@@ -99,7 +99,53 @@
 **Артефакты:** `site/`, `.github/workflows/deploy.yml`, `docs/DNS_INSTRUCTIONS.md`
 
 **Следующие шаги:**
-- CEO: визуальная проверка в браузере
-- CEO: палитра (замена PH → финальная)
-- CEO: AI-фото (Nano Banana)
+- CEO визуальная проверка
+
+---
+
+### [S005] — 2026-04-15 — BUG: карточки Leistungen невидимые (3 попытки)
+
+**Задача:** Фикс карточек услуг на /leistungen
+**Роли:** #2 Lena Schwarz, #3 Marco Reiter, #14 Landa
+**Статус:** завершено — ИСПРАВЛЕНО
+
+**Хронология бага (3 неудачных фикса → архитектурное решение):**
+1. Попытка 1: заменил glassmorphism (bg-cream-dark/30 → bg-cream-dark solid) — НЕ ПОМОГЛО
+2. Попытка 2: убрал h-full с html (обрезало контент ниже viewport) — ЧАСТИЧНО
+3. Попытка 3: GSAP from({opacity:0}) + ScrollTrigger = архитектурная проблема. ScrollTrigger не срабатывает для элементов уже в viewport → opacity:0 навсегда
+
+**Корень проблемы:** GSAP `from({ opacity: 0 })` ставит начальное невидимое состояние, ScrollTrigger должен анимировать обратно. Но на страницах где контент начинается в viewport — ScrollTrigger никогда не срабатывает → контент невидим навсегда.
+
+**Архитектурное решение (Phase 4.5 — question architecture):**
+- УБРАЛИ GSAP из Stagger.tsx и ScrollReveal.tsx полностью
+- CSS transitions (opacity + transform) + IntersectionObserver (.is-visible класс)
+- Контент ВСЕГДА виден по умолчанию (opacity:1 в CSS)
+- Анимация = CSS enhancement, не JS requirement
+- noscript fallback для полной видимости без JS
+- Мягкий easing: cubic-bezier(0.25, 0.1, 0.25, 1), translateY 8-12px
+
+**Готча G18:** Glassmorphism невидим на light bg → solid bg + shadow
+**Готча G19:** GSAP from({opacity:0}) + ScrollTrigger = BROKEN для elements in viewport → CSS-first
+
+**Артефакты:** Stagger.tsx, ScrollReveal.tsx, globals.css, layout.tsx
+
+---
+
+### [S006] — 2026-04-15 — AI-фото подключены (4 изображения)
+
+**Задача:** Размещение AI-фото из Nano Banana
+**Роли:** #2 Lena Schwarz
+**Статус:** завершено
+
+**Что сделано:**
+- IMG-01 Hero Background → public/images/hero/hero-bg.webp (за Lamp с gradient overlay)
+- IMG-02 About Section → public/images/about.png (заменил emoji placeholder)
+- IMG-03 Hausmeisterservice → public/images/services/hausmeisterservice.webp (карточка с hover zoom)
+- IMG-04 Gartenpflege → public/images/services/gartenpflege.webp (карточка с hover zoom)
+- Service type обновлён (optional image field)
+
+**Следующие шаги:**
+- CEO: визуальная проверка всех изображений
+- CEO: палитра
+- CEO: оставшиеся фото (Dacharbeiten, Entrümpelung, Schrottabholung)
 - CEO: DNS IONOS
