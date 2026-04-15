@@ -192,3 +192,17 @@
 - F3: `image` + `detailImage` разделены
 
 **Артефакты:** 17 image files, services.json, referenzen.json, types.ts, ServiceDetail.tsx, ReferenzenContent.tsx, ContactForm.tsx, layout.tsx
+
+---
+
+### [S009] — 2026-04-15 — Hero Lamp fix: soft glow вместо артефактов
+
+**Задача:** CEO обнаружил тёмную полосу + жёлтую линию между navbar и hero heading
+**Роли:** #2 Lena Schwarz
+**Статус:** завершено
+
+**Корень:** Lamp Effect (Aceternity) — `h-0.5 bg-copper` = видимая бронзовая линия, `h-44 bg-charcoal` = тёмная полоса над ней. Артефакт conic-gradient beam system.
+
+**Решение:** Убрал conic-gradient beams, hard copper line, dark band. Оставил мягкое бронзовое свечение (blur-120px + blur-80px) поверх hero photo. Результат: тёплый ambient glow без артефактов.
+
+**Артефакты:** Lamp.tsx, Hero.tsx
