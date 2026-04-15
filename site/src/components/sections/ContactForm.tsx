@@ -141,7 +141,7 @@ export default function ContactForm() {
                                   rows={4}
                                   className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all resize-none"
                                 />
-                                <label className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-copper peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
+                                <label className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
                                   {field.label}
                                   {field.required && " *"}
                                 </label>
@@ -155,7 +155,7 @@ export default function ContactForm() {
                                   placeholder=" "
                                   className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all"
                                 />
-                                <label className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-copper peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
+                                <label className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
                                   {field.label}
                                   {field.required && " *"}
                                 </label>

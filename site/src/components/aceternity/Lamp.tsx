@@ -16,7 +16,7 @@ export default function Lamp({ children }: LampProps) {
     <div
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-charcoal w-full z-0"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(58,58,58,0.7), rgba(58,58,58,0.9)), url(${basePath}/images/hero/hero-bg.png)`,
+        backgroundImage: `linear-gradient(to bottom, rgba(42,42,42,0.7), rgba(42,42,42,0.9)), url(${basePath}/images/hero/hero-bg.png)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
