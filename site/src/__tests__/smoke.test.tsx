@@ -41,7 +41,7 @@ describe("Homepage", () => {
 
   it("renders hero subheading", () => {
     render(<Home />);
-    expect(screen.getByText(/Hausmeisterservice, Gartenpflege/)).toBeInTheDocument();
+    expect(screen.getByText(/zuverlässiger Service rund ums Haus/)).toBeInTheDocument();
   });
 
   it("renders CTA buttons", () => {

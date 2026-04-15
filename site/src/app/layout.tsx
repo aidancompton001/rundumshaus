@@ -24,10 +24,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
   description:
-    "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und Umgebung.",
+    "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
   openGraph: {
     title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
-    description: "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und Umgebung.",
+    description: "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
     url: "https://rundumshaus-littawe.de",
     locale: "de_DE",
     type: "website",
@@ -57,7 +57,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               name: "Rundum's Haus Littawe",
               description:
-                "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und Umgebung.",
+                "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Osnabrück",

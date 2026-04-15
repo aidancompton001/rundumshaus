@@ -67,6 +67,18 @@ export default function ServiceOverview() {
             </a>
           ))}
         </Stagger>
+
+        <ScrollReveal className="text-center mt-12">
+          <a
+            href={getHref("/weitere-leistungen")}
+            className="inline-flex items-center gap-2 border-2 border-charcoal/20 hover:border-copper text-charcoal hover:text-copper px-6 py-3 rounded-xl font-body font-semibold transition-colors duration-200"
+          >
+            Weitere Dienstleistungen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </ScrollReveal>
       </div>
     </section>
   );
