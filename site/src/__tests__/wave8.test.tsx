@@ -36,9 +36,11 @@ describe("Referenzen", () => {
     expect(screen.getByText("Referenzen")).toBeInTheDocument();
   });
 
-  it("shows empty state when no items", () => {
+  it("renders referenzen items with titles", () => {
     render(<ReferenzenContent />);
-    expect(screen.getByText(/Referenzen folgen in Kürze/)).toBeInTheDocument();
+    expect(screen.getByText("Gartenumgestaltung")).toBeInTheDocument();
+    expect(screen.getByText("Dachreinigung")).toBeInTheDocument();
+    expect(screen.getByText("Kellerentrümpelung")).toBeInTheDocument();
   });
 });
 

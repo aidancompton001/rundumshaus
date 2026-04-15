@@ -1,5 +1,30 @@
 {
   "heading": "Referenzen",
   "emptyState": "Referenzen folgen in Kürze — wir arbeiten bereits an spannenden Projekten!",
-  "items": []
+  "items": [
+    {
+      "id": "garten-pflege-01",
+      "title": "Gartenumgestaltung",
+      "description": "Komplette Neugestaltung eines verwilderten Gartens — Rasenmähen, Heckenschnitt und Beetpflege.",
+      "before": "/images/referenzen/garten-vorher-nachher.png",
+      "after": "/images/referenzen/garten-vorher-nachher.png",
+      "date": "2026-03"
+    },
+    {
+      "id": "dach-reinigung-01",
+      "title": "Dachreinigung",
+      "description": "Professionelle Reinigung eines vermoosten Daches — Moos, Algen und Verschmutzungen entfernt.",
+      "before": "/images/referenzen/dach-vorher-nachher.png",
+      "after": "/images/referenzen/dach-vorher-nachher.png",
+      "date": "2026-02"
+    },
+    {
+      "id": "entruempelung-keller-01",
+      "title": "Kellerentrümpelung",
+      "description": "Komplette Entrümpelung eines vollgestellten Kellers — sauber, schnell und stressfrei.",
+      "before": "/images/referenzen/entruempelung-vorher-nachher.png",
+      "after": "/images/referenzen/entruempelung-vorher-nachher.png",
+      "date": "2026-01"
+    }
+  ]
 }

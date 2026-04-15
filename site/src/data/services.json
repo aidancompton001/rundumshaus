@@ -8,7 +8,8 @@
       "description": "Alles rund ums Haus — zuverlässig und schnell erledigt.",
       "detailDescription": "Ob Reparaturen, Wartungsarbeiten oder regelmäßige Kontrollen — unser Hausmeisterservice kümmert sich um alle anfallenden Aufgaben rund um Ihre Immobilie. Professionell, termingerecht und zu fairen Preisen.",
       "icon": "wrench",
-      "image": "/images/services/hausmeisterservice.webp"
+      "image": "/images/services/hausmeisterservice.png",
+      "detailImage": "/images/services/detail-hausmeister.png"
     },
     {
       "id": "gartenpflege",
@@ -16,28 +17,35 @@
       "description": "Fachgerechte Pflege Ihres Gartens — Rasen mähen, Hecken schneiden und vieles mehr.",
       "detailDescription": "Ihr Garten verdient professionelle Pflege. Wir übernehmen Rasenmähen, Heckenschnitt, Beetpflege, Unkrautentfernung und saisonale Gartenarbeiten. Regelmäßig oder auf Abruf — ganz nach Ihrem Bedarf.",
       "icon": "leaf",
-      "image": "/images/services/gartenpflege.webp"
+      "image": "/images/services/gartenpflege.png",
+      "detailImage": "/images/services/detail-garten.png"
     },
     {
       "id": "dacharbeiten",
       "title": "Dacharbeiten",
       "description": "Reinigung, Pflege und Arbeiten rund ums Dach — sauber und zuverlässig.",
       "detailDescription": "Insbesondere Dachreinigung: Moos, Laub und Verschmutzungen werden gründlich entfernt. Wir sorgen dafür, dass Ihr Dach gepflegt aussieht und langfristig geschützt bleibt.",
-      "icon": "home"
+      "icon": "home",
+      "image": "/images/services/dacharbeiten.jpg",
+      "detailImage": "/images/services/detail-dach.png"
     },
     {
       "id": "entruempelung",
       "title": "Entrümpelung",
       "description": "Wir übernehmen Entrümpelungen in allen Bereichen — sauber und stressfrei.",
       "detailDescription": "Vom Keller bis zur kompletten Haushaltsauflösung — wir entrümpeln schnell, sauber und stressfrei. Alle Gegenstände werden fachgerecht entsorgt oder dem Recycling zugeführt.",
-      "icon": "truck"
+      "icon": "truck",
+      "image": "/images/services/entruempelung.jpg",
+      "detailImage": "/images/services/detail-entruempelung.png"
     },
     {
       "id": "schrottabholung",
       "title": "Schrottabholung",
       "description": "Kostenlose Abholung von Altmetall — schnell und unkompliziert.",
       "detailDescription": "Wir holen Ihren Altmetallschrott kostenlos ab — schnell und unkompliziert. Weitere Gegenstände auf Anfrage. Einfach anrufen, Termin vereinbaren, fertig.",
-      "icon": "recycle"
+      "icon": "recycle",
+      "image": "/images/services/schrottabholung.png",
+      "detailImage": "/images/services/detail-schrott.png"
     }
   ]
 }

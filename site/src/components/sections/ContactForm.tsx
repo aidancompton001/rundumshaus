@@ -39,8 +39,17 @@ export default function ContactForm() {
     }
   }
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
-    <section className="py-20 md:py-28">
+    <section
+      className="py-20 md:py-28 relative"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(243,237,226,0.92), rgba(243,237,226,0.96)), url(${basePath}/images/kontakt/contact-bg.png)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}

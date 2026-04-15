@@ -24,6 +24,14 @@ export const metadata: Metadata = {
   title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
   description:
     "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in der Region Bielefeld.",
+  openGraph: {
+    title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
+    description: "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in der Region Bielefeld.",
+    url: "https://rundumshaus-littawe.de",
+    locale: "de_DE",
+    type: "website",
+    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Rundum's Haus Littawe" }],
+  },
 };
 
 export default function RootLayout({

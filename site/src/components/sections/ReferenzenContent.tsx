@@ -3,7 +3,7 @@
 import referenzenData from "@/data/referenzen.json";
 import type { ReferenzenData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
-import BeforeAfter from "./BeforeAfter";
+import { getImageUrl } from "@/lib/getImageUrl";
 
 const data = referenzenData as ReferenzenData;
 
@@ -15,10 +15,12 @@ export default function ReferenzenContent() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
             {data.heading}
           </h1>
+          <p className="text-charcoal-light text-lg max-w-2xl mx-auto">
+            Vorher &amp; Nachher — unsere Arbeit spricht für sich.
+          </p>
         </ScrollReveal>
 
         {data.items.length === 0 ? (
-          /* Empty state */
           <ScrollReveal className="text-center py-20">
             <div className="max-w-md mx-auto">
               <span className="text-6xl block mb-6">📷</span>
@@ -28,21 +30,35 @@ export default function ReferenzenContent() {
             </div>
           </ScrollReveal>
         ) : (
-          /* Grid of before/after items */
-          <Stagger staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <Stagger staggerDelay={100} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.items.map((item) => (
-              <div key={item.id} className="space-y-3">
-                <BeforeAfter
-                  before={item.before}
-                  after={item.after}
-                  title={item.title}
-                />
-                <h3 className="font-heading text-lg font-semibold text-charcoal">
-                  {item.title}
-                </h3>
-                <p className="text-charcoal-light text-sm">
-                  {item.description}
-                </p>
+              <div
+                key={item.id}
+                className="group bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={getImageUrl(item.before)}
+                    alt={`Vorher/Nachher — ${item.title}`}
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-copper">
+                      Vorher / Nachher
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold text-charcoal mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-charcoal-light text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               </div>
             ))}
           </Stagger>

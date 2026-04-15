@@ -38,10 +38,10 @@ export default function ServiceDetail() {
               key={service.id}
               className="group relative bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
             >
-              {service.image && (
+              {(service.detailImage || service.image) && (
                 <div className="aspect-[16/9] overflow-hidden">
                   <img
-                    src={getImageUrl(service.image)}
+                    src={getImageUrl(service.detailImage || service.image || "")}
                     alt={service.title}
                     width={800}
                     height={450}
