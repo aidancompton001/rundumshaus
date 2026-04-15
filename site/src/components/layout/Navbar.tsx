@@ -73,7 +73,7 @@ export default function Navbar() {
               ))}
               <a
                 href={getHref("/kontakt")}
-                className="bg-copper hover:bg-copper-light text-white px-5 py-2 rounded-lg text-sm font-body font-semibold transition-colors duration-200"
+                className="bg-gold hover:bg-gold-light text-white px-5 py-2 rounded-lg text-sm font-body font-semibold transition-colors duration-200"
               >
                 Kontakt
               </a>
@@ -135,7 +135,7 @@ export default function Navbar() {
                 <a
                   href={getHref("/kontakt")}
                   onClick={() => setIsOpen(false)}
-                  className="bg-copper hover:bg-copper-light text-white px-8 py-3 rounded-lg text-lg font-body font-semibold transition-colors mt-4"
+                  className="bg-gold hover:bg-gold-light text-white px-8 py-3 rounded-lg text-lg font-body font-semibold transition-colors mt-4"
                 >
                   Kontakt
                 </a>

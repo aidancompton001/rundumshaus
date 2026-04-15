@@ -25,7 +25,7 @@ export default function MovingBorder({
   const showAnimation = !reducedMotion && !isMobile;
 
   const inner = (
-    <span className="relative z-10 inline-flex items-center justify-center gap-2 bg-copper px-8 py-3.5 rounded-xl text-white font-body font-semibold text-lg transition-colors hover:bg-copper-light">
+    <span className="relative z-10 inline-flex items-center justify-center gap-2 bg-gold px-8 py-3.5 rounded-xl text-white font-body font-semibold text-lg transition-colors hover:bg-gold-light">
       {children}
     </span>
   );

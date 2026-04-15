@@ -34,7 +34,7 @@ export default function Spotlight({ children, className = "" }: SpotlightProps) 
         !isMobile && !reducedMotion
           ? {
               background:
-                "radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(155,123,78,0.12), transparent 80%)",
+                "radial-gradient(600px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(74,139,63,0.12), transparent 80%)",
             }
           : undefined
       }

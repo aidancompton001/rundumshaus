@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
   <!-- House outline - for dark backgrounds (cream stroke) -->
-  <path d="M60 8 L110 52 L100 52 L60 18 L20 52 L10 52 Z" stroke="#F3EDE2" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-  <path d="M25 52 L25 105 L95 105 L95 52" stroke="#F3EDE2" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-  <path d="M50 105 L50 72 L70 72 L70 105" stroke="#F3EDE2" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-  <path d="M50 72 L50 62 L80 62 L80 85 L60 85" stroke="#F3EDE2" stroke-width="2" fill="none" stroke-linejoin="round"/>
-  <path d="M35 62 L35 78 L47 78 L47 62 Z" stroke="#F3EDE2" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M60 8 L110 52 L100 52 L60 18 L20 52 L10 52 Z" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+  <path d="M25 52 L25 105 L95 105 L95 52" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+  <path d="M50 105 L50 72 L70 72 L70 105" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+  <path d="M50 72 L50 62 L80 62 L80 85 L60 85" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M35 62 L35 78 L47 78 L47 62 Z" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
 </svg>

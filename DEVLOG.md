@@ -2,6 +2,43 @@
 
 ---
 
+### [S010] — 2026-04-15 — Палитра V2: Blau/Grün/Weiß/Gold
+
+**Задача:** [T002](docs/tasks/T002_rebrand_flyer.md) — ребрендинг палитры по флаеру
+**Роли:** #2 Lena Schwarz (UX/UI Engineer)
+**Статус:** завершено
+
+**Что сделано:**
+- Замена 8 CSS-переменных (:root + @theme): Bronze/Cream → Navy/Green/White
+- 2 новых токена: --color-gold (#D4A843), --color-gold-light (#E0BA5A) для CTA
+- CTA-кнопки: copper → gold (Navbar, MovingBorder, ContactForm submit, error retry, mobile menu)
+- Hardcoded rgba: Lamp.tsx, Spotlight.tsx, ContactForm.tsx — обновлены
+- moving-border gradient + ::selection — обновлены
+- Favicon icon.svg: bg #2A2A2A → #1B3A5C, stroke #9B7B4E → #4A8B3F
+- 4 SVG лого: bronze → green (light), cream → white (dark)
+- Checkbox accent: copper → dark green #3A7030 (WCAG fix, Landa F2)
+- Footer hover underline: copper → gold
+
+**Ключевые решения:**
+- Токены НЕ переименованы (cream/charcoal/copper) — только hex swap, минимальный blast radius
+- CTA = gold (как на флаере), accent = green (как в лого) — два визуальных слоя
+- Checkbox #3A7030 вместо #4A8B3F — WCAG 4.8:1 для мелких элементов
+
+**Верификация:**
+- grep старых hex = 0 результатов
+- grep старых rgba = 0 результатов
+- Build: OK (Next.js 16.2.3)
+- Tests: 84/84 pass
+
+**Артефакты:** globals.css, Lamp.tsx, Spotlight.tsx, ContactForm.tsx, Navbar.tsx, MovingBorder.tsx, Footer.tsx, icon.svg, 4× logo SVG, docs/PALETTE_V2.md
+
+**Следующие шаги (T002):**
+- Wave 1: город Bielefeld → Osnabrück
+- Wave 4: страница Weitere Leistungen
+- Wave 5: WhatsApp + телефон
+
+---
+
 ### [S008] — 2026-04-15 — Dual-tone SVG иконки услуг
 
 **Задача:** Замена emoji на branded SVG иконки

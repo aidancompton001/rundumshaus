@@ -45,7 +45,7 @@ export default function ContactForm() {
     <section
       className="py-20 md:py-28 relative"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(243,237,226,0.92), rgba(243,237,226,0.96)), url(${basePath}/images/kontakt/contact-bg.png)`,
+        backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.92), rgba(255,255,255,0.96)), url(${basePath}/images/kontakt/contact-bg.png)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -89,7 +89,7 @@ export default function ContactForm() {
                   </p>
                   <button
                     onClick={() => setState("idle")}
-                    className="bg-copper hover:bg-copper-light text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                    className="bg-gold hover:bg-gold-light text-white px-6 py-2 rounded-lg font-semibold transition-colors"
                   >
                     Erneut versuchen
                   </button>
@@ -135,7 +135,7 @@ export default function ContactForm() {
                                   type="checkbox"
                                   name={field.name}
                                   required={field.required}
-                                  className="mt-1 w-5 h-5 rounded border-sand accent-copper"
+                                  className="mt-1 w-5 h-5 rounded border-sand accent-[#3A7030]"
                                 />
                                 <span className="text-charcoal-light text-sm">
                                   {field.label}
@@ -179,7 +179,7 @@ export default function ContactForm() {
                       <button
                         type="submit"
                         disabled={state === "submitting"}
-                        className="bg-copper hover:bg-copper-light disabled:opacity-50 text-white px-8 py-3.5 rounded-xl font-semibold text-lg transition-colors w-full sm:w-auto"
+                        className="bg-gold hover:bg-gold-light disabled:opacity-50 text-white px-8 py-3.5 rounded-xl font-semibold text-lg transition-colors w-full sm:w-auto"
                       >
                         {state === "submitting"
                           ? "Wird gesendet..."

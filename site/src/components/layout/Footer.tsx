@@ -42,7 +42,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={getHref(link.href)}
-                    className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-copper after:transition-all after:duration-300 hover:after:w-full"
+                    className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {link.label}
                   </a>
