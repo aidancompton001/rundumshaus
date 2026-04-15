@@ -6,6 +6,7 @@ import type { HomepageData } from "@/data/types";
 import { useMotion } from "@/components/motion/MotionProvider";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useSplitText } from "@/hooks/useSplitText";
+import Lamp from "@/components/aceternity/Lamp";
 import Spotlight from "@/components/aceternity/Spotlight";
 import MovingBorder from "@/components/aceternity/MovingBorder";
 import Button from "@/components/ui/Button";
@@ -17,7 +18,6 @@ export default function Hero() {
   const subheadingRef = useRef<HTMLParagraphElement>(null);
   const { reducedMotion } = useMotion();
   const isMobile = useIsMobile();
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   useSplitText(headingRef, reducedMotion, {
     type: "chars",
@@ -36,15 +36,8 @@ export default function Hero() {
   });
 
   return (
-    <section
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden w-full"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(42,42,42,0.6), rgba(42,42,42,0.85)), url(${basePath}/images/hero/hero-bg.png)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <Spotlight className="w-full max-w-4xl mx-auto text-center px-4">
+    <Lamp>
+      <Spotlight className="w-full max-w-4xl mx-auto text-center">
         <h1
           ref={headingRef}
           style={{ opacity: 0 }}
@@ -97,6 +90,6 @@ export default function Hero() {
           </div>
         )}
       </Spotlight>
-    </section>
+    </Lamp>
   );
 }
