@@ -1,13 +1,22 @@
 "use client";
 
 import { ScrollReveal, Stagger } from "@/components/motion";
+import {
+  ClockIcon,
+  SparkleIcon,
+  PriceTagIcon,
+  CalendarIcon,
+  HandshakeIcon,
+} from "@/components/WarumWirIcons";
+import type { FC } from "react";
+import type { IconProps } from "@/components/icon-types";
 
-const reasons = [
-  { title: "Zuverlässig & Pünktlich", icon: "🕐" },
-  { title: "Saubere & Sorgfältige Arbeit", icon: "✨" },
-  { title: "Faire & Transparente Preise", icon: "💰" },
-  { title: "Kurzfristige Termine Möglich", icon: "📅" },
-  { title: "Alles aus einer Hand", icon: "🤝" },
+const reasons: { title: string; Icon: FC<IconProps> }[] = [
+  { title: "Zuverlässig & Pünktlich", Icon: ClockIcon },
+  { title: "Saubere & Sorgfältige Arbeit", Icon: SparkleIcon },
+  { title: "Faire & Transparente Preise", Icon: PriceTagIcon },
+  { title: "Kurzfristige Termine Möglich", Icon: CalendarIcon },
+  { title: "Alles aus einer Hand", Icon: HandshakeIcon },
 ];
 
 export default function WarumWir() {
@@ -33,9 +42,10 @@ export default function WarumWir() {
               key={reason.title}
               className="flex items-center gap-4 bg-charcoal-light/30 border border-cream/10 rounded-xl px-6 py-5 transition-colors hover:border-gold/40"
             >
-              <span className="text-2xl flex-shrink-0" aria-hidden="true">
-                {reason.icon}
-              </span>
+              <reason.Icon
+                className="w-7 h-7 flex-shrink-0"
+                variant="light"
+              />
               <span className="font-body text-base font-medium">
                 {reason.title}
               </span>

@@ -7,6 +7,14 @@ import type { ContactFormData, SiteConfig } from "@/data/types";
 import { FORMSUBMIT_ACTION } from "@/lib/formsubmit";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { motion, AnimatePresence } from "motion/react";
+import {
+  PhoneIcon,
+  WhatsAppIcon,
+  EnvelopeIcon,
+  MapPinIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+} from "@/components/ContactIcons";
 
 const form = contactFormData as ContactFormData;
 const site = siteData as SiteConfig;
@@ -71,7 +79,7 @@ export default function ContactForm() {
                   animate={{ scale: 1, opacity: 1 }}
                   className="text-center py-16"
                 >
-                  <span className="text-6xl block mb-4">✅</span>
+                  <CheckCircleIcon className="w-16 h-16 mx-auto mb-4" />
                   <p className="text-charcoal text-lg font-semibold">
                     {form.successMessage}
                   </p>
@@ -83,7 +91,7 @@ export default function ContactForm() {
                   animate={{ scale: 1, opacity: 1 }}
                   className="text-center py-16"
                 >
-                  <span className="text-6xl block mb-4">❌</span>
+                  <XCircleIcon className="w-16 h-16 mx-auto mb-4" />
                   <p className="text-charcoal text-lg mb-4">
                     {form.errorMessage}
                   </p>
@@ -203,7 +211,7 @@ export default function ContactForm() {
                   href={`tel:${site.phone}`}
                   className="flex items-center gap-3 bg-gold hover:bg-gold-light text-white rounded-xl px-5 py-3 font-semibold transition-colors"
                 >
-                  <span className="text-xl">📞</span>
+                  <PhoneIcon className="w-5 h-5" variant="mono" />
                   <span className="font-body">Jetzt anrufen</span>
                 </a>
                 <a
@@ -212,25 +220,25 @@ export default function ContactForm() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl px-5 py-3 font-semibold transition-colors"
                 >
-                  <span className="text-xl">💬</span>
+                  <WhatsAppIcon className="w-5 h-5" variant="mono" />
                   <span className="font-body">WhatsApp schreiben</span>
                 </a>
                 <a
                   href={`tel:${site.phone}`}
                   className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
                 >
-                  <span className="text-2xl">📞</span>
+                  <PhoneIcon className="w-6 h-6" />
                   <span className="font-body">{site.phone}</span>
                 </a>
                 <a
                   href={`mailto:${site.email}`}
                   className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
                 >
-                  <span className="text-2xl">✉️</span>
+                  <EnvelopeIcon className="w-6 h-6" />
                   <span className="font-body">{site.email}</span>
                 </a>
                 <div className="flex items-start gap-3 text-charcoal-light">
-                  <span className="text-2xl">📍</span>
+                  <MapPinIcon className="w-6 h-6 flex-shrink-0 mt-0.5" />
                   <span className="font-body">
                     {site.address.street}
                     <br />

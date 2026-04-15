@@ -2,6 +2,71 @@
 
 ---
 
+### [S015] — 2026-04-15 — PX-010: Унификация иконок (0 emoji)
+
+**Задача:** PX-010 — замена ВСЕХ эмодзи на кастомные dual-tone SVG
+**Роли:** #2 Lena Schwarz (UX/UI), #14 Hans Landa (ревью ТС1)
+**Статус:** завершено
+
+**Что сделано:**
+- Создан `icon-types.ts` — shared IconProps с variant (default/light/mono)
+- Создан `WarumWirIcons.tsx` — 5 SVG (Clock, Sparkle, PriceTag, Calendar, Handshake)
+- Создан `ContactIcons.tsx` — 6+1 SVG (Phone, WhatsApp official, Envelope, MapPin, CheckCircle, XCircle)
+- Интеграция: WarumWir.tsx (variant="light"), ContactForm.tsx (variant="mono" в кнопках), Footer.tsx (variant="mono" inline-flex)
+- Тесты: 17 новых тестов (иконки + zero-emoji), все проходят
+- Build: 13 routes, 101 тестов pass, 0 emoji в src/
+
+**Ключевые решения:**
+- variant prop вместо CSS override (по замечанию Landa #1 CRITICAL)
+- WhatsApp = official SVG path (по замечанию Landa #4 HIGH)
+- Shared IconProps в icon-types.ts (по замечанию Landa #5 MEDIUM)
+- aria-hidden="true" на всех SVG (по замечанию Landa #3 HIGH)
+
+**Артефакты:** `icon-types.ts`, `WarumWirIcons.tsx`, `ContactIcons.tsx`, `icons.test.tsx`
+
+**Следующие шаги:**
+- CEO визуальная проверка на dev server
+
+---
+
+### [S014] — 2026-04-15 — Landa Audit: 8/8 пунктов ТЗ PASS
+
+**Задача:** PX-009 — полный аудит требований заказчика
+**Роли:** #14 Hans Landa (Critical Reviewer)
+**Статус:** завершено
+
+**Что сделано:**
+- Grep Bielefeld по всему репо: 0 в коде, 10 в docs (допустимо)
+- Grep старых hex/rgba: 0 в src/ и public/
+- Grep 0155 63675772 / 4915563675772: 0 в репо
+- WhatsApp: 3 места, все wa.me/4915239603175
+- tel: links: 4 места, все через site.phone
+- Structured data: Osnabrück, 49074, +49 1523 9603175
+- Datenschutz: LfD Niedersachsen (0 LDI NRW)
+- Build: 13 routes, Tests: 84/84
+
+**Findings:** 0 CRITICAL, 0 HIGH, 1 MEDIUM (CLAUDE.md:16 "Bielefeld" — устарело)
+
+**Вердикт:** 8/8 PASS. Production ready.
+
+---
+
+### [S012] — 2026-04-15 — Task Registry: реестр PX-формулировок
+
+**Задача:** Создание индексированного реестра структурированных задач CEO
+**Роли:** #1 Viktor Hartmann (Product Architect)
+**Статус:** завершено
+
+**Что сделано:**
+- Создан `01_Projects/RundumsHaus/Task Registry.md` в Obsidian
+- Формат: PX-NNN, дата, статус, DEVLOG ref, полный текст PX as-is
+- Инструкция "Как пользоваться" для других чатов (проверить последний номер перед добавлением)
+- PX-001: SVG иконки (из текущего чата)
+
+**Артефакты:** Obsidian `Task Registry.md`
+
+---
+
 ### [S011] — 2026-04-15 — T002 Complete: город, услуги, WhatsApp, Warum wir
 
 **Задача:** [T002](docs/tasks/T002_rebrand_flyer.md) — ребрендинг remaining waves

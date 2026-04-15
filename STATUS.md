@@ -1,7 +1,7 @@
 # STATUS — RundumsHaus
 
 **Обновлён:** 2026-04-15
-**Этап:** T002 Ребрендинг COMPLETE. Сайт обновлён по флаеру.
+**Этап:** PX-010 Icon Unification COMPLETE. 0 emoji на сайте.
 
 ## Готово
 
@@ -14,7 +14,10 @@
 - [x] T002: WhatsApp кнопка (wa.me/4915239603175)
 - [x] T002: Секция «Warum wir?»
 - [x] T002: Datenschutz → LfD Niedersachsen
-- [x] 84 тестов pass, build clean
+- [x] PX-010: WarumWir — 5 dual-tone SVG иконок (variant="light")
+- [x] PX-010: Contact — 7 SVG (Phone, WhatsApp official, Envelope, MapPin, Check, X)
+- [x] PX-010: Footer — 3 SVG (mono, inline-flex)
+- [x] PX-010: 0 emoji в src/, 101 тестов pass, build clean
 
 ## Repo + Production
 
@@ -23,7 +26,7 @@
 
 ## Следующее
 
-- [ ] CEO: визуальная проверка на production
+- [ ] CEO: визуальная проверка иконок на dev server
 - [ ] CEO: DNS IONOS (docs/DNS_INSTRUCTIONS.md)
 - [ ] FormSubmit.co: реальный тест отправки
 

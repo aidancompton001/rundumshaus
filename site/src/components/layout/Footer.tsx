@@ -1,6 +1,7 @@
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
 import { getHref, getImageUrl } from "@/lib/getImageUrl";
+import { PhoneIcon, WhatsAppIcon, EnvelopeIcon } from "@/components/ContactIcons";
 
 const site = siteData as SiteConfig;
 
@@ -60,9 +61,10 @@ export default function Footer() {
               <li>
                 <a
                   href={`tel:${site.phone}`}
-                  className="hover:text-cream transition-colors"
+                  className="inline-flex items-center gap-1.5 hover:text-cream transition-colors"
                 >
-                  📞 {site.phone}
+                  <PhoneIcon className="w-4 h-4 inline-block align-middle" variant="mono" />
+                  <span>{site.phone}</span>
                 </a>
               </li>
               <li>
@@ -70,17 +72,19 @@ export default function Footer() {
                   href="https://wa.me/4915239603175"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-cream transition-colors"
+                  className="inline-flex items-center gap-1.5 hover:text-cream transition-colors"
                 >
-                  💬 WhatsApp
+                  <WhatsAppIcon className="w-4 h-4 inline-block align-middle" variant="mono" />
+                  <span>WhatsApp</span>
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="hover:text-cream transition-colors"
+                  className="inline-flex items-center gap-1.5 hover:text-cream transition-colors"
                 >
-                  ✉️ {site.email}
+                  <EnvelopeIcon className="w-4 h-4 inline-block align-middle" variant="mono" />
+                  <span>{site.email}</span>
                 </a>
               </li>
             </ul>
