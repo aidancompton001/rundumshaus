@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${lora.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${lora.variable} ${plusJakarta.variable} antialiased`}
     >
       <head>
         <script
@@ -99,7 +99,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-body bg-cream text-charcoal">
+      <body className="min-h-screen flex flex-col font-body bg-cream text-charcoal">
         <MotionProvider>
           <Navbar />
           <main className="flex-1 pt-16">{children}</main>
