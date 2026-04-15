@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import gsap from "gsap";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
-import { getHref } from "@/lib/getImageUrl";
+import { getHref, getImageUrl } from "@/lib/getImageUrl";
 import { useMotion } from "@/components/motion/MotionProvider";
 
 const site = siteData as SiteConfig;
@@ -43,12 +43,21 @@ export default function Navbar() {
       <nav className="backdrop-blur-xl bg-charcoal/90 border-b border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo / Company */}
+            {/* Logo */}
             <a
               href={getHref("/")}
-              className="font-heading text-xl font-bold text-cream"
+              className="flex items-center gap-3"
             >
-              {site.company}
+              <img
+                src={getImageUrl("/images/branding/logo-icon-dark.svg")}
+                alt=""
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
+              <span className="font-heading text-lg font-bold text-cream hidden sm:inline">
+                {site.company}
+              </span>
             </a>
 
             {/* Desktop Nav */}

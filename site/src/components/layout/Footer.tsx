@@ -1,6 +1,6 @@
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
-import { getHref } from "@/lib/getImageUrl";
+import { getHref, getImageUrl } from "@/lib/getImageUrl";
 
 const site = siteData as SiteConfig;
 
@@ -11,9 +11,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Company Info */}
           <div>
-            <h3 className="font-heading text-xl font-bold text-cream mb-4">
-              {site.company}
-            </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={getImageUrl("/images/branding/logo-icon-dark.svg")}
+                alt=""
+                width={28}
+                height={28}
+                className="w-7 h-7"
+              />
+              <h3 className="font-heading text-xl font-bold text-cream">
+                {site.company}
+              </h3>
+            </div>
             <address className="not-italic text-sm leading-relaxed">
               <p>{site.owner}</p>
               <p>{site.address.street}</p>

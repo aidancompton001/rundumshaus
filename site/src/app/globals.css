@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
-/* === RundumsHaus Design Tokens (temporary PH palette — CEO will provide final) === */
+/* === RundumsHaus — Warm Bronze Palette (FINAL — from Luma Nano Banana 2) === */
 
 :root {
-  --color-cream: #F5EDE3;
-  --color-cream-dark: #EDE3D5;
-  --color-charcoal: #3A3A3A;
-  --color-charcoal-light: #5A5A5A;
-  --color-copper: #B87333;
-  --color-copper-light: #D4955A;
-  --color-copper-dark: #8B5A24;
-  --color-sand: #B8A48E;
+  --color-cream: #F3EDE2;
+  --color-cream-dark: #E8E2D6;
+  --color-charcoal: #2A2A2A;
+  --color-charcoal-light: #4A4A40;
+  --color-copper: #9B7B4E;
+  --color-copper-light: #B89A6A;
+  --color-copper-dark: #7A6B58;
+  --color-sand: #A09A90;
 }
 
 @theme inline {
-  --color-cream: #F5EDE3;
-  --color-cream-dark: #EDE3D5;
-  --color-charcoal: #3A3A3A;
-  --color-charcoal-light: #5A5A5A;
-  --color-copper: #B87333;
-  --color-copper-light: #D4955A;
-  --color-copper-dark: #8B5A24;
-  --color-sand: #B8A48E;
+  --color-cream: #F3EDE2;
+  --color-cream-dark: #E8E2D6;
+  --color-charcoal: #2A2A2A;
+  --color-charcoal-light: #4A4A40;
+  --color-copper: #9B7B4E;
+  --color-copper-light: #B89A6A;
+  --color-copper-dark: #7A6B58;
+  --color-sand: #A09A90;
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
 }
@@ -64,7 +64,7 @@ html.lenis body {
 }
 
 .moving-border-gradient {
-  background: conic-gradient(from var(--border-angle), transparent 70%, #B87333 90%, transparent 100%);
+  background: conic-gradient(from var(--border-angle), transparent 70%, #9B7B4E 90%, transparent 100%);
 }
 
 @keyframes rotating-border {
@@ -141,6 +141,6 @@ html.lenis body {
 /* === Selection === */
 
 ::selection {
-  background: #B87333;
-  color: #F5EDE3;
+  background: #9B7B4E;
+  color: #F3EDE2;
 }
