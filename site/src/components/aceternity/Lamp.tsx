@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { useMotion } from "@/components/motion/MotionProvider";
 
 interface LampProps {
@@ -20,23 +19,15 @@ export default function Lamp({ children }: LampProps) {
         backgroundPosition: "center",
       }}
     >
-      {/* Soft glow — NO hard copper line, NO dark band */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        {/* Wide ambient glow */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: reducedMotion ? 0.3 : 0.5 }}
-          transition={{ delay: 0.3, duration: 1.2, ease: "easeInOut" }}
-          className="absolute w-[40rem] h-[20rem] -translate-y-[10rem] rounded-full bg-copper/30 blur-[120px]"
-        />
-        {/* Focused center glow */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: reducedMotion ? 0.2 : 0.4 }}
-          transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
-          className="absolute w-[20rem] h-[12rem] -translate-y-[6rem] rounded-full bg-copper-light/40 blur-[80px]"
-        />
-      </div>
+      {/* Soft bronze glow — CSS only, no Motion dependency */}
+      {!reducedMotion && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {/* Wide ambient glow */}
+          <div className="absolute w-[40rem] h-[20rem] -translate-y-[10rem] rounded-full bg-copper/30 blur-[120px] opacity-50" />
+          {/* Focused center glow */}
+          <div className="absolute w-[20rem] h-[12rem] -translate-y-[6rem] rounded-full bg-copper-light/40 blur-[80px] opacity-40" />
+        </div>
+      )}
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-5">
