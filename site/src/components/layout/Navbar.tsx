@@ -46,18 +46,15 @@ export default function Navbar() {
             {/* Logo */}
             <a
               href={getHref("/")}
-              className="flex items-center gap-3"
+              className="flex items-center"
             >
               <img
-                src={getImageUrl("/images/branding/logo-icon-dark.svg")}
-                alt=""
-                width={32}
-                height={32}
-                className="w-8 h-8"
+                src={getImageUrl("/images/branding/logo-client.png")}
+                alt={site.company}
+                width={160}
+                height={48}
+                className="h-10 sm:h-11 w-auto rounded bg-white/95 px-2 py-1"
               />
-              <span className="font-heading text-lg font-bold text-cream hidden sm:inline">
-                {site.company}
-              </span>
             </a>
 
             {/* Desktop Nav */}

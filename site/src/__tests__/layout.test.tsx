@@ -47,9 +47,9 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 describe("Navbar", () => {
-  it("renders company name", () => {
+  it("renders company logo", () => {
     render(<Navbar />);
-    expect(screen.getByText("Rundum's Haus Littawe")).toBeInTheDocument();
+    expect(screen.getByAltText("Rundum's Haus Littawe")).toBeInTheDocument();
   });
 
   it("renders 4 navigation links on desktop", () => {
@@ -73,9 +73,9 @@ describe("Navbar", () => {
 });
 
 describe("Footer", () => {
-  it("renders company name", () => {
+  it("renders company logo", () => {
     render(<Footer />);
-    expect(screen.getByText("Rundum's Haus Littawe")).toBeInTheDocument();
+    expect(screen.getByAltText("Rundum's Haus Littawe")).toBeInTheDocument();
   });
 
   it("renders owner name", () => {

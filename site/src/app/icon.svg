@@ -1,6 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
   <rect width="120" height="120" rx="20" fill="#1B3A5C"/>
-  <path d="M60 18 L100 52 L92 52 L60 26 L28 52 L20 52 Z" stroke="#4A8B3F" stroke-width="3" fill="none" stroke-linejoin="round"/>
-  <path d="M32 52 L32 98 L88 98 L88 52" stroke="#4A8B3F" stroke-width="3" fill="none" stroke-linejoin="round"/>
-  <path d="M50 98 L50 72 L70 72 L70 98" stroke="#4A8B3F" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <!-- House shape from client logo -->
+  <path d="M60 15 L105 55 L95 55 L60 25 L25 55 L15 55 Z" fill="#2E6AB0"/>
+  <path d="M30 55 L30 100 L90 100 L90 55" fill="#2E6AB0"/>
+  <!-- Window -->
+  <rect x="48" y="42" width="24" height="20" rx="2" fill="white"/>
+  <line x1="60" y1="42" x2="60" y2="62" stroke="#2E6AB0" stroke-width="2"/>
+  <line x1="48" y1="52" x2="72" y2="52" stroke="#2E6AB0" stroke-width="2"/>
+  <!-- Door -->
+  <rect x="50" y="72" width="20" height="28" rx="2" fill="white"/>
+  <!-- Green accent wave -->
+  <path d="M15 58 Q40 50 60 58 Q80 66 105 58" stroke="#4A8B3F" stroke-width="4" fill="none"/>
 </svg>
