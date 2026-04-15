@@ -4,19 +4,12 @@ import servicesData from "@/data/services.json";
 import type { Service } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { getImageUrl } from "@/lib/getImageUrl";
+import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
   subheading: string;
   services: Service[];
-};
-
-const iconMap: Record<string, string> = {
-  wrench: "🔧",
-  leaf: "🌿",
-  home: "🏠",
-  truck: "🚛",
-  recycle: "♻️",
 };
 
 export default function ServiceDetail() {
@@ -52,9 +45,12 @@ export default function ServiceDetail() {
               )}
               <div className="p-8">
                 <div className="flex items-start gap-4 mb-4">
-                  <span className="text-4xl flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
-                    {iconMap[service.icon] || "⚡"}
-                  </span>
+                  {(() => {
+                    const Icon = serviceIconMap[service.icon] || DefaultIcon;
+                    return (
+                      <Icon className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 transition-colors duration-300" />
+                    );
+                  })()}
                   <h2 className="font-heading text-2xl font-bold text-charcoal group-hover:text-copper transition-colors">
                     {service.title}
                   </h2>

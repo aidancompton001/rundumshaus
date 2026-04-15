@@ -2,6 +2,31 @@
 
 ---
 
+### [S008] — 2026-04-15 — Dual-tone SVG иконки услуг
+
+**Задача:** Замена emoji на branded SVG иконки
+**Роли:** #2 Lena Schwarz (UX/UI Engineer)
+**Статус:** завершено
+
+**Что сделано:**
+- Создан `ServiceIcons.tsx` — 5 dual-tone SVG иконок + DefaultIcon fallback
+- Каждая иконка: 2 слоя (charcoal основа + copper акцент), viewBox 24x24, stroke-width 1.5
+- Обновлены ServiceOverview.tsx и ServiceDetail.tsx — iconMap → JSX-компоненты
+- Responsive: w-8/h-8 mobile, w-10/h-10 desktop (w-10/h-10 → w-12/h-12 на detail)
+- 0 hardcoded hex, все цвета через Tailwind tokens
+- 6 новых тестов (dual-tone проверка, 0 emoji, 0 hex, fallback, iconMap coverage)
+
+**Ключевые решения:**
+- Dual-tone (подход C) вместо monochrome — премиум quiet luxury feel
+- SVG paths на основе Lucide (MIT), модифицированы для split charcoal/copper
+- DefaultIcon (круг) как fallback вместо crash при unknown key (Landa F3)
+- Оба компонента покрыты (Landa F1: consistency Overview + Detail)
+
+**Артефакты:** `ServiceIcons.tsx`, `ServiceOverview.tsx`, `ServiceDetail.tsx`, `services.test.tsx`
+
+**Следующие шаги:**
+- CEO визуальная проверка на dev server
+
 ### [S001] — 2026-04-14 — Развёртывание проекта RundumsHaus
 
 **Задача:** Инициализация проекта

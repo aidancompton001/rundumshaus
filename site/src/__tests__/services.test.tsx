@@ -25,6 +25,65 @@ vi.mock("lenis", () => ({
 import ServiceOverview from "@/components/sections/ServiceOverview";
 import ServiceDetail from "@/components/sections/ServiceDetail";
 import AboutSection from "@/components/sections/AboutSection";
+import {
+  WrenchIcon,
+  LeafIcon,
+  RoofIcon,
+  BoxArrowIcon,
+  RecycleIcon,
+  DefaultIcon,
+  serviceIconMap,
+} from "@/components/ServiceIcons";
+
+describe("ServiceIcons", () => {
+  it("renders all 5 named icons as SVG", () => {
+    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon];
+    icons.forEach((Icon) => {
+      const { container } = render(<Icon className="w-10 h-10" />);
+      const svg = container.querySelector("svg");
+      expect(svg).toBeInTheDocument();
+      expect(svg).toHaveAttribute("viewBox", "0 0 24 24");
+    });
+  });
+
+  it("each icon has dual-tone: charcoal base + copper accent groups", () => {
+    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon];
+    icons.forEach((Icon) => {
+      const { container } = render(<Icon />);
+      const charcoalGroup = container.querySelector(".text-charcoal");
+      const copperGroup = container.querySelector(".text-copper");
+      expect(charcoalGroup).toBeInTheDocument();
+      expect(copperGroup).toBeInTheDocument();
+    });
+  });
+
+  it("DefaultIcon renders as SVG fallback", () => {
+    const { container } = render(<DefaultIcon />);
+    const svg = container.querySelector("svg");
+    expect(svg).toBeInTheDocument();
+  });
+
+  it("serviceIconMap covers all 5 service keys", () => {
+    expect(serviceIconMap["wrench"]).toBe(WrenchIcon);
+    expect(serviceIconMap["leaf"]).toBe(LeafIcon);
+    expect(serviceIconMap["home"]).toBe(RoofIcon);
+    expect(serviceIconMap["truck"]).toBe(BoxArrowIcon);
+    expect(serviceIconMap["recycle"]).toBe(RecycleIcon);
+  });
+
+  it("serviceIconMap returns undefined for unknown key (fallback handled by consumer)", () => {
+    expect(serviceIconMap["unknown"]).toBeUndefined();
+  });
+
+  it("0 hardcoded hex in SVG output", () => {
+    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon];
+    icons.forEach((Icon) => {
+      const { container } = render(<Icon />);
+      const svg = container.querySelector("svg");
+      expect(svg?.innerHTML).not.toMatch(/#[0-9a-fA-F]{3,6}/);
+    });
+  });
+});
 
 describe("ServiceOverview", () => {
   it("renders heading from services.json", () => {
@@ -39,6 +98,16 @@ describe("ServiceOverview", () => {
     expect(screen.getByText("Dacharbeiten")).toBeInTheDocument();
     expect(screen.getByText("Entrümpelung")).toBeInTheDocument();
     expect(screen.getByText("Schrottabholung")).toBeInTheDocument();
+  });
+
+  it("renders SVG icons instead of emoji", () => {
+    const { container } = render(<ServiceOverview />);
+    const svgs = container.querySelectorAll("svg");
+    expect(svgs.length).toBeGreaterThanOrEqual(5);
+    // No emoji text nodes
+    const emojiPattern = /[\u{1F300}-\u{1F9FF}]|[♻️]/u;
+    const allText = container.textContent || "";
+    expect(allText).not.toMatch(emojiPattern);
   });
 });
 

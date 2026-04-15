@@ -10,7 +10,8 @@
 - [x] Landa audit: PASS (0 старых hex, WCAG verified)
 - [x] Все 17 AI-фото размещены (IMG-01 — IMG-17)
 - [x] Referenzen: 3 vorher/nachher записи
-- [x] 77 тестов pass, build clean, CI GREEN
+- [x] 84 тестов pass, build clean, CI GREEN
+- [x] Dual-tone SVG иконки услуг (замена emoji)
 
 ## Repo + Production
 

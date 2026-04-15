@@ -5,19 +5,12 @@ import type { Service } from "@/data/types";
 import { ScrollReveal } from "@/components/motion";
 import { Stagger } from "@/components/motion";
 import { getHref, getImageUrl } from "@/lib/getImageUrl";
+import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
   subheading: string;
   services: Service[];
-};
-
-const iconMap: Record<string, string> = {
-  wrench: "🔧",
-  leaf: "🌿",
-  home: "🏠",
-  truck: "🚛",
-  recycle: "♻️",
 };
 
 export default function ServiceOverview() {
@@ -57,9 +50,12 @@ export default function ServiceOverview() {
               )}
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">
-                    {iconMap[service.icon] || "⚡"}
-                  </span>
+                  {(() => {
+                    const Icon = serviceIconMap[service.icon] || DefaultIcon;
+                    return (
+                      <Icon className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 transition-colors duration-300" />
+                    );
+                  })()}
                   <h3 className="font-heading text-xl font-semibold text-charcoal group-hover:text-copper transition-colors">
                     {service.title}
                   </h3>
