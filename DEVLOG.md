@@ -49,13 +49,11 @@
 **Артефакты:** `docs/tasks/T001_premium_website.md` (v2), `STATUS.md`, `DEVLOG.md`
 
 **Следующие шаги:**
-- CEO решение: Next.js 16 vs Astro
-- CEO ОК на T001 v2
-- Фаза 1: Scaffold
+- T001 v3 execution
 
 ---
 
-### [S003] — 2026-04-14 — T001 v3: wave-based roadmap + DESIGN_MAP + Landa review
+### [S003] — 2026-04-15 — T001 v3: wave-based roadmap + DESIGN_MAP + Landa review
 
 **Задача:** [T001](docs/tasks/T001_premium_website.md) — финализация roadmap
 **Роли:** #1 Viktor Hartmann, #14 Hans Landa (reviewer)
@@ -79,6 +77,29 @@
 **Артефакты:** `docs/tasks/T001_premium_website.md` (v3), `docs/DESIGN_MAP.md`, 13 Obsidian notes
 
 **Следующие шаги:**
-- CEO ОК на T001 v3
-- CEO даёт палитру
-- Wave 1: Scaffold
+- T001 v3 execution → S004
+
+---
+
+### [S004] — 2026-04-15 — T001 v3 EXECUTION: Waves 1-11 COMPLETE
+
+**Задача:** [T001](docs/tasks/T001_premium_website.md) — полная сборка сайта
+**Роли:** #3 Marco Reiter (Frontend), #14 Hans Landa (QA audit)
+**Статус:** завершено — LIVE
+
+**Что сделано:**
+- 11 волн × 5 шагов = 55 шагов выполнено
+- 75 тестов (9 test files, все pass)
+- 8 routes + sitemap + robots
+- CI GREEN: GitHub Actions (lint→test→build→.nojekyll→deploy)
+- Production: https://aidancompton001.github.io/rundumshaus/
+
+**CI incidents:** lockfile mismatch (→ npm install), Pages not enabled (→ gh api). 3-й run GREEN.
+
+**Артефакты:** `site/`, `.github/workflows/deploy.yml`, `docs/DNS_INSTRUCTIONS.md`
+
+**Следующие шаги:**
+- CEO: визуальная проверка в браузере
+- CEO: палитра (замена PH → финальная)
+- CEO: AI-фото (Nano Banana)
+- CEO: DNS IONOS
