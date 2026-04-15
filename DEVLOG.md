@@ -145,7 +145,50 @@
 - Service type обновлён (optional image field)
 
 **Следующие шаги:**
-- CEO: визуальная проверка всех изображений
-- CEO: палитра
 - CEO: оставшиеся фото (Dacharbeiten, Entrümpelung, Schrottabholung)
 - CEO: DNS IONOS
+
+---
+
+### [S007] — 2026-04-15 — Branding: Warm Bronze palette + logos + brand guide
+
+**Задача:** Финальная айдентика
+**Роли:** #2 Lena Schwarz, #14 Landa (audit)
+**Статус:** завершено
+
+**Что сделано:**
+- Палитра: PH Warm Sand → Warm Bronze (Deep Charcoal #2A2A2A, Warm Cream #F3EDE2, Aged Bronze #9B7B4E, Stone Gray #A09A90)
+- SVG логотипы: 4 варианта (icon + full × light/dark) + favicon
+- Navbar + Footer: logo icon подключен
+- Brand guide: docs/BRAND_GUIDE.md (палитра, типографика, WCAG, CSS code)
+- Landa audit: 0 старых hex, F1 (Lamp rgba) fixed, F2 (WCAG label) fixed
+- Obsidian: Branding Decision.md + Design and Branding.md обновлены
+
+**Артефакты:** globals.css, BRAND_GUIDE.md, 5 SVG файлов, Navbar.tsx, Footer.tsx
+
+---
+
+### [S008] — 2026-04-15 — Все 17 AI-фото размещены
+
+**Задача:** Размещение всех изображений из img/ по назначению из LUMA_IMAGE_PROMPTS.md
+**Роли:** #2 Lena Schwarz
+**Статус:** завершено
+
+**Что сделано:**
+- 5 flat-lay карточек (IMG-03-07) → ServiceOverview (homepage)
+- 5 detail фото (IMG-08-12) → ServiceDetail (/leistungen)
+- 3 vorher/nachher (IMG-13-15) → Referenzen (showcase cards)
+- Contact bg atmosphere (IMG-16) → /kontakt (gradient overlay)
+- OG social share (IMG-17) → layout.tsx openGraph metadata
+- services.json: `image` (flat-lay) + `detailImage` (detail) для всех 5 услуг
+- referenzen.json: 3 записи вместо пустого массива
+- types.ts: `detailImage` optional field добавлен
+- ReferenzenContent: showcase cards вместо BeforeAfter slider (split-composition images)
+- Тесты: 77/77 pass (обновлён referenzen test: items вместо empty state)
+
+**Landa ТС2 findings закрыты:**
+- F1: файлы большие (~87MB) но в рамках GitHub Pages limit (1GB)
+- F2: split-composition images → showcase cards (не slider)
+- F3: `image` + `detailImage` разделены
+
+**Артефакты:** 17 image files, services.json, referenzen.json, types.ts, ServiceDetail.tsx, ReferenzenContent.tsx, ContactForm.tsx, layout.tsx
