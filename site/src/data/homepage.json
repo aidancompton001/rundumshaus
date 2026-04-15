@@ -1,0 +1,21 @@
+{
+  "hero": {
+    "heading": "Alles rund ums Haus — zuverlässig erledigt.",
+    "subheading": "Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in der Region Bielefeld.",
+    "ctas": [
+      { "label": "Kostenlos anfragen", "href": "/kontakt", "variant": "primary" },
+      { "label": "Unsere Leistungen", "href": "/leistungen", "variant": "ghost" }
+    ]
+  },
+  "about": {
+    "heading": "Über uns",
+    "body": "Rundum's Haus Littawe steht für Zuverlässigkeit, Sauberkeit und faire Preise. Wir kümmern uns um alles rund um Ihr Haus — vom Garten bis zum Dach, von der Entrümpelung bis zur Schrottabholung. Schnell, sauber und stressfrei.",
+    "image": "/images/hero/about.jpg",
+    "imageAlt": "Kevin Littawe bei der Arbeit"
+  },
+  "stats": [
+    { "value": 100, "suffix": "%", "label": "Kundenzufriedenheit" },
+    { "value": 5, "suffix": "+", "label": "Leistungsbereiche" },
+    { "value": 24, "suffix": "h", "label": "Schnelle Reaktionszeit" }
+  ]
+}

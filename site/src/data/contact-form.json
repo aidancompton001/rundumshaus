@@ -1,0 +1,30 @@
+{
+  "title": "Kontakt",
+  "heading": "Schreiben Sie uns",
+  "body": "Haben Sie Fragen oder möchten ein unverbindliches Angebot? Füllen Sie das Formular aus — wir melden uns schnellstmöglich bei Ihnen.",
+  "sections": [
+    {
+      "heading": "Ihre Kontaktdaten",
+      "fields": [
+        { "name": "name", "label": "Ihr Name", "type": "text", "required": true, "placeholder": " " },
+        { "name": "email", "label": "E-Mail-Adresse", "type": "email", "required": true, "placeholder": " " },
+        { "name": "phone", "label": "Telefonnummer", "type": "tel", "required": false, "placeholder": " " }
+      ]
+    },
+    {
+      "heading": "Ihre Anfrage",
+      "fields": [
+        { "name": "message", "label": "Ihre Nachricht", "type": "textarea", "required": true, "placeholder": " " }
+      ]
+    },
+    {
+      "heading": "Datenschutz",
+      "fields": [
+        { "name": "consent", "label": "Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.", "type": "checkbox", "required": true }
+      ]
+    }
+  ],
+  "submitLabel": "Anfrage absenden",
+  "successMessage": "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.",
+  "errorMessage": "Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch."
+}

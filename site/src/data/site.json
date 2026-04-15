@@ -1,0 +1,25 @@
+{
+  "company": "Rundum's Haus Littawe",
+  "owner": "Kevin Littawe",
+  "address": {
+    "street": "Bielefeld",
+    "city": "Bielefeld",
+    "zip": "33602",
+    "country": "DE"
+  },
+  "phone": "+49 XXX XXXXXXX",
+  "email": "kontakt@rundumshaus-littawe.de",
+  "navigation": [
+    { "label": "Startseite", "href": "/" },
+    { "label": "Leistungen", "href": "/leistungen" },
+    { "label": "Referenzen", "href": "/referenzen" },
+    { "label": "Kontakt", "href": "/kontakt" }
+  ],
+  "footer": {
+    "copyright": "© 2026 Rundum's Haus Littawe. Alle Rechte vorbehalten.",
+    "legalLinks": [
+      { "label": "Impressum", "href": "/impressum" },
+      { "label": "Datenschutz", "href": "/datenschutz" }
+    ]
+  }
+}

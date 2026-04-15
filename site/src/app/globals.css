@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* === RundumsHaus Design Tokens (temporary PH palette — CEO will provide final) === */
+
+:root {
+  --color-cream: #F5EDE3;
+  --color-cream-dark: #EDE3D5;
+  --color-charcoal: #3A3A3A;
+  --color-charcoal-light: #5A5A5A;
+  --color-copper: #B87333;
+  --color-copper-light: #D4955A;
+  --color-copper-dark: #8B5A24;
+  --color-sand: #B8A48E;
+}
+
+@theme inline {
+  --color-cream: #F5EDE3;
+  --color-cream-dark: #EDE3D5;
+  --color-charcoal: #3A3A3A;
+  --color-charcoal-light: #5A5A5A;
+  --color-copper: #B87333;
+  --color-copper-light: #D4955A;
+  --color-copper-dark: #8B5A24;
+  --color-sand: #B8A48E;
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+}
+
+/* === Lenis Smooth Scroll === */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* === Reduced Motion === */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === Moving Border (Aceternity) === */
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.moving-border-gradient {
+  background: conic-gradient(from var(--border-angle), transparent 70%, #B87333 90%, transparent 100%);
+}
+
+@keyframes rotating-border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* === Selection === */
+
+::selection {
+  background: #B87333;
+  color: #F5EDE3;
+}
