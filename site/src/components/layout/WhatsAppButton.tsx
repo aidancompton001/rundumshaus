@@ -1,36 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 
 const WHATSAPP_URL = "https://wa.me/4915239603175";
 
-export default function WhatsAppButton() {
-  const [visible, setVisible] = useState(false);
+function subscribe(callback: () => void) {
+  // Listen for storage changes (cookie consent)
+  window.addEventListener("storage", callback);
+  // Also poll briefly for same-tab changes
+  const id = setInterval(callback, 1000);
+  const timeout = setTimeout(callback, 3000);
+  return () => {
+    window.removeEventListener("storage", callback);
+    clearInterval(id);
+    clearTimeout(timeout);
+  };
+}
 
-  useEffect(() => {
-    // Show after cookie consent is given (or if no banner needed)
-    const consent = localStorage.getItem("cookie-consent");
-    if (consent) {
-      setVisible(true);
-    } else {
-      // Check periodically if consent was given
-      const interval = setInterval(() => {
-        if (localStorage.getItem("cookie-consent")) {
-          setVisible(true);
-          clearInterval(interval);
-        }
-      }, 1000);
-      // Show after 3s anyway (fallback)
-      const timeout = setTimeout(() => {
-        setVisible(true);
-        clearInterval(interval);
-      }, 3000);
-      return () => {
-        clearInterval(interval);
-        clearTimeout(timeout);
-      };
-    }
-  }, []);
+function getSnapshot() {
+  try {
+    return localStorage.getItem("cookie-consent") !== null || Date.now() > (window as unknown as Record<string, number>).__wa_show_at;
+  } catch {
+    return false;
+  }
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+// Set a future timestamp on first load
+if (typeof window !== "undefined" && !(window as unknown as Record<string, number>).__wa_show_at) {
+  (window as unknown as Record<string, number>).__wa_show_at = Date.now() + 3000;
+}
+
+export default function WhatsAppButton() {
+  const visible = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   if (!visible) return null;
 
