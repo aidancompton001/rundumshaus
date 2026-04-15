@@ -3,6 +3,7 @@
 import servicesData from "@/data/services.json";
 import type { Service } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
+import { getImageUrl } from "@/lib/getImageUrl";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -31,25 +32,37 @@ export default function ServiceDetail() {
           </p>
         </ScrollReveal>
 
-        <Stagger staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Stagger staggerDelay={100} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service) => (
             <div
               key={service.id}
-              className="group relative bg-cream-dark border border-sand/30 rounded-2xl p-8 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
+              className="group relative bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
             >
-              <div className="flex items-start gap-4 mb-4">
-                <span className="text-5xl flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
-                  {iconMap[service.icon] || "⚡"}
-                </span>
-                <div>
+              {service.image && (
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img
+                    src={getImageUrl(service.image)}
+                    alt={service.title}
+                    width={800}
+                    height={450}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div className="p-8">
+                <div className="flex items-start gap-4 mb-4">
+                  <span className="text-4xl flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
+                    {iconMap[service.icon] || "⚡"}
+                  </span>
                   <h2 className="font-heading text-2xl font-bold text-charcoal group-hover:text-copper transition-colors">
                     {service.title}
                   </h2>
                 </div>
+                <p className="text-charcoal-light leading-relaxed">
+                  {service.detailDescription}
+                </p>
               </div>
-              <p className="text-charcoal-light leading-relaxed">
-                {service.detailDescription}
-              </p>
             </div>
           ))}
         </Stagger>

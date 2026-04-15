@@ -7,6 +7,7 @@ import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
 import { ScrollReveal } from "@/components/motion";
 import { useMotion } from "@/components/motion/MotionProvider";
+import { getImageUrl } from "@/lib/getImageUrl";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,10 +78,14 @@ export default function AboutSection() {
           </ScrollReveal>
           <ScrollReveal direction="right">
             <div className="aspect-[4/3] rounded-2xl bg-sand/20 overflow-hidden">
-              {/* Placeholder — AI photo later */}
-              <div className="w-full h-full flex items-center justify-center text-charcoal-light">
-                <span className="text-6xl">🏠</span>
-              </div>
+              <img
+                src={getImageUrl("/images/about.png")}
+                alt="Professionelle Gartenarbeit — Rundum's Haus Littawe"
+                width={1200}
+                height={800}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
           </ScrollReveal>
         </div>

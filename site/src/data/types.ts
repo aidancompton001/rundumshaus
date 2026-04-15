@@ -64,6 +64,7 @@ export interface Service {
   description: string;
   detailDescription: string;
   icon: string;
+  image?: string;
 }
 
 /* ── Contact Form ── */

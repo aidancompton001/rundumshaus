@@ -10,8 +10,17 @@ interface LampProps {
 export default function Lamp({ children }: LampProps) {
   const { reducedMotion } = useMotion();
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-charcoal w-full z-0">
+    <div
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-charcoal w-full z-0"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(58,58,58,0.7), rgba(58,58,58,0.9)), url(${basePath}/images/hero/hero-bg.webp)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Lamp beams */}
       <div className="relative flex w-full flex-1 items-center justify-center isolate z-0">
         <motion.div
