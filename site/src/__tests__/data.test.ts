@@ -20,8 +20,8 @@ describe("Data Integrity", () => {
       expect(site.company).toBe("Rundum's Haus Littawe");
     });
 
-    it("has 4 navigation links", () => {
-      expect(site.navigation).toHaveLength(4);
+    it("has 5 navigation links", () => {
+      expect(site.navigation).toHaveLength(5);
     });
 
     it("has owner name", () => {

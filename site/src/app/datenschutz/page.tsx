@@ -140,20 +140,19 @@ export default function DatenschutzPage() {
           beschweren. Die für uns zuständige Aufsichtsbehörde ist:
         </p>
         <p className="mt-2">
-          Landesbeauftragte für Datenschutz und Informationsfreiheit
-          Nordrhein-Westfalen (LDI NRW)
+          Die Landesbeauftragte für den Datenschutz Niedersachsen
           <br />
-          Kavalleriestr. 2-4
+          Prinzenstraße 5
           <br />
-          40213 Düsseldorf
+          30159 Hannover
           <br />
           <a
-            href="https://www.ldi.nrw.de"
+            href="https://www.lfd.niedersachsen.de"
             target="_blank"
             rel="noopener noreferrer"
             className="text-copper hover:text-copper-light"
           >
-            www.ldi.nrw.de
+            www.lfd.niedersachsen.de
           </a>
         </p>
       </div>

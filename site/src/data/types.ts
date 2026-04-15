@@ -93,6 +93,15 @@ export interface ContactFormData {
   errorMessage: string;
 }
 
+/* ── Weitere Leistungen ── */
+
+export interface WeitereLeistungenData {
+  heading: string;
+  subheading: string;
+  services: string[];
+  footer: string;
+}
+
 /* ── Referenzen ── */
 
 export interface Referenz {

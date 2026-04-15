@@ -1,7 +1,7 @@
 # T002 — Ребрендинг по флаеру клиента
 
 **Дата:** 2026-04-15
-**Статус:** P0 — roadmap готов, ждёт ОК CEO
+**Статус:** В работе — Wave 2+3 (палитра) DONE, остальное в процессе
 **Ответственные:** #2 Lena Schwarz (UI/палитра), #3 Marco Reiter (код/данные/новая страница)
 **Размер:** L (несколько модулей, кросс-доменная)
 **Скилл:** ui-ux-pro-max + dispatching-parallel-agents
@@ -46,7 +46,7 @@
 | Аспект | БЫЛО | СТАНЕТ |
 |--------|------|--------|
 | Город | Bielefeld, PLZ 33602 | Osnabrück und Umgebung (60 km Umkreis) |
-| Телефон | +49 XXX XXXXXXX (заглушка) | 0155 63675772 (CEO) + 01523 9603175 (флаер) |
+| Телефон | +49 XXX XXXXXXX (заглушка) | 01523 9603175 (с флаера клиента) |
 | Email | kontakt@rundumshaus-littawe.de | без изменений |
 | --color-cream (#F3EDE2) | Warm Cream | #FFFFFF (Weiß) |
 | --color-cream-dark (#E8E2D6) | Тёмный крем | ~#F0F4F8 (светлый серо-голубой) |
@@ -101,7 +101,7 @@
 
 ### Wave 1: Данные и город (Data Layer)
 
-1. Обновить `site.json`: address → Osnabrück, phone → `+49 155 63675772`, phone2 → `+49 1523 9603175`, navigation → добавить Weitere Leistungen
+1. Обновить `site.json`: address → Osnabrück, phone → `+49 1523 9603175`, navigation → добавить Weitere Leistungen
 2. Обновить `homepage.json`: hero.subheading → "Osnabrück und Umgebung"
 3. Обновить `layout.tsx`: meta descriptions, structured data (addressLocality, postalCode → 49074, areaServed, telephone)
 4. Обновить `referenzen/page.tsx`: meta description
@@ -127,13 +127,13 @@
 
 ### Wave 4: Новая страница «Weitere Leistungen»
 
-18. Создать `src/data/weitere-leistungen.json` — список услуг (CEO + флаер)
+18. Создать `src/data/weitere-leistungen.json` — список услуг (точно с флаера)
 19. Создать `src/app/weitere-leistungen/page.tsx` — страница с галочками, без фото
 20. Добавить route в `sitemap.ts`
 
 ### Wave 5: WhatsApp + Телефон
 
-21. Создать `src/components/layout/WhatsAppButton.tsx` — fixed bottom-right, ссылка wa.me/4915563675772
+21. Создать `src/components/layout/WhatsAppButton.tsx` — fixed bottom-right, ссылка wa.me/4915239603175
 22. Подключить WhatsAppButton в `layout.tsx` (внутри body, после Footer)
 23. Обновить `ContactForm.tsx` — кнопка «Jetzt anrufen» + WhatsApp link в sidebar
 24. Обновить `Footer.tsx` — кликабельный телефон (уже есть tel:), добавить WhatsApp link
@@ -167,8 +167,7 @@
 - [ ] "Bielefeld" нигде не встречается в коде (grep = 0 results)
 - [ ] "Osnabrück" в meta, OG, structured data, hero
 - [ ] postalCode = 49074 (Osnabrück)
-- [ ] Телефон 0155 63675772 кликабелен (tel: link) на всех страницах
-- [ ] Телефон 01523 9603175 (с флаера) тоже присутствует
+- [ ] Телефон 01523 9603175 кликабелен (tel:+4915239603175) на всех страницах
 - [ ] Email kontakt@rundumshaus-littawe.de без изменений
 - [ ] Все CSS-переменные обновлены (Blau/Grün/Weiß)
 - [ ] 0 hardcoded старых hex (#9B7B4E, #F3EDE2, #2A2A2A в значении charcoal)
@@ -176,7 +175,7 @@
 - [ ] Страница /weitere-leistungen существует и содержит полный список
 - [ ] /weitere-leistungen в навигации (Navbar + Footer)
 - [ ] /weitere-leistungen в sitemap.ts
-- [ ] WhatsApp кнопка: fixed, bottom-right, ссылка wa.me/4915563675772
+- [ ] WhatsApp кнопка: fixed, bottom-right, ссылка wa.me/4915239603175
 - [ ] WhatsApp кнопка не перекрывает контент на mobile
 - [ ] Секция «Warum wir?» на главной
 - [ ] Datenschutz: LfD Niedersachsen (не NRW!)
@@ -188,9 +187,10 @@
 
 ---
 
-## Открытые вопросы для CEO
+## Закрытые вопросы
 
-1. **CTA цвет:** На флаере CTA-кнопка золотая (~#D4A843), акцент зелёный. Делать CTA зелёным (как акцент) или золотым (как на флаере)? Нужен ли отдельный токен?
-2. **AI-фото:** Сгенерированы под bronze/тёмный дуб. С новой blue/green палитрой могут не гармонировать. Нужна ли регенерация?
-3. **OG Image (IMG-17):** Содержит старые цвета. Регенерировать?
-4. **Точные HEX:** Цвета из флаера ~приблизительные (eyedropped из JPG). Утвердить?
+1. **CTA цвет:** Золотой (#D4A843) — как на флаере. Токен --color-gold добавлен. ✅
+2. **AI-фото:** Не трогаем. ✅
+3. **OG Image:** Не трогаем (нейтральное фото). ✅
+4. **HEX:** Утверждены в docs/PALETTE_V2.md. ✅
+5. **Телефон:** Единственный = 01523 9603175 (с флаера клиента). ✅

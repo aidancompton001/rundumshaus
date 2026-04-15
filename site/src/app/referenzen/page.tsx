@@ -4,7 +4,7 @@ import ReferenzenContent from "@/components/sections/ReferenzenContent";
 export const metadata = generateSEO({
   title: "Referenzen",
   description:
-    "Unsere Referenzen — Vorher/Nachher-Bilder unserer Projekte in der Region Bielefeld.",
+    "Unsere Referenzen — Vorher/Nachher-Bilder unserer Projekte in Osnabrück und Umgebung.",
   path: "/referenzen",
 });
 

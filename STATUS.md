@@ -1,27 +1,20 @@
 # STATUS — RundumsHaus
 
 **Обновлён:** 2026-04-15
-**Этап:** T002 Ребрендинг — палитра V2 готова, остальные waves в процессе.
+**Этап:** T002 Ребрендинг COMPLETE. Сайт обновлён по флаеру.
 
 ## Готово
 
 - [x] W1-11: полная сборка сайта (55 шагов)
-- [x] Все 17 AI-фото размещены (IMG-01 — IMG-17)
-- [x] Referenzen: 3 vorher/nachher записи
-- [x] 84 тестов pass, build clean, CI GREEN
-- [x] Dual-tone SVG иконки услуг (замена emoji)
-- [x] **T002 Wave 2+3: Палитра V2 — Blau/Grün/Weiß/Gold (из флаера)**
-
-## T002 Ребрендинг — Прогресс
-
-- [x] Wave 2: Палитра CSS + rgba + SVG
-- [x] Wave 3: Favicon + 4 SVG лого
-- [ ] Wave 1: Город Bielefeld → Osnabrück
-- [ ] Wave 4: Страница Weitere Leistungen
-- [ ] Wave 5: WhatsApp + Телефон
-- [ ] Wave 6: Секция «Warum wir?»
-- [ ] Wave 7: Тесты
-- [ ] Wave 8: Визуальная проверка
+- [x] Все 17 AI-фото размещены
+- [x] T002: Палитра V2 — Blau/Grün/Weiß/Gold
+- [x] T002: Город → Osnabrück und Umgebung
+- [x] T002: Телефон → 01523 9603175
+- [x] T002: /weitere-leistungen (9 услуг)
+- [x] T002: WhatsApp кнопка (wa.me/4915239603175)
+- [x] T002: Секция «Warum wir?»
+- [x] T002: Datenschutz → LfD Niedersachsen
+- [x] 84 тестов pass, build clean
 
 ## Repo + Production
 
@@ -30,10 +23,9 @@
 
 ## Следующее
 
-- [ ] T002 Wave 1: город → Osnabrück
-- [ ] T002 Wave 4-6: Weitere Leistungen + WhatsApp + Warum wir
+- [ ] CEO: визуальная проверка на production
 - [ ] CEO: DNS IONOS (docs/DNS_INSTRUCTIONS.md)
-- [ ] FormSubmit.co: реальный тест отправки с production
+- [ ] FormSubmit.co: реальный тест отправки
 
 ## Блокеры
 

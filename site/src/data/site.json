@@ -2,16 +2,17 @@
   "company": "Rundum's Haus Littawe",
   "owner": "Kevin Littawe",
   "address": {
-    "street": "Bielefeld",
-    "city": "Bielefeld",
-    "zip": "33602",
+    "street": "Osnabrück und Umgebung",
+    "city": "Osnabrück",
+    "zip": "49074",
     "country": "DE"
   },
-  "phone": "+49 XXX XXXXXXX",
+  "phone": "+49 1523 9603175",
   "email": "kontakt@rundumshaus-littawe.de",
   "navigation": [
     { "label": "Startseite", "href": "/" },
     { "label": "Leistungen", "href": "/leistungen" },
+    { "label": "Weitere Leistungen", "href": "/weitere-leistungen" },
     { "label": "Referenzen", "href": "/referenzen" },
     { "label": "Kontakt", "href": "/kontakt" }
   ],

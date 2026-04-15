@@ -62,7 +62,17 @@ export default function Footer() {
                   href={`tel:${site.phone}`}
                   className="hover:text-cream transition-colors"
                 >
-                  {site.phone}
+                  📞 {site.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/4915239603175"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-cream transition-colors"
+                >
+                  💬 WhatsApp
                 </a>
               </li>
               <li>
@@ -70,7 +80,7 @@ export default function Footer() {
                   href={`mailto:${site.email}`}
                   className="hover:text-cream transition-colors"
                 >
-                  {site.email}
+                  ✉️ {site.email}
                 </a>
               </li>
             </ul>

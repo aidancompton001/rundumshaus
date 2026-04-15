@@ -2,6 +2,33 @@
 
 ---
 
+### [S011] — 2026-04-15 — T002 Complete: город, услуги, WhatsApp, Warum wir
+
+**Задача:** [T002](docs/tasks/T002_rebrand_flyer.md) — ребрендинг remaining waves
+**Роли:** #3 Marco Reiter (Frontend), #2 Lena Schwarz (UI)
+**Статус:** завершено
+
+**Что сделано:**
+
+- Wave 1: Bielefeld → Osnabrück und Umgebung (site.json, homepage.json, layout.tsx, referenzen, datenschutz)
+- Wave 4: /weitere-leistungen — 9 услуг с флаера, галочки, в Navbar + sitemap
+- Wave 5: WhatsApp кнопка (fixed z-40, wa.me/4915239603175) + «Jetzt anrufen» CTA в Contact sidebar
+- Wave 6: Секция «Warum wir?» — 5 пунктов с флаера, dark section на главной
+- Datenschutz: LDI NRW → LfD Niedersachsen (Prinzenstraße 5, 30159 Hannover)
+- Телефон: 01523 9603175 (единственный, с флаера клиента)
+- Structured data: Osnabrück, 49074, +49 1523 9603175
+- Тесты обновлены: nav 4→5, LDI NRW→Niedersachsen
+
+**Верификация:**
+
+- grep "Bielefeld" = 0
+- Build: OK (13 routes)
+- Tests: 84/84 pass
+
+**Артефакты:** site.json, homepage.json, layout.tsx, datenschutz, referenzen, page.tsx, sitemap.ts, weitere-leistungen.json, weitere-leistungen/page.tsx, WhatsAppButton.tsx, WarumWir.tsx, ContactForm.tsx, Footer.tsx, types.ts, data.test.ts, legal.test.tsx
+
+---
+
 ### [S010] — 2026-04-15 — Палитра V2: Blau/Grün/Weiß/Gold
 
 **Задача:** [T002](docs/tasks/T002_rebrand_flyer.md) — ребрендинг палитры по флаеру

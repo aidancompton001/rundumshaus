@@ -201,6 +201,22 @@ export default function ContactForm() {
               <div className="space-y-4">
                 <a
                   href={`tel:${site.phone}`}
+                  className="flex items-center gap-3 bg-gold hover:bg-gold-light text-white rounded-xl px-5 py-3 font-semibold transition-colors"
+                >
+                  <span className="text-xl">📞</span>
+                  <span className="font-body">Jetzt anrufen</span>
+                </a>
+                <a
+                  href="https://wa.me/4915239603175"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl px-5 py-3 font-semibold transition-colors"
+                >
+                  <span className="text-xl">💬</span>
+                  <span className="font-body">WhatsApp schreiben</span>
+                </a>
+                <a
+                  href={`tel:${site.phone}`}
                   className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
                 >
                   <span className="text-2xl">📞</span>

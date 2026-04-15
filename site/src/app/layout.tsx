@@ -4,6 +4,7 @@ import MotionProvider from "@/components/motion/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import "./globals.css";
 
 const lora = Lora({
@@ -23,10 +24,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
   description:
-    "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in der Region Bielefeld.",
+    "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und Umgebung.",
   openGraph: {
     title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
-    description: "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in der Region Bielefeld.",
+    description: "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und Umgebung.",
     url: "https://rundumshaus-littawe.de",
     locale: "de_DE",
     type: "website",
@@ -56,19 +57,19 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               name: "Rundum's Haus Littawe",
               description:
-                "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in der Region Bielefeld.",
+                "Zuverlässiger Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und Umgebung.",
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Bielefeld",
-                postalCode: "33602",
+                addressLocality: "Osnabrück",
+                postalCode: "49074",
                 addressCountry: "DE",
               },
-              telephone: "+49 XXX XXXXXXX",
+              telephone: "+49 1523 9603175",
               email: "kontakt@rundumshaus-littawe.de",
               url: "https://rundumshaus-littawe.de",
               areaServed: {
                 "@type": "City",
-                name: "Bielefeld",
+                name: "Osnabrück und Umgebung",
               },
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
@@ -115,6 +116,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1 pt-16">{children}</main>
           <Footer />
+          <WhatsAppButton />
           <CookieBanner />
         </MotionProvider>
       </body>

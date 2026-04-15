@@ -73,9 +73,9 @@ describe("Datenschutz", () => {
     expect(screen.getByText(/Art\. 77 DSGVO/)).toBeInTheDocument();
   });
 
-  it("renders LDI NRW as supervisory authority", () => {
+  it("renders LfD Niedersachsen as supervisory authority", () => {
     render(<DatenschutzPage />);
-    expect(screen.getByText(/LDI NRW/)).toBeInTheDocument();
+    expect(screen.getByText(/Niedersachsen/)).toBeInTheDocument();
   });
 
   it("renders Google Fonts local notice", () => {
