@@ -41,7 +41,7 @@ export default function ServiceOverview() {
             <a
               key={service.id}
               href={getHref("/leistungen")}
-              className="group block bg-cream-dark/50 border border-sand/20 rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-copper/30"
+              className="group block bg-cream-dark border border-sand/30 rounded-2xl p-6 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-copper/30"
             >
               <div className="text-4xl mb-4">
                 {iconMap[service.icon] || "⚡"}

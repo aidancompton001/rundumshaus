@@ -35,7 +35,7 @@ export default function ServiceDetail() {
           {services.map((service) => (
             <div
               key={service.id}
-              className="group relative bg-cream-dark/30 backdrop-blur-xl border border-sand/20 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
+              className="group relative bg-cream-dark border border-sand/30 rounded-2xl p-8 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
             >
               <div className="flex items-start gap-4 mb-4">
                 <span className="text-5xl flex-shrink-0 transition-transform duration-200 group-hover:scale-105">

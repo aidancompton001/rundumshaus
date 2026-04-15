@@ -49,8 +49,9 @@ export default function ScrollReveal({
       ease: "power2.out",
       scrollTrigger: {
         trigger: el,
-        start,
+        start: start || "top 90%",
         toggleActions: "play none none none",
+        once: true,
       },
     });
 

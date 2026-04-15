@@ -51,6 +51,28 @@ describe("ServiceDetail", () => {
     expect(screen.getByText(/Vom Keller bis zur kompletten/)).toBeInTheDocument();
     expect(screen.getByText(/Wir holen Ihren Altmetallschrott/)).toBeInTheDocument();
   });
+
+  it("cards use solid bg, not transparent glassmorphism (bug fix)", () => {
+    const { container } = render(<ServiceDetail />);
+    const cards = container.querySelectorAll("[class*='bg-cream-dark']");
+    expect(cards.length).toBe(5);
+    // No card should have backdrop-blur (invisible on light bg)
+    cards.forEach((card) => {
+      expect(card.className).not.toContain("backdrop-blur");
+      // Should have solid bg (no /30 opacity)
+      expect(card.className).toContain("bg-cream-dark");
+      expect(card.className).not.toContain("bg-cream-dark/");
+    });
+  });
+
+  it("cards have visible border (solid, not transparent)", () => {
+    const { container } = render(<ServiceDetail />);
+    const cards = container.querySelectorAll("[class*='border-sand']");
+    expect(cards.length).toBe(5);
+    cards.forEach((card) => {
+      expect(card.className).toContain("shadow-md");
+    });
+  });
 });
 
 describe("AboutSection", () => {

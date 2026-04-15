@@ -40,8 +40,9 @@ export default function Stagger({
       ease: "power2.out",
       scrollTrigger: {
         trigger: el,
-        start,
+        start: "top 95%",
         toggleActions: "play none none none",
+        once: true,
       },
     });
 
