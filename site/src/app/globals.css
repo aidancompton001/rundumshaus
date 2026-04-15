@@ -73,6 +73,71 @@ html.lenis body {
   }
 }
 
+/* === ScrollReveal — CSS-first, content ALWAYS visible === */
+/* Without JS: content is fully visible (no animation) */
+/* With JS: IntersectionObserver adds .is-visible → triggers CSS animation */
+
+.scroll-reveal {
+  opacity: 1; /* DEFAULT: visible! */
+}
+
+.scroll-reveal.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.scroll-reveal.reveal-down {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.scroll-reveal.reveal-left {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.scroll-reveal.reveal-right {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+}
+
+/* === Stagger — CSS-first === */
+
+.stagger-container > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.stagger-container.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Fallback: no JS → everything visible === */
+
+@supports not (animation: none) {
+  .scroll-reveal,
+  .stagger-container > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* === Selection === */
 
 ::selection {

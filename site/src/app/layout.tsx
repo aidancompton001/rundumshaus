@@ -37,6 +37,9 @@ export default function RootLayout({
       className={`${lora.variable} ${plusJakarta.variable} antialiased`}
     >
       <head>
+        <noscript>
+          <style>{`.scroll-reveal, .stagger-container > * { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

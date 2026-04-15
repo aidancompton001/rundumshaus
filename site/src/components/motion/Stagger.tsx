@@ -1,25 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useMotion } from "./MotionProvider";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface StaggerProps {
   children: React.ReactNode;
   staggerDelay?: number;
-  duration?: number;
-  start?: string;
   className?: string;
 }
 
 export default function Stagger({
   children,
-  staggerDelay = 0.1,
-  duration = 0.7,
-  start = "top 85%",
+  staggerDelay = 100,
   className = "",
 }: StaggerProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -29,30 +21,31 @@ export default function Stagger({
     const el = ref.current;
     if (!el || reducedMotion) return;
 
-    const items = el.children;
-    if (items.length === 0) return;
-
-    const tween = gsap.from(items, {
-      opacity: 0,
-      y: 30,
-      duration,
-      stagger: staggerDelay,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 95%",
-        toggleActions: "play none none none",
-        once: true,
-      },
+    // Set stagger delay CSS variable on each child
+    Array.from(el.children).forEach((child, i) => {
+      (child as HTMLElement).style.setProperty(
+        "--stagger-delay",
+        `${i * staggerDelay}ms`
+      );
     });
 
-    return () => {
-      tween.kill();
-    };
-  }, [staggerDelay, duration, start, reducedMotion]);
+    // IntersectionObserver — adds .is-visible when element enters viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [staggerDelay, reducedMotion]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={`stagger-container ${className}`}>
       {children}
     </div>
   );
