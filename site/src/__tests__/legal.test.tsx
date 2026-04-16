@@ -21,7 +21,7 @@ describe("Impressum", () => {
 
   it("renders company name", () => {
     render(<ImpressumPage />);
-    expect(screen.getByText(/Rundum's Haus Littawe/)).toBeInTheDocument();
+    expect(screen.getByText(/Rund ums Haus Littawe/)).toBeInTheDocument();
   });
 
   it("renders EU ODR link", () => {
