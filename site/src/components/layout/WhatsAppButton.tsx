@@ -19,7 +19,7 @@ function subscribe(callback: () => void) {
 
 function getSnapshot() {
   try {
-    return localStorage.getItem("cookie-consent") !== null || Date.now() > (window as unknown as Record<string, number>).__wa_show_at;
+    return localStorage.getItem("rh-cookie-consent") !== null || Date.now() > (window as unknown as Record<string, number>).__wa_show_at;
   } catch {
     return false;
   }
