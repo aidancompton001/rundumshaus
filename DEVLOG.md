@@ -2,6 +2,32 @@
 
 ---
 
+### [S017] — 2026-04-16 — T003: Pages CMS — визуальная админка
+
+**Задача:** [T003](docs/tasks/T003_pages_cms.md) — Pages CMS для Kevin
+**Роли:** #3 Marco Reiter (Frontend)
+**Статус:** завершено
+
+**Что сделано:**
+
+- `.pages.yml` — 6 коллекций с German labels (Firmendaten, Startseite, Weitere Dienstleistungen, Hauptleistungen, Referenzen, Kontaktformular)
+- Media: site/public/images (input) → /images (output)
+- Hidden fields: icon, image, detailImage, id (Kevin не видит, не сломает)
+- JSON validation step в CI deploy.yml (safety net)
+- `docs/ANLEITUNG_KEVIN.md` — пошаговая инструкция на немецком
+- Build: 101/101 pass, JSON validation OK
+
+**Ключевые решения:**
+
+- Навигация (site.json navigation) НЕ включена в CMS — Kevin не может сломать nav
+- hero.ctas НЕ включены — Kevin не трогает CTA кнопки
+- contact-form.json sections НЕ включены — только тексты (heading, body, submit, success, error)
+- services icon/image/detailImage = hidden — Kevin меняет только тексты
+
+**Артефакты:** `.pages.yml`, `docs/ANLEITUNG_KEVIN.md`, `.github/workflows/deploy.yml`
+
+---
+
 ### [S015] — 2026-04-15 — PX-010: Унификация иконок (0 emoji)
 
 **Задача:** PX-010 — замена ВСЕХ эмодзи на кастомные dual-tone SVG

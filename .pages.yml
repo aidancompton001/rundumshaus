@@ -1,0 +1,215 @@
+media:
+  input: site/public/images
+  output: /images
+
+content:
+  # === Firmendaten ===
+  - name: firmendaten
+    label: Firmendaten
+    path: site/src/data/site.json
+    type: file
+    description: "Firmenname, Adresse, Telefon, E-Mail"
+    fields:
+      - name: company
+        label: Firmenname
+        type: string
+      - name: owner
+        label: Inhaber
+        type: string
+      - name: address
+        label: Adresse
+        type: object
+        fields:
+          - name: street
+            label: Straße / Region
+            type: string
+          - name: city
+            label: Stadt
+            type: string
+          - name: zip
+            label: PLZ
+            type: string
+          - name: country
+            label: Land
+            type: string
+      - name: phone
+        label: Telefon
+        type: string
+        description: "Format: +49 1523 9603175"
+      - name: email
+        label: E-Mail
+        type: string
+
+  # === Startseite ===
+  - name: startseite
+    label: Startseite
+    path: site/src/data/homepage.json
+    type: file
+    description: "Hero-Text, Über uns, Statistik"
+    fields:
+      - name: hero
+        label: Hero-Bereich
+        type: object
+        fields:
+          - name: heading
+            label: Überschrift
+            type: string
+          - name: subheading
+            label: Unterüberschrift
+            type: string
+      - name: about
+        label: Über uns
+        type: object
+        fields:
+          - name: heading
+            label: Überschrift
+            type: string
+          - name: body
+            label: Text
+            type: text
+          - name: imageAlt
+            label: Bildbeschreibung
+            type: string
+      - name: stats
+        label: Statistik
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Zahl
+            type: number
+          - name: suffix
+            label: Einheit
+            type: string
+            description: "z.B. %, +, h"
+          - name: label
+            label: Beschreibung
+            type: string
+
+  # === Weitere Dienstleistungen ===
+  - name: weitere-leistungen
+    label: Weitere Dienstleistungen
+    path: site/src/data/weitere-leistungen.json
+    type: file
+    description: "Liste der zusätzlichen Dienstleistungen"
+    fields:
+      - name: heading
+        label: Überschrift
+        type: string
+      - name: subheading
+        label: Unterüberschrift
+        type: text
+      - name: services
+        label: Dienstleistungen
+        type: string
+        list: true
+        description: "Eine Dienstleistung pro Zeile"
+      - name: footer
+        label: Fußzeile
+        type: string
+
+  # === Hauptleistungen ===
+  - name: leistungen
+    label: Hauptleistungen
+    path: site/src/data/services.json
+    type: file
+    description: "Die 5 Hauptleistungen — Texte bearbeiten"
+    fields:
+      - name: heading
+        label: Überschrift
+        type: string
+      - name: subheading
+        label: Unterüberschrift
+        type: text
+      - name: services
+        label: Leistungen
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            hidden: true
+          - name: title
+            label: Titel
+            type: string
+          - name: description
+            label: Kurzbeschreibung
+            type: text
+          - name: detailDescription
+            label: Detailbeschreibung
+            type: text
+          - name: icon
+            label: Icon
+            type: string
+            hidden: true
+          - name: image
+            label: Bild
+            type: string
+            hidden: true
+          - name: detailImage
+            label: Detailbild
+            type: string
+            hidden: true
+
+  # === Referenzen ===
+  - name: referenzen
+    label: Referenzen
+    path: site/src/data/referenzen.json
+    type: file
+    description: "Vorher/Nachher-Projekte — Bilder und Texte"
+    fields:
+      - name: heading
+        label: Überschrift
+        type: string
+      - name: emptyState
+        label: Text wenn keine Referenzen
+        type: string
+      - name: items
+        label: Projekte
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            description: "Eindeutige Kennung (z.B. garten-01)"
+          - name: title
+            label: Titel
+            type: string
+          - name: description
+            label: Beschreibung
+            type: text
+          - name: date
+            label: Datum
+            type: string
+            description: "Format: JJJJ-MM (z.B. 2026-04)"
+          - name: before
+            label: Vorher-Bild
+            type: image
+          - name: after
+            label: Nachher-Bild
+            type: image
+
+  # === Kontaktformular ===
+  - name: kontaktformular
+    label: Kontaktformular
+    path: site/src/data/contact-form.json
+    type: file
+    description: "Texte des Kontaktformulars"
+    fields:
+      - name: heading
+        label: Überschrift
+        type: string
+      - name: body
+        label: Einleitung
+        type: text
+      - name: submitLabel
+        label: Button-Text
+        type: string
+      - name: successMessage
+        label: Erfolgsmeldung
+        type: text
+      - name: errorMessage
+        label: Fehlermeldung
+        type: text
