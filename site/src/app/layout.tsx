@@ -22,16 +22,16 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
+  title: "Rund ums Haus Littawe | Hausmeisterservice & Gartenpflege",
   description:
     "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
   openGraph: {
-    title: "Rundum's Haus Littawe | Hausmeisterservice & Gartenpflege",
+    title: "Rund ums Haus Littawe | Hausmeisterservice & Gartenpflege",
     description: "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
     url: "https://rundumshaus-littawe.de",
     locale: "de_DE",
     type: "website",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Rundum's Haus Littawe" }],
+    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Rund ums Haus Littawe" }],
   },
 };
 
@@ -55,13 +55,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              name: "Rundum's Haus Littawe",
+              name: "Rund ums Haus Littawe",
               description:
                 "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
               address: {
                 "@type": "PostalAddress",
+                streetAddress: "Bramscher Str. 161",
                 addressLocality: "Osnabrück",
-                postalCode: "49074",
+                postalCode: "49090",
                 addressCountry: "DE",
               },
               telephone: "+49 1523 9603175",

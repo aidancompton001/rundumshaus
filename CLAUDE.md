@@ -12,8 +12,8 @@
 
 **Название:** RundumsHaus
 **Тип:** Коммерческий сайт для клиента (Hausmeister & Gartenpflege)
-**Описание:** Премиум-сайт для компании "Rundum's Haus Littawe" — услуги по дому: Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung, Schrottabholung. Клиент — Kevin Littawe, бизнес на старте.
-**Локация:** Мюнхен, Германия (разработка) / Bielefeld region (клиент)
+**Описание:** Премиум-сайт для компании "Rund ums Haus Littawe" — услуги по дому: Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung, Schrottabholung. Клиент — Kevin Littawe, бизнес на старте. Адрес: Bramscher Str. 161, 49090 Osnabrück.
+**Локация:** Мюнхен, Германия (разработка) / Osnabrück und Umgebung (клиент)
 **Языки:** Deutsch (единственный язык сайта)
 **Домен:** rundumshaus-littawe.de (IONOS)
 **Бюджет клиента:** 300€ Festpreis

@@ -7,7 +7,7 @@ const site = siteData as SiteConfig;
 export const metadata = generateSEO({
   title: "Datenschutzerklärung",
   description:
-    "Datenschutzerklärung — Informationen zur Verarbeitung Ihrer personenbezogenen Daten durch Rundum's Haus Littawe.",
+    "Datenschutzerklärung — Informationen zur Verarbeitung Ihrer personenbezogenen Daten durch Rund ums Haus Littawe.",
   path: "/datenschutz",
 });
 

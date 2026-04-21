@@ -5,7 +5,7 @@ import { ScrollReveal, Stagger } from "@/components/motion";
 export const metadata = generateSEO({
   title: "Weitere Leistungen",
   description:
-    "Weitere Dienstleistungen von Rundum's Haus Littawe — Fassadenreinigung, Winterdienst, Gebäudereinigung und mehr in Osnabrück und Umgebung.",
+    "Weitere Dienstleistungen von Rund ums Haus Littawe — Fassadenreinigung, Winterdienst, Gebäudereinigung und mehr in Osnabrück und Umgebung.",
   path: "/weitere-leistungen",
 });
 

@@ -80,7 +80,7 @@ export default function AboutSection() {
             <div className="aspect-[4/3] rounded-2xl bg-sand/20 overflow-hidden">
               <img
                 src={getImageUrl("/images/about.png")}
-                alt="Professionelle Gartenarbeit — Rundum's Haus Littawe"
+                alt="Professionelle Gartenarbeit — Rund ums Haus Littawe"
                 width={1200}
                 height={800}
                 className="w-full h-full object-cover"

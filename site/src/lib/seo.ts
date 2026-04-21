@@ -6,7 +6,7 @@ interface SEOInput {
   path?: string;
 }
 
-const SITE_NAME = "Rundum's Haus Littawe";
+const SITE_NAME = "Rund ums Haus Littawe";
 const DOMAIN = "rundumshaus-littawe.de";
 
 export function generateSEO({ title, description, path = "" }: SEOInput): Metadata {
