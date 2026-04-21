@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import siteData from "@/data/site.json";
 import homepageData from "@/data/homepage.json";
 import servicesData from "@/data/services.json";
@@ -92,6 +94,39 @@ describe("Data Integrity", () => {
 
     it("includes Schrottabholung", () => {
       expect(services.find((s) => s.id === "schrottabholung")).toBeTruthy();
+    });
+
+    it("all referenced image files exist on disk", () => {
+      const PUBLIC = join(process.cwd(), "public");
+      services.forEach((s) => {
+        if (s.image) {
+          const p = join(PUBLIC, s.image);
+          expect(existsSync(p), `Missing image: ${s.image}`).toBe(true);
+        }
+        if (s.detailImage) {
+          const p = join(PUBLIC, s.detailImage);
+          expect(existsSync(p), `Missing detailImage: ${s.detailImage}`).toBe(
+            true
+          );
+        }
+      });
+    });
+
+    it("all responsive webp variants used in <picture> srcset exist", () => {
+      const PUBLIC = join(process.cwd(), "public");
+      // ServiceOverview uses [400, 800] for service.image (cards)
+      const widths = [400, 800];
+      services.forEach((s) => {
+        if (!s.image) return;
+        const withoutExt = s.image.replace(/\.(png|jpe?g|webp)$/i, "");
+        widths.forEach((w) => {
+          const variant = `${withoutExt}-${w}w.webp`;
+          const p = join(PUBLIC, variant);
+          expect(existsSync(p), `Missing responsive variant: ${variant}`).toBe(
+            true
+          );
+        });
+      });
     });
   });
 

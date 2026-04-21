@@ -116,7 +116,7 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="md:hidden fixed inset-0 top-16 bg-charcoal/95 backdrop-blur-2xl z-40"
+              className="md:hidden fixed inset-0 top-16 bg-charcoal z-[60]"
             >
               <div className="flex flex-col items-center justify-center h-full gap-8">
                 {site.navigation.map((link) => (

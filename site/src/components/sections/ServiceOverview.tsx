@@ -41,7 +41,7 @@ export default function ServiceOverview() {
                   <picture>
                     <source
                       type="image/webp"
-                      srcSet={toResponsiveWebpSrcSet(service.image, [400, 800, 1200])}
+                      srcSet={toResponsiveWebpSrcSet(service.image, [400, 800])}
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <img
