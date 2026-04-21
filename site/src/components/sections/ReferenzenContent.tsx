@@ -3,7 +3,7 @@
 import referenzenData from "@/data/referenzen.json";
 import type { ReferenzenData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
-import { getImageUrl } from "@/lib/getImageUrl";
+import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 
 const data = referenzenData as ReferenzenData;
 
@@ -37,14 +37,18 @@ export default function ReferenzenContent() {
                 className="group bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={getImageUrl(item.before)}
-                    alt={`Vorher/Nachher — ${item.title}`}
-                    width={800}
-                    height={600}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source type="image/webp" srcSet={getImageUrl(toWebp(item.before))} />
+                    <img
+                      src={getImageUrl(item.before)}
+                      alt={`Vorher/Nachher — ${item.title}`}
+                      width={800}
+                      height={600}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-2">

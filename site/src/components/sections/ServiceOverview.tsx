@@ -4,7 +4,7 @@ import servicesData from "@/data/services.json";
 import type { Service } from "@/data/types";
 import { ScrollReveal } from "@/components/motion";
 import { Stagger } from "@/components/motion";
-import { getHref, getImageUrl } from "@/lib/getImageUrl";
+import { getHref, getImageUrl, toResponsiveWebpSrcSet } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
 
 const { services, heading, subheading } = servicesData as {
@@ -38,14 +38,22 @@ export default function ServiceOverview() {
             >
               {service.image && (
                 <div className="aspect-[16/10] overflow-hidden">
-                  <img
-                    src={getImageUrl(service.image)}
-                    alt={service.title}
-                    width={600}
-                    height={375}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={toResponsiveWebpSrcSet(service.image, [400, 800, 1200])}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <img
+                      src={getImageUrl(service.image)}
+                      alt={service.title}
+                      width={600}
+                      height={375}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
               )}
               <div className="p-6">

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     url: "https://rundumshaus-littawe.de",
     locale: "de_DE",
     type: "website",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Rund ums Haus Littawe" }],
+    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Rund ums Haus Littawe" }],
   },
 };
 
@@ -46,6 +46,14 @@ export default function RootLayout({
       className={`${lora.variable} ${plusJakarta.variable} antialiased`}
     >
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/about-800w.webp"
+          imageSrcSet="/images/about-400w.webp 400w, /images/about-800w.webp 800w, /images/about-1200w.webp 1200w"
+          imageSizes="(max-width: 768px) 100vw, 50vw"
+          fetchPriority="high"
+        />
         <noscript>
           <style>{`.scroll-reveal, .stagger-container > * { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>

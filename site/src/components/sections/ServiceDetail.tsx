@@ -3,7 +3,7 @@
 import servicesData from "@/data/services.json";
 import type { Service } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
-import { getImageUrl } from "@/lib/getImageUrl";
+import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
 
 const { services, heading, subheading } = servicesData as {
@@ -31,18 +31,25 @@ export default function ServiceDetail() {
               key={service.id}
               className="group relative bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
             >
-              {(service.detailImage || service.image) && (
-                <div className="aspect-[16/9] overflow-hidden">
-                  <img
-                    src={getImageUrl(service.detailImage || service.image || "")}
-                    alt={service.title}
-                    width={800}
-                    height={450}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              )}
+              {(service.detailImage || service.image) && (() => {
+                const imgSrc = service.detailImage || service.image || "";
+                return (
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <picture>
+                      <source type="image/webp" srcSet={getImageUrl(toWebp(imgSrc))} />
+                      <img
+                        src={getImageUrl(imgSrc)}
+                        alt={service.title}
+                        width={800}
+                        height={450}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                  </div>
+                );
+              })()}
               <div className="p-8">
                 <div className="flex items-start gap-4 mb-4">
                   {(() => {

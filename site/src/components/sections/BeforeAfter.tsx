@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { getImageUrl } from "@/lib/getImageUrl";
+import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 
 interface BeforeAfterProps {
   before: string;
@@ -28,28 +28,36 @@ export default function BeforeAfter({
 
       {/* After image (full width, behind) */}
       <div className="relative aspect-[4/3]">
-        <img
-          src={getImageUrl(after)}
-          alt={`${afterAlt} — ${title}`}
-          width={800}
-          height={600}
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
+        <picture>
+          <source type="image/webp" srcSet={getImageUrl(toWebp(after))} />
+          <img
+            src={getImageUrl(after)}
+            alt={`${afterAlt} — ${title}`}
+            width={800}
+            height={600}
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
 
         {/* Before image (clipped) */}
         <div
           className="absolute inset-0"
           style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
         >
-          <img
-            src={getImageUrl(before)}
-            alt={`${beforeAlt} — ${title}`}
-            width={800}
-            height={600}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <picture>
+            <source type="image/webp" srcSet={getImageUrl(toWebp(before))} />
+            <img
+              src={getImageUrl(before)}
+              alt={`${beforeAlt} — ${title}`}
+              width={800}
+              height={600}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
 
         {/* Slider line */}
