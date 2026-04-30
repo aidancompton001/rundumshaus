@@ -15,7 +15,7 @@ export default function RedirectClient() {
           Diese Seite wurde verschoben
         </h1>
         <p className="text-charcoal-light mb-8">
-          Unsere Leistungen finden Sie jetzt unter „Leistungen".
+          Unsere Leistungen finden Sie jetzt unter &bdquo;Leistungen&ldquo;.
         </p>
         <a
           href={getHref("/leistungen/")}
