@@ -1,0 +1,140 @@
+{
+  "heading": "Unser Einsatzgebiet",
+  "subheading": "Wir sind in Osnabrück und im Umkreis von rund 60 km für Sie im Einsatz — von Niedersachsen bis ins westliche Münsterland.",
+  "regions": [
+    {
+      "name": "Osnabrücker Land & Umgebung",
+      "cities": [
+        "Osnabrück",
+        "Georgsmarienhütte",
+        "Melle",
+        "Bramsche",
+        "Wallenhorst",
+        "Belm",
+        "Bissendorf",
+        "Bad Essen",
+        "Bohmte",
+        "Ostercappeln",
+        "Hagen am Teutoburger Wald",
+        "Bad Iburg",
+        "Bad Laer",
+        "Bad Rothenfelde",
+        "Dissen am Teutoburger Wald",
+        "Glandorf",
+        "Hasbergen"
+      ]
+    },
+    {
+      "name": "Artland & Wittlager Land",
+      "cities": [
+        "Quakenbrück",
+        "Bersenbrück",
+        "Ankum",
+        "Fürstenau",
+        "Neuenkirchen",
+        "Voltlage",
+        "Rieste",
+        "Alfhausen",
+        "Nortrup",
+        "Kettenkamp",
+        "Eggermühlen",
+        "Menslage",
+        "Bippen",
+        "Berge",
+        "Gehrde",
+        "Badbergen"
+      ]
+    },
+    {
+      "name": "Münsterland",
+      "cities": [
+        "Münster",
+        "Greven",
+        "Ibbenbüren",
+        "Lengerich",
+        "Tecklenburg",
+        "Mettingen",
+        "Hörstel",
+        "Rheine",
+        "Emsdetten",
+        "Steinfurt",
+        "Ochtrup",
+        "Horstmar",
+        "Laer",
+        "Nordwalde",
+        "Altenberge",
+        "Telgte",
+        "Hopsten",
+        "Recke",
+        "Westerkappeln",
+        "Ladbergen",
+        "Saerbeck",
+        "Lotte",
+        "Wettringen",
+        "Neuenkirchen (Kreis Steinfurt)",
+        "Neuenkirchen (bei Rheine)"
+      ]
+    },
+    {
+      "name": "Warendorf, Bielefeld & Umgebung",
+      "cities": [
+        "Warendorf",
+        "Sassenberg",
+        "Versmold",
+        "Halle (Westfalen)",
+        "Borgholzhausen",
+        "Werther",
+        "Bielefeld",
+        "Löhne",
+        "Herford",
+        "Bad Oeynhausen",
+        "Preußisch Oldendorf"
+      ]
+    },
+    {
+      "name": "Mittelweser & Nordniedersachsen",
+      "cities": [
+        "Rahden",
+        "Stemwede",
+        "Espelkamp",
+        "Diepholz"
+      ]
+    },
+    {
+      "name": "Vechta & Cloppenburg",
+      "cities": [
+        "Vechta",
+        "Lohne",
+        "Dinklage",
+        "Damme",
+        "Holdorf",
+        "Steinfeld",
+        "Neuenkirchen-Vörden",
+        "Cloppenburg",
+        "Cappeln (Oldenburg)",
+        "Emstek",
+        "Molbergen",
+        "Löningen",
+        "Essen (Oldenburg)"
+      ]
+    },
+    {
+      "name": "Emsland & Grafschaft Bentheim",
+      "cities": [
+        "Haselünne",
+        "Meppen",
+        "Lingen (Ems)",
+        "Spelle",
+        "Freren",
+        "Geeste",
+        "Twist",
+        "Salzbergen",
+        "Herzlake",
+        "Schüttorf",
+        "Nordhorn",
+        "Wietmarschen"
+      ]
+    }
+  ],
+  "footer": "Ihr Ort ist nicht dabei? Sprechen Sie uns trotzdem an — wir prüfen jeden Auftrag individuell."
+}

@@ -5,7 +5,12 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import serviceAreasData from "@/data/service-areas.json";
+import type { ServiceAreasData } from "@/data/types";
 import "./globals.css";
+
+const serviceAreas = serviceAreasData as ServiceAreasData;
+const allCities = serviceAreas.regions.flatMap((r) => r.cities);
 
 const lora = Lora({
   variable: "--font-heading",
@@ -74,10 +79,10 @@ export default function RootLayout({
               telephone: "+49 1523 9603175",
               email: "kontakt@rundumshaus-littawe.de",
               url: "https://rundumshaus-littawe.de",
-              areaServed: {
+              areaServed: allCities.map((city) => ({
                 "@type": "City",
-                name: "Osnabrück und Umgebung",
-              },
+                name: city,
+              })),
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
                 name: "Leistungen",

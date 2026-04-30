@@ -118,3 +118,17 @@ export interface ReferenzenData {
   emptyState: string;
   items: Referenz[];
 }
+
+/* ── Service Areas ── */
+
+export interface ServiceAreaRegion {
+  name: string;
+  cities: string[];
+}
+
+export interface ServiceAreasData {
+  heading: string;
+  subheading: string;
+  regions: ServiceAreaRegion[];
+  footer: string;
+}

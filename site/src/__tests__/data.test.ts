@@ -6,6 +6,7 @@ import homepageData from "@/data/homepage.json";
 import servicesData from "@/data/services.json";
 import contactFormData from "@/data/contact-form.json";
 import referenzenData from "@/data/referenzen.json";
+import serviceAreasData from "@/data/service-areas.json";
 import type {
   SiteConfig,
   HomepageData,
@@ -156,6 +157,35 @@ describe("Data Integrity", () => {
       expect(consent).toBeTruthy();
       expect(consent?.type).toBe("checkbox");
       expect(consent?.required).toBe(true);
+    });
+  });
+
+  describe("service-areas.json", () => {
+    const data = serviceAreasData as {
+      heading: string;
+      regions: { name: string; cities: string[] }[];
+    };
+
+    it("has heading and regions", () => {
+      expect(data.heading).toBeTruthy();
+      expect(data.regions.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it("each region has name and cities", () => {
+      data.regions.forEach((r) => {
+        expect(r.name).toBeTruthy();
+        expect(r.cities.length).toBeGreaterThanOrEqual(1);
+      });
+    });
+
+    it("contains Osnabrück (home city)", () => {
+      const allCities = data.regions.flatMap((r) => r.cities);
+      expect(allCities).toContain("Osnabrück");
+    });
+
+    it("has 80+ cities total (covers wide service area)", () => {
+      const allCities = data.regions.flatMap((r) => r.cities);
+      expect(allCities.length).toBeGreaterThanOrEqual(80);
     });
   });
 
