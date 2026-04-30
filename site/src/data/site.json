@@ -12,7 +12,6 @@
   "navigation": [
     { "label": "Startseite", "href": "/" },
     { "label": "Leistungen", "href": "/leistungen" },
-    { "label": "Weitere Leistungen", "href": "/weitere-leistungen" },
     { "label": "Referenzen", "href": "/referenzen" },
     { "label": "Kontakt", "href": "/kontakt" }
   ],

@@ -22,8 +22,8 @@ describe("Data Integrity", () => {
       expect(site.company).toBeTruthy();
     });
 
-    it("has 5 navigation links", () => {
-      expect(site.navigation).toHaveLength(5);
+    it("has 4 navigation links", () => {
+      expect(site.navigation).toHaveLength(4);
     });
 
     it("has owner name", () => {
