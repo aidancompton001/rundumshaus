@@ -123,7 +123,10 @@ describe("ServiceDetail", () => {
 
   it("cards use solid bg, not transparent glassmorphism (bug fix)", () => {
     const { container } = render(<ServiceDetail />);
-    const cards = container.querySelectorAll("[class*='bg-cream-dark']");
+    // Service cards have group + relative + rounded-2xl + bg-cream-dark — distinguish from FAQ section bg
+    const cards = container.querySelectorAll(
+      ".group.relative[class*='rounded-2xl'][class*='bg-cream-dark']"
+    );
     expect(cards.length).toBe(5);
     // No card should have backdrop-blur (invisible on light bg)
     cards.forEach((card) => {
@@ -136,7 +139,10 @@ describe("ServiceDetail", () => {
 
   it("cards have visible border (solid, not transparent)", () => {
     const { container } = render(<ServiceDetail />);
-    const cards = container.querySelectorAll("[class*='border-sand']");
+    // Same precise selector as above — exclude FAQ accordion items
+    const cards = container.querySelectorAll(
+      ".group.relative[class*='rounded-2xl'][class*='border-sand']"
+    );
     expect(cards.length).toBe(5);
     cards.forEach((card) => {
       expect(card.className).toContain("shadow-md");

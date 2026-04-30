@@ -119,6 +119,24 @@ export interface ReferenzenData {
   items: Referenz[];
 }
 
+/* ── Service FAQ (Local SEO) ── */
+
+export interface ServiceFAQItem {
+  q: string;
+  a: string;
+}
+
+export interface ServiceFAQEntry {
+  title: string;
+  subheading: string;
+  items: ServiceFAQItem[];
+}
+
+export interface ServiceFAQData {
+  gartenpflege: ServiceFAQEntry;
+  entruempelung: ServiceFAQEntry;
+}
+
 /* ── Service Areas ── */
 
 export interface ServiceAreaRegion {

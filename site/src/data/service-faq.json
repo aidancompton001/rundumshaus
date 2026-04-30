@@ -1,0 +1,62 @@
+{
+  "gartenpflege": {
+    "title": "Häufige Fragen zur Gartenpflege",
+    "subheading": "Antworten rund um Gärtner, Heckenschnitt und Rasenpflege in Osnabrück, Bramsche, Melle und Umgebung.",
+    "items": [
+      {
+        "q": "Bieten Sie Gartenpflege auch in Bramsche und Wallenhorst an?",
+        "a": "Ja, wir sind regelmäßig in Bramsche, Wallenhorst und im gesamten näheren Umkreis von Osnabrück im Einsatz. Rasenmähen, Heckenschnitt oder eine ganzjährige Gartenbetreuung sind dort genauso möglich wie in der Stadt selbst."
+      },
+      {
+        "q": "Wie schnell sind Sie als Gärtner in Belm oder Bissendorf vor Ort?",
+        "a": "Dank der kurzen Anfahrtswege im Umkreis von rund 25 km können wir Termine in Belm oder Bissendorf meist innerhalb weniger Tage anbieten — bei dringenden Anfragen oft sogar kurzfristiger."
+      },
+      {
+        "q": "Übernehmen Sie auch Heckenschnitt in Georgsmarienhütte und Melle?",
+        "a": "Ja, Heckenschnitt gehört zu unseren Standardleistungen — sowohl in Georgsmarienhütte als auch in Melle. Wir kümmern uns um Form-, Pflege- und Rückschnitte für Hecken aller Art."
+      },
+      {
+        "q": "Bieten Sie eine ganzjährige Gartenbetreuung im Umkreis von Osnabrück an?",
+        "a": "Sehr gern. Für viele Kunden in Osnabrück und Umgebung übernehmen wir die komplette Gartenpflege übers Jahr — vom Frühjahrsschnitt über Rasenpflege im Sommer bis zum Herbstlaub."
+      },
+      {
+        "q": "Was kostet eine Besichtigung vor Ort?",
+        "a": "Eine Besichtigung im Einsatzgebiet rund um Osnabrück (ca. 25 km Umkreis) ist kostenlos und unverbindlich. So können wir den Aufwand realistisch einschätzen und Ihnen ein faires Angebot machen."
+      },
+      {
+        "q": "Mähen Sie auch große Grundstücke und Außenanlagen?",
+        "a": "Ja, neben privaten Gärten betreuen wir auch Außenanlagen von Unternehmen sowie größere Grundstücke in Osnabrück, Bramsche, Melle und den umliegenden Gemeinden."
+      }
+    ]
+  },
+  "entruempelung": {
+    "title": "Häufige Fragen zur Entrümpelung",
+    "subheading": "Antworten rund um Haushaltsauflösung, Keller- und Wohnungsentrümpelung in Osnabrück und Umgebung.",
+    "items": [
+      {
+        "q": "Entrümpeln Sie auch Wohnungen und Häuser in Bramsche?",
+        "a": "Ja, als Entrümpelungsfirma sind wir regelmäßig in Bramsche im Einsatz — von einzelnen Räumen bis zur kompletten Wohnungsauflösung. Termine können meist kurzfristig vereinbart werden."
+      },
+      {
+        "q": "Ist eine komplette Haushaltsauflösung in Melle möglich?",
+        "a": "Selbstverständlich. Wir übernehmen Haushaltsauflösungen in Melle inklusive Sortierung, fachgerechter Entsorgung und besenreiner Übergabe der Räume."
+      },
+      {
+        "q": "Bieten Sie kostenlose Besichtigungen in Belm und Wallenhorst?",
+        "a": "Ja, im näheren Umkreis von Osnabrück — also auch in Belm und Wallenhorst — ist die Vor-Ort-Besichtigung für eine Entrümpelung kostenlos und unverbindlich."
+      },
+      {
+        "q": "Räumen Sie auch Keller und Dachböden in Bissendorf?",
+        "a": "Ja, Keller-, Dachboden- und Garagenentrümpelungen sind in Bissendorf und Umgebung kein Problem. Wir entsorgen alles fachgerecht und sortieren wertvolle Gegenstände."
+      },
+      {
+        "q": "Wie schnell bekomme ich einen Termin in Osnabrück oder Georgsmarienhütte?",
+        "a": "Dank kurzer Anfahrt sind wir in Osnabrück und Georgsmarienhütte oft innerhalb weniger Tage verfügbar. Bei dringenden Haushaltsauflösungen versuchen wir, einen schnelleren Termin zu finden."
+      },
+      {
+        "q": "Werden Wertgegenstände bei der Entrümpelung angerechnet?",
+        "a": "Auf Wunsch ja — verwertbare Gegenstände werden bei der Endabrechnung berücksichtigt und können den Preis deutlich reduzieren. Sprechen Sie uns einfach bei der Besichtigung darauf an."
+      }
+    ]
+  }
+}

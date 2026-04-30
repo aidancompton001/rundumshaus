@@ -5,6 +5,7 @@ import type { Service } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
+import ServiceFAQ from "@/components/sections/ServiceFAQ";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -70,6 +71,10 @@ export default function ServiceDetail() {
           ))}
         </Stagger>
       </div>
+
+      {/* Local SEO FAQ — Gartenpflege + Entrümpelung (PX-022) */}
+      <ServiceFAQ serviceId="gartenpflege" />
+      <ServiceFAQ serviceId="entruempelung" />
     </section>
   );
 }

@@ -7,10 +7,15 @@ import CookieBanner from "@/components/layout/CookieBanner";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import serviceAreasData from "@/data/service-areas.json";
 import type { ServiceAreasData } from "@/data/types";
+import { TARGET_CITIES } from "@/lib/targetCities";
 import "./globals.css";
 
 const serviceAreas = serviceAreasData as ServiceAreasData;
 const allCities = serviceAreas.regions.flatMap((r) => r.cities);
+const targetCitiesSchema = TARGET_CITIES.map((name) => ({
+  "@type": "City",
+  name,
+}));
 
 const lora = Lora({
   variable: "--font-heading",
@@ -98,6 +103,7 @@ export default function RootLayout({
                     name: "Gartenpflege",
                     description:
                       "Fachgerechte Pflege Ihres Gartens — Rasen mähen, Hecken schneiden und vieles mehr.",
+                    areaServed: targetCitiesSchema,
                   },
                   {
                     "@type": "Service",
@@ -110,6 +116,7 @@ export default function RootLayout({
                     name: "Entrümpelung",
                     description:
                       "Entrümpelungen in allen Bereichen — vom Keller bis zur kompletten Haushaltsauflösung.",
+                    areaServed: targetCitiesSchema,
                   },
                   {
                     "@type": "Service",
