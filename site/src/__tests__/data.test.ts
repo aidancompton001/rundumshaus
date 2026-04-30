@@ -97,6 +97,52 @@ describe("Data Integrity", () => {
       expect(services.find((s) => s.id === "schrottabholung")).toBeTruthy();
     });
 
+    describe("Local SEO content (PX-022 Wave 1)", () => {
+      const TARGET_CITIES = [
+        "Osnabrück",
+        "Bramsche",
+        "Wallenhorst",
+        "Belm",
+        "Bissendorf",
+        "Georgsmarienhütte",
+        "Melle",
+      ];
+
+      it("gartenpflege.detailDescription mentions all 7 target cities", () => {
+        const garten = services.find((s) => s.id === "gartenpflege");
+        expect(garten).toBeTruthy();
+        TARGET_CITIES.forEach((city) => {
+          expect(
+            garten!.detailDescription,
+            `Missing city in gartenpflege: ${city}`
+          ).toContain(city);
+        });
+      });
+
+      it("entruempelung.detailDescription mentions all 7 target cities", () => {
+        const entr = services.find((s) => s.id === "entruempelung");
+        expect(entr).toBeTruthy();
+        TARGET_CITIES.forEach((city) => {
+          expect(
+            entr!.detailDescription,
+            `Missing city in entruempelung: ${city}`
+          ).toContain(city);
+        });
+      });
+
+      it("gartenpflege.detailDescription has at least 100 words (SEO content)", () => {
+        const garten = services.find((s) => s.id === "gartenpflege");
+        const wordCount = garten!.detailDescription.split(/\s+/).length;
+        expect(wordCount).toBeGreaterThanOrEqual(100);
+      });
+
+      it("entruempelung.detailDescription has at least 100 words (SEO content)", () => {
+        const entr = services.find((s) => s.id === "entruempelung");
+        const wordCount = entr!.detailDescription.split(/\s+/).length;
+        expect(wordCount).toBeGreaterThanOrEqual(100);
+      });
+    });
+
     it("all referenced image files exist on disk", () => {
       const PUBLIC = join(process.cwd(), "public");
       services.forEach((s) => {

@@ -115,9 +115,9 @@ describe("ServiceDetail", () => {
   it("renders all 5 service detail descriptions", () => {
     render(<ServiceDetail />);
     expect(screen.getByText(/Ob Reparaturen, Wartungsarbeiten/)).toBeInTheDocument();
-    expect(screen.getByText(/Ihr Garten verdient/)).toBeInTheDocument();
+    expect(screen.getByText(/Als zuverlässiger Gärtner in Osnabrück/)).toBeInTheDocument();
     expect(screen.getByText(/Moos, Laub und Verschmutzungen/)).toBeInTheDocument();
-    expect(screen.getByText(/Vom Keller bis zur kompletten/)).toBeInTheDocument();
+    expect(screen.getByText(/Als Entrümpelungsfirma in Osnabrück/)).toBeInTheDocument();
     expect(screen.getByText(/Wir holen Ihren Altmetallschrott/)).toBeInTheDocument();
   });
 
