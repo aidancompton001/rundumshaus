@@ -72,6 +72,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               name: "Rund ums Haus Littawe",
+              image: "https://rundumshaus-littawe.de/images/og-image.jpg",
+              priceRange: "€€",
               description:
                 "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
               address: {
