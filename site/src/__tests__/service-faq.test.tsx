@@ -34,6 +34,7 @@ vi.mock("gsap/ScrollTrigger", () => ({
 }));
 
 import ServiceFAQ from "@/components/sections/ServiceFAQ";
+import FAQSchema from "@/components/sections/FAQSchema";
 import faqData from "@/data/service-faq.json";
 
 const TARGET_CITIES = [
@@ -110,22 +111,47 @@ describe("ServiceFAQ component", () => {
     ).toBeInTheDocument();
   });
 
-  it("includes Schema.org FAQPage JSON-LD", () => {
+  it("does NOT render schema (avoid duplicate FAQPage — PX-024)", () => {
     const { container } = render(<ServiceFAQ serviceId="gartenpflege" />);
     const schemaScript = container.querySelector(
       'script[type="application/ld+json"]'
     );
-    expect(schemaScript).toBeInTheDocument();
-    const schema = JSON.parse(schemaScript!.textContent || "{}");
-    expect(schema["@type"]).toBe("FAQPage");
-    expect(Array.isArray(schema.mainEntity)).toBe(true);
-    expect(schema.mainEntity.length).toBeGreaterThanOrEqual(5);
-    expect(schema.mainEntity[0]["@type"]).toBe("Question");
-    expect(schema.mainEntity[0].acceptedAnswer["@type"]).toBe("Answer");
+    expect(schemaScript).not.toBeInTheDocument();
   });
 
   it("section has anchor id for deep-linking", () => {
     const { container } = render(<ServiceFAQ serviceId="gartenpflege" />);
     expect(container.querySelector("#gartenpflege-faq")).toBeInTheDocument();
+  });
+});
+
+describe("FAQSchema component (PX-024)", () => {
+  it("renders a single FAQPage JSON-LD with combined items from both services", () => {
+    const { container } = render(<FAQSchema />);
+    const scripts = container.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
+    expect(scripts).toHaveLength(1);
+    const schema = JSON.parse(scripts[0].textContent || "{}");
+    expect(schema["@type"]).toBe("FAQPage");
+    expect(Array.isArray(schema.mainEntity)).toBe(true);
+    // Combined: gartenpflege.items + entruempelung.items
+    const expectedTotal =
+      faqData.gartenpflege.items.length + faqData.entruempelung.items.length;
+    expect(schema.mainEntity).toHaveLength(expectedTotal);
+    expect(schema.mainEntity[0]["@type"]).toBe("Question");
+    expect(schema.mainEntity[0].acceptedAnswer["@type"]).toBe("Answer");
+  });
+
+  it("first question matches gartenpflege, last matches entruempelung", () => {
+    const { container } = render(<FAQSchema />);
+    const schema = JSON.parse(
+      container.querySelector('script[type="application/ld+json"]')!
+        .textContent || "{}"
+    );
+    expect(schema.mainEntity[0].name).toBe(faqData.gartenpflege.items[0].q);
+    expect(schema.mainEntity[schema.mainEntity.length - 1].name).toBe(
+      faqData.entruempelung.items[faqData.entruempelung.items.length - 1].q
+    );
   });
 });

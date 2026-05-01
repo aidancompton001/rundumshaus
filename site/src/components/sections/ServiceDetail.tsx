@@ -6,6 +6,7 @@ import { ScrollReveal, Stagger } from "@/components/motion";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
 import ServiceFAQ from "@/components/sections/ServiceFAQ";
+import FAQSchema from "@/components/sections/FAQSchema";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -75,6 +76,9 @@ export default function ServiceDetail() {
       {/* Local SEO FAQ — Gartenpflege + Entrümpelung (PX-022) */}
       <ServiceFAQ serviceId="gartenpflege" />
       <ServiceFAQ serviceId="entruempelung" />
+
+      {/* Single combined Schema.org FAQPage (PX-024 fix: avoid duplicate FAQPage) */}
+      <FAQSchema />
     </section>
   );
 }

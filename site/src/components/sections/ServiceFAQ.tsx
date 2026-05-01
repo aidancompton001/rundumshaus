@@ -9,22 +9,13 @@ interface ServiceFAQProps {
   serviceId: "gartenpflege" | "entruempelung";
 }
 
+/**
+ * FAQ accordion section for a single service. Renders UI only.
+ * Schema.org FAQPage JSON-LD is rendered ONCE by <FAQSchema /> at page level
+ * to avoid Google Rich Results "duplicate FAQPage" error (PX-024).
+ */
 export default function ServiceFAQ({ serviceId }: ServiceFAQProps) {
   const faq = data[serviceId];
-
-  // Schema.org FAQPage JSON-LD for Google Rich Results
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faq.items.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.a,
-      },
-    })),
-  };
 
   return (
     <section
@@ -48,11 +39,6 @@ export default function ServiceFAQ({ serviceId }: ServiceFAQProps) {
             ))}
           </div>
         </ScrollReveal>
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
       </div>
     </section>
   );
