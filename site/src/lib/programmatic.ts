@@ -614,16 +614,57 @@ export interface PageContent {
   service: { id: ServiceId; title: string; description: string };
 }
 
-function paragraphCountForTier(tier: Tier): number {
+export function paragraphCountForTier(tier: Tier): number {
   if (tier === 1) return 7;
   if (tier === 2) return 5;
   return 3;
 }
 
-function faqCountForTier(tier: Tier): number {
+export function faqCountForTier(tier: Tier): number {
   if (tier === 1) return 8;
   if (tier === 2) return 6;
   return 5;
+}
+
+// Exported for testability — read-only structural access to service blocks (pool sizes, etc.).
+export function getServiceBlockSizes(serviceId: ServiceId): {
+  introVariants: number;
+  bodyParagraphs: number;
+  faqPool: number;
+} {
+  const b = BLOCKS[serviceId];
+  return {
+    introVariants: b.introVariants.length,
+    bodyParagraphs: b.bodyParagraphs.length,
+    faqPool: b.faqPool.length,
+  };
+}
+
+// Exported for testability — returns the deterministic indices a page would pick.
+// Mirrors generatePageContent() selection logic.
+export function getSelectedIndices(
+  serviceId: ServiceId,
+  citySlug: string
+): { introIdx: number; bodyIdx: number[]; faqIdx: number[] } {
+  const city = getCityBySlug(citySlug);
+  if (!city) throw new Error(`Unknown city: ${citySlug}`);
+  const blocks = BLOCKS[serviceId];
+  const variantKey = `${serviceId}:${citySlug}`;
+  const introIdx = pickIndex(blocks.introVariants.length, variantKey);
+
+  const pickNIdx = (len: number, count: number, key: string): number[] => {
+    if (count >= len) return Array.from({ length: len }, (_, i) => i);
+    const start = hash(key) % len;
+    const out: number[] = [];
+    for (let i = 0; i < count; i++) out.push((start + i) % len);
+    return out;
+  };
+
+  const bodyCount = paragraphCountForTier(city.tier);
+  const faqCount = faqCountForTier(city.tier);
+  const bodyIdx = pickNIdx(blocks.bodyParagraphs.length, bodyCount, variantKey + ":body");
+  const faqIdx = pickNIdx(blocks.faqPool.length, faqCount, variantKey + ":faq");
+  return { introIdx, bodyIdx, faqIdx };
 }
 
 function buildFakten(city: City, service: ServiceId): FaktenItem[] {

@@ -2,6 +2,66 @@
 
 ---
 
+### [S030] — 2026-05-02 — PX-026: Multi-agent test protocol для programmatic.ts
+
+**Задача:** PX-026 — multi-agent протокол создания тестов для site/src/lib/programmatic.ts (engine 490 programmatic SEO landing pages) с adversarial валидацией
+**Роли:** #3 Marco Reiter (3 параллельных агента), #14 Hans Landa (3 раунда review)
+**Статус:** завершено CONDITIONAL GO — 3 follow-ups (PX-027/028/029) non-blocking
+
+**7-фазный протокол выполнен:**
+- Phase 1: 3 ТС1 → Hans Landa NO-GO (10 defects, 3 critical) → 3 ТС2 → CEO ОК
+- Phase 2: 3 параллельных агента создали 3 тест-файла (snapshot/invariant/example) — НЕ collision (разные suffix)
+- Phase 3: Comparative critique → winner = Agent B (invariant)
+- Phase 4: Gap analysis на B → 15 gaps, TOP-5 must-fix
+- Phase 5: 19 новых tests в invariant.test.ts (TOP-5 + complementary)
+- Phase 6: Hans Landa CONDITIONAL GO
+- Phase 7: commit + push в feat/t007-ultra-seo-ai-search
+
+**Ключевые находки (real bugs):**
+1. SCHROTT.bodyParagraphs.length === 5 < 7 (T1 paragraphCountForTier) → 20 T1 schrottabholung pages silently shipping 5 paragraphs вместо 7. Захвачено как `it.fails()` sentinel — auto-trip when PX-027 fix lands.
+2. Neighbor graph asymmetry: bad-iburg, bad-rothenfelde reference bad-essen, но bad-essen.neighbors не reciprocates. Захвачено как KNOWN_ASYMMETRIES baseline — фикс PX-027.
+
+**Финальный test-suite:**
+- 3 файла: programmatic.snapshot.test.ts (14 tests) + programmatic.invariant.test.ts (40 tests, 1 expected-fail) + programmatic.example.test.ts (22 tests) = 76 new tests
+- Total suite: 128 → 204 (203 passed + 1 expected fail)
+- Build green, время выполнения <8s
+
+**Подходы validated:**
+- Snapshot: low semantic value, high false-positive risk при text changes, но variant coverage matrix полезна
+- Invariant (winner): 100% coverage 490 pairs, low false-positive, нашёл реальные баги — это правильный подход для programmatic content generators
+- Example: complementary для negative cases / Neuenkirchen disambiguation / distance branches
+
+**Изменения в production code (минимальные, для testability):**
+- `programmatic.ts`: добавлены exports `paragraphCountForTier`, `faqCountForTier`, `getServiceBlockSizes`, `getSelectedIndices` (Hans Landa Phase 6 пометил это как PX-028 followup для rename с _TEST_ONLY suffix)
+- `__tests__/setup.ts`: window globals обёрнуты в `typeof window !== 'undefined'` для node env compatibility
+
+**Артефакты:**
+- `site/src/lib/__tests__/programmatic.snapshot.test.ts` (новый)
+- `site/src/lib/__tests__/programmatic.invariant.test.ts` (новый, 40 tests)
+- `site/src/lib/__tests__/programmatic.example.test.ts` (новый)
+- `site/src/lib/__tests__/__snapshots__/programmatic.snapshot.test.ts.snap` (auto-generated)
+- `site/src/lib/programmatic.ts` (4 exports added)
+- `site/src/__tests__/setup.ts` (window guards)
+
+**Hans Landa traversal:**
+- Round 1 (ТС1): NO-GO — 10 defects (filename collision, wrong meta bounds, hash-based body assertions risk, ...)
+- Round 2 (post-Phase-2): не понадобился — 3 параллельных файла без collision
+- Round 3 (Phase 4 gap analysis): 15 gaps in winner B → 5 critical
+- Round 4 (Phase 6 final): CONDITIONAL GO
+
+**Follow-ups (non-blocking):**
+- PX-027: Expand SCHROTT.bodyParagraphs ≥7 + fix bad-essen neighbors asymmetry
+- PX-028: Rename test-only exports с `_TEST_ONLY` или move в `programmatic.testing.ts`
+- PX-029 (nice-to-have): plzPrefix region check, distanceKm upper bound, cross-service h1 audit, distancePhrase branch-count invariant
+
+**Lessons learned:**
+- Multi-agent параллельность с разными suffix'ами устраняет filename collision risk
+- Invariant-based testing для content generators значительно эффективнее snapshot-based в обнаружении data bugs
+- `it.fails()` sentinel pattern для known bugs — self-clearing workflow без рисков забыть
+- Adversarial review до запуска агентов (ТС1→ТС2) экономит wasted work
+
+---
+
 ### [S029] — 2026-05-02 — T007 / PX-025 Phase 1+2+3+6 (+9 framework): Ultra Local SEO + AI Search
 
 **Задача:** T007 / PX-025 Ultra-Premium Local SEO + AI Search Optimization. Phase 1 (Discovery), Phase 2 (Programmatic SEO), Phase 3 (AI Search), Phase 6 (Ratgeber), Phase 9 framework. БЕЗ deploy — ждём данные Kevin'а.

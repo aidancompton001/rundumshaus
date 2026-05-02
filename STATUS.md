@@ -1,7 +1,7 @@
 # STATUS — RundumsHaus
 
 **Обновлён:** 2026-05-02
-**Этап:** T007 / PX-025 Phase 1+2+3+6 + Phase 9 framework готовы локально. **NOT DEPLOYED** — ждём данные Kevin'а + Hans Landa GO. 512 страниц generated, 128/128 тестов pass.
+**Этап:** T007 commit готов в `feat/t007-ultra-seo-ai-search`. PX-026 (multi-agent test protocol) завершён CONDITIONAL GO — 76 новых tests, 2 real bugs detected (PX-027 follow-up). **NOT DEPLOYED** — ждём 8 позиций Kevin'а. 204 tests pass (203 + 1 expected-fail sentinel).
 
 ## Готово
 

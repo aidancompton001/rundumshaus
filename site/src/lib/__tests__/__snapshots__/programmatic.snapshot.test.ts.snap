@@ -1,0 +1,679 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / bad-essen 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Bad Essen",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 22 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Wann ist der beste Zeitpunkt für einen Rückschnitt in Niedersachsen?",
+    "Mähen Sie auch große Grundstücke in Bad Essen?",
+    "Was kostet eine Besichtigung des Gartens in Bad Essen?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Bad Essen?",
+    "Wie schnell bekomme ich in Bad Essen einen Termin?",
+    "Verwenden Sie chemische Unkrautvernichter?",
+    "Übernehmen Sie auch die Entsorgung des Grünguts in Bad Essen?",
+    "Bieten Sie auch Vertikutieren und Düngung in Bad Essen an?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Bad Essen",
+  "intro": "Als Gärtner im Landkreis Osnabrück kümmern wir uns um private Gärten ebenso wie um Außenanlagen von Unternehmen in Bad Essen. Heckenschnitt, Rasenpflege, Unkrautentfernung, Vertikutieren, Beetpflege und saisonale Arbeiten gehören zu unseren Standardleistungen. Im Wittlager Land am Mittellandkanal sind wir regelmäßig vor Ort und können Termine bündeln.",
+  "metaDescription": "Gartenpflege in Bad Essen (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 22 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Bad Essen (Landkreis Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "bohmte",
+    "bad-laer",
+    "glandorf",
+    "melle",
+    "bramsche",
+    "ostercappeln",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / bad-iburg 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Bad Iburg",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 17 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Wie oft sollte eine Hecke in Bad Iburg geschnitten werden?",
+    "Wann ist der beste Zeitpunkt für einen Rückschnitt in Niedersachsen?",
+    "Mähen Sie auch große Grundstücke in Bad Iburg?",
+    "Was kostet eine Besichtigung des Gartens in Bad Iburg?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Bad Iburg?",
+    "Wie schnell bekomme ich in Bad Iburg einen Termin?",
+    "Verwenden Sie chemische Unkrautvernichter?",
+    "Übernehmen Sie auch die Entsorgung des Grünguts in Bad Iburg?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Bad Iburg",
+  "intro": "Gärtner-Service Bad Iburg & Umgebung: Wir betreuen private Gärten von 100 m² bis 5 000 m², Außenanlagen von Mehrfamilienhäusern, Firmenparks und kleine Gewerbeflächen. Südlich von Osnabrück, Kurort am Teutoburger Wald sind wir bekannt für saubere Schnittlinien, faire Stundensätze und schnelle Verfügbarkeit.",
+  "metaDescription": "Gartenpflege in Bad Iburg (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 17 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Bad Iburg (Landkreis Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "bramsche",
+    "bissendorf",
+    "bad-essen",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / belm 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Belm",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 9 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Bieten Sie Gartenpflege auch in Belm an?",
+    "Wie oft sollte eine Hecke in Belm geschnitten werden?",
+    "Wann ist der beste Zeitpunkt für einen Rückschnitt in Niedersachsen?",
+    "Mähen Sie auch große Grundstücke in Belm?",
+    "Was kostet eine Besichtigung des Gartens in Belm?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Belm?",
+    "Wie schnell bekomme ich in Belm einen Termin?",
+    "Verwenden Sie chemische Unkrautvernichter?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Belm",
+  "intro": "Gartenpflege Belm (Kleinstadt in Niedersachsen): Rasen, Hecke, Beete, Bäume, Wege, Sträucher — alles, was im Garten anfällt. Wir arbeiten mit eigenem Profi-Werkzeug, sind als Familienbetrieb versichert und entsorgen das Schnittgut fachgerecht. Unverbindliche Besichtigung kostenlos.",
+  "metaDescription": "Gartenpflege in Belm (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 9 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Belm (Landkreis Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "georgsmarienhuette",
+    "wallenhorst",
+    "hasbergen",
+    "osnabrueck",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / bohmte 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Bohmte",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 22 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Mähen Sie auch große Grundstücke in Bohmte?",
+    "Was kostet eine Besichtigung des Gartens in Bohmte?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Bohmte?",
+    "Wie schnell bekomme ich in Bohmte einen Termin?",
+    "Verwenden Sie chemische Unkrautvernichter?",
+    "Übernehmen Sie auch die Entsorgung des Grünguts in Bohmte?",
+    "Bieten Sie auch Vertikutieren und Düngung in Bohmte an?",
+    "Können Sie auch Rasen neu anlegen in Bohmte?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Bohmte",
+  "intro": "Wenn Sie als Hauseigentümer in Bohmte regelmäßig einen Gärtner brauchen — für den wöchentlichen Rasenschnitt, den jährlichen Heckenschnitt oder die komplette Betreuung —, sind wir Ihr Ansprechpartner. Im nördlichen Osnabrücker Land an der Hunte bündeln wir Termine effizient. Reaktionszeit in der Regel wenige Tage.",
+  "metaDescription": "Gartenpflege in Bohmte (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 22 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Bohmte (Landkreis Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "bad-essen",
+    "bad-laer",
+    "glandorf",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / bramsche 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Bramsche",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 17 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Mähen Sie auch große Grundstücke in Bramsche?",
+    "Was kostet eine Besichtigung des Gartens in Bramsche?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Bramsche?",
+    "Wie schnell bekomme ich in Bramsche einen Termin?",
+    "Verwenden Sie chemische Unkrautvernichter?",
+    "Übernehmen Sie auch die Entsorgung des Grünguts in Bramsche?",
+    "Bieten Sie auch Vertikutieren und Düngung in Bramsche an?",
+    "Können Sie auch Rasen neu anlegen in Bramsche?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Bramsche",
+  "intro": "Gartenpflege in Bramsche aus einer Hand: vom regelmäßigen Rasenschnitt über Heckenform- und Rückschnitte bis zur kompletten Jahresbetreuung. Wir kommen mit eigenem Werkzeug und übernehmen die fachgerechte Entsorgung des Grünguts. In Niedersachsen unterliegt der Heckenschnitt von März bis September dem Bundesnaturschutzgesetz — wir berücksichtigen das in der Planung.",
+  "metaDescription": "Gartenpflege in Bramsche (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 17 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Bramsche (Landkreis Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "bad-iburg",
+    "bissendorf",
+    "bad-essen",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / damme 1`] = `
+{
+  "bodyLength": 5,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Damme",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Vechta",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 35 km",
+    },
+    {
+      "label": "Region",
+      "value": "Vechta & Cloppenburg",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Übernehmen Sie auch die Entsorgung des Grünguts in Damme?",
+    "Bieten Sie auch Vertikutieren und Düngung in Damme an?",
+    "Können Sie auch Rasen neu anlegen in Damme?",
+    "Sind Sie als Gartenpflege-Dienst in Damme versichert?",
+    "Bieten Sie Gartenpflege auch in Damme an?",
+    "Wie oft sollte eine Hecke in Damme geschnitten werden?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Damme",
+  "intro": "Sie suchen einen zuverlässigen Gärtner in Damme? Wir übernehmen Rasenmähen, Heckenschnitt, Beetpflege, Vertikutieren und saisonale Arbeiten — einmalig oder als ganzjährige Gartenbetreuung. Am Dümmer im Oldenburger Münsterland kennen wir die Bodenverhältnisse, das Klima und die typischen Pflanzenarten der Region. Anfahrt aus Osnabrück: 35 km.",
+  "metaDescription": "Gartenpflege in Damme (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 35 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Damme (Landkreis Vechta) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "holdorf",
+    "steinfeld",
+    "neuenkirchen-voerden",
+    "dinklage",
+    "essen-oldenburg",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / lotte 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Lotte",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Nordrhein-Westfalen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Kreis Steinfurt",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 12 km",
+    },
+    {
+      "label": "Region",
+      "value": "Münsterland",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Können Sie auch Rasen neu anlegen in Lotte?",
+    "Sind Sie als Gartenpflege-Dienst in Lotte versichert?",
+    "Bieten Sie Gartenpflege auch in Lotte an?",
+    "Wie oft sollte eine Hecke in Lotte geschnitten werden?",
+    "Wann ist der beste Zeitpunkt für einen Rückschnitt in Nordrhein-Westfalen?",
+    "Mähen Sie auch große Grundstücke in Lotte?",
+    "Was kostet eine Besichtigung des Gartens in Lotte?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Lotte?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Lotte",
+  "intro": "Professionelle Gartenpflege in Lotte: vom Frühjahrsschnitt im März bis zum Laub-Räumen im November. Wir verstehen Gärten als Jahresprojekt und planen mit Ihnen den passenden Pflegerhythmus. Auch in Münsterland angepasst — Bodentyp, Klima, Pflanzenmix der nordrhein-westfälischen Region.",
+  "metaDescription": "Gartenpflege in Lotte (Nordrhein-Westfalen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 12 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Lotte (Kreis Steinfurt) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "westerkappeln",
+    "lengerich",
+    "tecklenburg",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / melle 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Gärtner Melle",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 25 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Mähen Sie auch große Grundstücke in Melle?",
+    "Was kostet eine Besichtigung des Gartens in Melle?",
+    "Übernehmen Sie eine ganzjährige Gartenbetreuung in Melle?",
+    "Wie schnell bekomme ich in Melle einen Termin?",
+    "Verwenden Sie chemische Unkrautvernichter?",
+    "Übernehmen Sie auch die Entsorgung des Grünguts in Melle?",
+    "Bieten Sie auch Vertikutieren und Düngung in Melle an?",
+    "Können Sie auch Rasen neu anlegen in Melle?",
+  ],
+  "h1": "Gärtner & Gartenpflege in Melle",
+  "intro": "Heckenschnitt, Rasenmähen, Beetpflege in Melle — wir sind ein junger Familienbetrieb aus Osnabrück (25 km nach Melle) und übernehmen sowohl einmalige Gartenarbeiten als auch ganzjährige Betreuungsverträge. Im Landkreis Osnabrück sind wir mehrmals pro Woche im Einsatz.",
+  "metaDescription": "Gartenpflege in Melle (Niedersachsen): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, 25 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Gärtner & Gartenpflege Melle (Landkreis Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "ostercappeln",
+    "bad-rothenfelde",
+    "bad-essen",
+    "dissen-am-teutoburger-wald",
+  ],
+  "serviceId": "gartenpflege",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > other services — spot checks > dacharbeiten / lengerich 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Dachreinigung Lengerich",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Nordrhein-Westfalen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Kreis Steinfurt",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 25 km",
+    },
+    {
+      "label": "Region",
+      "value": "Münsterland",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Wann ist der beste Zeitpunkt für eine Dachreinigung in Lengerich?",
+    "Wie oft sollte ein Dach in Lengerich gereinigt werden?",
+    "Was kostet eine Dachreinigung in Lengerich?",
+    "Reinigen Sie auch die Dachrinne in Lengerich?",
+    "Bieten Sie eine Schutzbeschichtung nach der Reinigung an?",
+    "Ist die Reinigung schonend für die Dachziegel?",
+    "Welche Dächer reinigen Sie in Lengerich?",
+    "Brauche ich eine Genehmigung für die Dachreinigung in Nordrhein-Westfalen?",
+  ],
+  "h1": "Dachreinigung in Lengerich — sauber und langlebig",
+  "intro": "Sie möchten Ihr Dach in Lengerich reinigen lassen? Wir übernehmen Reinigung, Moosentfernung, Dachrinnenreinigung und auf Wunsch eine schützende Beschichtung. Anfahrt aus Osnabrück (25 km), faire Festpreise nach Besichtigung, fachgerechte Entsorgung des Materials.",
+  "metaDescription": "Dachreinigung in Lengerich (Kreis Steinfurt, Nordrhein-Westfalen): Moos- und Algenentfernung, Dachrinnenreinigung, Beschichtung. Festpreis nach kostenloser Besichtigung. 25 km aus Osnabrück.",
+  "metaTitle": "Dachreinigung & Dacharbeiten Lengerich | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "tecklenburg",
+    "recke",
+    "westerkappeln",
+    "lotte",
+  ],
+  "serviceId": "dacharbeiten",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > other services — spot checks > entruempelung / bramsche 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Entrümpelung Bramsche",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Landkreis Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 17 km",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Übernehmen Sie auch Haushaltsauflösungen nach Todesfall in Bramsche?",
+    "Werden Wertgegenstände bei der Entrümpelung in Bramsche angerechnet?",
+    "Kann ich vor Ort in Bramsche dabei sein?",
+    "Was kostet eine Besichtigung in Bramsche?",
+    "Welche Räume entrümpeln Sie in Bramsche?",
+    "Wohin geht das entrümpelte Material in Bramsche?",
+    "Bieten Sie auch Endreinigung in Bramsche?",
+    "Was kostet eine Wohnungsauflösung in Bramsche ungefähr?",
+  ],
+  "h1": "Entrümpelung & Haushaltsauflösung in Bramsche",
+  "intro": "Entrümpelungsservice Bramsche (Niedersachsen): Festpreisangebot nach Besichtigung, schnelle Terminierung, fachgerechte Entsorgung über zugelassene Wertstoffhöfe im Landkreis Osnabrück, besenreine Übergabe der Räume. Ohne Subunternehmer, ohne versteckte Kosten.",
+  "metaDescription": "Entrümpelung in Bramsche (Landkreis Osnabrück): vom Keller bis zur kompletten Haushaltsauflösung. Festpreis nach kostenloser Besichtigung. Aus Osnabrück, 17 km Anfahrt.",
+  "metaTitle": "Entrümpelung & Haushaltsauflösung Bramsche | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "bad-iburg",
+    "bissendorf",
+    "bad-essen",
+  ],
+  "serviceId": "entruempelung",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > other services — spot checks > hausmeisterservice / osnabrueck 1`] = `
+{
+  "bodyLength": 7,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Hausmeisterservice Osnabrück",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Niedersachsen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Stadt Osnabrück",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "49",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "Standort",
+    },
+    {
+      "label": "Region",
+      "value": "Osnabrücker Land & Umgebung",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Wie schnell sind Sie als Hausmeister in Osnabrück vor Ort?",
+    "Übernehmen Sie auch Mehrfamilienhäuser in Osnabrück?",
+    "Was kostet eine Besichtigung in Osnabrück?",
+    "Bieten Sie Winterdienst in Osnabrück an?",
+    "Arbeiten Sie auf Stunden- oder Festpreisbasis?",
+    "Kann der Hausmeisterservice in Osnabrück dauerhaft beauftragt werden?",
+    "Welche typischen Aufgaben übernehmen Sie in Osnabrück?",
+    "Sind Sie auch für Hausverwaltungen in Niedersachsen ansprechbar?",
+  ],
+  "h1": "Hausmeisterservice in Osnabrück — zuverlässig und schnell vor Ort",
+  "intro": "Wenn Sie als Eigentümer oder Hausverwalter in Osnabrück einen Hausmeister suchen, bekommen Sie bei uns das, was Sie erwarten: Verlässlichkeit, kurze Reaktionszeiten und ehrliche Preise. Im Herzen der Friedensstadt sind wir regelmäßig im Einsatz und kennen die typischen Anforderungen von Wohnobjekten in Ihrer niedersächsischen Region.",
+  "metaDescription": "Zuverlässiger Hausmeisterservice in Osnabrück (Niedersachsen): Reparaturen, Wartung, Treppenhausreinigung, Außenanlagen, Winterdienst. Aus Osnabrück, 0 km Anfahrt. Kostenlose Besichtigung.",
+  "metaTitle": "Hausmeisterservice Osnabrück (Stadt Osnabrück) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "georgsmarienhuette",
+    "belm",
+    "wallenhorst",
+  ],
+  "serviceId": "hausmeisterservice",
+}
+`;
+
+exports[`programmatic — snapshot regression suite > other services — spot checks > schrottabholung / muenster 1`] = `
+{
+  "bodyLength": 3,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Schrottabholung Münster",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Nordrhein-Westfalen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Stadt Münster",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "48",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 50 km",
+    },
+    {
+      "label": "Region",
+      "value": "Münsterland",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Holen Sie auch in der Nachbarschaft ab?",
+    "Können Sie Schrott auch von Firmenstandorten in Münster abholen?",
+    "Ist die Schrottabholung in Münster wirklich kostenlos?",
+    "Was wird in Münster mitgenommen?",
+    "Was wird nicht mitgenommen?",
+  ],
+  "h1": "Kostenlose Schrottabholung in Münster",
+  "intro": "Wenn Sie in Münster Altmetall loswerden möchten — Heizkörper, alte Werkzeuge, Schrott aus Renovierung oder Räumung —, holen wir das kostenlos bei Ihnen ab. Im Herzen des Münsterlandes, Universitätsstadt sind kurze Anfahrten zu fairen Konditionen Standard.",
+  "metaDescription": "Kostenlose Schrottabholung in Münster (Nordrhein-Westfalen): Altmetall schnell und unkompliziert abgeholt. Aus Osnabrück, 50 km Anfahrt. Termin kurzfristig möglich.",
+  "metaTitle": "Kostenlose Schrottabholung Münster (Stadt Münster) | Rund ums Haus Littawe",
+  "neighborSlugs": [
+    "ochtrup",
+    "horstmar",
+    "neuenkirchen-kreis-steinfurt",
+    "laer",
+    "altenberge",
+    "telgte",
+  ],
+  "serviceId": "schrottabholung",
+}
+`;
