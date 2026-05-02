@@ -71,9 +71,53 @@ function readSchemaGraph(): {
   const allCities = serviceAreas.regions.flatMap((r) => r.cities);
   const targetCitiesSchema: Array<{ "@type": "City"; name: string }> = []; // not under test here
 
+  // Resolve reviewSchemas + reviewsData from real data file
+  const reviewsData = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, "..", "..", "data", "reviews.json"),
+      "utf-8"
+    )
+  ) as {
+    aggregateRating: {
+      ratingValue: number;
+      ratingCount: number;
+      bestRating: number;
+      worstRating: number;
+    };
+    reviews: Array<{
+      author: string;
+      datePublished: string;
+      rating: number;
+      text: string;
+    }>;
+  };
+  const reviewSchemas = reviewsData.reviews.map((r) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: r.author },
+    datePublished: r.datePublished,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: r.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: r.text,
+  }));
+
   // eslint-disable-next-line @typescript-eslint/no-implied-eval
-  const fn = new Function("allCities", "targetCitiesSchema", `return (${literal});`);
-  return fn(allCities, targetCitiesSchema) as ReturnType<typeof readSchemaGraph>;
+  const fn = new Function(
+    "allCities",
+    "targetCitiesSchema",
+    "reviewsData",
+    "reviewSchemas",
+    `return (${literal});`
+  );
+  return fn(
+    allCities,
+    targetCitiesSchema,
+    reviewsData,
+    reviewSchemas
+  ) as ReturnType<typeof readSchemaGraph>;
 }
 
 describe("layout.tsx — Schema.org @graph", () => {
@@ -212,6 +256,48 @@ describe("layout.tsx — Schema.org @graph", () => {
         .map((n) => n["@id"] as string | undefined)
         .filter((x): x is string => Boolean(x));
       expect(new Set(ids).size).toBe(ids.length);
+    });
+  });
+
+  describe("AggregateRating + Review (PX-031 Phase A)", () => {
+    const lb3 = readSchemaGraph()["@graph"].find(
+      (n) => n["@id"] === LB_ID
+    ) as Record<string, unknown> | undefined;
+
+    it("LocalBusiness has AggregateRating with verified Kevin reviews", () => {
+      const ar = lb3!.aggregateRating as Record<string, unknown>;
+      expect(ar["@type"]).toBe("AggregateRating");
+      expect(ar.ratingValue).toBe(5);
+      expect(ar.ratingCount).toBe(2);
+      expect(ar.bestRating).toBe(5);
+      expect(ar.worstRating).toBe(5);
+    });
+
+    it("LocalBusiness has 2 Review entries (Radoslaw + Daria)", () => {
+      const reviews = lb3!.review as Array<Record<string, unknown>>;
+      expect(Array.isArray(reviews)).toBe(true);
+      expect(reviews.length).toBe(2);
+      const authors = reviews.map(
+        (r) => (r.author as Record<string, string>).name
+      );
+      expect(authors).toContain("Radoslaw Eugeniusz Labuda");
+      expect(authors).toContain("Daria Kaminska");
+    });
+
+    it("each Review has @type, author Person, rating, body", () => {
+      const reviews = lb3!.review as Array<Record<string, unknown>>;
+      for (const r of reviews) {
+        expect(r["@type"]).toBe("Review");
+        const author = r.author as Record<string, string>;
+        expect(author["@type"]).toBe("Person");
+        expect(author.name).toBeTruthy();
+        const rating = r.reviewRating as Record<string, unknown>;
+        expect(rating["@type"]).toBe("Rating");
+        expect(rating.ratingValue).toBe(5);
+        expect(typeof r.reviewBody).toBe("string");
+        expect((r.reviewBody as string).length).toBeGreaterThan(0);
+        expect(r.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
     });
   });
 
