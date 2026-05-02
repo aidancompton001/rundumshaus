@@ -54,6 +54,8 @@ exports[`programmatic — snapshot regression suite > gartenpflege — covers al
     "melle",
     "bramsche",
     "ostercappeln",
+    "bad-iburg",
+    "bad-rothenfelde",
   ],
   "serviceId": "gartenpflege",
 }

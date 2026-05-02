@@ -538,6 +538,10 @@ const SCHROTT: ServiceBlocks = {
       `Wirtschaftlichkeit für Sie als Anbieter in ${c.displayName}: Der Service funktioniert, weil Altmetall einen Materialwert hat. Mischschrott liegt 2026 bei 100-250 € pro Tonne, Kupfer bei 6 000-8 500 € pro Tonne. Aus den Erlösen finanzieren wir die Anfahrt im Einsatzgebiet und die Personalkosten. Bei haushaltsüblichen Mengen reicht der Erlös für die kostenlose Abholung — Sie sparen die Entsorgungsgebühr, die Sie sonst am Wertstoffhof zahlen würden.`,
     (c) =>
       `Praktische Tipps für Ihre Schrottabholung in ${c.displayName}: Sortieren Sie nach Möglichkeit grob in Eisen / Buntmetall / verzinkt — das beschleunigt die Abholung. Lagern Sie den Schrott trocken (nasses Eisen rostet schnell, was den Materialwert mindert). Informieren Sie uns über besondere Stücke (große Maschinen, Tresor, Heizungsanlagen mit Öl) im Voraus — wir bringen dann passendes Werkzeug mit. Bei Werkstätten-Auflösungen lohnt sich oft eine Vorab-Sichtung per Foto.`,
+    (c) =>
+      `Sicherheit und Datenschutz bei Schrottabholung in ${c.displayName}: Festplatten und USB-Sticks aus alten PCs, sowie SIM-Karten in Smartphones, sollten Sie vor der Abholung physisch entfernen oder zerstören — wir nehmen Geräte mit, aber DSGVO-relevante Datenträger gehören nicht in den Recycling-Strom. Ebenso bei Heizungsanlagen mit Restöl oder bei Tanks: Restflüssigkeiten müssen vor der Abholung entleert werden. Wir prüfen das vor Ort und beraten, falls Sondermaßnahmen nötig sind.`,
+    (c) =>
+      `Gewerbliche Schrottabholung im ${c.landkreis}: Werkstätten, Schlossereien, Heizungsbauer und Sanitärbetriebe in ${c.displayName} und Umgebung können regelmäßige Abholtermine vereinbaren — wöchentlich, zweiwöchentlich oder nach Bedarf. Bei sortenreinen Mengen ab ca. 500 kg (Kupfer, Messing, V2A) verhandeln wir Vergütungspreise nach aktuellem Tagespreis. Wir stellen ggf. einen Schrottcontainer und entleeren ihn nach Vereinbarung — bürokratiearm und mit allen Wiegeprotokollen für Ihre Buchhaltung.`,
   ],
   faqPool: [
     (c) => ({

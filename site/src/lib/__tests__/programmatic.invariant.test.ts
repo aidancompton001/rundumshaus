@@ -179,10 +179,9 @@ describe("programmatic — neighbor graph", () => {
   // Baseline of pre-existing asymmetric edges. New asymmetries will fail the test.
   // Each entry: "FROM -> TO" where FROM lists TO as neighbor but TO does not list FROM.
   // Findings documented PX-026 (Agent B): data inconsistency in cities.json.
-  const KNOWN_ASYMMETRIES = new Set<string>([
-    "bad-iburg -> bad-essen",
-    "bad-rothenfelde -> bad-essen",
-  ]);
+  // Empty after PX-027: bad-essen.neighbors now reciprocates bad-iburg + bad-rothenfelde.
+  // Future asymmetries should be added here only with a tracked task and removed on fix.
+  const KNOWN_ASYMMETRIES = new Set<string>([]);
 
   it("neighbor relation is symmetric via public API (no NEW asymmetries beyond baseline)", () => {
     const newAsymmetries: string[] = [];
@@ -305,17 +304,10 @@ describe("programmatic — empirical bounds report", () => {
 // ─────────────────────────────────────────────────────────────────────
 
 describe("programmatic — content quality contracts (Phase 5 gaps)", () => {
-  // GAP #5 — pool-size demand invariant (locks SCHROTT lesson).
-  // Without this, a service with pool < paragraphCountForTier(1) silently
-  // ships fewer paragraphs than expected for Tier-1 cities.
-  //
-  // KNOWN: schrottabholung bodyParagraphs pool size === 5 (< 7).
-  // Tracked as bug — fix via PX-027 (expand SCHROTT pool to ≥7).
-  // Using `it.fails()` as regression sentinel: when PX-027 lands and
-  // pool grows to ≥7, this test will start passing, .fails() flag will
-  // trip vitest and remind us to remove the marker. Until then, the
-  // "expected to fail" state documents the open debt visibly.
-  it.fails("each service has bodyParagraphs ≥ 7 (Tier-1 demand) — SENTINEL until PX-027", () => {
+  // GAP #5 — pool-size demand invariant (PX-026 sentinel resolved by PX-027).
+  // Each service's bodyParagraphs pool must be ≥ paragraphCountForTier(1).
+  // Otherwise Tier-1 cities silently receive fewer paragraphs than expected.
+  it("each service has bodyParagraphs ≥ 7 (Tier-1 demand)", () => {
     const T1 = paragraphCountForTier(1);
     for (const sid of SERVICE_IDS) {
       const sz = getServiceBlockSizes(sid);
