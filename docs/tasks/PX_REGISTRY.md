@@ -737,4 +737,158 @@ Phase 7 — Add to codebase:
 **Рекомендуемый промпт:** P8
 ---
 
-<!-- Последний номер: PX-029 -->
+## PX-030
+**Дата:** 2026-05-02
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** WhatsApp Kevin 2026-05-02 — ответ на 8 позиций запроса
+
+---
+**PX-030**
+**Задача:** Phase 5 finalization — Schema deep с Kevin'овыми данными + WhatsApp-инструкции Kevin'у (отзывы + GBP photos/posts + Bing/Yandex) + fact-checks Grüne Hauptstadt/Salzstreuverbot, перед merge в master и deploy
+
+**Контекст:**
+- Branch `feat/t007-ultra-seo-ai-search` (5 commits: 3167ea1 → 6b86431 → 2361585 → 9355264 → 644afd4 → 9bff9c1, 208 tests, NOT deployed)
+- Kevin ответил 2026-05-02 на 8 позиций — частично данные есть, частично async
+- `site/src/app/layout.tsx` — Schema graph (LocalBusiness/HomeAndConstructionBusiness/WebSite/Organization @id refs)
+- `site/src/components/sections/FaktenBlock.tsx` — already has "Gegründet: 2026"
+- Founder block — нужно создать (без фото Kevin'а)
+- WhatsApp templates → отдельный artefact `docs/kevin-followup-templates.md`
+
+**Ответ Kevin'а (парсинг):**
+1. Цены: "mach mal ruhig" + "Entrümpelung ab 200€, Gartenpflege ab 15€/h" — формат "ab X€" подтверждён, 2 цены даны, 3 услуги (Hausmeister/Dach/Schrott) без данных
+2. Отзывы: "4 Stück habe ich bereits gesammelt" — есть, но тексты не прислал (запросить отдельно)
+3. Фото: "Fotos von mir ungern 😂😂" — отказ, нужна альтернатива (логотип + Familienbetrieb текст)
+4. Wording: "passt schon" — ОК на "junges Familienunternehmen seit 2026"
+5+6. Bing/Yandex: "mache ich nachher fertig" — Kevin сделает аккаунты, ждём verification codes
+7. GBP: services заполнены, photos = 0, posts = 0 — нужна WhatsApp инструкция Kevin'у
+8. Measurement: "habe ich bereits Search Console" — выбрал GSC, Plausible не делаем
+
+**Проблема:**
+- Phase 5 Schema deep частично сделан (HomeAndConstructionBusiness + WebSite + Organization), но без `priceSpecification`, `AggregateRating`, `founder` детально
+- Kevin дал 2 цены, формат "ab X€" подтверждён, но 3 другие услуги без цен
+- Kevin отказался дать своё фото → Founder block нужен без личного фото
+- 4 отзыва Kevin собрал, но тексты не прислал → AggregateRating блокирован
+- 2 факта (Grüne Hauptstadt-Förderung 250-2000€, Salzstreuverbot 2019 1000€ Bußgeld) в ratgeber-content.ts требуют verification — Hans Landa Round 3 Conditional GO trigger
+- Bing/Yandex аккаунты Kevin делает позже → Phase 4 (multi-engine indexing) async
+
+**Цель:**
+- Schema полностью финализирован с реальными данными
+- Founder block корректно отображается без личного фото
+- Kevin получает чёткую WhatsApp-инструкцию для GBP photos/posts + запрос на 4 review texts + Bing/Yandex creds
+- 2 факта подтверждены WebSearch ИЛИ wording смягчён
+- Branch готов к merge → master → deploy
+- Phase 4 (Bing/Yandex/IndexNow) — async когда Kevin пришлёт credentials → PX-031
+- AggregateRating — async когда Kevin пришлёт 4 отзыва → PX-031
+
+**Скоуп:**
+
+Часть А — Schema deep finalize (мой код):
+- `layout.tsx` Service entries:
+  - `entruempelung` → `offers: { priceSpecification: { minPrice: 200, priceCurrency: "EUR" } }`
+  - `gartenpflege` → `offers: { priceSpecification: { minPrice: 15, priceCurrency: "EUR", unitText: "HUR" } }`
+  - `hausmeisterservice` → `priceRange: "auf Anfrage"` (без minPrice — рыночный 30-45€/h не фабриковать)
+  - `dacharbeiten` → `priceRange: "auf Anfrage"`
+  - `schrottabholung` → `offers: { price: 0, priceCurrency: "EUR", description: "Kostenlose Abholung" }`
+- Organization schema founder block:
+  - `founder: { @type: "Person", name: "Kevin Littawe", jobTitle: "Inhaber" }` (без image)
+  - `foundingDate: "2026"` ✅ already
+- Новая section / компонент `FamilyBusinessBlock.tsx`:
+  - Заменяет/дополняет "Über uns" — show brand logo + "Familienbetrieb Littawe — gegründet 2026 von Kevin Littawe in Osnabrück"
+  - НЕТ личного фото — brand-logo + текстовый акцент
+
+Часть B — Fact-checks 2 утверждения (мой WebSearch):
+- Verify "Grüne Hauptstadt"-Förderung в Osnabrück (Programm для naturnahe Gärten 250-2000€)
+- Verify Salzstreuverbot Landkreis Osnabrück 2019 + 1000€ Bußgeld
+- Если подтверждены → keep current wording в ratgeber-content.ts
+- Если НЕ подтверждены → soften: "in vielen Kommunen NDS/NRW gibt es ähnliche Programme/Verbote — bitte mit Ihrer Gemeinde abklären"
+
+Часть C — WhatsApp templates для Kevin (`docs/kevin-followup-templates.md`):
+- Template 1 (Reviews request): "Schick mir bitte die 4 Bewertungen — Name oder Initialen, Stadt, Sterne, Text. Ich brauche sie für die Sterne-Anzeige in Google."
+- Template 2 (GBP photos walkthrough): step-by-step как сфотографировать (5 категорий: Auto/Logo, Werkzeug, vorher/nachher, Arbeitskleidung, Fassade Bramscher 161) + как загрузить в Google Business Profile
+- Template 3 (GBP posts): 3 готовых ready-to-paste поста (Vorstellung Familienbetrieb, Aktuelle Saison-Tipps, Service-Highlight Entrümpelung Festpreis)
+- Template 4 (Bing/Yandex): step-by-step setup + что прислать (verification codes/TXT records)
+
+Часть D — Async-блокеры → ставим в pending state:
+- `AggregateRating` — comment в layout.tsx: "Pending Kevin's 4 reviews → add via PX-031"
+- Phase 4 multi-engine indexing — комментарий в SEO_RESULTS.md: "Pending Kevin's Bing/Yandex accounts → PX-031"
+- Phase 7 GBP optimization — Kevin делает по WhatsApp template
+
+Часть E — Final verification + commit + merge:
+- `npm test` (208 tests pass)
+- `npm run build` (build green)
+- Hans Landa quick review of Phase 5 changes (review @id graph, founder block)
+- Commit на `feat/t007-ultra-seo-ai-search`
+- Merge `feat/t007-ultra-seo-ai-search` → `master` через PR (CI prerun автоматически через ci.yml)
+- GitHub Actions автодеплой → live на rundumshaus-littawe.de
+- GSC re-submit sitemap (уже verified) + request indexing для 5 главных URLs
+- Update DEVLOG S031 + STATUS + Obsidian
+
+**Ограничения:**
+- НЕ фабриковать цены — для 3 услуг без данных Kevin'а только "auf Anfrage"
+- НЕ ставить AggregateRating без visible on-page reviews (Google policy)
+- НЕ деплоить если 2 факта не verified (вместо этого smooth wording)
+- НЕ менять branding/palette (CEO ранее запретил)
+- WhatsApp templates на Deutsch, лаконичные, copy-paste ready
+- Founder block без личного фото — Kevin отказался, не настаивать
+- Bing/Yandex Phase 4 — отдельный follow-up PX-031 когда Kevin пришлёт credentials
+- AggregateRating Phase 5 — отдельный follow-up PX-031 когда Kevin пришлёт 4 review texts
+- НЕ ломать существующие 208 tests
+- Build time не должен значимо вырасти
+
+**Размер:** L (Schema deep + new component + fact-checks + WhatsApp templates + merge orchestration)
+**Рекомендуемый промпт:** P1 (фича M-L) или P0 если roadmap-first
+---
+
+## PX-031
+**Дата:** 2026-05-02
+**Статус:** новая (async, ждёт триггера от Kevin)
+**DEVLOG:** —
+**Источник:** PX-030 Phase 5 — Hans Landa Round 4 follow-up + async-блокеры
+
+---
+**PX-031**
+**Задача:** Async finalization — добавить AggregateRating в schema (когда Kevin пришлёт 4 review texts), завершить Phase 4 multi-engine indexing (когда Kevin пришлёт Bing/Yandex verification codes), доделать priceSpecification для services где нужна clarification (если требуется)
+
+**Trigger:**
+- Kevin пришлёт **4 review texts** (Name/Initialen + Stadt + Sterne + Text + bestätigt "verstanden" anti-fake disclaimer) → AggregateRating live
+- ИЛИ Kevin создаёт Bing Webmaster Tools account + Yandex Webmaster + пришлёт verification codes/HTML meta tags → Phase 4 indexing setup
+- ИЛИ Kevin даёт дополнительные pricing clarifications если потребуется (например для Hausmeister/Dach regular rate)
+
+**Owner:** #3 Marco Reiter (Frontend Engineer)
+**Max wait:** 2 weeks (deadline **2026-05-16**) → если Kevin не отвечает → CEO escalation (WhatsApp напоминание ИЛИ proceed без AggregateRating и без Bing/Yandex)
+
+**Контекст:**
+- PX-030 завершила Phase 5 schema deep с partial data — entruempelung priceSpec ab 200€ ✅, gartenpflege Festpreis-only description ✅, hausmeister/dach description-only, schrott Tauschgeschäft description, founder block без image ✅
+- AggregateRating НЕ добавлен (Google требует visible on-page reviews — без этого self-serving stars)
+- Phase 4 (Bing/Yandex/Ecosia indexing) не сделан — Kevin создаёт аккаунты сам, ждём
+- 4 reviews Kevin "habe ich gesammelt" — тексты не прислал
+- WhatsApp Template 1 (reviews request) уже отправлен Kevin'у 2026-05-02
+
+**Скоуп:**
+Phase A (когда reviews пришли):
+- Создать ReviewsBlock компонент с visible on-page reviews
+- Добавить AggregateRating в LocalBusiness/HomeAndConstructionBusiness schema (`ratingValue` average, `ratingCount: 4`)
+- Тесты: render + schema validity + AggregateRating fields
+
+Phase B (когда Bing/Yandex verification пришла):
+- Добавить meta tag verification в layout.tsx ИЛИ TXT records в IONOS DNS
+- Submit sitemap.xml в Bing Webmaster + Yandex Webmaster
+- Initial URL inspection top-5 pages
+- Update SEO_RESULTS.md baseline
+
+Phase C (если Kevin даст дополнительные pricing):
+- Update layout.tsx Service entries
+- Update programmatic.ts content где упоминаются цены
+
+**Ограничения:**
+- НЕ ставить AggregateRating без visible on-page reviews
+- НЕ ставить fake reviews/ratings
+- При escalation после 2 weeks — proceed без блокеров (deploy уже live, можно update incrementally)
+- Все changes в feat-branch (или новой fix-ветке) → PR → merge
+
+**Размер:** S-M (зависит от того что Kevin пришлёт)
+**Рекомендуемый промпт:** P8 (мелкие правки) или P1 (если нужен полный flow)
+---
+
+<!-- Последний номер: PX-031 -->

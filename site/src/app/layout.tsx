@@ -107,6 +107,8 @@ export default function RootLayout({
                     "@type": "City",
                     name: city,
                   })),
+                  // PX-031 follow-up: AggregateRating pending Kevin's 4 review texts.
+                  // priceSpecification details added per service below where confirmed.
                   hasOfferCatalog: {
                     "@type": "OfferCatalog",
                     name: "Leistungen",
@@ -115,14 +117,14 @@ export default function RootLayout({
                         "@type": "Service",
                         name: "Hausmeisterservice",
                         description:
-                          "Alles rund ums Haus — zuverlässig und schnell erledigt.",
+                          "Alles rund ums Haus — zuverlässig zum fairen Festpreis nach Besichtigung.",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                       },
                       {
                         "@type": "Service",
                         name: "Gartenpflege",
                         description:
-                          "Fachgerechte Pflege Ihres Gartens — Rasen mähen, Hecken schneiden und vieles mehr.",
+                          "Fachgerechte Pflege Ihres Gartens — Rasen mähen, Hecken schneiden und vieles mehr. Festpreis nach kostenloser Besichtigung.",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                         areaServed: targetCitiesSchema,
                       },
@@ -130,22 +132,32 @@ export default function RootLayout({
                         "@type": "Service",
                         name: "Dacharbeiten",
                         description:
-                          "Reinigung, Pflege und Arbeiten rund ums Dach — sauber und zuverlässig.",
+                          "Reinigung, Pflege und Arbeiten rund ums Dach — sauber und zum fairen Festpreis.",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                       },
                       {
                         "@type": "Service",
                         name: "Entrümpelung",
                         description:
-                          "Entrümpelungen in allen Bereichen — vom Keller bis zur kompletten Haushaltsauflösung.",
+                          "Entrümpelungen in allen Bereichen — vom Keller bis zur kompletten Haushaltsauflösung. Festpreis ab 200 € nach kostenloser Besichtigung.",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                         areaServed: targetCitiesSchema,
+                        offers: {
+                          "@type": "Offer",
+                          priceSpecification: {
+                            "@type": "PriceSpecification",
+                            minPrice: 200,
+                            priceCurrency: "EUR",
+                          },
+                          description:
+                            "Festpreisangebot ab 200 € nach kostenloser Besichtigung vor Ort. Wertgegenstände werden nicht angerechnet.",
+                        },
                       },
                       {
                         "@type": "Service",
                         name: "Schrottabholung",
                         description:
-                          "Kostenlose Abholung von Altmetall — schnell und unkompliziert.",
+                          "Kostenlose Abholung von Altmetall im 60-km-Umkreis — Tauschgeschäft (Materialwert deckt die Anfahrt).",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                       },
                     ],
@@ -165,7 +177,11 @@ export default function RootLayout({
                   name: "Rund ums Haus Littawe",
                   url: "https://rundumshaus-littawe.de",
                   logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
-                  founder: { "@type": "Person", name: "Kevin Littawe" },
+                  founder: {
+                    "@type": "Person",
+                    name: "Kevin Littawe",
+                    jobTitle: "Inhaber",
+                  },
                   foundingDate: "2026",
                   email: "kontakt@rundumshaus-littawe.de",
                   telephone: "+49 1523 9603175",

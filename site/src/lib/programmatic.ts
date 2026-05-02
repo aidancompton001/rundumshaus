@@ -133,7 +133,7 @@ const HAUSMEISTER: ServiceBlocks = {
     (c) =>
       `Wenn Sie als Eigentümer oder Hausverwalter in ${c.displayName} einen Hausmeister suchen, bekommen Sie bei uns das, was Sie erwarten: Verlässlichkeit, kurze Reaktionszeiten und ehrliche Preise. ${c.uniqueHook.charAt(0).toUpperCase() + c.uniqueHook.slice(1)} sind wir regelmäßig im Einsatz und kennen die typischen Anforderungen von Wohnobjekten in Ihrer ${c.bundesland === "Niedersachsen" ? "niedersächsischen" : "nordrhein-westfälischen"} Region.`,
     (c) =>
-      `Professioneller Hausmeisterservice in ${c.displayName}: Reparaturen, Wartung, Pflege — alles aus einer Hand. Unser Standort liegt im ${c.distanceKm <= 25 ? "direkten" : c.distanceKm <= 45 ? "näheren" : "erweiterten"} Einsatzgebiet von ${c.displayName} (rund ${c.distanceKm} km). Wir betreuen Einfamilienhäuser, Mehrfamilienhäuser und kleinere Gewerbeflächen mit gleicher Sorgfalt — auf Stunden- oder Festpreisbasis.`,
+      `Professioneller Hausmeisterservice in ${c.displayName}: Reparaturen, Wartung, Pflege — alles aus einer Hand. Unser Standort liegt im ${c.distanceKm <= 25 ? "direkten" : c.distanceKm <= 45 ? "näheren" : "erweiterten"} Einsatzgebiet von ${c.displayName} (rund ${c.distanceKm} km). Wir betreuen Einfamilienhäuser, Mehrfamilienhäuser und kleinere Gewerbeflächen mit gleicher Sorgfalt — zum fairen Festpreis nach Besichtigung.`,
     (c) =>
       `Als Hausmeister in ${c.displayName} kümmern wir uns um das, was wirklich anfällt: tropfender Wasserhahn, defekte Lampe, klemmende Tür, verstopfte Dachrinne, ungemähter Rasen, schmutziges Treppenhaus. Anstatt mehrere Handwerker zu organisieren, haben Sie einen Ansprechpartner aus Osnabrück, der ${distancePhrase(c)} ist und im ${c.landkreis} regelmäßig unterwegs ist.`,
     (c) =>
@@ -145,7 +145,7 @@ const HAUSMEISTER: ServiceBlocks = {
     (c, n) =>
       `Mehrfamilienhäuser und Eigentümergemeinschaften in ${c.displayName} betreuen wir auf Wunsch dauerhaft. Treppenhausreinigung in festen Intervallen, Pflege der Außenanlagen, Müllmanagement, kleine Reparaturen, Pflege der Heizung, Winterdienst — alles aus einer Hand und mit einem festen Ansprechpartner. Wir sind regelmäßig auch in ${n.slice(0, 3).map((x) => x.displayName).join(", ")} im Einsatz, was kurze Reaktionszeiten in der gesamten Region ermöglicht.`,
     (c) =>
-      `Eine Besichtigung vor Ort in ${c.displayName} ist kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück. Bei der Besichtigung erfassen wir den Zustand, klären Wünsche und Prioritäten und erstellen anschließend ein faires Angebot. Sie entscheiden, ob Stunden- oder Festpreisabrechnung. Bei laufenden Aufträgen erhalten Sie monatliche Übersichten der erledigten Tätigkeiten.`,
+      `Eine Besichtigung vor Ort in ${c.displayName} ist kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück. Bei der Besichtigung erfassen wir den Zustand, klären Wünsche und Prioritäten und erstellen anschließend ein faires Festpreisangebot. Bei laufenden Aufträgen (z.B. Mehrfamilienhausbetreuung) erhalten Sie monatliche Übersichten der erledigten Tätigkeiten.`,
     (c) =>
       `Winterdienst in ${c.displayName}: Wir übernehmen Räum- und Streupflichten von November bis März — sowohl für private Eigentümer als auch für Hausverwaltungen. Geräumt wird in der Regel werktags vor 7:00 Uhr und sonntags vor 9:00 Uhr (gemäß lokaler Streupflicht). Streumittel stellen wir auf Wunsch zur Verfügung.`,
     (c) =>
@@ -177,8 +177,8 @@ const HAUSMEISTER: ServiceBlocks = {
       a: `Ja. Räum- und Streudienst von November bis März — werktags vor 7:00 Uhr, sonntags vor 9:00 Uhr (örtliche Streupflicht). Streumittel stellen wir auf Wunsch.`,
     }),
     (c) => ({
-      q: `Arbeiten Sie auf Stunden- oder Festpreisbasis?`,
-      a: `Beides. Bei klar abgrenzbaren Aufträgen in ${c.displayName} bieten wir Festpreise, bei laufenden Tätigkeiten arbeiten wir nach Stunden zu fairen Konditionen.`,
+      q: `Arbeiten Sie zum Festpreis?`,
+      a: `Ja. Bei klar abgrenzbaren Aufträgen in ${c.displayName} erhalten Sie ein verbindliches Festpreisangebot nach kostenloser Besichtigung — keine Überraschungen bei der Endabrechnung.`,
     }),
     (c) => ({
       q: `Kann der Hausmeisterservice in ${c.displayName} dauerhaft beauftragt werden?`,
@@ -278,7 +278,7 @@ const GARTEN: ServiceBlocks = {
     }),
     (c) => ({
       q: `Was kostet eine Besichtigung des Gartens in ${c.displayName}?`,
-      a: `Die Besichtigung in ${c.displayName} ist kostenlos und unverbindlich. Anschließend erhalten Sie ein faires Angebot zum Stunden- oder Festpreis.`,
+      a: `Die Besichtigung in ${c.displayName} ist kostenlos und unverbindlich. Anschließend erhalten Sie ein faires Festpreisangebot.`,
     }),
     (c) => ({
       q: `Übernehmen Sie eine ganzjährige Gartenbetreuung in ${c.displayName}?`,

@@ -46,7 +46,7 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
       "Anfahrt: bei lokalen Anbietern im Umkreis Osnabrück oft enthalten oder pauschal 20–40 €.",
       "Entsorgung Schnittgut: typisch 5–10 € pro m³ oder im Stundenlohn enthalten.",
     ] },
-    { type: "p", text: "Bei Rund ums Haus Littawe ist die Besichtigung kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück. Anschließend erhalten Sie ein verbindliches Angebot, entweder zum Stunden- oder Festpreis." },
+    { type: "p", text: "Bei Rund ums Haus Littawe ist die Besichtigung kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück. Anschließend erhalten Sie ein verbindliches Festpreisangebot." },
     { type: "h2", text: "Schnittgut entsorgen — Wege im Landkreis Osnabrück und Nachbarn" },
     { type: "p", text: "Im Landkreis Osnabrück können Sie Heckenschnitt bei den Awigo-Annahmestellen abgeben (z.B. Atter, Bramsche, Melle, Quakenbrück). Im Kreis Steinfurt nutzen Sie die Wertstoffhöfe der Kreisabfallwirtschaft. Wer einen Garten mit Komposterstellung hat, kann den feinen Anteil selbst kompostieren — verholzte Triebe gehören jedoch in die Grünabfall-Annahme." },
     { type: "h2", text: "Häufige Fehler beim Heckenschnitt" },
@@ -287,6 +287,7 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
       "Kommunikation mit Bewohnern bei Reparaturwünschen oder Beschwerden.",
       "Gartenneuanlage, Rasensanierung — gegen separate Berechnung.",
     ] },
+    { type: "callout", text: "Bei Rund ums Haus Littawe: ausschließlich Festpreis nach kostenloser Besichtigung — keine Stundenabrechnung, keine versteckten Aufschläge. Die folgenden Vertragsmodelle beschreiben den Marktstandard zur Orientierung." },
     { type: "h2", text: "Vertragsmodelle" },
     { type: "h3", text: "Stundenbasiert" },
     { type: "p", text: "Klassisches Modell für kleine Häuser oder unregelmäßige Aufgaben. Stundenlohn 30–45 €, monatliche Übersicht der Leistungen. Vorteil: nur bezahlt was wirklich anfällt. Nachteil: schwer kalkulierbar." },
@@ -587,7 +588,7 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
       "Eingeschränkt erlaubt: Salz nur bei extremer Glätte (Eisregen) oder an gefährlichen Stellen (Treppen, Steigungen).",
       "Verboten in vielen Gemeinden: flächendeckendes Salzstreuen — ökologische Gründe (Salzbelastung von Bäumen und Boden).",
     ] },
-    { type: "p", text: "In Osnabrück und großen Teilen des Landkreises sowie im Münsterland gilt seit 2019 ein Salzstreuverbot in Wohngebieten. Salz darf nur an gefährlichen Stellen (Steigungen, Treppen) eingesetzt werden. Bei Verstößen drohen Bußgelder bis 1 000 €." },
+    { type: "p", text: "In Osnabrück und vielen umliegenden Kommunen gilt ein generelles Salzstreuverbot auf Gehwegen — Salz ist nur an gefährlichen Stellen (Steigungen, Treppen) erlaubt. Bei Verstößen drohen Bußgelder; die genaue Höhe regelt die jeweilige Kommune. Aktuelle Vorgaben für Ihre Adresse: Stadt- bzw. Gemeindeverwaltung anfragen." },
     { type: "h2", text: "Was passiert bei Pflichtverletzung?" },
     { type: "p", text: "Stürzt jemand auf nicht geräumtem oder nicht gestreutem Gehweg, kann er Schadensersatz und Schmerzensgeld verlangen. Die Höhe richtet sich nach Verletzungsgrad:" },
     { type: "list", items: [
@@ -629,7 +630,7 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
       "Salz (NaCl, Streusalz): in Osnabrück und vielen NDS/NRW-Gemeinden in Wohngebieten verboten. Nur bei extremer Eisbildung an Treppen und Steigungen erlaubt. Schadet Bäumen und Boden, fördert Korrosion an Metall.",
       "Salz-Solemix (Sole): sparsamer als reines Salz, aber gleiche Umweltprobleme. Nur professioneller Einsatz auf Hauptstraßen sinnvoll.",
     ] },
-    { type: "p", text: "Empfehlung für Privateigentümer und Hausverwaltungen: Sand oder Granitsplitt als Standard. Salz nur als Notfall-Reserve für extreme Glätte an gefährlichen Stellen (Treppen, steile Auffahrten). Im Landkreis Osnabrück gilt seit 2019 ein Salzstreuverbot in Wohngebieten — bei Verstoß Bußgeld bis 1 000 €." },
+    { type: "p", text: "Empfehlung für Privateigentümer und Hausverwaltungen: Sand oder Granitsplitt als Standard. Salz nur als Notfall-Reserve für extreme Glätte an gefährlichen Stellen (Treppen, steile Auffahrten). In Osnabrück und vielen Nachbarkommunen gilt zudem ein Salzstreuverbot auf normalen Gehwegen — die genauen Bußgeldsätze regelt die jeweilige Stadt- oder Gemeindesatzung." },
     { type: "h2", text: "Was tun bei tatsächlichem Sturzfall?" },
     { type: "p", text: "Stürzt jemand auf Ihrem Gehweg, ist der Ablauf rechtlich klar:" },
     { type: "ol", items: [
@@ -647,8 +648,9 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
   // ════════════════════════════════════════════════════════════════
   "gaertner-vs-selbst-machen-wann-lohnt": [
     { type: "p", text: "„Gärtnern macht doch Spaß — warum jemanden bezahlen?“ Das hört man oft, und in vielen Fällen ist es richtig. In manchen aber nicht. Diese Analyse hilft Ihnen, eine sachliche Entscheidung zu treffen: Wann lohnt sich der Profi-Gärtner in der Region Osnabrück, und wann ist Eigenleistung die bessere Wahl?" },
-    { type: "h2", text: "Die ehrliche Stundenlohn-Rechnung" },
-    { type: "p", text: "Gärtner-Stundenlohn in NDS/NRW 2026: 30–45 € netto. Eigenleistung: kostenfrei — vermeintlich. Tatsächlich hat Ihre Zeit einen Wert. Wenn Sie selbst 35 € pro Stunde verdienen (Bruttogehalt geteilt durch 1 700 Jahresstunden), dann kostet Sie eine Stunde im Garten dasselbe wie der Profi. Mit dem Unterschied, dass der Profi schneller ist." },
+    { type: "callout", text: "Bei Rund ums Haus Littawe: Gartenpflege ausschließlich zum Festpreis nach Besichtigung. Die folgende Stundenlohn-Rechnung beschreibt den Marktdurchschnitt zur Orientierung." },
+    { type: "h2", text: "Die ehrliche Marktrechnung" },
+    { type: "p", text: "Marktdurchschnitt Gärtner-Stundenlohn in NDS/NRW 2026: 30–45 € netto (zur Orientierung). Eigenleistung: kostenfrei — vermeintlich. Tatsächlich hat Ihre Zeit einen Wert. Wenn Sie selbst 35 € pro Stunde verdienen (Bruttogehalt geteilt durch 1 700 Jahresstunden), dann kostet Sie eine Stunde im Garten dasselbe wie ein Profi-Stundensatz. Mit dem Unterschied, dass der Profi schneller ist. (Bei uns: Festpreis, kein Stundensatz.)" },
     { type: "h2", text: "Geschwindigkeitsfaktor — wo der Profi 2-3× schneller ist" },
     { type: "list", items: [
       "Heckenschnitt 30 m, 1,80 m hoch: Sie 4-6 h, Profi 1,5-2 h.",
@@ -799,7 +801,7 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
     ] },
     { type: "p", text: "Nicht selbst machen sollten Sie: Drainage (Fachwissen nötig), Pflasterungen mit größerem Untergrund (Fundament setzt sich falsch), Elektroinstallationen, Großpflanzungen (Bäume) — Risikoarbeiten." },
     { type: "h2", text: "Förderungen prüfen" },
-    { type: "p", text: "Einige Kommunen in NDS/NRW fördern naturnahe Gartenanlagen, Versickerungsflächen statt Pflasterung oder Dachbegrünung. In Osnabrück gibt es das Programm „Grüne Hauptstadt“-Förderung für naturnahe Gärten — Zuschüsse 250-2 000 € je nach Maßnahme. In Bielefeld und Münster ähnliche Programme. Vor dem Bau bei der Stadt anfragen." },
+    { type: "p", text: "Einige Kommunen in NDS/NRW fördern naturnahe Gartenanlagen, Versickerungsflächen statt Pflasterung oder Dachbegrünung. In Osnabrück gibt es z.B. das Programm „Grün statt Grau“ der Stadt — Förderung von Dachbegrünung, Fassadenbegrünung und Entsiegelung mit bis zu 60 % der förderfähigen Kosten (Konditionen je nach Lage und Maßnahme). Zusätzlich vergibt die Stadt einen Naturschutzpreis für naturnahe Vorgärten. In Bielefeld und Münster ähnliche Programme. Aktuelle Konditionen direkt bei Ihrer Stadt erfragen." },
     { type: "h2", text: "Genehmigungspflichten" },
     { type: "list", items: [
       "Reine Gartenanlage: keine Genehmigung.",

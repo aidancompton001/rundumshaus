@@ -23,8 +23,10 @@ describe("Data Integrity", () => {
       expect(site.company).toBeTruthy();
     });
 
-    it("has 4 navigation links", () => {
-      expect(site.navigation).toHaveLength(4);
+    it("has 5 navigation links (Startseite, Leistungen, Über uns, Referenzen, Kontakt)", () => {
+      expect(site.navigation).toHaveLength(5);
+      const labels = site.navigation.map((n) => n.label);
+      expect(labels).toEqual(["Startseite", "Leistungen", "Über uns", "Referenzen", "Kontakt"]);
     });
 
     it("has owner name", () => {
