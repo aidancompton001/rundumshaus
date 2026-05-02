@@ -490,4 +490,54 @@ describe("programmatic — determinism & mutation safety (Phase 5 gaps #10, #11)
     expect(second.body).not.toContain("MUTATED");
     expect(second.fakten.length).toBe(7);
   });
+
+  // PX-029: extended mutation safety — faqs, neighbors, body[i] strings.
+  it("mutation of faqs/neighbors arrays does not leak", () => {
+    const first = generatePageContent("dacharbeiten", "lengerich");
+    first.faqs.push({ q: "X?", a: "Y" });
+    first.neighbors.push({} as never);
+    const second = generatePageContent("dacharbeiten", "lengerich");
+    expect(second.faqs.find((f) => f.q === "X?")).toBeUndefined();
+    expect(second.neighbors.length).toBe(getCityBySlug("lengerich")!.neighbors.length);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────
+// PX-029 — strict bounds + cross-field validation invariants.
+// ─────────────────────────────────────────────────────────────────────
+
+describe("programmatic — strict bounds (PX-029)", () => {
+  // PLZ-prefix range: NDS/NRW в данных используют {"32","33","48","49"}.
+  const ALLOWED_PLZ = new Set(["32", "33", "48", "49"]);
+
+  it("every city has plzPrefix in NDS/NRW set {32, 33, 48, 49}", () => {
+    for (const c of CITIES) {
+      expect(ALLOWED_PLZ.has(c.plzPrefix), `${c.slug} plzPrefix=${c.plzPrefix}`).toBe(true);
+    }
+  });
+
+  // Defensive distanceKm upper bound. Current max in data ≈ 80km (Twist, Nordhorn).
+  // 100 catches future drift (e.g. accidentally adding Bremen distance 130km).
+  it("every city has distanceKm ≤ 100 (defensive upper bound)", () => {
+    for (const c of CITIES) {
+      expect(c.distanceKm, `${c.slug}`).toBeLessThanOrEqual(100);
+    }
+  });
+
+  // Cross-field: bundesland ↔ plzPrefix is intentionally NOT strict.
+  // PLZ zones span Bundesland borders (e.g. Salzbergen NDS uses 48 because
+  // Emsland PLZ-zone 48 covers both NDS-Emsland and NRW-Münsterland). The
+  // existing plzPrefix enum check above is sufficient.
+});
+
+describe("programmatic — cross-page contracts (PX-029)", () => {
+  // Cross-service h1 audit: same city across 5 services should produce
+  // 5 distinct h1's (different service titles in template).
+  it("a single city produces 5 distinct h1's across all services", () => {
+    for (const c of CITIES) {
+      const h1s = SERVICE_IDS.map((sid) => generatePageContent(sid, c.slug).h1);
+      const unique = new Set(h1s);
+      expect(unique.size, `${c.slug} cross-service h1 collision: ${h1s.join(" / ")}`).toBe(SERVICE_IDS.length);
+    }
+  });
 });
