@@ -842,8 +842,8 @@ Phase 7 — Add to codebase:
 
 ## PX-031
 **Дата:** 2026-05-02
-**Статус:** новая (async, ждёт триггера от Kevin)
-**DEVLOG:** —
+**Статус:** Phase A завершена 2026-05-02 (AggregateRating live), Phase B pending Kevin Bing/Yandex
+**DEVLOG:** S031 (Phase A)
 **Источник:** PX-030 Phase 5 — Hans Landa Round 4 follow-up + async-блокеры
 
 ---

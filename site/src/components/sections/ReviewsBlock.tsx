@@ -99,7 +99,7 @@ export default function ReviewsBlock() {
                 </time>
               </div>
               <p className="text-charcoal leading-relaxed mb-4 text-base">
-                „{r.text}"
+                &bdquo;{r.text}&ldquo;
               </p>
               <footer className="text-sm text-charcoal-light">
                 <strong className="text-charcoal">{r.author}</strong>
