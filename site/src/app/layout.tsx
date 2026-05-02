@@ -70,64 +70,123 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              name: "Rund ums Haus Littawe",
-              image: "https://rundumshaus-littawe.de/images/og-image.jpg",
-              priceRange: "€€",
-              description:
-                "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Bramscher Str. 161",
-                addressLocality: "Osnabrück",
-                postalCode: "49090",
-                addressCountry: "DE",
-              },
-              telephone: "+49 1523 9603175",
-              email: "kontakt@rundumshaus-littawe.de",
-              url: "https://rundumshaus-littawe.de",
-              areaServed: allCities.map((city) => ({
-                "@type": "City",
-                name: city,
-              })),
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "Leistungen",
-                itemListElement: [
-                  {
-                    "@type": "Service",
-                    name: "Hausmeisterservice",
-                    description:
-                      "Alles rund ums Haus — zuverlässig und schnell erledigt.",
+              "@graph": [
+                {
+                  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+                  "@id": "https://rundumshaus-littawe.de/#localbusiness",
+                  name: "Rund ums Haus Littawe",
+                  legalName: "Rund ums Haus Littawe",
+                  image: "https://rundumshaus-littawe.de/images/og-image.jpg",
+                  logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
+                  priceRange: "€€",
+                  description:
+                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und im Umkreis von 60 km.",
+                  foundingDate: "2026",
+                  founder: {
+                    "@type": "Person",
+                    name: "Kevin Littawe",
                   },
-                  {
-                    "@type": "Service",
-                    name: "Gartenpflege",
-                    description:
-                      "Fachgerechte Pflege Ihres Gartens — Rasen mähen, Hecken schneiden und vieles mehr.",
-                    areaServed: targetCitiesSchema,
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "Bramscher Str. 161",
+                    addressLocality: "Osnabrück",
+                    addressRegion: "Niedersachsen",
+                    postalCode: "49090",
+                    addressCountry: "DE",
                   },
-                  {
-                    "@type": "Service",
-                    name: "Dacharbeiten",
-                    description:
-                      "Reinigung, Pflege und Arbeiten rund ums Dach — sauber und zuverlässig.",
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 52.30,
+                    longitude: 8.04,
                   },
-                  {
-                    "@type": "Service",
-                    name: "Entrümpelung",
-                    description:
-                      "Entrümpelungen in allen Bereichen — vom Keller bis zur kompletten Haushaltsauflösung.",
-                    areaServed: targetCitiesSchema,
+                  telephone: "+49 1523 9603175",
+                  email: "kontakt@rundumshaus-littawe.de",
+                  url: "https://rundumshaus-littawe.de",
+                  knowsLanguage: "de",
+                  areaServed: allCities.map((city) => ({
+                    "@type": "City",
+                    name: city,
+                  })),
+                  // PX-031 follow-up: AggregateRating pending Kevin's 4 review texts.
+                  // priceSpecification details added per service below where confirmed.
+                  hasOfferCatalog: {
+                    "@type": "OfferCatalog",
+                    name: "Leistungen",
+                    itemListElement: [
+                      {
+                        "@type": "Service",
+                        name: "Hausmeisterservice",
+                        description:
+                          "Alles rund ums Haus — zuverlässig zum fairen Festpreis nach Besichtigung.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                      },
+                      {
+                        "@type": "Service",
+                        name: "Gartenpflege",
+                        description:
+                          "Fachgerechte Pflege Ihres Gartens — Rasen mähen, Hecken schneiden und vieles mehr. Festpreis nach kostenloser Besichtigung.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                        areaServed: targetCitiesSchema,
+                      },
+                      {
+                        "@type": "Service",
+                        name: "Dacharbeiten",
+                        description:
+                          "Reinigung, Pflege und Arbeiten rund ums Dach — sauber und zum fairen Festpreis.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                      },
+                      {
+                        "@type": "Service",
+                        name: "Entrümpelung",
+                        description:
+                          "Entrümpelungen in allen Bereichen — vom Keller bis zur kompletten Haushaltsauflösung. Festpreis ab 200 € nach kostenloser Besichtigung.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                        areaServed: targetCitiesSchema,
+                        offers: {
+                          "@type": "Offer",
+                          priceSpecification: {
+                            "@type": "PriceSpecification",
+                            minPrice: 200,
+                            priceCurrency: "EUR",
+                          },
+                          description:
+                            "Festpreisangebot ab 200 € nach kostenloser Besichtigung vor Ort. Wertgegenstände werden nicht angerechnet.",
+                        },
+                      },
+                      {
+                        "@type": "Service",
+                        name: "Schrottabholung",
+                        description:
+                          "Kostenlose Abholung von Altmetall im 60-km-Umkreis — Tauschgeschäft (Materialwert deckt die Anfahrt).",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                      },
+                    ],
                   },
-                  {
-                    "@type": "Service",
-                    name: "Schrottabholung",
-                    description:
-                      "Kostenlose Abholung von Altmetall — schnell und unkompliziert.",
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://rundumshaus-littawe.de/#website",
+                  url: "https://rundumshaus-littawe.de",
+                  name: "Rund ums Haus Littawe",
+                  inLanguage: "de-DE",
+                  publisher: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://rundumshaus-littawe.de/#organization",
+                  name: "Rund ums Haus Littawe",
+                  url: "https://rundumshaus-littawe.de",
+                  logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
+                  founder: {
+                    "@type": "Person",
+                    name: "Kevin Littawe",
+                    jobTitle: "Inhaber",
                   },
-                ],
-              },
+                  foundingDate: "2026",
+                  email: "kontakt@rundumshaus-littawe.de",
+                  telephone: "+49 1523 9603175",
+                },
+              ],
             }),
           }}
         />

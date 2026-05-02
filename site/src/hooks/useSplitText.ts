@@ -15,6 +15,8 @@ interface UseSplitTextOptions {
   ease?: string;
   triggerOnScroll?: boolean;
   scrollStart?: string;
+  /** Skip animation entirely (e.g. on mobile for LCP performance). Text remains visible. */
+  disabled?: boolean;
 }
 
 export function useSplitText(
@@ -30,14 +32,15 @@ export function useSplitText(
     ease = "power2.out",
     triggerOnScroll = false,
     scrollStart = "top 85%",
+    disabled = false,
   } = options;
 
   useEffect(() => {
     const el = elementRef.current;
     if (!el) return;
 
-    // Reduced motion: show text immediately
-    if (reducedMotion) {
+    // Reduced motion or disabled (mobile): show text immediately
+    if (reducedMotion || disabled) {
       gsap.set(el, { opacity: 1 });
       return;
     }
@@ -74,5 +77,6 @@ export function useSplitText(
     ease,
     triggerOnScroll,
     scrollStart,
+    disabled,
   ]);
 }

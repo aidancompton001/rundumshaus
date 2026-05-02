@@ -2,6 +2,474 @@
 
 ---
 
+### [S030] — 2026-05-02 — PX-026: Multi-agent test protocol для programmatic.ts
+
+**Задача:** PX-026 — multi-agent протокол создания тестов для site/src/lib/programmatic.ts (engine 490 programmatic SEO landing pages) с adversarial валидацией
+**Роли:** #3 Marco Reiter (3 параллельных агента), #14 Hans Landa (3 раунда review)
+**Статус:** завершено CONDITIONAL GO — 3 follow-ups (PX-027/028/029) non-blocking
+
+**7-фазный протокол выполнен:**
+- Phase 1: 3 ТС1 → Hans Landa NO-GO (10 defects, 3 critical) → 3 ТС2 → CEO ОК
+- Phase 2: 3 параллельных агента создали 3 тест-файла (snapshot/invariant/example) — НЕ collision (разные suffix)
+- Phase 3: Comparative critique → winner = Agent B (invariant)
+- Phase 4: Gap analysis на B → 15 gaps, TOP-5 must-fix
+- Phase 5: 19 новых tests в invariant.test.ts (TOP-5 + complementary)
+- Phase 6: Hans Landa CONDITIONAL GO
+- Phase 7: commit + push в feat/t007-ultra-seo-ai-search
+
+**Ключевые находки (real bugs):**
+1. SCHROTT.bodyParagraphs.length === 5 < 7 (T1 paragraphCountForTier) → 20 T1 schrottabholung pages silently shipping 5 paragraphs вместо 7. Захвачено как `it.fails()` sentinel — auto-trip when PX-027 fix lands.
+2. Neighbor graph asymmetry: bad-iburg, bad-rothenfelde reference bad-essen, но bad-essen.neighbors не reciprocates. Захвачено как KNOWN_ASYMMETRIES baseline — фикс PX-027.
+
+**Финальный test-suite:**
+- 3 файла: programmatic.snapshot.test.ts (14 tests) + programmatic.invariant.test.ts (40 tests, 1 expected-fail) + programmatic.example.test.ts (22 tests) = 76 new tests
+- Total suite: 128 → 204 (203 passed + 1 expected fail)
+- Build green, время выполнения <8s
+
+**Подходы validated:**
+- Snapshot: low semantic value, high false-positive risk при text changes, но variant coverage matrix полезна
+- Invariant (winner): 100% coverage 490 pairs, low false-positive, нашёл реальные баги — это правильный подход для programmatic content generators
+- Example: complementary для negative cases / Neuenkirchen disambiguation / distance branches
+
+**Изменения в production code (минимальные, для testability):**
+- `programmatic.ts`: добавлены exports `paragraphCountForTier`, `faqCountForTier`, `getServiceBlockSizes`, `getSelectedIndices` (Hans Landa Phase 6 пометил это как PX-028 followup для rename с _TEST_ONLY suffix)
+- `__tests__/setup.ts`: window globals обёрнуты в `typeof window !== 'undefined'` для node env compatibility
+
+**Артефакты:**
+- `site/src/lib/__tests__/programmatic.snapshot.test.ts` (новый)
+- `site/src/lib/__tests__/programmatic.invariant.test.ts` (новый, 40 tests)
+- `site/src/lib/__tests__/programmatic.example.test.ts` (новый)
+- `site/src/lib/__tests__/__snapshots__/programmatic.snapshot.test.ts.snap` (auto-generated)
+- `site/src/lib/programmatic.ts` (4 exports added)
+- `site/src/__tests__/setup.ts` (window guards)
+
+**Hans Landa traversal:**
+- Round 1 (ТС1): NO-GO — 10 defects (filename collision, wrong meta bounds, hash-based body assertions risk, ...)
+- Round 2 (post-Phase-2): не понадобился — 3 параллельных файла без collision
+- Round 3 (Phase 4 gap analysis): 15 gaps in winner B → 5 critical
+- Round 4 (Phase 6 final): CONDITIONAL GO
+
+**Follow-ups (non-blocking):**
+- PX-027: Expand SCHROTT.bodyParagraphs ≥7 + fix bad-essen neighbors asymmetry
+- PX-028: Rename test-only exports с `_TEST_ONLY` или move в `programmatic.testing.ts`
+- PX-029 (nice-to-have): plzPrefix region check, distanceKm upper bound, cross-service h1 audit, distancePhrase branch-count invariant
+
+**Lessons learned:**
+- Multi-agent параллельность с разными suffix'ами устраняет filename collision risk
+- Invariant-based testing для content generators значительно эффективнее snapshot-based в обнаружении data bugs
+- `it.fails()` sentinel pattern для known bugs — self-clearing workflow без рисков забыть
+- Adversarial review до запуска агентов (ТС1→ТС2) экономит wasted work
+
+---
+
+### [S029] — 2026-05-02 — T007 / PX-025 Phase 1+2+3+6 (+9 framework): Ultra Local SEO + AI Search
+
+**Задача:** T007 / PX-025 Ultra-Premium Local SEO + AI Search Optimization. Phase 1 (Discovery), Phase 2 (Programmatic SEO), Phase 3 (AI Search), Phase 6 (Ratgeber), Phase 9 framework. БЕЗ deploy — ждём данные Kevin'а.
+**Роли:** #1 Viktor Hartmann (координация), #3 Marco Reiter (SEO/programmatic/ratgeber), #14 Hans Landa (XL adversarial review — initial NO-GO + re-review pending)
+**Статус:** Phase 2-3-6 готовы локально, NOT deployed (ожидает данные Kevin'а: цены, отзывы, фото, формулировка; ОК CEO на Bing/Yandex/Plausible). Phase 4-5-7-8 — ждут CEO.
+
+**Что сделано:**
+- **Phase 1 — Discovery:** Конкурентный аудит через WebSearch (Stockreiter, Rümpel Meister, Dukat, Hagedorn, 1A Haushaltsauflösung). Найдена существующая 11880.com-citation для Kevin'а. Шорт-лист 30→97 городов финализирован (CEO решение). Saved: `docs/SEO_RESEARCH.md`.
+- **Phase 2 — Programmatic SEO Foundation (с Hans Landa fixes):**
+  - `cities.json` обогащён: 98 городов с tier/slug/displayName/Bundesland/Landkreis/PLZ-Prefix/distanceKm/populationClass/uniqueHook
+  - Tier 1: 12→**20** (Landa C2 fix), Tier 2: 41, Tier 3: 37
+  - **Symmetrize neighbor graph** (Landa C3): 53→**0 orphans**
+  - `lib/programmatic.ts` переписан: 8 intro variants/service, 12 FAQ pool/service с rotation, tier-scaled bodyParagraphs (5/3/2), city-specific Fakten (40% unique data per Google E-E-A-T 2026)
+  - `[service]/[city]/page.tsx` обновлён: Fakten-Block, displayName для disambiguation Neuenkirchen, @id reference для LocalBusiness (Landa M4)
+  - `layout.tsx` schema: HomeAndConstructionBusiness subtype + WebSite + Organization graph с @id refs, foundingDate 2026, founder Kevin Littawe
+  - `sitemap.ts` обновлён: 7 static + 10 ratgeber + 490 programmatic = **507 URLs**
+  - Build: **512 страниц** generated (Turbopack ~10s)
+- **Phase 3 — AI Search Optimization (GEO 2026):**
+  - `public/llms.txt` (Anthropic standard, 8.1KB) с answer-first структурой и AI-citable specific facts
+  - `public/llms-full.txt` (13.4KB) — comprehensive content dump для LLM crawlers
+  - `public/ai.txt` (909B) — alternative AI-policy format
+  - `robots.ts` переписан с **2026 three-tier framework**: ALLOW для GPTBot/ClaudeBot/Claude-SearchBot/Claude-User/PerplexityBot/Perplexity-User/OAI-SearchBot/ChatGPT-User/Google-Extended/Applebot-Extended/CCBot/YouBot/MistralAI-User/Meta-ExternalAgent. DISALLOW для Bytespider (abusive)
+  - Главная: новый `FaktenBlock` — answer-first 200-words paragraph + 18 structured Fakten (Bundesland, Standort, Telefon, Festpreis-Differenzierung, etc.)
+- **Phase 6 — Ratgeber (kompakt-Format, не Pillar Pages):**
+  - `/ratgeber` index page + `/ratgeber/[slug]` dynamic route (Next.js 16 generateStaticParams)
+  - **10 ratgeber статей kompakt-Format 500-850 Wörter Artikel-Body** (Hans Landa Re-Review корректирует первоначальное Über-Claim 1500-2500w): Hecke schneiden Osnabrück (850w), Entrümpelung Kosten (700w), Dachreinigung sinnvoll, Hausmeister Mehrfamilienhaus (557w), Schrottabholung, Frühjahrspflege Checkliste (508w, slug fixed ASCII), Haushaltsauflösung Todesfall, Winterdienst Pflichten (647w), Gärtner vs Selbstmachen, Garten anlegen Kosten 2026
+  - Каждая статья: Article schema + BreadcrumbList; HowTo schema на 3 articles (hecke-schneiden, schrottabholung, gartenpflege-fruehjahr)
+  - Real regional facts: Bundesnaturschutzgesetz §39, kommunale Streupflicht-Regeln, Awigo Wertstoffhöfe, Salzstreuverbot Osnabrück 2019, etc.
+  - **Phase 6.5 future work (deferred):** Expansion ratgeber до 1500-2500w Pillar Pages für stärkere informational keyword competition
+- **Cross-linking:**
+  - `Servicegebiet.tsx` — 98 cities → /leistungen/gartenpflege/[slug] (anti-orphan reinforcement)
+  - Programmatic-страницы → 3-6 neighbor cities (symmetric)
+- **Phase 9 — Measurement Framework:**
+  - `docs/SEO_RESULTS.md` — baseline + weekly/4w/8w/12w report templates + AI test schedule
+  - `scripts/ai-search-test.md` — 6 engines × 8 queries protocol для bi-weekly tests
+  - SEO_BACKLINKS табличка в SEO_RESULTS.md (12 каталогов)
+- **Bonus:** `docs/google-review-template.md` — Place ID setup + 3 WhatsApp templates + 4-5-stars strategy
+
+**Результат проверки:**
+- Build: **512 HTML страниц** ✅
+- Tests: **128/128 pass** ✅
+- Word counts: programmatic landings 1700-2200w (incl. nav, ~600w unique core); ratgeber 2100-2900w ✅
+- Schema validity: BreadcrumbList, FAQPage, Service (с @id ref), HowTo, Article, LocalBusiness/HomeAndConstructionBusiness, WebSite, Organization
+- llms.txt + llms-full.txt + ai.txt + robots.txt все generated в `out/`
+
+**Ключевые решения:**
+- 97→98 cities (4 Neuenkirchen) tiered (Landa T1=20 fix через distance-based scoring + manual override)
+- Symmetric neighbor graph через reverse-link map с soft cap 6
+- 8 intro variants × hash rotation = ~12 cities/variant per service (vs 33 в первой итерации)
+- FAQ rotation через pickN с deterministic offset
+- @id schema reference вместо N+1 LocalBusiness duplication
+- HomeAndConstructionBusiness specific subtype вместо generic LocalBusiness (better Google match)
+- AggregateRating SKIPPED — нет visible reviews on-page; будет добавлен после получения 5+ Google reviews от Kevin'а
+- Plausible/Umami self-hosted vs только GSC — pending CEO
+
+**Не сделано (ждёт данных от CEO/Kevin):**
+- Phase 4 (Bing/Yandex/Ecosia/IndexNow) — нужны аккаунты CEO
+- Phase 5 deep schema priceSpecification — нужны цены Kevin'а
+- Phase 5 AggregateRating — нужны 5+ реальных отзывов
+- Phase 7 Backlinks (Cylex, GBP optimization) — manual CEO/Kevin
+- Phase 8 Performance (mobile LCP fix) — отложено для отдельной сессии
+- Deploy — НЕ сделан до получения Kevin'овых данных и Hans Landa GO
+
+**Артефакты (создано/изменено):**
+- `site/scripts/generate-cities.mjs` (re-write)
+- `site/src/data/cities.json` (regenerated)
+- `site/src/data/ratgeber.json` (new)
+- `site/src/lib/programmatic.ts` (re-write)
+- `site/src/lib/ratgeber-content.ts` (new — 10 articles)
+- `site/src/app/leistungen/[service]/[city]/page.tsx` (updated)
+- `site/src/app/ratgeber/page.tsx` (new)
+- `site/src/app/ratgeber/[slug]/page.tsx` (new)
+- `site/src/app/sitemap.ts` (updated)
+- `site/src/app/robots.ts` (re-write — 2026 AI bot framework)
+- `site/src/app/layout.tsx` (schema graph re-write)
+- `site/src/app/page.tsx` (FaktenBlock added)
+- `site/src/components/sections/FaktenBlock.tsx` (new)
+- `site/src/components/sections/Servicegebiet.tsx` (cross-links)
+- `site/public/llms.txt`, `site/public/llms-full.txt`, `site/public/ai.txt` (new/rewrite)
+- `docs/SEO_RESEARCH.md`, `docs/SEO_RESULTS.md`, `docs/google-review-template.md`, `scripts/ai-search-test.md` (new)
+- `docs/tasks/T007_ultra_seo_ai_search.md` (roadmap)
+
+**Следующие шаги (когда CEO предоставит):**
+1. Цены Kevin'а → priceSpecification в Service schema
+2. 5+ реальных отзывов → AggregateRating + visible reviews block
+3. Bing/Yandex accounts → Phase 4 indexing
+4. AI baseline screenshots → SEO_RESULTS.md baseline
+5. ahrefs DR snapshot → backlinks baseline
+6. GBP audit → Phase 7 optimization plan
+7. Hans Landa re-review (XL обязательно) — pending после этой сессии
+8. Phase 8 Performance fix (отдельная сессия)
+9. Deploy после Hans Landa GO + минимум Phase 5 priceSpec
+
+---
+
+### [S028] — 2026-05-01 — PX-024: LocalBusiness image + priceRange (Rich Results warnings fix)
+
+**Задача:** PX-024 — закрыть 2 optional warnings от Google Rich Results Test
+**Роли:** #3 Marco Reiter
+**Статус:** завершено
+
+**Что сделано:**
+- `layout.tsx` LocalBusiness JSON-LD: добавлено `image: "https://rundumshaus-littawe.de/images/og-image.jpg"` (1200×630, существует)
+- Добавлено `priceRange: "€€"` (средний)
+
+**Verify на live:** оба поля присутствуют в Schema на /leistungen ✅
+
+**Метрики:** 128/128 тестов pass, build OK, deploy live (1m10s)
+
+**Бонус (вне PX-024):** В этой же сессии починен duplicate FAQPage error (создан `FAQSchema.tsx` — единый объединённый FAQPage с 11 вопросами вместо 2 отдельных). Rich Results Test после этого: 3 элемента без ошибок (FAQ + LocalBusiness + Organization).
+
+**Артефакты:** layout.tsx, FAQSchema.tsx (новый), ServiceFAQ.tsx (удалён schema-рендер)
+
+---
+
+### [S027] — 2026-05-01 — PX-023: Content fixes (25→60km + remove Wertgegenstände FAQ)
+
+**Задача:** 2 правки контента от Kevin
+**Роли:** #3 Marco Reiter (content), #14 Hans Landa (review)
+**Статус:** завершено
+
+**Что сделано:**
+- 25 km → 60 km в 4 пользовательских вхождениях (services.json gartenpflege/entruempelung detailDescription + service-faq.json 2 ответа). Везде в контексте Besichtigung-Radius/Anfahrt — исправлено на реальный 60km Einsatzgebiet
+- Удалён FAQ "Werden Wertgegenstände bei der Entrümpelung angerechnet?" из service-faq.json (создавал ложные ожидания клиентов → споры после Besichtigung)
+- Также убрана зеркальная фраза "auf Wunsch wertanrechnung von verwertbaren Gegenständen" из entruempelung.detailDescription
+- Заменена нейтральным текстом про umweltgerechte Entsorgung (для сохранения ≥100 слов SEO-теста)
+
+**Не тронуто (по ограничению):**
+- 25 km в комментарии lib/targetCities.ts (определяет SEO target radius, не Besichtigung)
+- Документация (T006_local_seo_basis.md, PX_REGISTRY) — историческая
+
+**Verify на live:**
+- /leistungen: "60 km" 3× | "25 km" 0× | "Wertgegenstände" 0× | "wertanrechnung" 0× ✅
+
+**Метрики:** 126/126 тестов pass, build OK, deploy live
+
+**Артефакты:** services.json, service-faq.json
+
+---
+
+### [S026] — 2026-05-01 — T006/PX-022: Local SEO Basis-Paket (Gärtner + Entrümpelungsfirma × 7 ближних городов)
+
+**Задача:** PX-022 — Local SEO 150€ для 2 услуг и 7 ближних городов
+**Роли:** #3 Marco Reiter (Frontend + content), #2 Lena Schwarz (FAQ UI), #14 Hans Landa (review)
+**Статус:** код завершён, deploy live; ждём 2-4 недели для GSC данных
+
+**Что сделано (Wave 1):**
+- `lib/targetCities.ts` — TARGET_CITIES (7 ближних: Osnabrück, Bramsche, Wallenhorst, Belm, Bissendorf, Georgsmarienhütte, Melle), runtime-validated против service-areas.json
+- `services.json`: gartenpflege.detailDescription расширен с 28 до ~120 слов с упоминаниями всех 7 городов в естественных предложениях ("Als zuverlässiger Gärtner in Osnabrück...")
+- `services.json`: entruempelung.detailDescription расширен аналогично ("Als Entrümpelungsfirma in Osnabrück...")
+- 8 новых тестов (target-cities + Local SEO content в data.test.ts)
+
+**Что сделано (Wave 2):**
+- `service-faq.json` — 6 Q&A × 2 услуги = 12 локальных вопросов; каждый service-FAQ упоминает все 7 целевых городов
+- Типы ServiceFAQEntry/Item в types.ts
+- Новый `ServiceFAQ.tsx` (Accordion-based UI + Schema.org FAQPage JSON-LD для Google Rich Results)
+- ServiceDetail.tsx рендерит 2 ServiceFAQ после grid карточек
+- 8 новых тестов (service-faq + render + Schema)
+
+**Что сделано (Wave 3):**
+- `/leistungen` meta: title "Leistungen — Gärtner & Entrümpelungsfirma in Osnabrück und Umgebung" + description с 7 городами и обеими услугами
+- layout.tsx: Schema.org Service.areaServed для Gartenpflege и Entrümpelung — массив 7 City entries (через TARGET_CITIES)
+- LocalBusiness.areaServed (97 cities из T005) НЕ тронут
+
+**Lighthouse /leistungen mobile (после T006):**
+- SEO: **100/100** ✅ (цель ≥95)
+- Accessibility: 94/100 (было 92)
+- Best Practices: 100
+- Performance: 72 (LCP 6.7s — много detail-* картинок, отдельная задача)
+
+**Verification на live:**
+- /leistungen 200 OK
+- Schema.org FAQPage + Service.areaServed в DOM
+- Все 7 целевых городов upmenions: Osnabrück 38, Bramsche 26, Wallenhorst 20, Belm 20, Bissendorf 20, Georgsmarienhütte 20, Melle 22
+
+**Метрики тестов:**
+- 110 → **126** pass (+16 новых)
+- Build OK, CI green, deploy live
+
+**Открытые follow-ups (через 2-4 недели):**
+- GSC → Performance → импрешны/клики по локальным запросам ("Gärtner Bramsche", и т.п.)
+- Если ranking растёт — апсейл premium 300-500€ (отдельные landing pages /gaertner-bramsche)
+- LCP /leistungen 6.7s (тяжёлые detail-* картинки) — отдельный perf-патч если нужно
+
+**НЕ входило в T006 (рамки 150€):**
+- Отдельные landing pages /gaertner-bramsche → premium 300-500€
+- 3 другие услуги (Hausmeister/Dach/Schrott) — Kevin не запросил
+- Дальние города (Bielefeld/Münster/Rheine) → premium
+
+**Артефакты:** lib/targetCities.ts, services.json, service-faq.json, types.ts, ServiceFAQ.tsx, ServiceDetail.tsx, leistungen/page.tsx, layout.tsx, target-cities.test.ts, service-faq.test.tsx, services.test.tsx (updated), data.test.ts (updated)
+
+---
+
+### [S025] — 2026-04-30 — T005 Wave 1+2: Leistungen restructure + /einsatzgebiet (PX-021)
+
+**Задача:** PX-021 — реструктуризация Leistungen + 95 городов SEO + GSC setup
+**Роли:** #3 Marco Reiter (Frontend), #6 Jonas Keller (DNS/SEO), #14 Hans Landa (ревью)
+**Статус:** Wave 1+2 завершены (код), Wave 3 (GSC/DNS) — инструкция CEO
+
+**Что сделано (Wave 1 — restructure):**
+- `WeitereLeistungenSection.tsx` — извлечена секция, добавлен `id="weitere"`
+- `/leistungen` теперь: ServiceDetail (5 главных) + WeitereLeistungenSection (9 доп.)
+- `/weitere-leistungen` → client redirect на `/leistungen#weitere` + visible message + `noindex`
+- Navigation: 5 → 4 ссылок (Weitere Leistungen убрано)
+- sitemap: убрано `/weitere-leistungen`, добавлено `/einsatzgebiet`
+
+**Что сделано (Wave 2 — Service Areas):**
+- `service-areas.json` — 7 регионов, 95 уникальных городов (Osnabrücker Land, Artland, Münsterland, Warendorf/Bielefeld, Mittelweser, Vechta/Cloppenburg, Emsland)
+- `Servicegebiet.tsx` — responsive grid (1/2/3 колонки), карточки регионов
+- `/einsatzgebiet` page с SEO meta
+- Footer ссылка "Einsatzgebiet"
+- structured data `areaServed: City[]` (массив 95 City schema вместо одного)
+- 4 новых теста на service-areas
+
+**Wave 3 — выполнено CEO 2026-04-30:**
+- GSC Domain property `rundumshaus-littawe.de` — auto-verified (без TXT, через GBP-связь)
+- Sitemap `https://rundumshaus-littawe.de/sitemap.xml` submitted (status "Couldn't fetch" временный)
+- Indexing requested для 4 URLs: /leistungen, /einsatzgebiet, /referenzen, /kontakt (главная уже indexed)
+- GSC показал: 95 кликов с 06.04, www-версия упала на 89% impressions (Recommendation для дальнейшего SEO)
+- `docs/SEO.md` — детальная инструкция + статус Wave 3
+
+**Метрики:** 110/110 тестов pass (104 → 110, +6), 14 routes (13+/einsatzgebiet)
+
+**Артефакты:** WeitereLeistungenSection.tsx, leistungen/page.tsx, weitere-leistungen/{page.tsx,RedirectClient.tsx}, service-areas.json, Servicegebiet.tsx, einsatzgebiet/page.tsx, types.ts, layout.tsx, Footer.tsx, sitemap.ts, docs/SEO.md
+
+---
+
+### [S024] — 2026-04-21 — PX-020: Bug fixes (mobile menu + Gartenpflege broken image)
+
+**Задача:** 2 бага от CEO после Wave 2 T004 деплоя
+**Роли:** #2 Lena Schwarz (UI), #3 Marco Reiter (data), #14 Hans Landa (ревью)
+**Статус:** завершено
+
+**BUG 1 — Mobile menu transparent/broken:**
+- Корень: `bg-charcoal/95 backdrop-blur-2xl z-40` — iOS Safari плохо рендерит semi-transparent bg + backdrop-blur. Z-index конфликт с WhatsApp (z-40).
+- Фикс: `bg-charcoal` (solid) + `z-[60]`
+
+**BUG 2 — Gartenpflege broken image:**
+- Корень: `gartenpflege-1200w.webp` возвращал 404 (оригинал 896w < 1200w, sharp скрипт пропустил upscale). High-DPI экраны запрашивали эту ширину.
+- Фикс: ServiceOverview cards используют srcSet `[400, 800]` (карточки ~480px max на любом экране — 1200w не нужен)
+- Curl verify: все остальные 1200w варианты существуют
+
+**Тесты (по Landa HIGH):**
+- `services.json` — все `image`/`detailImage` пути существуют физически (+1 test)
+- Все responsive webp варианты в srcset существуют (+1 test)
+- Результат: 104 → 106 pass
+
+**Артефакты:** Navbar.tsx, ServiceOverview.tsx, __tests__/data.test.ts
+
+---
+
+### [S023] — 2026-04-21 — T004/PX-019: Performance optimization (WebP + responsive)
+
+**Задача:** T004 — Critical image/perf optimization (LCP mobile 9.3s → <2.5s)
+**Роли:** #3 Marco Reiter (Frontend), #2 Lena Schwarz (UX/UI), #14 Hans Landa (ревью)
+**Статус:** частично завершено — mobile 82/100 (цель ≥90 не достигнута)
+
+**Что сделано (Wave 1-2):**
+- `scripts/optimize-images.mjs` — sharp-based конвертер (идемпотентный, не трогает оригиналы)
+- Все PNG/JPG → +WebP (quality 80), 86 MB images сохранены как fallback
+- Responsive варианты (400w/800w/1200w) для above-the-fold
+- detail-*.png resized до 1600w WebP (9.4MB → 1.1MB, -89%)
+- og-image.jpg (76 KB) для социальных сетей
+- 7 компонентов `<img>` → `<picture>` (AboutSection, ServiceOverview, ServiceDetail, BeforeAfter, ReferenzenContent) + AboutSection с fetchPriority=high
+- Lamp.tsx CSS background: hero-bg.png (1.27 MB) → hero-bg.webp (192 KB) — **главный фикс LCP**
+- layout.tsx: preload hero-bg.webp + og-image.jpg метатеги
+- `lib/getImageUrl.ts`: добавлены `toWebp()` и `toResponsiveWebpSrcSet()` helpers
+
+**Метрики:**
+- Mobile Performance: 69 → **82** (+13)
+- Mobile LCP: 9.3s → **4.3s** (-54%)
+- Desktop Performance: 94 → **99**
+- Desktop LCP: 1.6s → **0.9s**
+- Tests: 104/104 pass
+
+**Что НЕ сделано и почему:**
+- **Wave 3 (a11y prohibited aria-label):** SKIPPED — aria-label на `<p>` добавляется GSAP SplitText runtime для screen readers (real a11y); удаление ухудшит UX, Lighthouse warning = false positive
+- **Gold CTA contrast fix:** SKIPPED — CEO запретил глобальные изменения палитры
+- **Mobile 82 vs цель 90:** LCP всё ещё 4.3s из-за GSAP SplitText (H1 с opacity:0, анимация JS). Фикс потребует изменить Hero анимацию — отдельная задача если нужно
+
+**Артефакты:** `scripts/optimize-images.mjs`, `lib/getImageUrl.ts`, 6 компонентов, layout.tsx, 86 MB → +48 MB WebP файлов
+
+---
+
+### [S022] — 2026-04-21 — PX-018: Физический адрес + имя компании
+
+**Задача:** PX-018 — Обновление физического адреса (§5 TMG ladungsfähige Anschrift)
+**Роли:** #3 Marco Reiter (Frontend), #14 Hans Landa (ревью ТС)
+**Статус:** завершено
+
+**Что сделано:**
+- `site.json`: street "Osnabrück und Umgebung" (баг!) → "Bramscher Str. 161", zip 49074 → 49090
+- `layout.tsx` structured data: добавлен streetAddress, postalCode 49090
+- Company name: "Rundum's Haus Littawe" → "Rund ums Haus Littawe" (как пишет Kevin) в 6 файлах: seo.ts, layout.tsx (4 места), datenschutz, kontakt, weitere-leistungen, homepage.json, AboutSection alt
+- CLAUDE.md обновлён (имя + адрес)
+- 104/104 тестов pass, build OK, 13 routes
+
+**Ключевые решения:**
+- "Osnabrück und Umgebung" сохранён как зона обслуживания (Hero, areaServed, descriptions)
+- Физический адрес (Impressum, Datenschutz, Footer, Kontakt, structured data) = Bramscher Str. 161, 49090
+- Баг: `site.address.street` ранее содержал "Osnabrück und Umgebung" — исправлено
+
+**Артефакты:** site.json, layout.tsx, seo.ts, datenschutz/page.tsx, kontakt/page.tsx, weitere-leistungen/page.tsx, homepage.json, AboutSection.tsx, CLAUDE.md
+
+---
+
+### [S021] — 2026-04-16 — PX-017: DSGVO Cookie Consent Banner
+
+**Задача:** PX-017 — Cookie Banner по запросу Kevin
+**Роли:** #3 Marco Reiter (Frontend), #14 Hans Landa (ревью ТС)
+**Статус:** завершено
+
+**Что сделано:**
+- CookieBanner.tsx уже существовал (создан в T001 wave 9) — компонент полностью рабочий
+- Баг-фикс: WhatsAppButton проверял ключ `cookie-consent`, а CookieBanner использует `rh-cookie-consent` → выровнял
+- 3 теста: показ после задержки, скрытие при наличии consent, dismiss + localStorage persist
+- Build: 13 routes, 104 теста pass
+
+**Ключевые решения:**
+- Компонент уже был — нужен был только фикс несовпадения ключей + тесты
+- Баннер информационный (DSGVO Art. 13), не consent manager — нет optional cookies
+
+**Артефакты:** `WhatsAppButton.tsx` (фикс ключа), `cookie-banner.test.tsx` (3 теста)
+
+---
+
+### [S020] — 2026-04-16 — PX-015: Визуальная инструкция для Kevin
+
+**Задача:** PX-015 — HTML-гайд по редактированию сайта через Pages CMS
+**Роли:** #2 Lena Schwarz (UX/UI), #14 Hans Landa (ревью ТС1)
+**Статус:** завершено
+
+**Что сделано:**
+- `docs/ANLEITUNG_KEVIN.html` — self-contained HTML в бренд-стиле (Navy/Green/White/Gold, Plus Jakarta Sans)
+- 8 разделов: Anmelden, Firmendaten, Startseite, Hauptleistungen, Weitere Dienstleistungen, Referenzen, Bilder, Kontaktformular
+- 9 скриншотов CMS переименованы и встроены (`img/anleitung/01-09`)
+- `@media print` для корректного Save as PDF
+- `docs/ANLEITUNG_KEVIN.md` обновлён — ссылка на HTML-версию, упрощённые формулировки
+
+**Ключевые решения:**
+- HTML с relative paths к img/ (не base64 — файлы слишком большие)
+- Print CSS: page-break-inside: avoid на секциях и скриншотах (по замечанию Landa)
+- Контакт в подвале: WhatsApp + email клиента
+
+**Артефакты:** `docs/ANLEITUNG_KEVIN.html`, `docs/ANLEITUNG_KEVIN.md`, `img/anleitung/*.png` (9 файлов)
+
+---
+
+### [S019] — 2026-04-16 — Передача прав клиенту + оплата
+
+**Задача:** Передача доступов Kevin Littawe после оплаты
+**Роли:** #1 Viktor Hartmann (Product Architect)
+**Статус:** завершено
+
+**Что сделано:**
+- GitHub аккаунт для Kevin: `rundumshaus-littawe` (k_littawe@icloud.com)
+- Kevin добавлен как collaborator (write) на repo `aidancompton001/rundumshaus`
+- Kevin принял invite, залогинился в Pages CMS (app.pagescms.org)
+- Оплата 300€ получена (Echtzeitüberweisung на Revolut)
+- ANLEITUNG_KEVIN.md готова к отправке
+
+**Ключевые решения:**
+- Вариант A (collaborator) вместо transfer repo — минимальный риск, CMS работает, домен не трогаем
+- Transfer repo на аккаунт Kevin — отдельная задача позже (если потребуется)
+- Kevin может самостоятельно: менять тексты, добавлять услуги, загружать фото через CMS
+
+**Переписка с клиентом (2026-04-16):**
+- Kevin подтвердил работу сайта: "Klappt ich komme drauf"
+- Kevin оплатил 300€ Echtzeitüberweisung (PayPal не использует)
+- Kevin принял GitHub invite и зашёл в Pages CMS
+
+**Артефакты:** docs/CREDENTIALS.md (обновлён: GitHub Kevin)
+
+---
+
+### [S018] — 2026-04-16 — PX-011: Деплой на rundumshaus-littawe.de
+
+**Задача:** PX-011 — Деплой на боевой домен клиента
+**Роли:** #6 Jonas Keller (SRE/Platform), #14 Hans Landa (ревью ТС1)
+**Статус:** завершено
+
+**Что сделано:**
+- DNS IONOS: 4 WordPress-записи деактивированы, 4 A-записи GitHub Pages (185.199.108-111.153) + CNAME www → aidancompton001.github.io
+- GitHub Pages: custom domain = rundumshaus-littawe.de, HTTPS enforced, SSL cert approved
+- `site/public/CNAME` создан (копируется в out/ при build)
+- `site/next.config.ts`: basePath `/rundumshaus` удалён (custom domain = root)
+- DNS backup сохранён в `docs/DNS_BACKUP_2026-04-16.md`
+- CI/CD: push → GitHub Actions → deploy → сайт на домене (101 тестов pass)
+- Локальный DNS-кэш CEO показывал старый IP ~1 час после смены — resolved (провайдер/роутер кэш, TTL)
+
+**Ключевые решения:**
+- Порядок: DNS first → GitHub Pages → basePath removal (по замечанию Landa — zero downtime)
+- Mail-записи (MX, SPF, DKIM, DMARC) НЕ тронуты — почта клиента работает
+- www → 301 redirect на apex domain (GitHub Pages auto)
+- IONOS WordPress-пакет остаётся (downgrade на domain-only позже, ~12€/год вместо ~100€/год)
+
+**Верификация:**
+- https://rundumshaus-littawe.de → 200 OK
+- HTTPS cert: approved, enforced, expires 2026-07-15
+- www → 301 redirect ✅
+- Images load (/images/branding/logo-client.png) → 200 OK
+- DNS: Google 8.8.8.8 → все 4 GitHub IPs
+- Клиент подтвердил: сайт открывается
+
+**Артефакты:** `site/public/CNAME`, `site/next.config.ts`, `docs/DNS_BACKUP_2026-04-16.md`
+
+---
+
 ### [S017] — 2026-04-16 — T003: Pages CMS — визуальная админка
 
 **Задача:** [T003](docs/tasks/T003_pages_cms.md) — Pages CMS для Kevin
