@@ -1,0 +1,54 @@
+name: CI (feat-branches + PRs)
+
+# Запускается на push в feat/* ветки и на PR в master.
+# Прогоняет lint + tests + build БЕЗ деплоя — деплой только из master через deploy.yml.
+# Цель: ловить регрессии до merge, защищать master от поломок.
+
+on:
+  push:
+    branches:
+      - 'feat/**'
+      - 'fix/**'
+      - 'refactor/**'
+      - 'test/**'
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./site
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate JSON data
+        run: node -e "const fs=require('fs'),p=require('path'),d='src/data';fs.readdirSync(d).filter(f=>f.endsWith('.json')).forEach(f=>{try{JSON.parse(fs.readFileSync(p.join(d,f),'utf8'));console.log('✓',f)}catch(e){console.error('✗',f,e.message);process.exit(1)}})"
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: Build (verify SSG works, no deploy)
+        run: npm run build
