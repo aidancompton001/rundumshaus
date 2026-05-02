@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import serviceAreasData from "@/data/service-areas.json";
+import reviewsData from "@/data/reviews.json";
 import type { ServiceAreasData } from "@/data/types";
 import { TARGET_CITIES } from "@/lib/targetCities";
 import "./globals.css";
@@ -15,6 +16,21 @@ const allCities = serviceAreas.regions.flatMap((r) => r.cities);
 const targetCitiesSchema = TARGET_CITIES.map((name) => ({
   "@type": "City",
   name,
+}));
+
+// Reviews: visible on /ueber-uns. Schema below references this data.
+// PX-031 Phase A: AggregateRating + individual Review entries.
+const reviewSchemas = reviewsData.reviews.map((r) => ({
+  "@type": "Review",
+  author: { "@type": "Person", name: r.author },
+  datePublished: r.datePublished,
+  reviewRating: {
+    "@type": "Rating",
+    ratingValue: r.rating,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  reviewBody: r.text,
 }));
 
 const lora = Lora({
@@ -107,8 +123,16 @@ export default function RootLayout({
                     "@type": "City",
                     name: city,
                   })),
-                  // PX-031 follow-up: AggregateRating pending Kevin's 4 review texts.
-                  // priceSpecification details added per service below where confirmed.
+                  // AggregateRating: 2 verified Google reviews from Osnabrück
+                  // (PX-031 Phase A, CEO confirmed with Kevin 2026-05-02).
+                  aggregateRating: {
+                    "@type": "AggregateRating",
+                    ratingValue: reviewsData.aggregateRating.ratingValue,
+                    ratingCount: reviewsData.aggregateRating.ratingCount,
+                    bestRating: reviewsData.aggregateRating.bestRating,
+                    worstRating: reviewsData.aggregateRating.worstRating,
+                  },
+                  review: reviewSchemas,
                   hasOfferCatalog: {
                     "@type": "OfferCatalog",
                     name: "Leistungen",

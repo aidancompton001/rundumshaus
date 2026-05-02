@@ -1,0 +1,30 @@
+{
+  "source": "Google Business Profile",
+  "verified": "2026-05-02 (CEO confirmed mit Kevin via WhatsApp screenshots)",
+  "aggregateRating": {
+    "ratingValue": 5,
+    "ratingCount": 2,
+    "bestRating": 5,
+    "worstRating": 5
+  },
+  "reviews": [
+    {
+      "id": "google-radoslaw-labuda-2026-04",
+      "author": "Radoslaw Eugeniusz Labuda",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-04-25",
+      "text": "Alles perfekt! Schnelle Terminvergabe, pünktliche Abholung und fairer Preis. Der ganze Grünschnitt und Müll ist weg, genau so habe ich mir das vorgestellt.",
+      "service": "Schrottabholung"
+    },
+    {
+      "id": "google-daria-kaminska-2026-04",
+      "author": "Daria Kaminska",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-04-18",
+      "text": "Super !! 🙌",
+      "service": null
+    }
+  ]
+}

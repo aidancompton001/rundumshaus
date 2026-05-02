@@ -1,5 +1,6 @@
 import { generateSEO } from "@/lib/seo";
 import FamilyBusinessBlock from "@/components/sections/FamilyBusinessBlock";
+import ReviewsBlock from "@/components/sections/ReviewsBlock";
 
 export const metadata = generateSEO({
   title: "Über uns — Familienbetrieb Littawe in Osnabrück",
@@ -43,6 +44,7 @@ export default function UeberUnsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <FamilyBusinessBlock />
+      <ReviewsBlock />
     </>
   );
 }
