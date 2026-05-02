@@ -630,6 +630,12 @@ export function faqCountForTier(tier: Tier): number {
   return 5;
 }
 
+// ─────────────────────────────────────────────────────────────────────
+// TEST-ONLY EXPORTS BELOW — do NOT import from production code.
+// Re-exported via `programmatic.testing.ts` for clearer test-only signal.
+// PX-028 follow-up: ESLint rule `no-restricted-imports` to enforce.
+// ─────────────────────────────────────────────────────────────────────
+
 // Exported for testability — read-only structural access to service blocks (pool sizes, etc.).
 export function getServiceBlockSizes(serviceId: ServiceId): {
   introVariants: number;

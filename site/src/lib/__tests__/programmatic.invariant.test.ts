@@ -9,11 +9,13 @@ import {
   getNeighborCities,
   paragraphCountForTier,
   faqCountForTier,
-  getServiceBlockSizes,
-  getSelectedIndices,
   type ServiceId,
   type PageContent,
 } from "@/lib/programmatic";
+import {
+  getServiceBlockSizes,
+  getSelectedIndices,
+} from "@/lib/programmatic.testing";
 
 // ─────────────────────────────────────────────────────────────────────
 // Pre-pass: generate every page once, collect empirical bounds + cache.
