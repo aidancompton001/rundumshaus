@@ -19,12 +19,15 @@ export default function Hero() {
   const { reducedMotion } = useMotion();
   const isMobile = useIsMobile();
 
+  // On mobile: skip SplitText entirely for fastest LCP. Text appears instantly.
+  // On desktop: full animation as designed.
   useSplitText(headingRef, reducedMotion, {
     type: "chars",
     yPercent: 150,
     ease: "power3.out",
     stagger: 0.03,
     duration: 0.8,
+    disabled: isMobile,
   });
 
   useSplitText(subheadingRef, reducedMotion, {
@@ -33,14 +36,17 @@ export default function Hero() {
     ease: "power2.out",
     stagger: 0.04,
     duration: 0.6,
+    disabled: isMobile,
   });
 
   return (
     <Lamp>
       <Spotlight className="w-full max-w-4xl mx-auto text-center">
+        {/* LCP fix: no inline opacity:0 — text shown immediately for fast LCP.
+            useSplitText sets opacity:0 inside useEffect (1-frame after first paint),
+            then animates chars in. If JS fails or is slow, text remains visible. */}
         <h1
           ref={headingRef}
-          style={{ opacity: 0 }}
           className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream leading-tight mb-6"
         >
           {data.hero.heading}
@@ -48,7 +54,6 @@ export default function Hero() {
 
         <p
           ref={subheadingRef}
-          style={{ opacity: 0 }}
           className="font-body text-lg sm:text-xl text-cream/70 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           {data.hero.subheading}

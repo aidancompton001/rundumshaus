@@ -1,0 +1,1852 @@
+{
+  "generated": "2026-05-02",
+  "totalCities": 98,
+  "byTier": {
+    "1": 20,
+    "2": 41,
+    "3": 37
+  },
+  "orphanCount": 0,
+  "cities": [
+    {
+      "name": "Osnabrück",
+      "displayName": "Osnabrück",
+      "slug": "osnabrueck",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Stadt Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 0,
+      "populationClass": "city",
+      "uniqueHook": "im Herzen der Friedensstadt",
+      "neighbors": [
+        "georgsmarienhuette",
+        "belm",
+        "wallenhorst"
+      ]
+    },
+    {
+      "name": "Belm",
+      "displayName": "Belm",
+      "slug": "belm",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 9,
+      "populationClass": "medium",
+      "uniqueHook": "nordöstlich am Stadtrand von Osnabrück",
+      "neighbors": [
+        "georgsmarienhuette",
+        "wallenhorst",
+        "hasbergen",
+        "osnabrueck"
+      ]
+    },
+    {
+      "name": "Georgsmarienhütte",
+      "displayName": "Georgsmarienhütte",
+      "slug": "georgsmarienhuette",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 9,
+      "populationClass": "large",
+      "uniqueHook": "südlich von Osnabrück am Fuß des Teutoburger Walds",
+      "neighbors": [
+        "belm",
+        "wallenhorst",
+        "hasbergen",
+        "osnabrueck"
+      ]
+    },
+    {
+      "name": "Hasbergen",
+      "displayName": "Hasbergen",
+      "slug": "hasbergen",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 10,
+      "populationClass": "medium",
+      "uniqueHook": "westlich an Osnabrück angrenzend, am Hüggel",
+      "neighbors": [
+        "wallenhorst",
+        "georgsmarienhuette",
+        "belm",
+        "bissendorf",
+        "hagen-am-teutoburger-wald"
+      ]
+    },
+    {
+      "name": "Wallenhorst",
+      "displayName": "Wallenhorst",
+      "slug": "wallenhorst",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 10,
+      "populationClass": "medium",
+      "uniqueHook": "nördlich an Osnabrück angrenzend",
+      "neighbors": [
+        "hasbergen",
+        "georgsmarienhuette",
+        "belm",
+        "osnabrueck",
+        "bissendorf",
+        "hagen-am-teutoburger-wald"
+      ]
+    },
+    {
+      "name": "Hagen am Teutoburger Wald",
+      "displayName": "Hagen am Teutoburger Wald",
+      "slug": "hagen-am-teutoburger-wald",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 12,
+      "populationClass": "medium",
+      "uniqueHook": "südwestlich von Osnabrück im Teutoburger Wald",
+      "neighbors": [
+        "bissendorf",
+        "wallenhorst",
+        "hasbergen"
+      ]
+    },
+    {
+      "name": "Lotte",
+      "displayName": "Lotte",
+      "slug": "lotte",
+      "region": "Münsterland",
+      "tier": 1,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 12,
+      "populationClass": "medium",
+      "uniqueHook": "westlich an Osnabrück angrenzend, im Tecklenburger Land",
+      "neighbors": [
+        "westerkappeln",
+        "lengerich",
+        "tecklenburg"
+      ]
+    },
+    {
+      "name": "Bissendorf",
+      "displayName": "Bissendorf",
+      "slug": "bissendorf",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 13,
+      "populationClass": "medium",
+      "uniqueHook": "östlich von Osnabrück am Wiehengebirge",
+      "neighbors": [
+        "hagen-am-teutoburger-wald",
+        "wallenhorst",
+        "hasbergen",
+        "bramsche",
+        "bad-iburg"
+      ]
+    },
+    {
+      "name": "Bad Iburg",
+      "displayName": "Bad Iburg",
+      "slug": "bad-iburg",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 17,
+      "populationClass": "medium",
+      "uniqueHook": "südlich von Osnabrück, Kurort am Teutoburger Wald",
+      "neighbors": [
+        "bramsche",
+        "bissendorf",
+        "bad-essen"
+      ]
+    },
+    {
+      "name": "Bramsche",
+      "displayName": "Bramsche",
+      "slug": "bramsche",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 17,
+      "populationClass": "large",
+      "uniqueHook": "nördlich von Osnabrück an der Hase",
+      "neighbors": [
+        "bad-iburg",
+        "bissendorf",
+        "bad-essen"
+      ]
+    },
+    {
+      "name": "Westerkappeln",
+      "displayName": "Westerkappeln",
+      "slug": "westerkappeln",
+      "region": "Münsterland",
+      "tier": 1,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 17,
+      "populationClass": "medium",
+      "uniqueHook": "westlich von Osnabrück im Tecklenburger Land",
+      "neighbors": [
+        "lotte",
+        "lengerich",
+        "tecklenburg"
+      ]
+    },
+    {
+      "name": "Bad Essen",
+      "displayName": "Bad Essen",
+      "slug": "bad-essen",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 22,
+      "populationClass": "medium",
+      "uniqueHook": "im Wittlager Land am Mittellandkanal",
+      "neighbors": [
+        "bohmte",
+        "bad-laer",
+        "glandorf",
+        "melle",
+        "bramsche",
+        "ostercappeln"
+      ]
+    },
+    {
+      "name": "Bad Laer",
+      "displayName": "Bad Laer",
+      "slug": "bad-laer",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 22,
+      "populationClass": "small",
+      "uniqueHook": "im südlichen Osnabrücker Land, Solebad",
+      "neighbors": [
+        "bad-essen",
+        "bohmte",
+        "glandorf"
+      ]
+    },
+    {
+      "name": "Bohmte",
+      "displayName": "Bohmte",
+      "slug": "bohmte",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 22,
+      "populationClass": "medium",
+      "uniqueHook": "im nördlichen Osnabrücker Land an der Hunte",
+      "neighbors": [
+        "bad-essen",
+        "bad-laer",
+        "glandorf"
+      ]
+    },
+    {
+      "name": "Glandorf",
+      "displayName": "Glandorf",
+      "slug": "glandorf",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 22,
+      "populationClass": "small",
+      "uniqueHook": "im südwestlichen Osnabrücker Land",
+      "neighbors": [
+        "bad-essen",
+        "bohmte",
+        "bad-laer"
+      ]
+    },
+    {
+      "name": "Bad Rothenfelde",
+      "displayName": "Bad Rothenfelde",
+      "slug": "bad-rothenfelde",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 25,
+      "populationClass": "small",
+      "uniqueHook": "südöstlich von Osnabrück, Solekurort",
+      "neighbors": [
+        "melle",
+        "ostercappeln",
+        "bad-essen",
+        "dissen-am-teutoburger-wald"
+      ]
+    },
+    {
+      "name": "Lengerich",
+      "displayName": "Lengerich",
+      "slug": "lengerich",
+      "region": "Münsterland",
+      "tier": 1,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 25,
+      "populationClass": "medium",
+      "uniqueHook": "im Tecklenburger Land am Teutoburger Wald",
+      "neighbors": [
+        "tecklenburg",
+        "recke",
+        "westerkappeln",
+        "lotte"
+      ]
+    },
+    {
+      "name": "Melle",
+      "displayName": "Melle",
+      "slug": "melle",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 25,
+      "populationClass": "large",
+      "uniqueHook": "östlich von Osnabrück im Grönegau",
+      "neighbors": [
+        "ostercappeln",
+        "bad-rothenfelde",
+        "bad-essen",
+        "dissen-am-teutoburger-wald"
+      ]
+    },
+    {
+      "name": "Ostercappeln",
+      "displayName": "Ostercappeln",
+      "slug": "ostercappeln",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 25,
+      "populationClass": "small",
+      "uniqueHook": "im Wittlager Land am Wiehengebirge",
+      "neighbors": [
+        "melle",
+        "bad-rothenfelde",
+        "bad-essen",
+        "dissen-am-teutoburger-wald"
+      ]
+    },
+    {
+      "name": "Rieste",
+      "displayName": "Rieste",
+      "slug": "rieste",
+      "region": "Artland & Wittlager Land",
+      "tier": 1,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 25,
+      "populationClass": "small",
+      "uniqueHook": "am Alfsee im nördlichen Osnabrücker Land",
+      "neighbors": [
+        "alfhausen",
+        "bersenbrueck",
+        "ankum"
+      ]
+    },
+    {
+      "name": "Alfhausen",
+      "displayName": "Alfhausen",
+      "slug": "alfhausen",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 27,
+      "populationClass": "small",
+      "uniqueHook": "am Alfsee nördlich von Osnabrück",
+      "neighbors": [
+        "bersenbrueck",
+        "ankum",
+        "gehrde",
+        "rieste"
+      ]
+    },
+    {
+      "name": "Dissen am Teutoburger Wald",
+      "displayName": "Dissen am Teutoburger Wald",
+      "slug": "dissen-am-teutoburger-wald",
+      "region": "Osnabrücker Land & Umgebung",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 28,
+      "populationClass": "medium",
+      "uniqueHook": "am südlichen Rand des Teutoburger Walds",
+      "neighbors": [
+        "melle",
+        "ostercappeln",
+        "bad-rothenfelde"
+      ]
+    },
+    {
+      "name": "Recke",
+      "displayName": "Recke",
+      "slug": "recke",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 28,
+      "populationClass": "medium",
+      "uniqueHook": "im Tecklenburger Land",
+      "neighbors": [
+        "tecklenburg",
+        "ibbenbueren",
+        "mettingen",
+        "lengerich"
+      ]
+    },
+    {
+      "name": "Tecklenburg",
+      "displayName": "Tecklenburg",
+      "slug": "tecklenburg",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 28,
+      "populationClass": "small",
+      "uniqueHook": "Burgstadt im Teutoburger Wald",
+      "neighbors": [
+        "recke",
+        "ibbenbueren",
+        "mettingen",
+        "lengerich",
+        "westerkappeln",
+        "lotte"
+      ]
+    },
+    {
+      "name": "Ankum",
+      "displayName": "Ankum",
+      "slug": "ankum",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 30,
+      "populationClass": "small",
+      "uniqueHook": "im Artland am Fuße der Ankumer Höhen",
+      "neighbors": [
+        "bersenbrueck",
+        "gehrde",
+        "alfhausen",
+        "rieste"
+      ]
+    },
+    {
+      "name": "Bersenbrück",
+      "displayName": "Bersenbrück",
+      "slug": "bersenbrueck",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 30,
+      "populationClass": "small",
+      "uniqueHook": "im Artland nördlich von Osnabrück",
+      "neighbors": [
+        "ankum",
+        "gehrde",
+        "alfhausen",
+        "rieste"
+      ]
+    },
+    {
+      "name": "Gehrde",
+      "displayName": "Gehrde",
+      "slug": "gehrde",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 30,
+      "populationClass": "small",
+      "uniqueHook": "im Artland",
+      "neighbors": [
+        "bersenbrueck",
+        "ankum",
+        "alfhausen"
+      ]
+    },
+    {
+      "name": "Ibbenbüren",
+      "displayName": "Ibbenbüren",
+      "slug": "ibbenbueren",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 30,
+      "populationClass": "large",
+      "uniqueHook": "im Tecklenburger Land am Teutoburger Wald",
+      "neighbors": [
+        "mettingen",
+        "rheine",
+        "ladbergen",
+        "tecklenburg",
+        "recke"
+      ]
+    },
+    {
+      "name": "Ladbergen",
+      "displayName": "Ladbergen",
+      "slug": "ladbergen",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 30,
+      "populationClass": "small",
+      "uniqueHook": "südlich des Teutoburger Walds im Münsterland",
+      "neighbors": [
+        "ibbenbueren",
+        "mettingen",
+        "rheine"
+      ]
+    },
+    {
+      "name": "Mettingen",
+      "displayName": "Mettingen",
+      "slug": "mettingen",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "49",
+      "distanceKm": 30,
+      "populationClass": "medium",
+      "uniqueHook": "im Tecklenburger Land",
+      "neighbors": [
+        "ibbenbueren",
+        "rheine",
+        "ladbergen",
+        "tecklenburg",
+        "recke"
+      ]
+    },
+    {
+      "name": "Rheine",
+      "displayName": "Rheine",
+      "slug": "rheine",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 30,
+      "populationClass": "large",
+      "uniqueHook": "an der Ems im nördlichen Münsterland",
+      "neighbors": [
+        "ibbenbueren",
+        "mettingen",
+        "ladbergen"
+      ]
+    },
+    {
+      "name": "Emsdetten",
+      "displayName": "Emsdetten",
+      "slug": "emsdetten",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 33,
+      "populationClass": "large",
+      "uniqueHook": "an der Ems im westlichen Münsterland",
+      "neighbors": [
+        "saerbeck",
+        "hoerstel",
+        "neuenkirchen-bei-rheine"
+      ]
+    },
+    {
+      "name": "Kettenkamp",
+      "displayName": "Kettenkamp",
+      "slug": "kettenkamp",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 33,
+      "populationClass": "small",
+      "uniqueHook": "im Artland",
+      "neighbors": [
+        "voltlage",
+        "nortrup",
+        "eggermuehlen"
+      ]
+    },
+    {
+      "name": "Saerbeck",
+      "displayName": "Saerbeck",
+      "slug": "saerbeck",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 33,
+      "populationClass": "small",
+      "uniqueHook": "im Münsterland zwischen Münster und Osnabrück",
+      "neighbors": [
+        "emsdetten",
+        "hoerstel",
+        "neuenkirchen-bei-rheine"
+      ]
+    },
+    {
+      "name": "Badbergen",
+      "displayName": "Badbergen",
+      "slug": "badbergen",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "small",
+      "uniqueHook": "im Artland an der Hase",
+      "neighbors": [
+        "voltlage",
+        "nortrup",
+        "eggermuehlen"
+      ]
+    },
+    {
+      "name": "Damme",
+      "displayName": "Damme",
+      "slug": "damme",
+      "region": "Vechta & Cloppenburg",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "medium",
+      "uniqueHook": "am Dümmer im Oldenburger Münsterland",
+      "neighbors": [
+        "holdorf",
+        "steinfeld",
+        "neuenkirchen-voerden",
+        "dinklage",
+        "essen-oldenburg"
+      ]
+    },
+    {
+      "name": "Eggermühlen",
+      "displayName": "Eggermühlen",
+      "slug": "eggermuehlen",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "small",
+      "uniqueHook": "im Artland",
+      "neighbors": [
+        "voltlage",
+        "nortrup",
+        "badbergen",
+        "kettenkamp"
+      ]
+    },
+    {
+      "name": "Holdorf",
+      "displayName": "Holdorf",
+      "slug": "holdorf",
+      "region": "Vechta & Cloppenburg",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "small",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "damme",
+        "steinfeld",
+        "neuenkirchen-voerden"
+      ]
+    },
+    {
+      "name": "Hörstel",
+      "displayName": "Hörstel",
+      "slug": "hoerstel",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 35,
+      "populationClass": "medium",
+      "uniqueHook": "an der Mittellandkanal-Kreuzung im Tecklenburger Land",
+      "neighbors": [
+        "neuenkirchen-bei-rheine",
+        "emsdetten",
+        "saerbeck",
+        "greven",
+        "steinfurt",
+        "hopsten"
+      ]
+    },
+    {
+      "name": "Neuenkirchen (bei Rheine)",
+      "displayName": "Neuenkirchen bei Rheine",
+      "slug": "neuenkirchen-bei-rheine",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 35,
+      "populationClass": "medium",
+      "uniqueHook": "bei Rheine im nördlichen Münsterland",
+      "neighbors": [
+        "hoerstel",
+        "emsdetten",
+        "saerbeck"
+      ]
+    },
+    {
+      "name": "Neuenkirchen-Vörden",
+      "displayName": "Neuenkirchen-Vörden",
+      "slug": "neuenkirchen-voerden",
+      "region": "Vechta & Cloppenburg",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "medium",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "damme",
+        "holdorf",
+        "steinfeld"
+      ]
+    },
+    {
+      "name": "Nortrup",
+      "displayName": "Nortrup",
+      "slug": "nortrup",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "small",
+      "uniqueHook": "im Artland nördlich von Osnabrück",
+      "neighbors": [
+        "voltlage",
+        "eggermuehlen",
+        "badbergen",
+        "kettenkamp"
+      ]
+    },
+    {
+      "name": "Steinfeld",
+      "displayName": "Steinfeld",
+      "slug": "steinfeld",
+      "region": "Vechta & Cloppenburg",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "medium",
+      "uniqueHook": "am Dammer Berge im Oldenburger Münsterland",
+      "neighbors": [
+        "damme",
+        "holdorf",
+        "neuenkirchen-voerden"
+      ]
+    },
+    {
+      "name": "Voltlage",
+      "displayName": "Voltlage",
+      "slug": "voltlage",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 35,
+      "populationClass": "small",
+      "uniqueHook": "im nordwestlichen Osnabrücker Land",
+      "neighbors": [
+        "nortrup",
+        "eggermuehlen",
+        "badbergen",
+        "kettenkamp"
+      ]
+    },
+    {
+      "name": "Fürstenau",
+      "displayName": "Fürstenau",
+      "slug": "fuerstenau",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 38,
+      "populationClass": "small",
+      "uniqueHook": "im nördlichen Osnabrücker Land",
+      "neighbors": [
+        "quakenbrueck",
+        "neuenkirchen",
+        "menslage"
+      ]
+    },
+    {
+      "name": "Greven",
+      "displayName": "Greven",
+      "slug": "greven",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 38,
+      "populationClass": "medium",
+      "uniqueHook": "an der Ems im westlichen Münsterland",
+      "neighbors": [
+        "hopsten",
+        "steinfurt",
+        "hoerstel",
+        "nordwalde",
+        "wettringen"
+      ]
+    },
+    {
+      "name": "Hopsten",
+      "displayName": "Hopsten",
+      "slug": "hopsten",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 38,
+      "populationClass": "small",
+      "uniqueHook": "im nördlichen Münsterland",
+      "neighbors": [
+        "greven",
+        "steinfurt",
+        "hoerstel"
+      ]
+    },
+    {
+      "name": "Quakenbrück",
+      "displayName": "Quakenbrück",
+      "slug": "quakenbrueck",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 38,
+      "populationClass": "medium",
+      "uniqueHook": "im Artland an der Hase, historische Fachwerkstadt",
+      "neighbors": [
+        "fuerstenau",
+        "neuenkirchen",
+        "menslage"
+      ]
+    },
+    {
+      "name": "Versmold",
+      "displayName": "Versmold",
+      "slug": "versmold",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Gütersloh",
+      "plzPrefix": "33",
+      "distanceKm": 38,
+      "populationClass": "medium",
+      "uniqueHook": "im südwestlichen Ostwestfalen am Teutoburger Wald",
+      "neighbors": [
+        "borgholzhausen",
+        "preussisch-oldendorf",
+        "halle-westfalen"
+      ]
+    },
+    {
+      "name": "Borgholzhausen",
+      "displayName": "Borgholzhausen",
+      "slug": "borgholzhausen",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Gütersloh",
+      "plzPrefix": "33",
+      "distanceKm": 40,
+      "populationClass": "small",
+      "uniqueHook": "am südlichen Teutoburger Wald",
+      "neighbors": [
+        "versmold",
+        "preussisch-oldendorf",
+        "halle-westfalen"
+      ]
+    },
+    {
+      "name": "Menslage",
+      "displayName": "Menslage",
+      "slug": "menslage",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 40,
+      "populationClass": "small",
+      "uniqueHook": "im Artland nahe der Hase",
+      "neighbors": [
+        "neuenkirchen",
+        "quakenbrueck",
+        "fuerstenau",
+        "bippen",
+        "berge"
+      ]
+    },
+    {
+      "name": "Neuenkirchen",
+      "displayName": "Neuenkirchen",
+      "slug": "neuenkirchen",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 40,
+      "populationClass": "small",
+      "uniqueHook": "im Artland nördlich von Osnabrück",
+      "neighbors": [
+        "menslage",
+        "quakenbrueck",
+        "fuerstenau",
+        "bippen",
+        "berge"
+      ]
+    },
+    {
+      "name": "Steinfurt",
+      "displayName": "Steinfurt",
+      "slug": "steinfurt",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 40,
+      "populationClass": "medium",
+      "uniqueHook": "Kreisstadt im westlichen Münsterland",
+      "neighbors": [
+        "greven",
+        "hopsten",
+        "hoerstel",
+        "nordwalde",
+        "wettringen"
+      ]
+    },
+    {
+      "name": "Berge",
+      "displayName": "Berge",
+      "slug": "berge",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 42,
+      "populationClass": "small",
+      "uniqueHook": "im nördlichen Osnabrücker Land",
+      "neighbors": [
+        "bippen",
+        "neuenkirchen",
+        "menslage"
+      ]
+    },
+    {
+      "name": "Bippen",
+      "displayName": "Bippen",
+      "slug": "bippen",
+      "region": "Artland & Wittlager Land",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Osnabrück",
+      "plzPrefix": "49",
+      "distanceKm": 42,
+      "populationClass": "small",
+      "uniqueHook": "im nördlichen Osnabrücker Land",
+      "neighbors": [
+        "berge",
+        "neuenkirchen",
+        "menslage"
+      ]
+    },
+    {
+      "name": "Dinklage",
+      "displayName": "Dinklage",
+      "slug": "dinklage",
+      "region": "Vechta & Cloppenburg",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 45,
+      "populationClass": "medium",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "essen-oldenburg",
+        "lohne",
+        "damme",
+        "loeningen"
+      ]
+    },
+    {
+      "name": "Essen (Oldenburg)",
+      "displayName": "Essen (Oldenburg)",
+      "slug": "essen-oldenburg",
+      "region": "Vechta & Cloppenburg",
+      "tier": 2,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Cloppenburg",
+      "plzPrefix": "49",
+      "distanceKm": 45,
+      "populationClass": "medium",
+      "uniqueHook": "im Oldenburger Münsterland (nicht zu verwechseln mit Essen NRW)",
+      "neighbors": [
+        "dinklage",
+        "lohne",
+        "damme"
+      ]
+    },
+    {
+      "name": "Nordwalde",
+      "displayName": "Nordwalde",
+      "slug": "nordwalde",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 45,
+      "populationClass": "small",
+      "uniqueHook": "im Münsterland nördlich von Münster",
+      "neighbors": [
+        "wettringen",
+        "steinfurt",
+        "greven"
+      ]
+    },
+    {
+      "name": "Preußisch Oldendorf",
+      "displayName": "Preußisch Oldendorf",
+      "slug": "preussisch-oldendorf",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Minden-Lübbecke",
+      "plzPrefix": "32",
+      "distanceKm": 45,
+      "populationClass": "small",
+      "uniqueHook": "im Mühlenkreis am Wiehengebirge",
+      "neighbors": [
+        "borgholzhausen",
+        "versmold",
+        "halle-westfalen"
+      ]
+    },
+    {
+      "name": "Stemwede",
+      "displayName": "Stemwede",
+      "slug": "stemwede",
+      "region": "Mittelweser & Nordniedersachsen",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Minden-Lübbecke",
+      "plzPrefix": "32",
+      "distanceKm": 45,
+      "populationClass": "medium",
+      "uniqueHook": "im nördlichen Ostwestfalen am Stemweder Berg",
+      "neighbors": [
+        "rahden",
+        "espelkamp",
+        "diepholz"
+      ]
+    },
+    {
+      "name": "Wettringen",
+      "displayName": "Wettringen",
+      "slug": "wettringen",
+      "region": "Münsterland",
+      "tier": 2,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 45,
+      "populationClass": "small",
+      "uniqueHook": "im westlichen Münsterland",
+      "neighbors": [
+        "nordwalde",
+        "steinfurt",
+        "greven"
+      ]
+    },
+    {
+      "name": "Altenberge",
+      "displayName": "Altenberge",
+      "slug": "altenberge",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 47,
+      "populationClass": "medium",
+      "uniqueHook": "im Münsterland nördlich von Münster",
+      "neighbors": [
+        "laer",
+        "muenster",
+        "ochtrup"
+      ]
+    },
+    {
+      "name": "Laer",
+      "displayName": "Laer",
+      "slug": "laer",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 47,
+      "populationClass": "small",
+      "uniqueHook": "im westlichen Münsterland",
+      "neighbors": [
+        "altenberge",
+        "muenster",
+        "ochtrup"
+      ]
+    },
+    {
+      "name": "Freren",
+      "displayName": "Freren",
+      "slug": "freren",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 50,
+      "populationClass": "small",
+      "uniqueHook": "im südlichen Emsland",
+      "neighbors": [
+        "spelle",
+        "salzbergen",
+        "herzlake"
+      ]
+    },
+    {
+      "name": "Halle (Westfalen)",
+      "displayName": "Halle (Westfalen)",
+      "slug": "halle-westfalen",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Gütersloh",
+      "plzPrefix": "33",
+      "distanceKm": 50,
+      "populationClass": "medium",
+      "uniqueHook": "in Ostwestfalen am südlichen Teutoburger Wald",
+      "neighbors": [
+        "werther",
+        "sassenberg",
+        "bielefeld",
+        "versmold",
+        "borgholzhausen",
+        "preussisch-oldendorf"
+      ]
+    },
+    {
+      "name": "Horstmar",
+      "displayName": "Horstmar",
+      "slug": "horstmar",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 50,
+      "populationClass": "small",
+      "uniqueHook": "im westlichen Münsterland",
+      "neighbors": [
+        "muenster",
+        "ochtrup",
+        "neuenkirchen-kreis-steinfurt",
+        "telgte"
+      ]
+    },
+    {
+      "name": "Lohne",
+      "displayName": "Lohne",
+      "slug": "lohne",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 50,
+      "populationClass": "large",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "loeningen",
+        "vechta",
+        "dinklage",
+        "essen-oldenburg"
+      ]
+    },
+    {
+      "name": "Löningen",
+      "displayName": "Löningen",
+      "slug": "loeningen",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Cloppenburg",
+      "plzPrefix": "49",
+      "distanceKm": 50,
+      "populationClass": "medium",
+      "uniqueHook": "im Oldenburger Münsterland an der Hase",
+      "neighbors": [
+        "lohne",
+        "vechta",
+        "dinklage"
+      ]
+    },
+    {
+      "name": "Münster",
+      "displayName": "Münster",
+      "slug": "muenster",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Stadt Münster",
+      "plzPrefix": "48",
+      "distanceKm": 50,
+      "populationClass": "city",
+      "uniqueHook": "im Herzen des Münsterlandes, Universitätsstadt",
+      "neighbors": [
+        "ochtrup",
+        "horstmar",
+        "neuenkirchen-kreis-steinfurt",
+        "laer",
+        "altenberge",
+        "telgte"
+      ]
+    },
+    {
+      "name": "Neuenkirchen (Kreis Steinfurt)",
+      "displayName": "Neuenkirchen (Kreis Steinfurt)",
+      "slug": "neuenkirchen-kreis-steinfurt",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 50,
+      "populationClass": "medium",
+      "uniqueHook": "im Kreis Steinfurt im westlichen Münsterland",
+      "neighbors": [
+        "muenster",
+        "ochtrup",
+        "horstmar"
+      ]
+    },
+    {
+      "name": "Ochtrup",
+      "displayName": "Ochtrup",
+      "slug": "ochtrup",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Steinfurt",
+      "plzPrefix": "48",
+      "distanceKm": 50,
+      "populationClass": "medium",
+      "uniqueHook": "im westlichen Münsterland nahe der Niederlande",
+      "neighbors": [
+        "muenster",
+        "horstmar",
+        "neuenkirchen-kreis-steinfurt",
+        "laer",
+        "altenberge",
+        "telgte"
+      ]
+    },
+    {
+      "name": "Rahden",
+      "displayName": "Rahden",
+      "slug": "rahden",
+      "region": "Mittelweser & Nordniedersachsen",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Minden-Lübbecke",
+      "plzPrefix": "32",
+      "distanceKm": 50,
+      "populationClass": "medium",
+      "uniqueHook": "im Mühlenkreis im nördlichen Ostwestfalen",
+      "neighbors": [
+        "espelkamp",
+        "diepholz",
+        "stemwede"
+      ]
+    },
+    {
+      "name": "Salzbergen",
+      "displayName": "Salzbergen",
+      "slug": "salzbergen",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "48",
+      "distanceKm": 50,
+      "populationClass": "small",
+      "uniqueHook": "an der Ems im südlichen Emsland",
+      "neighbors": [
+        "spelle",
+        "freren",
+        "herzlake"
+      ]
+    },
+    {
+      "name": "Spelle",
+      "displayName": "Spelle",
+      "slug": "spelle",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "48",
+      "distanceKm": 50,
+      "populationClass": "small",
+      "uniqueHook": "im südlichen Emsland",
+      "neighbors": [
+        "freren",
+        "salzbergen",
+        "herzlake"
+      ]
+    },
+    {
+      "name": "Werther",
+      "displayName": "Werther",
+      "slug": "werther",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Gütersloh",
+      "plzPrefix": "33",
+      "distanceKm": 50,
+      "populationClass": "medium",
+      "uniqueHook": "im Ravensberger Land",
+      "neighbors": [
+        "halle-westfalen",
+        "sassenberg",
+        "bielefeld"
+      ]
+    },
+    {
+      "name": "Bielefeld",
+      "displayName": "Bielefeld",
+      "slug": "bielefeld",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Stadt Bielefeld",
+      "plzPrefix": "33",
+      "distanceKm": 55,
+      "populationClass": "city",
+      "uniqueHook": "Großstadt in Ostwestfalen am Teutoburger Wald",
+      "neighbors": [
+        "sassenberg",
+        "warendorf",
+        "halle-westfalen",
+        "werther",
+        "bad-oeynhausen"
+      ]
+    },
+    {
+      "name": "Diepholz",
+      "displayName": "Diepholz",
+      "slug": "diepholz",
+      "region": "Mittelweser & Nordniedersachsen",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Diepholz",
+      "plzPrefix": "49",
+      "distanceKm": 55,
+      "populationClass": "medium",
+      "uniqueHook": "Kreisstadt im südlichen Niedersachsen",
+      "neighbors": [
+        "espelkamp",
+        "rahden",
+        "stemwede"
+      ]
+    },
+    {
+      "name": "Espelkamp",
+      "displayName": "Espelkamp",
+      "slug": "espelkamp",
+      "region": "Mittelweser & Nordniedersachsen",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Minden-Lübbecke",
+      "plzPrefix": "32",
+      "distanceKm": 55,
+      "populationClass": "medium",
+      "uniqueHook": "im Mühlenkreis",
+      "neighbors": [
+        "diepholz",
+        "rahden",
+        "stemwede"
+      ]
+    },
+    {
+      "name": "Herzlake",
+      "displayName": "Herzlake",
+      "slug": "herzlake",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 55,
+      "populationClass": "small",
+      "uniqueHook": "im Emsland",
+      "neighbors": [
+        "haseluenne",
+        "lingen-ems",
+        "spelle",
+        "freren",
+        "salzbergen"
+      ]
+    },
+    {
+      "name": "Sassenberg",
+      "displayName": "Sassenberg",
+      "slug": "sassenberg",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Warendorf",
+      "plzPrefix": "48",
+      "distanceKm": 55,
+      "populationClass": "medium",
+      "uniqueHook": "im östlichen Münsterland",
+      "neighbors": [
+        "bielefeld",
+        "warendorf",
+        "halle-westfalen",
+        "werther",
+        "bad-oeynhausen"
+      ]
+    },
+    {
+      "name": "Telgte",
+      "displayName": "Telgte",
+      "slug": "telgte",
+      "region": "Münsterland",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Warendorf",
+      "plzPrefix": "48",
+      "distanceKm": 55,
+      "populationClass": "medium",
+      "uniqueHook": "an der Ems östlich von Münster, Wallfahrtsort",
+      "neighbors": [
+        "muenster",
+        "ochtrup",
+        "horstmar"
+      ]
+    },
+    {
+      "name": "Vechta",
+      "displayName": "Vechta",
+      "slug": "vechta",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Vechta",
+      "plzPrefix": "49",
+      "distanceKm": 55,
+      "populationClass": "large",
+      "uniqueHook": "im Oldenburger Münsterland, Universitätsstadt",
+      "neighbors": [
+        "lohne",
+        "loeningen",
+        "cloppenburg"
+      ]
+    },
+    {
+      "name": "Bad Oeynhausen",
+      "displayName": "Bad Oeynhausen",
+      "slug": "bad-oeynhausen",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Minden-Lübbecke",
+      "plzPrefix": "32",
+      "distanceKm": 60,
+      "populationClass": "large",
+      "uniqueHook": "Kurstadt im Mühlenkreis",
+      "neighbors": [
+        "warendorf",
+        "sassenberg",
+        "bielefeld",
+        "loehne",
+        "herford"
+      ]
+    },
+    {
+      "name": "Haselünne",
+      "displayName": "Haselünne",
+      "slug": "haseluenne",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 60,
+      "populationClass": "medium",
+      "uniqueHook": "an der Hase im Emsland",
+      "neighbors": [
+        "lingen-ems",
+        "schuettorf",
+        "geeste",
+        "meppen",
+        "herzlake",
+        "wietmarschen"
+      ]
+    },
+    {
+      "name": "Lingen (Ems)",
+      "displayName": "Lingen (Ems)",
+      "slug": "lingen-ems",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 60,
+      "populationClass": "large",
+      "uniqueHook": "an der Ems im Emsland",
+      "neighbors": [
+        "haseluenne",
+        "schuettorf",
+        "geeste",
+        "herzlake"
+      ]
+    },
+    {
+      "name": "Schüttorf",
+      "displayName": "Schüttorf",
+      "slug": "schuettorf",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Grafschaft Bentheim",
+      "plzPrefix": "48",
+      "distanceKm": 60,
+      "populationClass": "medium",
+      "uniqueHook": "in der Grafschaft Bentheim",
+      "neighbors": [
+        "haseluenne",
+        "lingen-ems",
+        "geeste"
+      ]
+    },
+    {
+      "name": "Warendorf",
+      "displayName": "Warendorf",
+      "slug": "warendorf",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Warendorf",
+      "plzPrefix": "48",
+      "distanceKm": 60,
+      "populationClass": "large",
+      "uniqueHook": "im östlichen Münsterland an der Ems",
+      "neighbors": [
+        "bad-oeynhausen",
+        "sassenberg",
+        "bielefeld",
+        "loehne",
+        "herford"
+      ]
+    },
+    {
+      "name": "Cappeln (Oldenburg)",
+      "displayName": "Cappeln (Oldenburg)",
+      "slug": "cappeln-oldenburg",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Cloppenburg",
+      "plzPrefix": "49",
+      "distanceKm": 65,
+      "populationClass": "small",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "cloppenburg",
+        "emstek",
+        "molbergen"
+      ]
+    },
+    {
+      "name": "Cloppenburg",
+      "displayName": "Cloppenburg",
+      "slug": "cloppenburg",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Cloppenburg",
+      "plzPrefix": "49",
+      "distanceKm": 65,
+      "populationClass": "large",
+      "uniqueHook": "Kreisstadt im Oldenburger Münsterland",
+      "neighbors": [
+        "cappeln-oldenburg",
+        "emstek",
+        "molbergen",
+        "vechta"
+      ]
+    },
+    {
+      "name": "Emstek",
+      "displayName": "Emstek",
+      "slug": "emstek",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Cloppenburg",
+      "plzPrefix": "49",
+      "distanceKm": 65,
+      "populationClass": "medium",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "cloppenburg",
+        "cappeln-oldenburg",
+        "molbergen"
+      ]
+    },
+    {
+      "name": "Geeste",
+      "displayName": "Geeste",
+      "slug": "geeste",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 65,
+      "populationClass": "medium",
+      "uniqueHook": "im Emsland",
+      "neighbors": [
+        "haseluenne",
+        "meppen",
+        "lingen-ems",
+        "schuettorf",
+        "wietmarschen"
+      ]
+    },
+    {
+      "name": "Herford",
+      "displayName": "Herford",
+      "slug": "herford",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Herford",
+      "plzPrefix": "32",
+      "distanceKm": 65,
+      "populationClass": "large",
+      "uniqueHook": "Hansestadt in Ostwestfalen",
+      "neighbors": [
+        "loehne",
+        "warendorf",
+        "bad-oeynhausen"
+      ]
+    },
+    {
+      "name": "Löhne",
+      "displayName": "Löhne",
+      "slug": "loehne",
+      "region": "Warendorf, Bielefeld & Umgebung",
+      "tier": 3,
+      "bundesland": "Nordrhein-Westfalen",
+      "landkreis": "Kreis Herford",
+      "plzPrefix": "32",
+      "distanceKm": 65,
+      "populationClass": "large",
+      "uniqueHook": "im Ravensberger Land an der Werre",
+      "neighbors": [
+        "herford",
+        "warendorf",
+        "bad-oeynhausen"
+      ]
+    },
+    {
+      "name": "Meppen",
+      "displayName": "Meppen",
+      "slug": "meppen",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 70,
+      "populationClass": "large",
+      "uniqueHook": "Kreisstadt an der Ems im Emsland",
+      "neighbors": [
+        "wietmarschen",
+        "geeste",
+        "haseluenne",
+        "twist",
+        "nordhorn"
+      ]
+    },
+    {
+      "name": "Molbergen",
+      "displayName": "Molbergen",
+      "slug": "molbergen",
+      "region": "Vechta & Cloppenburg",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Cloppenburg",
+      "plzPrefix": "49",
+      "distanceKm": 70,
+      "populationClass": "small",
+      "uniqueHook": "im Oldenburger Münsterland",
+      "neighbors": [
+        "cloppenburg",
+        "cappeln-oldenburg",
+        "emstek"
+      ]
+    },
+    {
+      "name": "Wietmarschen",
+      "displayName": "Wietmarschen",
+      "slug": "wietmarschen",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Grafschaft Bentheim",
+      "plzPrefix": "49",
+      "distanceKm": 70,
+      "populationClass": "medium",
+      "uniqueHook": "in der Grafschaft Bentheim",
+      "neighbors": [
+        "meppen",
+        "geeste",
+        "haseluenne",
+        "twist",
+        "nordhorn"
+      ]
+    },
+    {
+      "name": "Nordhorn",
+      "displayName": "Nordhorn",
+      "slug": "nordhorn",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Grafschaft Bentheim",
+      "plzPrefix": "48",
+      "distanceKm": 80,
+      "populationClass": "large",
+      "uniqueHook": "Kreisstadt in der Grafschaft Bentheim nahe der Niederlande",
+      "neighbors": [
+        "twist",
+        "meppen",
+        "wietmarschen"
+      ]
+    },
+    {
+      "name": "Twist",
+      "displayName": "Twist",
+      "slug": "twist",
+      "region": "Emsland & Grafschaft Bentheim",
+      "tier": 3,
+      "bundesland": "Niedersachsen",
+      "landkreis": "Landkreis Emsland",
+      "plzPrefix": "49",
+      "distanceKm": 80,
+      "populationClass": "medium",
+      "uniqueHook": "im Emsland nahe der Niederlande",
+      "neighbors": [
+        "nordhorn",
+        "meppen",
+        "wietmarschen"
+      ]
+    }
+  ]
+}
