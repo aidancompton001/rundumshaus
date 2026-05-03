@@ -201,6 +201,10 @@ export default function RootLayout({
                   name: "Rund ums Haus Littawe",
                   url: "https://rundumshaus-littawe.de",
                   logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
+                  image: [
+                    "https://rundumshaus-littawe.de/images/branding/firmenwagen-1200.jpg",
+                    "https://rundumshaus-littawe.de/images/og-image.jpg",
+                  ],
                   founder: {
                     "@type": "Person",
                     name: "Kevin Littawe",
