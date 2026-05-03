@@ -43,7 +43,7 @@ export default function FamilyBusinessBlock() {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
               alt="Firmenwagen von Rund ums Haus Littawe — VW Caddy mit Logo, allen 5 Hauptleistungen, Telefonnummer und WhatsApp-QR-Code"
               width={1200}
-              height={830}
+              height={900}
               loading="eager"
               fetchPriority="high"
               decoding="sync"
