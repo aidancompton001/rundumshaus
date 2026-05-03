@@ -32,7 +32,7 @@ Hallo {{Vorname}},
 
 vielen Dank für Ihren Auftrag! Falls Sie zufrieden waren, würde uns eine kurze Google-Bewertung sehr helfen — gerade als junges Unternehmen ist jede Stimme wertvoll:
 
-👉 [BEWERTUNGS-LINK]
+👉 https://g.page/r/CeUCmVRwjz8dEBM/review
 
 Schon eine kurze Bemerkung mit Sternen reicht. Vielen Dank!
 
@@ -48,7 +48,7 @@ Hallo {{Vorname}},
 
 ich hoffe, alles passt nach unserem Einsatz bei Ihnen. Falls Sie kurz Zeit haben, würde uns eine Google-Bewertung wirklich helfen — sie hilft anderen Kunden in Ihrer Umgebung, uns zu finden:
 
-⭐ [BEWERTUNGS-LINK]
+⭐ https://g.page/r/CeUCmVRwjz8dEBM/review
 
 Auch wenn Sie noch etwas haben, das wir verbessern könnten — bitte sagen Sie es mir direkt, dann gehen wir das gemeinsam an.
 
@@ -62,7 +62,7 @@ Kevin
 Hallo {{Vorname}},
 
 falls Sie unseren Service in {{Stadt}} weiterempfehlen würden, freuen wir uns über eine Google-Bewertung:
-[BEWERTUNGS-LINK]
+https://g.page/r/CeUCmVRwjz8dEBM/review
 
 Vielen Dank!
 Kevin Littawe — Rund ums Haus Littawe

@@ -119,6 +119,23 @@ export default function ReviewsBlock() {
         <p className="text-center text-xs text-charcoal-light/70 mt-6">
           Quelle: {data.source}
         </p>
+
+        <div className="mt-10 text-center border-t border-sand/30 pt-8">
+          <p className="text-charcoal mb-4">
+            Sie waren Kunde? Wir freuen uns über Ihre Bewertung.
+          </p>
+          <a
+            href="https://g.page/r/CeUCmVRwjz8dEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" />
+            </svg>
+            Bei Google bewerten
+          </a>
+        </div>
       </div>
     </section>
   );
