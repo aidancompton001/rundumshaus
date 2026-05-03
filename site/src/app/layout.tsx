@@ -72,6 +72,8 @@ export default function RootLayout({
       className={`${lora.variable} ${plusJakarta.variable} antialiased`}
     >
       <head>
+        {/* Yandex Webmaster verification (PX-031 Phase B). */}
+        <meta name="yandex-verification" content="f5a1b4f7b6386a4c" />
         <link
           rel="preload"
           as="image"
