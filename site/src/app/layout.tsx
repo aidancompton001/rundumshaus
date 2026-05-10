@@ -48,13 +48,14 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rundumshaus-littawe.de"),
   title: "Rund ums Haus Littawe | Hausmeisterservice & Gartenpflege",
   description:
     "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
   openGraph: {
     title: "Rund ums Haus Littawe | Hausmeisterservice & Gartenpflege",
     description: "Ihr zuverlässiger Service rund ums Haus — Hausmeisterservice, Gartenpflege, Dacharbeiten und mehr in Osnabrück und Umgebung.",
-    url: "https://rundumshaus-littawe.de",
+    url: "https://rundumshaus-littawe.de/",
     locale: "de_DE",
     type: "website",
     images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Rund ums Haus Littawe" }],

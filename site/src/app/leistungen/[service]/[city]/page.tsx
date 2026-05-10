@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   generatePageContent,
   getAllPagePairs,
+  getServiceMeta,
   SERVICE_IDS,
   type ServiceId,
 } from "@/lib/programmatic";
@@ -63,7 +64,7 @@ export default async function ProgrammaticLandingPage({
 
   const { h1, intro, body, faqs, fakten, neighbors, service: svc } = content;
   const cityName = content.city.displayName;
-  const canonical = `${BASE_URL}/leistungen/${service}/${city}`;
+  const canonical = `${BASE_URL}/leistungen/${service}/${city}/`;
 
   // Schema.org with @id reference to avoid N+1 LocalBusiness pollution (Landa M4 fix).
   // Service references the single LocalBusiness defined on the homepage layout.
@@ -72,8 +73,8 @@ export default async function ProgrammaticLandingPage({
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen` },
-      { "@type": "ListItem", position: 3, name: svc.title, item: `${BASE_URL}/leistungen#${service}` },
+      { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+      { "@type": "ListItem", position: 3, name: svc.title, item: `${BASE_URL}/leistungen/#${service}` },
       { "@type": "ListItem", position: 4, name: cityName, item: canonical },
     ],
   };
@@ -218,7 +219,7 @@ export default async function ProgrammaticLandingPage({
             </section>
           )}
 
-          {/* Cross-links to symmetric neighbors */}
+          {/* Cross-links to symmetric neighbors (same service, neighbor cities) */}
           {neighbors.length > 0 && (
             <section className="mt-12 pt-8 border-t border-sand/30">
               <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
@@ -237,6 +238,27 @@ export default async function ProgrammaticLandingPage({
               </div>
             </section>
           )}
+
+          {/* Vertical cross-links: same city, other services (PX-032 indexation acceleration) */}
+          <section className="mt-12 pt-8 border-t border-sand/30">
+            <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+              Weitere Leistungen in {cityName}
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {SERVICE_IDS.filter((id) => id !== service).map((otherId) => {
+                const other = getServiceMeta(otherId);
+                return (
+                  <Link
+                    key={otherId}
+                    href={`/leistungen/${otherId}/${city}/`}
+                    className="px-4 py-2 bg-cream-dark border border-sand/30 rounded-lg text-charcoal hover:border-copper hover:text-copper transition"
+                  >
+                    {other.title} {cityName}
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
 
           {/* Footer navigation */}
           <div className="mt-12 pt-8 border-t border-sand/30 text-sm text-charcoal-light">
