@@ -1,7 +1,7 @@
 # STATUS — RundumsHaus
 
-**Обновлён:** 2026-05-02
-**Этап:** T007 commit готов в `feat/t007-ultra-seo-ai-search`. PX-026 (multi-agent test protocol) завершён CONDITIONAL GO — 76 новых tests, 2 real bugs detected (PX-027 follow-up). **NOT DEPLOYED** — ждём 8 позиций Kevin'а. 204 tests pass (203 + 1 expected-fail sentinel).
+**Обновлён:** 2026-05-03
+**Этап:** **PX-032 fixes ready for push** (branch `fix/px032-metadata-canonical-crosslinks`, commit f1af600). Diagnostic of every 468 GSC URL completed (CSV evidence). Phase A+B+D done: metadataBase fix → og:image production URL on 5 pages incl. homepage, +1960 internal cross-links between programmatic pages. 226/226 tests pass, build 513 pages OK. **Awaiting:** CEO push branch + GitHub Pages settings (Enforce HTTPS + www CNAME) + GSC Validate Fix actions.
 
 ## Готово
 
