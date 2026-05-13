@@ -3,9 +3,17 @@
   "emptyState": "Referenzen folgen in Kürze — wir arbeiten bereits an spannenden Projekten!",
   "items": [
     {
-      "id": "vorgarten-bielefeld-01",
-      "title": "Vorgartenpflege & Pflasterarbeiten — Bielefeld",
-      "description": "40 m² Vorgarten für eine Immobilienverwaltung in Bielefeld: Vorher nur Unkraut und Erde — jetzt gepflasterte Fläche mit sicherem Stand für die Mülltonnen. Pampasgras zurückgeschnitten, Wildwuchs entfernt, Grünschnitt fachgerecht entsorgt.",
+      "id": "vorgarten-bielefeld-uebersicht",
+      "title": "Vorgartenpflege — Bielefeld (Übersicht)",
+      "description": "40 m² Vorgarten für eine Immobilienverwaltung in Bielefeld komplett überholt — Pampasgras zurückgeschnitten, Wildwuchs entfernt, Beet neu strukturiert. Grünschnitt fachgerecht entsorgt.",
+      "before": "/images/referenzen/bielefeld-vorgarten/vorher-uebersicht-800.jpg",
+      "after": "/images/referenzen/bielefeld-vorgarten/nachher-uebersicht-800.jpg",
+      "date": "2026-05"
+    },
+    {
+      "id": "pflasterarbeiten-bielefeld",
+      "title": "Pflasterarbeiten — Bielefeld",
+      "description": "Vorher nur Unkraut und Erde — jetzt gepflasterte Fläche mit sicherem Stand für die Mülltonnen. Teil des Vorgarten-Projekts für eine Immobilienverwaltung in Bielefeld.",
       "before": "/images/referenzen/bielefeld-vorgarten/vorher-detail-800.jpg",
       "after": "/images/referenzen/bielefeld-vorgarten/nachher-pflaster-800.jpg",
       "date": "2026-05"
