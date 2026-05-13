@@ -36,20 +36,61 @@ export default function ReferenzenContent() {
                 key={item.id}
                 className="group bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <picture>
-                    <source type="image/webp" srcSet={getImageUrl(toWebp(item.before))} />
-                    <img
-                      src={getImageUrl(item.before)}
-                      alt={`Vorher/Nachher — ${item.title}`}
-                      width={800}
-                      height={600}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </picture>
-                </div>
+                {item.before === item.after ? (
+                  // Single composite image (legacy split-image references)
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <picture>
+                      <source type="image/webp" srcSet={getImageUrl(toWebp(item.before))} />
+                      <img
+                        src={getImageUrl(item.before)}
+                        alt={`Vorher/Nachher — ${item.title}`}
+                        width={800}
+                        height={600}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                  </div>
+                ) : (
+                  // Side-by-side vorher | nachher with labels
+                  <div className="aspect-[4/3] grid grid-cols-2 gap-px overflow-hidden bg-charcoal/10">
+                    <div className="relative overflow-hidden">
+                      <picture>
+                        <source type="image/webp" srcSet={getImageUrl(toWebp(item.before))} />
+                        <img
+                          src={getImageUrl(item.before)}
+                          alt={`Vorher — ${item.title}`}
+                          width={400}
+                          height={600}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </picture>
+                      <span className="absolute top-3 left-3 px-2.5 py-1 bg-charcoal/80 text-white text-xs font-semibold uppercase tracking-wider rounded">
+                        Vorher
+                      </span>
+                    </div>
+                    <div className="relative overflow-hidden">
+                      <picture>
+                        <source type="image/webp" srcSet={getImageUrl(toWebp(item.after))} />
+                        <img
+                          src={getImageUrl(item.after)}
+                          alt={`Nachher — ${item.title}`}
+                          width={400}
+                          height={600}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </picture>
+                      <span className="absolute top-3 left-3 px-2.5 py-1 bg-copper/90 text-white text-xs font-semibold uppercase tracking-wider rounded">
+                        Nachher
+                      </span>
+                    </div>
+                  </div>
+                )}
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-semibold uppercase tracking-wider text-copper">
