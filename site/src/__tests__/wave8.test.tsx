@@ -38,7 +38,7 @@ describe("Referenzen", () => {
 
   it("renders referenzen items with titles", () => {
     render(<ReferenzenContent />);
-    expect(screen.getByText("Gartenumgestaltung")).toBeInTheDocument();
+    expect(screen.getByText(/Vorgartenpflege.*Bielefeld/)).toBeInTheDocument();
     expect(screen.getByText("Dachreinigung")).toBeInTheDocument();
     expect(screen.getByText("Kellerentrümpelung")).toBeInTheDocument();
   });
