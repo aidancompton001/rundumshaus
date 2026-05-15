@@ -195,7 +195,14 @@
         "bad-iburg",
         "bissendorf",
         "bad-essen"
-      ]
+      ],
+      "boost": {
+        "schrottabholung": {
+          "anfahrtMin": 17,
+          "festpreisBeispiel": "Altmetall-Abholung im Stadtgebiet kostenfrei ab 30 kg",
+          "lokal": "Direkt nördlich unseres HQ — kurze Anfahrt, oft am gleichen Tag möglich. Wir holen Schrott aus Industrie-Areal Hase-Auen und Wohngebieten zwischen Engter und Hesepe"
+        }
+      }
     },
     {
       "name": "Westerkappeln",
@@ -254,7 +261,14 @@
         "bad-essen",
         "bohmte",
         "glandorf"
-      ]
+      ],
+      "boost": {
+        "entruempelung": {
+          "anfahrtMin": 22,
+          "festpreisBeispiel": "Keller- oder Garagenentrümpelung ab 220 €, Wohnung ab 600 €",
+          "lokal": "Sole-Kurort im südlichen Osnabrücker Land — viele Ältere Bewohner organisieren rechtzeitig Haushaltsauflösung. Erfahrung mit ruhiger, einfühlsamer Abwicklung"
+        }
+      }
     },
     {
       "name": "Bohmte",
@@ -1320,7 +1334,14 @@
         "muenster",
         "ochtrup",
         "horstmar"
-      ]
+      ],
+      "boost": {
+        "gartenpflege": {
+          "anfahrtMin": 50,
+          "festpreisBeispiel": "Heckenschnitt + Rasenpflege Reihenhausgarten ab 180 €",
+          "lokal": "Münsterland-Gemeinde im Kreis Steinfurt — typische Einfamilienhausgärten mit Liguster-Hecken und Buchenbeeten. Termine i. d. R. binnen 1–2 Wochen"
+        }
+      }
     },
     {
       "name": "Ochtrup",
@@ -1643,7 +1664,14 @@
         "bielefeld",
         "loehne",
         "herford"
-      ]
+      ],
+      "boost": {
+        "gartenpflege": {
+          "anfahrtMin": 50,
+          "festpreisBeispiel": "Gartenpflege 100 m² Münsterland-Garten ab 280 € (Hecken, Stauden, Rasen)",
+          "lokal": "Pferdestadt im östlichen Münsterland — typische Reiterhof-Außenanlagen mit Pferdekoppeln und Reitwegen pflegen wir regelmäßig"
+        }
+      }
     },
     {
       "name": "Cappeln (Oldenburg)",
@@ -1680,7 +1708,14 @@
         "emstek",
         "molbergen",
         "vechta"
-      ]
+      ],
+      "boost": {
+        "entruempelung": {
+          "anfahrtMin": 55,
+          "festpreisBeispiel": "Wohnungsentrümpelung 70 m² Oldenburger Münsterland ab 950 €",
+          "lokal": "Kreisstadt im Oldenburger Münsterland — wir kennen die typischen Klinkerhäuser mit Kellerräumen und Dachböden, die häufig komplett geleert werden müssen"
+        }
+      }
     },
     {
       "name": "Emstek",

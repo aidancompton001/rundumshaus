@@ -19,6 +19,12 @@ export const SERVICE_IDS: ServiceId[] = [
 export type Tier = 1 | 2 | 3;
 export type PopulationClass = "city" | "large" | "medium" | "small";
 
+export interface CityBoost {
+  anfahrtMin: number;
+  festpreisBeispiel: string;
+  lokal: string;
+}
+
 export interface City {
   name: string;
   displayName: string;
@@ -32,9 +38,24 @@ export interface City {
   populationClass: PopulationClass;
   uniqueHook: string;
   neighbors: string[];
+  boost?: Partial<Record<ServiceId, CityBoost>>;
 }
 
 export const CITIES = (citiesData.cities as City[]).slice();
+
+// PX-033 Phase B.3: pages with noindex (bottom-5 thin programmatic by data-driven score).
+// Concentrates Google crawl budget on stronger T1/T2 pages while still serving users.
+export const NOINDEX_PAIRS: ReadonlySet<string> = new Set([
+  "schrottabholung/emsdetten",
+  "hausmeisterservice/herzlake",
+  "schrottabholung/glandorf",
+  "schrottabholung/neuenkirchen-kreis-steinfurt",
+  "schrottabholung/berge",
+]);
+
+export function isNoindexPair(serviceId: ServiceId, citySlug: string): boolean {
+  return NOINDEX_PAIRS.has(`${serviceId}/${citySlug}`);
+}
 
 export function getCityBySlug(slug: string): City | undefined {
   return CITIES.find((c) => c.slug === slug);
@@ -616,6 +637,7 @@ export interface PageContent {
   city: City;
   neighbors: City[];
   service: { id: ServiceId; title: string; description: string };
+  boost?: CityBoost;
 }
 
 export function paragraphCountForTier(tier: Tier): number {
@@ -725,6 +747,9 @@ export function generatePageContent(serviceId: ServiceId, citySlug: string): Pag
     city,
     neighbors,
     service: { id: serviceId, title: service.title, description: service.description },
+    // PX-033 Phase B.1: data-driven boost block for pages flagged as crawled-not-indexed.
+    // Adds local Festpreis-Beispiel + Anfahrtszeit + city-specific context paragraph.
+    boost: city.boost?.[serviceId],
   };
 }
 
