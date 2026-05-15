@@ -5,6 +5,7 @@ import {
   generatePageContent,
   getAllPagePairs,
   getServiceMeta,
+  isNoindexPair,
   SERVICE_IDS,
   type ServiceId,
 } from "@/lib/programmatic";
@@ -37,11 +38,16 @@ export async function generateMetadata({
   if (!isServiceId(service)) return {};
   try {
     const content = generatePageContent(service, city);
-    return generateSEO({
+    const seo = generateSEO({
       title: content.metaTitle.replace(" | Rund ums Haus Littawe", ""),
       description: content.metaDescription,
       path: `/leistungen/${service}/${city}`,
     });
+    // PX-033 Phase B.3: noindex bottom-5 thin pages to concentrate crawl budget
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
   } catch {
     return {};
   }
@@ -62,7 +68,7 @@ export default async function ProgrammaticLandingPage({
     notFound();
   }
 
-  const { h1, intro, body, faqs, fakten, neighbors, service: svc } = content;
+  const { h1, intro, body, faqs, fakten, neighbors, service: svc, boost } = content;
   const cityName = content.city.displayName;
   const canonical = `${BASE_URL}/leistungen/${service}/${city}/`;
 
@@ -179,6 +185,26 @@ export default async function ProgrammaticLandingPage({
               {paragraph}
             </p>
           ))}
+
+          {/* PX-033 Phase B.1: city-specific boost block — Festpreis + Anfahrt + Lokal */}
+          {boost && (
+            <aside className="my-10 p-6 bg-copper/5 border-l-4 border-copper rounded-r-2xl">
+              <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+                Konkret für {cityName}
+              </h2>
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm mb-4">
+                <div className="flex flex-col">
+                  <dt className="text-charcoal-light font-medium">Anfahrt von Osnabrück (HQ)</dt>
+                  <dd className="text-charcoal">ca. {boost.anfahrtMin} Min.</dd>
+                </div>
+                <div className="flex flex-col">
+                  <dt className="text-charcoal-light font-medium">Beispiel-Festpreis</dt>
+                  <dd className="text-charcoal">{boost.festpreisBeispiel}</dd>
+                </div>
+              </dl>
+              <p className="text-charcoal-light leading-relaxed">{boost.lokal}</p>
+            </aside>
+          )}
 
           {/* CTA */}
           <div className="my-10 flex flex-wrap gap-4">
