@@ -1,7 +1,7 @@
 # STATUS — RundumsHaus
 
-**Обновлён:** 2026-05-03
-**Этап:** **PX-032 fixes ready for push** (branch `fix/px032-metadata-canonical-crosslinks`, commit f1af600). Diagnostic of every 468 GSC URL completed (CSV evidence). Phase A+B+D done: metadataBase fix → og:image production URL on 5 pages incl. homepage, +1960 internal cross-links between programmatic pages. 226/226 tests pass, build 513 pages OK. **Awaiting:** CEO push branch + GitHub Pages settings (Enforce HTTPS + www CNAME) + GSC Validate Fix actions.
+**Обновлён:** 2026-05-14
+**Этап:** **PX-033 deployed** (PR #14 commit a3ff2e8) per Hans Landa CONDITIONAL GO. Boost block (Anfahrt+Festpreis+Lokal) для top-5 thin programmatic pages, noindex для bottom-5. 238/238 tests, 513 pages built+verified live. Indexed 46→147 (+220% за 11 дней) с PX-032; главная +2400% trafic. **Awaiting:** CEO GSC re-trigger Validate Fix во всех 4 категориях (24-48ч после re-crawl).
 
 ## Готово
 

@@ -2,6 +2,57 @@
 
 ---
 
+### [S036] — 2026-05-14 — PX-033: Fix 2 FAILED GSC validations (boost top-5 + noindex bottom-5)
+
+**Задача:** PX-033 fix 2 FAILED GSC validations (redirect-failed 6 + crawled-not-indexed 11) после PX-032 deploy
+**Роли:** #3 Marco Reiter (Frontend), #14 Hans Landa (adversarial review CONDITIONAL GO с 10 findings)
+**Статус:** ✅ deployed live (PR #14 commit a3ff2e8), awaiting CEO GSC re-validate
+
+**Math evidence:**
+- Indexed W1→W3: 46 → 147 (**+220%** за 11 дней) — главный win работает
+- Главная +2400% trafic — metadataBase fix proven
+- 162 distinct queries (+189% vs W1) — long-tail работает
+- New programmatic queries в результатах: gärtner melle/wallenhorst, dachdecker münster
+
+**Phase 0+A audit (Landa #1+#2+#7):**
+- ✅ Нет noindex regression
+- ✅ Все 6 redirect URLs реально работают (curl 301→200) — это GSC cache, не код
+- ✅ sitemap.xml clean, internal links все с trailing slash
+- → Phase A action: только re-trigger GSC Validate Fix (no code changes)
+
+**Phase B.0 — data-driven priority (Landa #4):**
+Score = tier × pop × demand × inbound. Top-5 BOOST, Bottom-5 NOINDEX.
+
+**Phase B.1+B.3 — implementation:**
+- `cities.json`: добавлено поле `boost: { anfahrtMin, festpreisBeispiel, lokal }` для top-5
+- `programmatic.ts`: новый interface `CityBoost`, constant `NOINDEX_PAIRS`, function `isNoindexPair()`
+- `page.tsx generateMetadata`: noindex для bottom-5 pairs
+- `page.tsx render`: новый "Konkret für {city}" boost block для top-5
+- Новый test file: `programmatic.noindex.test.ts` (12 tests)
+
+**Что верифицировано на production:**
+- ✅ Top-5 boost block live (curl confirmed: "Konkret für", "Anfahrt von Osnabrück", "Beispiel-Festpreis")
+- ✅ Bottom-5 noindex live (`<meta name="robots" content="noindex, follow">`)
+- ✅ Tests 226 → 238 (+12)
+- ✅ Build 513 pages OK
+
+**Measurement gates (Landa #5):**
+- Day 7 (21.05): indexed ≥175. Если <160 → rollback noindex
+- Day 14 (28.05): indexed ≥200, crawled-not-indexed ≤5. Иначе escalate
+- Day 28 (11.06): indexed ≥280 → final report
+
+**Артефакты:** PR #14, c:/tmp/seo_week3_audit.py, c:/tmp/px033_priority.py, c:/tmp/add_boost.py
+
+**Pending от CEO:** GSC re-trigger Validate Fix во всех проблемных категориях (после 24-48ч re-crawl)
+
+**Lessons:**
+- Hans Landa adversarial review до execution = -days спасает после-deploy iterations
+- Data-driven priority > gut-feel (5 cities по score ≠ 5 cities по интуиции)
+- Noindex > wait-and-see для tail thin pages — не блокировать crawl budget
+- Curl test перед обвинением кода — 6 redirect URLs работали, это GSC cache
+
+---
+
 ### [S035] — 2026-05-03 — PX-032: GSC indexing fix (metadataBase + canonical + vertical cross-links)
 
 **Задача:** Fix all 4 GSC indexing problems (4 redirect-failed + 1 404 + 5 crawled-not-indexed + 458 discovered-not-indexed) после T007 Ultra SEO deploy
