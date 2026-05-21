@@ -2,6 +2,53 @@
 
 ---
 
+### [S037] — 2026-05-21 — PX-034: SEO-аудит week-5 + Mobile LCP fix
+
+**Задача:** PX-034 — полный SEO-аудит + fix технических проблем
+**Роли:** #3 Marco Reiter (Frontend perf)
+**Статус:** ✅ LCP fix deployed (PR #15); аудит зафиксирован; часть проблем = CEO actions
+
+**SEO-аудит 2026-05-21 (данные GSC+GBP+PageSpeed+Gemini):**
+
+✅ ПОБЕДЫ (PX-033 сработал):
+- Crawled-not-indexed: 11 → **0**
+- Indexed: 147 → **163**
+- PageSpeed SEO score: **100/100** mobile + desktop
+- GBP: **5.0⭐ (4 отзыва)**, 1620 просмотров/мес, 74 взаимодействия
+- Desktop Performance: **95**
+
+🔴 НАЙДЕННЫЕ ПРОБЛЕМЫ:
+1. AI Search: Gemini "Hausmeister Osnabrück" → 5 конкурентов, нас нет
+2. Mobile LCP 4.8s (Performance 71, Speed Index 5.1s)
+3. Cache lifetimes −605 KiB (GitHub Pages platform limit)
+4. Prohibited ARIA attributes (Accessibility 89-93)
+5. Page-with-redirect 6 FAILED (host variants — curl proves OK)
+6. GBP Profilstärke неполный (нет фото от Kevin)
+
+**Что исправлено кодом (PR #15):**
+- **Mobile LCP fix:** Lamp.tsx грузил hero-bg.webp 192KB как CSS background на всех viewport. Переделано на responsive: `.hero-lamp-bg` media query + CSS vars. Mobile → hero-bg-800w.webp (36KB), desktop → 1200w (61KB). Preload в layout.tsx тоже viewport-matched. **LCP-картинка: 192KB → 36KB mobile (−81%).**
+- Verified production: preload responsive live, 800w accessible (36316 bytes)
+
+**Диагностика (не исправлено — обоснование):**
+- **ARIA:** все aria-* в наших исходниках валидные (aria-current/expanded/hidden/label/labelledby). Prohibited ARIA от PageSpeed нужен раскрытый Lighthouse audit для точной локализации. Accessibility 89-93 — не блокер. НЕ трогал вслепую (риск сломать)
+- **AI Search:** ключевой инсайт — Gemini для "Hausmeister Osnabrück" показывает результаты из Google Maps/GBP (адреса+телефоны), не из website. Путь к Gemini-видимости = **GBP optimization**, не llms.txt. llms.txt уже отличный (116 строк, факт-плотный)
+- **Cache lifetimes:** GitHub Pages не позволяет настроить Cache-Control headers — platform limit, не fix'абельно
+- **Page-with-redirect:** curl доказал что все 6 URLs работают (301→200) — GSC validation cache, не баг
+
+**Артефакты:** PR #15, Lamp.tsx, layout.tsx, globals.css (.hero-lamp-bg)
+
+**Pending — CEO actions (не код):**
+1. GSC → re-trigger Validate Fix (redirect + 404)
+2. GBP optimization (это путь к AI Search visibility):
+   - загрузить 10+ фото (vorher/nachher из реальных работ)
+   - publish Beiträge регулярно (Entrümpelung + Heckenschnitt тексты готовы)
+   - заполнить Profilstärke до 100%
+3. Опционально: раскрыть Lighthouse ARIA detail → пришлю точечный fix
+
+**Прогноз:** Mobile Performance 71 → ~85+ (LCP 4.8s → ~2.5s). Десктоп уже 95.
+
+---
+
 ### [S036] — 2026-05-14 — PX-033: Fix 2 FAILED GSC validations (boost top-5 + noindex bottom-5)
 
 **Задача:** PX-033 fix 2 FAILED GSC validations (redirect-failed 6 + crawled-not-indexed 11) после PX-032 deploy
