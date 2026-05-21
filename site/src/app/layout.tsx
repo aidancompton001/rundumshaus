@@ -75,10 +75,21 @@ export default function RootLayout({
       <head>
         {/* Yandex Webmaster verification (PX-031 Phase B). */}
         <meta name="yandex-verification" content="f5a1b4f7b6386a4c" />
+        {/* PX-034 LCP fix: preload responsive hero variant by viewport.
+            Mobile (<768px) preloads 800w (36 KB); desktop preloads 1200w (61 KB).
+            Matches .hero-lamp-bg media query — no wasted 192 KB download. */}
         <link
           rel="preload"
           as="image"
-          href="/images/hero/hero-bg.webp"
+          href="/images/hero/hero-bg-800w.webp"
+          media="(max-width: 767px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero/hero-bg-1200w.webp"
+          media="(min-width: 768px)"
           fetchPriority="high"
         />
         <noscript>

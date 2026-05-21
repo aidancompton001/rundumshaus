@@ -10,14 +10,18 @@ export default function Lamp({ children }: LampProps) {
   const { reducedMotion } = useMotion();
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
+  // PX-034 LCP fix: responsive background via CSS media query (globals.css
+  // .hero-lamp-bg). Mobile loads hero-bg-800w.webp (36 KB), desktop 1200w
+  // (61 KB) — never the full 192 KB hero-bg.webp. Cuts mobile LCP.
   return (
     <div
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden w-full z-0"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(27,58,92,0.6), rgba(27,58,92,0.85)), url(${basePath}/images/hero/hero-bg.webp)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden w-full z-0 hero-lamp-bg"
+      style={
+        {
+          "--hero-img-mobile": `url(${basePath}/images/hero/hero-bg-800w.webp)`,
+          "--hero-img-desktop": `url(${basePath}/images/hero/hero-bg-1200w.webp)`,
+        } as React.CSSProperties
+      }
     >
       {/* Soft bronze glow — CSS only, no Motion dependency */}
       {!reducedMotion && (

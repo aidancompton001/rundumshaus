@@ -891,4 +891,138 @@ Phase C (если Kevin даст дополнительные pricing):
 **Рекомендуемый промпт:** P8 (мелкие правки) или P1 (если нужен полный flow)
 ---
 
-<!-- Последний номер: PX-031 -->
+## PX-032
+**Дата:** 2026-05-03
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** CEO 2026-05-03 — 6 скриншотов GSC (Performance + Indexing + Overview + Recommendations + Experience + Enhancements)
+
+---
+**PX-032**
+**Задача:** Fix all GSC indexing issues + восстановить impressions главной страницы (-64%) + ускорить индексацию 458 programmatic pages
+**Контекст:**
+- GSC (rundumshaus-littawe.de) snapshot 2026-05-03:
+  - Performance 7d: 20 clicks, 415 impressions, CTR 4.8%, avg pos 5.9
+  - Performance 30d: **133 total clicks**
+  - Indexing: **46 indexed / 468 not-indexed** (514 known URLs)
+  - 4 not-indexed reasons: Page-with-redirect=4 Failed, 404=1, Discovered/not-indexed=458, Crawled/not-indexed=5
+  - Schema enhancements ✅ all valid: Breadcrumbs 15, FAQ 15, Review snippets 54
+  - HTTPS: 23 valid / 0 non-HTTPS ✅
+  - Core Web Vitals: "No data" (нужно 28 дней реального трафика)
+  - 🚨 Recommendations: главная **/  -64% impressions** (после T007 deploy)
+  - 🚨 Recommendations: "dachrinnenreinigung osnabrück" **+7000% impressions** (70 imp/0 clicks — top opportunity)
+- Файлы потенциально затронуты:
+  - `site/src/app/sitemap.ts` — может включать stale URLs / дубли / битые
+  - `site/src/app/leistungen/[service]/[city]/page.tsx` — 490 programmatic pages из PX-025
+  - `site/src/app/page.tsx` — главная (-64% impressions, нужна диагностика meta/H1/title после T007 deploy)
+  - `site/src/app/weitere-leistungen/page.tsx` или redirect-конфиг — 301 redirect /weitere-leistungen → /leistungen#weitere
+  - `next.config.js` — redirects
+  - `site/src/components/sections/Hero.tsx`, `ServiceOverview.tsx` — на главной
+  - Footer.tsx, Navbar.tsx, ServiceDetail.tsx — внутренние ссылки могут быть битые
+  - Schema.org `url` поля
+- Внешние: GSC URL Inspection, Request Indexing, IndexNow protocol (Bing/Yandex), GitHub Actions
+**Проблема:**
+1. **4 redirect failures (Failed)** — теряем link equity, Google понижает доверие
+2. **1 404** — битая внутренняя ссылка где-то (sitemap / footer / schema / контент)
+3. **5 crawled/not-indexed** — Google прочёл, но не индексирует → thin content / duplicate / canonical issue
+4. **458 discovered/not-indexed** — Google знает но не успел индексировать (нормально для week-1 programmatic, но можно ускорить)
+5. **🚨 Главная -64% impressions** — критично! После T007 deploy 02.05 что-то изменилось:
+   - Возможные причины: programmatic landing pages "оттянули" приоритет; meta title/description главной изменились; H1 стал слабее; canonical issues; sitemap order; internal linking
+   - Это означает что сильнейший актив (главная с brand keywords) теряет видимость → **должно быть исправлено в первую очередь**
+6. **"dachrinnenreinigung osnabrück" 70 imp / 0 clicks** — самый высокий упущенный CTR. Не в top-3 → нужна выделенная landing page или усиление /leistungen/dachreinigung
+**Цель:**
+- A. **0 redirect failures** — все 4 битых redirect починены
+- B. **0 404** — найти и исправить
+- C. **5 crawled/not-indexed** — проанализировать и решить (усилить или удалить из sitemap)
+- D. **458 discovered/not-indexed → 100-200 за 2-4 недели** через internal linking + IndexNow + manual GSC requests
+- E. **Главная +impressions восстановлены** — диагностика что изменилось 02.05, fix
+- F. **dachrinnenreinigung osnabrück → top-3** через выделенный landing или усиление текущей страницы
+- G. Validate fix через GSC, monitoring 14 дней
+- H. Цель week-3 (24.05): indexed 46 → 200+, errors всех 4 категорий = 0 (кроме "discovered/not-indexed" — целевое <200)
+**Скоуп:**
+- Phase 1 — Diagnose (60 мин):
+  - GSC URL Inspection для 4 redirect-failures + 1 404 + 5 crawled/not-indexed → конкретные URL
+  - Сопоставить с sitemap.ts и кодом
+  - Diff главной страницы / meta до/после T007 deploy (git log + diff page.tsx + layout.tsx)
+  - Анализ "dachrinnenreinigung osnabrück" — какая страница ranking'ует, почему не CTR
+- Phase 2 — Fix redirects (30 мин): найти 4 битых, устранить (loop/chain/wrong target), чек next.config.js
+- Phase 3 — Fix 404 (15 мин): найти источник, либо создать/restore страницу, либо убрать ссылку, либо 301
+- Phase 4 — Crawled/not-indexed (30 мин): 5 страниц проанализировать, усилить или noindex
+- Phase 5 — Главная impressions fix (1 час): сравнить meta/H1/title/schema до и после T007, восстановить силу главной (canonical, internal links FROM programmatic TO главная, обогатить hero meta)
+- Phase 6 — Dachrinnenreinigung уплотнить (1 час): улучшить /leistungen/dachreinigung — H1, FAQ, meta description с акцентом "Dachrinnenreinigung Osnabrück", добавить 5+ FAQ про чистку Dachrinnen
+- Phase 7 — Ускорить discovered/not-indexed (1-2 часа):
+  - Internal linking: главная + /leistungen + /einsatzgebiet → ссылки на топ-30 programmatic pages
+  - IndexNow batch ping для всех 490 URL (требует Bing API key — Kevin должен создать аккаунт)
+  - Manual GSC "Request Indexing" для топ-30 priority pages (по 10/день — лимит)
+  - Crosslinks между programmatic: "Gärtner Bramsche" → "Auch in Bramsche: Entrümpelung, Hausmeister"
+  - Повторно submit sitemap в GSC + Bing + Yandex
+- Phase 8 — Validate (5 мин в GSC): нажать "Validate Fix" во всех 4 категориях, зафиксировать в SEO_RESULTS.md
+- Phase 9 — Monitoring (continuous, 14 дней):
+  - Day 7 (10.05): redirect=0, 404=0, indexed pages count
+  - Day 14 (17.05): главная impressions восстановлены? discovered/not-indexed <250?
+  - Если discovered/not-indexed >250 на day 14 → escalation (consolidation или удаление части programmatic)
+**Ограничения:**
+- НЕ удалять programmatic pages без анализа (PX-025 инвестиция 450€)
+- НЕ ставить noindex на legitimate страницы — только thin/duplicate
+- НЕ менять URL structure `/leistungen/[service]/[city]/`
+- НЕ убивать главную ради programmatic — главная должна оставаться сильной
+- IndexNow требует API key (Bing) — может быть заблокировано пока Kevin не создаст аккаунт (PX-025 Phase 4 dependency)
+- GSC "Request Indexing" лимит ~10-20 URL/день
+- 458 не починятся за 1 день — план 2-4 недели реалистичен
+- НЕ keyword-stuff в crosslinks
+- Все fix → коммит → деплой → подождать 24-48ч → validate в GSC
+- Не сломать sitemap (XML validity tests)
+- Не сломать существующие 46 indexed pages
+- Schema enhancements уже OK (Breadcrumbs 15, FAQ 15, Reviews 54) — НЕ трогать
+**Размер:** L (диагностика + 5 категорий fix + ускорение + monitoring 14 дней + критичный fix главной)
+**Рекомендуемый промпт:** P2 (systematic-debugging) для Phase 1-6 + P0 (roadmap) для Phase 7-9
+---
+
+## PX-033
+**Дата:** 2026-05-14
+**Статус:** завершено
+**DEVLOG:** S036
+**Источник:** GSC week-3 audit — 2 FAILED validations
+
+---
+**PX-033**
+**Задача:** Fix 2 FAILED GSC validations (redirect-failed 6 + crawled-not-indexed 11) через data-driven priority + boost top-5 + noindex bottom-5
+**Контекст:** programmatic.ts, cities.json, leistungen/[service]/[city]/page.tsx
+**Проблема:** После PX-032 deploy GSC validation FAILED — 11 thin programmatic pages crawled-not-indexed (template-duplicate ML detection), 6 redirect-failed (false positive — curl proves 301→200)
+**Цель:** Crawled-not-indexed → 0-3, концентрация crawl budget
+**Скоуп:** Hans Landa CONDITIONAL GO (10 findings) → TS2 → data-driven priority score → boost top-5 (Anfahrt+Festpreis+Lokal block) → noindex bottom-5 → 238 tests
+**Результат:** ✅ Crawled-not-indexed 11→0, indexed 147→163. PR #14.
+**Рекомендуемый промпт:** P2 (systematic-debugging)
+---
+
+## PX-034
+**Дата:** 2026-05-21
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** чат CEO, 2026-05-21 — полный SEO-аудит (GSC+GBP+PageSpeed+AI Search скриншоты)
+
+---
+**PX-034**
+**Задача:** SEO-аудит week-5 + fix всех технических проблем (LCP, ARIA, legacy JS, AI Search visibility)
+**Контекст:** `site/src/components/sections/Hero.tsx` (LCP), `site/src/app/layout.tsx` (ARIA + preload), `site/public/llms.txt` + `llms-full.txt` (AI Search), `site/public/images/hero/` (image delivery), browserslist config (legacy JS), GitHub Actions (cache — platform limit)
+**Проблема:** Аудит 2026-05-21 выявил 6 проблем после PX-032+033:
+- 🔴 AI Search: Gemini "Hausmeister Osnabrück" → 5 конкурентов, нас НЕТ
+- 🔴 Mobile LCP 4.8s (должно <2.5s), Performance 71, Speed Index 5.1s
+- 🟡 Cache lifetimes −605 KiB (GitHub Pages platform limit — не fix'абельно)
+- 🟡 Prohibited ARIA attributes — Accessibility 89-93
+- 🟡 Page-with-redirect 6 FAILED (host variants — curl proves OK, GSC cache)
+- 🟡 GBP Profilstärke неполный (нет фото от Kevin, нет Social-Media)
+**Цель:** Все код-fix'абельные проблемы исправлены: LCP <2.5s, ARIA 0 errors, legacy JS убран, AI Search улучшен. Отчёт docs/SEO_AUDIT_2026-05.md
+**Скоуп:**
+- Diagnose + fix prohibited ARIA attributes
+- Diagnose + fix Mobile LCP 4.8s (Hero bg preload/srcset/size)
+- Fix legacy JavaScript (browserslist target)
+- Re-optimize images (−77 KiB delivery)
+- Enrich llms.txt + structured data для AI Search visibility
+- DEVLOG audit entry + CEO action list (GSC re-validate + GBP photos)
+**Ограничения:** Cache lifetimes — GitHub Pages limit, документировать не fix'ать. GBP — задача Kevin. НЕ ломать SEO 100/100. Schema не трогать
+**Размер:** XL (6 проблем, кросс-доменная: performance + a11y + AI SEO)
+**Рекомендуемый промпт:** P6 (аудит) → P2 (debug fixes)
+---
+
+<!-- Последний номер: PX-034 -->

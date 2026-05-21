@@ -148,3 +148,20 @@ html.lenis body {
   background: #4A8B3F;
   color: #FFFFFF;
 }
+
+/* PX-034 LCP fix — responsive hero background.
+   Mobile loads 800w (36 KB), desktop 1200w (61 KB). Overlay keeps text contrast. */
+.hero-lamp-bg {
+  background-image:
+    linear-gradient(to bottom, rgba(27, 58, 92, 0.6), rgba(27, 58, 92, 0.85)),
+    var(--hero-img-mobile);
+  background-size: cover;
+  background-position: center;
+}
+@media (min-width: 768px) {
+  .hero-lamp-bg {
+    background-image:
+      linear-gradient(to bottom, rgba(27, 58, 92, 0.6), rgba(27, 58, 92, 0.85)),
+      var(--hero-img-desktop);
+  }
+}
