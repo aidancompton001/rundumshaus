@@ -440,7 +440,7 @@ const ENTRUEMP: ServiceBlocks = {
     (c) =>
       `Sie planen eine Haushaltsauflösung in ${c.displayName}? Wir räumen Wohnungen, Häuser, Garagen und Gewerbeflächen — fachgerecht entsorgt, transparent abgerechnet, kostenlos besichtigt. Anfahrt aus Osnabrück: ${c.distanceKm} km.`,
     (c) =>
-      `Entrümpelung in ${c.displayName} zum Festpreis: Nach kostenloser Besichtigung erhalten Sie ein verbindliches Angebot ohne versteckte Zusatzkosten. Alle Gegenstände werden fachgerecht entsorgt oder dem Recycling zugeführt — Wertgegenstände werden nicht angerechnet, wir entrümpeln vollständig.`,
+      `Entrümpelung in ${c.displayName} zum Festpreis: Nach kostenloser Besichtigung erhalten Sie ein verbindliches Angebot ohne versteckte Zusatzkosten. Alle Gegenstände werden fachgerecht entsorgt oder dem Recycling zugeführt — wir entrümpeln vollständig.`,
     (c) =>
       `Haushaltsauflösung ${c.displayName}: Wir kümmern uns um alles — Räumung, Entsorgung, besenreine Übergabe. Termine sind oft kurzfristig möglich, gerade bei dringenden Anfragen wegen Mietende oder Wohnungsübergabe. ${c.uniqueHook.charAt(0).toUpperCase() + c.uniqueHook.slice(1)} bündeln wir Aufträge effizient.`,
     (c) =>
@@ -458,7 +458,7 @@ const ENTRUEMP: ServiceBlocks = {
     (c, n) =>
       `Wir sind in ${c.displayName} und Umgebung — ${n.slice(0, 3).map((x) => x.displayName).join(", ")} — regelmäßig im Einsatz und können viele Aufträge kurzfristig übernehmen, auch bei dringenden Haushaltsauflösungen wegen Mietende oder anstehender Wohnungsübergabe. Bei größeren Objekten in ${c.displayName} planen wir 1–2 Wochen Vorlauf ein.`,
     (c) =>
-      `Eine Besichtigung vor Ort in ${c.displayName} ist kostenlos und unverbindlich. Wertgegenstände werden nicht angerechnet — wir entrümpeln und entsorgen, ohne dass Sie sich um Abrechnung oder Verwertung kümmern müssen. Was nicht mehr benötigt wird, übernehmen wir vollständig.`,
+      `Eine Besichtigung vor Ort in ${c.displayName} ist kostenlos und unverbindlich. Wir entrümpeln und entsorgen vollständig — was nicht mehr benötigt wird, übernehmen wir komplett, sauber und stressfrei.`,
     (c) =>
       `Fachgerechte Entsorgung in ${c.displayName} und im ${c.landkreis}: Restmüll, Sperrmüll, Schrott, Elektrogeräte, Papier, Holz, Bauschutt — alles wird kategorisiert und über die zugelassenen Wertstoffhöfe entsorgt. So vermeiden Sie als Eigentümer haftungsrechtliche Risiken durch unsachgemäße Entsorgung.`,
     (c) =>
@@ -484,10 +484,6 @@ const ENTRUEMP: ServiceBlocks = {
     (c) => ({
       q: `Übernehmen Sie auch Haushaltsauflösungen nach Todesfall in ${c.displayName}?`,
       a: `Ja, das ist eine sehr häufige Anfrage in ${c.displayName}. Wir gehen einfühlsam vor, sortieren persönliche Dokumente gesondert und erledigen alle Schritte: Räumung, Entsorgung, besenreine Übergabe.`,
-    }),
-    (c) => ({
-      q: `Werden Wertgegenstände bei der Entrümpelung in ${c.displayName} angerechnet?`,
-      a: `Nein. Wir entrümpeln und entsorgen — Wertgegenstände werden nicht gegen den Preis verrechnet. Was nicht mehr benötigt wird, übernehmen wir vollständig.`,
     }),
     (c) => ({
       q: `Kann ich vor Ort in ${c.displayName} dabei sein?`,
