@@ -17,7 +17,7 @@
 - **Hauptleistungen:** 5 (Hausmeisterservice, Gartenpflege, Dacharbeiten/Dachreinigung, Entrümpelung/Haushaltsauflösung, Schrottabholung)
 - **Weitere Leistungen:** 9 (Reinigung, Pflasterarbeiten, kleine Renovierungen, Möbelmontage, Umzüge im Nahbereich, Gartenanlage, Hausmeisterdienst Mehrfamilienhäuser, Winterdienst, Rasenmähen)
 - **Kostenlose Besichtigung:** ja, im gesamten Einsatzgebiet (60 km)
-- **Festpreisangebote:** nein bei Stundenarbeit, ja bei Entrümpelungen nach Besichtigung
+- **Festpreisangebote:** ja, bei allen Arbeiten nach kostenloser Besichtigung
 - **Subunternehmer:** nein, eigene Mitarbeiter und Fahrzeuge
 
 ## Leistungen (Hauptleistungen)

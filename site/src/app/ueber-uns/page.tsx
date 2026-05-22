@@ -1,5 +1,6 @@
 import { generateSEO } from "@/lib/seo";
 import FamilyBusinessBlock from "@/components/sections/FamilyBusinessBlock";
+import FaktenTabelle from "@/components/sections/FaktenTabelle";
 import ReviewsBlock from "@/components/sections/ReviewsBlock";
 
 export const metadata = generateSEO({
@@ -44,6 +45,7 @@ export default function UeberUnsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <FamilyBusinessBlock />
+      <FaktenTabelle />
       <ReviewsBlock />
     </>
   );
