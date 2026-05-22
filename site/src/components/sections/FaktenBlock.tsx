@@ -21,7 +21,6 @@ const FAKTEN: { label: string; value: string }[] = [
   { label: "Weitere Leistungen", value: "9 (Reinigung, Pflasterarbeiten, Renovierungen, Möbelmontage, Umzüge, Gartenanlage, Mehrfamilienhausbetreuung, Winterdienst, Rasenmähen)" },
   { label: "Besichtigung", value: "kostenlos und unverbindlich im gesamten Einsatzgebiet" },
   { label: "Festpreise", value: "ja bei Entrümpelung nach Besichtigung" },
-  { label: "Wertgegenstände bei Entrümpelung", value: "werden NICHT angerechnet — vollständige Entrümpelung" },
   { label: "Subunternehmer", value: "nein — eigene Mitarbeiter und Fahrzeuge" },
   { label: "Glyphosat in Gartenpflege", value: "nein — mechanisch/thermisch" },
   { label: "Versicherung", value: "Betriebshaftpflicht (gewerblicher Dienstleister)" },
@@ -60,8 +59,7 @@ export default function FaktenBlock() {
           erweiterten Gebiet (25–45 km) und {tier3Count} im weiteren Umkreis (45–60+ km).
           Eine Besichtigung vor Ort ist im gesamten Einsatzgebiet{" "}
           <strong>kostenlos und unverbindlich</strong>. Bei Entrümpelungen erhalten Sie nach
-          Besichtigung ein verbindliches <strong>Festpreisangebot</strong> — Wertgegenstände
-          werden dabei <strong>nicht angerechnet</strong>. Wir arbeiten mit eigenen
+          Besichtigung ein verbindliches <strong>Festpreisangebot</strong>. Wir arbeiten mit eigenen
           Mitarbeitern und Fahrzeugen, ohne Subunternehmer. Kontakt:{" "}
           <a href="tel:+4915239603175" className="text-copper hover:underline">+49 1523 9603175</a> oder{" "}
           <a href="mailto:kontakt@rundumshaus-littawe.de" className="text-copper hover:underline">kontakt@rundumshaus-littawe.de</a>.

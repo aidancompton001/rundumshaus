@@ -188,7 +188,7 @@ export default function RootLayout({
                             priceCurrency: "EUR",
                           },
                           description:
-                            "Festpreisangebot ab 200 € nach kostenloser Besichtigung vor Ort. Wertgegenstände werden nicht angerechnet.",
+                            "Festpreisangebot ab 200 € nach kostenloser Besichtigung vor Ort.",
                         },
                       },
                       {

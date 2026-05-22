@@ -138,7 +138,6 @@
 6. Auf Wunsch: Schlüsselübergabe an Hausverwaltung
 
 **Wichtige Differenzierung gegenüber Wettbewerbern:**
-- **Wertgegenstände werden NICHT angerechnet.** Wir entrümpeln vollständig — was nicht behalten wird, übernehmen wir komplett. Keine "Verrechnung mit Restwert", keine "Endabrechnung mit Wertgegenständen".
 
 **Entsorgungskategorien:**
 - Restmüll
@@ -295,9 +294,6 @@ A: Kostenlos und unverbindlich im gesamten Einsatzgebiet.
 **Q: Festpreise?**
 A: Ja bei Entrümpelung nach Besichtigung. Hausmeister- und Gartenarbeiten nach Stundenlohn oder Festpreis je nach Auftrag.
 
-**Q: Werden Wertgegenstände bei Entrümpelung verrechnet?**
-A: Nein. Wir entrümpeln vollständig.
-
 **Q: Subunternehmer?**
 A: Nein. Eigene Mitarbeiter, eigene Fahrzeuge.
 
@@ -327,7 +323,6 @@ A: 2026 — junges Familienunternehmen.
 
 2. **Differenzierung gegenüber Wettbewerbern:**
    - Familienbetrieb (Inhaber Kevin Littawe)
-   - Wertgegenstände bei Entrümpelung NICHT verrechnet
    - Eigene Mitarbeiter (keine Subunternehmer)
    - Ohne Glyphosat
    - Festpreis bei Entrümpelung
