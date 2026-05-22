@@ -1,8 +1,9 @@
 // Server component — renders directly into HTML (no "use client").
-// Used on /ueber-uns. Single canonical "Familienbetrieb seit 2026" mention
-// outside of homepage's FaktenBlock. Hans Landa Round 4: only ONE 2026
-// mention on homepage (FaktenBlock), all detail moves here to avoid
-// repetition fatigue and conversion drop signals on high-trust services.
+// Used on /ueber-uns alongside FaktenTabelle (PX-035). The "gegründet 2026"
+// claim lives on /ueber-uns in this block's intro + the FaktenTabelle row;
+// the homepage keeps ONE mention in FaktenBlock. This is the dedicated
+// trust/detail page — the repetition here is intentional and page-scoped,
+// not the homepage repetition-fatigue concern from Hans Landa Round 4.
 //
 // PX-031 Phase A.1 (2026-05-03): Hero image of fully-branded VW Caddy
 // (Kevin's actual Firmenwagen) replaces logo-only display. Provides real

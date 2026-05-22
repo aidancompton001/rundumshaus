@@ -1025,4 +1025,35 @@ Phase C (если Kevin даст дополнительные pricing):
 **Рекомендуемый промпт:** P6 (аудит) → P2 (debug fixes)
 ---
 
-<!-- Последний номер: PX-034 -->
+## PX-035
+**Дата:** 2026-05-22
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** WhatsApp Kevin 2026-05-22 23:10 (2 замечания по FaktenBlock)
+
+---
+**PX-035**
+**Задача:** Festpreise-формулировка fix + редизайн FaktenBlock (вариант D — сокращённые карточки на главной, полная версия на /ueber-uns)
+**Контекст:** `site/src/components/sections/FaktenBlock.tsx` (главная — answer-first блок GEO 2026), `site/src/app/ueber-uns/page.tsx` + `FamilyBusinessBlock.tsx`
+**Проблема:**
+1. FaktenBlock label "Festpreise" = "ja bei Entrümpelung nach Besichtigung" — но Kevin делает Festpreise на ВСЕ работы, текст занижает предложение
+2. FaktenBlock на главной — голая таблица label/value, Kevin считает что дублирует "Über uns" и непривлекательно выглядит
+**Цель:**
+1. Festpreise = "ja, bei allen Arbeiten nach kostenloser Besichtigung" — везде
+2. FaktenBlock на главной — 4-5 ключевых фактов красивыми карточками (иконки), полная версия фактов перенесена на /ueber-uns
+**Скоуп:**
+- Fix Festpreise-строки в FaktenBlock.tsx + answer-first параграфе
+- Grep "Festpreis" по сайту — где привязано только к Entrümpelung → расширить на все услуги (programmatic.ts, llms.txt, Schema)
+- FaktenBlock главная: 4-5 топ-фактов как карточки с иконками (НЕ голая таблица)
+- Полная таблица фактов → перенести/добавить на /ueber-uns
+- Сохранить answer-first параграф на главной (AI-SEO GEO 2026)
+**Ограничения:**
+- НЕ удалять факты полностью — answer-first блок нужен для AI-поиска
+- НЕ ломать Schema.org / aria-labelledby="fakten-heading"
+- Бренд-палитра V2, Tailwind 4
+- Тесты не сломать
+**Размер:** M (текст-fix + redesign 1 компонент + перенос на /ueber-uns)
+**Рекомендуемый промпт:** P8 (правка) + `ui-ux-pro-max` (redesign карточек)
+---
+
+<!-- Последний номер: PX-035 -->
