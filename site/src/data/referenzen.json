@@ -3,6 +3,14 @@
   "emptyState": "Referenzen folgen in Kürze — wir arbeiten bereits an spannenden Projekten!",
   "items": [
     {
+      "id": "rasen-neuanlage-maulwurfsschutz",
+      "title": "Rasen-Neuanlage mit Maulwurfsschutz",
+      "description": "Kompletter Neuaufbau einer Rasenfläche im Privatgarten in 4 Schritten: alten Rasen abgeschält, 10 cm tief professionelles Maulwurfsgitter verlegt, frische Erde aufgefüllt und neuen Rasen gesät. Schutz vor Maulwurfshügeln auf Jahre — sauberer Start für einen pflegeleichten Garten.",
+      "before": "/images/referenzen/rasen-neuanlage/vorher-800.jpg",
+      "after": "/images/referenzen/rasen-neuanlage/nachher-800.jpg",
+      "date": "2026-05"
+    },
+    {
       "id": "vorgarten-bielefeld-uebersicht",
       "title": "Vorgartenpflege — Bielefeld (Übersicht)",
       "description": "40 m² Vorgarten für eine Immobilienverwaltung in Bielefeld komplett überholt — Pampasgras zurückgeschnitten, Wildwuchs entfernt, Beet neu strukturiert. Grünschnitt fachgerecht entsorgt.",
