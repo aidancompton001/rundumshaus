@@ -1056,4 +1056,37 @@ Phase C (если Kevin даст дополнительные pricing):
 **Рекомендуемый промпт:** P8 (правка) + `ui-ux-pro-max` (redesign карточек)
 ---
 
-<!-- Последний номер: PX-035 -->
+## PX-036
+**Дата:** 2026-05-25
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** WhatsApp Kevin — 4 новых фото (Rasen-Neuanlage Privatgarten)
+
+---
+**PX-036**
+**Задача:** Залить новый Gartenpflege-кейс (Rasen-Neuanlage mit Maulwurfsschutz, 4 этапа) на /referenzen + GBP-post текст для Kevin
+**Контекст:**
+- Source: `img/referenzen-real/neu-gartenpflege/` (4 jpg, Kevin сам подписал)
+- Target: `site/public/images/referenzen/rasen-neuanlage/`
+- `site/src/data/referenzen.json` — новая карточка
+- `site/src/__tests__/wave8.test.tsx` — обновить regex referenz titles если нужно
+- ReferenzenContent.tsx side-by-side vorher/nachher уже работает (PR #8)
+**Проблема:** Kevin прислал 4 фото = 1 кейс (vorher → Rasen abgeschält → Maulwurfsgitter 10cm tief → Erde + Rasen säen). Premium-level Gartenpflege (Maulwurfsschutz = professional feature). Privatkunde (vs B2B Bielefeld). Сейчас на /referenzen: 2 Bielefeld + 2 legacy AI-placeholder
+**Цель:**
+1. Новая карточка "Rasen-Neuanlage mit Maulwurfsschutz" на /referenzen с vorher/nachher
+2. GBP-post текст для Kevin (без телефона, с Anruf-Button workaround)
+3. Опционально: если город подтверждён → встроить в /leistungen/gartenpflege/{city}/ E-E-A-T
+**Скоуп:**
+- Оптимизация 4 фото (sharp WebP 400/800/1200 + JPG 800 = 16 файлов)
+- Новая запись `rasen-neuanlage-01` в referenzen.json
+- Title/description упоминают 4 этапа + Maulwurfsschutz
+- Города уточнить у CEO (фото показывают Wald-Randlage — Osnabrücker Land, Hagen/Bad Iburg/Belm/Bissendorf?). Без подтверждения = "Raum Osnabrück"
+- GBP-post text: Rasen-Neuanlage, 4 шага, Festpreis-CTA
+- Update test wave8 при необходимости
+- Build + tests + commit + push + merge + deploy + verify
+**Ограничения:** НЕ менять остальные карточки, НЕ ломать side-by-side render (PR #8), DSGVO ✓ (только реальные фото Kevin), Tailwind 4
+**Размер:** S-M
+**Рекомендуемый промпт:** P8 (контент + изображения)
+---
+
+<!-- Последний номер: PX-036 -->
