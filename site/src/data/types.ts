@@ -104,6 +104,11 @@ export interface WeitereLeistungenData {
 
 /* ── Referenzen ── */
 
+export interface ReferenzStep {
+  src: string;
+  label: string;
+}
+
 export interface Referenz {
   id: string;
   title: string;
@@ -111,6 +116,10 @@ export interface Referenz {
   before: string;
   after: string;
   date: string;
+  // PX-036b: optional multi-step gallery (Kevin request — 4 photos per case).
+  // If present, ReferenzenContent renders a 2×2 grid with labels instead of
+  // the standard side-by-side vorher/nachher.
+  steps?: ReferenzStep[];
 }
 
 export interface ReferenzenData {

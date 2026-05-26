@@ -8,7 +8,13 @@
       "description": "Kompletter Neuaufbau einer Rasenfläche im Privatgarten in Bramsche, in 4 Schritten: alten Rasen abgeschält, 10 cm tief professionelles Maulwurfsgitter verlegt, frische Erde aufgefüllt und neuen Rasen gesät. Schutz vor Maulwurfshügeln auf Jahre — sauberer Start für einen pflegeleichten Garten.",
       "before": "/images/referenzen/rasen-neuanlage/vorher-800.jpg",
       "after": "/images/referenzen/rasen-neuanlage/nachher-800.jpg",
-      "date": "2026-05"
+      "date": "2026-05",
+      "steps": [
+        { "src": "/images/referenzen/rasen-neuanlage/vorher-800.jpg",                       "label": "Vorher" },
+        { "src": "/images/referenzen/rasen-neuanlage/prozess-1-rasen-abgeschaelt-800.jpg",  "label": "Rasen abgeschält" },
+        { "src": "/images/referenzen/rasen-neuanlage/prozess-2-maulwurfsgitter-800.jpg",    "label": "Maulwurfsgitter (10 cm)" },
+        { "src": "/images/referenzen/rasen-neuanlage/nachher-800.jpg",                      "label": "Nachher" }
+      ]
     },
     {
       "id": "vorgarten-bielefeld-uebersicht",
