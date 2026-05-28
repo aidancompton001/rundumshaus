@@ -67,6 +67,14 @@ export default function ServiceDetail() {
                 <p className="text-charcoal-light leading-relaxed">
                   {service.detailDescription}
                 </p>
+                {service.subPage && (
+                  <a
+                    href={service.subPage.href}
+                    className="inline-flex items-center mt-5 text-copper font-semibold hover:underline"
+                  >
+                    {service.subPage.label}
+                  </a>
+                )}
               </div>
             </div>
           ))}
