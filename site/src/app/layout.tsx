@@ -198,6 +198,17 @@ export default function RootLayout({
                           "Kostenlose Abholung von Altmetall im 60-km-Umkreis — Tauschgeschäft (Materialwert deckt die Anfahrt).",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                       },
+                      // PX-037: dedicated Rasenneuanlage sub-service with its own landing page.
+                      {
+                        "@type": "Service",
+                        name: "Rasenneuanlage",
+                        serviceType: "Gartenpflege — Rasenneuanlage",
+                        description:
+                          "Komplette Rasenneuanlage: alten Rasen entfernen, Boden vorbereiten, Rasensaat oder Rollrasen-Verlegung. Kostenlose Besichtigung — Festpreis.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                        url: "https://rundumshaus-littawe.de/leistungen/rasen-neuanlage/",
+                        areaServed: targetCitiesSchema,
+                      },
                     ],
                   },
                 },

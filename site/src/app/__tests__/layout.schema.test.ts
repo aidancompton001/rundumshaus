@@ -163,9 +163,9 @@ describe("layout.tsx — Schema.org @graph", () => {
       expect(lb!.foundingDate).toBe("2026");
     });
 
-    it("has hasOfferCatalog with all 5 services", () => {
+    it("has hasOfferCatalog with all 5 main services + Rasenneuanlage sub-service (PX-037)", () => {
       const cat = lb!.hasOfferCatalog as { itemListElement: Array<Record<string, unknown>> };
-      expect(cat.itemListElement.length).toBe(5);
+      expect(cat.itemListElement.length).toBe(6);
       const names = cat.itemListElement.map((s) => s.name);
       expect(names).toEqual([
         "Hausmeisterservice",
@@ -173,6 +173,7 @@ describe("layout.tsx — Schema.org @graph", () => {
         "Dacharbeiten",
         "Entrümpelung",
         "Schrottabholung",
+        "Rasenneuanlage",
       ]);
     });
 
