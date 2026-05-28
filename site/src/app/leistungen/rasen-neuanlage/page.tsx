@@ -159,7 +159,7 @@ export default function RasenNeuanlagePage() {
               href="/referenzen/"
               className="inline-flex items-center text-copper hover:underline font-medium"
             >
-              Zur Referenz „Rasen-Neuanlage Bramsche" →
+              Zur Referenz „Rasen-Neuanlage Bramsche&ldquo; →
             </Link>
           </section>
 
