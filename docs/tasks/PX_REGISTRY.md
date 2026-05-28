@@ -1089,4 +1089,22 @@ Phase C (если Kevin даст дополнительные pricing):
 **Рекомендуемый промпт:** P8 (контент + изображения)
 ---
 
-<!-- Последний номер: PX-036 -->
+## PX-037
+**Дата:** 2026-05-28
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** WhatsApp Kevin 2026-05-27 11:56-12:12 — много запросов на Rasen-Neuanlage, прислал готовый текст
+
+---
+**PX-037**
+**Задача:** Создать отдельную страницу `/leistungen/rasen-neuanlage/` (вариант C) с готовым текстом Kevin
+**Контекст:** новая `site/src/app/leistungen/rasen-neuanlage/page.tsx`, sitemap.ts, layout.tsx Schema OfferCatalog, ReferenzenContent (cross-link Bramsche)
+**Проблема:** Kevin получает много заявок на Rasen-Neuanlage. На сайте упоминается косвенно. Прислал готовый текст (Title + intro + 9 работ список). Без фото
+**Цель:** Отдельный URL `/leistungen/rasen-neuanlage/` со Schema Service, ranking-таргет под "Rasen neu anlegen [Stadt]"
+**Скоуп:** Создать page.tsx (готовый текст Kevin AS IS), 9 пунктов checklist, CTA Kontakt, cross-link Bramsche Referenz, добавить в sitemap, опц. Schema Service entry в OfferCatalog
+**Ограничения:** Текст Kevin AS IS, без фото, бренд V2, не ломать existing
+**Размер:** S-M
+**Рекомендуемый промпт:** P8
+---
+
+<!-- Последний номер: PX-037 -->
