@@ -125,6 +125,11 @@ interface ServiceBlocks {
 const cityContext = (c: City) =>
   `${c.displayName} (${c.bundesland}, ${c.landkreis}, PLZ-Bereich ${c.plzPrefix})`;
 
+// PX-038 CTR fix: meta description should not say "Aus Osnabrück, 0 km Anfahrt"
+// when the city IS Osnabrück. Returns " · 60 km Anfahrt" or empty string.
+const distanceMeta = (c: City) =>
+  c.distanceKm === 0 ? "" : ` · ${c.distanceKm} km Anfahrt`;
+
 const distancePhrase = (c: City) =>
   c.distanceKm === 0
     ? `direkt in Osnabrück`
@@ -138,9 +143,9 @@ const distancePhrase = (c: City) =>
 const HAUSMEISTER: ServiceBlocks = {
   primaryKeyword: (c) => `Hausmeisterservice ${c.displayName}`,
   metaTitle: (c) =>
-    `Hausmeisterservice ${c.displayName} (${c.landkreis}) | Rund ums Haus Littawe`,
+    `Hausmeisterservice ${c.displayName} ★ Festpreis & schneller Termin`,
   metaDescription: (c) =>
-    `Zuverlässiger Hausmeisterservice in ${c.displayName} (${c.bundesland}): Reparaturen, Wartung, Treppenhausreinigung, Außenanlagen, Winterdienst. Aus Osnabrück, ${c.distanceKm} km Anfahrt. Kostenlose Besichtigung.`,
+    `Hausmeister in ${c.displayName}: Reparaturen, Wartung, Treppenhaus, Außenanlagen, Winterdienst. Festpreis nach kostenloser Besichtigung. Familienbetrieb aus Osnabrück${distanceMeta(c)}. ☎ Jetzt anrufen.`,
   h1: (c) => `Hausmeisterservice in ${c.displayName} — zuverlässig und schnell vor Ort`,
   introVariants: [
     (c) =>
@@ -238,9 +243,9 @@ const HAUSMEISTER: ServiceBlocks = {
 const GARTEN: ServiceBlocks = {
   primaryKeyword: (c) => `Gärtner ${c.displayName}`,
   metaTitle: (c) =>
-    `Gärtner & Gartenpflege ${c.displayName} (${c.landkreis}) | Rund ums Haus Littawe`,
+    `Gärtner ${c.displayName} ★ Rasen, Hecken & komplette Gartenpflege`,
   metaDescription: (c) =>
-    `Gartenpflege in ${c.displayName} (${c.bundesland}): Rasen mähen, Hecken schneiden, Beetpflege, Gartenbetreuung übers Jahr. Aus Osnabrück, ${c.distanceKm} km Anfahrt. Kostenlose Besichtigung.`,
+    `Gartenpflege in ${c.displayName}: Rasen mähen, Hecken schneiden, Beetpflege, Rasen neu anlegen. Festpreis nach kostenloser Besichtigung. Familienbetrieb aus Osnabrück${distanceMeta(c)}. ☎ Termin sichern.`,
   h1: (c) => `Gärtner & Gartenpflege in ${c.displayName}`,
   introVariants: [
     (c) =>
@@ -338,9 +343,9 @@ const GARTEN: ServiceBlocks = {
 const DACH: ServiceBlocks = {
   primaryKeyword: (c) => `Dachreinigung ${c.displayName}`,
   metaTitle: (c) =>
-    `Dachreinigung & Dacharbeiten ${c.displayName} | Rund ums Haus Littawe`,
+    `Dachreinigung ${c.displayName} ★ Moos & Algen entfernen | Festpreis`,
   metaDescription: (c) =>
-    `Dachreinigung in ${c.displayName} (${c.landkreis}, ${c.bundesland}): Moos- und Algenentfernung, Dachrinnenreinigung, Beschichtung. Festpreis nach kostenloser Besichtigung. ${c.distanceKm} km aus Osnabrück.`,
+    `Dachreinigung in ${c.displayName}: Moos- und Algenentfernung, Dachrinnen, Beschichtung. Festpreis nach kostenloser Besichtigung — keine Stunden­abrechnung. Familienbetrieb aus Osnabrück${distanceMeta(c)}.`,
   h1: (c) => `Dachreinigung in ${c.displayName} — sauber und langlebig`,
   introVariants: [
     (c) =>
@@ -430,9 +435,9 @@ const DACH: ServiceBlocks = {
 const ENTRUEMP: ServiceBlocks = {
   primaryKeyword: (c) => `Entrümpelung ${c.displayName}`,
   metaTitle: (c) =>
-    `Entrümpelung & Haushaltsauflösung ${c.displayName} | Rund ums Haus Littawe`,
+    `Entrümpelung ${c.displayName} ★ Festpreis ab 200 € | besenrein`,
   metaDescription: (c) =>
-    `Entrümpelung in ${c.displayName} (${c.landkreis}): vom Keller bis zur kompletten Haushaltsauflösung. Festpreis nach kostenloser Besichtigung. Aus Osnabrück, ${c.distanceKm} km Anfahrt.`,
+    `Entrümpelung & Haushaltsauflösung in ${c.displayName}: Keller, Dachboden, ganze Wohnung — besenrein übergeben. Festpreis ab 200 € nach kostenloser Besichtigung. Aus Osnabrück${distanceMeta(c)}.`,
   h1: (c) => `Entrümpelung & Haushaltsauflösung in ${c.displayName}`,
   introVariants: [
     (c) =>
@@ -526,9 +531,9 @@ const ENTRUEMP: ServiceBlocks = {
 const SCHROTT: ServiceBlocks = {
   primaryKeyword: (c) => `Schrottabholung ${c.displayName}`,
   metaTitle: (c) =>
-    `Kostenlose Schrottabholung ${c.displayName} (${c.landkreis}) | Rund ums Haus Littawe`,
+    `Schrottabholung ${c.displayName} ★ Kostenlos & schnell vor Ort`,
   metaDescription: (c) =>
-    `Kostenlose Schrottabholung in ${c.displayName} (${c.bundesland}): Altmetall schnell und unkompliziert abgeholt. Aus Osnabrück, ${c.distanceKm} km Anfahrt. Termin kurzfristig möglich.`,
+    `Kostenlose Schrottabholung in ${c.displayName}: Altmetall schnell und unkompliziert abgeholt — meist innerhalb weniger Tage. Aus Osnabrück${distanceMeta(c)}. ☎ Termin per Anruf oder WhatsApp.`,
   h1: (c) => `Kostenlose Schrottabholung in ${c.displayName}`,
   introVariants: [
     (c) =>
