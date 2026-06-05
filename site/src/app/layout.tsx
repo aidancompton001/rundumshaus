@@ -209,6 +209,21 @@ export default function RootLayout({
                         url: "https://rundumshaus-littawe.de/leistungen/rasen-neuanlage/",
                         areaServed: targetCitiesSchema,
                       },
+                      // PX-040: dedicated B2B Objektpflege landing for property managers, WEGs etc.
+                      {
+                        "@type": "Service",
+                        name: "Objektpflege",
+                        serviceType: "Objektbetreuung & Hausmeisterservice für Hausverwaltungen",
+                        description:
+                          "Professionelle Objektpflege für Mehrfamilienhäuser, Wohnanlagen, Gewerbeobjekte und Außenanlagen. Festpreis oder Jahresvertrag.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                        url: "https://rundumshaus-littawe.de/leistungen/objektpflege/",
+                        areaServed: targetCitiesSchema,
+                        audience: {
+                          "@type": "Audience",
+                          audienceType: "Hausverwaltungen, Vermieter, WEGs, Wohnungsbaugesellschaften",
+                        },
+                      },
                     ],
                   },
                 },

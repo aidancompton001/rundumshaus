@@ -62,6 +62,14 @@ export default function Footer() {
                   Rasen neu anlegen
                 </a>
               </li>
+              <li>
+                <a
+                  href={getHref("/leistungen/objektpflege")}
+                  className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  Objektpflege (B2B)
+                </a>
+              </li>
             </ul>
           </div>
 
