@@ -1,21 +1,57 @@
 {
   "source": "Google Business Profile",
-  "verified": "2026-05-02 (CEO confirmed mit Kevin via WhatsApp screenshots)",
+  "verified": "2026-06-05 (CEO confirmed via Google Maps screenshot, 6 total reviews — PX-041)",
   "aggregateRating": {
     "ratingValue": 5,
-    "ratingCount": 2,
+    "ratingCount": 6,
     "bestRating": 5,
     "worstRating": 5
   },
   "reviews": [
+    {
+      "id": "google-justus-mueller-2026-05",
+      "author": "Justus Müller",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-05-05",
+      "text": "Rund ums Haus Littawe hat meinen kompletten Garten wieder in Topform gebracht. Es wurde alles gründlich gesäubert, der Rasen gemäht und vertikutiert sowie sämtliche Gartenarbeiten sauber erledigt.",
+      "service": "Gartenpflege"
+    },
+    {
+      "id": "google-charleton-kaps-2026-05",
+      "author": "Charleton Kaps",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-05-29",
+      "text": "Sehr zuverlässig, super schnell gearbeitet und dabei auch noch total freundlich. Die Entrümpelung und Dachreinigung wurden sauber und professionell durchgeführt – und das zu einem top Preis. Bin sehr zufrieden, jederzeit wieder gerne!",
+      "service": "Entrümpelung & Dachreinigung"
+    },
+    {
+      "id": "google-maxim-kloster-2026-05",
+      "author": "Maxim Kloster",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-05-29",
+      "text": "Sehr freundlich und gute Arbeit geleistet. Kann ich nur weiterempfehlen!",
+      "service": null
+    },
     {
       "id": "google-radoslaw-labuda-2026-04",
       "author": "Radoslaw Eugeniusz Labuda",
       "city": "Osnabrück",
       "rating": 5,
       "datePublished": "2026-04-25",
-      "text": "Alles perfekt! Schnelle Terminvergabe, pünktliche Abholung und fairer Preis. Der ganze Grünschnitt und Müll ist weg, genau so habe ich mir das vorgestellt.",
+      "text": "Alles perfekt! Schnelle Terminvorgabe, pünktliche Abholung und fairer Preis. Der ganze Grünschnitt und Müll ist weg, genau so habe ich mir das vorgestellt. Gerne wieder!",
       "service": "Schrottabholung"
+    },
+    {
+      "id": "google-luca-kleinfeld-2026-05",
+      "author": "Luca Kleinfeld",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-05-10",
+      "text": "Bestes Unternehmen",
+      "service": null
     },
     {
       "id": "google-daria-kaminska-2026-04",
@@ -23,7 +59,7 @@
       "city": "Osnabrück",
       "rating": 5,
       "datePublished": "2026-04-18",
-      "text": "Super !! 🙌",
+      "text": "Super !! 🙌🙌",
       "service": null
     }
   ]
