@@ -9,7 +9,8 @@
       "detailDescription": "Ob Reparaturen, Wartungsarbeiten oder regelmäßige Kontrollen — unser Hausmeisterservice kümmert sich um alle anfallenden Aufgaben rund um Ihre Immobilie. Professionell, termingerecht und zu fairen Preisen.",
       "icon": "wrench",
       "image": "/images/services/hausmeisterservice.png",
-      "detailImage": "/images/services/detail-hausmeister.png"
+      "detailImage": "/images/services/detail-hausmeister.png",
+      "subPage": { "href": "/leistungen/objektpflege/", "label": "Für Hausverwaltungen & WEGs: Objektpflege →" }
     },
     {
       "id": "gartenpflege",
