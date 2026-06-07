@@ -1,13 +1,22 @@
 {
   "source": "Google Business Profile",
-  "verified": "2026-06-05 (CEO confirmed via Google Maps screenshot, 6 total reviews — PX-041)",
+  "verified": "2026-06-07 (CEO confirmed, +1 new review from Jens 2026-06-06 — PX-043)",
   "aggregateRating": {
     "ratingValue": 5,
-    "ratingCount": 6,
+    "ratingCount": 7,
     "bestRating": 5,
     "worstRating": 5
   },
   "reviews": [
+    {
+      "id": "google-jens-2026-06",
+      "author": "Jens",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-06-06",
+      "text": "In meinem Fall ging es um eine Dachrinnenreinigung. Ein super freundlicher Kontakt und wirklich unglaublich schnell noch am selben Tag vor Ort. Ich kann das Unternehmen wirklich nur sehr empfehlen und bin sehr zufrieden.",
+      "service": "Dachrinnenreinigung"
+    },
     {
       "id": "google-justus-mueller-2026-05",
       "author": "Justus Müller",

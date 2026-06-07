@@ -270,15 +270,15 @@ describe("layout.tsx — Schema.org @graph", () => {
       const ar = lb3!.aggregateRating as Record<string, unknown>;
       expect(ar["@type"]).toBe("AggregateRating");
       expect(ar.ratingValue).toBe(5);
-      expect(ar.ratingCount).toBe(6);
+      expect(ar.ratingCount).toBe(7);
       expect(ar.bestRating).toBe(5);
       expect(ar.worstRating).toBe(5);
     });
 
-    it("LocalBusiness has 6 Review entries (PX-041: +4 new)", () => {
+    it("LocalBusiness has 7 Review entries (PX-043: +Jens, Dachrinnenreinigung)", () => {
       const reviews = lb3!.review as Array<Record<string, unknown>>;
       expect(Array.isArray(reviews)).toBe(true);
-      expect(reviews.length).toBe(6);
+      expect(reviews.length).toBe(7);
       const authors = reviews.map(
         (r) => (r.author as Record<string, string>).name
       );
@@ -288,6 +288,7 @@ describe("layout.tsx — Schema.org @graph", () => {
       expect(authors).toContain("Charleton Kaps");
       expect(authors).toContain("Maxim Kloster");
       expect(authors).toContain("Luca Kleinfeld");
+      expect(authors).toContain("Jens");
     });
 
     it("each Review has @type, author Person, rating, body", () => {
