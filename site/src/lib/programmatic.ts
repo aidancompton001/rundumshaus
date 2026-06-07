@@ -641,16 +641,21 @@ export interface PageContent {
   boost?: CityBoost;
 }
 
+// PX-042 Phase A: bump Tier 2 and Tier 3 to fight the "Crawled - currently
+// not indexed" cluster. Forensic analysis (12 stuck URLs, 2026-06-05) showed
+// Tier 1 pages average 570-610 words while Tier 2/3 averaged 300-440 — well
+// below Google's thin-content threshold. Adding +1 body paragraph for T2/T3
+// raises content density without diluting unique-hook ratio.
 export function paragraphCountForTier(tier: Tier): number {
   if (tier === 1) return 7;
-  if (tier === 2) return 5;
-  return 3;
+  if (tier === 2) return 6;
+  return 4;
 }
 
 export function faqCountForTier(tier: Tier): number {
   if (tier === 1) return 8;
-  if (tier === 2) return 6;
-  return 5;
+  if (tier === 2) return 7;
+  return 6;
 }
 
 // ─────────────────────────────────────────────────────────────────────

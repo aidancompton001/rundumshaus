@@ -288,7 +288,7 @@ exports[`programmatic — snapshot regression suite > gartenpflege — covers al
 
 exports[`programmatic — snapshot regression suite > gartenpflege — covers all 8 intro variants > gartenpflege / damme 1`] = `
 {
-  "bodyLength": 5,
+  "bodyLength": 6,
   "fakten": [
     {
       "label": "Leistung",
@@ -326,6 +326,7 @@ exports[`programmatic — snapshot regression suite > gartenpflege — covers al
     "Sind Sie als Gartenpflege-Dienst in Damme versichert?",
     "Bieten Sie Gartenpflege auch in Damme an?",
     "Wie oft sollte eine Hecke in Damme geschnitten werden?",
+    "Wann ist der beste Zeitpunkt für einen Rückschnitt in Niedersachsen?",
   ],
   "h1": "Gärtner & Gartenpflege in Damme",
   "intro": "Sie suchen einen zuverlässigen Gärtner in Damme? Wir übernehmen Rasenmähen, Heckenschnitt, Beetpflege, Vertikutieren und saisonale Arbeiten — einmalig oder als ganzjährige Gartenbetreuung. Am Dümmer im Oldenburger Münsterland kennen wir die Bodenverhältnisse, das Klima und die typischen Pflanzenarten der Region. Anfahrt aus Osnabrück: 35 km.",
@@ -626,7 +627,7 @@ exports[`programmatic — snapshot regression suite > other services — spot ch
 
 exports[`programmatic — snapshot regression suite > other services — spot checks > schrottabholung / muenster 1`] = `
 {
-  "bodyLength": 3,
+  "bodyLength": 4,
   "fakten": [
     {
       "label": "Leistung",
@@ -663,6 +664,7 @@ exports[`programmatic — snapshot regression suite > other services — spot ch
     "Ist die Schrottabholung in Münster wirklich kostenlos?",
     "Was wird in Münster mitgenommen?",
     "Was wird nicht mitgenommen?",
+    "Wie schnell kommen Sie in Münster?",
   ],
   "h1": "Kostenlose Schrottabholung in Münster",
   "intro": "Wenn Sie in Münster Altmetall loswerden möchten — Heizkörper, alte Werkzeuge, Schrott aus Renovierung oder Räumung —, holen wir das kostenlos bei Ihnen ab. Im Herzen des Münsterlandes, Universitätsstadt sind kurze Anfahrten zu fairen Konditionen Standard.",

@@ -177,7 +177,14 @@
         "bramsche",
         "bissendorf",
         "bad-essen"
-      ]
+      ],
+      "boost": {
+        "hausmeisterservice": {
+          "anfahrtMin": 17,
+          "festpreisBeispiel": "Hausmeister-Kleinreparaturen ab 150 € · Treppenhauspflege ab 85 €/Monat",
+          "lokal": "Bad Iburg ist Kurort am Teutoburger Wald, nur 17 km südlich von Osnabrück über die B51 erreichbar. Kurze Anfahrt bedeutet kurzfristige Termine — oft innerhalb der gleichen Woche. Wir betreuen Mehrfamilienhäuser im Ortskern, Wohnanlagen am Kurpark und Privatobjekte in den Ortsteilen Glane und Sentrup."
+        }
+      }
     },
     {
       "name": "Bramsche",
@@ -830,7 +837,14 @@
         "damme",
         "holdorf",
         "neuenkirchen-voerden"
-      ]
+      ],
+      "boost": {
+        "hausmeisterservice": {
+          "anfahrtMin": 35,
+          "festpreisBeispiel": "Hausmeister-Kleinreparaturen ab 180 € · Treppenhaus-Pflege ab 95 €/Monat",
+          "lokal": "Steinfeld liegt 35 km südlich von Osnabrück am Dammer Berge. Wir betreuen regelmäßig Mehrfamilienhäuser im Ortskern sowie Wohngebiete Richtung Mühlen und Holdorf. Anfahrt über A1 Abfahrt Holdorf, typische Fahrzeit 30-35 Minuten."
+        }
+      }
     },
     {
       "name": "Voltlage",
@@ -905,7 +919,19 @@
         "greven",
         "steinfurt",
         "hoerstel"
-      ]
+      ],
+      "boost": {
+        "hausmeisterservice": {
+          "anfahrtMin": 38,
+          "festpreisBeispiel": "Treppenhausreinigung ab 90 €/Einsatz · Außenanlagen ab 120 €",
+          "lokal": "Hopsten im nördlichen Münsterland — Anfahrt über B70 oder Autobahn A1/A30. Wir sind regelmäßig in den Ortsteilen Schale und Halverde unterwegs und übernehmen sowohl Einzelaufträge als auch laufende Betreuungsverträge für Hausverwaltungen aus dem Kreis Steinfurt."
+        },
+        "schrottabholung": {
+          "anfahrtMin": 38,
+          "festpreisBeispiel": "Altmetall-Abholung kostenlos ab 50 kg im 60-km-Umkreis",
+          "lokal": "Hopsten erreichen wir über die B70 in rund 40 Minuten. Schrott aus Privathaushalten in Schale, Halverde und dem Ortskern holen wir nach Terminabsprache ab — Termin oft innerhalb von 3-5 Werktagen verfügbar."
+        }
+      }
     },
     {
       "name": "Quakenbrück",
@@ -979,7 +1005,14 @@
         "fuerstenau",
         "bippen",
         "berge"
-      ]
+      ],
+      "boost": {
+        "schrottabholung": {
+          "anfahrtMin": 40,
+          "festpreisBeispiel": "Altmetall-Abholung kostenlos ab 50 kg · Sammlung aus Hofbetrieben gerne",
+          "lokal": "Menslage liegt im Artland nahe der Hase, rund 40 km nord-westlich von Osnabrück. Wir kombinieren Anfahrten in die Region Bersenbrück/Quakenbrück, sodass Schrottabholungen meist innerhalb einer Woche möglich sind. Auch Hofbetriebe und landwirtschaftliche Schuppen sind kein Problem."
+        }
+      }
     },
     {
       "name": "Neuenkirchen",
@@ -1218,7 +1251,19 @@
         "spelle",
         "salzbergen",
         "herzlake"
-      ]
+      ],
+      "boost": {
+        "dacharbeiten": {
+          "anfahrtMin": 50,
+          "festpreisBeispiel": "Dachrinnen-Reinigung Einfamilienhaus ab 150 € · Dachmoos-Entfernung ab 8 €/m²",
+          "lokal": "Freren im südlichen Emsland erreichen wir über die A30/B214 in rund 50 Minuten. Wir bündeln Dacharbeiten in Freren mit Aufträgen in Lengerich und Lingen, dadurch bleibt der Anfahrtsaufschlag fair. Typische Objekte: Walmdach-Einfamilienhäuser und kleinere Mehrfamilienhäuser."
+        },
+        "gartenpflege": {
+          "anfahrtMin": 50,
+          "festpreisBeispiel": "Heckenschnitt ab 4 €/lfm · Rasenmähen ab 35 €/Einsatz",
+          "lokal": "Freren liegt 50 km von uns entfernt im südlichen Emsland. Gartenpflege übernehmen wir saisonal oder als laufenden Vertrag — wir kombinieren Anfahrten in der Region, sodass auch kleinere Aufträge wirtschaftlich bleiben. Häufige Arbeiten: Heckenpflege, Rasen-Saisonpflege, Vertikutieren."
+        }
+      }
     },
     {
       "name": "Halle (Westfalen)",
@@ -1454,7 +1499,14 @@
         "halle-westfalen",
         "werther",
         "bad-oeynhausen"
-      ]
+      ],
+      "boost": {
+        "hausmeisterservice": {
+          "anfahrtMin": 55,
+          "festpreisBeispiel": "Treppenhausreinigung ab 110 €/Einsatz · Hausmeister-Stundensätze auf Anfrage",
+          "lokal": "Bielefeld ist Großstadt in Ostwestfalen am Teutoburger Wald, 55 km östlich von Osnabrück. Wir betreuen ausgewählte Objekte in Brackwede, Sennestadt und dem Stadtteil Heepen — vor allem laufende Hausmeisterverträge für Hausverwaltungen, bei denen sich die Anfahrt durch wiederkehrende Einsätze rechnet."
+        }
+      }
     },
     {
       "name": "Diepholz",
@@ -1472,7 +1524,14 @@
         "espelkamp",
         "rahden",
         "stemwede"
-      ]
+      ],
+      "boost": {
+        "entruempelung": {
+          "anfahrtMin": 55,
+          "festpreisBeispiel": "Entrümpelung ab 200 € Festpreis · Haushaltsauflösung Mehrfamilienhaus auf Anfrage",
+          "lokal": "Diepholz ist Kreisstadt im südlichen Niedersachsen, 55 km von unserem HQ. Wir übernehmen Entrümpelungen vom einzelnen Keller bis zur kompletten Haushaltsauflösung — besenrein, mit fachgerechter Entsorgung und Wertanrechnung verwertbarer Gegenstände. Anfahrt über die A1."
+        }
+      }
     },
     {
       "name": "Espelkamp",
@@ -1548,7 +1607,14 @@
         "muenster",
         "ochtrup",
         "horstmar"
-      ]
+      ],
+      "boost": {
+        "schrottabholung": {
+          "anfahrtMin": 55,
+          "festpreisBeispiel": "Altmetall-Abholung kostenlos ab 50 kg · auch Sondertermine möglich",
+          "lokal": "Telgte liegt an der Ems östlich von Münster, 55 km von unserem Standort. Wir kombinieren Schrottfahrten in der Region Münsterland — Telgte, Westbevern und Ostbevern — sodass die Anfahrt für Sie kostenlos bleibt. Termin meist innerhalb von 1-2 Wochen."
+        }
+      }
     },
     {
       "name": "Vechta",
