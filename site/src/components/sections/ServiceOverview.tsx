@@ -33,7 +33,7 @@ export default function ServiceOverview() {
           {services.map((service) => (
             <a
               key={service.id}
-              href={getHref("/leistungen")}
+              href={getHref("/leistungen/")}
               className="group block bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-copper/30"
             >
               {service.image && (
@@ -78,7 +78,7 @@ export default function ServiceOverview() {
 
         <ScrollReveal className="text-center mt-12">
           <a
-            href={getHref("/weitere-leistungen")}
+            href={getHref("/weitere-leistungen/")}
             className="inline-flex items-center gap-2 border-2 border-charcoal/20 hover:border-copper text-charcoal hover:text-copper px-6 py-3 rounded-xl font-body font-semibold transition-colors duration-200"
           >
             Weitere Dienstleistungen

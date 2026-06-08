@@ -20,6 +20,22 @@ export function generateSEO({ title, description, path = "" }: SEOInput): Metada
       url: `https://${DOMAIN}${path}`,
       locale: "de_DE",
       type: "website",
+      // PX-046 F14: og:image fallback на всех страницах (6 из 7 главных
+      // не имели — отсутствовал preview в WhatsApp/LinkedIn/FB shares).
+      images: [
+        {
+          url: "/images/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: SITE_NAME,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description,
+      images: ["/images/og-image.jpg"],
     },
     alternates: {
       canonical: `https://${DOMAIN}${path}`,

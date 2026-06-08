@@ -165,3 +165,28 @@ html.lenis body {
       var(--hero-img-desktop);
   }
 }
+
+/* PX-046 F16: ContactForm responsive background — fixes mobile LCP 39s -> <3s.
+   7 MB PNG replaced with responsive webp variants (51 KB mobile, 94 KB tablet,
+   190 KB desktop). White-tint overlay keeps form readable. */
+.contact-form-bg {
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.96)),
+    url("/images/kontakt/contact-bg-800w.webp");
+  background-size: cover;
+  background-position: center;
+}
+@media (min-width: 768px) {
+  .contact-form-bg {
+    background-image:
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.96)),
+      url("/images/kontakt/contact-bg-1200w.webp");
+  }
+}
+@media (min-width: 1280px) {
+  .contact-form-bg {
+    background-image:
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.96)),
+      url("/images/kontakt/contact-bg-1920w.webp");
+  }
+}

@@ -10,10 +10,11 @@ import { generateSEO } from "@/lib/seo";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import reviewsData from "@/data/reviews.json";
 
+// PX-046 F4+F8: title 91→58 chars, description 191→154 chars
 export const metadata = generateSEO({
-  title: "Hausmeister & Gartenpflege Osnabrück ★ Rund ums Haus Littawe",
+  title: "Hausmeister & Gartenpflege Osnabrück ★ Familienbetrieb",
   description:
-    "Familienbetrieb in Osnabrück: Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung & Schrottabholung. Bramscher Str. 161 · ★ 5,0 aus 8 Google-Bewertungen. ☎ direkt anrufen.",
+    "Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Dach, Entrümpelung, Schrott in Osnabrück. ★ 5,0 aus 8 Bewertungen. ☎ direkt anrufen.",
   path: "/osnabrueck",
 });
 
