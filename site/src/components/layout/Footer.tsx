@@ -48,7 +48,7 @@ export default function Footer() {
               ))}
               <li>
                 <a
-                  href={getHref("/osnabrueck")}
+                  href={getHref("/osnabrueck/")}
                   className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Standort Osnabrück
@@ -56,7 +56,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={getHref("/einsatzgebiet")}
+                  href={getHref("/einsatzgebiet/")}
                   className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Einsatzgebiet
@@ -64,7 +64,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={getHref("/leistungen/rasen-neuanlage")}
+                  href={getHref("/leistungen/rasen-neuanlage/")}
                   className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Rasen neu anlegen
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={getHref("/leistungen/objektpflege")}
+                  href={getHref("/leistungen/objektpflege/")}
                   className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Objektpflege (B2B)

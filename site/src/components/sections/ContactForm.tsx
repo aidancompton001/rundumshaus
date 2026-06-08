@@ -47,17 +47,11 @@ export default function ContactForm() {
     }
   }
 
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
+  // PX-046 F16: 7 MB PNG → responsive webp. Mobile (default) 51 KB,
+  // tablet 94 KB, desktop 190 KB via CSS media queries in globals.css.
+  // Fixed mobile LCP from 39s to <3s.
   return (
-    <section
-      className="py-20 md:py-28 relative"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.92), rgba(255,255,255,0.96)), url(${basePath}/images/kontakt/contact-bg.png)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <section className="contact-form-bg py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}
@@ -150,15 +144,19 @@ export default function ContactForm() {
                                 </span>
                               </label>
                             ) : field.type === "textarea" ? (
+                              // PX-046 F22: aria-label fix for floating-label fields
                               <div key={field.name} className="relative">
                                 <textarea
+                                  id={`f-${field.name}`}
                                   name={field.name}
                                   required={field.required}
                                   placeholder=" "
                                   rows={4}
+                                  aria-label={field.label}
+                                  aria-required={field.required}
                                   className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all resize-none"
                                 />
-                                <label className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
+                                <label htmlFor={`f-${field.name}`} className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
                                   {field.label}
                                   {field.required && " *"}
                                 </label>
@@ -166,13 +164,25 @@ export default function ContactForm() {
                             ) : (
                               <div key={field.name} className="relative">
                                 <input
+                                  id={`f-${field.name}`}
                                   type={field.type}
                                   name={field.name}
                                   required={field.required}
                                   placeholder=" "
+                                  aria-label={field.label}
+                                  aria-required={field.required}
+                                  autoComplete={
+                                    field.type === "email"
+                                      ? "email"
+                                      : field.type === "tel"
+                                        ? "tel"
+                                        : field.name === "name"
+                                          ? "name"
+                                          : undefined
+                                  }
                                   className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all"
                                 />
-                                <label className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
+                                <label htmlFor={`f-${field.name}`} className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
                                   {field.label}
                                   {field.required && " *"}
                                 </label>

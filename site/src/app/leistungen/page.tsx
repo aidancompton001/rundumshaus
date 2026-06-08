@@ -3,10 +3,11 @@ import ServiceDetail from "@/components/sections/ServiceDetail";
 import LeistungenInStaedten from "@/components/sections/LeistungenInStaedten";
 import WeitereLeistungenSection from "@/components/sections/WeitereLeistungenSection";
 
+// PX-046 F3+F4: title 100→52 chars, description 181→152 chars (Google truncation fix)
 export const metadata = generateSEO({
-  title: "Leistungen — Gärtner & Entrümpelungsfirma in Osnabrück und Umgebung",
+  title: "Leistungen ★ Hausmeister & Gärtner Osnabrück",
   description:
-    "Gartenpflege, Heckenschnitt, Entrümpelung und Haushaltsauflösung — schnell und zuverlässig in Osnabrück, Bramsche, Wallenhorst, Belm, Bissendorf, Georgsmarienhütte und Melle.",
+    "Hausmeister, Gartenpflege, Dacharbeiten, Entrümpelung & Schrottabholung in Osnabrück und 60-km-Umkreis. Festpreis nach kostenloser Besichtigung.",
   path: "/leistungen",
 });
 
