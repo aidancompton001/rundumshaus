@@ -1,13 +1,22 @@
 {
   "source": "Google Business Profile",
-  "verified": "2026-06-07 (CEO confirmed, +1 new review from Jens 2026-06-06 — PX-043)",
+  "verified": "2026-06-08 (CEO confirmed, +1 new review from Markus 2026-06-07 — PX-044)",
   "aggregateRating": {
     "ratingValue": 5,
-    "ratingCount": 7,
+    "ratingCount": 8,
     "bestRating": 5,
     "worstRating": 5
   },
   "reviews": [
+    {
+      "id": "google-markus-2026-06",
+      "author": "Markus",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-06-07",
+      "text": "Sehr zuverlässig und super schnell gearbeitet. Terminabstimmung total unkompliziert und freundlich. Die Entrümpelung des Dachbodens wurde sauber und professionell durchgeführt. Preis-Leistung top! Bin sehr zufrieden und kann die Firma nur weiterempfehlen! Sehr sympathisches Team.",
+      "service": "Entrümpelung"
+    },
     {
       "id": "google-jens-2026-06",
       "author": "Jens",
