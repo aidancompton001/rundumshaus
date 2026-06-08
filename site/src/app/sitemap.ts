@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, lastModified: now, priority: 1.0, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/osnabrueck/`, lastModified: now, priority: 0.95, changeFrequency: "weekly" },
     { url: `${BASE_URL}/leistungen/`, lastModified: now, priority: 0.9, changeFrequency: "monthly" },
     { url: `${BASE_URL}/leistungen/rasen-neuanlage/`, lastModified: now, priority: 0.85, changeFrequency: "monthly" },
     { url: `${BASE_URL}/leistungen/objektpflege/`, lastModified: now, priority: 0.85, changeFrequency: "monthly" },

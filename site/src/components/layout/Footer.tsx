@@ -48,6 +48,14 @@ export default function Footer() {
               ))}
               <li>
                 <a
+                  href={getHref("/osnabrueck")}
+                  className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  Standort Osnabrück
+                </a>
+              </li>
+              <li>
+                <a
                   href={getHref("/einsatzgebiet")}
                   className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                 >
