@@ -1,5 +1,6 @@
 import { generateSEO } from "@/lib/seo";
 import ServiceDetail from "@/components/sections/ServiceDetail";
+import LeistungenInStaedten from "@/components/sections/LeistungenInStaedten";
 import WeitereLeistungenSection from "@/components/sections/WeitereLeistungenSection";
 
 export const metadata = generateSEO({
@@ -13,6 +14,7 @@ export default function LeistungenPage() {
   return (
     <>
       <ServiceDetail />
+      <LeistungenInStaedten />
       <WeitereLeistungenSection />
     </>
   );
