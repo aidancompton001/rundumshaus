@@ -23,10 +23,17 @@ describe("Data Integrity", () => {
       expect(site.company).toBeTruthy();
     });
 
-    it("has 5 navigation links (Startseite, Leistungen, Über uns, Referenzen, Kontakt)", () => {
-      expect(site.navigation).toHaveLength(5);
+    it("has 6 navigation links incl. Osnabrück (PX-045 — HQ-city hub)", () => {
+      expect(site.navigation).toHaveLength(6);
       const labels = site.navigation.map((n) => n.label);
-      expect(labels).toEqual(["Startseite", "Leistungen", "Über uns", "Referenzen", "Kontakt"]);
+      expect(labels).toEqual([
+        "Startseite",
+        "Leistungen",
+        "Osnabrück",
+        "Über uns",
+        "Referenzen",
+        "Kontakt",
+      ]);
     });
 
     it("has owner name", () => {
