@@ -64,6 +64,19 @@ const EXPECTATIONS = {
     ],
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
+  entruempelung: {
+    minH2: 8, // CTA + Pro + Leistungen + 2 sub + Warum + Einsatzgebiet + FAQ
+    minH3: 2,
+    requiredHeadings: [
+      "Jetzt kostenloses Angebot anfragen",
+      "Haushaltsauflösung in",
+      "Wohnungsauflösung & Nachlassauflösung",
+      "Warum Rund ums Haus Littawe?",
+      "Einsatzgebiet",
+      "Häufige Fragen",
+    ],
+    requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
+  },
 };
 
 const results = [];

@@ -15,9 +15,11 @@ import { generateSEO } from "@/lib/seo";
 import { getGartenContent } from "@/lib/template-content";
 import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import { getDachContent } from "@/lib/template-content-dach";
+import { getEntruempelungContent } from "@/lib/template-content-entruempelung";
 import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
 import HausmeisterCityTemplate from "@/components/templates/HausmeisterCityTemplate";
 import DachCityTemplate from "@/components/templates/DachCityTemplate";
+import EntruempelungCityTemplate from "@/components/templates/EntruempelungCityTemplate";
 
 export const dynamicParams = false;
 
@@ -81,6 +83,20 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getDachContent(cityData);
+    const seo = generateSEO({
+      title: content.metaTitle,
+      description: content.metaDescription,
+      path: `/leistungen/${service}/${city}`,
+    });
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
+  }
+  if (service === "entruempelung") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) return {};
+    const content = getEntruempelungContent(cityData);
     const seo = generateSEO({
       title: content.metaTitle,
       description: content.metaDescription,
@@ -332,6 +348,78 @@ export default async function ProgrammaticLandingPage({
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(dachFaqSchema) }} />
         <DachCityTemplate city={cityData} neighbors={neighbors} />
+      </>
+    );
+  }
+
+  // PX-050 Phase 4: entruempelung uses dedicated EntruempelungCityTemplate.
+  if (service === "entruempelung") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) notFound();
+    const neighbors = getNeighborCities(cityData);
+    const entContent = getEntruempelungContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/entruempelung/${city}/`;
+
+    const entBreadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+        { "@type": "ListItem", position: 3, name: "Entrümpelung", item: `${BASE_URL}/leistungen/#entruempelung` },
+        { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
+      ],
+    };
+
+    const entService: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Entrümpelung ${cityData.displayName}`,
+      serviceType: "Entrümpelung",
+      description: entContent.metaDescription,
+      areaServed: {
+        "@type": "City",
+        name: cityData.displayName,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: cityData.displayName,
+          addressRegion: cityData.bundesland,
+          addressCountry: "DE",
+        },
+      },
+      url: canonical,
+    };
+    if (cityData.distanceKm <= 40) {
+      entService.provider = { "@id": LOCAL_BUSINESS_ID };
+    }
+
+    const entFaqs = [
+      { q: `Was kostet eine Entrümpelung in ${cityData.displayName}?`, a: "Die Kosten hängen von der Menge, der Erreichbarkeit und dem Aufwand ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein verbindliches Festpreis-Angebot — ohne versteckte Zusatzkosten." },
+      { q: "Bieten Sie Festpreise an?", a: "Ja, nach der Besichtigung erhalten Sie ein verbindliches Festpreis-Angebot. Sie wissen vorher genau, was die Entrümpelung kostet — keine Überraschungen." },
+      { q: "Übernehmen Sie Haushaltsauflösungen nach Todesfall?", a: "Ja, wir gehen bei Nachlassauflösungen besonders respektvoll und diskret vor. Persönliche Dokumente, Fotos, Urkunden, Verträge und Wertgegenstände werden aussortiert und für Sie gesondert aufbewahrt." },
+      { q: "Was passiert mit den entsorgten Gegenständen?", a: "Wir achten auf eine umweltgerechte Trennung. Sperrmüll, Holz, Metall, Elektroschrott und weitere Wertstoffe werden fachgerecht sortiert und den entsprechenden Entsorgungsstellen zugeführt." },
+      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine für Entrümpelungen und Haushaltsauflösungen sind je nach Auslastung häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp." },
+      { q: "Übernehmen Sie auch Gewerbe- und Büroauflösungen?", a: "Ja, neben privaten Räumungen übernehmen wir auch Gewerbe-, Büro- und Lagerauflösungen sowie Räumungen von Hallen und Geschäftsflächen." },
+    ];
+    const entFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: entFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    };
+
+    return (
+      <>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entService) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entFaqSchema) }} />
+        <EntruempelungCityTemplate city={cityData} neighbors={neighbors} />
       </>
     );
   }
