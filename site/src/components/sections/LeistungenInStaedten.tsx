@@ -18,15 +18,40 @@ const SERVICES = [
   { slug: "schrottabholung", label: "Schrott" },
 ];
 
-// Top cities (the 7 in TARGET_CITIES). Osnabrück gets its dedicated
-// hub link instead of city-service grid (avoids visual duplication).
+// PX-054: Top 30 cities by tier + distance (Kevin's request 2026-06-09).
+// All T1 (19) + closest T2 (11) = 30 cities. Osnabrück excluded (own hub).
+// Full list of 98 cities accessible via /einsatzgebiet/ CTA below.
 const TOP_CITIES = [
-  { slug: "bramsche", label: "Bramsche" },
-  { slug: "wallenhorst", label: "Wallenhorst" },
   { slug: "belm", label: "Belm" },
-  { slug: "bissendorf", label: "Bissendorf" },
   { slug: "georgsmarienhuette", label: "Georgsmarienhütte" },
+  { slug: "hasbergen", label: "Hasbergen" },
+  { slug: "wallenhorst", label: "Wallenhorst" },
+  { slug: "hagen-am-teutoburger-wald", label: "Hagen am Teutoburger Wald" },
+  { slug: "lotte", label: "Lotte" },
+  { slug: "bissendorf", label: "Bissendorf" },
+  { slug: "bad-iburg", label: "Bad Iburg" },
+  { slug: "bramsche", label: "Bramsche" },
+  { slug: "westerkappeln", label: "Westerkappeln" },
+  { slug: "bad-essen", label: "Bad Essen" },
+  { slug: "bad-laer", label: "Bad Laer" },
+  { slug: "bohmte", label: "Bohmte" },
+  { slug: "glandorf", label: "Glandorf" },
+  { slug: "bad-rothenfelde", label: "Bad Rothenfelde" },
+  { slug: "lengerich", label: "Lengerich" },
   { slug: "melle", label: "Melle" },
+  { slug: "ostercappeln", label: "Ostercappeln" },
+  { slug: "rieste", label: "Rieste" },
+  { slug: "alfhausen", label: "Alfhausen" },
+  { slug: "dissen-am-teutoburger-wald", label: "Dissen am Teutoburger Wald" },
+  { slug: "recke", label: "Recke" },
+  { slug: "tecklenburg", label: "Tecklenburg" },
+  { slug: "ankum", label: "Ankum" },
+  { slug: "bersenbrueck", label: "Bersenbrück" },
+  { slug: "gehrde", label: "Gehrde" },
+  { slug: "ibbenbueren", label: "Ibbenbüren" },
+  { slug: "ladbergen", label: "Ladbergen" },
+  { slug: "mettingen", label: "Mettingen" },
+  { slug: "rheine", label: "Rheine" },
 ];
 
 const SPEZIAL = [
@@ -108,8 +133,8 @@ export default function LeistungenInStaedten() {
             </div>
           </Link>
 
-          {/* Other 6 top cities — grid */}
-          <div className="space-y-4">
+          {/* Top 30 cities — 2-column grid on md+ to keep section height reasonable */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {TOP_CITIES.map((city) => (
               <div
                 key={city.slug}
@@ -133,12 +158,20 @@ export default function LeistungenInStaedten() {
             ))}
           </div>
 
-          <div className="mt-6 text-sm text-charcoal-light">
-            Ihre Stadt nicht dabei? Im{" "}
-            <Link href="/einsatzgebiet/" className="text-copper hover:underline">
-              Einsatzgebiet
-            </Link>{" "}
-            findest du alle 98 Städte im 60-km-Umkreis.
+          {/* PX-054: prominent CTA to full list of 98 Einsatzgebiete */}
+          <div className="mt-8 text-center">
+            <Link
+              href="/einsatzgebiet/"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
+            >
+              Alle 98 Einsatzgebiete ansehen
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <p className="mt-3 text-sm text-charcoal-light">
+              Ihre Stadt nicht dabei? Wir sind im gesamten 60-km-Umkreis um Osnabrück tätig.
+            </p>
           </div>
         </div>
       </section>
