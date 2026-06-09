@@ -29,11 +29,11 @@ describe("Data Integrity", () => {
       expect(labels).toEqual([
         "Startseite",
         "Leistungen",
-        "Einsatzgebiete",
         "Osnabrück",
         "Über uns",
         "Referenzen",
         "Kontakt",
+        "Einsatzgebiete",
       ]);
     });
 

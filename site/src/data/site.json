@@ -12,11 +12,11 @@
   "navigation": [
     { "label": "Startseite", "href": "/" },
     { "label": "Leistungen", "href": "/leistungen/" },
-    { "label": "Einsatzgebiete", "href": "/einsatzgebiet/" },
     { "label": "Osnabrück", "href": "/osnabrueck/" },
     { "label": "Über uns", "href": "/ueber-uns/" },
     { "label": "Referenzen", "href": "/referenzen/" },
-    { "label": "Kontakt", "href": "/kontakt/" }
+    { "label": "Kontakt", "href": "/kontakt/" },
+    { "label": "Einsatzgebiete", "href": "/einsatzgebiet/" }
   ],
   "footer": {
     "copyright": "© 2026 Rund ums Haus Littawe. Alle Rechte vorbehalten.",
