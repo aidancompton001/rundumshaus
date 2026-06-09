@@ -33,7 +33,7 @@ export default function ServiceOverview() {
           {services.map((service) => (
             <a
               key={service.id}
-              href={getHref("/leistungen/")}
+              href={getHref(`/leistungen/${service.id}/osnabrueck/`)}
               className="group block bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-copper/30"
             >
               {service.image && (
@@ -68,9 +68,17 @@ export default function ServiceOverview() {
                     {service.title}
                   </h3>
                 </div>
-                <p className="text-charcoal-light text-sm leading-relaxed">
+                <p className="text-charcoal-light text-sm leading-relaxed mb-4">
                   {service.description}
                 </p>
+                {/* Visible affordance — Kevin K1: "Mehr erfahren" button.
+                    Not a nested <a> (parent is already <a>); styled as button-like span. */}
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold border border-copper/40 text-copper rounded-lg group-hover:border-copper group-hover:bg-copper/5 transition-colors">
+                  Mehr erfahren
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
               </div>
             </a>
           ))}

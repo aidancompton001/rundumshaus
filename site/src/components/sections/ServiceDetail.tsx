@@ -67,14 +67,27 @@ export default function ServiceDetail() {
                 <p className="text-charcoal-light leading-relaxed">
                   {service.detailDescription}
                 </p>
-                {service.subPage && (
+                {/* PX-052 K2: "Mehr erfahren" CTA to Osnabrück city page.
+                    Each service.id maps 1:1 to URL slug. */}
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
                   <a
-                    href={service.subPage.href}
-                    className="inline-flex items-center mt-5 text-copper font-semibold hover:underline"
+                    href={`/leistungen/${service.id}/osnabrueck/`}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold border border-copper/40 text-copper rounded-lg hover:border-copper hover:bg-copper/5 transition-colors"
                   >
-                    {service.subPage.label}
+                    Mehr erfahren
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                   </a>
-                )}
+                  {service.subPage && (
+                    <a
+                      href={service.subPage.href}
+                      className="text-copper font-semibold hover:underline"
+                    >
+                      {service.subPage.label}
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
