@@ -65,15 +65,18 @@ export default function Servicegebiet() {
           </p>
         </ScrollReveal>
 
-        {/* Multi-service top-cities sections — balanced inbound to all 5 services (Landa CL fix) */}
-        <ScrollReveal className="mb-12">
+        {/* PX-058: Top-cities multi-service grid removed per Kevin 2026-06-09 22:54
+            ("Links brauchen wir denke ich nicht bei den Dienstleistungen
+             haben wir dann ja schon die Links"). Direct service links
+             already available via Navbar → Leistungen. /einsatzgebiet/
+             now shows pure regional list of cities. */}
+        {false && (
+          <ScrollReveal className="mb-12">
           <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
             Beliebte Leistungen in unseren Top-Städten
           </h2>
           <p className="text-charcoal-light mb-6">
             Direkter Zugang zu unseren 5 Hauptleistungen in den nahegelegenen Städten.
-            Für Ihre konkrete Stadt nutzen Sie die regionale Übersicht weiter unten oder
-            rufen Sie uns direkt an.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 text-sm">
             {SERVICE_IDS.map((sid) => (
@@ -96,7 +99,8 @@ export default function Servicegebiet() {
               </div>
             ))}
           </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        )}
 
         <h2 className="font-heading text-2xl font-semibold text-charcoal mb-6">
           Alle {totalCities} Städte im Einsatzgebiet
@@ -123,26 +127,14 @@ export default function Servicegebiet() {
                         </li>
                       );
                     }
+                    // PX-058: Kevin requested plain text (no links).
                     return (
                       <li
                         key={city}
-                        className="flex items-start gap-2 text-sm flex-wrap"
+                        className="flex items-start gap-2 text-sm text-charcoal-light"
                       >
                         <span className="text-copper flex-shrink-0 mt-0.5" aria-hidden="true">&bull;</span>
-                        <span className="text-charcoal flex-1 min-w-0">{city}</span>
-                        <span className="flex gap-1 flex-shrink-0">
-                          {SERVICE_ICONS.map(({ sid, label, Icon }) => (
-                            <Link
-                              key={sid}
-                              href={`/leistungen/${sid}/${slug}/`}
-                              className="inline-flex items-center justify-center w-7 h-7 rounded-md hover:bg-copper/10 text-charcoal-light hover:text-copper transition-colors"
-                              title={`${label} in ${city}`}
-                              aria-label={`${label} in ${city}`}
-                            >
-                              <Icon className="w-4 h-4" />
-                            </Link>
-                          ))}
-                        </span>
+                        <span>{city}</span>
                       </li>
                     );
                   })}

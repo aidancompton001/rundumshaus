@@ -102,77 +102,27 @@ export default function LeistungenInStaedten() {
         </div>
       </section>
 
-      {/* Top cities — links to programmatic city pages */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-2">
-            Leistungen direkt in Ihrer Stadt
+      {/* PX-058: city section removed per Kevin's request 2026-06-09 22:51.
+          Einsatzgebiete now lives as its own page in navigation. */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-4">
+            Einsatzgebiet — Osnabrück und 60-km-Umkreis
           </h2>
-          <p className="text-charcoal-light leading-relaxed mb-6">
-            Wir sind regelmäßig in Osnabrück und im 60-km-Umkreis unterwegs.
-            Wählen Sie Ihre Stadt für lokale Details, Anfahrtszeit und
-            Festpreis-Beispiele.
+          <p className="text-charcoal-light leading-relaxed mb-6 max-w-2xl mx-auto">
+            Wir sind in Osnabrück und allen Städten und Gemeinden im
+            60-km-Umkreis im Einsatz — von Bramsche bis Münster, von
+            Cloppenburg bis Bielefeld.
           </p>
-
-          {/* Osnabrück hub — featured */}
           <Link
-            href="/osnabrueck/"
-            className="block mb-6 p-5 bg-copper/5 border-l-4 border-copper rounded-r-xl hover:bg-copper/10 transition group"
+            href="/einsatzgebiet/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
           >
-            <div className="flex items-center justify-between flex-wrap gap-3">
-              <div>
-                <h3 className="font-heading text-lg font-semibold text-charcoal group-hover:text-copper">
-                  Standort Osnabrück — alle Leistungen
-                </h3>
-                <p className="text-sm text-charcoal-light mt-1">
-                  Familienbetrieb · Bramscher Str. 161 · alle 5 Leistungen plus
-                  Stadtteil-Übersicht
-                </p>
-              </div>
-              <span className="text-copper font-medium">Zur Osnabrück-Seite →</span>
-            </div>
+            Alle 98 Einsatzgebiete ansehen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </Link>
-
-          {/* Top 30 cities — 2-column grid on md+ to keep section height reasonable */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {TOP_CITIES.map((city) => (
-              <div
-                key={city.slug}
-                className="p-4 bg-cream-dark border border-sand/30 rounded-xl"
-              >
-                <h3 className="font-heading text-base font-semibold text-charcoal mb-2">
-                  {city.label}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {SERVICES.map((s) => (
-                    <Link
-                      key={`${city.slug}-${s.slug}`}
-                      href={`/leistungen/${s.slug}/${city.slug}/`}
-                      className="inline-flex items-center px-3 py-1.5 text-sm bg-cream border border-sand/40 rounded-full text-charcoal hover:border-copper hover:text-copper transition"
-                    >
-                      {s.label} {city.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* PX-054: prominent CTA to full list of 98 Einsatzgebiete */}
-          <div className="mt-8 text-center">
-            <Link
-              href="/einsatzgebiet/"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
-            >
-              Alle 98 Einsatzgebiete ansehen
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-            <p className="mt-3 text-sm text-charcoal-light">
-              Ihre Stadt nicht dabei? Wir sind im gesamten 60-km-Umkreis um Osnabrück tätig.
-            </p>
-          </div>
         </div>
       </section>
     </>
