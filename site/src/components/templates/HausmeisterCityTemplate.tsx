@@ -226,9 +226,7 @@ export default function HausmeisterCityTemplate({ city, neighbors, allOtherCitie
               <span>Kontaktformular</span>
             </Link>
           </div>
-          <p className="mt-4 text-sm text-cream/60">
-            Telefon: <a href="tel:+4915239603175" className="underline hover:text-cream">+49 1523 9603175</a>
-          </p>
+          {/* PX-062: duplicate Telefon line removed per Kevin 2026-06-09 23:27 */}
         </section>
 
         <hr className="my-10 border-sand/30" />
