@@ -101,7 +101,7 @@ const WEITERE_LEISTUNGEN_TEMPLATES = [
 
 export default function SchrottCityTemplate({ city, neighbors }: Props) {
   const c = getSchrottContent(city);
-  const safeNeighbors = neighbors.slice(0, 9);
+  const safeNeighbors = neighbors.slice(0, 12);
   const einsatzList =
     safeNeighbors.length > 0
       ? safeNeighbors.map((n) => n.displayName).join(", ")

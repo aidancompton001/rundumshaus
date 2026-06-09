@@ -185,14 +185,20 @@ describe("programmatic — neighbor graph", () => {
   // Future asymmetries should be added here only with a tracked task and removed on fix.
   const KNOWN_ASYMMETRIES = new Set<string>([]);
 
-  it("neighbor relation is symmetric via public API (no NEW asymmetries beyond baseline)", () => {
+  it("neighbor relation is symmetric in SOURCE data (cities.json neighbors arrays)", () => {
+    // PX-055: getNeighborCities() now augments hardcoded with proximity-based
+    // fallback (runtime computation). Runtime fallback is intentionally
+    // asymmetric (city A's top-12 by proximity ≠ city B's top-12 by proximity).
+    //
+    // This test now validates the SOURCE DATA invariant — cities.json `neighbors`
+    // arrays must remain symmetric. The runtime symmetry contract is dropped.
     const newAsymmetries: string[] = [];
     const stillExisting = new Set<string>();
     for (const c of CITIES) {
-      const ns = getNeighborCities(c);
-      for (const n of ns) {
-        const back = getNeighborCities(n).map((x) => x.slug);
-        if (!back.includes(c.slug)) {
+      for (const nSlug of c.neighbors) {
+        const n = CITIES.find((x) => x.slug === nSlug);
+        if (!n) continue;
+        if (!n.neighbors.includes(c.slug)) {
           const key = `${c.slug} -> ${n.slug}`;
           if (KNOWN_ASYMMETRIES.has(key)) {
             stillExisting.add(key);
@@ -202,9 +208,7 @@ describe("programmatic — neighbor graph", () => {
         }
       }
     }
-    // Fail on unexpected new asymmetries.
-    expect(newAsymmetries, `NEW asymmetries: ${newAsymmetries.join(" | ")}`).toEqual([]);
-    // Sanity: baseline entries that no longer exist should be removed from KNOWN_ASYMMETRIES.
+    expect(newAsymmetries, `NEW asymmetries in cities.json: ${newAsymmetries.join(" | ")}`).toEqual([]);
     const stale = [...KNOWN_ASYMMETRIES].filter((k) => !stillExisting.has(k));
     expect(stale, `stale baseline entries — remove from KNOWN_ASYMMETRIES: ${stale.join(", ")}`).toEqual([]);
   });
@@ -492,13 +496,16 @@ describe("programmatic — determinism & mutation safety (Phase 5 gaps #10, #11)
   });
 
   // PX-029: extended mutation safety — faqs, neighbors, body[i] strings.
+  // PX-055: getNeighborCities now returns runtime-augmented array; compare
+  // mutation-safety by counting on fresh call vs known runtime baseline.
   it("mutation of faqs/neighbors arrays does not leak", () => {
     const first = generatePageContent("dacharbeiten", "lengerich");
+    const baselineNeighborCount = first.neighbors.length;
     first.faqs.push({ q: "X?", a: "Y" });
     first.neighbors.push({} as never);
     const second = generatePageContent("dacharbeiten", "lengerich");
     expect(second.faqs.find((f) => f.q === "X?")).toBeUndefined();
-    expect(second.neighbors.length).toBe(getCityBySlug("lengerich")!.neighbors.length);
+    expect(second.neighbors.length).toBe(baselineNeighborCount);
   });
 });
 

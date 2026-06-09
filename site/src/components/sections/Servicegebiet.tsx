@@ -7,7 +7,10 @@ import { CITIES, SERVICE_IDS, type ServiceId } from "@/lib/programmatic";
 const data = serviceAreasData as ServiceAreasData;
 
 // Build name → slug map once.
-const NAME_TO_SLUG = new Map(CITIES.map((c) => [c.name, c.slug]));
+// PX-055: use displayName (matches service-areas.json refs).
+// `c.name` had inconsistency e.g. "Neuenkirchen (bei Rheine)" vs displayName
+// "Neuenkirchen bei Rheine" → city was rendered as text without link.
+const NAME_TO_SLUG = new Map(CITIES.map((c) => [c.displayName, c.slug]));
 
 // Top 10 cities by tier+distance for each service — balanced inbound from /einsatzgebiet
 // to all 5 service-landings (Landa CL fix). Picks closest, highest-tier cities.
