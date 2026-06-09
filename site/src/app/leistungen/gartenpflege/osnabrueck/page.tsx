@@ -225,22 +225,6 @@ export default function GartenpflegeOsnabrueckPreviewPage() {
             Gärtner & Gartenpflege in {CITY}
           </h1>
 
-          {/* Hero image — AI-generated (Higgsfield nano_banana_pro) */}
-          <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8 border border-sand/30">
-            <picture>
-              <source type="image/webp" srcSet={getImageUrl(toWebp("/images/services/garten-hero.png"))} />
-              <img
-                src={getImageUrl("/images/services/garten-hero.png")}
-                alt={`Gepflegter Garten in ${CITY} — professionelle Gartenpflege durch Rund ums Haus Littawe`}
-                width={1200}
-                height={675}
-                className="w-full h-full object-cover"
-                loading="eager"
-                decoding="async"
-              />
-            </picture>
-          </div>
-
           {/* Intro */}
           <p className="text-lg text-charcoal-light leading-relaxed mb-5">
             Sie suchen einen zuverlässigen Gärtner in {CITY}? Rund ums Haus Littawe ist Ihr Ansprechpartner für professionelle Gartenpflege, Grundstückspflege und Grünanlagenpflege in {CITY} und Umgebung. Wir unterstützen Privatkunden, Unternehmen, Vermieter und Hausverwaltungen bei sämtlichen Arbeiten rund um Garten, Grünflächen und Außenanlagen.
@@ -258,6 +242,22 @@ export default function GartenpflegeOsnabrueckPreviewPage() {
               </li>
             ))}
           </ul>
+
+          {/* Hero image — Kevin Feedback 2026-06-09: moved DOWN under benefits */}
+          <div className="aspect-[16/9] overflow-hidden rounded-2xl my-8 border border-sand/30">
+            <picture>
+              <source type="image/webp" srcSet={getImageUrl(toWebp("/images/services/garten-hero.png"))} />
+              <img
+                src={getImageUrl("/images/services/garten-hero.png")}
+                alt={`Gepflegter Garten in ${CITY} — professionelle Gartenpflege durch Rund ums Haus Littawe`}
+                width={1200}
+                height={675}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </div>
 
           <hr className="my-10 border-sand/30" />
 
