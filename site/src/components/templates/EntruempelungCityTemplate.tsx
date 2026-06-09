@@ -95,7 +95,7 @@ const FAQS = [
 
 const WEITERE_LEISTUNGEN_TEMPLATES = [
   { label: "Gartenpflege", servicePath: "gartenpflege" },
-  { label: "Hausmeisterservice", servicePath: "hausmeisterservice" },
+  { label: "Hausmeisterservice, Objektpflege & Grundstückspflege", servicePath: "hausmeisterservice" },
   { label: "Dachreinigung", servicePath: "dacharbeiten" },
   { label: "Schrottabholung", servicePath: "schrottabholung" },
   { label: "Objektpflege", servicePath: "objektpflege", isHub: true },
