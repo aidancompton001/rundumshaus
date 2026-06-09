@@ -14,7 +14,13 @@ import { generateSEO } from "@/lib/seo";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getAllPagePairs().map((p) => ({ service: p.service, city: p.city }));
+  // PX-047 Phase 0: exclude gartenpflege/osnabrueck — handled by static
+  // override at /leistungen/gartenpflege/osnabrueck/page.tsx (preview deploy).
+  // After Kevin approves preview, the static override will be removed and
+  // this filter cleaned up (Phase 1).
+  return getAllPagePairs()
+    .filter((p) => !(p.service === "gartenpflege" && p.city === "osnabrueck"))
+    .map((p) => ({ service: p.service, city: p.city }));
 }
 
 interface PageParams {
