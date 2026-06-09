@@ -13,7 +13,9 @@ import {
 } from "@/lib/programmatic";
 import { generateSEO } from "@/lib/seo";
 import { getGartenContent } from "@/lib/template-content";
+import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
+import HausmeisterCityTemplate from "@/components/templates/HausmeisterCityTemplate";
 
 export const dynamicParams = false;
 
@@ -43,12 +45,26 @@ export async function generateMetadata({
   const { service, city } = await params;
   if (!isServiceId(service)) return {};
 
-  // PX-047 Phase 1: gartenpflege uses dedicated template content (single source).
-  // All other services continue to use programmatic generatePageContent().
+  // PX-047/048: gartenpflege + hausmeisterservice use dedicated template content
+  // (single source per service). All other services continue with programmatic.
   if (service === "gartenpflege") {
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getGartenContent(cityData);
+    const seo = generateSEO({
+      title: content.metaTitle,
+      description: content.metaDescription,
+      path: `/leistungen/${service}/${city}`,
+    });
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
+  }
+  if (service === "hausmeisterservice") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) return {};
+    const content = getHausmeisterContent(cityData);
     const seo = generateSEO({
       title: content.metaTitle,
       description: content.metaDescription,
@@ -156,6 +172,78 @@ export default async function ProgrammaticLandingPage({
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(gartenFaqSchema) }} />
         <GartenCityTemplate city={cityData} neighbors={neighbors} />
+      </>
+    );
+  }
+
+  // PX-048 Phase 2: hausmeisterservice uses dedicated HausmeisterCityTemplate.
+  if (service === "hausmeisterservice") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) notFound();
+    const neighbors = getNeighborCities(cityData);
+    const hmContent = getHausmeisterContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/hausmeisterservice/${city}/`;
+
+    const hmBreadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+        { "@type": "ListItem", position: 3, name: "Hausmeisterservice", item: `${BASE_URL}/leistungen/#hausmeisterservice` },
+        { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
+      ],
+    };
+
+    const hmService: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Hausmeisterservice ${cityData.displayName}`,
+      serviceType: "Hausmeisterservice",
+      description: hmContent.metaDescription,
+      areaServed: {
+        "@type": "City",
+        name: cityData.displayName,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: cityData.displayName,
+          addressRegion: cityData.bundesland,
+          addressCountry: "DE",
+        },
+      },
+      url: canonical,
+    };
+    if (cityData.distanceKm <= 40) {
+      hmService.provider = { "@id": LOCAL_BUSINESS_ID };
+    }
+
+    const hmFaqs = [
+      { q: `Was kostet ein Hausmeisterservice in ${cityData.displayName}?`, a: "Die Kosten hängen vom Umfang der Leistungen und der Größe des Objekts ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot zum Festpreis." },
+      { q: "Bieten Sie regelmäßige Betreuung an?", a: "Ja, wir übernehmen sowohl einmalige Hausmeisterleistungen als auch laufende Betreuungsverträge für Privatkunden, Wohnanlagen und Gewerbeobjekte." },
+      { q: "Arbeiten Sie auch für Hausverwaltungen?", a: "Ja, wir betreuen Hausverwaltungen, Vermieter, Eigentümergemeinschaften und Unternehmen mit festen Ansprechpartnern." },
+      { q: "Übernehmen Sie auch Kleinreparaturen?", a: "Ja, kleinere Reparaturen, Austausch defekter Leuchtmittel und vergleichbare Hausmeisteraufgaben gehören zum Standard unseres Hausmeisterservice." },
+      { q: "Bieten Sie Winterdienst an?", a: "Ja, Winterdienst gehört zu unserem Leistungsumfang. Sprechen Sie uns frühzeitig an, um Ihr Objekt zuverlässig betreuen zu können." },
+      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp." },
+    ];
+    const hmFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: hmFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    };
+
+    return (
+      <>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(hmBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(hmService) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(hmFaqSchema) }} />
+        <HausmeisterCityTemplate city={cityData} neighbors={neighbors} />
       </>
     );
   }
