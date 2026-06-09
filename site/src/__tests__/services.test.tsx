@@ -93,7 +93,10 @@ describe("ServiceOverview", () => {
 
   it("renders all 5 service titles", () => {
     render(<ServiceOverview />);
-    expect(screen.getByText("Hausmeisterservice")).toBeInTheDocument();
+    // PX-053: Hausmeister title expanded per Kevin's WhatsApp request 2026-06-09
+    // (Title now: "Hausmeisterservice, Objektpflege & Grundstückspflege" — appears in
+    // both card title and description, hence getAllByText)
+    expect(screen.getAllByText(/Hausmeisterservice/).length).toBeGreaterThan(0);
     expect(screen.getByText("Gartenpflege")).toBeInTheDocument();
     expect(screen.getByText("Dacharbeiten")).toBeInTheDocument();
     expect(screen.getByText("Entrümpelung")).toBeInTheDocument();
@@ -114,7 +117,8 @@ describe("ServiceOverview", () => {
 describe("ServiceDetail", () => {
   it("renders all 5 service detail descriptions", () => {
     render(<ServiceDetail />);
-    expect(screen.getByText(/Ob Reparaturen, Wartungsarbeiten/)).toBeInTheDocument();
+    // PX-053: Hausmeister description updated per Kevin's WhatsApp 2026-06-09
+    expect(screen.getByText(/Von der regelmäßigen Objektpflege/)).toBeInTheDocument();
     expect(screen.getByText(/Als zuverlässiger Gärtner in Osnabrück/)).toBeInTheDocument();
     expect(screen.getByText(/Moos, Laub und Verschmutzungen/)).toBeInTheDocument();
     expect(screen.getByText(/Als Entrümpelungsfirma in Osnabrück/)).toBeInTheDocument();
