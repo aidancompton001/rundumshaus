@@ -50,18 +50,22 @@ export function safeEinsatzText(city: City): string {
 /**
  * Tier-based title — avoids overflow for long city names (Neuenkirchen-Kreis-Steinfurt = 82 chars).
  * Google mobile title limit ~60 chars.
+ *
+ * @param shortSuffix — service-specific keyword extension for short city names
+ *   (only used if cityLen ≤ 12). Examples:
+ *   - Garten: "★ Rasen & Hecken-Experte"
+ *   - Hausmeister: "★ Zuverlässig & Schnell"
+ *   Pass undefined to omit (minimal format for all tiers).
  */
-export function safeTitle(city: City, service: string): string {
+export function safeTitle(city: City, service: string, shortSuffix?: string): string {
   const cityLen = city.displayName.length;
-  if (cityLen <= 12) {
-    // Short: "Bramsche" — full keyword format
-    return `${service} ${city.displayName} ★ Rasen & Hecken-Experte`;
+  if (cityLen <= 12 && shortSuffix) {
+    return `${service} ${city.displayName} ${shortSuffix}`;
   }
-  if (cityLen <= 20) {
-    // Medium: "Wallenhorst" — shorter
-    return `${service} ${city.displayName} — Rasen & Hecken`;
+  if (cityLen <= 20 && shortSuffix) {
+    // Medium: keep short, drop full suffix
+    return `${service} ${city.displayName}`;
   }
-  // Long: "Neuenkirchen-Kreis-Steinfurt" — minimal
   return `${service} ${city.displayName}`;
 }
 
@@ -87,7 +91,7 @@ export function getGartenContent(city: City): GartenTemplateContent {
 
   return {
     h1: `Gärtner & Gartenpflege in ${city.displayName}`,
-    metaTitle: safeTitle(city, "Gärtner & Gartenpflege"),
+    metaTitle: safeTitle(city, "Gärtner & Gartenpflege", "★ Rasen & Hecken-Experte"),
     metaDescription: `Professionelle Gartenpflege in ${city.displayName} und Umgebung: Rasenmähen, Heckenschnitt, Rasenerneuerung, Grundstückspflege. Familienbetrieb · Festpreis${distMeta}. ☎ direkt anrufen.`,
     intro1: `Sie suchen einen zuverlässigen Gärtner in ${city.displayName}? Rund ums Haus Littawe ist Ihr Ansprechpartner für professionelle Gartenpflege, Grundstückspflege und Grünanlagenpflege in ${city.displayName} und Umgebung. Wir unterstützen Privatkunden, Unternehmen, Vermieter und Hausverwaltungen bei sämtlichen Arbeiten rund um Garten, Grünflächen und Außenanlagen.`,
     intro2: `Als erfahrener Gärtner sind wir ${dist} und übernehmen sowohl regelmäßige Gartenpflege als auch einmalige Gartenarbeiten in ${city.displayName}. Unser Ziel ist es, Ihren Garten, Ihr Grundstück oder Ihre Außenanlage dauerhaft gepflegt und ansprechend zu halten.`,
