@@ -387,37 +387,41 @@ export default function GartenpflegeOsnabrueckPreviewPage() {
             <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">
               Sie suchen einen erfahrenen Gärtner in {CITY} oder benötigen Unterstützung bei der Gartenpflege? Kontaktieren Sie uns jetzt für eine kostenlose und unverbindliche Besichtigung.
             </p>
-            <div className="flex flex-wrap gap-3 justify-center">
+            {/* Kevin Feedback 2026-06-09: equal-width buttons, 2x2 grid on mobile, 4-in-row on desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl mx-auto">
               <a
                 href="tel:+4915239603175"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition whitespace-nowrap"
               >
-                <PhoneIcon className="w-5 h-5" variant="mono" />
-                <span>+49 1523 9603175</span>
+                <PhoneIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
+                <span>Anrufen</span>
               </a>
               <a
                 href="mailto:kontakt@rundumshaus-littawe.de"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition whitespace-nowrap"
               >
-                <EnvelopeIcon className="w-5 h-5" variant="mono" />
-                <span>E-Mail senden</span>
+                <EnvelopeIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
+                <span>E-Mail</span>
               </a>
               <a
                 href="https://wa.me/4915239603175"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1ebd5a] transition"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1ebd5a] transition whitespace-nowrap"
               >
-                <WhatsAppIcon className="w-5 h-5" variant="light" />
+                <WhatsAppIcon className="w-5 h-5 flex-shrink-0" variant="light" />
                 <span>WhatsApp</span>
               </a>
               <Link
                 href="/kontakt/"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition whitespace-nowrap"
               >
-                Zum Kontaktformular
+                <span>Kontaktformular</span>
               </Link>
             </div>
+            <p className="mt-4 text-sm text-cream/60">
+              Telefon: <a href="tel:+4915239603175" className="underline hover:text-cream">+49 1523 9603175</a>
+            </p>
           </section>
 
           <hr className="my-10 border-sand/30" />
