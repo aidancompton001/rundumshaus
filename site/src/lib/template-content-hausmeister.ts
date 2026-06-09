@@ -28,7 +28,7 @@ export function getHausmeisterContent(city: City): HausmeisterTemplateContent {
   const einsatz = safeEinsatzText(city);
 
   return {
-    h1: `Hausmeisterservice & Objektpflege in ${city.displayName}`,
+    h1: `Hausmeisterservice, Objektpflege & Grundstückspflege in ${city.displayName}`,
     metaTitle: safeTitle(city, "Hausmeisterservice", "★ Zuverlässig & Schnell"),
     metaDescription: `Hausmeisterservice in ${city.displayName} und Umgebung: Kontrollgänge, Kleinreparaturen, Objektpflege, Grundstückspflege, Winterdienst. Familienbetrieb · Festpreis${distMeta}. ☎ direkt anrufen.`,
     intro1: `Sie suchen einen zuverlässigen Hausmeisterservice in ${city.displayName}? Rund ums Haus Littawe übernimmt für Privatkunden, Unternehmen, Vermieter und Hausverwaltungen die Betreuung von Immobilien und Außenanlagen — von Kontrollgängen über Kleinreparaturen bis zur regelmäßigen Objektpflege.`,

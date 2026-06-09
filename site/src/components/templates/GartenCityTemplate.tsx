@@ -100,7 +100,7 @@ const FAQS = [
 const WEITERE_LEISTUNGEN_TEMPLATES = [
   { label: "Heckenschnitt", servicePath: "gartenpflege" },
   { label: "Rasen erneuern", servicePath: "rasen-neuanlage", isHub: true },
-  { label: "Hausmeisterservice", servicePath: "hausmeisterservice" },
+  { label: "Hausmeisterservice, Objektpflege & Grundstückspflege", servicePath: "hausmeisterservice" },
   { label: "Dachreinigung", servicePath: "dacharbeiten" },
   { label: "Entrümpelung", servicePath: "entruempelung" },
   { label: "Schrottabholung", servicePath: "schrottabholung" },

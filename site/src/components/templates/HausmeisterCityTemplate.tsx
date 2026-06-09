@@ -410,7 +410,7 @@ export default function HausmeisterCityTemplate({ city, neighbors, allOtherCitie
                   href={`/leistungen/hausmeisterservice/${n.slug}/`}
                   className="inline-flex items-center px-3 py-1.5 text-sm bg-cream-dark border border-sand/40 rounded-full text-charcoal hover:border-copper hover:text-copper transition max-w-xs break-words"
                 >
-                  Hausmeisterservice in {n.displayName}
+                  Hausmeisterservice, Objektpflege & Grundstückspflege in {n.displayName}
                 </Link>
               ))}
             </div>
@@ -429,7 +429,7 @@ export default function HausmeisterCityTemplate({ city, neighbors, allOtherCitie
                       href={`/leistungen/hausmeisterservice/${n.slug}/`}
                       className="inline-flex items-center px-3 py-1.5 text-sm bg-cream-dark border border-sand/40 rounded-full text-charcoal hover:border-copper hover:text-copper transition max-w-xs break-words"
                     >
-                      Hausmeisterservice in {n.displayName}
+                      Hausmeisterservice, Objektpflege & Grundstückspflege in {n.displayName}
                     </Link>
                   ))}
                 </div>
