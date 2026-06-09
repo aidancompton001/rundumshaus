@@ -23,16 +23,14 @@ describe("Data Integrity", () => {
       expect(site.company).toBeTruthy();
     });
 
-    it("has 7 navigation links incl. Osnabrück + Einsatzgebiete (PX-058)", () => {
-      expect(site.navigation).toHaveLength(7);
+    it("has 5 navigation links (PX-060: Osnabrück + Kontakt removed per Kevin)", () => {
+      expect(site.navigation).toHaveLength(5);
       const labels = site.navigation.map((n) => n.label);
       expect(labels).toEqual([
         "Startseite",
         "Leistungen",
-        "Osnabrück",
         "Über uns",
         "Referenzen",
-        "Kontakt",
         "Einsatzgebiete",
       ]);
     });
