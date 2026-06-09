@@ -315,5 +315,36 @@ Layer 6: Architecture    (ownership contracts, single source)
 
 ---
 
+## L-017 — Не используй regex для HTML (2026-06-09, PX-047 Phase 1 canary)
+
+**Что произошло:**
+После успешного deploy 98 страниц Garten template я прогнал `canary-verify.sh` — bash-скрипт с grep-проверками. Он закричал "5 страниц сломаны!": H2 count=1 (ждал ≥9), "0 km" detected, false neighbor "Belm". Откатывать собирался. Проверил руками — **все 5 страниц работают идеально**. 3 false positives из 3.
+
+**Корни (3 механизма false positives):**
+
+1. **React SSR вставляет `<!-- -->` маркеры** между статическим текстом и `{interpolation}`. `<h2>Title <!-- -->Osnabrück</h2>`. Мой grep `<h2[^>]*>[^<]+</h2>` не матчит multi-token content — пропустил все 6 из 7 H2 на каждой странице.
+
+2. **Substring matching без word boundaries.** Искал "0 km" → нашёл внутри "60 km". Числовые/коротко-строчные паттерны без `\b` или explicit guard всегда дают false positives.
+
+3. **Не различал visible content vs Schema.org JSON-LD.** Искал "Belm" на странице Freren → нашёл в Schema `{"@type":"City","name":"Belm"}` (LocalBusiness `areaServed` legitimately перечисляет все 98 городов). Проверка contextless.
+
+**Правило:**
+- **HTML парсится HTML-парсером, не grep.** Для Node — `jsdom` (уже в deps) или `cheerio`. Для bash — нет (отказаться от bash для HTML).
+- **DOM-aware checks с scope:** `document.querySelectorAll("h2").length` вместо grep; `section.querySelectorAll("a")` для проверки "соседей" внутри конкретной секции.
+- **Visible text strip:** для проверок visible content — клонировать body, удалить `<script>/<style>/<noscript>`, потом `textContent`.
+- **Schema.org через JSON.parse**, не substring.
+- **grep всё ещё OK для:** простых boolean checks ("есть ли тег `<script src="plausible.io"`"), быстрых debug-просмотров. НЕ для quantitative/structural verification.
+
+**Применение к будущим фазам:**
+Phase 2-5 каждая использует тот же `canary-verify.mjs` (с per-service `EXPECTATIONS` секцией). Скрипт надёжный → бинарный verdict → не нужно ручную верификацию после каждого деплоя. Автоматизация работает, экономит ~30 min/phase.
+
+**Артефакты:**
+- `site/scripts/phase1/canary-verify.mjs` — jsdom-based, replaces deprecated `.sh`
+- Обновить `PRE_DEPLOY_VERIFICATION_FRAMEWORK.md` Layer 4 — добавить "DOM parser, not grep, для structural HTML checks"
+
+**Связано:** [[L-016]] (verification framework), [[PX-047]] (canary deploy)
+
+---
+
 ## Tags
-#audit #ux #performance #seo #adversarial #protocol #workflow #programmatic-seo #template-rewrite #lighthouse #schema-ownership #verification-framework
+#audit #ux #performance #seo #adversarial #protocol #workflow #programmatic-seo #template-rewrite #lighthouse #schema-ownership #verification-framework #html-parsing #canary
