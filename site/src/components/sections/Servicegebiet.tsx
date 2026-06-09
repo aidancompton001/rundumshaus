@@ -3,6 +3,23 @@ import serviceAreasData from "@/data/service-areas.json";
 import type { ServiceAreasData } from "@/data/types";
 import { ScrollReveal } from "@/components/motion";
 import { CITIES, SERVICE_IDS, type ServiceId } from "@/lib/programmatic";
+import {
+  WrenchIcon,
+  LeafIcon,
+  RoofIcon,
+  BoxArrowIcon,
+  RecycleIcon,
+} from "@/components/ServiceIcons";
+
+// PX-056: 5 service icons next to every city — Kevin's request 2026-06-09.
+// Before: 88 cities only had Gartenpflege link. Now all 98 link to all 5.
+const SERVICE_ICONS: { sid: ServiceId; label: string; Icon: typeof WrenchIcon }[] = [
+  { sid: "hausmeisterservice", label: "Hausmeisterservice", Icon: WrenchIcon },
+  { sid: "gartenpflege", label: "Gartenpflege", Icon: LeafIcon },
+  { sid: "dacharbeiten", label: "Dachreinigung", Icon: RoofIcon },
+  { sid: "entruempelung", label: "Entrümpelung", Icon: BoxArrowIcon },
+  { sid: "schrottabholung", label: "Schrottabholung", Icon: RecycleIcon },
+];
 
 const data = serviceAreasData as ServiceAreasData;
 
@@ -109,16 +126,23 @@ export default function Servicegebiet() {
                     return (
                       <li
                         key={city}
-                        className="flex items-start gap-2 text-sm"
+                        className="flex items-start gap-2 text-sm flex-wrap"
                       >
                         <span className="text-copper flex-shrink-0 mt-0.5" aria-hidden="true">&bull;</span>
-                        <Link
-                          href={`/leistungen/gartenpflege/${slug}/`}
-                          className="text-charcoal-light hover:text-copper transition-colors"
-                          title={`Leistungen in ${city} ansehen`}
-                        >
-                          {city}
-                        </Link>
+                        <span className="text-charcoal flex-1 min-w-0">{city}</span>
+                        <span className="flex gap-1 flex-shrink-0">
+                          {SERVICE_ICONS.map(({ sid, label, Icon }) => (
+                            <Link
+                              key={sid}
+                              href={`/leistungen/${sid}/${slug}/`}
+                              className="inline-flex items-center justify-center w-7 h-7 rounded-md hover:bg-copper/10 text-charcoal-light hover:text-copper transition-colors"
+                              title={`${label} in ${city}`}
+                              aria-label={`${label} in ${city}`}
+                            >
+                              <Icon className="w-4 h-4" />
+                            </Link>
+                          ))}
+                        </span>
                       </li>
                     );
                   })}
