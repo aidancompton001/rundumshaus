@@ -260,7 +260,7 @@ describe("getNeighborCities integrity", () => {
     expect(os).toBeDefined();
     const neighbors = getNeighborCities(os!);
     expect(neighbors.length).toBeGreaterThan(0);
-    expect(neighbors.length).toBeLessThanOrEqual(12);
+    expect(neighbors.length).toBeLessThanOrEqual(30);
     // Self must not appear in own neighbor list
     expect(neighbors.find((n) => n.slug === "osnabrueck")).toBeUndefined();
   });

@@ -67,8 +67,21 @@ export function getCityBySlug(slug: string): City | undefined {
 //   (same Bundesland preferred, distance ±20km)
 // - Bidirectional integrity preserved (we only modify runtime, not cities.json)
 const HQ_SLUG = "osnabrueck";
-const NEIGHBOR_CAP = 12;
-const PROXIMITY_DELTA_KM = 20;
+const NEIGHBOR_CAP = 30;
+const PROXIMITY_DELTA_KM = 60;
+
+// PX-057: full list of OTHER cities (excludes self only, includes Osnabrück
+// as a valid Einsatzort). Sorted by distance proximity so the closest cities
+// come first — used in expandable "Weitere Einsatzorte" section.
+export function getAllOtherCities(city: City): City[] {
+  return CITIES
+    .filter((c) => c.slug !== city.slug)
+    .sort((a, b) => {
+      const aDist = Math.abs(a.distanceKm - city.distanceKm);
+      const bDist = Math.abs(b.distanceKm - city.distanceKm);
+      return aDist - bDist;
+    });
+}
 
 export function getNeighborCities(city: City): City[] {
   // 1. Hardcoded neighbors (filtered)

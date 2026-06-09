@@ -16,6 +16,7 @@ import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons
 interface Props {
   city: City;
   neighbors: City[];
+  allOtherCities: City[];
 }
 
 // 23 Leistungen per Kevin's template (kevin-chat-log-2026-06.md).
@@ -107,9 +108,12 @@ const WEITERE_LEISTUNGEN_TEMPLATES = [
   { label: "Objektpflege", servicePath: "objektpflege", isHub: true },
 ];
 
-export default function HausmeisterCityTemplate({ city, neighbors }: Props) {
+export default function HausmeisterCityTemplate({ city, neighbors, allOtherCities }: Props) {
   const c = getHausmeisterContent(city);
-  const safeNeighbors = neighbors.slice(0, 12);
+  const visibleNeighbors = neighbors.slice(0, 30);
+  const visibleSlugs = new Set(visibleNeighbors.map((n) => n.slug));
+  const extraCities = allOtherCities.filter((c) => !visibleSlugs.has(c.slug));
+  const safeNeighbors = visibleNeighbors;
   const einsatzList =
     safeNeighbors.length > 0
       ? safeNeighbors.map((n) => n.displayName).join(", ")
@@ -395,7 +399,7 @@ export default function HausmeisterCityTemplate({ city, neighbors }: Props) {
           </div>
         </section>
 
-        {/* Weitere Einsatzorte */}
+        {/* Weitere Einsatzorte — 30 visible + expandable */}
         {safeNeighbors.length > 0 && (
           <section className="mb-10">
             <h3 className="font-heading text-xl font-semibold text-charcoal mb-4">
@@ -412,6 +416,27 @@ export default function HausmeisterCityTemplate({ city, neighbors }: Props) {
                 </Link>
               ))}
             </div>
+            {extraCities.length > 0 && (
+              <details className="mt-4 group">
+                <summary className="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-copper hover:underline">
+                  <span>Weitere {extraCities.length} Städte anzeigen</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-open:rotate-180" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </summary>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {extraCities.map((n) => (
+                    <Link
+                      key={n.slug}
+                      href={`/leistungen/hausmeisterservice/${n.slug}/`}
+                      className="inline-flex items-center px-3 py-1.5 text-sm bg-cream-dark border border-sand/40 rounded-full text-charcoal hover:border-copper hover:text-copper transition max-w-xs break-words"
+                    >
+                      Hausmeisterservice in {n.displayName}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            )}
           </section>
         )}
 

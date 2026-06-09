@@ -18,6 +18,7 @@ import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons
 interface Props {
   city: City;
   neighbors: City[];
+  allOtherCities: City[];
 }
 
 // Shared globals (one source for all 98 cities).
@@ -105,10 +106,13 @@ const WEITERE_LEISTUNGEN_TEMPLATES = [
   { label: "Schrottabholung", servicePath: "schrottabholung" },
 ];
 
-export default function GartenCityTemplate({ city, neighbors }: Props) {
+export default function GartenCityTemplate({ city, neighbors, allOtherCities }: Props) {
   const c = getGartenContent(city);
-  // Cap at 9 neighbors per Playbook.
-  const safeNeighbors = neighbors.slice(0, 12);
+  // PX-057: 30 visible, rest in expandable <details>
+  const visibleNeighbors = neighbors.slice(0, 30);
+  const visibleSlugs = new Set(visibleNeighbors.map((n) => n.slug));
+  const extraCities = allOtherCities.filter((c) => !visibleSlugs.has(c.slug));
+  const safeNeighbors = visibleNeighbors;
   // Build city-specific einsatz cities list from real neighbors + extra targets.
   const einsatzList =
     safeNeighbors.length > 0
@@ -374,7 +378,7 @@ export default function GartenCityTemplate({ city, neighbors }: Props) {
           </div>
         </section>
 
-        {/* Weitere Einsatzorte — uses ACTUAL neighbors, not hardcoded */}
+        {/* Weitere Einsatzorte — 30 visible + expandable to all */}
         {safeNeighbors.length > 0 && (
           <section className="mb-10">
             <h3 className="font-heading text-xl font-semibold text-charcoal mb-4">
@@ -391,6 +395,27 @@ export default function GartenCityTemplate({ city, neighbors }: Props) {
                 </Link>
               ))}
             </div>
+            {extraCities.length > 0 && (
+              <details className="mt-4 group">
+                <summary className="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-copper hover:underline">
+                  <span>Weitere {extraCities.length} Städte anzeigen</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-open:rotate-180" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </summary>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {extraCities.map((n) => (
+                    <Link
+                      key={n.slug}
+                      href={`/leistungen/gartenpflege/${n.slug}/`}
+                      className="inline-flex items-center px-3 py-1.5 text-sm bg-cream-dark border border-sand/40 rounded-full text-charcoal hover:border-copper hover:text-copper transition max-w-xs break-words"
+                    >
+                      Gärtner in {n.displayName}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            )}
           </section>
         )}
 
