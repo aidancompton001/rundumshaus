@@ -5,9 +5,8 @@ import type { Service } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
-import ServiceFAQ from "@/components/sections/ServiceFAQ";
-import FAQSchema from "@/components/sections/FAQSchema";
-import SpezialthemenSection from "@/components/sections/SpezialthemenSection";
+// PX-061: ServiceFAQ, FAQSchema, SpezialthemenSection imports removed
+// (no longer rendered on /leistungen/ per Kevin's request).
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -99,15 +98,13 @@ export default function ServiceDetail() {
         </Stagger>
       </div>
 
-      {/* PX-059: Extra Dienstleistungen — Kevin wants these directly under the 5 main cards */}
-      <SpezialthemenSection />
-
-      {/* Local SEO FAQ — Gartenpflege + Entrümpelung (PX-022) */}
-      <ServiceFAQ serviceId="gartenpflege" />
-      <ServiceFAQ serviceId="entruempelung" />
-
-      {/* Single combined Schema.org FAQPage (PX-024 fix: avoid duplicate FAQPage) */}
-      <FAQSchema />
+      {/* PX-061: per Kevin 2026-06-09 23:23 — removed from /leistungen/:
+          - SpezialthemenSection (Objektpflege + Rasen cards)
+          - ServiceFAQ × 2 (FAQs are on city service pages)
+          - FAQSchema
+          - Einsatzgebiet CTA (was in LeistungenInStaedten, removed from page.tsx)
+          Rationale: FAQs + Einsatzgebiete duplicate content already
+          present on city service pages and on /einsatzgebiet/. */}
     </section>
   );
 }

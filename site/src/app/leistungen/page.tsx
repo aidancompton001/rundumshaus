@@ -1,6 +1,5 @@
 import { generateSEO } from "@/lib/seo";
 import ServiceDetail from "@/components/sections/ServiceDetail";
-import LeistungenInStaedten from "@/components/sections/LeistungenInStaedten";
 import WeitereLeistungenSection from "@/components/sections/WeitereLeistungenSection";
 
 // PX-046 F3+F4: title 100→52 chars, description 181→152 chars (Google truncation fix)
@@ -15,7 +14,6 @@ export default function LeistungenPage() {
   return (
     <>
       <ServiceDetail />
-      <LeistungenInStaedten />
       <WeitereLeistungenSection />
     </>
   );
