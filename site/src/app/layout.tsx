@@ -258,6 +258,13 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* PX-047 Phase 1: Plausible analytics (cookieless, DSGVO-clean).
+            Required для измерения успеха Phase 1 vs baseline. */}
+        <script
+          defer
+          data-domain="rundumshaus-littawe.de"
+          src="https://plausible.io/js/script.js"
+        />
       </head>
       <body className="min-h-screen flex flex-col font-body bg-cream text-charcoal">
         <MotionProvider>

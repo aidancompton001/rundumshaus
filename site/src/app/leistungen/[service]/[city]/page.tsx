@@ -4,23 +4,23 @@ import { notFound } from "next/navigation";
 import {
   generatePageContent,
   getAllPagePairs,
+  getCityBySlug,
+  getNeighborCities,
   getServiceMeta,
   isNoindexPair,
   SERVICE_IDS,
   type ServiceId,
 } from "@/lib/programmatic";
 import { generateSEO } from "@/lib/seo";
+import { getGartenContent } from "@/lib/template-content";
+import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  // PX-047 Phase 0: exclude gartenpflege/osnabrueck — handled by static
-  // override at /leistungen/gartenpflege/osnabrueck/page.tsx (preview deploy).
-  // After Kevin approves preview, the static override will be removed and
-  // this filter cleaned up (Phase 1).
-  return getAllPagePairs()
-    .filter((p) => !(p.service === "gartenpflege" && p.city === "osnabrueck"))
-    .map((p) => ({ service: p.service, city: p.city }));
+  // PX-047 Phase 1: filter removed — gartenpflege/osnabrueck now handled by
+  // dynamic route via GartenCityTemplate component. Static override deleted.
+  return getAllPagePairs().map((p) => ({ service: p.service, city: p.city }));
 }
 
 interface PageParams {
@@ -42,6 +42,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { service, city } = await params;
   if (!isServiceId(service)) return {};
+
+  // PX-047 Phase 1: gartenpflege uses dedicated template content (single source).
+  // All other services continue to use programmatic generatePageContent().
+  if (service === "gartenpflege") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) return {};
+    const content = getGartenContent(cityData);
+    const seo = generateSEO({
+      title: content.metaTitle,
+      description: content.metaDescription,
+      path: `/leistungen/${service}/${city}`,
+    });
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
+  }
+
   try {
     const content = generatePageContent(service, city);
     const seo = generateSEO({
@@ -66,6 +84,81 @@ export default async function ProgrammaticLandingPage({
 }) {
   const { service, city } = await params;
   if (!isServiceId(service)) notFound();
+
+  // PX-047 Phase 1: gartenpflege uses dedicated GartenCityTemplate.
+  // Schema (BreadcrumbList + Service + FAQPage) owned by route, not template.
+  if (service === "gartenpflege") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) notFound();
+    const neighbors = getNeighborCities(cityData);
+    const gartenContent = getGartenContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/gartenpflege/${city}/`;
+
+    const gartenBreadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+        { "@type": "ListItem", position: 3, name: "Gartenpflege", item: `${BASE_URL}/leistungen/#gartenpflege` },
+        { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
+      ],
+    };
+
+    const gartenService: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Gärtner & Gartenpflege ${cityData.displayName}`,
+      serviceType: "Gartenpflege",
+      description: gartenContent.metaDescription,
+      areaServed: {
+        "@type": "City",
+        name: cityData.displayName,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: cityData.displayName,
+          addressRegion: cityData.bundesland,
+          addressCountry: "DE",
+        },
+      },
+      url: canonical,
+    };
+    // Schema provider:@id only for cities within ~40km — avoid misleading
+    // local presence claim for distant cities (per Playbook architectural rule).
+    if (cityData.distanceKm <= 40) {
+      gartenService.provider = { "@id": LOCAL_BUSINESS_ID };
+    }
+
+    const gartenFaqs = [
+      { q: `Was kostet ein Gärtner in ${cityData.displayName}?`, a: "Die Kosten hängen vom Umfang der Arbeiten und der Größe des Grundstücks ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot." },
+      { q: "Bieten Sie regelmäßige Gartenpflege an?", a: "Ja, wir übernehmen sowohl einmalige Gartenarbeiten als auch regelmäßige Pflegeeinsätze." },
+      { q: "Pflegen Sie auch Gewerbegrundstücke?", a: "Ja, wir betreuen Firmengelände, Wohnanlagen, Gewerbeobjekte und größere Außenanlagen." },
+      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung häufig möglich." },
+      { q: "Entsorgen Sie Gartenabfälle?", a: "Ja, auf Wunsch übernehmen wir die fachgerechte Entsorgung von Gartenabfällen und Grünschnitt." },
+      { q: "Arbeiten Sie auch für Hausverwaltungen?", a: "Ja, wir betreuen Hausverwaltungen, Vermieter und Wohnanlagen." },
+    ];
+    const gartenFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: gartenFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    };
+
+    return (
+      <>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(gartenBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(gartenService) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(gartenFaqSchema) }} />
+        <GartenCityTemplate city={cityData} neighbors={neighbors} />
+      </>
+    );
+  }
 
   let content;
   try {

@@ -1,50 +1,44 @@
 # STATUS — RundumsHaus
 
-**Обновлён:** 2026-05-14
-**Этап:** **PX-033 deployed** (PR #14 commit a3ff2e8) per Hans Landa CONDITIONAL GO. Boost block (Anfahrt+Festpreis+Lokal) для top-5 thin programmatic pages, noindex для bottom-5. 238/238 tests, 513 pages built+verified live. Indexed 46→147 (+220% за 11 дней) с PX-032; главная +2400% trafic. **Awaiting:** CEO GSC re-trigger Validate Fix во всех 4 категориях (24-48ч после re-crawl).
+**Обновлён:** 2026-06-08
+**Этап:** **PX-046 deployed** (PR #32) — god-tier аудит сайта, 8 P0/P1 fixes. /kontakt/ mobile LCP 39s→3.6s (catastrophe fixed), /leistungen/ LCP 6.4s→4.1s, og:image на 7/7 main pages, sitemap real lastmod, trailing slash consistency, title/meta cleanup, form aria-labels.
 
-## Готово
+## Production state
 
-- [x] W1-11 + T002-T006 (предыдущие — см. DEVLOG)
-- [x] **T007 Phase 1 — Discovery:** Конкурентный аудит, 11880.com-citation existing, 98 cities tiered → `docs/SEO_RESEARCH.md`
-- [x] **T007 Phase 2 — Programmatic SEO (с Hans Landa C1+C2+C3+M4 fixes):** 490 landing pages, 0 orphans, symmetric neighbor graph, 8 intro variants, 12 FAQ pool, tier-scaled Fakten-block (40% unique data)
-- [x] **T007 Phase 3 — AI Search Optimization:** llms.txt + llms-full.txt + ai.txt + robots.ts с 2026 three-tier AI bot framework + Homepage answer-first FaktenBlock
-- [x] **T007 Phase 6 — Ratgeber:** 10 статей × 2100-2900 слов, Article+HowTo+BreadcrumbList schema, /ratgeber index + dynamic route
-- [x] **T007 Phase 9 — Framework:** SEO_RESULTS.md + ai-search-test.md + Google review template
-- [x] Schema deep partial: HomeAndConstructionBusiness, @id refs (LocalBusiness/WebSite/Organization graph), founder + foundingDate, BreadcrumbList на всех типах страниц
-- [x] Build OK (Turbopack ~10s), 512 HTML pages, 128/128 tests pass
+- **Live:** https://rundumshaus-littawe.de ✅
+- **Indexed pages (GSC last check):** 282 (растёт линейно: 50→147→282 за 6 недель)
+- **Organic clicks (28d):** 229
+- **Google Reviews:** 8 × 5,0★ (covered services: Garten, Entrümpelung, Dachreinigung, Schrott)
+- **Tests:** 238/238 pass | **Build:** exit 0 | **Deploy:** GitHub Actions auto
 
-## Repo + Production
+## Готово (последние 2 недели)
 
-- Repo: https://github.com/aidancompton001/rundumshaus
-- Live: https://rundumshaus-littawe.de (старая версия, БЕЗ T007 deploy)
-- CMS: https://app.pagescms.org
+- [x] **PX-040** B2B landing /leistungen/objektpflege/ (Kevin 50€) + Higgsfield hero image
+- [x] **PX-041** +4 Google reviews (2→6, schema updated)
+- [x] **PX-042** Thin-content fix для 12 застрявших programmatic pages (T2/T3 boost blocks)
+- [x] **PX-043** +1 review (Jens, Dachrinnenreinigung) → 7
+- [x] **PX-044** +1 review (Markus, Entrümpelung Dachboden) → 8
+- [x] **PX-045** Featured HQ-city hub /osnabrueck/ + Higgsfield Altstadt hero
+- [x] **PX-045b** /leistungen/ page: city chips + Spezialthemen cards (33 new internal links)
+- [x] **PX-046** God-tier audit: 15 confirmed findings (3 hallucinations killed), 8 P0/P1 fixed
 
-## Pending от CEO/Kevin (8 позиций — БЛОКИРУЮТ deploy)
+## Backlog
 
-1. **Цены Kevin'а** — для priceSpecification в Service schema (Phase 5)
-2. **5-10 реальных отзывов** клиентов — для AggregateRating + visible reviews block (Phase 5)
-3. **Фото Kevin'а** — для блока "Gründer" (Phase 5)
-4. **ОК на формулировку** "junges Familienunternehmen seit 2026"
-5. **Bing Webmaster Tools** аккаунт — Phase 4
-6. **Yandex Webmaster** аккаунт — Phase 4
-7. **AI baseline screenshots** — manual ~30 мин, 6 поисковиков × 6 запросов (`scripts/ai-search-test.md`)
-8. **DSGVO решение** — Plausible/Umami self-hosted vs только GSC
+- **F13 analytics setup** — CEO выбирает GA4 / Plausible / Matomo
+- **F20 local citations** — Kevin регистрирует в Gelbe Seiten / Houzz / MyHammer / werkenntdenbesten (~2h)
+- **F10 programmatic boilerplate variation pool**
+- **F21 ratgeber author byline + datePublished**
+- **Wartungs-Pauschale 79€/мес** — переговоры с Kevin
+- **Google Ads pilot** — после данных от Kevin
 
-## Pending — техническое (не блокирует, отдельная сессия)
+## Repo
 
-- [ ] Phase 4: Bing/Yandex/Ecosia indexing + IndexNow
-- [ ] Phase 5: priceSpecification после получения цен Kevin'а; AggregateRating после 5+ Google reviews
-- [ ] Phase 7: Cylex/Das Örtliche/GoYellow/Yelp DE/Gelbe Seiten + GBP optimization
-- [ ] Phase 8: Performance — GSAP SplitText fix mobile LCP, lazy-load detail images, dynamic GSAP/Lenis import
-- [ ] Hans Landa final re-review (XL обязательно) — после этой сессии
-- [ ] Deploy после Landa GO + Phase 5 priceSpec минимум
-- [ ] PX-021 GSC Pages indexing check (через 1-7 дней после deploy)
-- [ ] Form submit FormSubmit.co live test
-- [ ] IONOS WordPress downgrade (~12€/год)
-- [ ] Repo transfer to Kevin
+- **Repo:** https://github.com/aidancompton001/rundumshaus
+- **Latest PR:** #32 → master
+- **Baseline tag:** pre-px046-audit (rollback safety)
 
-## Блокеры
+## Следующая сессия
 
-- **CEO/Kevin данные (8 позиций выше)** — блокируют deploy
-- **Hans Landa re-review** — после фиксов C1+C2+C3+M4 нужна повторная adversarial проверка перед deploy
+- GSC effect от PX-046 через 2-4 недели
+- CEO решение по Wartungs-Pauschale + Analytics
+- Kevin делает backlinks + новые отзывы

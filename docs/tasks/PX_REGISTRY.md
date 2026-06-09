@@ -1107,4 +1107,99 @@ Phase C (если Kevin даст дополнительные pricing):
 **Рекомендуемый промпт:** P8
 ---
 
-<!-- Последний номер: PX-037 -->
+## PX-038
+**Дата:** 2026-05-29
+**Статус:** завершено (PR #24)
+**DEVLOG:** —
+**Источник:** GSC анализ 28 дней — hausmeisterservice osnabrück CTR 0.85%
+
+**Задача:** CTR-оптимизация meta title/description для programmatic city-страниц
+**Контекст:** site/src/lib/programmatic.ts (5 ServiceBlocks)
+**Проблема:** title бюрократичный `(Landkreis)`, description "0 km Anfahrt" баг на Osnabrück
+**Цель:** ★+USP в title, benefit-first description с ☎ CTA
+**Скоуп:**
+- distanceMeta() helper — пустая строка для distanceKm===0
+- 5× metaTitle переписаны с ★ + Festpreis/ab 200€
+- 5× metaDescription с CTA, Familienbetrieb signal
+**Верификация:** 238 tests pass, build exit 0, production title live
+**Размер:** S-M
+**Рекомендуемый промпт:** P8
+---
+
+## PX-040
+**Дата:** 2026-06-05
+**Статус:** завершено (PR #25)
+**DEVLOG:** —
+**Источник:** WhatsApp Kevin 2026-06-03..05 — запрос B2B страницы, 50€ утверждено
+
+**Задача:** Новая B2B landing `/leistungen/objektpflege/` для Hausverwaltungen, Vermieter, WEGs, Wohnungsbaugesellschaften
+**Контекст:** site/src/app/leistungen/objektpflege/page.tsx (новая), sitemap, layout OfferCatalog, services.json, Footer
+**Решение:** sub-page паттерн (как rasen-neuanlage), hero через Higgsfield, CTA = телефон + email (по букве Кевина), без WhatsApp кнопки (уже floating глобально)
+**Скоуп выполнен:**
+- Новая page.tsx с H1, 4 audience tiles, 11-Leistungen checklist, Festpreis/Jahresvertrag trust block, CTA блок
+- BreadcrumbList + Service Schema с audience.@type "Audience" (Landa H2 fix — BusinessAudience не существует)
+- areaServed = TARGET_CITIES (7 cities)
+- sitemap.ts: +1 URL priority 0.85
+- layout.tsx OfferCatalog: 7-я Service Objektpflege
+- services.json: Hausmeisterservice → subPage cross-link
+- Footer: новая ссылка "Objektpflege (B2B)"
+- Hero image AI-generated через Higgsfield nano_banana_pro (Mehrfamilienhaus exterior, gepflegt)
+- layout.schema.test.ts: 6 → 7 services
+**Hans Landa CONDITIONAL GO** — все 6 findings (2 HIGH + 3 MEDIUM + 1 LOW) применены в ТС2
+**Верификация цифрой:** HTTP 200 ✅, H1 "Objektpflege in Osnabrück" ✅, sitemap=1 ✅, footer link=1 ✅, 238 tests pass, build exit 0
+**Денежно:** 50€ — invoice/payment status pending
+**Размер:** M
+**Рекомендуемый промпт:** P8
+---
+
+## PX-041
+**Дата:** 2026-06-05
+**Статус:** завершено (PR #26)
+**DEVLOG:** —
+**Источник:** CEO Google Maps screenshot — обнаружил 6 отзывов (было 2)
+
+**Задача:** Обновить reviews.json: +4 новых Google Business отзыва (2 → 6, все 5★)
+**Скоуп выполнен:**
+- reviews.json: ratingCount 2→6, +4 reviews (Justus Müller, Charleton Kaps, Maxim Kloster, Luca Kleinfeld)
+- Radoslaw text исправлен ("Terminvorgabe", "Gerne wieder!" добавлено)
+- layout.schema.test.ts: assertion 2→6, 6 author имён
+- Verified date: 2026-06-05
+**Верификация цифрой:** "ratingCount":6 в production HTML, все 4 новых author имени найдены на /ueber-uns (grep=1 каждый), 238 tests pass
+**SEO эффект:** AggregateRating ×3, Rich snippet stronger, +trust для всех 282 indexed страниц
+**Размер:** S
+**Рекомендуемый промпт:** P8
+---
+
+## PX-042
+**Дата:** 2026-06-07 | **Статус:** завершено (PR #27) | **Источник:** GSC 12 страниц Crawled-not-indexed месяц
+**Задача:** Фикс thin-content для застрявших programmatic pages T2/T3
+**Решение:** paragraph count T2 5→6, T3 3→4; +10 boost-блоков для 8 affected cities (Steinfeld, Hopsten, Freren, Diepholz, Menslage, Bielefeld, Bad Iburg, Telgte) с anfahrt/festpreis/lokal данными
+**Верификация:** word count steinfeld 434→712, freren 302→619, telgte 311→618 (все >T1 baseline 570w), 238 tests, build OK
+**Размер:** L | **Промпт:** P8
+---
+
+## PX-043
+**Дата:** 2026-06-07 | **Статус:** завершено (PR #28) | **Источник:** Google Maps Jens отзыв
+**Задача:** +1 Google review (Jens, Dachrinnenreinigung) → 6→7
+**Верификация:** ratingCount 7, Jens на /ueber-uns, 238 tests
+**Размер:** S | **Промпт:** P8
+---
+
+## PX-044
+**Дата:** 2026-06-08 | **Статус:** завершено (PR #29) | **Источник:** Kevin WhatsApp 8 reviews
+**Задача:** +1 Google review (Markus, Entrümpelung Dachboden) → 7→8
+**Верификация:** ratingCount 8, Markus на /ueber-uns, 238 tests
+**Размер:** S | **Промпт:** P8
+---
+
+## PX-045
+**Дата:** 2026-06-08 | **Статус:** завершено (PR #30) | **Источник:** Kevin WhatsApp 2026-06-07 23:52
+**Задача:** Featured HQ-city hub `/osnabrueck/` + navigation entries
+**Косяк (мой):** PX-032 сделал Osnabrück одним из 98 равноценных programmatic-городов. 5 страниц для Osnabrück существовали и indexed, но findable только через /einsatzgebiet/. Kevin (владелец) заметил это сам. Strike против моего паттерна — недостаточный UX-audit с позиции owner.
+**Решение:** /osnabrueck/page.tsx (Hero+trust block+5 service cards→programmatic+Stadtteile+cross-links+3 reviews); BreadcrumbList+Place+ItemList JSON-LD; site.json nav +Osnabrück; Footer link; Homepage StandortOsnabrueck section; sitemap priority 0.95; Hero image AI-Higgsfield 213KB webp
+**Парный audit blindspots:** Explore agent нашёл 3 дополнительных (отложены)
+**Верификация:** HTTP 200, H1 ✅, sitemap=7, homepage section=1, nav link=present, 5 unique programmatic links, 238 tests, build OK
+**Размер:** M | **Промпт:** P8 (free fix — мой косяк)
+---
+
+<!-- Последний номер: PX-045 -->
