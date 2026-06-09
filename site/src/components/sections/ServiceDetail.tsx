@@ -7,6 +7,7 @@ import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
 import ServiceFAQ from "@/components/sections/ServiceFAQ";
 import FAQSchema from "@/components/sections/FAQSchema";
+import SpezialthemenSection from "@/components/sections/SpezialthemenSection";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -97,6 +98,9 @@ export default function ServiceDetail() {
           ))}
         </Stagger>
       </div>
+
+      {/* PX-059: Extra Dienstleistungen — Kevin wants these directly under the 5 main cards */}
+      <SpezialthemenSection />
 
       {/* Local SEO FAQ — Gartenpflege + Entrümpelung (PX-022) */}
       <ServiceFAQ serviceId="gartenpflege" />
