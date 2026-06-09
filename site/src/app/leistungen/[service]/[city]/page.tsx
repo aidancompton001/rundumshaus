@@ -16,10 +16,12 @@ import { getGartenContent } from "@/lib/template-content";
 import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import { getDachContent } from "@/lib/template-content-dach";
 import { getEntruempelungContent } from "@/lib/template-content-entruempelung";
+import { getSchrottContent } from "@/lib/template-content-schrott";
 import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
 import HausmeisterCityTemplate from "@/components/templates/HausmeisterCityTemplate";
 import DachCityTemplate from "@/components/templates/DachCityTemplate";
 import EntruempelungCityTemplate from "@/components/templates/EntruempelungCityTemplate";
+import SchrottCityTemplate from "@/components/templates/SchrottCityTemplate";
 
 export const dynamicParams = false;
 
@@ -97,6 +99,20 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getEntruempelungContent(cityData);
+    const seo = generateSEO({
+      title: content.metaTitle,
+      description: content.metaDescription,
+      path: `/leistungen/${service}/${city}`,
+    });
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
+  }
+  if (service === "schrottabholung") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) return {};
+    const content = getSchrottContent(cityData);
     const seo = generateSEO({
       title: content.metaTitle,
       description: content.metaDescription,
@@ -420,6 +436,78 @@ export default async function ProgrammaticLandingPage({
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(entFaqSchema) }} />
         <EntruempelungCityTemplate city={cityData} neighbors={neighbors} />
+      </>
+    );
+  }
+
+  // PX-051 Phase 5: schrottabholung uses dedicated SchrottCityTemplate (FINAL).
+  if (service === "schrottabholung") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) notFound();
+    const neighbors = getNeighborCities(cityData);
+    const schrottContent = getSchrottContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/schrottabholung/${city}/`;
+
+    const schrottBreadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+        { "@type": "ListItem", position: 3, name: "Schrottabholung", item: `${BASE_URL}/leistungen/#schrottabholung` },
+        { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
+      ],
+    };
+
+    const schrottService: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Schrottabholung ${cityData.displayName}`,
+      serviceType: "Schrottabholung",
+      description: schrottContent.metaDescription,
+      areaServed: {
+        "@type": "City",
+        name: cityData.displayName,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: cityData.displayName,
+          addressRegion: cityData.bundesland,
+          addressCountry: "DE",
+        },
+      },
+      url: canonical,
+    };
+    if (cityData.distanceKm <= 40) {
+      schrottService.provider = { "@id": LOCAL_BUSINESS_ID };
+    }
+
+    const schrottFaqs = [
+      { q: "Welche Metalle holen Sie ab?", a: "Wir holen Eisen, Stahl, Kupfer, Aluminium, Messing, Edelstahl und weitere Metalle ab — sowohl in kleineren als auch in größeren Mengen." },
+      { q: `Ist die Altmetallabholung in ${cityData.displayName} kostenlos?`, a: "Für die Abholung von Altmetall und Schrott berechnen wir bei größeren Mengen nichts — die Besichtigung vor Ort ist ebenfalls kostenlos. Sprechen Sie uns einfach an." },
+      { q: "Arbeiten Sie auch für Unternehmen und Hausverwaltungen?", a: "Ja, wir betreuen Privatkunden, Unternehmen, Hausverwaltungen und Gewerbekunden. Auch Hallenräumungen, Lagerauflösungen und Garagenräumungen mit Schrottentsorgung gehören zu unseren Leistungen." },
+      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung häufig möglich. Bei größeren Mengen vereinbaren wir gerne einen Besichtigungstermin und planen die Abholung flexibel." },
+      { q: "Holen Sie auch größere Mengen Schrott ab?", a: "Ja, gerne. Bei größeren Mengen — z. B. nach Hallenräumungen, Lagerauflösungen oder Garagenentrümpelungen — vereinbaren wir eine kostenlose Besichtigung und planen die Abholung passend zu Ihrem Termin." },
+      { q: "Übernehmen Sie auch die Demontage von Metallteilen?", a: "Ja, die Demontage kleiner Metallkonstruktionen und alter Metallteile vor Ort führen wir gerne im Rahmen der Schrottabholung durch." },
+    ];
+    const schrottFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: schrottFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    };
+
+    return (
+      <>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottService) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottFaqSchema) }} />
+        <SchrottCityTemplate city={cityData} neighbors={neighbors} />
       </>
     );
   }

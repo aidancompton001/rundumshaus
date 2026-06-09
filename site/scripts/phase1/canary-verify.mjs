@@ -77,6 +77,19 @@ const EXPECTATIONS = {
     ],
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
+  schrottabholung: {
+    minH2: 8, // CTA + Pro + Leistungen + Altmetall + B2B + Warum + Einsatzgebiet + FAQ
+    minH3: 2,
+    requiredHeadings: [
+      "Jetzt kostenlose Schrottabholung anfragen",
+      "Altmetallabholung in",
+      "Schrottentsorgung für Privat- und Gewerbekunden",
+      "Warum Rund ums Haus Littawe?",
+      "Einsatzgebiet",
+      "Häufige Fragen zur Schrottabholung",
+    ],
+    requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
+  },
 };
 
 const results = [];
