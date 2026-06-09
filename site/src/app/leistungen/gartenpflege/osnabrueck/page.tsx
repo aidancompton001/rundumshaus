@@ -13,6 +13,7 @@
 import Link from "next/link";
 import { generateSEO } from "@/lib/seo";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
+import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
 
 const CITY = "Osnabrück";
 const CITY_SLUG = "osnabrueck";
@@ -378,6 +379,49 @@ export default function GartenpflegeOsnabrueckPreviewPage() {
 
           <hr className="my-10 border-sand/30" />
 
+          {/* CTA block — Kevin Feedback 2026-06-09: moved up BEFORE Weitere Leistungen + Einsatzorte */}
+          <section className="my-12 p-8 bg-charcoal text-cream rounded-2xl text-center">
+            <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-3">
+              Jetzt kostenloses Angebot anfragen
+            </h2>
+            <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">
+              Sie suchen einen erfahrenen Gärtner in {CITY} oder benötigen Unterstützung bei der Gartenpflege? Kontaktieren Sie uns jetzt für eine kostenlose und unverbindliche Besichtigung.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <a
+                href="tel:+4915239603175"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
+              >
+                <PhoneIcon className="w-5 h-5" variant="mono" />
+                <span>+49 1523 9603175</span>
+              </a>
+              <a
+                href="mailto:kontakt@rundumshaus-littawe.de"
+                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
+              >
+                <EnvelopeIcon className="w-5 h-5" variant="mono" />
+                <span>E-Mail senden</span>
+              </a>
+              <a
+                href="https://wa.me/4915239603175"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1ebd5a] transition"
+              >
+                <WhatsAppIcon className="w-5 h-5" variant="light" />
+                <span>WhatsApp</span>
+              </a>
+              <Link
+                href="/kontakt/"
+                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
+              >
+                Zum Kontaktformular
+              </Link>
+            </div>
+          </section>
+
+          <hr className="my-10 border-sand/30" />
+
           {/* H2: Weitere Leistungen */}
           <section className="mb-10">
             <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
@@ -411,49 +455,6 @@ export default function GartenpflegeOsnabrueckPreviewPage() {
                   Gärtner & Gartenpflege in {c.name}
                 </Link>
               ))}
-            </div>
-          </section>
-
-          <hr className="my-10 border-sand/30" />
-
-          {/* CTA block */}
-          <section className="my-12 p-8 bg-charcoal text-cream rounded-2xl text-center">
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-3">
-              Jetzt kostenloses Angebot anfragen
-            </h2>
-            <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">
-              Sie suchen einen erfahrenen Gärtner in {CITY} oder benötigen Unterstützung bei der Gartenpflege? Kontaktieren Sie uns jetzt für eine kostenlose und unverbindliche Besichtigung.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <a
-                href="tel:+4915239603175"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"
-              >
-                <span aria-hidden="true">📞</span>
-                <span>+49 1523 9603175</span>
-              </a>
-              <a
-                href="mailto:kontakt@rundumshaus-littawe.de"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
-              >
-                <span aria-hidden="true">✉️</span>
-                <span>E-Mail senden</span>
-              </a>
-              <a
-                href="https://wa.me/4915239603175"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
-              >
-                <span aria-hidden="true">💬</span>
-                <span>WhatsApp</span>
-              </a>
-              <Link
-                href="/kontakt/"
-                className="inline-flex items-center gap-2 px-5 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition"
-              >
-                Zum Kontaktformular
-              </Link>
             </div>
           </section>
 
