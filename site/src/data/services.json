@@ -4,9 +4,9 @@
   "services": [
     {
       "id": "hausmeisterservice",
-      "title": "Hausmeisterservice",
-      "description": "Alles rund ums Haus — zuverlässig und schnell erledigt.",
-      "detailDescription": "Ob Reparaturen, Wartungsarbeiten oder regelmäßige Kontrollen — unser Hausmeisterservice kümmert sich um alle anfallenden Aufgaben rund um Ihre Immobilie. Professionell, termingerecht und zu fairen Preisen.",
+      "title": "Hausmeisterservice, Objektpflege & Grundstückspflege",
+      "description": "Rund ums Haus Littawe bietet professionellen Hausmeisterservice in Osnabrück und Umgebung. Von der regelmäßigen Objektpflege über Grundstückspflege und Kleinreparaturen bis hin zur Betreuung von Wohnanlagen und Gewerbeobjekten – wir sorgen für gepflegte Immobilien und einen zuverlässigen Werterhalt Ihrer Objekte. Ideal für Privatkunden, Vermieter, Unternehmen und Hausverwaltungen.",
+      "detailDescription": "Rund ums Haus Littawe bietet professionellen Hausmeisterservice in Osnabrück und Umgebung. Von der regelmäßigen Objektpflege über Grundstückspflege und Kleinreparaturen bis hin zur Betreuung von Wohnanlagen und Gewerbeobjekten – wir sorgen für gepflegte Immobilien und einen zuverlässigen Werterhalt Ihrer Objekte. Ideal für Privatkunden, Vermieter, Unternehmen und Hausverwaltungen.",
       "icon": "wrench",
       "image": "/images/services/hausmeisterservice.png",
       "detailImage": "/images/services/detail-hausmeister.png",

@@ -79,6 +79,9 @@ export default function ServiceDetail() {
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </a>
+                  {/* PX-053: Kevin asked to temporarily remove subPage links
+                      ("erstmal raus" 2026-06-09 18:31). Data preserved in
+                      services.json — uncomment to re-enable.
                   {service.subPage && (
                     <a
                       href={service.subPage.href}
@@ -87,6 +90,7 @@ export default function ServiceDetail() {
                       {service.subPage.label}
                     </a>
                   )}
+                  */}
                 </div>
               </div>
             </div>
