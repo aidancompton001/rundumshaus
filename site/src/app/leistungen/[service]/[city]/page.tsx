@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   generatePageContent,
+  getAllOtherCities,
   getAllPagePairs,
   getCityBySlug,
   getNeighborCities,
@@ -219,7 +220,7 @@ export default async function ProgrammaticLandingPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(gartenService) }} />
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(gartenFaqSchema) }} />
-        <GartenCityTemplate city={cityData} neighbors={neighbors} />
+        <GartenCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }
@@ -291,7 +292,7 @@ export default async function ProgrammaticLandingPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(hmService) }} />
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(hmFaqSchema) }} />
-        <HausmeisterCityTemplate city={cityData} neighbors={neighbors} />
+        <HausmeisterCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }
@@ -363,7 +364,7 @@ export default async function ProgrammaticLandingPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(dachService) }} />
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(dachFaqSchema) }} />
-        <DachCityTemplate city={cityData} neighbors={neighbors} />
+        <DachCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }
@@ -435,7 +436,7 @@ export default async function ProgrammaticLandingPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(entService) }} />
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(entFaqSchema) }} />
-        <EntruempelungCityTemplate city={cityData} neighbors={neighbors} />
+        <EntruempelungCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }
@@ -507,7 +508,7 @@ export default async function ProgrammaticLandingPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottService) }} />
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottFaqSchema) }} />
-        <SchrottCityTemplate city={cityData} neighbors={neighbors} />
+        <SchrottCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }
