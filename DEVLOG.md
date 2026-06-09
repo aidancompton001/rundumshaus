@@ -2,6 +2,186 @@
 
 ---
 
+### [S047a] — 2026-06-09 — PX-047 Phase 0: Garten Osnabrück preview (Kevin approved)
+
+**Задача:** Phase 0 preview новой 9-секционной структуры от Kevin'а на `/leistungen/gartenpflege/osnabrueck/`.
+**Статус:** ✅ DEPLOYED + Kevin approval (PRs #33-#38)
+
+**Iterations (Kevin feedback):** initial → +hero image → WhatsApp icon + CTA reorder → misunderstanding fix (hero back up, Kontakt under benefits) → CTA alignment fix
+
+**Kevin response:** "Ja super... lass uns erstmal weiter machen"
+
+---
+
+### [S047c] — 2026-06-09 — PX-047 Phase 1: ROUND 2 RE-CHECK + validation infrastructure
+
+**Задача:** После CEO решения "Stop, думать ещё" — повторный re-check всех фаз с подключением 4 новых agents (Plan + Data + Performance + Rollback) + создание validation infrastructure.
+
+**Статус:** ⏸ STANDBY — все findings + scripts + documentation готовы, ждём финальный CEO OK.
+
+**Метод:** 4 параллельных agents с разными углами после первого раунда:
+- Plan agent: architectural sanity check (нашёл 8 gaps, 3 P0 architectural)
+- Explore agent: runtime + data validation (98 cities)
+- Performance agent: real Lighthouse measurements (3 cities, выявил LCP regression)
+- General agent: rollback + monitoring plan (concrete bash commands)
+
+**6 НОВЫХ CRITICAL FINDINGS которые пропустили в round 1:**
+
+1. **A1: Meta vs Template content divergence** — `generateMetadata` использует `generatePageContent()`, но новый template owned own copy → drift. Fix: single source `getTemplateContent()` function.
+
+2. **A2: Schema duplication risk** — если template emits own Schema + route already emits Service Schema → 2 Service nodes = Google duplicate. Fix: Ownership contract — Route owns Schema/metadata, Template owns JSX/copy.
+
+3. **A3: Premature abstraction** — план extract `ServiceCityTemplate` base для всех 5 services с N=1 = leaky abstraction. Fix: Rule of Three — concrete component Phase 1-2, extract base в Phase 3.
+
+4. **A5: Analytics gap = Phase 1 blocker** — F13 от PX-046 unfixed. Без аналитики невозможно измерить успех. Fix: Plausible (cookieless) **до** Phase 1 deploy.
+
+5. **B11: LCP regression на preview** ⚠️ MOST CRITICAL — Lighthouse mobile показал Phase 0 preview УЖЕ хуже siblings: Perf 81 vs 91 (-10), LCP **4.8s vs 3.5s** (+1.3s), HTML 132KB vs 95KB (+39%). Apply на 97 cities = деградация всех. Fix: hero image preload + responsive variants (400w/800w) ДО Phase 1.
+
+6. **B10: service-areas.json mismatch** — "Neuenkirchen (bei Rheine)" в SA vs "Neuenkirchen bei Rheine" в cities.json → template lookup fail. Fix: standardize на slug, fix display name.
+
+**Создана документация:**
+
+1. **[docs/PHASE1_FINDINGS_LOG.md](docs/PHASE1_FINDINGS_LOG.md)** — все 36 findings (15 P0 + 10 P1 + 11 P2) с конкретными fix actions, severity, ETA. Priority-ranked action items list.
+
+2. **[docs/PLAYBOOK_PROGRAMMATIC_TEMPLATE_REWRITE.md](docs/PLAYBOOK_PROGRAMMATIC_TEMPLATE_REWRITE.md)** — addendum с 8 новыми architectural rules (B-H):
+   - Schema ownership contract
+   - `getTemplateContent()` single source
+   - Rule of Three (не extract base прежде Phase 3)
+   - Analytics — Phase 1 blocker
+   - Image performance ДО deploy
+   - Validation scripts mandatory
+   - service-areas.json consistency
+   - PR-A + PR-B split atomicity
+
+3. **5 validation scripts** в `site/scripts/phase1/`:
+   - `baseline.sh` — pre-deploy snapshot 5 sample cities
+   - `lighthouse-baseline.sh` — pre-deploy Lighthouse 3 cities
+   - `canary-verify.sh` — post-deploy 10 checks (HTTP, words, H2, FAQ Schema, CTA, "0 km" guard, false neighbors, Einsatzgebiet claim)
+   - `lighthouse-compare.sh` — post-deploy vs baseline comparison (Perf delta, LCP delta, CLS delta tolerance)
+   - `rollback.sh` — emergency revert procedure
+   - `README.md` — execution order + tolerance thresholds
+
+**Lighthouse baseline measured (pre-Phase 1):**
+
+| Метрика | osnabrueck (preview NEW) | bramsche (old) | freren T3 (old) |
+|---------|--------------------------|----------------|-----------------|
+| Perf | 81 | 91 | 91 |
+| LCP | 4.8s ⚠️ | 3.5s | 3.4s |
+| HTML | 132 KB | 95 KB | 91 KB |
+
+**Positive findings (Data agent):**
+- ✅ Все 98 cities имеют валидные fields
+- ✅ getNeighborCities never returns empty
+- ✅ Distance range 0-80km
+- ✅ 0 Garten в NOINDEX_PAIRS
+- ✅ Content pool sizes ≥ tier demand
+- ✅ displayName length safe (max 30 chars)
+
+**Updated estimated time с все fixes:** ~5 часов (vs 1.5ч initial estimate) + 2 часа monitoring.
+
+**После Phase 1 + Rule of Three (после Phase 2):** Phases 3-5 = по 2ч каждая.
+
+**Total Phase 1-5 estimate:** ~13-15 часов.
+
+**Артефакты:**
+- PHASE1_FINDINGS_LOG.md — 36 findings
+- Playbook addendum (B-H sections)
+- 5 validation scripts + README
+- L-014 + L-015 в LESSONS.md
+- Lighthouse baseline measurements
+
+**Следующие шаги (когда CEO даст финальный OK):**
+1. Fix service-areas.json (5 min)
+2. Hero image responsive variants + preload (25 min)
+3. Plausible analytics setup (30 min)
+4. `getTemplateContent()` + safeguards (1 ч)
+5. Build `GartenCityTemplate.tsx` props-driven component (1.5 ч)
+6. PR-A merge + deploy + verify
+7. PR-B wire-up + deploy + canary-verify.sh + lighthouse-compare.sh
+8. 7-day GSC monitoring
+
+---
+
+### [S047b] — 2026-06-09 — PX-047 Phase 1: ANALYSIS ONLY (5 BLOCKERS, STOP)
+
+**Задача:** Phase 1 — раскат Garten template на 97 cities.
+**Статус:** ⏸ STANDBY — CEO выбрал "Stop, думать ещё"
+
+**Метод:** 4 параллельных agents (Hans Landa + Explore × 3) для adversarial review ТС2 → 30+ рисков, 5 P0 blockers.
+
+**5 P0 BLOCKERS (которые сломали бы 97 страниц):**
+1. **HARDCODED neighbors/services/USPs** — в preview жёстко под Osnabrück. Apply на 97 cities → каждая страница покажет соседей Osnabrück'а.
+2. **distancePhrase(0)** для Osnabrück = "0 km von Osnabrück entfernt" катастрофа
+3. **Title overflow** для длинных cities (Neuenkirchen-Kreis-Steinfurt = 82 chars)
+4. **False distance claim** "60 km Umkreis" для Nordhorn/Twist на 80 km = UWG § 5 legal risk
+5. **Atomicity** 6 steps в одном PR — broken state risk
+
+**Создано:**
+- [docs/PLAYBOOK_PROGRAMMATIC_TEMPLATE_REWRITE.md](docs/PLAYBOOK_PROGRAMMATIC_TEMPLATE_REWRITE.md) — universal pattern для будущих services (Hausmeister, Dach, Entrümp, Schrott по 2ч каждая вместо 4ч)
+- L-011 / L-012 / L-013 в LESSONS.md
+
+**Следующие шаги:** ждём CEO OK на ТС3 (props-driven component + 2 PR split + manual snapshot review + Lighthouse baseline 3 cities + Kevin communication step + 15-min canary verify)
+
+---
+
+### [S046] — 2026-06-08 — PX-046: God-tier audit + 8 P0/P1 fixes
+
+**Задача:** [PX-046](docs/tasks/PX_REGISTRY.md) — тотальный аудит сайта (10 направлений: архитектура, индексация, SEO, UX, perf, контент, конверсия, security, local-SEO, analytics) с adversarial verification.
+**Роли:** #1 Product Architect + #14 Hans Landa (ТС-review) + 8 параллельных subagents (Explore × 2, general-purpose × 3, Plan × 1, skeptic × 2)
+**Статус:** ✅ DEPLOYED (PR #32)
+
+**Что сделано (метод):**
+- 3-фазный аудит: Direct Bash → 3 параллельных Explore agents → adversarial verification каждого CRITICAL/HIGH finding (evidence-gate: reproducer + actual output + file:line, не voting)
+- 2 раунда Hans Landa review до запуска: 12 holes в ТС1 → ТС2 закрыла все 12
+
+**Ключевые решения:**
+- Replaced fake "3-vote adversarial voting" → evidence-gate (reproducer required) — Landa H1 fix
+- Lighthouse через npx Bash (не теоретический performance audit) — Landa H2 fix
+- Honest scope-down пунктов которые нельзя проверить (GSC API, mobile UX без Playwright) — Landa H3-H4
+- Hard cap 8 fixes/сессию, остальное в backlog → защита от scope creep — Landa H5
+- Business impact filter (revenue/trust/seo_rank/none) — Landa H6
+
+**Findings: 25 total → 15 confirmed → 8 fixed**
+1. **F16 P0** /kontakt/ mobile LCP 39s → 3.6s (90.8% improvement) — 7 MB PNG заменён на responsive webp
+2. **F1 P0** /leistungen/ mobile LCP 6.4s → 4.1s — 10 service images пересжаты (88-99% reduction)
+3. **F14 P0** og:image добавлен через generateSEO() default — было на 6 из 7 страниц
+4. **F12 P0** sitemap fake lastmod (все 512 URLs идентичные) → per-page-group real dates (1→6 unique)
+5. **F9 P0** trailing slash inconsistency в Nav/Footer/sections → all с `/` — eliminates 301 chain
+6. **F3+F4+F8 P1** title/meta lengths fixed (100→52, 91→58, 181→152, 191→154, 201→152 chars)
+7. **F22 P2** form aria-labels + autoComplete (WCAG 2.1 AA)
+
+**Adversarial verification killed 3 hallucinations:**
+- "Bramsche имеет noindex meta" — FALSE (proven by curl)
+- "100% content duplication Bramsche/Wallenhorst" — FALSE (3320 vs 3445 words)
+- "/osnabrueck/ имеет 0 CTAs" — FALSE (tel+mailto+WhatsApp найдены)
+
+**Артефакты:** PR #32, `.planning/audit-2026-06-08/` (findings dir), `git tag pre-px046-audit` (rollback safety)
+
+**Верификация цифрой (live production):**
+- HTTP 200 на всех затронутых страницах
+- /kontakt/ Lighthouse mobile: Perf 86-90 (было 66), LCP 3.6s (было 39.0s)
+- /leistungen/ Lighthouse mobile: Perf 82 (было 75), LCP 4.1s (было 6.4s)
+- og:image=1 на 7 из 7 main pages (было 1 из 7)
+- Sitemap unique lastmod dates: 6 (было 1)
+- 238 tests pass, build exit 0
+
+**Backlog (отдельные PX, требуют CEO/Кевина):**
+- F13 analytics setup — CEO выбирает GA4/Plausible/Matomo
+- F20 local citations — Кевин регистрирует в Gelbe Seiten/Houzz/MyHammer/werkenntdenbesten (~2h руками)
+- F10 programmatic boilerplate variation pool (1 параграф shared между cities)
+- F21 ratgeber author byline + datePublished
+- F11 critical CSS inlining (доп LCP boost)
+- F5 security headers — задокументировано как GH Pages limitation
+
+**Уроки:** см. `docs/LESSONS.md`
+
+**Следующие шаги:**
+- Дождаться эффекта PX-046 на GSC (2-4 недели)
+- При решении CEO — реализовать analytics tracking
+- Кевин делает Phase 4 backlinks (своими руками)
+
+---
+
 ### [S037] — 2026-05-21 — PX-034: SEO-аудит week-5 + Mobile LCP fix
 
 **Задача:** PX-034 — полный SEO-аудит + fix технических проблем
