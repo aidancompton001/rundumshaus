@@ -23,12 +23,13 @@ describe("Data Integrity", () => {
       expect(site.company).toBeTruthy();
     });
 
-    it("has 6 navigation links incl. Osnabrück (PX-045 — HQ-city hub)", () => {
-      expect(site.navigation).toHaveLength(6);
+    it("has 7 navigation links incl. Osnabrück + Einsatzgebiete (PX-058)", () => {
+      expect(site.navigation).toHaveLength(7);
       const labels = site.navigation.map((n) => n.label);
       expect(labels).toEqual([
         "Startseite",
         "Leistungen",
+        "Einsatzgebiete",
         "Osnabrück",
         "Über uns",
         "Referenzen",
