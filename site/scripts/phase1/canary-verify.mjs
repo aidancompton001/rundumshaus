@@ -199,10 +199,10 @@ async function verifyPage(sample) {
       ? [...section.querySelectorAll(`a[href*="/leistungen/${SERVICE}/"]`)]
       : [];
     const neighborCount = neighborLinks.length;
-    if (neighborCount >= 1 && neighborCount <= 9) {
-      pass(sample.city, `neighbors-count(1-9)=${neighborCount}`);
-    } else if (neighborCount > 9) {
-      warn(sample.city, `neighbors-count`, `${neighborCount} > 9 (cap broken?)`);
+    if (neighborCount >= 30 && neighborCount <= 100) {
+      pass(sample.city, `neighbors-count(30-100)=${neighborCount}`);
+    } else if (neighborCount > 100) {
+      warn(sample.city, `neighbors-count`, `${neighborCount} > 100 (cap broken?)`);
     } else {
       fail(sample.city, `neighbors-count`, `${neighborCount} (no neighbors rendered)`);
     }

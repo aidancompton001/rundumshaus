@@ -70,12 +70,11 @@ const HQ_SLUG = "osnabrueck";
 const NEIGHBOR_CAP = 30;
 const PROXIMITY_DELTA_KM = 60;
 
-// PX-057: full list of OTHER cities (excludes self only, includes Osnabrück
-// as a valid Einsatzort). Sorted by distance proximity so the closest cities
-// come first — used in expandable "Weitere Einsatzorte" section.
+// PX-057: full list of OTHER cities (excludes self + Osnabrück HQ).
+// Sorted by distance proximity. Used in expandable "Weitere Einsatzorte".
 export function getAllOtherCities(city: City): City[] {
   return CITIES
-    .filter((c) => c.slug !== city.slug)
+    .filter((c) => c.slug !== city.slug && c.slug !== HQ_SLUG)
     .sort((a, b) => {
       const aDist = Math.abs(a.distanceKm - city.distanceKm);
       const bDist = Math.abs(b.distanceKm - city.distanceKm);
