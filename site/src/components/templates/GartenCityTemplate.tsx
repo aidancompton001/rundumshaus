@@ -108,7 +108,7 @@ const WEITERE_LEISTUNGEN_TEMPLATES = [
 export default function GartenCityTemplate({ city, neighbors }: Props) {
   const c = getGartenContent(city);
   // Cap at 9 neighbors per Playbook.
-  const safeNeighbors = neighbors.slice(0, 9);
+  const safeNeighbors = neighbors.slice(0, 12);
   // Build city-specific einsatz cities list from real neighbors + extra targets.
   const einsatzList =
     safeNeighbors.length > 0

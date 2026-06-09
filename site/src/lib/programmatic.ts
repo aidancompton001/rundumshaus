@@ -61,10 +61,42 @@ export function getCityBySlug(slug: string): City | undefined {
   return CITIES.find((c) => c.slug === slug);
 }
 
+// PX-055 Option D: enrich sparse neighbor data (92% of cities had <6 neighbors).
+// - Filter out Osnabrück (HQ ≠ "neighbor") and self
+// - If hardcoded < cap: supplement with proximity-based cities
+//   (same Bundesland preferred, distance ±20km)
+// - Bidirectional integrity preserved (we only modify runtime, not cities.json)
+const HQ_SLUG = "osnabrueck";
+const NEIGHBOR_CAP = 12;
+const PROXIMITY_DELTA_KM = 20;
+
 export function getNeighborCities(city: City): City[] {
-  return city.neighbors
+  // 1. Hardcoded neighbors (filtered)
+  const hardcoded = city.neighbors
     .map((slug) => getCityBySlug(slug))
-    .filter((c): c is City => Boolean(c));
+    .filter((c): c is City => c !== undefined && c.slug !== HQ_SLUG && c.slug !== city.slug);
+
+  if (hardcoded.length >= NEIGHBOR_CAP) return hardcoded.slice(0, NEIGHBOR_CAP);
+
+  // 2. Proximity fallback: cities within ±20km distance, same Bundesland preferred
+  const used = new Set([city.slug, HQ_SLUG, ...hardcoded.map((c) => c.slug)]);
+  const fallback = CITIES.filter(
+    (c) =>
+      !used.has(c.slug) &&
+      Math.abs(c.distanceKm - city.distanceKm) <= PROXIMITY_DELTA_KM,
+  ).sort((a, b) => {
+    // Same Bundesland first
+    const aBL = a.bundesland === city.bundesland ? 0 : 1;
+    const bBL = b.bundesland === city.bundesland ? 0 : 1;
+    if (aBL !== bBL) return aBL - bBL;
+    // Then by distance proximity to this city
+    return (
+      Math.abs(a.distanceKm - city.distanceKm) -
+      Math.abs(b.distanceKm - city.distanceKm)
+    );
+  });
+
+  return [...hardcoded, ...fallback].slice(0, NEIGHBOR_CAP);
 }
 
 export function getServiceMeta(id: ServiceId) {

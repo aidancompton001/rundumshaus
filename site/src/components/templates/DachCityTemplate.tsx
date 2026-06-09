@@ -102,7 +102,7 @@ const WEITERE_LEISTUNGEN_TEMPLATES = [
 
 export default function DachCityTemplate({ city, neighbors }: Props) {
   const c = getDachContent(city);
-  const safeNeighbors = neighbors.slice(0, 9);
+  const safeNeighbors = neighbors.slice(0, 12);
   const einsatzList =
     safeNeighbors.length > 0
       ? safeNeighbors.map((n) => n.displayName).join(", ")

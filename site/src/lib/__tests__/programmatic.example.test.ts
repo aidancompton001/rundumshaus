@@ -251,11 +251,34 @@ describe("getNeighborCities integrity", () => {
     }
   });
 
-  it("osnabrueck has between 1 and 6 neighbors (soft cap)", () => {
+  it("osnabrueck has 0 self-referential neighbors (HQ exclusion)", () => {
+    // PX-055: getNeighborCities now excludes Osnabrück (HQ) and self
+    // from results. For Osnabrück itself, hardcoded neighbors (3) all
+    // remain valid since none of them are the HQ; proximity fallback
+    // fills up to cap=12.
     const os = getCityBySlug("osnabrueck");
     expect(os).toBeDefined();
     const neighbors = getNeighborCities(os!);
-    expect(neighbors.length).toBeGreaterThanOrEqual(1);
-    expect(neighbors.length).toBeLessThanOrEqual(6);
+    expect(neighbors.length).toBeGreaterThan(0);
+    expect(neighbors.length).toBeLessThanOrEqual(12);
+    // Self must not appear in own neighbor list
+    expect(neighbors.find((n) => n.slug === "osnabrueck")).toBeUndefined();
+  });
+
+  it("no city has Osnabrück (HQ) listed as a neighbor", () => {
+    // PX-055: Osnabrück = HQ, not a "neighbor". Must be filtered.
+    for (const c of CITIES) {
+      const neighbors = getNeighborCities(c);
+      const hasHQ = neighbors.find((n) => n.slug === "osnabrueck");
+      expect(hasHQ, `city ${c.slug} has Osnabrück in neighbors`).toBeUndefined();
+    }
+  });
+
+  it("no city has itself in own neighbor list", () => {
+    for (const c of CITIES) {
+      const neighbors = getNeighborCities(c);
+      const hasSelf = neighbors.find((n) => n.slug === c.slug);
+      expect(hasSelf, `city ${c.slug} self-references`).toBeUndefined();
+    }
   });
 });
