@@ -39,6 +39,31 @@ const EXPECTATIONS = {
     ],
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
+  hausmeisterservice: {
+    minH2: 8,
+    minH3: 2,
+    requiredHeadings: [
+      "Jetzt kostenloses Angebot anfragen",
+      "Hausmeisterservice für Vermieter, Unternehmen & Hausverwaltungen",
+      "Warum Rund ums Haus Littawe?",
+      "Einsatzgebiet",
+      "Häufige Fragen",
+    ],
+    requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
+  },
+  dacharbeiten: {
+    minH2: 9, // CTA + Pro + Leistungen + 3 sub + Warum + Einsatzgebiet + FAQ
+    minH3: 2,
+    requiredHeadings: [
+      "Jetzt kostenloses Angebot anfragen",
+      "Dachreinigung in",
+      "Dachrinnenreinigung in",
+      "Warum Rund ums Haus Littawe?",
+      "Einsatzgebiet",
+      "Häufige Fragen",
+    ],
+    requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
+  },
 };
 
 const results = [];

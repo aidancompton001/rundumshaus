@@ -14,8 +14,10 @@ import {
 import { generateSEO } from "@/lib/seo";
 import { getGartenContent } from "@/lib/template-content";
 import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
+import { getDachContent } from "@/lib/template-content-dach";
 import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
 import HausmeisterCityTemplate from "@/components/templates/HausmeisterCityTemplate";
+import DachCityTemplate from "@/components/templates/DachCityTemplate";
 
 export const dynamicParams = false;
 
@@ -65,6 +67,20 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getHausmeisterContent(cityData);
+    const seo = generateSEO({
+      title: content.metaTitle,
+      description: content.metaDescription,
+      path: `/leistungen/${service}/${city}`,
+    });
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
+  }
+  if (service === "dacharbeiten") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) return {};
+    const content = getDachContent(cityData);
     const seo = generateSEO({
       title: content.metaTitle,
       description: content.metaDescription,
@@ -244,6 +260,78 @@ export default async function ProgrammaticLandingPage({
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(hmFaqSchema) }} />
         <HausmeisterCityTemplate city={cityData} neighbors={neighbors} />
+      </>
+    );
+  }
+
+  // PX-049 Phase 3: dacharbeiten uses dedicated DachCityTemplate.
+  if (service === "dacharbeiten") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) notFound();
+    const neighbors = getNeighborCities(cityData);
+    const dachContent = getDachContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/dacharbeiten/${city}/`;
+
+    const dachBreadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+        { "@type": "ListItem", position: 3, name: "Dachservice", item: `${BASE_URL}/leistungen/#dacharbeiten` },
+        { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
+      ],
+    };
+
+    const dachService: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Dachservice ${cityData.displayName}`,
+      serviceType: "Dachservice",
+      description: dachContent.metaDescription,
+      areaServed: {
+        "@type": "City",
+        name: cityData.displayName,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: cityData.displayName,
+          addressRegion: cityData.bundesland,
+          addressCountry: "DE",
+        },
+      },
+      url: canonical,
+    };
+    if (cityData.distanceKm <= 40) {
+      dachService.provider = { "@id": LOCAL_BUSINESS_ID };
+    }
+
+    const dachFaqs = [
+      { q: `Was kostet eine Dachreinigung in ${cityData.displayName}?`, a: "Die Kosten hängen von der Dachgröße, dem Verschmutzungsgrad und der Erreichbarkeit ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot zum Festpreis." },
+      { q: "Wie häufig sollte die Dachrinne gereinigt werden?", a: "Wir empfehlen die Dachrinnenreinigung mindestens einmal im Jahr — bevorzugt im Spätherbst, wenn das Laub gefallen ist. Bei umliegenden Bäumen oder besonders exponierten Lagen kann auch eine halbjährliche Reinigung sinnvoll sein." },
+      { q: "Bieten Sie auch reine Dachreinigungen an?", a: "Ja, wir übernehmen Dachreinigungen separat — von der Moos- und Algenentfernung bis zur kompletten Pflege von Dachflächen, Garagendächern und Carports." },
+      { q: "Übernehmen Sie auch kleinere Dachreparaturen?", a: "Ja, kleinere Dachreparaturen, Austausch einzelner Dachziegel und Ausbesserungsarbeiten gehören zu unseren Leistungen." },
+      { q: "Arbeiten Sie auch für Hausverwaltungen?", a: "Ja, wir betreuen Hausverwaltungen, Vermieter, Eigentümergemeinschaften und Unternehmen mit festen Ansprechpartnern." },
+      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung und Wetterlage häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp." },
+    ];
+    const dachFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: dachFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    };
+
+    return (
+      <>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(dachBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(dachService) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(dachFaqSchema) }} />
+        <DachCityTemplate city={cityData} neighbors={neighbors} />
       </>
     );
   }
