@@ -110,10 +110,18 @@ describe("committed meta-overrides.json (production state)", () => {
 });
 
 describe("wrappers bound to committed JSON", () => {
-  it("currently return null for homepage (empty overrides = zero regression)", () => {
-    // If this fails, someone filled overrides — fine in prod, but then the
-    // title-regression diff in CI must be updated consciously.
-    expect(getPageMetaOverride("/")).toBeNull();
-    expect(getServiceMetaOverride("gartenpflege", "Osnabrück")).toBeNull();
+  // PX-069 hotfix: the previous "must be null" assertion gated on PROD CONTENT
+  // state — Kevin's very first real CMS save (filling gartenpflege patterns)
+  // broke the deploy pipeline. Same E2-class mistake the design review warned
+  // about. Wrappers must accept ANY committed state; the empty→null contract
+  // is covered by the pure-resolver fixture tests above.
+  it("wrappers return null OR a clean {title?,description?} shape", () => {
+    for (const r of [getPageMetaOverride("/"), getServiceMetaOverride("gartenpflege", "Osnabrück")]) {
+      if (r !== null) {
+        expect(typeof (r.title ?? "")).toBe("string");
+        expect(typeof (r.description ?? "")).toBe("string");
+        expect(r.title || r.description).toBeTruthy();
+      }
+    }
   });
 });
