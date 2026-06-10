@@ -7,33 +7,33 @@
     },
     {
       "path": "/leistungen/",
-      "title": "",
-      "description": ""
+      "title": "Leistungen in Osnabrück | Gärtner, Hausmeisterservice & Dachservice",
+      "description": "Professionelle Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung in Osnabrück und Umgebung. Faire Preise und kostenlose Besichtigung."
     },
     {
       "path": "/ueber-uns/",
-      "title": "",
-      "description": ""
+      "title": "Über uns | Gärtner Osnabrück & Hausmeisterservice",
+      "description": "Rund ums Haus Littawe ist Ihr zuverlässiger Gärtner und Hausmeisterservice in Osnabrück. Gartenpflege, Dachservice, Entrümpelung und Schrottabholung aus einer Hand."
     },
     {
       "path": "/kontakt/",
-      "title": "",
-      "description": ""
+      "title": "Kontakt | Gärtner & Hausmeisterservice Osnabrück",
+      "description": "Kontaktieren Sie Rund ums Haus Littawe. Ihr Ansprechpartner für Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung in Osnabrück und Umgebung."
     },
     {
       "path": "/einsatzgebiet/",
-      "title": "",
-      "description": ""
+      "title": "Einsatzgebiet | Gärtner Osnabrück & Umgebung",
+      "description": "Ihr Gärtner in Osnabrück und Umgebung. Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung im gesamten Einsatzgebiet."
     },
     {
       "path": "/datenschutz/",
-      "title": "",
-      "description": ""
+      "title": "Datenschutzerklärung",
+      "description": "Informationen zum Datenschutz, zur Verarbeitung personenbezogener Daten und zu Ihren Rechten gemäß DSGVO."
     },
     {
       "path": "/impressum/",
-      "title": "",
-      "description": ""
+      "title": "Impressum",
+      "description": "Impressum und rechtliche Angaben von Rund ums Haus Littawe gemäß den gesetzlichen Vorschriften."
     }
   ],
   "services": [
@@ -44,23 +44,23 @@
     },
     {
       "id": "hausmeisterservice",
-      "titlePattern": "",
-      "descriptionPattern": ""
+      "titlePattern": "Hausmeisterservice {city} | Objektpflege & Grundstückspflege",
+      "descriptionPattern": "Hausmeisterservice in {city} für Objektpflege, Grundstückspflege und Immobilienbetreuung. Kostenlose Besichtigung, schnelle Termine und faire Preise."
     },
     {
       "id": "dacharbeiten",
-      "titlePattern": "",
-      "descriptionPattern": ""
+      "titlePattern": "Dachservice {city} | Dachpflege & Dachrinnenreinigung",
+      "descriptionPattern": "Dachservice in {city} für Dachpflege, Dachreinigung und Dachrinnenreinigung. Kostenlose Besichtigung, schnelle Termine und faire Preise."
     },
     {
       "id": "entruempelung",
-      "titlePattern": "",
-      "descriptionPattern": ""
+      "titlePattern": "Entrümpelung {city} | Haushaltsauflösung & Wohnungsauflösung",
+      "descriptionPattern": "Entrümpelung in {city} für Wohnungen, Häuser, Keller und Dachböden. Haushaltsauflösungen mit kostenloser Besichtigung, fairen Preisen und schnellen Terminen."
     },
     {
       "id": "schrottabholung",
-      "titlePattern": "",
-      "descriptionPattern": ""
+      "titlePattern": "Schrottabholung {city} | Altmetallentsorgung & Schrottabholung",
+      "descriptionPattern": "Schrottabholung in {city} für Altmetall, Metallschrott und sonstige Schrottgegenstände. Schnelle Abholung, kostenlose Besichtigung und faire Preise."
     }
   ]
 }
