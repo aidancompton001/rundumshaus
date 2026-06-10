@@ -37,10 +37,26 @@ export default function Stagger({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0 }
     );
 
-    observer.observe(el);
+    // PX-071: if the element is already (partly) in the viewport on mount,
+
+    // reveal immediately — a tall container plus threshold-based IO left
+
+    // /leistungen/ cards invisible until the first scroll (CEO bug report).
+
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+
+      el.classList.add("is-visible");
+
+      observer.disconnect();
+
+    } else {
+
+      observer.observe(el);
+
+    }
     return () => observer.disconnect();
   }, [staggerDelay, reducedMotion]);
 
