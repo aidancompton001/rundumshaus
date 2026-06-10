@@ -66,7 +66,7 @@ export default function BewertungenSlider() {
               >
                 <Stars count={r.rating} />
                 <p className="mt-4 text-charcoal-light leading-relaxed flex-1">
-                  „{r.text}"
+                  &bdquo;{r.text}&ldquo;
                 </p>
                 <div className="mt-5 pt-4 border-t border-sand/30 flex items-center justify-between">
                   <div>
