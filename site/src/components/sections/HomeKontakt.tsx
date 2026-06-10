@@ -1,21 +1,22 @@
-// PX-065: Large contact CTA block on homepage — Kevin's request 2026-06-10
-// ("nochmal Kontakt Bereich in größer"). Mirrors the city-page CTA block
-// but full-width and prominent. Phone/WhatsApp/E-Mail/Kontaktformular.
+// PX-065: Large contact CTA block on homepage (Kevin's request).
+// PX-070: texts moved to homepage.json (CMS-editable).
 
 import Link from "next/link";
+import homepageData from "@/data/homepage.json";
+import type { HomepageData } from "@/data/types";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
+
+const data = (homepageData as HomepageData).kontaktCta;
 
 export default function HomeKontakt() {
   return (
     <section className="py-20 md:py-28 bg-charcoal text-cream">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-          Jetzt kostenlos anfragen
+          {data.heading}
         </h2>
         <p className="text-cream/80 text-lg mb-10 leading-relaxed max-w-2xl mx-auto">
-          Sie brauchen Unterstützung rund ums Haus, Garten oder Dach?
-          Kontaktieren Sie uns für eine kostenlose und unverbindliche
-          Besichtigung — telefonisch, per WhatsApp oder über das Kontaktformular.
+          {data.text}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl mx-auto">
           <a
@@ -48,8 +49,7 @@ export default function HomeKontakt() {
             <span>Kontaktformular</span>
           </Link>
         </div>
-        {/* PX-067: duplicate "Telefon: ..." line removed per Kevin 2026-06-10
-            (Anrufen button already exposes the number). */}
+        {/* PX-067: duplicate "Telefon: ..." line removed per Kevin 2026-06-10 */}
       </div>
     </section>
   );

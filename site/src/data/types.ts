@@ -55,6 +55,17 @@ export interface HomepageData {
   hero: HeroData;
   about: AboutData;
   stats: StatItem[];
+  // PX-070: previously hardcoded homepage sections, now CMS-editable
+  warumWir: { heading: string; subheading: string; items: string[] };
+  faq: { heading: string; items: { q: string; a: string }[] };
+  einsatzgebiet: {
+    heading: string;
+    text1: string;
+    text2: string;
+    ctaLabel: string;
+    slogan: string;
+  };
+  kontaktCta: { heading: string; text: string };
 }
 
 /* ── Services ── */

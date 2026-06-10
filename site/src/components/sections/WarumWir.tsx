@@ -1,19 +1,13 @@
 "use client";
 
+// PX-064: 8 checkmarks per Kevin's verbatim Startseite text.
+// PX-070: texts moved to homepage.json (CMS-editable) — no hardcoded content.
+
+import homepageData from "@/data/homepage.json";
+import type { HomepageData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
 
-// PX-064: 8 ✓ checkmarks per Kevin's verbatim Startseite text (WhatsApp 2026-06-09).
-// Replaced the 5 varied icons with uniform ✓ to match the rest of the new design.
-const reasons: string[] = [
-  "Schnelle Terminvergabe",
-  "Kostenlose und unverbindliche Besichtigung",
-  "Faire und transparente Preise",
-  "Zuverlässige und saubere Ausführung",
-  "Persönlicher Ansprechpartner",
-  "Viele Dienstleistungen aus einer Hand",
-  "Für Privat- und Gewerbekunden",
-  "Tätig in Osnabrück und Umgebung",
-];
+const data = (homepageData as HomepageData).warumWir;
 
 export default function WarumWir() {
   return (
@@ -21,11 +15,10 @@ export default function WarumWir() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-14">
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-            Warum Rund ums Haus Littawe?
+            {data.heading}
           </h2>
           <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-            Was uns von anderen unterscheidet — und warum unsere Kunden uns
-            weiterempfehlen.
+            {data.subheading}
           </p>
         </ScrollReveal>
 
@@ -33,7 +26,7 @@ export default function WarumWir() {
           staggerDelay={80}
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
-          {reasons.map((reason) => (
+          {data.items.map((reason) => (
             <div
               key={reason}
               className="flex items-center gap-4 bg-charcoal-light/30 border border-cream/10 rounded-xl px-6 py-5 transition-colors hover:border-gold/40"
