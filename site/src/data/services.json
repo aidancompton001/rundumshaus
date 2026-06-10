@@ -39,18 +39,18 @@
     },
     {
       "id": "entruempelung",
-      "title": "Entrümpelung",
-      "description": "Wir übernehmen Entrümpelungen in allen Bereichen — sauber und stressfrei.",
-      "detailDescription": "Als Entrümpelungsfirma in Osnabrück und Umgebung übernehmen wir Entrümpelungen jeder Größe — vom einzelnen Keller oder Dachboden bis zur kompletten Haushaltsauflösung. Ob Wohnung, Haus, Garage oder Gewerbefläche: Wir räumen schnell, sauber und stressfrei. Regelmäßig sind wir in Bramsche, Wallenhorst, Belm und Bissendorf im Einsatz, häufig auch in Georgsmarienhütte und Melle. Alle Gegenstände werden fachgerecht und umweltgerecht entsorgt oder dem Recycling zugeführt — Sie müssen sich um nichts kümmern. Eine Besichtigung vor Ort ist im gesamten Umkreis von rund 60 km kostenlos und unverbindlich. Dank der kurzen Anfahrt sind wir schnell vor Ort und können viele Termine kurzfristig vereinbaren — auch bei dringenden Haushaltsauflösungen.",
+      "title": "Entrümpelung & Haushaltsauflösung",
+      "description": "Professionelle Entrümpelungen, Haushaltsauflösungen und Wohnungsauflösungen für Privat- und Gewerbekunden. Schnell, zuverlässig und inklusive fachgerechter Entsorgung.",
+      "detailDescription": "Rund ums Haus Littawe unterstützt Privatkunden, Unternehmen, Vermieter und Hausverwaltungen bei Entrümpelungen aller Art. Ob Wohnung, Haus, Keller, Dachboden, Garage oder Gewerbeobjekt – wir übernehmen die komplette Räumung inklusive fachgerechter Entsorgung und besenreiner Übergabe.\n\nZu unseren Leistungen gehören Entrümpelungen, Haushaltsauflösungen, Wohnungsauflösungen, Kellerentrümpelungen, Dachbodenentrümpelungen, Garagenräumungen sowie die Entsorgung von Sperrmüll, Möbeln und sonstigem Hausrat. Dank transparenter Preise, kostenloser Besichtigungen und kurzfristiger Termine sorgen wir für eine schnelle, saubere und stressfreie Abwicklung.",
       "icon": "truck",
       "image": "/images/services/entruempelung.jpg",
       "detailImage": "/images/services/detail-entruempelung.png"
     },
     {
       "id": "schrottabholung",
-      "title": "Schrottabholung",
-      "description": "Kostenlose Abholung von Altmetall — schnell und unkompliziert.",
-      "detailDescription": "Wir holen Ihren Altmetallschrott kostenlos ab — schnell und unkompliziert. Weitere Gegenstände auf Anfrage. Einfach anrufen, Termin vereinbaren, fertig.",
+      "title": "Schrottabholung & Altmetallentsorgung",
+      "description": "Zuverlässige Schrottabholung und Altmetallentsorgung für Privat- und Gewerbekunden. Wir holen Metallschrott, Altmetalle und sonstige Schrottgegenstände schnell und unkompliziert ab.",
+      "detailDescription": "Rund ums Haus Littawe bietet eine zuverlässige Schrottabholung und Altmetallentsorgung für Privatkunden, Unternehmen, Handwerksbetriebe und Hausverwaltungen. Wir holen Metallschrott, Altmetalle, Stahl, Eisen, Kupfer, Aluminium, Messing sowie viele weitere Schrottarten direkt bei Ihnen vor Ort ab.\n\nOb Keller, Garage, Werkstatt, Lagerhalle, Gewerbeobjekt oder Grundstück – wir unterstützen Sie bei der fachgerechten Entsorgung von Schrott und Altmetall. Auch größere Mengen können nach vorheriger Absprache übernommen werden. Unser Ziel ist eine schnelle, saubere und unkomplizierte Abwicklung mit fairen Konditionen und kurzfristigen Terminen.\n\nDurch die regelmäßige Schrottabholung schaffen Sie Platz, sorgen für Ordnung und führen wertvolle Rohstoffe dem Recyclingkreislauf zu. Kostenlose Besichtigungen und eine transparente Beratung gehören für uns selbstverständlich dazu.",
       "icon": "recycle",
       "image": "/images/services/schrottabholung.png",
       "detailImage": "/images/services/detail-schrott.png"
