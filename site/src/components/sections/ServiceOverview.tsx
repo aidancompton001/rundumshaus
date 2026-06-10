@@ -46,7 +46,7 @@ export default function ServiceOverview() {
                     />
                     <img
                       src={getImageUrl(service.image)}
-                      alt={service.title}
+                      alt={service.imageAlt ?? service.title}
                       width={600}
                       height={375}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

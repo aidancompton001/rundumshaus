@@ -41,7 +41,7 @@ export default function ServiceDetail() {
                       <source type="image/webp" srcSet={getImageUrl(toWebp(imgSrc))} />
                       <img
                         src={getImageUrl(imgSrc)}
-                        alt={service.title}
+                        alt={service.imageAlt ?? service.title}
                         width={800}
                         height={450}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

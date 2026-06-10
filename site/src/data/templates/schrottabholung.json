@@ -1,5 +1,6 @@
 {
   "h1": "Schrottabholung & Altmetallabholung in {city}",
+  "heroImage": "/images/services/schrott-hero.webp",
   "heroAlt": "Schrottabholung und Altmetallabholung in {city} — Rund ums Haus Littawe",
   "intro1": "Sie möchten Schrott oder Altmetall in {city} loswerden? Rund ums Haus Littawe übernimmt die zuverlässige Schrottabholung und Altmetallabholung — bei Privatkunden, Unternehmen, Hausverwaltungen und Gewerbeobjekten. Wir holen Eisen, Stahl, Kupfer, Aluminium, Messing und Edelstahl direkt vor Ort ab und kümmern uns um die fachgerechte Verwertung.",
   "intro2": "Als Familienbetrieb sind wir {dist} und holen sowohl kleinere Mengen als auch größere Posten Schrott in {city} ab. Wo Schrott Platz wegnimmt, schaffen wir schnell und unkompliziert wieder Raum — bei größeren Mengen ist die Besichtigung kostenlos.",
@@ -122,11 +123,27 @@
   "weitereLeistungen": {
     "heading": "Weitere Leistungen",
     "links": [
-      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
-      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
-      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
-      { "label": "Entrümpelung", "servicePath": "entruempelung" },
-      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+      {
+        "label": "Gartenpflege",
+        "servicePath": "gartenpflege"
+      },
+      {
+        "label": "Hausmeisterservice, Objektpflege & Grundstückspflege",
+        "servicePath": "hausmeisterservice"
+      },
+      {
+        "label": "Dachreinigung",
+        "servicePath": "dacharbeiten"
+      },
+      {
+        "label": "Entrümpelung",
+        "servicePath": "entruempelung"
+      },
+      {
+        "label": "Objektpflege",
+        "servicePath": "objektpflege",
+        "isHub": true
+      }
     ]
   },
   "einsatzorte": {

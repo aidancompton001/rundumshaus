@@ -36,6 +36,15 @@ for (const s of servicesData?.services ?? []) {
   if (s.detailImage) managed.add(s.detailImage);
 }
 
+// PX-072: city-template hero images (CMS-editable via Stadt-Seiten Texte)
+{
+  const { readdirSync } = await import("node:fs");
+  for (const tf of readdirSync(path.join(SITE_ROOT, "src/data/templates"))) {
+    const tpl = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/templates", tf), "utf8"));
+    if (tpl.heroImage) managed.add(tpl.heroImage);
+  }
+}
+
 const stripExt = (p) => p.replace(/\.(png|jpe?g|webp)$/i, "");
 
 let failures = 0;

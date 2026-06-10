@@ -77,6 +77,7 @@ export interface Service {
   detailDescription: string;
   icon: string;
   image?: string;
+  imageAlt?: string;  // PX-072: CMS-editable alt text (fallback: title)
   detailImage?: string;
   subPage?: { href: string; label: string };
 }

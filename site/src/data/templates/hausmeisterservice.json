@@ -1,5 +1,6 @@
 {
   "h1": "Hausmeisterservice, Objektpflege & Grundstückspflege in {city}",
+  "heroImage": "/images/services/hausmeister-hero.webp",
   "heroAlt": "Hausmeister bei der Objektpflege in {city} — Rund ums Haus Littawe",
   "intro1": "Sie suchen einen zuverlässigen Hausmeisterservice in {city}? Rund ums Haus Littawe übernimmt für Privatkunden, Unternehmen, Vermieter und Hausverwaltungen die Betreuung von Immobilien und Außenanlagen — von Kontrollgängen über Kleinreparaturen bis zur regelmäßigen Objektpflege.",
   "intro2": "Als erfahrener Hausmeister sind wir {dist} und übernehmen sowohl einmalige Aufträge als auch laufende Betreuungsverträge in {city}. Eine regelmäßige Pflege Ihres Objekts trägt zum Werterhalt der Immobilie bei und sorgt für ein gepflegtes Erscheinungsbild.",
@@ -126,11 +127,27 @@
   "weitereLeistungen": {
     "heading": "Weitere Leistungen",
     "links": [
-      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
-      { "label": "Entrümpelung", "servicePath": "entruempelung" },
-      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
-      { "label": "Schrottabholung", "servicePath": "schrottabholung" },
-      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+      {
+        "label": "Gartenpflege",
+        "servicePath": "gartenpflege"
+      },
+      {
+        "label": "Entrümpelung",
+        "servicePath": "entruempelung"
+      },
+      {
+        "label": "Dachreinigung",
+        "servicePath": "dacharbeiten"
+      },
+      {
+        "label": "Schrottabholung",
+        "servicePath": "schrottabholung"
+      },
+      {
+        "label": "Objektpflege",
+        "servicePath": "objektpflege",
+        "isHub": true
+      }
     ]
   },
   "einsatzorte": {
