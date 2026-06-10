@@ -31,23 +31,33 @@ vi.mock("lenis", () => ({
 }));
 
 import Home from "@/app/page";
+import homepageData from "@/data/homepage.json";
+
+// PX-068 A0: content is CMS-editable by Kevin. Tests compare rendered output
+// against the JSON SOURCE, never against hardcoded literals — otherwise a
+// legitimate CMS edit would fail `npm test` in deploy.yml and silently block
+// the deploy (Design Review E2).
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 describe("Homepage", () => {
   it("renders hero heading from homepage.json", () => {
     render(<Home />);
-    const matches = screen.getAllByText(/Alles rund ums Haus/);
+    const heroStart = homepageData.hero.heading.split(" ").slice(0, 3).join(" ");
+    const matches = screen.getAllByText(new RegExp(escapeRe(heroStart)));
     expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders hero subheading", () => {
+  it("renders hero subheading from homepage.json", () => {
     render(<Home />);
-    expect(screen.getByText(/zuverlässiger Service rund ums Haus/)).toBeInTheDocument();
+    const subStart = homepageData.hero.subheading.split(" ").slice(0, 4).join(" ");
+    expect(screen.getAllByText(new RegExp(escapeRe(subStart))).length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders CTA buttons", () => {
+  it("renders CTA buttons from homepage.json", () => {
     render(<Home />);
-    expect(screen.getByText("Kostenlos anfragen")).toBeInTheDocument();
-    const leistungenLinks = screen.getAllByText(/Unsere Leistungen/);
-    expect(leistungenLinks.length).toBeGreaterThanOrEqual(1);
+    homepageData.hero.ctas.forEach((cta) => {
+      const matches = screen.getAllByText(new RegExp(escapeRe(cta.label)));
+      expect(matches.length).toBeGreaterThanOrEqual(1);
+    });
   });
 });

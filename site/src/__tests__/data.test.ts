@@ -23,16 +23,16 @@ describe("Data Integrity", () => {
       expect(site.company).toBeTruthy();
     });
 
-    it("has 5 navigation links (PX-060: Osnabrück + Kontakt removed per Kevin)", () => {
-      expect(site.navigation).toHaveLength(5);
-      const labels = site.navigation.map((n) => n.label);
-      expect(labels).toEqual([
-        "Startseite",
-        "Leistungen",
-        "Über uns",
-        "Referenzen",
-        "Einsatzgebiete",
-      ]);
+    // PX-068 A0: nav labels are CMS-editable — assert STRUCTURE, not exact
+    // labels (a Kevin edit must not fail the deploy pipeline).
+    it("has structurally valid navigation links", () => {
+      expect(site.navigation.length).toBeGreaterThanOrEqual(3);
+      site.navigation.forEach((n) => {
+        expect(n.label).toBeTruthy();
+        expect(n.href).toMatch(/^\//);
+      });
+      // Startseite link must always exist (structural invariant, not content)
+      expect(site.navigation.some((n) => n.href === "/")).toBe(true);
     });
 
     it("has owner name", () => {
@@ -105,51 +105,11 @@ describe("Data Integrity", () => {
       expect(services.find((s) => s.id === "schrottabholung")).toBeTruthy();
     });
 
-    describe("Local SEO content (PX-022 Wave 1)", () => {
-      const TARGET_CITIES = [
-        "Osnabrück",
-        "Bramsche",
-        "Wallenhorst",
-        "Belm",
-        "Bissendorf",
-        "Georgsmarienhütte",
-        "Melle",
-      ];
-
-      it("gartenpflege.detailDescription mentions all 7 target cities", () => {
-        const garten = services.find((s) => s.id === "gartenpflege");
-        expect(garten).toBeTruthy();
-        TARGET_CITIES.forEach((city) => {
-          expect(
-            garten!.detailDescription,
-            `Missing city in gartenpflege: ${city}`
-          ).toContain(city);
-        });
-      });
-
-      it("entruempelung.detailDescription mentions all 7 target cities", () => {
-        const entr = services.find((s) => s.id === "entruempelung");
-        expect(entr).toBeTruthy();
-        TARGET_CITIES.forEach((city) => {
-          expect(
-            entr!.detailDescription,
-            `Missing city in entruempelung: ${city}`
-          ).toContain(city);
-        });
-      });
-
-      it("gartenpflege.detailDescription has at least 100 words (SEO content)", () => {
-        const garten = services.find((s) => s.id === "gartenpflege");
-        const wordCount = garten!.detailDescription.split(/\s+/).length;
-        expect(wordCount).toBeGreaterThanOrEqual(100);
-      });
-
-      it("entruempelung.detailDescription has at least 100 words (SEO content)", () => {
-        const entr = services.find((s) => s.id === "entruempelung");
-        const wordCount = entr!.detailDescription.split(/\s+/).length;
-        expect(wordCount).toBeGreaterThanOrEqual(100);
-      });
-    });
+    // PX-068 A0: "Local SEO content (PX-022 Wave 1)" policy tests removed.
+    // They required card detailDescriptions to mention 7 cities + ≥100 words —
+    // that local-SEO role moved to the 490 programmatic city pages (PX-047..051),
+    // and descriptions are now CMS-editable by Kevin (his PX-053 Hausmeister
+    // text already dropped the 7-city pattern). Structural checks above remain.
 
     it("all referenced image files exist on disk", () => {
       const PUBLIC = join(process.cwd(), "public");

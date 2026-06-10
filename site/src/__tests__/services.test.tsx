@@ -25,6 +25,9 @@ vi.mock("lenis", () => ({
 import ServiceOverview from "@/components/sections/ServiceOverview";
 import ServiceDetail from "@/components/sections/ServiceDetail";
 import AboutSection from "@/components/sections/AboutSection";
+import servicesData from "@/data/services.json";
+import homepageData from "@/data/homepage.json";
+import type { Service } from "@/data/types";
 import {
   WrenchIcon,
   LeafIcon,
@@ -91,38 +94,37 @@ describe("ServiceOverview", () => {
     expect(screen.getByText("Unsere Leistungen")).toBeInTheDocument();
   });
 
-  it("renders all 5 service titles", () => {
-    render(<ServiceOverview />);
-    // PX-053: Hausmeister title expanded per Kevin's WhatsApp request 2026-06-09
-    // (Title now: "Hausmeisterservice, Objektpflege & Grundstückspflege" — appears in
-    // both card title and description, hence getAllByText)
-    expect(screen.getAllByText(/Hausmeisterservice/).length).toBeGreaterThan(0);
-    expect(screen.getByText("Gartenpflege")).toBeInTheDocument();
-    expect(screen.getByText("Dacharbeiten")).toBeInTheDocument();
-    expect(screen.getByText("Entrümpelung")).toBeInTheDocument();
-    expect(screen.getByText("Schrottabholung")).toBeInTheDocument();
+  // PX-068 A0: titles are CMS-editable — compare against services.json source,
+  // not literals (Kevin's edits must not fail the deploy pipeline).
+  it("renders all service titles from services.json", () => {
+    const { container } = render(<ServiceOverview />);
+    const { services } = servicesData as { services: Service[] };
+    expect(services.length).toBeGreaterThanOrEqual(5);
+    services.forEach((s) => {
+      expect(container.textContent).toContain(s.title);
+    });
   });
 
-  it("renders SVG icons instead of emoji", () => {
+  it("renders SVG icons for every service card", () => {
     const { container } = render(<ServiceOverview />);
     const svgs = container.querySelectorAll("svg");
     expect(svgs.length).toBeGreaterThanOrEqual(5);
-    // No emoji text nodes
-    const emojiPattern = /[\u{1F300}-\u{1F9FF}]|[♻️]/u;
-    const allText = container.textContent || "";
-    expect(allText).not.toMatch(emojiPattern);
+    // PX-068 A0: emoji-in-text check removed — descriptions are CMS-editable
+    // and Kevin may legitimately paste emoji. The SVG-icons assertion above
+    // still guards the original design regression (icons, not emoji icons).
   });
 });
 
 describe("ServiceDetail", () => {
-  it("renders all 5 service detail descriptions", () => {
-    render(<ServiceDetail />);
-    // PX-053: Hausmeister description updated per Kevin's WhatsApp 2026-06-09
-    expect(screen.getByText(/Von der regelmäßigen Objektpflege/)).toBeInTheDocument();
-    expect(screen.getByText(/Als zuverlässiger Gärtner in Osnabrück/)).toBeInTheDocument();
-    expect(screen.getByText(/Moos, Laub und Verschmutzungen/)).toBeInTheDocument();
-    expect(screen.getByText(/Als Entrümpelungsfirma in Osnabrück/)).toBeInTheDocument();
-    expect(screen.getByText(/Wir holen Ihren Altmetallschrott/)).toBeInTheDocument();
+  // PX-068 A0: descriptions are CMS-editable — compare against services.json
+  // source so Kevin's edits never break the deploy pipeline.
+  it("renders all service detail descriptions from services.json", () => {
+    const { container } = render(<ServiceDetail />);
+    const { services } = servicesData as { services: Service[] };
+    services.forEach((s) => {
+      const snippet = s.detailDescription.slice(0, 40);
+      expect(container.textContent, `service ${s.id}`).toContain(snippet);
+    });
   });
 
   it("cards use solid bg, not transparent glassmorphism (bug fix)", () => {
@@ -160,10 +162,11 @@ describe("AboutSection", () => {
     expect(screen.getByText("Über uns")).toBeInTheDocument();
   });
 
-  it("renders about body text", () => {
-    render(<AboutSection />);
-    // PX-064: About intro replaced with Kevin's verbatim Startseite text
-    expect(screen.getByText(/Willkommen bei Rund ums Haus Littawe/)).toBeInTheDocument();
+  // PX-068 A0: About body is CMS-editable — compare against homepage.json.
+  it("renders about body text from homepage.json", () => {
+    const { container } = render(<AboutSection />);
+    const snippet = homepageData.about.body.slice(0, 40);
+    expect(container.textContent).toContain(snippet);
   });
 
   it("renders 3 stat labels", () => {
