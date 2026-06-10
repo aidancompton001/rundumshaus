@@ -2,6 +2,74 @@
 
 ---
 
+### [S066] — 2026-06-10 — PX-064→066: Startseite Redesign (Kevin verbatim) + reorder + bg
+
+**Задача:** Полный редизайн главной страницы по verbatim-текстам Кевина (WhatsApp 2026-06-09/10) + перестановка секций + чередование фонов.
+**Роли:** #6 Full-Stack
+**Статус:** ✅ DEPLOYED (PRs #61, #62, #63)
+
+**Что сделано:**
+- **PX-064** Startseite Redesign:
+  - WarumWir: 5 иконок → 8 ✓ checkmarks (SVG, список Кевина)
+  - AboutSection: intro → Kevin's "Willkommen bei Rund ums Haus Littawe..." (2 абзаца, добавлен `body2` в AboutData type)
+  - **BewertungenSlider** (NEW): scroll-snap slider из 8 реальных Google-отзывов (`reviews.json`), JSX only — AggregateRating уже в LocalBusiness Schema (L-015)
+  - **HomeFAQ** (NEW): 4 вопроса Кевина + FAQPage Schema (на homepage её раньше не было)
+  - **HomeEinsatzgebiet** (NEW): 40 городов текст + Slogan + CTA
+- **PX-065** Reorder + Kontakt:
+  - Порядок Кевина: Hero → Bewertungen → Leistungen → Über uns → Warum wir → Einsatzgebiet → Kontakt
+  - **HomeKontakt** (NEW): большой full-width CTA-блок (Anrufen/WhatsApp/E-Mail/Formular)
+  - Удалены из рендера: FaktenBlock + StandortOsnabrueck (Kevin не включил в список; файлы сохранены для revert)
+- **PX-066** FAQ position + bg alternation:
+  - FAQ перемещён между Warum wir и Einsatzgebiet
+  - Чередование фонов: cream→серый→cream→charcoal→cream→серый→charcoal (footer dark), нет двух одинаковых подряд (CEO заметил 2 белых подряд)
+
+**Ключевые решения:**
+- Все тексты — verbatim Кевина, ничего не выдумано
+- Bewertungen из существующего `reviews.json` (8 Google-отзывов) — НЕ ждём Places API
+- Schema ownership (L-015): slider/FAQ — JSX, AggregateRating в LocalBusiness
+- FaktenBlock/Standort НЕ удалены физически (правило: без указания CEO)
+
+**Google setup (для будущего Places API auto-pull):**
+- Kevin's Google Workspace → Cloud project "Rund ums Haus Littawe Website"
+- Places API key создан + restricted (в `docs/CREDENTIALS.md`)
+- Place ID НЕ получен — Google Places API ещё не проиндексировал profile (delay для нового/service-area business). Auto-pull отложен, slider работает на static JSON
+
+**Артефакты:** `BewertungenSlider.tsx`, `HomeFAQ.tsx`, `HomeEinsatzgebiet.tsx`, `HomeKontakt.tsx`, `WarumWir.tsx`, `AboutSection.tsx`, `homepage.json`, `page.tsx`
+
+**Верификация:** 240/240 tests, jsdom: 1 H1, LocalBusiness+FAQPage Schema, 8 review cards, live verified
+
+---
+
+### [S065] — 2026-06-09/10 — PX-052→063: Kevin homepage/structure iterations
+
+**Задача:** Серия мелких правок по WhatsApp-фидбеку Кевина после rollout 5 services.
+**Роли:** #6 Full-Stack
+**Статус:** ✅ DEPLOYED (PRs #46-#60)
+
+**Что сделано:**
+- **PX-052** (#46): "Mehr erfahren" CTA на homepage service cards + /leistungen/ hub → city pages
+- **PX-053** (#48): Hausmeister card title+description (Kevin text); скрыл subPage links под карточками
+- **PX-054** (#49): /leistungen/ city section 6 → 30 городов + "Alle 98 Einsatzgebiete" CTA
+- **PX-055** (#50): Option D — `getNeighborCities` enrich (4→12 соседей), Osnabrück исключён из neighbors, `getAllOtherCities` helper; fix Servicegebiet `c.name`→`c.displayName` (/einsatzgebiet/ 97→98 кликабельных, neuenkirchen-bei-rheine)
+- **PX-056** (#51): /einsatzgebiet/ — все 98 городов × 5 service icons (было 88 городов только Gartenpflege — мой баг, fixed)
+- **PX-057** (#52): "Weitere Einsatzorte" 30 visible + `<details>` expand до 97 (cap 12→30); fix Osnabrück exclusion + canary cap
+- **PX-058** (#54): navbar Einsatzgebiete + /leistungen/ city grid убран + /einsatzgebiet/ plain text (no service links)
+- **PX-059** (#56): "Weitere Spezialleistungen" под 5 main cards
+- **PX-060** (#57): navbar — убраны Osnabrück + дубль Kontakt (yellow CTA остался)
+- **PX-061** (#58): /leistungen/ cleanup — убраны FAQ + Spezialleistungen + Einsatzgebiet CTA (Kevin X-нул на скриншоте)
+- **PX-062** (#59): убран дубль "Telefon:" под CTA кнопками (490 city pages)
+- **PX-063** (#60): длинный титул "Hausmeisterservice, Objektpflege & Grundstückspflege" везде в visible content (H1 + chips + cross-links), Schema/meta остались short
+- Entrümpelung hero image regenerated (#47) — fix AI physics errors (стул/тумба/дверь фургона)
+
+**Ключевые уроки:**
+- L-017 применён: canary cap обновлялся вместе с изменениями (избежали false positives)
+- Несколько раз Kevin менял решение (Top 30 cities → потом убрал; 5 icons → потом убрал) — откатывали чисто
+- Мой баг PX-056: 88 городов имели только Gartenpflege link — поймал сам через audit
+
+**Верификация:** 240/240 tests на каждом PR, live canary 5 services, jsdom verify
+
+---
+
 ### [S047a] — 2026-06-09 — PX-047 Phase 0: Garten Osnabrück preview (Kevin approved)
 
 **Задача:** Phase 0 preview новой 9-секционной структуры от Kevin'а на `/leistungen/gartenpflege/osnabrueck/`.
