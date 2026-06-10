@@ -86,7 +86,7 @@ export default function ServiceOverview() {
 
         <ScrollReveal className="text-center mt-12">
           <a
-            href={getHref("/weitere-leistungen/")}
+            href={getHref("/leistungen/") + "#weitere"}
             className="inline-flex items-center gap-2 border-2 border-charcoal/20 hover:border-copper text-charcoal hover:text-copper px-6 py-3 rounded-xl font-body font-semibold transition-colors duration-200"
           >
             Weitere Dienstleistungen
