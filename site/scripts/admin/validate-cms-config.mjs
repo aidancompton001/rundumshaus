@@ -74,6 +74,26 @@ for (const coll of config.collections ?? []) {
   }
 }
 
+/* ── PX-069+: city-template cross-links must point to EXISTING pages ──
+   Learned from the Kevin/Eduard race on 2026-06-10: a CMS save produced a
+   chip linking to /leistungen/gartenpflege/ (no such page → 404).
+   Rule: isHub:true → servicePath must be a real hub page;
+         otherwise   → servicePath must be one of the 5 service ids. */
+const SERVICE_IDS = ["gartenpflege", "hausmeisterservice", "dacharbeiten", "entruempelung", "schrottabholung"];
+const HUB_PATHS = ["objektpflege", "rasen-neuanlage"];
+for (const svc of SERVICE_IDS) {
+  const tpl = JSON.parse(readFileSync(path.join(SITE_ROOT, `src/data/templates/${svc}.json`), "utf8"));
+  for (const link of tpl.weitereLeistungen?.links ?? []) {
+    if (link.isHub) {
+      if (!HUB_PATHS.includes(link.servicePath))
+        fail(`templates/${svc}.json link "${link.label}": isHub=true but /leistungen/${link.servicePath}/ is not an existing hub page (404!)`);
+    } else if (!SERVICE_IDS.includes(link.servicePath)) {
+      fail(`templates/${svc}.json link "${link.label}": servicePath "${link.servicePath}" is not a known service (404!)`);
+    }
+  }
+}
+ok("city-template cross-links point to existing pages");
+
 /* ── G6: meta-overrides patterns ────────────────────────────── */
 const meta = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/meta-overrides.json"), "utf8"));
 const cities = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/cities.json"), "utf8")).cities;
