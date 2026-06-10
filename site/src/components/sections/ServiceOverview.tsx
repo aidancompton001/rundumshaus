@@ -15,7 +15,7 @@ const { services, heading, subheading } = servicesData as {
 
 export default function ServiceOverview() {
   return (
-    <section className="py-20 md:py-28 bg-cream">
+    <section className="py-20 md:py-28 bg-cream-dark/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-4">
