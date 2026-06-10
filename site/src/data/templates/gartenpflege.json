@@ -121,16 +121,37 @@
   "weitereLeistungen": {
     "heading": "Weitere Leistungen",
     "links": [
-      { "label": "Rasen erneuern", "servicePath": "rasen-neuanlage", "isHub": true },
-      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
-      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
-      { "label": "Entrümpelung", "servicePath": "entruempelung" },
-      { "label": "Schrottabholung", "servicePath": "schrottabholung" }
+      {
+        "label": "Heckenschnitt",
+        "servicePath": "gartenpflege",
+        "isHub": true
+      },
+      {
+        "label": "Rasen erneuern",
+        "servicePath": "rasen-neuanlage",
+        "isHub": true
+      },
+      {
+        "label": "Hausmeisterservice, Objektpflege & Grundstückspflege",
+        "servicePath": "hausmeisterservice"
+      },
+      {
+        "label": "Dachreinigung",
+        "servicePath": "dacharbeiten"
+      },
+      {
+        "label": "Entrümpelung",
+        "servicePath": "entruempelung"
+      },
+      {
+        "label": "Schrottabholung",
+        "servicePath": "schrottabholung"
+      }
     ]
   },
   "einsatzorte": {
     "heading": "Weitere Einsatzorte",
-    "chipLabel": "Gärtner in {city}",
+    "chipLabel": "Gärtner & Gartenpflege in {city}",
     "expandLabel": "Weitere {count} Städte anzeigen"
   }
 }
