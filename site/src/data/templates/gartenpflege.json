@@ -122,11 +122,6 @@
     "heading": "Weitere Leistungen",
     "links": [
       {
-        "label": "Heckenschnitt",
-        "servicePath": "gartenpflege",
-        "isHub": true
-      },
-      {
         "label": "Rasen erneuern",
         "servicePath": "rasen-neuanlage",
         "isHub": true
