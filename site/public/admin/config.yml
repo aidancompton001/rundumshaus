@@ -117,7 +117,7 @@ collections:
               - { name: imageAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string, required: false }
               - { name: detailImage, label: Detail-Bild, widget: image, required: false }
               - name: subPage
-                label: Zusatz-Link (optional)
+                label: "Zusatz-Link (derzeit ausgeblendet — Änderungen hier sind aktuell ohne Wirkung)"
                 widget: object
                 required: false
                 fields:
@@ -195,7 +195,7 @@ collections:
   # Field schema shared via YAML anchor; validator enforces full coverage.
   - name: stadtseiten
     label: Stadt-Seiten Texte
-    description: "Texte der 98 Stadt-Seiten je Dienstleistung (Leistungslisten, Beschreibungen, FAQ). Platzhalter: {city} = Stadtname, {dist} = Entfernungs-Satz, {einsatz} = Einsatzgebiets-Satz, {list} = Nachbarstädte-Liste. Änderungen gelten für alle 98 Städte der Dienstleistung."
+    description: "Texte der 98 Stadt-Seiten je Dienstleistung (Leistungslisten, Beschreibungen, FAQ). Platzhalter (nur in Text-Feldern, nicht in Listen-Punkten): {city} = Stadtname, {dist} = Entfernungs-Satz, {einsatz} = Einsatzgebiets-Satz, {list} = Nachbarstädte-Liste. Änderungen gelten für alle 98 Städte der Dienstleistung."
     files:
       - name: gartenpflege
         label: Gärtner & Gartenpflege
@@ -203,7 +203,7 @@ collections:
         fields: &stadtseiten_fields
           - { name: h1, label: "Überschrift (H1)", widget: string, hint: "{city} = Stadtname" }
           - { name: heroImage, label: "Hero-Bild (oben auf den Stadt-Seiten)", widget: image }
-          - { name: heroAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string }
+          - { name: heroAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string, hint: "{city} = Stadtname" }
           - { name: intro1, label: "Einleitung — Absatz 1", widget: text }
           - { name: intro2, label: "Einleitung — Absatz 2", widget: text, hint: "{dist} = automatischer Entfernungs-Satz" }
           - { name: benefits, label: "✅ Vorteile (oben)", widget: list, field: { name: item, label: Punkt, widget: string } }
@@ -266,10 +266,11 @@ collections:
               - name: links
                 label: Links
                 widget: list
+                allow_add: false
                 fields:
                   - { name: label, label: Link-Text, widget: string }
                   - { name: servicePath, label: "Technischer Pfad (nicht ändern!)", widget: string, readonly: true }
-                  - { name: isHub, label: "Übersichtsseite? (nicht ändern)", widget: boolean, required: false }
+                  - { name: isHub, label: "Übersichtsseite? (nicht ändern)", widget: boolean, required: false, readonly: true }
           - name: einsatzorte
             label: "Weitere Einsatzorte"
             widget: object
@@ -336,7 +337,7 @@ collections:
         file: site/src/data/reviews.json
         fields:
           - { name: source, label: "Quelle (nicht ändern)", widget: string, readonly: true }
-          - { name: verified, label: Verifiziert-Notiz, widget: string }
+          - { name: verified, label: "Interne Notiz (wird nicht angezeigt)", widget: string }
           - name: aggregateRating
             label: Gesamt-Bewertung
             widget: object
@@ -373,7 +374,7 @@ collections:
         label: Kontaktformular (Texte)
         file: site/src/data/contact-form.json
         fields:
-          - { name: title, label: Seitentitel, widget: string }
+          - { name: title, label: "Seitentitel (derzeit ungenutzt)", widget: string }
           - { name: heading, label: Überschrift, widget: string }
           - { name: body, label: Einleitung, widget: text }
           - name: sections

@@ -4,9 +4,13 @@
 import Link from "next/link";
 import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
+import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
 
 const data = (homepageData as HomepageData).kontaktCta;
+const PHONE = (siteData as { phone: string }).phone.replace(/\s+/g, "");
+const EMAIL = (siteData as { email: string }).email;
+const WA = PHONE.replace(/^\+/, "");
 
 export default function HomeKontakt() {
   return (
@@ -20,14 +24,14 @@ export default function HomeKontakt() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl mx-auto">
           <a
-            href="tel:+4915239603175"
+            href={`tel:${PHONE}`}
             className="inline-flex items-center justify-center gap-2 px-5 py-4 bg-copper text-white font-semibold rounded-xl hover:bg-copper-dark transition"
           >
             <PhoneIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
             <span>Anrufen</span>
           </a>
           <a
-            href="https://wa.me/4915239603175"
+            href={`https://wa.me/${WA}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-5 py-4 bg-[#25D366] text-white font-semibold rounded-xl hover:bg-[#1ebd5a] transition"
@@ -36,7 +40,7 @@ export default function HomeKontakt() {
             <span>WhatsApp</span>
           </a>
           <a
-            href="mailto:kontakt@rundumshaus-littawe.de"
+            href={`mailto:${EMAIL}`}
             className="inline-flex items-center justify-center gap-2 px-5 py-4 border border-cream/40 text-cream font-semibold rounded-xl hover:bg-cream/10 transition"
           >
             <EnvelopeIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
