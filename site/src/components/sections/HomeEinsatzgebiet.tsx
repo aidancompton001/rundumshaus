@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function HomeEinsatzgebiet() {
   return (
-    <section className="py-20 md:py-28 bg-cream">
+    <section className="py-20 md:py-28 bg-cream-dark/50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-6">
           Einsatzgebiet – Osnabrück und Umgebung

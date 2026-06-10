@@ -65,7 +65,7 @@ export default function AboutSection() {
   const { reducedMotion } = useMotion();
 
   return (
-    <section className="py-20 md:py-28 bg-cream-dark/50">
+    <section className="py-20 md:py-28 bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
           <ScrollReveal>

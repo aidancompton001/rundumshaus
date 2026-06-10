@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-// PX-065: section order per Kevin's WhatsApp 2026-06-10:
+// PX-065/066: section order per Kevin's WhatsApp 2026-06-10:
 // 1 Hero · 2 Bewertungen · 3 Leistungen · 4 Über uns · 5 Warum wir ·
-// 6 Einsatzgebiet · 7 großer Kontakt-Bereich.
+// 6 FAQ · 7 Einsatzgebiet · 8 großer Kontakt-Bereich.
+// (PX-066: Kevin moved FAQ between Warum wir and Einsatzgebiet.)
 // FaktenBlock + StandortOsnabrueck removed (not in Kevin's list).
-// FAQ kept before Kontakt (Kevin supplied the text + FAQPage schema for SEO).
 export default function Home() {
   return (
     <>
@@ -25,8 +25,8 @@ export default function Home() {
       <ServiceOverview />
       <AboutSection />
       <WarumWir />
-      <HomeEinsatzgebiet />
       <HomeFAQ />
+      <HomeEinsatzgebiet />
       <HomeKontakt />
     </>
   );

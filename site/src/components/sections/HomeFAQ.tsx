@@ -33,7 +33,7 @@ const faqSchema = {
 
 export default function HomeFAQ() {
   return (
-    <section className="py-20 md:py-28 bg-cream-dark/50">
+    <section className="py-20 md:py-28 bg-cream">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -46,7 +46,7 @@ export default function HomeFAQ() {
           {FAQS.map((f, i) => (
             <details
               key={i}
-              className="group bg-cream border border-sand/30 rounded-xl p-5"
+              className="group bg-cream-dark border border-sand/30 rounded-xl p-5"
             >
               <summary className="cursor-pointer font-medium text-charcoal flex justify-between items-center">
                 <span>{f.q}</span>
