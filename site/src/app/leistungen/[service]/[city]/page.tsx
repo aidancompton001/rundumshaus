@@ -13,6 +13,7 @@ import {
   type ServiceId,
 } from "@/lib/programmatic";
 import { generateSEO } from "@/lib/seo";
+import { getServiceMetaOverride } from "@/lib/meta-overrides";
 import { getGartenContent } from "@/lib/template-content";
 import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import { getDachContent } from "@/lib/template-content-dach";
@@ -58,9 +59,11 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getGartenContent(cityData);
+    // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
+    const metaOv = getServiceMetaOverride("gartenpflege", cityData.displayName);
     const seo = generateSEO({
-      title: content.metaTitle,
-      description: content.metaDescription,
+      title: metaOv?.title ?? content.metaTitle,
+      description: metaOv?.description ?? content.metaDescription,
       path: `/leistungen/${service}/${city}`,
     });
     if (isNoindexPair(service, city)) {
@@ -72,9 +75,11 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getHausmeisterContent(cityData);
+    // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
+    const metaOv = getServiceMetaOverride("hausmeisterservice", cityData.displayName);
     const seo = generateSEO({
-      title: content.metaTitle,
-      description: content.metaDescription,
+      title: metaOv?.title ?? content.metaTitle,
+      description: metaOv?.description ?? content.metaDescription,
       path: `/leistungen/${service}/${city}`,
     });
     if (isNoindexPair(service, city)) {
@@ -86,9 +91,11 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getDachContent(cityData);
+    // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
+    const metaOv = getServiceMetaOverride("dacharbeiten", cityData.displayName);
     const seo = generateSEO({
-      title: content.metaTitle,
-      description: content.metaDescription,
+      title: metaOv?.title ?? content.metaTitle,
+      description: metaOv?.description ?? content.metaDescription,
       path: `/leistungen/${service}/${city}`,
     });
     if (isNoindexPair(service, city)) {
@@ -100,9 +107,11 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getEntruempelungContent(cityData);
+    // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
+    const metaOv = getServiceMetaOverride("entruempelung", cityData.displayName);
     const seo = generateSEO({
-      title: content.metaTitle,
-      description: content.metaDescription,
+      title: metaOv?.title ?? content.metaTitle,
+      description: metaOv?.description ?? content.metaDescription,
       path: `/leistungen/${service}/${city}`,
     });
     if (isNoindexPair(service, city)) {
@@ -114,9 +123,11 @@ export async function generateMetadata({
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
     const content = getSchrottContent(cityData);
+    // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
+    const metaOv = getServiceMetaOverride("schrottabholung", cityData.displayName);
     const seo = generateSEO({
-      title: content.metaTitle,
-      description: content.metaDescription,
+      title: metaOv?.title ?? content.metaTitle,
+      description: metaOv?.description ?? content.metaDescription,
       path: `/leistungen/${service}/${city}`,
     });
     if (isNoindexPair(service, city)) {
