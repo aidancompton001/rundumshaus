@@ -14,6 +14,20 @@
  */
 import { JSDOM } from "jsdom";
 
+// PX-069: required headings derive from the SAME JSONs Kevin edits via CMS —
+// canary stays in sync with his text changes automatically.
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+const TPL_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../src/data/templates");
+const tplHeadings = (svc) => {
+  const t = JSON.parse(readFileSync(path.join(TPL_DIR, svc + ".json"), "utf8"));
+  return [t.cta.heading, t.warum.heading, t.einsatzgebiet.heading, t.faq.heading]
+    .map((h) => h.split("{city}")[0].trim())
+    .filter(Boolean);
+};
+
+
 const BASE = "https://rundumshaus-littawe.de";
 const SERVICE = process.argv[2] || "gartenpflege";
 
@@ -31,63 +45,31 @@ const EXPECTATIONS = {
   gartenpflege: {
     minH2: 7,
     minH3: 2,
-    requiredHeadings: [
-      "Jetzt kostenloses Angebot anfragen",
-      "Warum Rund ums Haus Littawe?",
-      "Einsatzgebiet",
-      "Häufige Fragen",
-    ],
+    requiredHeadings: tplHeadings("gartenpflege"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
   hausmeisterservice: {
     minH2: 8,
     minH3: 2,
-    requiredHeadings: [
-      "Jetzt kostenloses Angebot anfragen",
-      "Hausmeisterservice für Vermieter, Unternehmen & Hausverwaltungen",
-      "Warum Rund ums Haus Littawe?",
-      "Einsatzgebiet",
-      "Häufige Fragen",
-    ],
+    requiredHeadings: tplHeadings("hausmeisterservice"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
   dacharbeiten: {
     minH2: 9, // CTA + Pro + Leistungen + 3 sub + Warum + Einsatzgebiet + FAQ
     minH3: 2,
-    requiredHeadings: [
-      "Jetzt kostenloses Angebot anfragen",
-      "Dachreinigung in",
-      "Dachrinnenreinigung in",
-      "Warum Rund ums Haus Littawe?",
-      "Einsatzgebiet",
-      "Häufige Fragen",
-    ],
+    requiredHeadings: tplHeadings("dacharbeiten"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
   entruempelung: {
     minH2: 8, // CTA + Pro + Leistungen + 2 sub + Warum + Einsatzgebiet + FAQ
     minH3: 2,
-    requiredHeadings: [
-      "Jetzt kostenloses Angebot anfragen",
-      "Haushaltsauflösung in",
-      "Wohnungsauflösung & Nachlassauflösung",
-      "Warum Rund ums Haus Littawe?",
-      "Einsatzgebiet",
-      "Häufige Fragen",
-    ],
+    requiredHeadings: tplHeadings("entruempelung"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
   schrottabholung: {
     minH2: 8, // CTA + Pro + Leistungen + Altmetall + B2B + Warum + Einsatzgebiet + FAQ
     minH3: 2,
-    requiredHeadings: [
-      "Jetzt kostenlose Schrottabholung anfragen",
-      "Altmetallabholung in",
-      "Schrottentsorgung für Privat- und Gewerbekunden",
-      "Warum Rund ums Haus Littawe?",
-      "Einsatzgebiet",
-      "Häufige Fragen zur Schrottabholung",
-    ],
+    requiredHeadings: tplHeadings("schrottabholung"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
 };

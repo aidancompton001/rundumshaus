@@ -155,3 +155,106 @@ collections:
                 fields:
                   - { name: label, label: Text, widget: string }
                   - { name: href, label: Link, widget: string }
+
+  # ────────────────────────────────────────────────────────────
+  # PX-069: Stadt-Seiten Texte — Kevin's Wettbewerbsrecht request 2026-06-10.
+  # Field schema shared via YAML anchor; validator enforces full coverage.
+  - name: stadtseiten
+    label: Stadt-Seiten Texte
+    description: "Texte der 98 Stadt-Seiten je Dienstleistung (Leistungslisten, Beschreibungen, FAQ). Platzhalter: {city} = Stadtname, {dist} = Entfernungs-Satz, {einsatz} = Einsatzgebiets-Satz, {list} = Nachbarstädte-Liste. Änderungen gelten für alle 98 Städte der Dienstleistung."
+    files:
+      - name: gartenpflege
+        label: Gärtner & Gartenpflege
+        file: site/src/data/templates/gartenpflege.json
+        fields: &stadtseiten_fields
+          - { name: h1, label: "Überschrift (H1)", widget: string, hint: "{city} = Stadtname" }
+          - { name: heroAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string }
+          - { name: intro1, label: "Einleitung — Absatz 1", widget: text }
+          - { name: intro2, label: "Einleitung — Absatz 2", widget: text, hint: "{dist} = automatischer Entfernungs-Satz" }
+          - { name: benefits, label: "✅ Vorteile (oben)", widget: list, field: { name: item, label: Punkt, widget: string } }
+          - name: cta
+            label: "Kontakt-Block"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: text, label: Text, widget: text }
+          - name: sectionsBefore
+            label: "Abschnitte VOR der Leistungsliste"
+            widget: list
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
+          - name: leistungen
+            label: "Leistungsliste"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: intro, label: Einleitungssatz, widget: string }
+              - { name: items, label: Leistungen, widget: list, field: { name: item, label: Leistung, widget: string } }
+              - { name: footnote, label: Schlusszeile, widget: string }
+          - name: sectionsAfter
+            label: "Abschnitte NACH der Leistungsliste"
+            widget: list
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
+          - name: warum
+            label: "Warum wir?"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: items, label: "✓ Punkte", widget: list, field: { name: item, label: Punkt, widget: string } }
+              - { name: cityLine, label: "Letzter Punkt (mit {city})", widget: string }
+          - name: einsatzgebiet
+            label: "Einsatzgebiet"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: text, label: Text, widget: text, hint: "{list} = Nachbarstädte, {einsatz} = automatischer Satz" }
+          - name: faq
+            label: "Häufige Fragen"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - name: items
+                label: Fragen
+                widget: list
+                fields:
+                  - { name: q, label: Frage, widget: string }
+                  - { name: a, label: Antwort, widget: text }
+                  - { name: cityInQuestion, label: "Stadtname an Frage anhängen?", widget: boolean, default: false }
+          - name: weitereLeistungen
+            label: "Weitere Leistungen (Links)"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - name: links
+                label: Links
+                widget: list
+                fields:
+                  - { name: label, label: Link-Text, widget: string }
+                  - { name: servicePath, label: "Technischer Pfad (nicht ändern!)", widget: string, readonly: true }
+                  - { name: isHub, label: "Übersichtsseite? (nicht ändern)", widget: boolean, required: false }
+          - name: einsatzorte
+            label: "Weitere Einsatzorte"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: chipLabel, label: "Stadt-Link-Text (mit {city})", widget: string }
+              - { name: expandLabel, label: "Aufklapp-Text (mit {count})", widget: string }
+      - name: hausmeisterservice
+        label: Hausmeisterservice
+        file: site/src/data/templates/hausmeisterservice.json
+        fields: *stadtseiten_fields
+      - name: dacharbeiten
+        label: Dachservice & Dacharbeiten
+        file: site/src/data/templates/dacharbeiten.json
+        fields: *stadtseiten_fields
+      - name: entruempelung
+        label: Entrümpelung
+        file: site/src/data/templates/entruempelung.json
+        fields: *stadtseiten_fields
+      - name: schrottabholung
+        label: Schrottabholung
+        file: site/src/data/templates/schrottabholung.json
+        fields: *stadtseiten_fields
