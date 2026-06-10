@@ -1,12 +1,15 @@
 import { generateSEO } from "@/lib/seo";
+import { getPageMetaOverride } from "@/lib/meta-overrides";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
 
 const site = siteData as SiteConfig;
 
+// PX-068 B+: Kevin-editable meta via /admin/.
+const metaOverride = getPageMetaOverride("/impressum/");
 export const metadata = generateSEO({
-  title: "Impressum",
-  description: `Impressum — ${site.company}, ${site.owner}, ${site.address.city}.`,
+  title: metaOverride?.title ?? "Impressum",
+  description: metaOverride?.description ?? `Impressum — ${site.company}, ${site.owner}, ${site.address.city}.`,
   path: "/impressum",
 });
 

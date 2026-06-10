@@ -1,12 +1,16 @@
 import { generateSEO } from "@/lib/seo";
+import { getPageMetaOverride } from "@/lib/meta-overrides";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
 
 const site = siteData as SiteConfig;
 
+// PX-068 B+: Kevin-editable meta via /admin/ (Kevin circled this snippet in Google).
+const metaOverride = getPageMetaOverride("/datenschutz/");
 export const metadata = generateSEO({
-  title: "Datenschutzerklärung",
+  title: metaOverride?.title ?? "Datenschutzerklärung",
   description:
+    metaOverride?.description ??
     "Datenschutzerklärung — Informationen zur Verarbeitung Ihrer personenbezogenen Daten durch Rund ums Haus Littawe.",
   path: "/datenschutz",
 });

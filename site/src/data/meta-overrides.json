@@ -1,16 +1,66 @@
 {
   "pages": [
-    { "path": "/", "title": "", "description": "" },
-    { "path": "/leistungen/", "title": "", "description": "" },
-    { "path": "/ueber-uns/", "title": "", "description": "" },
-    { "path": "/kontakt/", "title": "", "description": "" },
-    { "path": "/einsatzgebiet/", "title": "", "description": "" }
+    {
+      "path": "/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "path": "/leistungen/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "path": "/ueber-uns/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "path": "/kontakt/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "path": "/einsatzgebiet/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "path": "/datenschutz/",
+      "title": "",
+      "description": ""
+    },
+    {
+      "path": "/impressum/",
+      "title": "",
+      "description": ""
+    }
   ],
   "services": [
-    { "id": "gartenpflege", "titlePattern": "", "descriptionPattern": "" },
-    { "id": "hausmeisterservice", "titlePattern": "", "descriptionPattern": "" },
-    { "id": "dacharbeiten", "titlePattern": "", "descriptionPattern": "" },
-    { "id": "entruempelung", "titlePattern": "", "descriptionPattern": "" },
-    { "id": "schrottabholung", "titlePattern": "", "descriptionPattern": "" }
+    {
+      "id": "gartenpflege",
+      "titlePattern": "",
+      "descriptionPattern": ""
+    },
+    {
+      "id": "hausmeisterservice",
+      "titlePattern": "",
+      "descriptionPattern": ""
+    },
+    {
+      "id": "dacharbeiten",
+      "titlePattern": "",
+      "descriptionPattern": ""
+    },
+    {
+      "id": "entruempelung",
+      "titlePattern": "",
+      "descriptionPattern": ""
+    },
+    {
+      "id": "schrottabholung",
+      "titlePattern": "",
+      "descriptionPattern": ""
+    }
   ]
 }
