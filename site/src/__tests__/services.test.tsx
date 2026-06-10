@@ -162,7 +162,8 @@ describe("AboutSection", () => {
 
   it("renders about body text", () => {
     render(<AboutSection />);
-    expect(screen.getByText(/Zuverlässigkeit, Sauberkeit/)).toBeInTheDocument();
+    // PX-064: About intro replaced with Kevin's verbatim Startseite text
+    expect(screen.getByText(/Willkommen bei Rund ums Haus Littawe/)).toBeInTheDocument();
   });
 
   it("renders 3 stat labels", () => {

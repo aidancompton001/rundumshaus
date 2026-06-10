@@ -40,6 +40,7 @@ export interface HeroData {
 export interface AboutData {
   heading: string;
   body: string;
+  body2?: string;
   image: string;
   imageAlt: string;
 }

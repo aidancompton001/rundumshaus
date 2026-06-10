@@ -75,6 +75,11 @@ export default function AboutSection() {
             <p className="text-charcoal-light text-lg leading-relaxed">
               {data.about.body}
             </p>
+            {data.about.body2 && (
+              <p className="text-charcoal-light text-lg leading-relaxed mt-4">
+                {data.about.body2}
+              </p>
+            )}
           </ScrollReveal>
           <ScrollReveal direction="right">
             <div className="aspect-[4/3] rounded-2xl bg-sand/20 overflow-hidden">
