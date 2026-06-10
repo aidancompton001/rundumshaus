@@ -154,7 +154,7 @@
   },
   "einsatzorte": {
     "heading": "Weitere Einsatzorte",
-    "chipLabel": "Dachservice in {city}",
+    "chipLabel": "Dachservice & Dachpflege in {city}",
     "expandLabel": "Weitere {count} Städte anzeigen"
   }
 }
