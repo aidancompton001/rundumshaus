@@ -39,8 +39,8 @@
   "services": [
     {
       "id": "gartenpflege",
-      "titlePattern": "Gärtner & Gartenpflege in {city} | Rund ums Haus Littawe",
-      "descriptionPattern": "Professionelle Gartenpflege in {city}. Ihr zuverlässiger Gärtner für Rasenpflege, Beetpflege, Unkrautentfernung, Vertikutieren und Grünanlagenpflege. Kostenlose Besichtigung und schnelle Termine."
+      "titlePattern": "Gärtner {city} | Gartenpflege & Grundstückspflege | Rund ums Haus Littawe",
+      "descriptionPattern": "Gärtner in {city} für professionelle Gartenpflege, Grundstückspflege und Grünanlagenpflege. Kostenlose Besichtigung, schnelle Termine und faire Preise."
     },
     {
       "id": "hausmeisterservice",
