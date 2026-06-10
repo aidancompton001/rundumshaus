@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Anleitung — Admin-Panel | Rund ums Haus Littawe</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; color: #2b2b2b; line-height: 1.55; font-size: 11pt; margin: 0; }
+  header { border-bottom: 3px solid #1d3a5f; padding-bottom: 10px; margin-bottom: 22px; }
+  header h1 { margin: 0 0 4px; font-size: 20pt; color: #1d3a5f; }
+  header .sub { color: #777; font-size: 10pt; }
+  h2 { color: #1d3a5f; font-size: 14pt; margin: 26px 0 8px; border-bottom: 1px solid #d9d2c5; padding-bottom: 4px; }
+  h3 { color: #b06b2e; font-size: 11.5pt; margin: 16px 0 6px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 14px; font-size: 10pt; }
+  th, td { border: 1px solid #d9d2c5; padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #f3efe7; color: #1d3a5f; }
+  ol, ul { margin: 6px 0 12px; padding-left: 22px; }
+  li { margin: 4px 0; }
+  code { background: #f3efe7; border: 1px solid #e2dccd; border-radius: 4px; padding: 1px 5px; font-family: Consolas, monospace; font-size: 9.5pt; }
+  .box { background: #f7f4ee; border-left: 4px solid #b06b2e; padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+  .box.blue { border-left-color: #1d3a5f; }
+  .url { font-weight: 600; color: #1d3a5f; }
+  .step { font-weight: 600; }
+  .muted { color: #777; font-size: 9.5pt; }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Anleitung — Admin-Panel</h1>
+  <div class="sub">rundumshaus-littawe.de/admin/ &nbsp;·&nbsp; Stand: Juni 2026 &nbsp;·&nbsp; Bei Fragen: Eduard per WhatsApp</div>
+</header>
+
+<h2>Was du damit machen kannst</h2>
+<table>
+  <tr><th style="width:30%">Bereich</th><th>Was du ändern kannst</th></tr>
+  <tr><td><b>Startseite</b></td><td>Hero-Überschrift, Untertitel, Buttons, Über-uns-Texte, Über-uns-Bild, Statistik-Zahlen</td></tr>
+  <tr><td><b>Dienstleistungen</b></td><td>Titel + Beschreibungen der 5 Karten, Karten-Bilder, Icons</td></tr>
+  <tr><td><b>SEO / Google</b></td><td>Google-Titel + Google-Beschreibung für: Startseite, Leistungen, Über uns, Kontakt, Einsatzgebiete, Datenschutz, Impressum — UND als Muster für alle 98 Stadt-Seiten je Dienstleistung</td></tr>
+  <tr><td><b>Stadt-Seiten Texte</b></td><td>Komplette Texte der 98 Stadt-Seiten je Dienstleistung: Leistungslisten, Beschreibungen, FAQ, Überschriften</td></tr>
+  <tr><td><b>Einstellungen</b></td><td>Telefon, E-Mail, Adresse, Menü, Footer</td></tr>
+</table>
+<div class="box blue"><b>Leer lassen bei SEO-Feldern = automatischer Standard bleibt aktiv.</b><br>
+Du kannst nichts kaputt machen — jede Änderung lässt sich rückgängig machen.</div>
+
+<h2>Einmalig: Zugang einrichten (ca. 5 Minuten)</h2>
+<p>Das Panel speichert Änderungen direkt in unserem GitHub-Projekt. Dafür brauchst du einen
+<b>Zugangsschlüssel (Token)</b> von deinem GitHub-Konto (<code>rundumshaus-littawe</code>):</p>
+<ol>
+  <li>Einloggen auf <span class="url">github.com</span> (dein Konto <code>rundumshaus-littawe</code>)</li>
+  <li>Öffne direkt: <span class="url">github.com/settings/tokens/new</span><br>
+      <span class="muted">(Classic Token — wichtig: NICHT „fine-grained", das funktioniert bei uns nicht)</span></li>
+  <li><span class="step">Note:</span> <code>Admin Panel Website</code></li>
+  <li><span class="step">Expiration:</span> „No expiration" wählen <span class="muted">(sonst musst du in 30 Tagen einen neuen machen)</span></li>
+  <li>Häkchen setzen bei: <b>repo</b> <span class="muted">(der oberste Haken — Unterpunkte werden automatisch mit angehakt)</span></li>
+  <li>Unten <span class="step">„Generate token"</span> → der Schlüssel wird angezeigt (beginnt mit <code>ghp_…</code>)</li>
+  <li><b>Kopieren und sicher speichern</b> (z. B. Notizen-App) — er wird nur EINMAL angezeigt!</li>
+</ol>
+
+<h3>Anmelden im Panel</h3>
+<ol>
+  <li>Öffne <span class="url">rundumshaus-littawe.de/admin/</span></li>
+  <li>Klicke <b>nicht</b> auf den großen GitHub-Button, sondern auf <span class="step">„Sign In with Token"</span> / „Use a personal access token" (kleiner Link darunter)</li>
+  <li>Token einfügen → fertig. Die Anmeldung bleibt im Browser gespeichert.</li>
+</ol>
+
+<div class="pagebreak"></div>
+
+<h2>Texte ändern</h2>
+<ol>
+  <li>Links den Bereich wählen (z. B. <b>Startseite</b>)</li>
+  <li>Eintrag öffnen → Felder ändern</li>
+  <li>Oben rechts <span class="step">„Speichern"</span> (Save)</li>
+  <li><b>Warten: ca. 3–10 Minuten</b> bis es online ist<br>
+      <span class="muted">(2–3 Min. automatischer Neuaufbau + bis zu 10 Min. Browser-Cache).
+      Wenn du es nicht siehst: Seite mit <b>Strg+F5</b> neu laden oder privates Fenster.</span></li>
+</ol>
+
+<h2>Bilder ändern</h2>
+<ol>
+  <li>Im jeweiligen Eintrag aufs Bild-Feld → <span class="step">„Bild auswählen"</span> → hochladen</li>
+  <li>Speichern. Die verschiedenen Bildgrößen für Handy/Desktop werden <b>automatisch</b> erzeugt — du musst nichts weiter tun.</li>
+  <li>Empfehlung: Querformat, mindestens 1200 px breit, JPG oder PNG.</li>
+</ol>
+<div class="box">Die Bild-Bibliothek („Assets") ist am Anfang <b>leer</b> — das ist normal. Sie zeigt nur deine
+eigenen Uploads. Die bestehenden Website-Bilder sind dort bewusst nicht gelistet (Schutz vor versehentlichem Löschen).</div>
+
+
+<h2>Stadt-Seiten Texte ändern (alle 98 Städte je Dienstleistung)</h2>
+<p>Im Bereich <b>Stadt-Seiten Texte</b> änderst du die kompletten Texte der Stadt-Seiten —
+Leistungslisten, Beschreibungen, FAQ, Überschriften. Eine Änderung gilt automatisch für
+<b>alle 98 Städte</b> der jeweiligen Dienstleistung.</p>
+<ol>
+  <li>Bereich <b>Stadt-Seiten Texte</b> → Dienstleistung wählen (z. B. Dachservice)</li>
+  <li>Felder ändern — z. B. einen Punkt aus der <b>Leistungsliste</b> löschen (Mülleimer-Symbol) oder einen FAQ-Eintrag anpassen</li>
+  <li><span class="step">Speichern</span> → nach ca. 3–10 Minuten auf allen 98 Stadt-Seiten live <span class="muted">(auch in den Google-Daten/Schema der Seiten — automatisch synchron)</span></li>
+</ol>
+<table>
+  <tr><th style="width:22%">Platzhalter</th><th>Wird ersetzt durch</th></tr>
+  <tr><td><code>{city}</code></td><td>Stadtname (z. B. Bramsche)</td></tr>
+  <tr><td><code>{dist}</code></td><td>automatischer Entfernungs-Satz (z. B. „nur rund 17 km von Osnabrück entfernt")</td></tr>
+  <tr><td><code>{einsatz}</code></td><td>automatischer Einsatzgebiets-Satz</td></tr>
+  <tr><td><code>{list}</code></td><td>Liste der Nachbarstädte</td></tr>
+  <tr><td><code>{count}</code></td><td>Anzahl (beim Aufklapp-Text)</td></tr>
+</table>
+<div class="box">Ein Tippfehler in einem Platzhalter macht nichts kaputt — er wird dann einfach als Text angezeigt, bis du ihn korrigierst.</div>
+
+<h2>Google-Titel &amp; Beschreibung ändern</h2>
+<ol>
+  <li>Bereich <b>SEO / Google</b> → <b>Google Titel &amp; Beschreibungen</b></li>
+  <li><b>Einzelne Seiten:</b> Seite wählen, Titel/Beschreibung eintragen.
+    <ul>
+      <li>Der Zusatz „| Rund ums Haus Littawe" wird automatisch angehängt <span class="muted">(außer Startseite — dort gilt dein Text 1:1)</span></li>
+      <li>Empfohlen: Titel max. 60 Zeichen, Beschreibung 120–160 Zeichen</li>
+    </ul>
+  </li>
+  <li><b>Dienstleistungs-Seiten:</b> Hier änderst du das <b>Muster für alle 98 Städte</b> einer
+      Dienstleistung auf einmal. Der Platzhalter <code>{city}</code> wird automatisch durch den Stadtnamen ersetzt:
+    <ul>
+      <li>Muster: <code>Gartenpflege {city} ★ Ihr Gärtner vor Ort</code></li>
+      <li>Ergebnis Bramsche: „Gartenpflege Bramsche ★ Ihr Gärtner vor Ort"</li>
+      <li><b><code>{city}</code> muss im Muster vorkommen</b> — sonst hätten alle 98 Seiten denselben Titel (schlecht für Google)</li>
+    </ul>
+  </li>
+  <li>Feld <b>leeren + Speichern</b> = zurück zum automatischen Standard</li>
+  <li>Google übernimmt Änderungen nicht sofort — erfahrungsgemäß <b>1–14 Tage</b></li>
+</ol>
+
+<h2>Wichtig zu wissen</h2>
+<ul>
+  <li><b>Jede Änderung geht direkt live</b> (nach dem Neuaufbau). Es gibt keine Entwürfe.</li>
+  <li>Wenn etwas schiefgeht: Eduard kann <b>jede Änderung per Klick zurückdrehen</b>.</li>
+    <li>Token verloren? Einfach auf GitHub einen neuen erstellen (gleiche Schritte) und den alten unter <span class="url">github.com/settings/tokens</span> löschen.</li>
+</ul>
+
+</body>
+</html>

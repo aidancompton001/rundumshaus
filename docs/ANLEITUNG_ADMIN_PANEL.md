@@ -10,7 +10,8 @@
 |---------|----------------------|
 | **Startseite** | Hero-Überschrift, Untertitel, Buttons, Über-uns-Texte, Über-uns-Bild, Statistik-Zahlen |
 | **Dienstleistungen** | Titel + Beschreibungen der 5 Karten, Karten-Bilder, Icons |
-| **SEO / Google** | Google-Titel + Google-Beschreibung für: Startseite, Leistungen, Über uns, Kontakt, Einsatzgebiete — UND als Muster für alle 98 Stadt-Seiten je Dienstleistung |
+| **SEO / Google** | Google-Titel + Google-Beschreibung für: Startseite, Leistungen, Über uns, Kontakt, Einsatzgebiete, Datenschutz, Impressum — UND als Muster für alle 98 Stadt-Seiten je Dienstleistung |
+| **Stadt-Seiten Texte** | Komplette Texte der 98 Stadt-Seiten je Dienstleistung: Leistungslisten, Beschreibungen, FAQ, Überschriften |
 | **Einstellungen** | Telefon, E-Mail, Adresse, Menü, Footer |
 
 **Leer lassen bei SEO-Feldern = automatischer Standard bleibt aktiv.** Du kannst
@@ -55,6 +56,31 @@ du einen **Zugangsschlüssel (Token)** von deinem GitHub-Konto (`rundumshaus-lit
 2. Speichern. Die verschiedenen Bildgrößen für Handy/Desktop werden
    **automatisch** erzeugt — du musst nichts weiter tun.
 3. Empfehlung: Querformat, mindestens 1200 px breit, JPG oder PNG.
+
+## Stadt-Seiten Texte ändern (alle 98 Städte je Dienstleistung)
+
+Im Bereich **Stadt-Seiten Texte** änderst du die kompletten Texte der Stadt-Seiten —
+Leistungslisten, Beschreibungen, FAQ, Überschriften. Eine Änderung gilt automatisch
+für **alle 98 Städte** der jeweiligen Dienstleistung.
+
+1. Bereich **Stadt-Seiten Texte** → Dienstleistung wählen (z. B. Dachservice)
+2. Felder ändern — z. B. einen Punkt aus der **Leistungsliste** löschen (Mülleimer-Symbol)
+   oder einen FAQ-Eintrag anpassen
+3. **Speichern** → nach ca. 3–10 Minuten auf allen 98 Stadt-Seiten live
+   (auch in den Google-Daten/Schema der Seiten — automatisch synchron)
+
+**Platzhalter in den Texten (einfach stehen lassen bzw. mitverwenden):**
+
+| Platzhalter | Wird ersetzt durch |
+|-------------|--------------------|
+| `{city}` | Stadtname (z. B. Bramsche) |
+| `{dist}` | automatischer Entfernungs-Satz (z. B. „nur rund 17 km von Osnabrück entfernt") |
+| `{einsatz}` | automatischer Einsatzgebiets-Satz |
+| `{list}` | Liste der Nachbarstädte |
+| `{count}` | Anzahl (beim Aufklapp-Text) |
+
+Ein Tippfehler in einem Platzhalter macht nichts kaputt — er wird dann einfach
+als Text angezeigt, bis du ihn korrigierst.
 
 ## Google-Titel & Beschreibung ändern
 
