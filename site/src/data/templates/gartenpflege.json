@@ -122,6 +122,11 @@
     "heading": "Weitere Leistungen",
     "links": [
       {
+        "label": "Heckenschnitt",
+        "servicePath": "gartenpflege",
+        "isHub": true
+      },
+      {
         "label": "Rasen erneuern",
         "servicePath": "rasen-neuanlage",
         "isHub": true
@@ -131,7 +136,7 @@
         "servicePath": "hausmeisterservice"
       },
       {
-        "label": "Dachreinigung",
+        "label": "Dachservice & Dacharbeiten",
         "servicePath": "dacharbeiten"
       },
       {
