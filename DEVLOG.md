@@ -2,6 +2,26 @@
 
 ---
 
+### [S067] — 2026-06-10 — PX-068: Admin Panel (Sveltia CMS) für Kevin — LIVE
+
+**Задача:** Kevin 4× просил self-edit (Texte, Bilder, Google Meta). CEO: полный вариант.
+**Статус:** ✅ DEPLOYED (PR #65) — /admin/ live, canary 5 услуг 0 FAIL
+
+**Метод:** Design-doc → adversarial review против реального кода → реализация. Ревью нашло 3 блокирующие ошибки исходного дизайна (исправлены ДО запуска):
+- **E1:** fine-grained PAT невозможен (коллаборатор на чужом личном репо) → classic-PAT в Anleitung
+- **E2 (главное):** deploy.yml гоняет npm test; тесты хардкодили тексты, которые Kevin будет менять → его правка молча блокировала бы свой деплой. Fix A0: тесты сравнивают рендер с JSON-источником. Доказано симуляцией.
+- **E3:** CMS-upload без responsive-вариантов → битый <picture>; перезапись → stale. Fix A+: prebuild авто-генерит варианты (staleness-тест доказан)
+
+**Построено:** /admin/ Sveltia 0.166.1 (pinned, noindex) · config.yml немецкий, ВСЕ поля (anti-field-drop, validator=pretest CI-gate) · generate-image-variants=prebuild · meta-overrides: 5 страниц + {city}-паттерны 5 услуг (=490 city pages), пусто=код-fallback, og следует (G3) · AboutSection wired к JSON · ANLEITUNG_ADMIN_PANEL.md (DE)
+
+**Верификация:** 248/248 tests · title-diff 7/7 = baseline · E2E override→title+og меняются · live /admin/ 200+noindex+pinned · canary 5×0 FAIL
+
+**Артефакты:** `site/public/admin/*`, `site/scripts/admin/*`, `site/src/lib/meta-overrides.ts`, `docs/PX_068_*`, `docs/ANLEITUNG_ADMIN_PANEL.md`
+
+**Следующее:** Kevin создаёт token по Anleitung → первый login
+
+---
+
 ### [S066] — 2026-06-10 — PX-064→066: Startseite Redesign (Kevin verbatim) + reorder + bg
 
 **Задача:** Полный редизайн главной страницы по verbatim-текстам Кевина (WhatsApp 2026-06-09/10) + перестановка секций + чередование фонов.
