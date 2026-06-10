@@ -10,12 +10,17 @@ import { safeDistancePhrase, safeEinsatzText } from "@/lib/template-content";
 import { subst, type CityTemplateTexts } from "@/lib/template-text";
 import templateTexts from "@/data/templates/dacharbeiten.json";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
+import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
 
 const T = templateTexts as CityTemplateTexts;
+// PX-073 F3: contact data from site.json (Einstellungen in CMS) — was hardcoded.
+const PHONE = (siteData as { phone: string }).phone.replace(/\s+/g, "");
+const EMAIL = (siteData as { email: string }).email;
+const WA = PHONE.replace(/^\+/, "");
 const SERVICE_PATH = "dacharbeiten";
 // PX-072: hero image path comes from the template JSON (CMS-editable).
-const heroBase = (T.heroImage ?? "").replace(/.(png|jpe?g|webp)$/i, "");
+const heroBase = (T.heroImage ?? "").replace(/\.(png|jpe?g|webp)$/i, "");
 const HERO = {
   w1200: `${heroBase}-1200w.webp`,
   w800: `${heroBase}-800w.webp`,
@@ -132,21 +137,21 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-w-3xl mx-auto">
             <a
-              href="tel:+4915239603175"
+              href={`tel:${PHONE}`}
               className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition whitespace-nowrap"
             >
               <PhoneIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
               <span>Anrufen</span>
             </a>
             <a
-              href="mailto:kontakt@rundumshaus-littawe.de"
+              href={`mailto:${EMAIL}`}
               className="inline-flex items-center justify-center gap-2 px-4 py-3 border border-cream/40 text-cream font-semibold rounded-lg hover:bg-cream/10 transition whitespace-nowrap"
             >
               <EnvelopeIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
               <span>E-Mail</span>
             </a>
             <a
-              href="https://wa.me/4915239603175"
+              href={`https://wa.me/${WA}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1ebd5a] transition whitespace-nowrap"

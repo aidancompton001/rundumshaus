@@ -45,6 +45,18 @@ for (const s of servicesData?.services ?? []) {
   }
 }
 
+// PX-073 F1 (audit BLOCKER): Referenzen images — ReferenzenContent emits a
+// derived .webp <source>; a Kevin upload without the sibling .webp renders
+// broken. Manage before/after/steps[].src too.
+{
+  const ref = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/referenzen.json"), "utf8"));
+  for (const item of ref.items ?? []) {
+    if (item.before) managed.add(item.before);
+    if (item.after) managed.add(item.after);
+    for (const st of item.steps ?? []) if (st.src) managed.add(st.src);
+  }
+}
+
 const stripExt = (p) => p.replace(/\.(png|jpe?g|webp)$/i, "");
 
 let failures = 0;
