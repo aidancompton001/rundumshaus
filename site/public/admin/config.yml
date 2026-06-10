@@ -1,0 +1,157 @@
+# PX-068 — Sveltia CMS Konfiguration (Admin Panel für Kevin)
+#
+# WICHTIG (Design Review G1 — anti-field-drop):
+# Jede Collection deklariert ALLE Felder der Ziel-JSON-Datei, auch die,
+# die Kevin nicht ändern soll (als readonly/hidden markiert). So kann ein
+# Save niemals Felder verwerfen. Geprüft durch scripts/admin/validate-cms-config.mjs.
+
+backend:
+  name: github
+  repo: aidancompton001/rundumshaus
+  branch: master
+
+site_url: https://rundumshaus-littawe.de
+display_url: https://rundumshaus-littawe.de
+
+media_folder: site/public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  # ────────────────────────────────────────────────────────────
+  - name: startseite
+    label: Startseite
+    description: Texte und Bilder der Startseite. Änderungen sind nach dem Speichern in ca. 3–10 Minuten online.
+    files:
+      - name: homepage
+        label: Startseite — Inhalte
+        file: site/src/data/homepage.json
+        fields:
+          - name: hero
+            label: Hero (oberer Bereich)
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift (H1), widget: string }
+              - { name: subheading, label: Untertitel, widget: text }
+              - name: ctas
+                label: Buttons
+                widget: list
+                allow_add: false
+                fields:
+                  - { name: label, label: Button-Text, widget: string }
+                  - { name: href, label: Ziel-Link, widget: string, hint: "Nur ändern, wenn du sicher bist (z. B. /kontakt)" }
+                  - { name: variant, label: Stil, widget: select, options: [primary, ghost] }
+          - name: about
+            label: Über uns
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: body, label: Text — Absatz 1, widget: text }
+              - { name: body2, label: Text — Absatz 2, widget: text, required: false }
+              - { name: image, label: Bild, widget: image }
+              - { name: imageAlt, label: Bild-Beschreibung (Alt-Text), widget: string }
+          - name: stats
+            label: Zahlen-Statistiken
+            widget: list
+            allow_add: false
+            fields:
+              - { name: value, label: Zahl, widget: number, value_type: int }
+              - { name: suffix, label: Zusatz (z. B. % oder +), widget: string }
+              - { name: label, label: Beschriftung, widget: string }
+
+  # ────────────────────────────────────────────────────────────
+  - name: leistungen
+    label: Dienstleistungen
+    description: Die 5 Hauptdienstleistungs-Karten (Titel, Beschreibungen, Bilder).
+    files:
+      - name: services
+        label: Dienstleistungs-Karten
+        file: site/src/data/services.json
+        fields:
+          - { name: heading, label: Bereichs-Überschrift, widget: string }
+          - { name: subheading, label: Bereichs-Untertitel, widget: text }
+          - name: services
+            label: Karten
+            widget: list
+            allow_add: false
+            hint: "Reihenfolge nicht ändern — sie bestimmt die Anzeige auf der Seite."
+            fields:
+              - { name: id, label: Technische ID (nicht ändern!), widget: string, readonly: true }
+              - { name: title, label: Titel, widget: string }
+              - { name: description, label: Kurzbeschreibung (Startseite), widget: text }
+              - { name: detailDescription, label: Lange Beschreibung (Leistungen-Seite), widget: text }
+              - { name: icon, label: Icon, widget: select, options: [wrench, leaf, home, truck, recycle] }
+              - { name: image, label: Karten-Bild, widget: image, required: false }
+              - { name: detailImage, label: Detail-Bild, widget: image, required: false }
+              - name: subPage
+                label: Zusatz-Link (optional)
+                widget: object
+                required: false
+                fields:
+                  - { name: href, label: Link, widget: string }
+                  - { name: label, label: Link-Text, widget: string }
+
+  # ────────────────────────────────────────────────────────────
+  - name: seo
+    label: SEO / Google
+    description: Meta-Titel und Meta-Beschreibungen für Google. Leer lassen = automatischer Standard.
+    files:
+      - name: meta
+        label: Google Titel & Beschreibungen
+        file: site/src/data/meta-overrides.json
+        fields:
+          - name: pages
+            label: Einzelne Seiten
+            widget: list
+            allow_add: false
+            fields:
+              - { name: path, label: Seite (nicht ändern), widget: string, readonly: true }
+              - { name: title, label: "Google-Titel (leer = Standard)", widget: string, required: false, hint: "Empfohlen max. 60 Zeichen. Der Zusatz '| Rund ums Haus Littawe' wird automatisch angehängt (außer Startseite)." }
+              - { name: description, label: "Google-Beschreibung (leer = Standard)", widget: text, required: false, hint: "Empfohlen 120–160 Zeichen." }
+          - name: services
+            label: Dienstleistungs-Seiten (alle 98 Städte je Dienstleistung)
+            widget: list
+            allow_add: false
+            fields:
+              - { name: id, label: Dienstleistung (nicht ändern), widget: string, readonly: true }
+              - { name: titlePattern, label: "Titel-Muster (leer = Standard)", widget: string, required: false, hint: "Pflicht-Platzhalter {city} = Stadtname. Beispiel: Gartenpflege {city} ★ Ihr Gärtner vor Ort" }
+              - { name: descriptionPattern, label: "Beschreibungs-Muster (leer = Standard)", widget: text, required: false, hint: "Auch hier {city} verwenden. Gilt für alle 98 Stadt-Seiten dieser Dienstleistung." }
+
+  # ────────────────────────────────────────────────────────────
+  - name: einstellungen
+    label: Einstellungen
+    description: Kontaktdaten, Navigation, Footer. Vorsicht bei Links.
+    files:
+      - name: site
+        label: Seiten-Einstellungen
+        file: site/src/data/site.json
+        fields:
+          - { name: company, label: Firmenname, widget: string }
+          - { name: owner, label: Inhaber, widget: string }
+          - name: address
+            label: Adresse
+            widget: object
+            fields:
+              - { name: street, label: Straße, widget: string }
+              - { name: city, label: Stadt, widget: string }
+              - { name: zip, label: PLZ, widget: string }
+              - { name: country, label: Land, widget: string }
+          - { name: phone, label: Telefon, widget: string }
+          - { name: email, label: E-Mail, widget: string }
+          - name: navigation
+            label: Navigation (Menü)
+            widget: list
+            fields:
+              - { name: label, label: Menü-Text, widget: string }
+              - { name: href, label: Link, widget: string, hint: "Nur ändern, wenn die Ziel-Seite existiert!" }
+          - name: footer
+            label: Footer
+            widget: object
+            fields:
+              - { name: copyright, label: Copyright-Zeile, widget: string }
+              - name: legalLinks
+                label: Rechtliche Links
+                widget: list
+                allow_add: false
+                fields:
+                  - { name: label, label: Text, widget: string }
+                  - { name: href, label: Link, widget: string }

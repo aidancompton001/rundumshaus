@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint src/",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prebuild": "node scripts/admin/generate-image-variants.mjs",
+    "pretest": "node scripts/admin/validate-cms-config.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",
@@ -32,6 +34,7 @@
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.4",
+    "yaml": "^2.9.0"
   }
 }
