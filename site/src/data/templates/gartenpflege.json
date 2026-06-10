@@ -1,0 +1,137 @@
+{
+  "h1": "Gärtner & Gartenpflege in {city}",
+  "heroAlt": "Gepflegter Garten in {city} — professionelle Gartenpflege durch Rund ums Haus Littawe",
+  "intro1": "Sie suchen einen zuverlässigen Gärtner in {city}? Rund ums Haus Littawe ist Ihr Ansprechpartner für professionelle Gartenpflege, Grundstückspflege und Grünanlagenpflege in {city} und Umgebung. Wir unterstützen Privatkunden, Unternehmen, Vermieter und Hausverwaltungen bei sämtlichen Arbeiten rund um Garten, Grünflächen und Außenanlagen.",
+  "intro2": "Als erfahrener Gärtner sind wir {dist} und übernehmen sowohl regelmäßige Gartenpflege als auch einmalige Gartenarbeiten in {city}. Unser Ziel ist es, Ihren Garten, Ihr Grundstück oder Ihre Außenanlage dauerhaft gepflegt und ansprechend zu halten.",
+  "benefits": [
+    "Kostenlose Besichtigung",
+    "Schnelle Terminvergabe",
+    "Faire und transparente Preise",
+    "Privat- & Gewerbekunden",
+    "WhatsApp-Anfragen möglich"
+  ],
+  "cta": {
+    "heading": "Jetzt kostenloses Angebot anfragen",
+    "text": "Sie suchen einen erfahrenen Gärtner in {city} oder benötigen Unterstützung bei der Gartenpflege? Kontaktieren Sie uns jetzt für eine kostenlose und unverbindliche Besichtigung."
+  },
+  "sectionsBefore": [
+    {
+      "heading": "Professionelle Gartenpflege in {city}",
+      "paragraphs": [
+        "Ein gepflegter Garten sorgt nicht nur für einen positiven ersten Eindruck, sondern trägt auch zum Werterhalt Ihrer Immobilie bei. Mit unserer professionellen Gartenpflege in {city} unterstützen wir Privatkunden, Unternehmen und Hausverwaltungen bei sämtlichen Pflegearbeiten rund um Garten und Grundstück.",
+        "Ganz gleich, ob kleine Grünfläche, Privatgarten, Firmengelände oder größere Wohnanlage — wir bieten individuelle Lösungen und zuverlässigen Service. {einsatz}"
+      ]
+    }
+  ],
+  "leistungen": {
+    "heading": "Unsere Leistungen als Gärtner in {city}",
+    "intro": "Zu unseren Leistungen im Bereich Gartenpflege gehören unter anderem:",
+    "items": [
+      "Rasenmähen",
+      "Allgemeine Rasenpflege",
+      "Vertikutieren",
+      "Aerifizieren",
+      "Nachsaat",
+      "Düngung",
+      "Unkrautentfernung",
+      "Beetpflege",
+      "Strauchschnitt",
+      "Formschnitt",
+      "Gartenreinigung",
+      "Grundstückspflege",
+      "Grünanlagenpflege",
+      "Pflege von Außenanlagen",
+      "Mulcharbeiten",
+      "Bepflanzungen",
+      "Entfernung von Wildwuchs",
+      "Saisonale Gartenpflege",
+      "Frühjahrs- und Herbstpflege",
+      "Bodenbearbeitung",
+      "Planierarbeiten",
+      "Entsorgung von Gartenabfällen",
+      "Pflege von Privatgärten",
+      "Pflege von Firmengeländen",
+      "Pflege von Wohnanlagen",
+      "Pflege von Gewerbeobjekten"
+    ],
+    "footnote": "Viele weitere Gartenarbeiten"
+  },
+  "sectionsAfter": [
+    {
+      "heading": "Grundstückspflege & Grünanlagenpflege in {city}",
+      "paragraphs": [
+        "Neben klassischen Gartenarbeiten übernehmen wir auch die regelmäßige Grundstückspflege und Grünanlagenpflege in {city}. Eine gepflegte Außenanlage hinterlässt bei Kunden, Besuchern, Mietern und Gästen einen positiven Eindruck und trägt gleichzeitig zum langfristigen Werterhalt Ihrer Immobilie bei.",
+        "Wir betreuen sowohl kleine Privatgrundstücke als auch größere Wohnanlagen, Gewerbeobjekte und Firmengelände in {city} und in den umliegenden Gemeinden."
+      ]
+    }
+  ],
+  "warum": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "items": [
+      "Kostenlose und unverbindliche Besichtigung",
+      "Schnelle Terminvergabe",
+      "Faire und transparente Preise",
+      "Zuverlässige Ausführung",
+      "Persönlicher Ansprechpartner",
+      "Privat- und Gewerbekunden",
+      "Regelmäßige Gartenpflege möglich",
+      "Individuelle Lösungen für jedes Grundstück"
+    ],
+    "cityLine": "Gärtner & Gartenpflege in {city} und Umgebung"
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet",
+    "text": "Wir sind als Gärtner und Gartenpfleger nicht nur in {city} tätig, sondern auch in {list} und vielen weiteren Städten und Gemeinden der Region. {einsatz}"
+  },
+  "faq": {
+    "heading": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Was kostet ein Gärtner",
+        "a": "Die Kosten hängen vom Umfang der Arbeiten und der Größe des Grundstücks ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot.",
+        "cityInQuestion": true
+      },
+      {
+        "q": "Bieten Sie regelmäßige Gartenpflege an?",
+        "a": "Ja, wir übernehmen sowohl einmalige Gartenarbeiten als auch regelmäßige Pflegeeinsätze.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Pflegen Sie auch Gewerbegrundstücke?",
+        "a": "Ja, wir betreuen Firmengelände, Wohnanlagen, Gewerbeobjekte und größere Außenanlagen.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Wie schnell sind Termine möglich?",
+        "a": "Kurzfristige Termine sind je nach Auslastung häufig möglich.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Entsorgen Sie Gartenabfälle?",
+        "a": "Ja, auf Wunsch übernehmen wir die fachgerechte Entsorgung von Gartenabfällen und Grünschnitt.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Arbeiten Sie auch für Hausverwaltungen?",
+        "a": "Ja, wir betreuen Hausverwaltungen, Vermieter und Wohnanlagen.",
+        "cityInQuestion": false
+      }
+    ]
+  },
+  "weitereLeistungen": {
+    "heading": "Weitere Leistungen",
+    "links": [
+      { "label": "Heckenschnitt", "servicePath": "gartenpflege" },
+      { "label": "Rasen erneuern", "servicePath": "rasen-neuanlage", "isHub": true },
+      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
+      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
+      { "label": "Entrümpelung", "servicePath": "entruempelung" },
+      { "label": "Schrottabholung", "servicePath": "schrottabholung" }
+    ]
+  },
+  "einsatzorte": {
+    "heading": "Weitere Einsatzorte",
+    "chipLabel": "Gärtner in {city}",
+    "expandLabel": "Weitere {count} Städte anzeigen"
+  }
+}

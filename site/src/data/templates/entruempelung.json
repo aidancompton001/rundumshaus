@@ -1,0 +1,140 @@
+{
+  "h1": "Entrümpelung & Haushaltsauflösung in {city}",
+  "heroAlt": "Entrümpelung und Haushaltsauflösung in {city} — Rund ums Haus Littawe",
+  "intro1": "Sie suchen eine zuverlässige Entrümpelungsfirma in {city}? Rund ums Haus Littawe übernimmt die professionelle Räumung von Wohnungen, Häusern, Kellern, Dachböden, Garagen und Gewerbeobjekten — schnell, sauber und zum fairen Festpreis. Auch Haushaltsauflösungen und Nachlassauflösungen führen wir respektvoll und diskret durch.",
+  "intro2": "Als Familienbetrieb sind wir {dist} und übernehmen sowohl kleine Räumungen als auch komplette Haushaltsauflösungen in {city}. Bei jeder Entrümpelung achten wir auf eine besenreine Übergabe und eine fachgerechte Entsorgung der Gegenstände.",
+  "benefits": [
+    "Kostenlose Besichtigung",
+    "Schnelle Terminvergabe",
+    "Faire und transparente Preise",
+    "Besenreine Übergabe",
+    "Diskret & respektvoll"
+  ],
+  "cta": {
+    "heading": "Jetzt kostenloses Angebot anfragen",
+    "text": "Sie benötigen eine Entrümpelung oder Haushaltsauflösung in {city}? Kontaktieren Sie uns jetzt für eine kostenlose, unverbindliche Besichtigung und ein Festpreis-Angebot."
+  },
+  "sectionsBefore": [
+    {
+      "heading": "Professionelle Entrümpelung in {city}",
+      "paragraphs": [
+        "Ob einzelne Räume, Keller, Dachboden, Garage oder eine komplette Haushaltsauflösung — wir übernehmen die fachgerechte Räumung und Entsorgung in {city}. Dabei legen wir großen Wert auf Zuverlässigkeit, Diskretion und eine besenreine Übergabe.",
+        "Auch kurzfristige Entrümpelungen, Räumungen nach Umzug oder Todesfall führen wir zuverlässig und sorgfältig durch. {einsatz}"
+      ]
+    }
+  ],
+  "leistungen": {
+    "heading": "Unsere Leistungen im Bereich Entrümpelung in {city}",
+    "intro": "Zu unseren Entrümpelungsleistungen gehören unter anderem:",
+    "items": [
+      "Entrümpelungen aller Art",
+      "Haushaltsauflösungen",
+      "Wohnungsauflösungen",
+      "Hausauflösungen",
+      "Kellerentrümpelungen",
+      "Dachbodenentrümpelungen",
+      "Garagenentrümpelungen",
+      "Gewerbe- und Büroauflösungen",
+      "Nachlassauflösungen",
+      "Räumungen nach Umzug",
+      "Räumungen nach Todesfall",
+      "Messi-Wohnungen",
+      "Sperrmüllentsorgung",
+      "Schrottentsorgung",
+      "Entsorgung von Hausrat",
+      "Demontage von Möbeln",
+      "Demontage von Einbauküchen",
+      "Räumung von Lagern und Hallen",
+      "Entsorgung von Gartenabfällen",
+      "Besenreine Übergabe",
+      "Endreinigung auf Wunsch",
+      "Fachgerechte Sortierung und Entsorgung"
+    ],
+    "footnote": "Viele weitere Räumungen und Auflösungen auf Anfrage"
+  },
+  "sectionsAfter": [
+    {
+      "heading": "Haushaltsauflösung in {city}",
+      "paragraphs": [
+        "Eine Haushaltsauflösung ist oft mit viel Aufwand und emotionalem Stress verbunden. Wir unterstützen Sie professionell bei der kompletten Räumung von Wohnungen und Häusern in {city} und übernehmen die gesamte Organisation — von der Besichtigung bis zur fachgerechten Entsorgung.",
+        "Auf Wunsch sortieren wir Hausrat, Möbel und Geräte vor und bereiten die Räume besenrein für die Übergabe an Vermieter oder Käufer vor."
+      ]
+    },
+    {
+      "heading": "Wohnungsauflösung & Nachlassauflösung in {city}",
+      "paragraphs": [
+        "Besonders bei Wohnungsauflösungen und Nachlassauflösungen nach Todesfällen gehen wir respektvoll und diskret vor. Persönliche Dokumente, Fotos, Urkunden, Verträge oder Wertgegenstände werden selbstverständlich aussortiert und gesondert für Sie aufbewahrt.",
+        "Sprechen Sie uns gerne an — wir nehmen uns Zeit für Ihre Situation und finden gemeinsam mit Ihnen die passende Lösung."
+      ]
+    }
+  ],
+  "warum": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "items": [
+      "Kostenlose und unverbindliche Besichtigung",
+      "Transparente Festpreise ohne versteckte Kosten",
+      "Schnelle Terminvergabe",
+      "Zuverlässige und saubere Ausführung",
+      "Besenreine Übergabe möglich",
+      "Entrümpelung inklusive fachgerechter Entsorgung",
+      "Diskreter Umgang mit persönlichen Unterlagen",
+      "Familienbetrieb aus Osnabrück",
+      "Privat- und Gewerbekunden"
+    ],
+    "cityLine": "Entrümpelung in {city} und Umgebung"
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet",
+    "text": "Wir bieten unsere Entrümpelungen und Haushaltsauflösungen nicht nur in {city} an, sondern auch in {list} und vielen weiteren Städten und Gemeinden der Region. {einsatz}"
+  },
+  "faq": {
+    "heading": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Was kostet eine Entrümpelung",
+        "a": "Die Kosten hängen von der Menge, der Erreichbarkeit und dem Aufwand ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein verbindliches Festpreis-Angebot — ohne versteckte Zusatzkosten.",
+        "cityInQuestion": true
+      },
+      {
+        "q": "Bieten Sie Festpreise an?",
+        "a": "Ja, nach der Besichtigung erhalten Sie ein verbindliches Festpreis-Angebot. Sie wissen vorher genau, was die Entrümpelung kostet — keine Überraschungen.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Übernehmen Sie Haushaltsauflösungen nach Todesfall?",
+        "a": "Ja, wir gehen bei Nachlassauflösungen besonders respektvoll und diskret vor. Persönliche Dokumente, Fotos, Urkunden, Verträge und Wertgegenstände werden aussortiert und für Sie gesondert aufbewahrt.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Was passiert mit den entsorgten Gegenständen?",
+        "a": "Wir achten auf eine umweltgerechte Trennung. Sperrmüll, Holz, Metall, Elektroschrott und weitere Wertstoffe werden fachgerecht sortiert und den entsprechenden Entsorgungsstellen zugeführt.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Wie schnell sind Termine möglich?",
+        "a": "Kurzfristige Termine für Entrümpelungen und Haushaltsauflösungen sind je nach Auslastung häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Übernehmen Sie auch Gewerbe- und Büroauflösungen?",
+        "a": "Ja, neben privaten Räumungen übernehmen wir auch Gewerbe-, Büro- und Lagerauflösungen sowie Räumungen von Hallen und Geschäftsflächen.",
+        "cityInQuestion": false
+      }
+    ]
+  },
+  "weitereLeistungen": {
+    "heading": "Weitere Leistungen",
+    "links": [
+      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
+      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
+      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
+      { "label": "Schrottabholung", "servicePath": "schrottabholung" },
+      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+    ]
+  },
+  "einsatzorte": {
+    "heading": "Weitere Einsatzorte",
+    "chipLabel": "Entrümpelung in {city}",
+    "expandLabel": "Weitere {count} Städte anzeigen"
+  }
+}
