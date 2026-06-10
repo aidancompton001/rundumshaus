@@ -38,5 +38,51 @@
       "suffix": "h",
       "label": "Schnelle Reaktionszeit"
     }
-  ]
+  ],
+  "warumWir": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "subheading": "Was uns von anderen unterscheidet — und warum unsere Kunden uns weiterempfehlen.",
+    "items": [
+      "Schnelle Terminvergabe",
+      "Kostenlose und unverbindliche Besichtigung",
+      "Faire und transparente Preise",
+      "Zuverlässige und saubere Ausführung",
+      "Persönlicher Ansprechpartner",
+      "Viele Dienstleistungen aus einer Hand",
+      "Für Privat- und Gewerbekunden",
+      "Tätig in Osnabrück und Umgebung"
+    ]
+  },
+  "faq": {
+    "heading": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Bieten Sie kostenlose Besichtigungen an?",
+        "a": "Ja, Besichtigungen sind kostenlos und unverbindlich. Dadurch können wir den Aufwand genau einschätzen und ein passendes Angebot erstellen."
+      },
+      {
+        "q": "Wie schnell sind Termine möglich?",
+        "a": "Je nach Auftragslage sind kurzfristige Termine häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp."
+      },
+      {
+        "q": "Arbeiten Sie auch für Unternehmen und Hausverwaltungen?",
+        "a": "Ja, wir betreuen Privatkunden, Unternehmen, Vermieter und Hausverwaltungen."
+      },
+      {
+        "q": "Bieten Sie Festpreise an?",
+        "a": "Viele Leistungen können nach einer Besichtigung zu einem transparenten Festpreis angeboten werden."
+      }
+    ]
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet – Osnabrück und Umgebung",
+    "text1": "Wir sind regelmäßig in Osnabrück, Georgsmarienhütte, Melle, Bramsche, Wallenhorst, Belm, Bissendorf, Bad Essen, Bohmte, Ostercappeln, Hagen am Teutoburger Wald, Bad Iburg, Bad Laer, Bad Rothenfelde, Dissen am Teutoburger Wald, Glandorf, Hasbergen, Lotte, Westerkappeln, Ibbenbüren, Tecklenburg, Lengerich, Mettingen, Hörstel, Rheine, Emsdetten, Steinfurt, Münster, Greven, Warendorf, Bielefeld, Herford, Bad Oeynhausen, Vechta, Damme, Cloppenburg, Meppen, Lingen, Nordhorn und vielen weiteren Städten und Gemeinden tätig.",
+    "text2": "Für zahlreiche Orte stehen eigene Leistungsseiten zur Verfügung, damit Kunden schnell die passende Dienstleistung in ihrer Nähe finden.",
+    "ctaLabel": "Alle Einsatzgebiete ansehen",
+    "slogan": "Rund ums Haus Littawe – Ihr Ansprechpartner für Gärtnerarbeiten, Gartenpflege, Hausmeisterservice, Objektpflege, Dachservice, Dachreinigung, Dachrinnenreinigung, Dachreparaturen, Entrümpelungen, Haushaltsauflösungen und Schrottabholung in Osnabrück und Umgebung."
+  },
+  "kontaktCta": {
+    "heading": "Jetzt kostenlos anfragen",
+    "text": "Sie brauchen Unterstützung rund ums Haus, Garten oder Dach? Kontaktieren Sie uns für eine kostenlose und unverbindliche Besichtigung — telefonisch, per WhatsApp oder über das Kontaktformular."
+  }
 }

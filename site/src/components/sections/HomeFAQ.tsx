@@ -1,30 +1,16 @@
-// PX-064: Homepage FAQ — Kevin's 4 verbatim questions (WhatsApp 2026-06-09).
-// Server component → FAQPage JSON-LD rendered statically.
-// Homepage had no FAQPage schema before, so no duplication risk.
+// PX-064: Homepage FAQ — Kevin's 4 verbatim questions.
+// PX-070: texts moved to homepage.json (CMS-editable); FAQPage schema
+// derives from the SAME data (single source, L-015).
 
-const FAQS = [
-  {
-    q: "Bieten Sie kostenlose Besichtigungen an?",
-    a: "Ja, Besichtigungen sind kostenlos und unverbindlich. Dadurch können wir den Aufwand genau einschätzen und ein passendes Angebot erstellen.",
-  },
-  {
-    q: "Wie schnell sind Termine möglich?",
-    a: "Je nach Auftragslage sind kurzfristige Termine häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp.",
-  },
-  {
-    q: "Arbeiten Sie auch für Unternehmen und Hausverwaltungen?",
-    a: "Ja, wir betreuen Privatkunden, Unternehmen, Vermieter und Hausverwaltungen.",
-  },
-  {
-    q: "Bieten Sie Festpreise an?",
-    a: "Viele Leistungen können nach einer Besichtigung zu einem transparenten Festpreis angeboten werden.",
-  },
-];
+import homepageData from "@/data/homepage.json";
+import type { HomepageData } from "@/data/types";
+
+const data = (homepageData as HomepageData).faq;
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: FAQS.map((f) => ({
+  mainEntity: data.items.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -40,10 +26,10 @@ export default function HomeFAQ() {
       />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-10 text-center">
-          Häufige Fragen
+          {data.heading}
         </h2>
         <div className="space-y-3">
-          {FAQS.map((f, i) => (
+          {data.items.map((f, i) => (
             <details
               key={i}
               className="group bg-cream-dark border border-sand/30 rounded-xl p-5"
