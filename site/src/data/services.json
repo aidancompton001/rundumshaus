@@ -13,7 +13,8 @@
       "subPage": {
         "href": "/leistungen/objektpflege/",
         "label": "Für Hausverwaltungen & WEGs: Objektpflege →"
-      }
+      },
+      "imageAlt": "Hausmeisterservice, Objektpflege & Grundstückspflege"
     },
     {
       "id": "gartenpflege",
@@ -26,7 +27,8 @@
       "subPage": {
         "href": "/leistungen/rasen-neuanlage/",
         "label": "Spezial: Rasen neu anlegen →"
-      }
+      },
+      "imageAlt": "Gärtner & Gartenpflege"
     },
     {
       "id": "dacharbeiten",
@@ -35,7 +37,8 @@
       "detailDescription": "Wir unterstützen Privatkunden, Unternehmen und Hausverwaltungen mit professionellem Dachservice in Osnabrück und Umgebung. Zu unseren Leistungen gehören Dachreinigung, Dachpflege, Dachrinnenreinigung, Fallrohrreinigung, Moosentfernung, Laubentfernung, Sichtprüfungen von Dachflächen sowie die Reinigung von Garagendächern und Carports. Regelmäßige Pflege und Kontrollen helfen dabei, Verschmutzungen frühzeitig zu erkennen und den Wert Ihrer Immobilie langfristig zu erhalten.",
       "icon": "home",
       "image": "/images/services/dacharbeiten.jpg",
-      "detailImage": "/images/services/detail-dach.png"
+      "detailImage": "/images/services/detail-dach.png",
+      "imageAlt": "Dachservice & Dachpflege"
     },
     {
       "id": "entruempelung",
@@ -44,7 +47,8 @@
       "detailDescription": "Rund ums Haus Littawe unterstützt Privatkunden, Unternehmen, Vermieter und Hausverwaltungen bei Entrümpelungen aller Art. Ob Wohnung, Haus, Keller, Dachboden, Garage oder Gewerbeobjekt – wir übernehmen die komplette Räumung inklusive fachgerechter Entsorgung und besenreiner Übergabe.\n\nZu unseren Leistungen gehören Entrümpelungen, Haushaltsauflösungen, Wohnungsauflösungen, Kellerentrümpelungen, Dachbodenentrümpelungen, Garagenräumungen sowie die Entsorgung von Sperrmüll, Möbeln und sonstigem Hausrat. Dank transparenter Preise, kostenloser Besichtigungen und kurzfristiger Termine sorgen wir für eine schnelle, saubere und stressfreie Abwicklung.",
       "icon": "truck",
       "image": "/images/services/entruempelung.jpg",
-      "detailImage": "/images/services/detail-entruempelung.png"
+      "detailImage": "/images/services/detail-entruempelung.png",
+      "imageAlt": "Entrümpelung & Haushaltsauflösung"
     },
     {
       "id": "schrottabholung",
@@ -53,7 +57,8 @@
       "detailDescription": "Rund ums Haus Littawe bietet eine zuverlässige Schrottabholung und Altmetallentsorgung für Privatkunden, Unternehmen, Handwerksbetriebe und Hausverwaltungen. Wir holen Metallschrott, Altmetalle, Stahl, Eisen, Kupfer, Aluminium, Messing sowie viele weitere Schrottarten direkt bei Ihnen vor Ort ab.\n\nOb Keller, Garage, Werkstatt, Lagerhalle, Gewerbeobjekt oder Grundstück – wir unterstützen Sie bei der fachgerechten Entsorgung von Schrott und Altmetall. Auch größere Mengen können nach vorheriger Absprache übernommen werden. Unser Ziel ist eine schnelle, saubere und unkomplizierte Abwicklung mit fairen Konditionen und kurzfristigen Terminen.\n\nDurch die regelmäßige Schrottabholung schaffen Sie Platz, sorgen für Ordnung und führen wertvolle Rohstoffe dem Recyclingkreislauf zu. Kostenlose Besichtigungen und eine transparente Beratung gehören für uns selbstverständlich dazu.",
       "icon": "recycle",
       "image": "/images/services/schrottabholung.png",
-      "detailImage": "/images/services/detail-schrott.png"
+      "detailImage": "/images/services/detail-schrott.png",
+      "imageAlt": "Schrottabholung & Altmetallentsorgung"
     }
   ]
 }

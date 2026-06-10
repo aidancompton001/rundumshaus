@@ -1,5 +1,6 @@
 {
   "h1": "Entrümpelung & Haushaltsauflösung in {city}",
+  "heroImage": "/images/services/entruempelung-hero.webp",
   "heroAlt": "Entrümpelung und Haushaltsauflösung in {city} — Rund ums Haus Littawe",
   "intro1": "Sie suchen eine zuverlässige Entrümpelungsfirma in {city}? Rund ums Haus Littawe übernimmt die professionelle Räumung von Wohnungen, Häusern, Kellern, Dachböden, Garagen und Gewerbeobjekten — schnell, sauber und zum fairen Festpreis. Auch Haushaltsauflösungen und Nachlassauflösungen führen wir respektvoll und diskret durch.",
   "intro2": "Als Familienbetrieb sind wir {dist} und übernehmen sowohl kleine Räumungen als auch komplette Haushaltsauflösungen in {city}. Bei jeder Entrümpelung achten wir auf eine besenreine Übergabe und eine fachgerechte Entsorgung der Gegenstände.",
@@ -125,11 +126,27 @@
   "weitereLeistungen": {
     "heading": "Weitere Leistungen",
     "links": [
-      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
-      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
-      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
-      { "label": "Schrottabholung", "servicePath": "schrottabholung" },
-      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+      {
+        "label": "Gartenpflege",
+        "servicePath": "gartenpflege"
+      },
+      {
+        "label": "Hausmeisterservice, Objektpflege & Grundstückspflege",
+        "servicePath": "hausmeisterservice"
+      },
+      {
+        "label": "Dachreinigung",
+        "servicePath": "dacharbeiten"
+      },
+      {
+        "label": "Schrottabholung",
+        "servicePath": "schrottabholung"
+      },
+      {
+        "label": "Objektpflege",
+        "servicePath": "objektpflege",
+        "isHub": true
+      }
     ]
   },
   "einsatzorte": {

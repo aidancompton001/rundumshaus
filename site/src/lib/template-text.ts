@@ -23,6 +23,7 @@ export interface CitySection {
 
 export interface CityTemplateTexts {
   h1: string;
+  heroImage: string;
   heroAlt: string;
   intro1: string;
   intro2: string;

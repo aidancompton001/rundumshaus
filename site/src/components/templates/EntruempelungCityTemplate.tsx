@@ -12,11 +12,13 @@ import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons
 
 const T = templateTexts as CityTemplateTexts;
 const SERVICE_PATH = "entruempelung";
+// PX-072: hero image path comes from the template JSON (CMS-editable).
+const heroBase = (T.heroImage ?? "").replace(/.(png|jpe?g|webp)$/i, "");
 const HERO = {
-  w1200: "/images/services/entruempelung-hero-1200w.webp",
-  w800: "/images/services/entruempelung-hero-800w.webp",
-  w400: "/images/services/entruempelung-hero-400w.webp",
-  fallback: "/images/services/entruempelung-hero.png",
+  w1200: `${heroBase}-1200w.webp`,
+  w800: `${heroBase}-800w.webp`,
+  w400: `${heroBase}-400w.webp`,
+  fallback: T.heroImage,
 };
 
 interface Props {

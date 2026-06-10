@@ -114,6 +114,7 @@ collections:
               - { name: detailDescription, label: Lange Beschreibung (Leistungen-Seite), widget: text }
               - { name: icon, label: Icon, widget: select, options: [wrench, leaf, home, truck, recycle] }
               - { name: image, label: Karten-Bild, widget: image, required: false }
+              - { name: imageAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string, required: false }
               - { name: detailImage, label: Detail-Bild, widget: image, required: false }
               - name: subPage
                 label: Zusatz-Link (optional)
@@ -201,6 +202,7 @@ collections:
         file: site/src/data/templates/gartenpflege.json
         fields: &stadtseiten_fields
           - { name: h1, label: "Überschrift (H1)", widget: string, hint: "{city} = Stadtname" }
+          - { name: heroImage, label: "Hero-Bild (oben auf den Stadt-Seiten)", widget: image }
           - { name: heroAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string }
           - { name: intro1, label: "Einleitung — Absatz 1", widget: text }
           - { name: intro2, label: "Einleitung — Absatz 2", widget: text, hint: "{dist} = automatischer Entfernungs-Satz" }
