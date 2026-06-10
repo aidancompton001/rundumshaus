@@ -2,6 +2,31 @@
 
 ---
 
+### [S068] — 2026-06-10 — PX-073: Deep-Audit (CEO) + fixes — все находки закрыты
+
+**Задача:** CEO: «глубокий аудит — верификация, индексация, пользовательский путь, всё»
+**Роли:** #1 Product Architect + adversarial agent (94k tokens)
+**Статус:** ✅ завершено (PR #77, deploy success, верифицировано live)
+
+**Что сделано:**
+- Аудит 4 блока: live health (12/12 страниц + 25/25 city = 200), schema/meta (LocalBusiness, FAQPage, BreadcrumbList, Kevin-meta-patterns live), 40/40 internal links, canary 5×69 PASS + 248/248 тестов
+- Adversarial agent: 1 BLOCKER + 5 WARN + 3 INFO → все исправлены в PX-073:
+  - **F1 BLOCKER:** referenzen.json (before/after/steps) не покрывался генератором image variants → загрузка Kevin'ом Vorher/Nachher-фото рендерилась бы битой. Managed set: 16→26 изображений
+  - **F3:** phone/email/WhatsApp на 5 city-шаблонах + HomeKontakt были захардкожены (~490 страниц) → теперь из site.json (CMS Einstellungen)
+  - **F4:** isHub readonly + allow_add:false на weitereLeistungen.links (Kevin-добавленный link давал бы /leistungen//{city}/)
+  - **F2/F5/F6/F7:** честные hints в config.yml (subPage без эффекта, placeholder только в текст-полях, unused поля)
+  - **F9:** неэкранированная точка в heroBase regex ×5 шаблонов
+
+**Ключевые решения:**
+- Identity gate после F3: city-текст байт-идентичен live (значения те же, источник теперь site.json)
+
+**Артефакты:** `site/scripts/admin/generate-image-variants.mjs`, `site/src/components/templates/*.tsx`, `site/src/components/sections/HomeKontakt.tsx`, `site/public/admin/config.yml`
+
+**Следующие шаги:**
+- Backlog: Places API auto-pull (Google ещё не проиндексировал профиль), OAuth Phase D, slug rename /dacharbeiten/→/dachservice/ (нужны redirects), TSX-hardcoded страницы (ueber-uns, osnabrueck, objektpflege, rasen-neuanlage)
+
+---
+
 ### [S067] — 2026-06-10 — PX-068: Admin Panel (Sveltia CMS) für Kevin — LIVE
 
 **Задача:** Kevin 4× просил self-edit (Texte, Bilder, Google Meta). CEO: полный вариант.
