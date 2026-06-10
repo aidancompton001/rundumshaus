@@ -1,0 +1,141 @@
+{
+  "h1": "Hausmeisterservice, Objektpflege & Grundstückspflege in {city}",
+  "heroAlt": "Hausmeister bei der Objektpflege in {city} — Rund ums Haus Littawe",
+  "intro1": "Sie suchen einen zuverlässigen Hausmeisterservice in {city}? Rund ums Haus Littawe übernimmt für Privatkunden, Unternehmen, Vermieter und Hausverwaltungen die Betreuung von Immobilien und Außenanlagen — von Kontrollgängen über Kleinreparaturen bis zur regelmäßigen Objektpflege.",
+  "intro2": "Als erfahrener Hausmeister sind wir {dist} und übernehmen sowohl einmalige Aufträge als auch laufende Betreuungsverträge in {city}. Eine regelmäßige Pflege Ihres Objekts trägt zum Werterhalt der Immobilie bei und sorgt für ein gepflegtes Erscheinungsbild.",
+  "benefits": [
+    "Kostenlose Besichtigung",
+    "Schnelle Terminvergabe",
+    "Faire und transparente Preise",
+    "Privat- & Gewerbekunden",
+    "Regelmäßige Betreuung möglich"
+  ],
+  "cta": {
+    "heading": "Jetzt kostenloses Angebot anfragen",
+    "text": "Sie suchen einen erfahrenen Hausmeister in {city} oder benötigen Unterstützung bei der Objektpflege? Kontaktieren Sie uns jetzt für eine kostenlose und unverbindliche Besichtigung."
+  },
+  "sectionsBefore": [
+    {
+      "heading": "Professioneller Hausmeisterservice in {city}",
+      "paragraphs": [
+        "Ob Mehrfamilienhaus, Wohnanlage, Gewerbeobjekt, Bürogebäude oder Privatimmobilie — wir übernehmen die laufende Betreuung Ihrer Objekte in {city}. Mit zuverlässigem Hausmeisterservice sorgen wir für gepflegte Außenanlagen, funktionierende Technik im Alltag und ein ordentliches Erscheinungsbild Ihrer Immobilie.",
+        "Ganz gleich, ob Sie einen einmaligen Einsatz oder eine regelmäßige Betreuung benötigen — wir bieten individuelle Lösungen und feste Ansprechpartner. {einsatz}"
+      ]
+    }
+  ],
+  "leistungen": {
+    "heading": "Unsere Leistungen im Bereich Hausmeisterservice in {city}",
+    "intro": "Zu unseren Hausmeisterleistungen gehören unter anderem:",
+    "items": [
+      "Objektpflege",
+      "Grundstückspflege",
+      "Pflege von Außenanlagen",
+      "Kontrollgänge",
+      "Sichtkontrollen von Gebäuden",
+      "Kleinreparaturen",
+      "Austausch defekter Leuchtmittel",
+      "Reinigung von Gehwegen und Hofflächen",
+      "Reinigung von Außen- und Gemeinschaftsflächen",
+      "Pflege von Grünflächen",
+      "Laubbeseitigung",
+      "Unkrautentfernung",
+      "Mülltonnenservice (Bereitstellung und Rückstellung)",
+      "Betreuung von Wohnanlagen",
+      "Betreuung von Gewerbeobjekten",
+      "Winterdienst",
+      "Entrümpelungen",
+      "Schrottabholung",
+      "Pflege von Treppenhäusern und Eingangsbereichen",
+      "Sicht- und Sauberkeitskontrollen",
+      "Pflege von Privatgrundstücken",
+      "Pflege von Mehrfamilienhäusern",
+      "Pflege von Firmengeländen"
+    ],
+    "footnote": "Viele weitere Hausmeisterleistungen auf Anfrage"
+  },
+  "sectionsAfter": [
+    {
+      "heading": "Objektpflege & Grundstückspflege in {city}",
+      "paragraphs": [
+        "Eine regelmäßige Objektpflege trägt zum Werterhalt Ihrer Immobilie bei und sorgt für ein gepflegtes Gesamtbild. Wir kümmern uns um laufende Sichtkontrollen, Pflege der Außenanlagen, Reinigung von Gemeinschaftsflächen und kleinere Instandhaltungsarbeiten in {city}.",
+        "So bleibt Ihre Immobilie dauerhaft attraktiv für Mieter, Käufer und Besucher — ohne dass Sie sich selbst um die Details kümmern müssen."
+      ]
+    },
+    {
+      "heading": "Hausmeisterservice für Vermieter, Unternehmen & Hausverwaltungen",
+      "paragraphs": [
+        "Vermieter, Hausverwaltungen und Gewerbekunden in {city} schätzen feste Ansprechpartner, transparente Festpreise und zuverlässige Betreuungsverträge. Wir übernehmen die laufende Pflege von Wohnanlagen, Gewerbeobjekten und Bürogebäuden — auf Wunsch mit regelmäßiger Berichterstattung.",
+        "Auch kurzfristige Einsätze, Sondertermine und saisonale Aufgaben (z. B. Laubbeseitigung, Winterdienst) lassen sich flexibel im Rahmen der Betreuung abdecken."
+      ]
+    }
+  ],
+  "warum": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "items": [
+      "Kostenlose und unverbindliche Besichtigung",
+      "Schnelle Terminvergabe",
+      "Faire und transparente Preise",
+      "Zuverlässige Ausführung",
+      "Persönlicher Ansprechpartner",
+      "Privat- und Gewerbekunden",
+      "Regelmäßige Betreuung möglich",
+      "Individuelle Lösungen für jedes Objekt",
+      "Viele Leistungen aus einer Hand"
+    ],
+    "cityLine": "Hausmeisterservice in {city} und Umgebung"
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet",
+    "text": "Wir sind als Hausmeisterservice nicht nur in {city} tätig, sondern auch in {list} und vielen weiteren Städten und Gemeinden der Region. {einsatz}"
+  },
+  "faq": {
+    "heading": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Was kostet ein Hausmeisterservice",
+        "a": "Die Kosten hängen vom Umfang der Leistungen und der Größe des Objekts ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot zum Festpreis.",
+        "cityInQuestion": true
+      },
+      {
+        "q": "Bieten Sie regelmäßige Betreuung an?",
+        "a": "Ja, wir übernehmen sowohl einmalige Hausmeisterleistungen als auch laufende Betreuungsverträge für Privatkunden, Wohnanlagen und Gewerbeobjekte.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Arbeiten Sie auch für Hausverwaltungen?",
+        "a": "Ja, wir betreuen Hausverwaltungen, Vermieter, Eigentümergemeinschaften und Unternehmen mit festen Ansprechpartnern.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Übernehmen Sie auch Kleinreparaturen?",
+        "a": "Ja, kleinere Reparaturen, Austausch defekter Leuchtmittel und vergleichbare Hausmeisteraufgaben gehören zum Standard unseres Hausmeisterservice.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Bieten Sie Winterdienst an?",
+        "a": "Ja, Winterdienst gehört zu unserem Leistungsumfang. Sprechen Sie uns frühzeitig an, um Ihr Objekt zuverlässig betreuen zu können.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Wie schnell sind Termine möglich?",
+        "a": "Kurzfristige Termine sind je nach Auslastung häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp.",
+        "cityInQuestion": false
+      }
+    ]
+  },
+  "weitereLeistungen": {
+    "heading": "Weitere Leistungen",
+    "links": [
+      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
+      { "label": "Entrümpelung", "servicePath": "entruempelung" },
+      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
+      { "label": "Schrottabholung", "servicePath": "schrottabholung" },
+      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+    ]
+  },
+  "einsatzorte": {
+    "heading": "Weitere Einsatzorte",
+    "chipLabel": "Hausmeisterservice, Objektpflege & Grundstückspflege in {city}",
+    "expandLabel": "Weitere {count} Städte anzeigen"
+  }
+}

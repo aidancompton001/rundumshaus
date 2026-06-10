@@ -14,6 +14,12 @@ import {
 } from "@/lib/programmatic";
 import { generateSEO } from "@/lib/seo";
 import { getServiceMetaOverride } from "@/lib/meta-overrides";
+import { subst } from "@/lib/template-text";
+import dachTexts from "@/data/templates/dacharbeiten.json";
+import gartenTexts from "@/data/templates/gartenpflege.json";
+import hausmeisterTexts from "@/data/templates/hausmeisterservice.json";
+import entruempelungTexts from "@/data/templates/entruempelung.json";
+import schrottTexts from "@/data/templates/schrottabholung.json";
 import { getGartenContent } from "@/lib/template-content";
 import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import { getDachContent } from "@/lib/template-content-dach";
@@ -205,14 +211,11 @@ export default async function ProgrammaticLandingPage({
       gartenService.provider = { "@id": LOCAL_BUSINESS_ID };
     }
 
-    const gartenFaqs = [
-      { q: `Was kostet ein Gärtner in ${cityData.displayName}?`, a: "Die Kosten hängen vom Umfang der Arbeiten und der Größe des Grundstücks ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot." },
-      { q: "Bieten Sie regelmäßige Gartenpflege an?", a: "Ja, wir übernehmen sowohl einmalige Gartenarbeiten als auch regelmäßige Pflegeeinsätze." },
-      { q: "Pflegen Sie auch Gewerbegrundstücke?", a: "Ja, wir betreuen Firmengelände, Wohnanlagen, Gewerbeobjekte und größere Außenanlagen." },
-      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung häufig möglich." },
-      { q: "Entsorgen Sie Gartenabfälle?", a: "Ja, auf Wunsch übernehmen wir die fachgerechte Entsorgung von Gartenabfällen und Grünschnitt." },
-      { q: "Arbeiten Sie auch für Hausverwaltungen?", a: "Ja, wir betreuen Hausverwaltungen, Vermieter und Wohnanlagen." },
-    ];
+    // PX-069: FAQ schema derives from the SAME JSON as the visible template.
+    const gartenFaqs = gartenTexts.faq.items.map((f) => ({
+      q: f.cityInQuestion ? `${subst(f.q, { city: cityData.displayName })} in ${cityData.displayName}?` : subst(f.q, { city: cityData.displayName }),
+      a: subst(f.a, { city: cityData.displayName }),
+    }));
     const gartenFaqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -277,14 +280,11 @@ export default async function ProgrammaticLandingPage({
       hmService.provider = { "@id": LOCAL_BUSINESS_ID };
     }
 
-    const hmFaqs = [
-      { q: `Was kostet ein Hausmeisterservice in ${cityData.displayName}?`, a: "Die Kosten hängen vom Umfang der Leistungen und der Größe des Objekts ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot zum Festpreis." },
-      { q: "Bieten Sie regelmäßige Betreuung an?", a: "Ja, wir übernehmen sowohl einmalige Hausmeisterleistungen als auch laufende Betreuungsverträge für Privatkunden, Wohnanlagen und Gewerbeobjekte." },
-      { q: "Arbeiten Sie auch für Hausverwaltungen?", a: "Ja, wir betreuen Hausverwaltungen, Vermieter, Eigentümergemeinschaften und Unternehmen mit festen Ansprechpartnern." },
-      { q: "Übernehmen Sie auch Kleinreparaturen?", a: "Ja, kleinere Reparaturen, Austausch defekter Leuchtmittel und vergleichbare Hausmeisteraufgaben gehören zum Standard unseres Hausmeisterservice." },
-      { q: "Bieten Sie Winterdienst an?", a: "Ja, Winterdienst gehört zu unserem Leistungsumfang. Sprechen Sie uns frühzeitig an, um Ihr Objekt zuverlässig betreuen zu können." },
-      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp." },
-    ];
+    // PX-069: FAQ schema derives from the SAME JSON as the visible template.
+    const hmFaqs = hausmeisterTexts.faq.items.map((f) => ({
+      q: f.cityInQuestion ? `${subst(f.q, { city: cityData.displayName })} in ${cityData.displayName}?` : subst(f.q, { city: cityData.displayName }),
+      a: subst(f.a, { city: cityData.displayName }),
+    }));
     const hmFaqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -349,14 +349,12 @@ export default async function ProgrammaticLandingPage({
       dachService.provider = { "@id": LOCAL_BUSINESS_ID };
     }
 
-    const dachFaqs = [
-      { q: `Was kostet eine Dachreinigung in ${cityData.displayName}?`, a: "Die Kosten hängen von der Dachgröße, dem Verschmutzungsgrad und der Erreichbarkeit ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot zum Festpreis." },
-      { q: "Wie häufig sollte die Dachrinne gereinigt werden?", a: "Wir empfehlen die Dachrinnenreinigung mindestens einmal im Jahr — bevorzugt im Spätherbst, wenn das Laub gefallen ist. Bei umliegenden Bäumen oder besonders exponierten Lagen kann auch eine halbjährliche Reinigung sinnvoll sein." },
-      { q: "Bieten Sie auch reine Dachreinigungen an?", a: "Ja, wir übernehmen Dachreinigungen separat — von der Moos- und Algenentfernung bis zur kompletten Pflege von Dachflächen, Garagendächern und Carports." },
-      { q: "Übernehmen Sie auch kleinere Dachreparaturen?", a: "Ja, kleinere Dachreparaturen, Austausch einzelner Dachziegel und Ausbesserungsarbeiten gehören zu unseren Leistungen." },
-      { q: "Arbeiten Sie auch für Hausverwaltungen?", a: "Ja, wir betreuen Hausverwaltungen, Vermieter, Eigentümergemeinschaften und Unternehmen mit festen Ansprechpartnern." },
-      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung und Wetterlage häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp." },
-    ];
+    // PX-069: FAQ schema derives from the SAME JSON as the visible template
+    // (single source — Kevin's legal edits flow into Schema.org too).
+    const dachFaqs = dachTexts.faq.items.map((f) => ({
+      q: f.cityInQuestion ? `${subst(f.q, { city: cityData.displayName })} in ${cityData.displayName}?` : subst(f.q, { city: cityData.displayName }),
+      a: subst(f.a, { city: cityData.displayName }),
+    }));
     const dachFaqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -421,14 +419,11 @@ export default async function ProgrammaticLandingPage({
       entService.provider = { "@id": LOCAL_BUSINESS_ID };
     }
 
-    const entFaqs = [
-      { q: `Was kostet eine Entrümpelung in ${cityData.displayName}?`, a: "Die Kosten hängen von der Menge, der Erreichbarkeit und dem Aufwand ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein verbindliches Festpreis-Angebot — ohne versteckte Zusatzkosten." },
-      { q: "Bieten Sie Festpreise an?", a: "Ja, nach der Besichtigung erhalten Sie ein verbindliches Festpreis-Angebot. Sie wissen vorher genau, was die Entrümpelung kostet — keine Überraschungen." },
-      { q: "Übernehmen Sie Haushaltsauflösungen nach Todesfall?", a: "Ja, wir gehen bei Nachlassauflösungen besonders respektvoll und diskret vor. Persönliche Dokumente, Fotos, Urkunden, Verträge und Wertgegenstände werden aussortiert und für Sie gesondert aufbewahrt." },
-      { q: "Was passiert mit den entsorgten Gegenständen?", a: "Wir achten auf eine umweltgerechte Trennung. Sperrmüll, Holz, Metall, Elektroschrott und weitere Wertstoffe werden fachgerecht sortiert und den entsprechenden Entsorgungsstellen zugeführt." },
-      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine für Entrümpelungen und Haushaltsauflösungen sind je nach Auslastung häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp." },
-      { q: "Übernehmen Sie auch Gewerbe- und Büroauflösungen?", a: "Ja, neben privaten Räumungen übernehmen wir auch Gewerbe-, Büro- und Lagerauflösungen sowie Räumungen von Hallen und Geschäftsflächen." },
-    ];
+    // PX-069: FAQ schema derives from the SAME JSON as the visible template.
+    const entFaqs = entruempelungTexts.faq.items.map((f) => ({
+      q: f.cityInQuestion ? `${subst(f.q, { city: cityData.displayName })} in ${cityData.displayName}?` : subst(f.q, { city: cityData.displayName }),
+      a: subst(f.a, { city: cityData.displayName }),
+    }));
     const entFaqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -493,14 +488,11 @@ export default async function ProgrammaticLandingPage({
       schrottService.provider = { "@id": LOCAL_BUSINESS_ID };
     }
 
-    const schrottFaqs = [
-      { q: "Welche Metalle holen Sie ab?", a: "Wir holen Eisen, Stahl, Kupfer, Aluminium, Messing, Edelstahl und weitere Metalle ab — sowohl in kleineren als auch in größeren Mengen." },
-      { q: `Ist die Altmetallabholung in ${cityData.displayName} kostenlos?`, a: "Für die Abholung von Altmetall und Schrott berechnen wir bei größeren Mengen nichts — die Besichtigung vor Ort ist ebenfalls kostenlos. Sprechen Sie uns einfach an." },
-      { q: "Arbeiten Sie auch für Unternehmen und Hausverwaltungen?", a: "Ja, wir betreuen Privatkunden, Unternehmen, Hausverwaltungen und Gewerbekunden. Auch Hallenräumungen, Lagerauflösungen und Garagenräumungen mit Schrottentsorgung gehören zu unseren Leistungen." },
-      { q: "Wie schnell sind Termine möglich?", a: "Kurzfristige Termine sind je nach Auslastung häufig möglich. Bei größeren Mengen vereinbaren wir gerne einen Besichtigungstermin und planen die Abholung flexibel." },
-      { q: "Holen Sie auch größere Mengen Schrott ab?", a: "Ja, gerne. Bei größeren Mengen — z. B. nach Hallenräumungen, Lagerauflösungen oder Garagenentrümpelungen — vereinbaren wir eine kostenlose Besichtigung und planen die Abholung passend zu Ihrem Termin." },
-      { q: "Übernehmen Sie auch die Demontage von Metallteilen?", a: "Ja, die Demontage kleiner Metallkonstruktionen und alter Metallteile vor Ort führen wir gerne im Rahmen der Schrottabholung durch." },
-    ];
+    // PX-069: FAQ schema derives from the SAME JSON as the visible template.
+    const schrottFaqs = schrottTexts.faq.items.map((f) => ({
+      q: f.cityInQuestion ? `${subst(f.q, { city: cityData.displayName })} in ${cityData.displayName}?` : subst(f.q, { city: cityData.displayName }),
+      a: subst(f.a, { city: cityData.displayName }),
+    }));
     const schrottFaqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",

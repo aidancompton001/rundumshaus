@@ -1,0 +1,144 @@
+{
+  "h1": "Dachservice & Dacharbeiten in {city}",
+  "heroAlt": "Dachdecker bei Dachreinigung und Dachrinnenreinigung in {city} — Rund ums Haus Littawe",
+  "intro1": "Sie suchen einen zuverlässigen Dachservice in {city}? Rund ums Haus Littawe übernimmt für Privatkunden, Unternehmen, Vermieter und Hausverwaltungen die professionelle Reinigung, Pflege und Instandhaltung von Dächern und Dachrinnen — vom Einfamilienhaus bis zur Wohnanlage.",
+  "intro2": "Als erfahrener Dachdienstleister sind wir {dist} und übernehmen sowohl einmalige Einsätze als auch regelmäßige Wartung in {city}. Regen, Wind, Moos und Laub setzen jedem Dach mit der Zeit zu — eine regelmäßige Dachpflege trägt zum Werterhalt Ihrer Immobilie bei und beugt teuren Folgeschäden vor.",
+  "benefits": [
+    "Kostenlose Besichtigung",
+    "Schnelle Terminvergabe",
+    "Faire und transparente Preise",
+    "Privat- & Gewerbekunden",
+    "Werterhalt der Immobilie"
+  ],
+  "cta": {
+    "heading": "Jetzt kostenloses Angebot anfragen",
+    "text": "Sie benötigen eine Dachreinigung, Dachrinnenreinigung oder kleinere Dachreparaturen in {city}? Kontaktieren Sie uns jetzt für eine kostenlose und unverbindliche Besichtigung."
+  },
+  "sectionsBefore": [
+    {
+      "heading": "Professioneller Dachservice in {city}",
+      "paragraphs": [
+        "Regen, Wind, Sturm, Moos, Laub und UV-Strahlung setzen jedem Dach mit der Zeit zu. In {city} und Umgebung sorgt eine regelmäßige Dachpflege dafür, dass Ihr Dach lange dicht bleibt und das Erscheinungsbild Ihrer Immobilie gepflegt aussieht — egal ob Einfamilienhaus, Mehrfamilienhaus oder Gewerbeobjekt.",
+        "Wir übernehmen Dachreinigung, Dachrinnenreinigung, Dachkontrollen und kleinere Reparaturen — alles aus einer Hand. {einsatz}"
+      ]
+    }
+  ],
+  "leistungen": {
+    "heading": "Unsere Leistungen im Bereich Dachservice in {city}",
+    "intro": "Zu unseren Leistungen rund ums Dach gehören unter anderem:",
+    "items": [
+      "Dachpflege",
+      "Dachreinigung",
+      "Dachrinnenreinigung",
+      "Reinigung von Fallrohren",
+      "Entfernung von Moos",
+      "Entfernung von Laub",
+      "Entfernung von Verschmutzungen",
+      "Dachkontrollen",
+      "Sichtprüfungen",
+      "Kontrolle von Dachrinnen und Fallrohren",
+      "Austausch einzelner Dachziegel",
+      "Kleinere Dachreparaturen",
+      "Ausbesserungsarbeiten",
+      "Reinigung von Garagendächern",
+      "Reinigung von Carports",
+      "Pflege von Dachflächen",
+      "Wartungsarbeiten",
+      "Vorbeugende Instandhaltung",
+      "Beratung zu Dachpflege",
+      "Begutachtung des Dachzustands"
+    ],
+    "footnote": "Viele weitere Arbeiten rund ums Dach auf Anfrage"
+  },
+  "sectionsAfter": [
+    {
+      "heading": "Dachreinigung in {city}",
+      "paragraphs": [
+        "Moos, Algen, Flechten und Laub auf dem Dach sehen nicht nur unschön aus — sie können langfristig die Lebensdauer Ihres Dachs verkürzen. Mit einer fachgerechten Dachreinigung entfernen wir Verschmutzungen schonend und sorgen für ein sauberes, gepflegtes Dachbild in {city}.",
+        "Auch Garagendächer, Carports und kleinere Dachflächen reinigen wir zuverlässig und sorgfältig."
+      ]
+    },
+    {
+      "heading": "Dachrinnenreinigung in {city}",
+      "paragraphs": [
+        "Verstopfte Dachrinnen und Fallrohre sind eine häufige Ursache für Wasserschäden an Fassade und Mauerwerk. Wir reinigen Dachrinnen und Fallrohre in {city} gründlich, prüfen die Abläufe und melden Ihnen rechtzeitig, wenn eine Ausbesserung sinnvoll ist.",
+        "Eine regelmäßige Dachrinnenreinigung — mindestens einmal jährlich — beugt teuren Folgeschäden vor und schützt Ihre Immobilie nachhaltig."
+      ]
+    },
+    {
+      "heading": "Kleinere Dachreparaturen & Dacharbeiten in {city}",
+      "paragraphs": [
+        "Einzelne verrutschte oder beschädigte Dachziegel, kleinere Ausbesserungen oder vorbeugende Wartungsarbeiten — wir übernehmen kleinere Dachreparaturen in {city} fachgerecht und zuverlässig.",
+        "Bei umfangreicheren Sanierungen oder komplexen Dachprojekten empfehlen wir gerne einen spezialisierten Dachdeckerbetrieb. Im Rahmen der laufenden Pflege und kleinerer Reparaturen sind wir Ihr zuverlässiger Ansprechpartner."
+      ]
+    }
+  ],
+  "warum": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "items": [
+      "Kostenlose und unverbindliche Besichtigung",
+      "Schnelle Terminvergabe",
+      "Faire und transparente Preise",
+      "Zuverlässige und saubere Ausführung",
+      "Persönlicher Ansprechpartner",
+      "Privat- und Gewerbekunden",
+      "Vorbeugende Wartung möglich",
+      "Werterhalt durch regelmäßige Dachpflege"
+    ],
+    "cityLine": "Dachservice in {city} und Umgebung"
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet",
+    "text": "Wir bieten unseren Dachservice nicht nur in {city} an, sondern auch in {list} und vielen weiteren Städten und Gemeinden der Region. {einsatz}"
+  },
+  "faq": {
+    "heading": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Was kostet eine Dachreinigung",
+        "a": "Die Kosten hängen von der Dachgröße, dem Verschmutzungsgrad und der Erreichbarkeit ab. Nach einer kostenlosen Besichtigung erstellen wir Ihnen gerne ein individuelles Angebot zum Festpreis.",
+        "cityInQuestion": true
+      },
+      {
+        "q": "Wie häufig sollte die Dachrinne gereinigt werden?",
+        "a": "Wir empfehlen die Dachrinnenreinigung mindestens einmal im Jahr — bevorzugt im Spätherbst, wenn das Laub gefallen ist. Bei umliegenden Bäumen oder besonders exponierten Lagen kann auch eine halbjährliche Reinigung sinnvoll sein.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Bieten Sie auch reine Dachreinigungen an?",
+        "a": "Ja, wir übernehmen Dachreinigungen separat — von der Moos- und Algenentfernung bis zur kompletten Pflege von Dachflächen, Garagendächern und Carports.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Übernehmen Sie auch kleinere Dachreparaturen?",
+        "a": "Ja, kleinere Dachreparaturen, Austausch einzelner Dachziegel und Ausbesserungsarbeiten gehören zu unseren Leistungen.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Arbeiten Sie auch für Hausverwaltungen?",
+        "a": "Ja, wir betreuen Hausverwaltungen, Vermieter, Eigentümergemeinschaften und Unternehmen mit festen Ansprechpartnern.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Wie schnell sind Termine möglich?",
+        "a": "Kurzfristige Termine sind je nach Auslastung und Wetterlage häufig möglich. Kontaktieren Sie uns gerne telefonisch oder per WhatsApp.",
+        "cityInQuestion": false
+      }
+    ]
+  },
+  "weitereLeistungen": {
+    "heading": "Weitere Leistungen",
+    "links": [
+      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
+      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
+      { "label": "Entrümpelung", "servicePath": "entruempelung" },
+      { "label": "Schrottabholung", "servicePath": "schrottabholung" },
+      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+    ]
+  },
+  "einsatzorte": {
+    "heading": "Weitere Einsatzorte",
+    "chipLabel": "Dachservice in {city}",
+    "expandLabel": "Weitere {count} Städte anzeigen"
+  }
+}

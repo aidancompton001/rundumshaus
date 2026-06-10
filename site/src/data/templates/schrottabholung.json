@@ -1,0 +1,137 @@
+{
+  "h1": "Schrottabholung & Altmetallabholung in {city}",
+  "heroAlt": "Schrottabholung und Altmetallabholung in {city} — Rund ums Haus Littawe",
+  "intro1": "Sie möchten Schrott oder Altmetall in {city} loswerden? Rund ums Haus Littawe übernimmt die zuverlässige Schrottabholung und Altmetallabholung — bei Privatkunden, Unternehmen, Hausverwaltungen und Gewerbeobjekten. Wir holen Eisen, Stahl, Kupfer, Aluminium, Messing und Edelstahl direkt vor Ort ab und kümmern uns um die fachgerechte Verwertung.",
+  "intro2": "Als Familienbetrieb sind wir {dist} und holen sowohl kleinere Mengen als auch größere Posten Schrott in {city} ab. Wo Schrott Platz wegnimmt, schaffen wir schnell und unkompliziert wieder Raum — bei größeren Mengen ist die Besichtigung kostenlos.",
+  "benefits": [
+    "Kostenlose Besichtigung bei größeren Mengen",
+    "Schnelle Terminvergabe",
+    "Privat- & Gewerbekunden",
+    "Fachgerechte Verwertung",
+    "Schrottabholung in der Region"
+  ],
+  "cta": {
+    "heading": "Jetzt kostenlose Schrottabholung anfragen",
+    "text": "Sie möchten Schrott oder Altmetall in {city} entsorgen? Kontaktieren Sie uns jetzt — kurze Wege, schnelle Termine, fachgerechte Verwertung."
+  },
+  "sectionsBefore": [
+    {
+      "heading": "Professionelle Schrottabholung in {city}",
+      "paragraphs": [
+        "Alter Schrott nimmt Platz weg — in Kellern, Garagen, Hallen oder auf Grundstücken. Wir holen Schrott und Altmetall in {city} unkompliziert ab und führen alles einer fachgerechten Verwertung zu. Ob einzelne Metallteile oder größere Mengen — gerne planen wir die Abholung passend zu Ihrem Termin.",
+        "Bei größeren Mengen vereinbaren wir gerne eine kostenlose Besichtigung vor Ort. {einsatz}"
+      ]
+    }
+  ],
+  "leistungen": {
+    "heading": "Unsere Leistungen im Bereich Schrottabholung in {city}",
+    "intro": "Zu unseren Schrott- und Altmetall-Leistungen gehören unter anderem:",
+    "items": [
+      "Schrottabholung",
+      "Altmetallabholung",
+      "Metallschrott entsorgen",
+      "Eisenschrott entsorgen",
+      "Stahlschrott entsorgen",
+      "Kupferschrott entsorgen",
+      "Aluminiumschrott entsorgen",
+      "Messingschrott entsorgen",
+      "Edelstahl entsorgen",
+      "Schrottabholung bei Privatkunden",
+      "Schrottabholung bei Unternehmen",
+      "Schrottabholung für Gewerbe",
+      "Schrottabholung für Hausverwaltungen",
+      "Garagenräumungen mit Schrottentsorgung",
+      "Kellerentrümpelungen mit Schrottentsorgung",
+      "Hallenräumungen",
+      "Lagerauflösungen",
+      "Demontage kleiner Metallkonstruktionen",
+      "Entsorgung alter Metallteile",
+      "Fachgerechte Verwertung & Recycling"
+    ],
+    "footnote": "Weitere Abholungen auf Anfrage"
+  },
+  "sectionsAfter": [
+    {
+      "heading": "Altmetallabholung in {city}",
+      "paragraphs": [
+        "Altmetall ist ein wertvoller Rohstoff. Eisen, Stahl, Kupfer, Aluminium, Messing und Edelstahl lassen sich nahezu vollständig recyceln. Wir holen Altmetall in {city} ab und sorgen für eine umweltgerechte Verwertung über zertifizierte Recyclingstellen.",
+        "So leisten Sie aktiv einen Beitrag zum Ressourcenkreislauf — und schaffen gleichzeitig Platz für Neues."
+      ]
+    },
+    {
+      "heading": "Schrottentsorgung für Privat- und Gewerbekunden",
+      "paragraphs": [
+        "Wir holen Schrott in {city} sowohl bei Privatkunden (Garagenräumungen, Kellerentrümpelungen, alte Metallteile aus dem Haushalt) als auch bei Unternehmen und Hausverwaltungen (Hallenräumungen, Lagerauflösungen, Gewerbeschrott) ab.",
+        "Auf Wunsch übernehmen wir auch die Demontage kleinerer Metallkonstruktionen und Anlagen vor der Abholung."
+      ]
+    }
+  ],
+  "warum": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "items": [
+      "Kostenlose Besichtigung bei größeren Mengen",
+      "Schnelle Terminvergabe",
+      "Zuverlässige und saubere Ausführung",
+      "Privat- und Gewerbekunden",
+      "Fachgerechte Verwertung der Metalle",
+      "Persönlicher Ansprechpartner",
+      "Flexible Einsatzplanung",
+      "Familienbetrieb aus Osnabrück"
+    ],
+    "cityLine": "Schrottabholung in {city} und Umgebung"
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet",
+    "text": "Wir holen Schrott und Altmetall nicht nur in {city} ab, sondern auch in {list} und vielen weiteren Städten und Gemeinden der Region. {einsatz}"
+  },
+  "faq": {
+    "heading": "Häufige Fragen zur Schrottabholung",
+    "items": [
+      {
+        "q": "Welche Metalle holen Sie ab?",
+        "a": "Wir holen Eisen, Stahl, Kupfer, Aluminium, Messing, Edelstahl und weitere Metalle ab — sowohl in kleineren als auch in größeren Mengen.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Ist die Altmetallabholung kostenlos",
+        "a": "Für die Abholung von Altmetall und Schrott berechnen wir bei größeren Mengen nichts — die Besichtigung vor Ort ist ebenfalls kostenlos. Sprechen Sie uns einfach an.",
+        "cityInQuestion": true
+      },
+      {
+        "q": "Arbeiten Sie auch für Unternehmen und Hausverwaltungen?",
+        "a": "Ja, wir betreuen Privatkunden, Unternehmen, Hausverwaltungen und Gewerbekunden. Auch Hallenräumungen, Lagerauflösungen und Garagenräumungen mit Schrottentsorgung gehören zu unseren Leistungen.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Wie schnell sind Termine möglich?",
+        "a": "Kurzfristige Termine sind je nach Auslastung häufig möglich. Bei größeren Mengen vereinbaren wir gerne einen Besichtigungstermin und planen die Abholung flexibel.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Holen Sie auch größere Mengen Schrott ab?",
+        "a": "Ja, gerne. Bei größeren Mengen — z. B. nach Hallenräumungen, Lagerauflösungen oder Garagenentrümpelungen — vereinbaren wir eine kostenlose Besichtigung und planen die Abholung passend zu Ihrem Termin.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Übernehmen Sie auch die Demontage von Metallteilen?",
+        "a": "Ja, die Demontage kleiner Metallkonstruktionen und alter Metallteile vor Ort führen wir gerne im Rahmen der Schrottabholung durch.",
+        "cityInQuestion": false
+      }
+    ]
+  },
+  "weitereLeistungen": {
+    "heading": "Weitere Leistungen",
+    "links": [
+      { "label": "Gartenpflege", "servicePath": "gartenpflege" },
+      { "label": "Hausmeisterservice, Objektpflege & Grundstückspflege", "servicePath": "hausmeisterservice" },
+      { "label": "Dachreinigung", "servicePath": "dacharbeiten" },
+      { "label": "Entrümpelung", "servicePath": "entruempelung" },
+      { "label": "Objektpflege", "servicePath": "objektpflege", "isHub": true }
+    ]
+  },
+  "einsatzorte": {
+    "heading": "Weitere Einsatzorte",
+    "chipLabel": "Schrottabholung in {city}",
+    "expandLabel": "Weitere {count} Städte anzeigen"
+  }
+}
