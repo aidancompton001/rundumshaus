@@ -48,12 +48,8 @@ export default function HomeKontakt() {
             <span>Kontaktformular</span>
           </Link>
         </div>
-        <p className="mt-8 text-cream/70">
-          Telefon:{" "}
-          <a href="tel:+4915239603175" className="underline hover:text-cream">
-            +49 1523 9603175
-          </a>
-        </p>
+        {/* PX-067: duplicate "Telefon: ..." line removed per Kevin 2026-06-10
+            (Anrufen button already exposes the number). */}
       </div>
     </section>
   );
