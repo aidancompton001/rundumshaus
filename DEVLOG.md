@@ -2,6 +2,24 @@
 
 ---
 
+### [S069] — 2026-06-11 — PX-074: 9-й Google-отзыв (Markus, Gartenpflege) + Mehr-lesen
+
+**Задача:** PX-074 (реестр) — CEO прислал новый отзыв из Google
+**Роли:** #1 Product Architect
+**Статус:** ✅ завершено (PR #78, live verified)
+
+**Что сделано:**
+- reviews.json: полный verbatim-текст (эмодзи убраны), ratingCount 8→9, id google-markus-garten-2026-06 (второй Markus, не конфликтует с Entrümpelung 07.06)
+- BewertungenSlider: тексты >280 символов клампятся до 6 строк + toggle Mehr lesen / Weniger anzeigen (решение CEO: полный текст вместо выжимки)
+- layout.schema.test: счётчик и авторы отзывов теперь derived из reviews.json вместо хардкода 8 (E2-класс — хардкод ломался на каждом легитимном отзыве)
+
+**Артефакты:** `site/src/data/reviews.json`, `site/src/components/sections/BewertungenSlider.tsx`, `site/src/app/__tests__/layout.schema.test.ts`
+
+**Следующие шаги:**
+- /ueber-uns ReviewsBlock: grid, длинная карточка не ломает layout — toggle там не нужен
+
+---
+
 ### [S068] — 2026-06-10 — PX-073: Deep-Audit (CEO) + fixes — все находки закрыты
 
 **Задача:** CEO: «глубокий аудит — верификация, индексация, пользовательский путь, всё»

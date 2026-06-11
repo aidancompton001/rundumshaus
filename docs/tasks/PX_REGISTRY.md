@@ -1206,8 +1206,8 @@ Phase C (если Kevin даст дополнительные pricing):
 
 ## PX-074
 **Дата:** 2026-06-11
-**Статус:** новая
-**DEVLOG:** —
+**Статус:** завершено (PR #78)
+**DEVLOG:** S069
 **Источник:** CEO чат 2026-06-11 (новый Google-отзыв Markus)
 **Задача:** Добавить 9-й Google-отзыв (Markus, Local Guide, Gartenpflege, 5 Sterne) в reviews.json полным текстом + кнопка Mehr lesen / Weniger anzeigen в слайдере отзывов
 **Контекст:** site/src/data/reviews.json (single source: BewertungenSlider главная + /ueber-uns + aggregateRating schema), site/src/components/sections/BewertungenSlider.tsx
