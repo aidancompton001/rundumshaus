@@ -2,6 +2,32 @@
 
 ---
 
+### [S071] — 2026-06-11 — PX-076: keyword-исследование Gartenarbeit Osnabrück
+
+**Задача:** [PX-076](docs/tasks/PX_REGISTRY.md) — Kevin: «Kann man sehen was für Gartenarbeit in Osnabrück gesucht wird?»
+**Роли:** #3 Marco Reiter (SEO) + #14 Hans Landa (ревью)
+**Статус:** завершено (отчёт принят CEO, немецкая версия отправлена Кевину)
+
+**Что сделано:**
+- Google Autocomplete (de/DE, 2 волны, усечённые префиксы): подтверждён спрос — rasen mähen (обе формы), hecke schneiden, heckenschnitt, baumschnitt, obstbaumschnitt, grünschnitt entsorgen, rollrasen verlegen, gartenpflege/gärtner/gartenservice osnabrück
+- Нет локального сигнала: unkraut entfernen (вопрос Кевина — честно с оговоркой о пороге метода), vertikutieren, rasen neu anlegen, rasenpflege
+- Национальный Kosten-интент: rasen mähen lassen kosten, hecke schneiden lassen kosten, gartenpflege preise → подтверждает блок Kostenfaktoren (PX-075 действие 4)
+- **Главная находка:** «hecke schneiden osnabrück» ищут, а в gartenpflege-шаблоне НОЛЬ упоминаний Hecke (только 1 слово в services.json) — кандидат №1 в контент-блок
+- Hans Landa отклонил ТС1 (нет колонки «наша видимость», не сверился с собственным сайтом, ярлыки «1:1»/«сильный=10») — всё исправлено в ТС2
+- Вопрос Кевину: делает ли он Baumschnitt (не вписываем сами после истории с Dacharbeiten)
+
+**Ключевые решения:**
+- GSC-выгрузка = pending (API не настроен): CEO может сделать 5-мин экспорт Suchanfragen для уточнения позиций
+- Объёмы поиска не фабрикуем — только живые autocomplete-подсказки
+
+**Артефакты:** research-нота в Obsidian `01_Projects/RundumsHaus/Research.md`
+
+**Следующие шаги:**
+- Будущий PX (контент-блок Garten-страницы): Hecken-блок + rasen mähen усиление + Kostenfaktoren + «So läuft es ab» (объединяет PX-075 действие 4 + PX-076 находки)
+- Ответ Кевина про Baumschnitt
+
+---
+
 ### [S070] — 2026-06-11 — PX-075: SEO-исследование позиций (HM #5 / GP #13)
 
 **Задача:** [PX-075](docs/tasks/PX_REGISTRY.md) — Kevin замерил: Hausmeisterservice Osnabrück #5, Gartenpflege Osnabrück #13
