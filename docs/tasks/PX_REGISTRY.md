@@ -1203,3 +1203,19 @@ Phase C (если Kevin даст дополнительные pricing):
 ---
 
 <!-- Последний номер: PX-045 -->
+
+## PX-074
+**Дата:** 2026-06-11
+**Статус:** новая
+**DEVLOG:** —
+**Источник:** CEO чат 2026-06-11 (новый Google-отзыв Markus)
+**Задача:** Добавить 9-й Google-отзыв (Markus, Local Guide, Gartenpflege, 5 Sterne) в reviews.json полным текстом + кнопка Mehr lesen / Weniger anzeigen в слайдере отзывов
+**Контекст:** site/src/data/reviews.json (single source: BewertungenSlider главная + /ueber-uns + aggregateRating schema), site/src/components/sections/BewertungenSlider.tsx
+**Проблема:** Отзыв есть в Google, нет на сайте; длинные отзывы ломали бы высоту слайдера — до сих пор резали выжимкой
+**Цель:** Отзыв на сайте 1:1 (без эмодзи), длинные тексты сворачиваются с toggle, ratingCount 8 -> 9
+**Скоуп:** запись в reviews.json (id google-markus-garten-2026-06, НЕ конфликтует с Markus Entrümpelung 07.06), clamp + toggle в слайдере для всех отзывов, ratingCount sync, тесты
+**Ограничения:** admin config не трогать (поля те же), текст verbatim без выдумок
+**Размер:** M | **Промпт:** P8 (расширенный)
+---
+
+<!-- Последний номер: PX-074 -->
