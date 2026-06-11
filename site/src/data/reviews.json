@@ -1,13 +1,22 @@
 {
   "source": "Google Business Profile",
-  "verified": "2026-06-08 (CEO confirmed, +1 new review from Markus 2026-06-07 — PX-044)",
+  "verified": "2026-06-11 (CEO confirmed, +1 new review from Markus (Local Guide), Gartenpflege — PX-074)",
   "aggregateRating": {
     "ratingValue": 5,
-    "ratingCount": 8,
+    "ratingCount": 9,
     "bestRating": 5,
     "worstRating": 5
   },
   "reviews": [
+    {
+      "id": "google-markus-garten-2026-06",
+      "author": "Markus",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-06-11",
+      "text": "Ich bin restlos begeistert. Ich hab den Kevin Littawe kurzfristig angerufen, da ich leider seit ein paar Wochen aus gesundheitlichen Gründen nicht im Garten arbeiten konnte und er hat mir super schnell geholfen. Heute, 2 Tage nach unserem ersten Telefonat war er 3 Stunden da, mit einem Kollegen und jeder Menge guten Werkzeugen - ein Profi mit Profi Equipment. Den Rasen-Verschnitt hat er natürlich sofort eingepackt und auch mitgenommen und alles sauber gemacht. Er hat sich mehrfach erkundigt, ob mir alles gefällt. Kevin ist ein Profi und ein richtig guter Dienstleister rund ums Haus und er hat mir viele gute Tipps fürs gesamte Haus - Dach, Fassade, Pflaster, Hecken, Bäume gegeben. Ich werde ihn wieder beauftragen und freue mich schon auf das nette gegenüber. Kevin und sein Kollege sind super sympathisch, herzlich und lustig und ich bin wirklich sehr dankbar. Ach ja: preislich sehr gut, eine absolute ehrliche Haut, günstig und steht zu seinem Wort!",
+      "service": "Gartenpflege"
+    },
     {
       "id": "google-markus-2026-06",
       "author": "Markus",

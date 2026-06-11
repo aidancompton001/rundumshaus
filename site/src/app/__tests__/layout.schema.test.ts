@@ -20,6 +20,9 @@
 import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+// PX-074: schema review assertions derive from reviews.json (single source) —
+// hardcoded counts broke every time a real review lands (A0/E2-class lesson).
+import reviewsData from "@/data/reviews.json";
 
 const LAYOUT_PATH = path.resolve(__dirname, "..", "layout.tsx");
 const BASE_URL = "https://rundumshaus-littawe.de";
@@ -269,27 +272,24 @@ describe("layout.tsx — Schema.org @graph", () => {
     it("LocalBusiness has AggregateRating with verified Kevin reviews", () => {
       const ar = lb3!.aggregateRating as Record<string, unknown>;
       expect(ar["@type"]).toBe("AggregateRating");
-      expect(ar.ratingValue).toBe(5);
-      expect(ar.ratingCount).toBe(8);
+      expect(ar.ratingValue).toBe(reviewsData.aggregateRating.ratingValue);
+      expect(ar.ratingCount).toBe(reviewsData.aggregateRating.ratingCount);
+      // ratingCount must never drift from the actual review list
+      expect(ar.ratingCount).toBe(reviewsData.reviews.length);
       expect(ar.bestRating).toBe(5);
       expect(ar.worstRating).toBe(5);
     });
 
-    it("LocalBusiness has 8 Review entries (PX-044: +Markus, Entrümpelung Dachboden)", () => {
+    it("LocalBusiness has one Review entry per reviews.json item (PX-074: derived, not hardcoded)", () => {
       const reviews = lb3!.review as Array<Record<string, unknown>>;
       expect(Array.isArray(reviews)).toBe(true);
-      expect(reviews.length).toBe(8);
+      expect(reviews.length).toBe(reviewsData.reviews.length);
       const authors = reviews.map(
         (r) => (r.author as Record<string, string>).name
       );
-      expect(authors).toContain("Radoslaw Eugeniusz Labuda");
-      expect(authors).toContain("Daria Kaminska");
-      expect(authors).toContain("Justus Müller");
-      expect(authors).toContain("Charleton Kaps");
-      expect(authors).toContain("Maxim Kloster");
-      expect(authors).toContain("Luca Kleinfeld");
-      expect(authors).toContain("Jens");
-      expect(authors).toContain("Markus");
+      for (const src of reviewsData.reviews) {
+        expect(authors).toContain(src.author);
+      }
     });
 
     it("each Review has @type, author Person, rating, body", () => {

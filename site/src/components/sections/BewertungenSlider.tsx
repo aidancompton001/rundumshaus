@@ -7,11 +7,40 @@
 // Auto-pull via Places API will replace the static JSON once Google
 // indexes the profile (see docs/CREDENTIALS.md — Places API key ready).
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import reviewsData from "@/data/reviews.json";
 import { ScrollReveal } from "@/components/motion";
 
 const { reviews, aggregateRating } = reviewsData;
+
+// PX-074: long reviews (Markus, Gartenpflege) would stretch every card in the
+// flex row to the tallest card's height — clamp long texts with a toggle.
+const CLAMP_CHARS = 280;
+
+function ReviewText({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = text.length > CLAMP_CHARS;
+  return (
+    <div className="mt-4 flex-1">
+      <p
+        className={`text-charcoal-light leading-relaxed ${
+          isLong && !expanded ? "line-clamp-6" : ""
+        }`}
+      >
+        &bdquo;{text}&ldquo;
+      </p>
+      {isLong && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-2 text-sm font-semibold text-copper hover:underline"
+        >
+          {expanded ? "Weniger anzeigen" : "Mehr lesen"}
+        </button>
+      )}
+    </div>
+  );
+}
 
 function Stars({ count }: { count: number }) {
   return (
@@ -65,9 +94,7 @@ export default function BewertungenSlider() {
                 className="snap-start shrink-0 w-[300px] md:w-[360px] bg-cream-dark border border-sand/30 rounded-2xl p-6 flex flex-col"
               >
                 <Stars count={r.rating} />
-                <p className="mt-4 text-charcoal-light leading-relaxed flex-1">
-                  &bdquo;{r.text}&ldquo;
-                </p>
+                <ReviewText text={r.text} />
                 <div className="mt-5 pt-4 border-t border-sand/30 flex items-center justify-between">
                   <div>
                     <p className="font-semibold text-charcoal">{r.author}</p>
