@@ -2,6 +2,31 @@
 
 ---
 
+### [S070] — 2026-06-11 — PX-075: SEO-исследование позиций (HM #5 / GP #13)
+
+**Задача:** [PX-075](docs/tasks/PX_REGISTRY.md) — Kevin замерил: Hausmeisterservice Osnabrück #5, Gartenpflege Osnabrück #13
+**Роли:** #3 Marco Reiter (SEO) + 2 research-агента + #14 Hans Landa (ревью)
+**Статус:** завершено (отчёт принят CEO)
+
+**Что сделано:**
+- Разбор 8 конкурентов (DAM, KS, Husmann, Dragaj / Stockreiter, Hellebusch, Dukat, Hagedorn): контент, schema, отзывы, возраст, платформа
+- Вывод: наш on-page на уровне/выше топа (полная schema + FAQ + отзывы на странице — почти ни у кого); разрыв off-site (возраст домена ~2 мес против 10-60 лет, citations, объём отзывов)
+- Citations-дыра: werkenntdenbesten (сам в топ-5 Google по обоим запросам) + рубрика Hausmeisterservice в Gelbe Seiten
+- Риск: коллизия имени с «Holger Elferich Rund ums Haus Servicetechnik» (Osnabrück) — мониторим
+- Hans Landa отклонил ТС1: 2 CRITICAL (ложный claim «нет areaServed» — он есть ×12; числа слов без метода), фабрикованные сроки «топ-3 за 4-8 недель» — всё исправлено в ТС2
+
+**Ключевые решения:**
+- План 4 действий: Kevin — wkdb-профиль, GS-рубрика HM, отзывы с упоминанием услуга+город; Мы — блок «So läuft es ab» + Kostenfaktoren на Garten-странице (будущая M-задача), мониторинг позиций раз в 2 недели
+- Сроки не обещаем: off-site-разрыв конкурентов не измерен
+
+**Артефакты:** research-нота в Obsidian `01_Projects/RundumsHaus/Research.md`
+
+**Следующие шаги:**
+- Kevin: 3 off-site действия (сообщение отправлено CEO)
+- Будущий PX: контент-блоки Garten-страницы
+
+---
+
 ### [S069] — 2026-06-11 — PX-074: 9-й Google-отзыв (Markus, Gartenpflege) + Mehr-lesen
 
 **Задача:** PX-074 (реестр) — CEO прислал новый отзыв из Google
