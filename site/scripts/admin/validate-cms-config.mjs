@@ -23,13 +23,8 @@ const fail = (msg) => { console.error(`✗ ${msg}`); errors++; };
 const ok = (msg) => console.log(`✓ ${msg}`);
 
 /* ── G2: pinned version ─────────────────────────────────────── */
-// Admin panel can be intentionally disabled (Sveltia script removed, stub page
-// with x-admin-panel=disabled). In that state there is no CDN dependency to
-// pin, so the supply-chain check is not applicable — skip instead of fail.
 const adminHtml = readFileSync(path.join(SITE_ROOT, "public/admin/index.html"), "utf8");
-const adminDisabled = /name="x-admin-panel"\s+content="disabled"/.test(adminHtml);
-if (adminDisabled) ok("Admin panel disabled (Sveltia not loaded) — pin check skipped");
-else if (/@sveltia\/cms@\d+\.\d+\.\d+\//.test(adminHtml)) ok("Sveltia version is pinned");
+if (/@sveltia\/cms@\d+\.\d+\.\d+\//.test(adminHtml)) ok("Sveltia version is pinned");
 else fail("admin/index.html: @sveltia/cms version is NOT pinned to exact x.y.z");
 
 /* ── config parses ──────────────────────────────────────────── */
