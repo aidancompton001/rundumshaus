@@ -4,35 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <meta name="x-admin-panel" content="disabled" />
     <title>Rund ums Haus Littawe — Verwaltung</title>
-    <style>
-      body {
-        font-family: system-ui, -apple-system, sans-serif;
-        display: flex;
-        min-height: 100vh;
-        margin: 0;
-        align-items: center;
-        justify-content: center;
-        background: #f5f1ea;
-        color: #2d2a26;
-      }
-      .box {
-        max-width: 28rem;
-        padding: 2rem;
-        text-align: center;
-        line-height: 1.6;
-      }
-    </style>
   </head>
   <body>
-    <!-- Admin-Panel (Sveltia CMS) vorübergehend deaktiviert.
-         Sveltia-Script entfernt = keine Verbindung zum GitHub-Backend.
-         Reaktivieren: diese Datei aus der Git-Historie wiederherstellen
-         (Stand vor diesem Commit lädt sveltia-cms.js@0.166.1). -->
-    <div class="box">
-      <h1>Verwaltung vorübergehend nicht verfügbar</h1>
-      <p>Die Verwaltung wird derzeit gewartet und ist momentan deaktiviert.</p>
-    </div>
+    <!-- PX-068 Admin Panel (Sveltia CMS).
+         Version is PINNED (supply-chain guard, Design Review G2) —
+         bump deliberately after testing, never float to latest. -->
+    <script src="https://unpkg.com/@sveltia/cms@0.166.1/dist/sveltia-cms.js"></script>
   </body>
 </html>
