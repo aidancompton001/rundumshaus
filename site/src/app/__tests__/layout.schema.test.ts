@@ -277,7 +277,8 @@ describe("layout.tsx — Schema.org @graph", () => {
       // ratingCount must never drift from the actual review list
       expect(ar.ratingCount).toBe(reviewsData.reviews.length);
       expect(ar.bestRating).toBe(5);
-      expect(ar.worstRating).toBe(5);
+      // schema.org: worstRating is the LOWER bound of the scale, not the lowest received rating
+      expect(ar.worstRating).toBe(1);
     });
 
     it("LocalBusiness has one Review entry per reviews.json item (PX-074: derived, not hardcoded)", () => {
