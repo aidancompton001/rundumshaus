@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "obsidian": {
-      "type": "sse",
-      "url": "http://localhost:22360/sse"
-    }
-  }
-}
