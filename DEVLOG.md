@@ -2,6 +2,32 @@
 
 ---
 
+### [S073] — 2026-08-06 — PX-077: Schrottabholung → Garten- und Landschaftsbau LIVE
+
+**Задача:** Kevin (WhatsApp 2026-08-06): замена услуги, текст Kevin получен
+**Роли:** #1 Product Architect
+**Статус:** завершено — LIVE
+
+**Что сделано:**
+- Новая услуга garten-landschaftsbau: template-JSON (текст Kevin), template-content-galabau.ts, GalabauCityTemplate, GALABAU ServiceBlocks, роут-ветка со Schema.org, 98 city-страниц, CMS-коллекция Sveltia
+- Schrottabholung удалена полностью: ServiceId, данные, страницы, Ratgeber-статья, 3 template-файла, 4 NOINDEX-пары, boost (4 города)
+- 100 redirect-стабов (meta refresh 0 + canonical + noindex) — GitHub Pages не умеет 301; генератор scripts/generate-schrott-redirects.mjs
+- PR #82 merged; canary 69 PASS / 0 FAIL; live: 200 + sitemap 98×galabau / 0×schrott, стабы работают
+
+**Ключевые решения:**
+- Фото GaLaBau временно = Gartenpflege (garten-hero) — Kevin заменит через Admin-Panel
+- Ratgeber «Kostenlose Schrottabholung» удалён (рекламировал убранную услугу), стаб → /ratgeber/
+- HM-Leistungen: пункт «Schrottabholung» убран (услуги больше нет)
+
+**Артефакты:** PR #82, `site/src/data/templates/garten-landschaftsbau.json`, `GalabauCityTemplate.tsx`, `template-content-galabau.ts`, `scripts/generate-schrott-redirects.mjs`
+
+**Следующие шаги:**
+- Kevin: фото для GaLaBau (hero + карточка) через Admin-Panel
+- GSC: наблюдать переиндексацию schrottabholung→galabau URL
+- 6 WARN canary (длинные Gärtner-тайтлы Kevin) — отдельная S-задача при случае
+
+---
+
 ### [S072] — 2026-08-06 — HRC-диагноз Entrümpelung SEO + фикс worstRating
 
 **Задача:** Kevin (WhatsApp): Schrottabholung → Garten- und Landschaftsbau; Entrümpelung не найти в Google

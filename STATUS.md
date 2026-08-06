@@ -1,27 +1,27 @@
 # STATUS — RundumsHaus
 
 **Обновлён:** 2026-08-06
-**Этап:** S072 — HRC-диагноз Entrümpelung SEO закрыт (Landa CONFIRMED-ALL), фикс worstRating задеплоен (PR #81).
+**Этап:** S073 — Garten- und Landschaftsbau LIVE (PX-077, PR #82), Schrottabholung удалена с редиректами.
 
 ## Production state
 
-- **Live:** https://rundumshaus-littawe.de ✅ | **Admin:** /admin/ (Sveltia)
-- **Tests:** 248/248 | **Schema:** AggregateRating worstRating=1 (live: 10× верифицировано)
-- **Sitemap:** 512 URL (99 entruempelung)
+- **Live:** https://rundumshaus-littawe.de ✅ | **Admin:** /admin/ (Sveltia, коллекция galabau добавлена)
+- **Tests:** 247/247 | **Canary:** 69 PASS / 0 FAIL | **Sitemap:** 98×garten-landschaftsbau, 0×schrottabholung
+- **Redirects:** 100 стабов /leistungen/schrottabholung/* → galabau (meta refresh + canonical)
 
 ## Готово (эта сессия)
 
-- [x] HRC-гейт по Entrümpelung-диагнозу: 15 claims, PASS, Landa CONFIRMED-ALL (2 раунда)
-- [x] Фикс F-06: worstRating 5→1 (reviews.json + тест) — PR #81 merged, live проверен
-- [x] Диагноз: on-page блокеров индексации нет; разрыв — отзывы (2/9 упоминают Entrümpelung)
+- [x] S072: HRC-диагноз Entrümpelung + фикс worstRating 5→1 (PR #81)
+- [x] S073: услуга Schrottabholung → Garten- und Landschaftsbau, текст Kevin (PR #82)
 
 ## В ожидании
 
-- **Kevin:** текст для Garten- und Landschaftsbau (замена Schrottabholung) → L-задача: 39+ файлов, шаблон, 301-редиректы 99 URL schrottabholung
-- **CEO:** GSC-замер «entrümpelung osnabrück» (Performance) + Pages-индексация
-- **Kevin:** отзывы Entrümpelung-клиентов с упоминанием услуги + города
+- **Kevin:** фото GaLaBau (сейчас placeholder = Gartenpflege-фото) — через Admin-Panel
+- **Kevin:** отзывы Entrümpelung-клиентов с упоминанием услуги + города (2/9 сейчас)
+- **CEO:** GSC-замер «entrümpelung osnabrück» + мониторинг переиндексации galabau-URL
 
-## Backlog (без изменений)
+## Backlog
 
+- 6 canary-WARN: длинные Gärtner-тайтлы (Kevin meta-pattern) — S-задача
 - wkdb-профиль (план PX-075) | Places API auto-pull | TSX→CMS страницы
-- Оплата Kevin (~250€ за PX-068+) | Wartungs-Pauschale 79€/мес
+- Оплата Kevin (~250€ за PX-068+, + PX-077) | Wartungs-Pauschale 79€/мес
