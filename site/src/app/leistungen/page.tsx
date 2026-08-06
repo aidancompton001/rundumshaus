@@ -10,7 +10,7 @@ export const metadata = generateSEO({
   title: metaOverride?.title ?? "Leistungen ★ Hausmeister & Gärtner Osnabrück",
   description:
     metaOverride?.description ??
-    "Hausmeister, Gartenpflege, Dacharbeiten, Entrümpelung & Schrottabholung in Osnabrück und 60-km-Umkreis. Festpreis nach kostenloser Besichtigung.",
+    "Hausmeister, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten & Entrümpelung in Osnabrück und 60-km-Umkreis. Festpreis nach kostenloser Besichtigung.",
   path: "/leistungen",
 });
 

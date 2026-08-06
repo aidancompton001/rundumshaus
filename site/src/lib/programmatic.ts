@@ -6,14 +6,14 @@ export type ServiceId =
   | "gartenpflege"
   | "dacharbeiten"
   | "entruempelung"
-  | "schrottabholung";
+  | "garten-landschaftsbau";
 
 export const SERVICE_IDS: ServiceId[] = [
   "hausmeisterservice",
   "gartenpflege",
   "dacharbeiten",
   "entruempelung",
-  "schrottabholung",
+  "garten-landschaftsbau",
 ];
 
 export type Tier = 1 | 2 | 3;
@@ -45,12 +45,10 @@ export const CITIES = (citiesData.cities as City[]).slice();
 
 // PX-033 Phase B.3: pages with noindex (bottom-5 thin programmatic by data-driven score).
 // Concentrates Google crawl budget on stronger T1/T2 pages while still serving users.
+// PX-077: schrottabholung pairs removed with the service swap to
+// garten-landschaftsbau (fresh pages start indexable; re-evaluate per GSC data).
 export const NOINDEX_PAIRS: ReadonlySet<string> = new Set([
-  "schrottabholung/emsdetten",
   "hausmeisterservice/herzlake",
-  "schrottabholung/glandorf",
-  "schrottabholung/neuenkirchen-kreis-steinfurt",
-  "schrottabholung/berge",
 ]);
 
 export function isNoindexPair(serviceId: ServiceId, citySlug: string): boolean {
@@ -164,10 +162,6 @@ interface ServiceBlocks {
   // 12+ FAQ pool rotated per page (Landa H1 fix).
   faqPool: ((city: City) => { q: string; a: string })[];
 }
-
-// ── Helper: city-context phrases (used across services) ──
-const cityContext = (c: City) =>
-  `${c.displayName} (${c.bundesland}, ${c.landkreis}, PLZ-Bereich ${c.plzPrefix})`;
 
 // PX-038 CTR fix: meta description should not say "Aus Osnabrück, 0 km Anfahrt"
 // when the city IS Osnabrück. Returns " · 60 km Anfahrt" or empty string.
@@ -570,85 +564,89 @@ const ENTRUEMP: ServiceBlocks = {
 };
 
 // ====================================================================
-// SCHROTTABHOLUNG
+// GARTEN- UND LANDSCHAFTSBAU (Kevin text 2026-08-06, replaced Schrottabholung)
 // ====================================================================
-const SCHROTT: ServiceBlocks = {
-  primaryKeyword: (c) => `Schrottabholung ${c.displayName}`,
+const GALABAU: ServiceBlocks = {
+  primaryKeyword: (c) => `Garten- und Landschaftsbau ${c.displayName}`,
   metaTitle: (c) =>
-    `Schrottabholung ${c.displayName} ★ Kostenlos & schnell vor Ort`,
+    `Garten- und Landschaftsbau ${c.displayName} ★ Pflaster & Außenanlagen`,
   metaDescription: (c) =>
-    `Kostenlose Schrottabholung in ${c.displayName}: Altmetall schnell und unkompliziert abgeholt — meist innerhalb weniger Tage. Aus Osnabrück${distanceMeta(c)}. ☎ Termin per Anruf oder WhatsApp.`,
-  h1: (c) => `Kostenlose Schrottabholung in ${c.displayName}`,
+    `Garten- und Landschaftsbau in ${c.displayName}: Gartenneuanlage, Pflasterarbeiten, Rollrasen, Erdarbeiten, Beete & Bepflanzung. Unverbindliches Angebot nach Besichtigung. Aus Osnabrück${distanceMeta(c)}.`,
+  h1: (c) => `Garten- und Landschaftsbau in ${c.displayName}`,
   introVariants: [
     (c) =>
-      `Schrottabholung in ${c.displayName}: Wir holen Ihren Altmetallschrott kostenlos ab — schnell und unkompliziert. Einfach anrufen, Termin vereinbaren, fertig. Anfahrt aus Osnabrück: ${c.distanceKm} km. ${c.uniqueHook.charAt(0).toUpperCase() + c.uniqueHook.slice(1)} sind wir regelmäßig im Einsatz.`,
+      `Individuelle Außenanlagen nach Ihren Vorstellungen in ${c.displayName}: Als zuverlässiger Partner im Garten- und Landschaftsbau realisieren wir individuelle Projekte für Privatkunden, Unternehmen und Wohnanlagen. Von der ersten Planung bis zur fachgerechten Umsetzung begleiten wir Sie mit Erfahrung, Sorgfalt und einem hohen Qualitätsanspruch. Anfahrt aus Osnabrück: ${c.distanceKm} km.`,
     (c) =>
-      `Sie haben Altmetall in ${c.displayName}, das abgeholt werden soll? Unsere kostenlose Schrottabholung übernimmt das schnell und ohne Aufwand für Sie. Einsatzgebiet: gesamter ${c.landkreis} und 60 km um Osnabrück.`,
+      `Sie planen die Neuanlage eines Gartens, die Umgestaltung bestehender Außenbereiche oder die Modernisierung von Einfahrten und Wegen in ${c.displayName}? Wir schaffen Außenanlagen, die optisch überzeugen und langfristig Bestand haben. ${c.uniqueHook.charAt(0).toUpperCase() + c.uniqueHook.slice(1)} sind wir regelmäßig im Einsatz.`,
     (c) =>
-      `Altmetall-Abholung in ${c.displayName}: Wir nehmen alle Arten von Schrott mit — vom defekten Gerät bis zum kompletten Altmetallhaufen. Kostenfrei und zuverlässig, mit eigenen Fahrzeugen aus Osnabrück.`,
+      `Garten- und Landschaftsbau in ${c.displayName} aus einer Hand: Pflasterarbeiten für Einfahrten, Wege und Terrassen, Rasenneuanlagen und Rollrasenverlegung, Erdarbeiten und Geländemodellierung, Beete und Bepflanzung. Wir sind Familienbetrieb aus Osnabrück (${c.distanceKm} km nach ${c.displayName}) und setzen Projekte jeder Größe termingerecht um.`,
     (c) =>
-      `Kostenlose Schrottabholung ${c.displayName} (${populationLabel(c.populationClass)} in ${c.bundesland}): Heizkörper, Rohre, Werkzeug, Kabel, Räder, Gartengeräte, Bleche, Stahlträger — wir nehmen klassisches Altmetall mit, fachgerecht verwertet.`,
+      `Eine professionell gestaltete Außenanlage verbindet Funktionalität, Ästhetik und Werterhalt. Für Grundstücke in ${c.displayName} (${populationLabel(c.populationClass)} im ${c.landkreis}) entwickeln wir gemeinsam mit Ihnen ein individuelles Konzept, das Ihre Wünsche, die örtlichen Gegebenheiten und Ihr Budget berücksichtigt.`,
     (c) =>
-      `Wenn Sie in ${c.displayName} Altmetall loswerden möchten — Heizkörper, alte Werkzeuge, Schrott aus Renovierung oder Räumung —, holen wir das kostenlos bei Ihnen ab. ${c.uniqueHook.charAt(0).toUpperCase() + c.uniqueHook.slice(1)} sind kurze Anfahrten zu fairen Konditionen Standard.`,
+      `Als Garten- und Landschaftsbauer im ${c.landkreis} übernehmen wir in ${c.displayName} die Neuanlage und Umgestaltung von Gärten, Pflasterarbeiten, Kies- und Schotterflächen, Rasenkanten und Beeteinfassungen sowie Bepflanzungen mit Hecken, Sträuchern und Zierpflanzen. ${c.uniqueHook.charAt(0).toUpperCase() + c.uniqueHook.slice(1)} bündeln wir Termine effizient.`,
     (c) =>
-      `Schrottabholung in ${c.displayName} ohne Termindruck: Bei kleineren Mengen Termin oft binnen 2–3 Werktagen, bei größeren Mengen nach Absprache. Anfahrt aus Osnabrück: ${c.distanceKm} km. Im Einsatzgebiet kostenfrei.`,
+      `Garten neu anlegen in ${c.displayName}: Von der Bodenvorbereitung über Erdarbeiten und Geländemodellierung bis zur Rollrasenverlegung und Bepflanzung — wir begleiten Ihr Projekt von der ersten Idee bis zur Fertigstellung. Auf Wunsch übernehmen wir anschließend auch die regelmäßige Gartenpflege.`,
+    (c) =>
+      `Einfahrt oder Terrasse in ${c.displayName} modernisieren? Pflasterarbeiten gehören zu unseren Kernleistungen — sauber verlegt, mit hochwertigen Materialien und präziser Ausführung. Unser Standort in Osnabrück liegt ${distancePhrase(c)}, sodass wir Besichtigungen kurzfristig anbieten können.`,
+    (c) =>
+      `Garten- und Landschaftsbau für ${c.displayName} und Umgebung: Wir betreuen private Gärten, Außenanlagen von Unternehmen und Wohnanlagen im ${c.landkreis}. Unsere Stärke ist die Kombination aus individueller Planung, hochwertigen Materialien und termingerechter Umsetzung — mit einem festen Ansprechpartner für das gesamte Projekt.`,
   ],
   bodyParagraphs: [
     (c) =>
-      `Mitgenommen wird in ${c.displayName} klassisches Altmetall: Heizkörper, Rohre, Werkzeug, Kabel, alte Räder, Gartengeräte, Stahlträger, Bleche, Schrottautoteile (ohne Karosserie), Maschinenteile. Bei größeren Mengen oder Sondergegenständen sprechen Sie uns einfach an.`,
+      `Zu unseren Leistungen im Garten- und Landschaftsbau in ${c.displayName} gehören: Neuanlage und Umgestaltung von Gärten, Rasenneuanlagen und Rollrasenverlegung, Pflasterarbeiten für Einfahrten, Wege und Terrassen, Anlage von Kies-, Splitt- und Schotterflächen, Erdarbeiten und Geländemodellierung, Setzen von Rasenkanten und Beeteinfassungen, Anlage und Umgestaltung von Beeten, Verlegung von Unkrautvlies, Bepflanzung mit Hecken, Sträuchern und Zierpflanzen sowie die Wiederherstellung bestehender Außenanlagen.`,
     (c, n) =>
-      `Da wir in ${c.displayName} und Umgebung — ${n.slice(0, 3).map((x) => x.displayName).join(", ")} — regelmäßig unterwegs sind, können wir Termine kurzfristig anbieten. Bei mehreren Aufträgen in ${c.region} bündeln wir Anfahrten, was die Planung beschleunigt.`,
+      `Neben ${c.displayName} sind wir regelmäßig in ${n.slice(0, 3).map((x) => x.displayName).join(", ")} im Einsatz. Dadurch können wir Besichtigungstermine kurzfristig anbieten und Projekte in der gesamten Region effizient planen.`,
     (c) =>
-      `Was wir nicht mitnehmen: Bauschutt, Restmüll, Holz, Elektrogeräte mit Bildschirm (TV, Monitore — DSGVO-relevant), Akkus separat, Schadstoffe (Öl, Lack, Asbest). Diese Materialien gehören in den Wertstoffhof bzw. zur Sondermüllabholung im ${c.landkreis}.`,
+      `Jedes Grundstück in ${c.displayName} stellt unterschiedliche Anforderungen. Deshalb entwickeln wir gemeinsam mit Ihnen ein individuelles Konzept, das Ihre Wünsche, die örtlichen Gegebenheiten und Ihr Budget berücksichtigt. Nach dem Vor-Ort-Termin erhalten Sie ein unverbindliches Angebot mit transparenter Kalkulation.`,
     (c) =>
-      `Wirtschaftlichkeit für Sie als Anbieter in ${c.displayName}: Der Service funktioniert, weil Altmetall einen Materialwert hat. Mischschrott liegt 2026 bei 100-250 € pro Tonne, Kupfer bei 6 000-8 500 € pro Tonne. Aus den Erlösen finanzieren wir die Anfahrt im Einsatzgebiet und die Personalkosten. Bei haushaltsüblichen Mengen reicht der Erlös für die kostenlose Abholung — Sie sparen die Entsorgungsgebühr, die Sie sonst am Wertstoffhof zahlen würden.`,
+      `Pflasterarbeiten in ${c.displayName}: Einfahrten, Wege und Terrassen pflastern wir mit hochwertigen Materialien — vom klassischen Betonpflaster bis zum Naturstein. Dazu gehören fachgerechter Unterbau, saubere Kanten und eine präzise Verlegung, damit die Fläche langfristig eben und tragfähig bleibt.`,
     (c) =>
-      `Praktische Tipps für Ihre Schrottabholung in ${c.displayName}: Sortieren Sie nach Möglichkeit grob in Eisen / Buntmetall / verzinkt — das beschleunigt die Abholung. Lagern Sie den Schrott trocken (nasses Eisen rostet schnell, was den Materialwert mindert). Informieren Sie uns über besondere Stücke (große Maschinen, Tresor, Heizungsanlagen mit Öl) im Voraus — wir bringen dann passendes Werkzeug mit. Bei Werkstätten-Auflösungen lohnt sich oft eine Vorab-Sichtung per Foto.`,
+      `Rasenneuanlage und Rollrasen in ${c.displayName}: Wir bereiten den Boden fachgerecht vor (Erdarbeiten, Feinplanum, Bodenverbesserung), verlegen Rollrasen oder säen klassisch an und setzen auf Wunsch Rasenkanten und Beeteinfassungen. So entsteht in kurzer Zeit eine dichte, belastbare Rasenfläche.`,
     (c) =>
-      `Sicherheit und Datenschutz bei Schrottabholung in ${c.displayName}: Festplatten und USB-Sticks aus alten PCs, sowie SIM-Karten in Smartphones, sollten Sie vor der Abholung physisch entfernen oder zerstören — wir nehmen Geräte mit, aber DSGVO-relevante Datenträger gehören nicht in den Recycling-Strom. Ebenso bei Heizungsanlagen mit Restöl oder bei Tanks: Restflüssigkeiten müssen vor der Abholung entleert werden. Wir prüfen das vor Ort und beraten, falls Sondermaßnahmen nötig sind.`,
+      `Bepflanzung und Beete in ${c.displayName}: Wir legen Beete neu an, gestalten bestehende um, verlegen Unkrautvlies und bepflanzen mit Hecken, Sträuchern und Zierpflanzen — abgestimmt auf Standort, Boden und Pflegeaufwand. Alte Bepflanzungen entfernen wir fachgerecht.`,
     (c) =>
-      `Gewerbliche Schrottabholung im ${c.landkreis}: Werkstätten, Schlossereien, Heizungsbauer und Sanitärbetriebe in ${c.displayName} und Umgebung können regelmäßige Abholtermine vereinbaren — wöchentlich, zweiwöchentlich oder nach Bedarf. Bei sortenreinen Mengen ab ca. 500 kg (Kupfer, Messing, V2A) verhandeln wir Vergütungspreise nach aktuellem Tagespreis. Wir stellen ggf. einen Schrottcontainer und entleeren ihn nach Vereinbarung — bürokratiearm und mit allen Wiegeprotokollen für Ihre Buchhaltung.`,
+      `Nach der Fertigstellung übernehmen wir auf Wunsch auch die anschließende Gartenpflege in ${c.displayName}, damit Ihre neu gestaltete Außenanlage dauerhaft in einem gepflegten Zustand bleibt — vom regelmäßigen Rasenschnitt bis zur saisonalen Beetpflege.`,
   ],
   faqPool: [
     (c) => ({
-      q: `Ist die Schrottabholung in ${c.displayName} wirklich kostenlos?`,
-      a: `Ja, die Abholung von Altmetall in ${c.displayName} ist für Sie kostenfrei. Wir verwerten den Schrott fachgerecht.`,
+      q: `Welche Arbeiten übernehmen Sie im Garten- und Landschaftsbau in ${c.displayName}?`,
+      a: `Neuanlage und Umgestaltung von Gärten, Rasenneuanlagen und Rollrasenverlegung, Pflasterarbeiten, Kies- und Schotterflächen, Erdarbeiten, Beeteinfassungen, Beete, Bepflanzungen und die Aufwertung bestehender Außenanlagen.`,
     }),
     (c) => ({
-      q: `Was wird in ${c.displayName} mitgenommen?`,
-      a: `Klassisches Altmetall: Heizkörper, Rohre, Werkzeug, Kabel, alte Räder, Gartengeräte, Bleche, Stahlträger, Maschinenteile.`,
+      q: `Wie läuft ein Projekt in ${c.displayName} ab?`,
+      a: `Zuerst besprechen wir Ihre Wünsche bei einem Vor-Ort-Termin in ${c.displayName}. Danach entwickeln wir ein Konzept mit transparenter Kalkulation. Nach Ihrer Freigabe setzen wir das Projekt fachgerecht und termingerecht um.`,
     }),
     (c) => ({
-      q: `Was wird nicht mitgenommen?`,
-      a: `Bauschutt, Restmüll, Holz, Elektrogeräte mit Bildschirm, Akkus, Schadstoffe (Öl, Lack, Asbest). Diese gehören in den Wertstoffhof im ${c.landkreis}.`,
+      q: `Was kostet ein Angebot in ${c.displayName}?`,
+      a: `Das Angebot ist unverbindlich und kostenlos. Nach der Besichtigung in ${c.displayName} erhalten Sie eine transparente Kalkulation ohne versteckte Kosten.`,
     }),
     (c) => ({
-      q: `Wie schnell kommen Sie in ${c.displayName}?`,
-      a: `Termine in ${c.displayName} sind in der Regel innerhalb weniger Tage möglich.`,
+      q: `Verlegen Sie auch Rollrasen in ${c.displayName}?`,
+      a: `Ja, Rasenneuanlagen und Rollrasenverlegung gehören zu unseren Kernleistungen — inklusive Bodenvorbereitung und Erdarbeiten.`,
     }),
     (c) => ({
-      q: `Holen Sie auch größere Mengen in ${c.displayName} ab?`,
-      a: `Ja, größere Mengen in ${c.displayName} sind kein Problem. Sprechen Sie uns kurz an, dann planen wir den passenden Termin.`,
+      q: `Pflastern Sie Einfahrten und Terrassen in ${c.displayName}?`,
+      a: `Ja, Pflasterarbeiten für Einfahrten, Wege und Terrassen führen wir mit fachgerechtem Unterbau und hochwertigen Materialien aus.`,
     }),
     (c) => ({
-      q: `Muss ich beim Abholen in ${c.displayName} anwesend sein?`,
-      a: `Ja, kurz für die Übergabe. Genaue Position des Schrotts klären wir vorher per Telefon oder WhatsApp.`,
+      q: `Übernehmen Sie nach der Neugestaltung auch die Pflege?`,
+      a: `Ja, auf Wunsch übernehmen wir die anschließende Gartenpflege in ${c.displayName}, damit Ihre Außenanlage dauerhaft gepflegt bleibt.`,
     }),
     (c) => ({
-      q: `Bekomme ich für den Schrott in ${c.displayName} Geld?`,
-      a: `Bei haushaltsüblichen Mengen ist die Abholung in ${c.displayName} kostenlos — ohne Auszahlung. Bei größeren, sortenreinen Mengen sprechen Sie uns gerne an.`,
+      q: `Arbeiten Sie auch für Unternehmen und Wohnanlagen in ${c.displayName}?`,
+      a: `Ja, wir realisieren Projekte für Privatkunden, Unternehmen und Wohnanlagen — von der Modernisierung der Einfahrt bis zur kompletten Außenanlage.`,
     }),
     (c) => ({
-      q: `Welche Anfahrtsentfernung gilt für ${c.displayName}?`,
-      a: `${c.displayName} liegt etwa ${c.distanceKm} km von unserem Standort in Osnabrück (Bramscher Str. 161). Anfahrtskosten entstehen für Sie nicht.`,
+      q: `Wie weit ist Ihr Standort von ${c.displayName} entfernt?`,
+      a: `Unser Sitz ist Bramscher Str. 161, 49090 Osnabrück — etwa ${c.distanceKm} km von ${c.displayName}. Besichtigungen planen wir kurzfristig ein.`,
     }),
     (c) => ({
-      q: `Holen Sie auch in der Nachbarschaft ab?`,
-      a: `Ja, wir sind im gesamten ${c.region} regelmäßig im Einsatz und bündeln benachbarte Termine.`,
+      q: `Entfernen Sie auch alte Bepflanzungen in ${c.displayName}?`,
+      a: `Ja, die Entfernung alter Bepflanzungen und die fachgerechte Entsorgung des Grünguts gehören zu unseren Leistungen.`,
     }),
     (c) => ({
-      q: `Können Sie Schrott auch von Firmenstandorten in ${c.displayName} abholen?`,
-      a: `Ja, gewerbliche Schrottabholung in ${c.displayName} ist möglich. Bei regelmäßigen Aufträgen vereinbaren wir gerne feste Termine.`,
+      q: `Werden Sie auch in der Nachbarschaft von ${c.displayName} tätig?`,
+      a: `Ja, wir sind im gesamten ${c.region} regelmäßig im Einsatz und können Besichtigungen und Projekte in der Umgebung bündeln.`,
     }),
   ],
 };
@@ -658,7 +656,7 @@ const BLOCKS: Record<ServiceId, ServiceBlocks> = {
   gartenpflege: GARTEN,
   dacharbeiten: DACH,
   entruempelung: ENTRUEMP,
-  schrottabholung: SCHROTT,
+  "garten-landschaftsbau": GALABAU,
 };
 
 // ────────────────────────────────────────────────────────────────────

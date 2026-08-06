@@ -80,7 +80,7 @@ export const BoxArrowIcon: FC<IconProps> = ({ className }) => (
   </svg>
 );
 
-/** Recycle — Schrottabholung */
+/** Recycle — Wertstoff/Recycling (frei) */
 export const RecycleIcon: FC<IconProps> = ({ className }) => (
   <svg
     viewBox="0 0 24 24"

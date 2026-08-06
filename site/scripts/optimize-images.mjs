@@ -22,7 +22,6 @@ const RESPONSIVE = [
   "services/gartenpflege.png",
   "services/dacharbeiten.jpg",
   "services/entruempelung.jpg",
-  "services/schrottabholung.png",
 ];
 
 // Large detail images — resize to max 1600w and convert to webp
@@ -30,7 +29,6 @@ const RESIZE_1600 = [
   "services/detail-garten.png",
   "services/detail-hausmeister.png",
   "services/detail-dach.png",
-  "services/detail-schrott.png",
   "services/detail-entruempelung.png",
   "referenzen/garten-vorher-nachher.png",
   "referenzen/dach-vorher-nachher.png",

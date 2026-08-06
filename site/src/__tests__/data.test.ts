@@ -101,8 +101,8 @@ describe("Data Integrity", () => {
       expect(services.find((s) => s.id === "hausmeisterservice")).toBeTruthy();
     });
 
-    it("includes Schrottabholung", () => {
-      expect(services.find((s) => s.id === "schrottabholung")).toBeTruthy();
+    it("includes Garten- und Landschaftsbau (PX-077 swap)", () => {
+      expect(services.find((s) => s.id === "garten-landschaftsbau")).toBeTruthy();
     });
 
     // PX-068 A0: "Local SEO content (PX-022 Wave 1)" policy tests removed.

@@ -45,7 +45,6 @@
       "Betreuung von Gewerbeobjekten",
       "Winterdienst",
       "Entrümpelungen",
-      "Schrottabholung",
       "Pflege von Treppenhäusern und Eingangsbereichen",
       "Sicht- und Sauberkeitskontrollen",
       "Pflege von Privatgrundstücken",
@@ -140,8 +139,8 @@
         "servicePath": "dacharbeiten"
       },
       {
-        "label": "Schrottabholung",
-        "servicePath": "schrottabholung"
+        "label": "Garten- und Landschaftsbau",
+        "servicePath": "garten-landschaftsbau"
       },
       {
         "label": "Objektpflege",

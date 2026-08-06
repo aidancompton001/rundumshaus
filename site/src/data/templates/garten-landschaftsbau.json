@@ -1,0 +1,145 @@
+{
+  "h1": "Garten- und Landschaftsbau in {city}",
+  "heroImage": "/images/services/garten-hero.png",
+  "heroAlt": "Garten- und Landschaftsbau in {city} — Rund ums Haus Littawe",
+  "intro1": "Individuelle Außenanlagen nach Ihren Vorstellungen: Eine professionell gestaltete Außenanlage verbindet Funktionalität, Ästhetik und Werterhalt. Als zuverlässiger Partner im Garten- und Landschaftsbau realisiert Rund ums Haus Littawe individuelle Projekte in {city} — für Privatkunden, Unternehmen sowie Wohnanlagen. Von der ersten Planung bis zur fachgerechten Umsetzung begleiten wir Sie mit Erfahrung, Sorgfalt und einem hohen Qualitätsanspruch.",
+  "intro2": "Ob die Neuanlage eines Gartens, die Umgestaltung bestehender Außenbereiche oder die Modernisierung von Einfahrten und Wegen — wir schaffen Außenanlagen in {city}, die optisch überzeugen und langfristig Bestand haben. Als Familienbetrieb sind wir {dist} und setzen Projekte jeder Größe termingerecht um.",
+  "benefits": [
+    "Individuelle Planung nach Ihren Wünschen",
+    "Hochwertige Materialien & präzise Ausführung",
+    "Privat- & Gewerbekunden",
+    "Unverbindliches Angebot nach Besichtigung",
+    "Garten- und Landschaftsbau in der Region"
+  ],
+  "cta": {
+    "heading": "Jetzt unverbindliches Angebot anfragen",
+    "text": "Sie planen eine Neugestaltung Ihrer Außenanlage oder möchten Ihren Garten in {city} neu anlegen? Kontaktieren Sie uns — wir beraten Sie gerne persönlich und erstellen Ihnen ein unverbindliches Angebot."
+  },
+  "sectionsBefore": [
+    {
+      "heading": "Individuelle Planung und fachgerechte Umsetzung in {city}",
+      "paragraphs": [
+        "Jedes Grundstück stellt unterschiedliche Anforderungen. Deshalb entwickeln wir gemeinsam mit Ihnen ein individuelles Konzept, das Ihre Wünsche, die örtlichen Gegebenheiten in {city} und Ihr Budget berücksichtigt. Als Ihr Garten- und Landschaftsbauer legen wir besonderen Wert auf hochwertige Materialien, eine präzise Ausführung und eine termingerechte Umsetzung.",
+        "Von der ersten Idee über die Planung bis zur Fertigstellung haben Sie einen festen Ansprechpartner. {einsatz}"
+      ]
+    }
+  ],
+  "leistungen": {
+    "heading": "Unsere Leistungen im Garten- und Landschaftsbau in {city}",
+    "intro": "Zu unseren Leistungen im Garten- und Landschaftsbau gehören unter anderem:",
+    "items": [
+      "Neuanlage und Umgestaltung von Gärten",
+      "Rasenneuanlagen und Rollrasenverlegung",
+      "Pflasterarbeiten für Einfahrten, Wege und Terrassen",
+      "Anlage von Kies-, Splitt- und Schotterflächen",
+      "Erdarbeiten und Geländemodellierung",
+      "Setzen von Rasenkanten und Beeteinfassungen",
+      "Anlage und Umgestaltung von Beeten",
+      "Verlegung von Unkrautvlies",
+      "Bepflanzung mit Hecken, Sträuchern und Zierpflanzen",
+      "Entfernung alter Bepflanzungen",
+      "Wiederherstellung und Aufwertung bestehender Außenanlagen"
+    ],
+    "footnote": "Weitere Arbeiten auf Anfrage"
+  },
+  "sectionsAfter": [
+    {
+      "heading": "Gartenpflege nach der Neugestaltung",
+      "paragraphs": [
+        "Darüber hinaus übernehmen wir auf Wunsch auch die anschließende Gartenpflege, damit Ihre neu gestaltete Außenanlage dauerhaft in einem gepflegten Zustand bleibt.",
+        "So haben Sie in {city} einen Ansprechpartner für alles — von der Neuanlage über die Pflasterarbeiten bis zum regelmäßigen Rasenschnitt."
+      ]
+    },
+    {
+      "heading": "Qualität, auf die Sie sich verlassen können",
+      "paragraphs": [
+        "Saubere Arbeit, Zuverlässigkeit und eine transparente Beratung stehen bei uns im Mittelpunkt. Unser Ziel ist es, Außenanlagen zu schaffen, die nicht nur optisch überzeugen, sondern auch funktional und langlebig sind.",
+        "Wir arbeiten mit hochwertigen Materialien und setzen jedes Projekt in {city} präzise und termingerecht um — vom kleinen Beet bis zur kompletten Außenanlage."
+      ]
+    }
+  ],
+  "warum": {
+    "heading": "Warum Rund ums Haus Littawe?",
+    "items": [
+      "Individuelle Planung nach Ihren Vorstellungen",
+      "Hochwertige Materialien",
+      "Präzise und termingerechte Ausführung",
+      "Privat- und Gewerbekunden sowie Wohnanlagen",
+      "Auf Wunsch anschließende Gartenpflege",
+      "Persönlicher Ansprechpartner",
+      "Transparente Beratung und faire Angebote",
+      "Familienbetrieb aus Osnabrück"
+    ],
+    "cityLine": "Garten- und Landschaftsbau in {city} und Umgebung"
+  },
+  "einsatzgebiet": {
+    "heading": "Einsatzgebiet",
+    "text": "Wir übernehmen Garten- und Landschaftsbau nicht nur in {city}, sondern auch in {list} und vielen weiteren Städten und Gemeinden der Region. {einsatz}"
+  },
+  "faq": {
+    "heading": "Häufige Fragen zum Garten- und Landschaftsbau",
+    "items": [
+      {
+        "q": "Welche Arbeiten übernehmen Sie im Garten- und Landschaftsbau?",
+        "a": "Wir übernehmen die Neuanlage und Umgestaltung von Gärten, Rasenneuanlagen und Rollrasenverlegung, Pflasterarbeiten für Einfahrten, Wege und Terrassen, Erdarbeiten, Beeteinfassungen, Bepflanzungen und die Aufwertung bestehender Außenanlagen.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Wie läuft ein Projekt ab",
+        "a": "Zuerst besprechen wir Ihre Wünsche und schauen uns das Grundstück an. Danach entwickeln wir gemeinsam ein Konzept, das Ihre Vorstellungen, die örtlichen Gegebenheiten und Ihr Budget berücksichtigt. Nach Ihrer Freigabe setzen wir das Projekt fachgerecht und termingerecht um.",
+        "cityInQuestion": true
+      },
+      {
+        "q": "Was kostet ein Angebot?",
+        "a": "Das Angebot ist unverbindlich und kostenlos. Nach einem Vor-Ort-Termin erhalten Sie eine transparente Kalkulation — ohne versteckte Kosten.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Verlegen Sie auch Rollrasen?",
+        "a": "Ja, Rasenneuanlagen und Rollrasenverlegung gehören zu unseren Kernleistungen — inklusive Bodenvorbereitung und Erdarbeiten.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Übernehmen Sie auch die Pflege nach der Neugestaltung?",
+        "a": "Ja, auf Wunsch übernehmen wir die anschließende Gartenpflege, damit Ihre neu gestaltete Außenanlage dauerhaft gepflegt bleibt.",
+        "cityInQuestion": false
+      },
+      {
+        "q": "Arbeiten Sie auch für Unternehmen und Wohnanlagen?",
+        "a": "Ja, wir realisieren Projekte für Privatkunden, Unternehmen und Wohnanlagen — von der Modernisierung der Einfahrt bis zur kompletten Außenanlage.",
+        "cityInQuestion": false
+      }
+    ]
+  },
+  "weitereLeistungen": {
+    "heading": "Weitere Leistungen",
+    "links": [
+      {
+        "label": "Gartenpflege",
+        "servicePath": "gartenpflege"
+      },
+      {
+        "label": "Hausmeisterservice, Objektpflege & Grundstückspflege",
+        "servicePath": "hausmeisterservice"
+      },
+      {
+        "label": "Dachreinigung",
+        "servicePath": "dacharbeiten"
+      },
+      {
+        "label": "Entrümpelung",
+        "servicePath": "entruempelung"
+      },
+      {
+        "label": "Objektpflege",
+        "servicePath": "objektpflege",
+        "isHub": true
+      }
+    ]
+  },
+  "einsatzorte": {
+    "heading": "Weitere Einsatzorte",
+    "chipLabel": "Garten- und Landschaftsbau in {city}",
+    "expandLabel": "Weitere {count} Städte anzeigen"
+  }
+}

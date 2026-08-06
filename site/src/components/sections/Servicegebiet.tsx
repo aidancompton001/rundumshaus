@@ -8,7 +8,6 @@ import {
   LeafIcon,
   RoofIcon,
   BoxArrowIcon,
-  RecycleIcon,
 } from "@/components/ServiceIcons";
 
 // PX-056: 5 service icons next to every city — Kevin's request 2026-06-09.
@@ -18,7 +17,7 @@ const SERVICE_ICONS: { sid: ServiceId; label: string; Icon: typeof WrenchIcon }[
   { sid: "gartenpflege", label: "Gartenpflege", Icon: LeafIcon },
   { sid: "dacharbeiten", label: "Dachreinigung", Icon: RoofIcon },
   { sid: "entruempelung", label: "Entrümpelung", Icon: BoxArrowIcon },
-  { sid: "schrottabholung", label: "Schrottabholung", Icon: RecycleIcon },
+  { sid: "garten-landschaftsbau", label: "Garten- und Landschaftsbau", Icon: LeafIcon },
 ];
 
 const data = serviceAreasData as ServiceAreasData;
@@ -41,7 +40,7 @@ const SERVICE_TITLES: Record<ServiceId, string> = {
   gartenpflege: "Gartenpflege",
   dacharbeiten: "Dachreinigung",
   entruempelung: "Entrümpelung",
-  schrottabholung: "Schrottabholung",
+  "garten-landschaftsbau": "Garten- und Landschaftsbau",
 };
 
 export default function Servicegebiet() {

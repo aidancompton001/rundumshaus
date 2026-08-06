@@ -1,0 +1,54 @@
+Canary run: 2026-06-09T13:37:43Z
+
+
+=== Testing: osnabrueck ===
+✅ PASS: [osnabrueck] HTTP 200
+✅ PASS: [osnabrueck] words=3450 (>=600)
+❌ FAIL: [osnabrueck] H2 count=1 expected >=9
+✅ PASS: [osnabrueck] FAQ Schema present
+✅ PASS: [osnabrueck] CTA 'kostenloses Angebot' present
+✅ PASS: [osnabrueck] OLD FaktenBlock removed
+⚠️ WARN: [osnabrueck] title=93 chars (>65, Google may truncate): 'Gärtner &amp; Gartenpflege Osnabrück ★ Rasen &amp; Hecken-Experte | Rund ums Haus Littawe'
+
+=== Testing: bramsche ===
+✅ PASS: [bramsche] HTTP 200
+✅ PASS: [bramsche] words=3484 (>=600)
+❌ FAIL: [bramsche] H2 count=1 expected >=9
+✅ PASS: [bramsche] FAQ Schema present
+✅ PASS: [bramsche] CTA 'kostenloses Angebot' present
+✅ PASS: [bramsche] OLD FaktenBlock removed
+⚠️ WARN: [bramsche] title=91 chars (>65, Google may truncate): 'Gärtner &amp; Gartenpflege Bramsche ★ Rasen &amp; Hecken-Experte | Rund ums Haus Littawe'
+
+=== Testing: bad-iburg ===
+✅ PASS: [bad-iburg] HTTP 200
+✅ PASS: [bad-iburg] words=3542 (>=600)
+❌ FAIL: [bad-iburg] H2 count=1 expected >=9
+✅ PASS: [bad-iburg] FAQ Schema present
+✅ PASS: [bad-iburg] CTA 'kostenloses Angebot' present
+✅ PASS: [bad-iburg] OLD FaktenBlock removed
+⚠️ WARN: [bad-iburg] title=92 chars (>65, Google may truncate): 'Gärtner &amp; Gartenpflege Bad Iburg ★ Rasen &amp; Hecken-Experte | Rund ums Haus Littawe'
+
+=== Testing: freren ===
+✅ PASS: [freren] HTTP 200
+✅ PASS: [freren] words=3478 (>=600)
+❌ FAIL: [freren] H2 count=1 expected >=9
+✅ PASS: [freren] FAQ Schema present
+✅ PASS: [freren] CTA 'kostenloses Angebot' present
+✅ PASS: [freren] OLD FaktenBlock removed
+⚠️ WARN: [freren] title=89 chars (>65, Google may truncate): 'Gärtner &amp; Gartenpflege Freren ★ Rasen &amp; Hecken-Experte | Rund ums Haus Littawe'
+
+=== Testing: bielefeld ===
+✅ PASS: [bielefeld] HTTP 200
+✅ PASS: [bielefeld] words=3529 (>=600)
+❌ FAIL: [bielefeld] H2 count=1 expected >=9
+✅ PASS: [bielefeld] FAQ Schema present
+✅ PASS: [bielefeld] CTA 'kostenloses Angebot' present
+✅ PASS: [bielefeld] OLD FaktenBlock removed
+⚠️ WARN: [bielefeld] title=92 chars (>65, Google may truncate): 'Gärtner &amp; Gartenpflege Bielefeld ★ Rasen &amp; Hecken-Experte | Rund ums Haus Littawe'
+
+=== Special checks ===
+❌ FAIL: [osnabrueck] '0 km' phrase detected — distancePhrase guard broken
+❌ FAIL: [freren] False neighbor 'Belm' detected — neighbors hardcoded bug
+✅ PASS: [bielefeld] Einsatzgebiet claim safe
+
+🚨 CANARY FAILURES DETECTED — consider rollback

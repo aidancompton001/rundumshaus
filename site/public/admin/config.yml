@@ -290,9 +290,9 @@ collections:
         label: Entrümpelung
         file: site/src/data/templates/entruempelung.json
         fields: *stadtseiten_fields
-      - name: schrottabholung
-        label: Schrottabholung
-        file: site/src/data/templates/schrottabholung.json
+      - name: garten-landschaftsbau
+        label: Garten- und Landschaftsbau
+        file: site/src/data/templates/garten-landschaftsbau.json
         fields: *stadtseiten_fields
 
   # ────────────────────────────────────────────────────────────

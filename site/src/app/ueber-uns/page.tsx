@@ -22,7 +22,7 @@ const aboutPageSchema = {
   "@type": "AboutPage",
   name: "Über uns — Rund ums Haus Littawe",
   description:
-    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück. Gegründet 2026 von Kevin Littawe.",
+    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück. Gegründet 2026 von Kevin Littawe.",
   inLanguage: "de-DE",
   url: `${BASE_URL}/ueber-uns`,
   mainEntity: { "@id": `${BASE_URL}/#localbusiness` },

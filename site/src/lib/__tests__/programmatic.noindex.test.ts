@@ -1,12 +1,13 @@
 /**
  * PX-033 Phase C: noindex assertions for bottom-5 thin programmatic pages.
  *
- * After data-driven priority scoring, 5 schrottabholung/hausmeisterservice ×
- * small-town pairs were marked for noindex to concentrate Google crawl budget
- * on the stronger T1/T2 pages.
+ * After data-driven priority scoring, thin small-town pairs were marked for
+ * noindex to concentrate Google crawl budget on the stronger T1/T2 pages.
+ * PX-077: the 4 schrottabholung pairs left with the service swap to
+ * garten-landschaftsbau — only hausmeisterservice/herzlake remains.
  *
  * Invariants:
- *   1. Exactly 5 pairs in NOINDEX_PAIRS (no accidental growth).
+ *   1. Exactly 1 pair in NOINDEX_PAIRS (no accidental growth).
  *   2. Each noindex pair must still exist as a built page (404 = bigger problem).
  *   3. NO main-target pair (Osnabrück + 6 priority cities) is in noindex.
  *   4. NO tier-1 large-population page is in noindex.
@@ -24,8 +25,8 @@ import {
 } from "../programmatic";
 
 describe("PX-033 noindex strategy", () => {
-  it("has exactly 5 noindex pairs (no accidental growth)", () => {
-    expect(NOINDEX_PAIRS.size).toBe(5);
+  it("has exactly 1 noindex pair (no accidental growth)", () => {
+    expect(NOINDEX_PAIRS.size).toBe(1);
   });
 
   it("isNoindexPair returns true for all noindex entries", () => {
@@ -61,8 +62,7 @@ describe("PX-033 noindex strategy", () => {
     ];
     for (const city of mainTargets) {
       for (const service of SERVICE_IDS) {
-        // bramsche/schrottabholung is intentionally NOT noindex (it's a strengthened TOP-5 city)
-        // verify by spot-checking gartenpflege + entruempelung at minimum
+        // spot-check gartenpflege + entruempelung at minimum
         if (["gartenpflege", "entruempelung"].includes(service)) {
           expect(
             isNoindexPair(service, city),
@@ -75,10 +75,10 @@ describe("PX-033 noindex strategy", () => {
 });
 
 describe("PX-033 boost data integrity", () => {
+  // PX-077: bramsche/schrottabholung boost removed with the service swap.
   const TOP_5_BOOST = [
     { city: "warendorf", service: "gartenpflege" as ServiceId },
     { city: "cloppenburg", service: "entruempelung" as ServiceId },
-    { city: "bramsche", service: "schrottabholung" as ServiceId },
     { city: "bad-laer", service: "entruempelung" as ServiceId },
     { city: "neuenkirchen-kreis-steinfurt", service: "gartenpflege" as ServiceId },
   ];

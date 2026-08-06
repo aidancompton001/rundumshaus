@@ -10,7 +10,7 @@ const SERVICES = [
   { slug: "gartenpflege", title: "Gartenpflege" },
   { slug: "dacharbeiten", title: "Dacharbeiten" },
   { slug: "entruempelung", title: "Entrümpelung" },
-  { slug: "schrottabholung", title: "Schrottabholung" },
+  { slug: "garten-landschaftsbau", title: "Garten- und Landschaftsbau" },
 ];
 
 export default function StandortOsnabrueck() {

@@ -79,7 +79,7 @@ for (const coll of config.collections ?? []) {
    chip linking to /leistungen/gartenpflege/ (no such page → 404).
    Rule: isHub:true → servicePath must be a real hub page;
          otherwise   → servicePath must be one of the 5 service ids. */
-const SERVICE_IDS = ["gartenpflege", "hausmeisterservice", "dacharbeiten", "entruempelung", "schrottabholung"];
+const SERVICE_IDS = ["gartenpflege", "hausmeisterservice", "dacharbeiten", "entruempelung", "garten-landschaftsbau"];
 const HUB_PATHS = ["objektpflege", "rasen-neuanlage"];
 for (const svc of SERVICE_IDS) {
   const tpl = JSON.parse(readFileSync(path.join(SITE_ROOT, `src/data/templates/${svc}.json`), "utf8"));

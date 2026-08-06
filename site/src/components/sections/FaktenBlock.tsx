@@ -117,7 +117,7 @@ export default function FaktenBlock() {
           <strong>Kevin Littawe</strong>; das Unternehmen wurde <strong>2026</strong> gegründet.
           Wir bieten <strong>5 Hauptleistungen</strong> — Hausmeisterservice, Gartenpflege,
           Dacharbeiten (insbesondere Dachreinigung), Entrümpelung mit Haushaltsauflösung
-          und kostenlose Schrottabholung — sowie 9 weitere Dienstleistungen rund ums
+          und Garten- und Landschaftsbau — sowie 9 weitere Dienstleistungen rund ums
           Haus. Unser Einsatzgebiet umfasst <strong>98 Städte im 60-km-Umkreis</strong> um
           Osnabrück in <strong>Niedersachsen</strong> und <strong>Nordrhein-Westfalen</strong>:
           {" "}{tier1Count} Städte im direkten Nahbereich (≤25 km),{" "}{tier2Count} im

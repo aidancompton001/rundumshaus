@@ -110,7 +110,7 @@ export default function RootLayout({
                   logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
                   priceRange: "€€",
                   description:
-                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und Schrottabholung in Osnabrück und im Umkreis von 60 km.",
+                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück und im Umkreis von 60 km.",
                   foundingDate: "2026",
                   founder: {
                     "@type": "Person",
@@ -193,9 +193,9 @@ export default function RootLayout({
                       },
                       {
                         "@type": "Service",
-                        name: "Schrottabholung",
+                        name: "Garten- und Landschaftsbau",
                         description:
-                          "Kostenlose Abholung von Altmetall im 60-km-Umkreis — Tauschgeschäft (Materialwert deckt die Anfahrt).",
+                          "Neuanlage und Umgestaltung von Gärten, Pflasterarbeiten, Rollrasen, Erdarbeiten und Bepflanzung — individuelle Außenanlagen im 60-km-Umkreis.",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                       },
                       // PX-037: dedicated Rasenneuanlage sub-service with its own landing page.

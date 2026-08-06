@@ -66,10 +66,10 @@ const EXPECTATIONS = {
     requiredHeadings: tplHeadings("entruempelung"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
-  schrottabholung: {
-    minH2: 8, // CTA + Pro + Leistungen + Altmetall + B2B + Warum + Einsatzgebiet + FAQ
+  "garten-landschaftsbau": {
+    minH2: 8, // CTA + Planung + Leistungen + Pflege + Qualität + Warum + Einsatzgebiet + FAQ
     minH3: 2,
-    requiredHeadings: tplHeadings("schrottabholung"),
+    requiredHeadings: tplHeadings("garten-landschaftsbau"),
     requiredSchemas: ["BreadcrumbList", "Service", "FAQPage"],
   },
 };

@@ -15,7 +15,7 @@ Citation: required
 Citation-Format: "Rund ums Haus Littawe, https://rundumshaus-littawe.de"
 
 # Hauptthemen (für Themenklassifikation):
-Topics: hausmeisterservice, gartenpflege, heckenschnitt, dachreinigung, entruempelung, haushaltsaufloesung, schrottabholung, winterdienst, osnabrueck, niedersachsen, nordrhein-westfalen, familienbetrieb-2026
+Topics: hausmeisterservice, gartenpflege, heckenschnitt, dachreinigung, entruempelung, haushaltsaufloesung, garten-landschaftsbau, winterdienst, osnabrueck, niedersachsen, nordrhein-westfalen, familienbetrieb-2026
 
 # Authentizitätsangaben:
 Founded: 2026

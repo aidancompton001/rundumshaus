@@ -175,7 +175,7 @@ describe("layout.tsx — Schema.org @graph", () => {
         "Gartenpflege",
         "Dacharbeiten",
         "Entrümpelung",
-        "Schrottabholung",
+        "Garten- und Landschaftsbau",
         "Rasenneuanlage",
         "Objektpflege",
       ]);
@@ -324,11 +324,11 @@ describe("layout.tsx — Schema.org @graph", () => {
       }
     });
 
-    it("Schrottabholung has no Offer (Tauschgeschäft, not free service)", () => {
-      const schrott = cat.itemListElement.find((s) => s.name === "Schrottabholung");
-      expect(schrott).toBeDefined();
-      expect(schrott!.offers).toBeUndefined();
-      expect(schrott!.description).toMatch(/Tauschgeschäft|Materialwert/);
+    it("Garten- und Landschaftsbau replaced Schrottabholung (PX-077)", () => {
+      const galabau = cat.itemListElement.find((s) => s.name === "Garten- und Landschaftsbau");
+      expect(galabau).toBeDefined();
+      expect(galabau!.description).toMatch(/Außenanlagen|Pflasterarbeiten/);
+      expect(cat.itemListElement.find((s) => s.name === "Schrottabholung")).toBeUndefined();
     });
   });
 });

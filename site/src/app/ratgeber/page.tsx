@@ -26,7 +26,7 @@ export default function RatgeberIndex() {
     "@type": "CollectionPage",
     name: "Ratgeber Rund ums Haus",
     description:
-      "Praxis-Guides zu Gartenpflege, Entrümpelung, Hausmeisterservice, Dacharbeiten und Schrottabholung.",
+      "Praxis-Guides zu Gartenpflege, Garten- und Landschaftsbau, Entrümpelung, Hausmeisterservice und Dacharbeiten.",
     publisher: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
     hasPart: articles.map((a) => ({
       "@type": "Article",

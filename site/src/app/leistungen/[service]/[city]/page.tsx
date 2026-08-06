@@ -19,17 +19,17 @@ import dachTexts from "@/data/templates/dacharbeiten.json";
 import gartenTexts from "@/data/templates/gartenpflege.json";
 import hausmeisterTexts from "@/data/templates/hausmeisterservice.json";
 import entruempelungTexts from "@/data/templates/entruempelung.json";
-import schrottTexts from "@/data/templates/schrottabholung.json";
+import galabauTexts from "@/data/templates/garten-landschaftsbau.json";
 import { getGartenContent } from "@/lib/template-content";
 import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import { getDachContent } from "@/lib/template-content-dach";
 import { getEntruempelungContent } from "@/lib/template-content-entruempelung";
-import { getSchrottContent } from "@/lib/template-content-schrott";
+import { getGalabauContent } from "@/lib/template-content-galabau";
 import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
 import HausmeisterCityTemplate from "@/components/templates/HausmeisterCityTemplate";
 import DachCityTemplate from "@/components/templates/DachCityTemplate";
 import EntruempelungCityTemplate from "@/components/templates/EntruempelungCityTemplate";
-import SchrottCityTemplate from "@/components/templates/SchrottCityTemplate";
+import GalabauCityTemplate from "@/components/templates/GalabauCityTemplate";
 
 export const dynamicParams = false;
 
@@ -125,12 +125,12 @@ export async function generateMetadata({
     }
     return seo;
   }
-  if (service === "schrottabholung") {
+  if (service === "garten-landschaftsbau") {
     const cityData = getCityBySlug(city);
     if (!cityData) return {};
-    const content = getSchrottContent(cityData);
+    const content = getGalabauContent(cityData);
     // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
-    const metaOv = getServiceMetaOverride("schrottabholung", cityData.displayName);
+    const metaOv = getServiceMetaOverride("garten-landschaftsbau", cityData.displayName);
     const seo = generateSEO({
       title: metaOv?.title ?? content.metaTitle,
       description: metaOv?.description ?? content.metaDescription,
@@ -447,31 +447,32 @@ export default async function ProgrammaticLandingPage({
     );
   }
 
-  // PX-051 Phase 5: schrottabholung uses dedicated SchrottCityTemplate (FINAL).
-  if (service === "schrottabholung") {
+  // PX-077: garten-landschaftsbau uses dedicated GalabauCityTemplate
+  // (Kevin swap 2026-08-06: Schrottabholung removed).
+  if (service === "garten-landschaftsbau") {
     const cityData = getCityBySlug(city);
     if (!cityData) notFound();
     const neighbors = getNeighborCities(cityData);
-    const schrottContent = getSchrottContent(cityData);
-    const canonical = `${BASE_URL}/leistungen/schrottabholung/${city}/`;
+    const galabauContent = getGalabauContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/garten-landschaftsbau/${city}/`;
 
-    const schrottBreadcrumb = {
+    const galabauBreadcrumb = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
         { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
-        { "@type": "ListItem", position: 3, name: "Schrottabholung", item: `${BASE_URL}/leistungen/#schrottabholung` },
+        { "@type": "ListItem", position: 3, name: "Garten- und Landschaftsbau", item: `${BASE_URL}/leistungen/#garten-landschaftsbau` },
         { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
       ],
     };
 
-    const schrottService: Record<string, unknown> = {
+    const galabauService: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: `Schrottabholung ${cityData.displayName}`,
-      serviceType: "Schrottabholung",
-      description: schrottContent.metaDescription,
+      name: `Garten- und Landschaftsbau ${cityData.displayName}`,
+      serviceType: "Garten- und Landschaftsbau",
+      description: galabauContent.metaDescription,
       areaServed: {
         "@type": "City",
         name: cityData.displayName,
@@ -485,18 +486,18 @@ export default async function ProgrammaticLandingPage({
       url: canonical,
     };
     if (cityData.distanceKm <= 40) {
-      schrottService.provider = { "@id": LOCAL_BUSINESS_ID };
+      galabauService.provider = { "@id": LOCAL_BUSINESS_ID };
     }
 
     // PX-069: FAQ schema derives from the SAME JSON as the visible template.
-    const schrottFaqs = schrottTexts.faq.items.map((f) => ({
+    const galabauFaqs = galabauTexts.faq.items.map((f) => ({
       q: f.cityInQuestion ? `${subst(f.q, { city: cityData.displayName })} in ${cityData.displayName}?` : subst(f.q, { city: cityData.displayName }),
       a: subst(f.a, { city: cityData.displayName }),
     }));
-    const schrottFaqSchema = {
+    const galabauFaqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: schrottFaqs.map((f) => ({
+      mainEntity: galabauFaqs.map((f) => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -506,12 +507,12 @@ export default async function ProgrammaticLandingPage({
     return (
       <>
         <script type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottBreadcrumb) }} />
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(galabauBreadcrumb) }} />
         <script type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottService) }} />
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(galabauService) }} />
         <script type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schrottFaqSchema) }} />
-        <SchrottCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(galabauFaqSchema) }} />
+        <GalabauCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }
