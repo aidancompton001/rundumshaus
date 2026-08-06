@@ -60,7 +60,7 @@ const otherFixtures: { service: ServiceId; city: string }[] = [
   { service: "hausmeisterservice", city: "osnabrueck" },
   { service: "entruempelung", city: "bramsche" },
   { service: "dacharbeiten", city: "lengerich" },
-  { service: "schrottabholung", city: "muenster" },
+  { service: "garten-landschaftsbau", city: "muenster" },
 ];
 
 describe("programmatic — snapshot regression suite", () => {

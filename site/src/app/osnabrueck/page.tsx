@@ -14,7 +14,7 @@ import reviewsData from "@/data/reviews.json";
 export const metadata = generateSEO({
   title: "Hausmeister & Gartenpflege Osnabrück ★ Familienbetrieb",
   description:
-    "Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Dach, Entrümpelung, Schrott in Osnabrück. ★ 5,0 aus 8 Bewertungen. ☎ direkt anrufen.",
+    "Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Landschaftsbau, Dach, Entrümpelung in Osnabrück. ★ 5,0 aus 8 Bewertungen. ☎ direkt anrufen.",
   path: "/osnabrueck",
 });
 
@@ -42,8 +42,8 @@ const SERVICES = [
     short: "Keller, Dachboden, Haushaltsauflösung — besenrein.",
   },
   {
-    slug: "schrottabholung",
-    title: "Schrottabholung",
+    slug: "garten-landschaftsbau",
+    title: "Garten- und Landschaftsbau",
     short: "Kostenlose Abholung von Altmetall im Stadtgebiet.",
   },
 ];
@@ -135,7 +135,7 @@ export default function OsnabrueckHubPage() {
           <p className="text-lg text-charcoal-light leading-relaxed mb-8">
             Familienbetrieb von Kevin Littawe in der Bramscher Straße 161.
             Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und
-            kostenlose Schrottabholung — direkt vor Ihrer Haustür in Osnabrück
+            Garten- und Landschaftsbau — direkt vor Ihrer Haustür in Osnabrück
             und im 60-km-Umkreis. Kostenlose Besichtigung, Festpreis nach Aufnahme.
           </p>
 

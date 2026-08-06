@@ -3,27 +3,27 @@
     {
       "path": "/",
       "title": "Gärtner Osnabrück | Gartenpflege & Hausmeisterservice | Rund ums Haus Littawe",
-      "description": "Gärtner in Osnabrück für professionelle Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung. Kostenlose Besichtigung und schnelle Termine."
+      "description": "Gärtner in Osnabrück für professionelle Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Garten- und Landschaftsbau. Kostenlose Besichtigung und schnelle Termine."
     },
     {
       "path": "/leistungen/",
       "title": "Leistungen in Osnabrück | Gärtner, Hausmeisterservice & Dachservice",
-      "description": "Professionelle Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung in Osnabrück und Umgebung. Faire Preise und kostenlose Besichtigung."
+      "description": "Professionelle Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Garten- und Landschaftsbau in Osnabrück und Umgebung. Faire Preise und kostenlose Besichtigung."
     },
     {
       "path": "/ueber-uns/",
       "title": "Über uns | Gärtner Osnabrück & Hausmeisterservice",
-      "description": "Rund ums Haus Littawe ist Ihr zuverlässiger Gärtner und Hausmeisterservice in Osnabrück. Gartenpflege, Dachservice, Entrümpelung und Schrottabholung aus einer Hand."
+      "description": "Rund ums Haus Littawe ist Ihr zuverlässiger Gärtner und Hausmeisterservice in Osnabrück. Gartenpflege, Dachservice, Entrümpelung und Garten- und Landschaftsbau aus einer Hand."
     },
     {
       "path": "/kontakt/",
       "title": "Kontakt | Gärtner & Hausmeisterservice Osnabrück",
-      "description": "Kontaktieren Sie Rund ums Haus Littawe. Ihr Ansprechpartner für Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung in Osnabrück und Umgebung."
+      "description": "Kontaktieren Sie Rund ums Haus Littawe. Ihr Ansprechpartner für Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Garten- und Landschaftsbau in Osnabrück und Umgebung."
     },
     {
       "path": "/einsatzgebiet/",
       "title": "Einsatzgebiet | Gärtner Osnabrück & Umgebung",
-      "description": "Ihr Gärtner in Osnabrück und Umgebung. Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Schrottabholung im gesamten Einsatzgebiet."
+      "description": "Ihr Gärtner in Osnabrück und Umgebung. Gartenpflege, Hausmeisterservice, Dachservice, Entrümpelung und Garten- und Landschaftsbau im gesamten Einsatzgebiet."
     },
     {
       "path": "/datenschutz/",
@@ -58,9 +58,9 @@
       "descriptionPattern": "Entrümpelung in {city} für Wohnungen, Häuser, Keller und Dachböden. Haushaltsauflösungen mit kostenloser Besichtigung, fairen Preisen und schnellen Terminen."
     },
     {
-      "id": "schrottabholung",
-      "titlePattern": "Schrottabholung {city} | Altmetallentsorgung & Schrottabholung",
-      "descriptionPattern": "Schrottabholung in {city} für Altmetall, Metallschrott und sonstige Schrottgegenstände. Schnelle Abholung, kostenlose Besichtigung und faire Preise."
+      "id": "garten-landschaftsbau",
+      "titlePattern": "Garten- und Landschaftsbau {city} | Pflasterarbeiten & Außenanlagen",
+      "descriptionPattern": "Garten- und Landschaftsbau in {city}: Gartenneuanlage, Pflasterarbeiten, Rollrasen, Erdarbeiten und Bepflanzung. Individuelle Planung und unverbindliches Angebot."
     }
   ]
 }

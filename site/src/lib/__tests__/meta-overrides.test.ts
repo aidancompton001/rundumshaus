@@ -72,9 +72,9 @@ describe("resolveServiceMeta", () => {
 
   it("returns null for empty patterns (= use default)", () => {
     const data: MetaOverridesData = {
-      services: [{ id: "schrottabholung", titlePattern: "", descriptionPattern: "" }],
+      services: [{ id: "garten-landschaftsbau", titlePattern: "", descriptionPattern: "" }],
     };
-    expect(resolveServiceMeta(data, "schrottabholung", "Melle")).toBeNull();
+    expect(resolveServiceMeta(data, "garten-landschaftsbau", "Melle")).toBeNull();
   });
 
   it("returns null for unknown service id", () => {
@@ -94,7 +94,7 @@ describe("committed meta-overrides.json (production state)", () => {
         "hausmeisterservice",
         "dacharbeiten",
         "entruempelung",
-        "schrottabholung",
+        "garten-landschaftsbau",
       ]),
     );
   });

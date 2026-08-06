@@ -202,14 +202,7 @@
         "bad-iburg",
         "bissendorf",
         "bad-essen"
-      ],
-      "boost": {
-        "schrottabholung": {
-          "anfahrtMin": 17,
-          "festpreisBeispiel": "Altmetall-Abholung im Stadtgebiet kostenfrei ab 30 kg",
-          "lokal": "Direkt nördlich unseres HQ — kurze Anfahrt, oft am gleichen Tag möglich. Wir holen Schrott aus Industrie-Areal Hase-Auen und Wohngebieten zwischen Engter und Hesepe"
-        }
-      }
+      ]
     },
     {
       "name": "Westerkappeln",
@@ -925,11 +918,6 @@
           "anfahrtMin": 38,
           "festpreisBeispiel": "Treppenhausreinigung ab 90 €/Einsatz · Außenanlagen ab 120 €",
           "lokal": "Hopsten im nördlichen Münsterland — Anfahrt über B70 oder Autobahn A1/A30. Wir sind regelmäßig in den Ortsteilen Schale und Halverde unterwegs und übernehmen sowohl Einzelaufträge als auch laufende Betreuungsverträge für Hausverwaltungen aus dem Kreis Steinfurt."
-        },
-        "schrottabholung": {
-          "anfahrtMin": 38,
-          "festpreisBeispiel": "Altmetall-Abholung kostenlos ab 50 kg im 60-km-Umkreis",
-          "lokal": "Hopsten erreichen wir über die B70 in rund 40 Minuten. Schrott aus Privathaushalten in Schale, Halverde und dem Ortskern holen wir nach Terminabsprache ab — Termin oft innerhalb von 3-5 Werktagen verfügbar."
         }
       }
     },
@@ -1005,14 +993,7 @@
         "fuerstenau",
         "bippen",
         "berge"
-      ],
-      "boost": {
-        "schrottabholung": {
-          "anfahrtMin": 40,
-          "festpreisBeispiel": "Altmetall-Abholung kostenlos ab 50 kg · Sammlung aus Hofbetrieben gerne",
-          "lokal": "Menslage liegt im Artland nahe der Hase, rund 40 km nord-westlich von Osnabrück. Wir kombinieren Anfahrten in die Region Bersenbrück/Quakenbrück, sodass Schrottabholungen meist innerhalb einer Woche möglich sind. Auch Hofbetriebe und landwirtschaftliche Schuppen sind kein Problem."
-        }
-      }
+      ]
     },
     {
       "name": "Neuenkirchen",
@@ -1607,14 +1588,7 @@
         "muenster",
         "ochtrup",
         "horstmar"
-      ],
-      "boost": {
-        "schrottabholung": {
-          "anfahrtMin": 55,
-          "festpreisBeispiel": "Altmetall-Abholung kostenlos ab 50 kg · auch Sondertermine möglich",
-          "lokal": "Telgte liegt an der Ems östlich von Münster, 55 km von unserem Standort. Wir kombinieren Schrottfahrten in der Region Münsterland — Telgte, Westbevern und Ostbevern — sodass die Anfahrt für Sie kostenlos bleibt. Termin meist innerhalb von 1-2 Wochen."
-        }
-      }
+      ]
     },
     {
       "name": "Vechta",

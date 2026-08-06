@@ -1,4 +1,4 @@
-// PX-069: Schrott city template — ALL visible texts from src/data/templates/schrottabholung.json
+// GaLaBau city template — ALL visible texts from src/data/templates/garten-landschaftsbau.json
 // (CMS-editable). Generated from the verified Dach pattern; text-identity
 // gated against pre-PX-069 baseline.
 
@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { City } from "@/lib/programmatic";
 import { safeDistancePhrase, safeEinsatzText } from "@/lib/template-content";
 import { subst, type CityTemplateTexts } from "@/lib/template-text";
-import templateTexts from "@/data/templates/schrottabholung.json";
+import templateTexts from "@/data/templates/garten-landschaftsbau.json";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
@@ -16,7 +16,7 @@ const T = templateTexts as CityTemplateTexts;
 const PHONE = (siteData as { phone: string }).phone.replace(/\s+/g, "");
 const EMAIL = (siteData as { email: string }).email;
 const WA = PHONE.replace(/^\+/, "");
-const SERVICE_PATH = "schrottabholung";
+const SERVICE_PATH = "garten-landschaftsbau";
 // PX-072: hero image path comes from the template JSON (CMS-editable).
 const heroBase = (T.heroImage ?? "").replace(/\.(png|jpe?g|webp)$/i, "");
 const HERO = {
@@ -32,7 +32,7 @@ interface Props {
   allOtherCities: City[];
 }
 
-export default function SchrottCityTemplate({ city, neighbors, allOtherCities }: Props) {
+export default function GalabauCityTemplate({ city, neighbors, allOtherCities }: Props) {
   const visibleNeighbors = neighbors.slice(0, 30);
   const visibleSlugs = new Set(visibleNeighbors.map((n) => n.slug));
   const extraCities = allOtherCities.filter((c) => !visibleSlugs.has(c.slug));

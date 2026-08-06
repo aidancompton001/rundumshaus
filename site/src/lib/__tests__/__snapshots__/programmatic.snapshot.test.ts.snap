@@ -829,6 +829,87 @@ exports[`programmatic — snapshot regression suite > other services — spot ch
 }
 `;
 
+exports[`programmatic — snapshot regression suite > other services — spot checks > garten-landschaftsbau / muenster 1`] = `
+{
+  "bodyLength": 4,
+  "fakten": [
+    {
+      "label": "Leistung",
+      "value": "Garten- und Landschaftsbau Münster",
+    },
+    {
+      "label": "Bundesland",
+      "value": "Nordrhein-Westfalen",
+    },
+    {
+      "label": "Landkreis",
+      "value": "Stadt Münster",
+    },
+    {
+      "label": "PLZ-Bereich",
+      "value": "48",
+    },
+    {
+      "label": "Entfernung Osnabrück",
+      "value": "~ 50 km",
+    },
+    {
+      "label": "Region",
+      "value": "Münsterland",
+    },
+    {
+      "label": "Besichtigung",
+      "value": "kostenlos und unverbindlich",
+    },
+  ],
+  "faqQuestions": [
+    "Pflastern Sie Einfahrten und Terrassen in Münster?",
+    "Übernehmen Sie nach der Neugestaltung auch die Pflege?",
+    "Arbeiten Sie auch für Unternehmen und Wohnanlagen in Münster?",
+    "Wie weit ist Ihr Standort von Münster entfernt?",
+    "Entfernen Sie auch alte Bepflanzungen in Münster?",
+    "Werden Sie auch in der Nachbarschaft von Münster tätig?",
+  ],
+  "h1": "Garten- und Landschaftsbau in Münster",
+  "intro": "Als Garten- und Landschaftsbauer im Stadt Münster übernehmen wir in Münster die Neuanlage und Umgestaltung von Gärten, Pflasterarbeiten, Kies- und Schotterflächen, Rasenkanten und Beeteinfassungen sowie Bepflanzungen mit Hecken, Sträuchern und Zierpflanzen. Im Herzen des Münsterlandes, Universitätsstadt bündeln wir Termine effizient.",
+  "metaDescription": "Garten- und Landschaftsbau in Münster: Gartenneuanlage, Pflasterarbeiten, Rollrasen, Erdarbeiten, Beete & Bepflanzung. Unverbindliches Angebot nach Besichtigung. Aus Osnabrück · 50 km Anfahrt.",
+  "metaTitle": "Garten- und Landschaftsbau Münster ★ Pflaster & Außenanlagen",
+  "neighborSlugs": [
+    "ochtrup",
+    "horstmar",
+    "neuenkirchen-kreis-steinfurt",
+    "laer",
+    "altenberge",
+    "telgte",
+    "halle-westfalen",
+    "rahden",
+    "werther",
+    "nordwalde",
+    "preussisch-oldendorf",
+    "stemwede",
+    "wettringen",
+    "bielefeld",
+    "espelkamp",
+    "sassenberg",
+    "borgholzhausen",
+    "steinfurt",
+    "bad-oeynhausen",
+    "warendorf",
+    "greven",
+    "hopsten",
+    "versmold",
+    "hoerstel",
+    "neuenkirchen-bei-rheine",
+    "herford",
+    "loehne",
+    "emsdetten",
+    "saerbeck",
+    "ibbenbueren",
+  ],
+  "serviceId": "garten-landschaftsbau",
+}
+`;
+
 exports[`programmatic — snapshot regression suite > other services — spot checks > hausmeisterservice / osnabrueck 1`] = `
 {
   "bodyLength": 7,
@@ -909,86 +990,5 @@ exports[`programmatic — snapshot regression suite > other services — spot ch
     "voltlage",
   ],
   "serviceId": "hausmeisterservice",
-}
-`;
-
-exports[`programmatic — snapshot regression suite > other services — spot checks > schrottabholung / muenster 1`] = `
-{
-  "bodyLength": 4,
-  "fakten": [
-    {
-      "label": "Leistung",
-      "value": "Schrottabholung Münster",
-    },
-    {
-      "label": "Bundesland",
-      "value": "Nordrhein-Westfalen",
-    },
-    {
-      "label": "Landkreis",
-      "value": "Stadt Münster",
-    },
-    {
-      "label": "PLZ-Bereich",
-      "value": "48",
-    },
-    {
-      "label": "Entfernung Osnabrück",
-      "value": "~ 50 km",
-    },
-    {
-      "label": "Region",
-      "value": "Münsterland",
-    },
-    {
-      "label": "Besichtigung",
-      "value": "kostenlos und unverbindlich",
-    },
-  ],
-  "faqQuestions": [
-    "Holen Sie auch in der Nachbarschaft ab?",
-    "Können Sie Schrott auch von Firmenstandorten in Münster abholen?",
-    "Ist die Schrottabholung in Münster wirklich kostenlos?",
-    "Was wird in Münster mitgenommen?",
-    "Was wird nicht mitgenommen?",
-    "Wie schnell kommen Sie in Münster?",
-  ],
-  "h1": "Kostenlose Schrottabholung in Münster",
-  "intro": "Wenn Sie in Münster Altmetall loswerden möchten — Heizkörper, alte Werkzeuge, Schrott aus Renovierung oder Räumung —, holen wir das kostenlos bei Ihnen ab. Im Herzen des Münsterlandes, Universitätsstadt sind kurze Anfahrten zu fairen Konditionen Standard.",
-  "metaDescription": "Kostenlose Schrottabholung in Münster: Altmetall schnell und unkompliziert abgeholt — meist innerhalb weniger Tage. Aus Osnabrück · 50 km Anfahrt. ☎ Termin per Anruf oder WhatsApp.",
-  "metaTitle": "Schrottabholung Münster ★ Kostenlos & schnell vor Ort",
-  "neighborSlugs": [
-    "ochtrup",
-    "horstmar",
-    "neuenkirchen-kreis-steinfurt",
-    "laer",
-    "altenberge",
-    "telgte",
-    "halle-westfalen",
-    "rahden",
-    "werther",
-    "nordwalde",
-    "preussisch-oldendorf",
-    "stemwede",
-    "wettringen",
-    "bielefeld",
-    "espelkamp",
-    "sassenberg",
-    "borgholzhausen",
-    "steinfurt",
-    "bad-oeynhausen",
-    "warendorf",
-    "greven",
-    "hopsten",
-    "versmold",
-    "hoerstel",
-    "neuenkirchen-bei-rheine",
-    "herford",
-    "loehne",
-    "emsdetten",
-    "saerbeck",
-    "ibbenbueren",
-  ],
-  "serviceId": "schrottabholung",
 }
 `;

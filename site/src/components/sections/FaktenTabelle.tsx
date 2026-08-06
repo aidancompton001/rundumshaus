@@ -14,7 +14,7 @@ const FAKTEN: { label: string; value: string }[] = [
   { label: "Einsatzgebiet", value: "60 km Umkreis um Osnabrück" },
   { label: "Anzahl bedienter Städte", value: "98 in Niedersachsen + Nordrhein-Westfalen" },
   { label: "Bundesländer", value: "Niedersachsen, Nordrhein-Westfalen" },
-  { label: "Hauptleistungen", value: "5 (Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung, Schrottabholung)" },
+  { label: "Hauptleistungen", value: "5 (Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten, Entrümpelung)" },
   { label: "Weitere Leistungen", value: "9 (Reinigung, Pflasterarbeiten, Renovierungen, Möbelmontage, Umzüge, Gartenanlage, Mehrfamilienhausbetreuung, Winterdienst, Rasenmähen)" },
   { label: "Besichtigung", value: "kostenlos und unverbindlich im gesamten Einsatzgebiet" },
   { label: "Festpreise", value: "ja, bei allen Arbeiten nach kostenloser Besichtigung" },

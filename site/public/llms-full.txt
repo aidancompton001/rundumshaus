@@ -153,33 +153,24 @@
 
 **Vorlaufzeit:** Kleinere Aufträge oft binnen Tagen. Größere Objekte 1–2 Wochen.
 
-### 2.5 Schrottabholung
+### 2.5 Garten- und Landschaftsbau
 
-**Kostenlos abgeholt:**
-- Heizkörper
-- Rohre
-- Werkzeug (alt)
-- Kabel
-- Alte Räder, Gartengeräte
-- Stahlträger, Bleche
-- Maschinenteile
-- Schrottautoteile (ohne Karosserie)
+**Leistungen:**
+- Neuanlage und Umgestaltung von Gärten
+- Rasenneuanlagen und Rollrasenverlegung
+- Pflasterarbeiten für Einfahrten, Wege und Terrassen
+- Anlage von Kies-, Splitt- und Schotterflächen
+- Erdarbeiten und Geländemodellierung
+- Setzen von Rasenkanten und Beeteinfassungen
+- Anlage und Umgestaltung von Beeten
+- Verlegung von Unkrautvlies
+- Bepflanzung mit Hecken, Sträuchern und Zierpflanzen
+- Entfernung alter Bepflanzungen
+- Wiederherstellung und Aufwertung bestehender Außenanlagen
 
-**NICHT mitgenommen:**
-- Bauschutt
-- Restmüll
-- Holz
-- Elektrogeräte mit Bildschirm (TV, Monitore — DSGVO-relevant)
-- Akkus
-- Schadstoffe (Öl, Lack, Asbest)
+**Ablauf:** Vor-Ort-Termin, individuelles Konzept (Wünsche, örtliche Gegebenheiten, Budget), unverbindliches Angebot, fachgerechte und termingerechte Umsetzung. Auf Wunsch anschließende Gartenpflege.
 
-**Auszahlung:** Bei haushaltsüblichen Mengen kostenlose Abholung ohne Auszahlung. Bei größeren, sortenreinen Mengen auf Anfrage.
-
-**Anwesenheit:** Kurz nötig für die Übergabe.
-
-**Anfahrtskosten:** Im Einsatzgebiet (60 km) keine.
-
----
+**Zielgruppen:** Privatkunden, Unternehmen, Wohnanlagen.
 
 ## 3. Weitere Leistungen (9)
 
@@ -258,7 +249,7 @@ Für jede Kombination aus Leistung und Stadt existiert eine eigene Landing Page:
 
 **5 Services × 98 Cities = 490 Landing Pages.**
 
-Service-Slugs: `hausmeisterservice`, `gartenpflege`, `dacharbeiten`, `entruempelung`, `schrottabholung`.
+Service-Slugs: `hausmeisterservice`, `gartenpflege`, `dacharbeiten`, `entruempelung`, `garten-landschaftsbau`.
 
 City-Slugs: ASCII-normalisiert (ä→ae, ö→oe, ü→ue, ß→ss, Klammern entfernt, Leerzeichen→`-`).
 
@@ -266,7 +257,7 @@ Beispiele:
 - https://rundumshaus-littawe.de/leistungen/gartenpflege/bramsche/
 - https://rundumshaus-littawe.de/leistungen/entruempelung/melle/
 - https://rundumshaus-littawe.de/leistungen/dacharbeiten/muenster/
-- https://rundumshaus-littawe.de/leistungen/schrottabholung/bielefeld/
+- https://rundumshaus-littawe.de/leistungen/garten-landschaftsbau/bielefeld/
 
 Jede Landing Page enthält:
 - City-spezifische H1 mit Servicename
