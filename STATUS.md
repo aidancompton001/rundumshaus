@@ -24,4 +24,4 @@
 
 - 6 canary-WARN: длинные Gärtner-тайтлы (Kevin meta-pattern) — S-задача
 - wkdb-профиль (план PX-075) | Places API auto-pull | TSX→CMS страницы
-- Оплата Kevin (~250€ за PX-068+, + PX-077) | Wartungs-Pauschale 79€/мес
+- Оплата Kevin (~250€ за PX-068+; PX-077 = 40€, названо Kevin 2026-08-06) | Wartungs-Pauschale 79€/мес
