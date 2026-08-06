@@ -2,6 +2,28 @@
 
 ---
 
+### [S072] — 2026-08-06 — HRC-диагноз Entrümpelung SEO + фикс worstRating
+
+**Задача:** Kevin (WhatsApp): Schrottabholung → Garten- und Landschaftsbau; Entrümpelung не найти в Google
+**Роли:** #1 Product Architect, #14 Hans Landa (2 раунда HRC-ревью)
+**Статус:** частично (фикс задеплоен; замена услуги ждёт текст Kevin)
+
+**Что сделано:**
+- HRC-гейт (Закон 23): реестр 15 claims, 7 машинных proof — PASS, Landa CONFIRMED-ALL (verify/hrc_ledger.json, verify/landa_review.json)
+- Диагноз Entrümpelung: страницы отдают 200, on-page блокеров нет (noindex/X-Robots-Tag/robots.txt/canonical — 4 проверки), 99 URL в sitemap (512 всего); только 2 из 9 отзывов упоминают Entrümpelung
+- Фикс F-06 (находка Landa): AggregateRating worstRating 5→1 в reviews.json + тест (PR #81, merged, live проверен: 10× worstRating:1)
+- Landa round 1 = REJECTED: цифра «229 вхождений schrott» не воспроизводилась (реально 265 в 39 файлах site/, 52 репозиторно) + fail-open proof — оба исправлены
+
+**Ключевые решения:**
+- Замер реальной позиции «Entrümpelung Osnabrück» — только через GSC (CEO), shell-замер невозможен
+- Рычаги Entrümpelung: отзывы с упоминанием услуги+города (Kevin), wkdb-профиль (план PX-075)
+
+**Артефакты:** `verify/hrc_ledger.json`, `verify/landa_review.json`, `verify/hrc.py`, PR #81
+
+**Следующие шаги:**
+- Kevin: текст для Garten- und Landschaftsbau (обещал прислать) → L-задача замены услуги (39+ файлов, 301-редиректы)
+- CEO: GSC-замер позиции entrümpelung osnabrück + Pages-индексация 99 URL
+
 ### [S071] — 2026-06-11 — PX-076: keyword-исследование Gartenarbeit Osnabrück
 
 **Задача:** [PX-076](docs/tasks/PX_REGISTRY.md) — Kevin: «Kann man sehen was für Gartenarbeit in Osnabrück gesucht wird?»
