@@ -92,6 +92,13 @@ CASES = [
      '<div style="overflow:hidden;text-overflow:ellipsis;width:100%">'
      '<img src="assets/img/ph-hero.svg" style="width:3000px;max-width:none;height:20px" '
      'alt="Vorher Nachher"></div>', True),
+    ("ellipsis + inline-block — всё равно дефект",  "body",
+     '<div style="overflow:hidden;text-overflow:ellipsis;width:100%">'
+     '<span style="display:inline-block;width:3000px;height:14px">Preisliste komplett</span></div>', True),
+    ("ellipsis + img display:inline — всё равно дефект", "hero",
+     '<div style="overflow:hidden;text-overflow:ellipsis;width:100%">'
+     '<img src="assets/img/ph-hero.svg" style="display:inline;width:3000px;max-width:none;height:20px" '
+     'alt="Vorher Nachher"></div>', True),
     ("НЕГАТИВ: скрытый элемент (visibility:hidden)", "body",
      '<div style="visibility:hidden"><p style="white-space:nowrap;width:80px">'
      'Sehr langer deutscher Kompositatext zur Pruefung</p></div>', False),

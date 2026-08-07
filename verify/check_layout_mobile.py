@@ -135,8 +135,15 @@ JS_OVERFLOW = """() => {
         // блокировку для целого поддерева и отменить гарантию claim 21
         // («обрезанное фото Vorher/Nachher — потеря контента»). Понижаем только
         // когда переполняет элемент строчного уровня, то есть собственно текст.
-        const inlineLevel = cs.display.startsWith('inline');
-        if (inlineLevel && getComputedStyle(clip).textOverflow === 'ellipsis') {
+        // Landa (дельта-3, уточнение его же рецепта): 'display начинается с inline'
+        // захватывает inline-block/inline-flex/inline-grid и картинку с display:inline —
+        // остаточный путь понизить дефект до предупреждения. Понижаем только для
+        // СОБСТВЕННО ТЕКСТА: чистый inline и без замещаемых элементов внутри.
+        const REPLACED = 'img,picture,video,canvas,iframe,object,embed';
+        const isTextInline = (cs.display === 'inline' || cs.display === 'contents')
+          && !MEDIA.has(el.tagName)
+          && !el.querySelector(REPLACED);
+        if (isTextInline && getComputedStyle(clip).textOverflow === 'ellipsis') {
           warn.push('ELLIPSIS:' + msg);
         } else {
           bad.push('CLIPPED:' + msg);
