@@ -135,12 +135,15 @@ async def run(directory, widths):
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
+        # одна страница на весь прогон: пересоздание контекста на каждую ширину
+        # стоило ~2 с и не давало уложиться в таймаут гейта
+        ctx = await browser.new_context(viewport={"width": widths[0], "height": 900})
+        page = await ctx.new_page()
         for width in widths:
-            ctx = await browser.new_context(viewport={"width": width, "height": 900})
-            page = await ctx.new_page()
+            await page.set_viewport_size({"width": width, "height": 900})
             for f in pages:
                 await page.goto("file:///" + os.path.abspath(f).replace("\\", "/"))
-                await page.wait_for_timeout(400)
+                await page.wait_for_timeout(120)
                 ovf = await page.evaluate(JS_OVERFLOW)
                 img = await page.evaluate(JS_IMAGES)
                 line = "%4d  %-22s viewport=%d" % (width, os.path.basename(f), ovf["width"])
@@ -163,7 +166,7 @@ async def run(directory, widths):
                     print(line + "  " + " | ".join(flags))
                 else:
                     print(line + "  OK")
-            await ctx.close()
+        await ctx.close()
         await browser.close()
 
     print("RESULT: %s" % ("LAYOUT_CLEAN" if problems == 0 else "PROBLEMS:%d" % problems))
