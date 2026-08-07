@@ -160,8 +160,15 @@ JS_OVERFLOW = """() => {
         .join('');
       if (!ownText) return;
       if (el.scrollWidth > el.clientWidth + NOISE) {
-        const kind = cs.textOverflow === 'ellipsis' ? 'ELLIPSIS' : 'SILENT_CLIP';
-        warn.push(kind + ':' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+        // Landa раунд 7: одна и та же обрезка не должна менять класс в зависимости
+        // от того, обёрнут ли текст в span. Единая модель: намеренная обрезка
+        // (объявленный ellipsis) — предупреждение, любая другая — дефект,
+        // как и обрезка текста в потомке (ветка CLIPPED выше).
+        if (cs.textOverflow === 'ellipsis') {
+          warn.push('ELLIPSIS:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+        } else {
+          bad.push('SILENT_CLIP:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+        }
       }
       return;
     }

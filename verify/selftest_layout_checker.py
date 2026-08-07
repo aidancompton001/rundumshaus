@@ -78,7 +78,7 @@ CASES = [
      'style="width:3000px;max-width:none;height:20px" alt="Vorher Nachher"></div>', True),
     ("МОЛЧАЛИВАЯ обрезка текста без ellipsis",     "body",
      '<div style="width:120px;overflow:hidden;white-space:nowrap">'
-     'Hausmeisterservice Osnabrueck Festpreis 79 Euro monatlich</div>', "warn"),
+     'Hausmeisterservice Osnabrueck Festpreis 79 Euro monatlich</div>', True),
     ("ellipsis-обрезка показывается",              "body",
      '<div style="width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'
      'Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</div>', "warn"),
