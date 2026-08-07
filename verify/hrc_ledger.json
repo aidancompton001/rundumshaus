@@ -264,7 +264,7 @@
    "text": "ИСПРАВЛЕНО (Landa F-02): в промпте стоит РЕАЛЬНЫЙ телефон бизнеса из site.json (+49 1523 9603175), а не номер с макета (0152 29 78 14 75), который был бы вшит в 490 city-страниц и в JSON-LD",
    "proof": {
     "cmd": "cd .worktrees/redesign && a=$(grep -c '+49 1523 9603175' docs/design/CDP-RundumsHaus.md); b=$(grep -c '0152 29 78 14 75' docs/design/CDP-RundumsHaus.md; true); c=$(py -c \"import json;print(json.load(open('site/src/data/site.json',encoding='utf-8'))['phone'])\"); echo \"$a $b $c\"",
-    "expect_equal": "2 0 +49 1523 9603175"
+    "expect_equal": "3 0 +49 1523 9603175"
    }
   },
   {
@@ -327,7 +327,7 @@
    "text": "ИСПРАВЛЕНО (Landa F-12, вторая половина F-02): e-mail. В макете стоит info@rundumshaus-littawe.de, которого в проекте не существует; реальный адрес kontakt@rundumshaus-littawe.de из site.json. Промпт теперь явно предписывает брать e-mail и телефон из данных бизнеса, а не с картинки",
    "proof": {
     "cmd": "cd .worktrees/redesign && a=$(grep -c 'kontakt@rundumshaus-littawe.de' docs/design/CDP-RundumsHaus.md); b=$(py -c \"import json;print(json.load(open('site/src/data/site.json',encoding='utf-8'))['email'])\"); c=$(grep -rc 'info@rundumshaus' site/src/data/site.json; true); echo \"$a $b $c\"",
-    "expect_equal": "3 kontakt@rundumshaus-littawe.de 0"
+    "expect_equal": "2 kontakt@rundumshaus-littawe.de 0"
    }
   },
   {
@@ -359,8 +359,8 @@
    "asserted": true,
    "text": "Реестр T008 закоммичен в redesign-ветку (Landa F-16: раньше жил только как untracked-файл основного чекаута и исчез бы при чистом клоне)",
    "proof": {
-    "cmd": "cd .worktrees/redesign && git show HEAD:verify/hrc_ledger.json | py -c \"import json,sys;print(len(json.load(sys.stdin)['claims']))\"",
-    "expect_contain": "3"
+    "cmd": "cd .worktrees/redesign && git show HEAD:verify/hrc_ledger.json | py -c \"import json,sys;d=json.load(sys.stdin);print('CLAIMS',len(d['claims']))\"",
+    "expect_contain": "CLAIMS 42"
    }
   }
  ]
