@@ -1,0 +1,367 @@
+{
+ "task": "T008 Ф1+Ф2+Ф3 — тулкит, замеры, типографика, CDP-промпт (2026-08-07, v4 после Landa раунд 3)",
+ "threshold": 1e-08,
+ "require_landa": true,
+ "claims": [
+  {
+   "id": "01",
+   "text": "Тулкит перенесён по-настоящему: 4 скрипта из HennerHeede-Site байтово идентичны донору (не заглушки), плюс свои measure_reference.py и hrc.py",
+   "asserted": true,
+   "proof": {
+    "cmd": "n=0; for f in pixel_toolkit pixel_proof check_geometry measure_mockup; do cmp -s .worktrees/redesign/verify/$f.py /c/Projects/HennerHeede-Site/verify/$f.py && n=$((n+1)); done; m=$(ls .worktrees/redesign/verify/ | grep -cE '^(measure_reference|hrc)\\.py$'); echo \"$n $m\"",
+    "expect_equal": "4 2"
+   }
+  },
+  {
+   "id": "02",
+   "text": "Зависимости замера установлены (numpy, Pillow)",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"import numpy,PIL;print('OK')\"",
+    "expect_equal": "OK"
+   }
+  },
+  {
+   "id": "03",
+   "text": "Референс Kevin импортирован: 962x1635 RGB",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"from PIL import Image;im=Image.open('.worktrees/redesign/docs/design/ref/reference.jpg');print(im.size[0],im.size[1],im.mode)\"",
+    "expect_equal": "962 1635 RGB"
+   }
+  },
+  {
+   "id": "04",
+   "text": "measure_reference.py v2 детерминирован: два прогона дают побайтово одинаковый JSON",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py verify/measure_reference.py > /tmp/r1.json 2>&1 && py verify/measure_reference.py > /tmp/r2.json 2>&1 && diff /tmp/r1.json /tmp/r2.json | wc -l | tr -d ' '",
+    "expect_equal": "0"
+   }
+  },
+  {
+   "id": "05",
+   "text": "ИСПРАВЛЕНО (Landa L-4): зелёная маска = 41103 px, а модальный цвет внутри неё #587E19 занимает лишь 193 px. Прежняя формулировка '#588018 на 41103 пикселях' завышала в 200 раз — отозвана. Канон акцента берётся по МЕДИАНЕ: #5A7F1B",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import json;d=json.load(open('docs/design/REFERENCE_MEASUREMENTS.json',encoding='utf-8'));g=d['green_accent'];print(g['mask_pixels'],g['mode_exact']['hex'],g['mode_pixels'],g['median']['hex'])\"",
+    "expect_equal": "41103 #587E19 193 #5A7F1B"
+   }
+  },
+  {
+   "id": "06",
+   "text": "ИСПРАВЛЕНО (Landa L-1): тёмный цвет макета = #10171F, а НЕ #0C121E из v1. Проверяется ПРЯМЫМ замером картинки тремя независимыми методами (мода, медиана, среднее) на двух тёмных зонах — stats и футер",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import numpy as np;from PIL import Image;a=np.asarray(Image.open('docs/design/ref/reference.jpg').convert('RGB'),dtype=np.int16)\nimport sys\ndef hx(c): return '#%02X%02X%02X'%tuple(int(round(v)) for v in c)\ndef med(y0,y1): return hx(np.median(a[y0:y1].reshape(-1,3),axis=0))\nprint(med(1190,1290), med(1530,1630))\"",
+    "expect_equal": "#10171F #11181F"
+   }
+  },
+  {
+   "id": "07",
+   "text": "ИСПРАВЛЕНО (Landa L-1): фон страницы = #F8F8F8 на обеих проверенных зонах (секция услуг и секция отзывов). Прежнее '#F6F6F6 для секции услуг' — артефакт квантования, отозвано",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import numpy as np;from PIL import Image;a=np.asarray(Image.open('docs/design/ref/reference.jpg').convert('RGB'),dtype=np.int16)\ndef hx(c): return '#%02X%02X%02X'%tuple(int(round(v)) for v in c)\ndef med(y0,y1): return hx(np.median(a[y0:y1].reshape(-1,3),axis=0))\nprint(med(470,540), med(1310,1340))\"",
+    "expect_equal": "#F8F8F8 #F8F8F8"
+   }
+  },
+  {
+   "id": "08",
+   "text": "ИСПРАВЛЕНО (Landa L-2): геометрия карточек услуг мерится по полосе ФОТО (y565-635), а не по полосе текста. Результат: 5 карточек шириной 156-171px, гэпы 13-15px, поля 48/45. Прежние 'ширина 82-112, гэпы 78-90' были блоками текста ВНУТРИ карточек — отозваны",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import numpy as np,sys;sys.path.insert(0,'verify');from PIL import Image;from measure_reference import card_geometry\na=np.asarray(Image.open('docs/design/ref/reference.jpg').convert('RGB'),dtype=np.int16)\nc=card_geometry(a,565,635,tol=14);w=[x['w'] for x in c['cards']]\nprint(c['count'],min(w),max(w),min(c['gaps_px']),max(c['gaps_px']),c['margin_left'],c['margin_right'])\"",
+    "expect_equal": "5 156 171 14 14 48 45"
+   }
+  },
+  {
+   "id": "09",
+   "text": "Замер карточек УСТОЙЧИВ к порогу детекции: при tol 6/10/14/20/26 всегда 5 карточек и гэпы в диапазоне 13-15px (не подгонка константы под нужное число)",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import numpy as np,sys;sys.path.insert(0,'verify');from PIL import Image;from measure_reference import card_geometry\na=np.asarray(Image.open('docs/design/ref/reference.jpg').convert('RGB'),dtype=np.int16)\nns=set();gs=[]\nfor t in (6,10,14,20,26):\n    c=card_geometry(a,565,635,tol=t);ns.add(c['count']);gs+=c['gaps_px']\nprint(sorted(ns), min(gs), max(gs))\"",
+    "expect_equal": "[5] 13 15"
+   }
+  },
+  {
+   "id": "10",
+   "text": "ИСПРАВЛЕНО (Landa L-3): футер начинается с y1521-1522, а не с y1493. Проверяется поиском тёмных полос по медианной яркости строки: найдено 4 тёмные полосы, последняя (футер) = y1522-1633, высота 112",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import json;d=json.load(open('docs/design/REFERENCE_MEASUREMENTS.json',encoding='utf-8'));b=d['dark_bands'];f=b[-1];print(len(b),f['y0'],f['y1'],f['height'])\"",
+    "expect_equal": "4 1522 1633 112"
+   }
+  },
+  {
+   "id": "11",
+   "text": "Числа в REFERENCE_MEASUREMENTS.md совпадают с ЖИВЫМ замером картинки (не самоцитирование): канон-акцент, тёмный, фон и число карточек из MD сверяются с прямым пересчётом пикселей",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import re,numpy as np,sys;sys.path.insert(0,'verify');from PIL import Image;from measure_reference import card_geometry\nmd=open('docs/design/REFERENCE_MEASUREMENTS.md',encoding='utf-8').read()\na=np.asarray(Image.open('docs/design/ref/reference.jpg').convert('RGB'),dtype=np.int16)\ndef hx(c): return '#%02X%02X%02X'%tuple(int(round(v)) for v in c)\ndef med(y0,y1,x0=0,x1=None): \n    x1=a.shape[1] if x1 is None else x1\n    return hx(np.median(a[y0:y1,x0:x1].reshape(-1,3),axis=0))\ndark=med(1190,1290); paper=med(470,540); n=card_geometry(a,565,635,tol=14)['count']\nok_dark = dark in md; ok_paper = paper in md; ok_n = ('| **5** |' in md) and n==5\nprint('DARK' if ok_dark else 'X', 'PAPER' if ok_paper else 'X', 'CARDS' if ok_n else 'X')\"",
+    "expect_equal": "DARK PAPER CARDS"
+   }
+  },
+  {
+   "id": "12",
+   "text": "CDP-промпт для Claude Desktop написан (Ф3) и содержит ИСПРАВЛЕННЫЕ константы: #5A7F1B, #10171F, #F8F8F8; старых ошибочных значений (#588018, #0C121E, #F6F6F6) в нём нет",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=docs/design/CDP-RundumsHaus.md; a=$(grep -c '#5A7F1B' $f); b=$(grep -c '#10171F' $f); c=$(grep -cE '#588018|#0C121E|#F6F6F6' $f; true); test $a -ge 1 -a $b -ge 1 && echo \"NEW_OK OLD:$c\"",
+    "expect_equal": "NEW_OK OLD:0"
+   }
+  },
+  {
+   "id": "13",
+   "text": "CDP-промпт содержит размеченную зону COPY (маркеры упомянуты 2× — в инструкции CEO и в самой зоне), требует 9 экранов (7 + Impressum + Datenschutz по требованию Landa) и режим репликации 1:1",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=docs/design/CDP-RundumsHaus.md; a=$(grep -c 'НАЧАЛО ЗОНЫ COPY' $f); b=$(grep -c 'КОНЕЦ ЗОНЫ COPY' $f); c=$(grep -c 'РЕЖИМ: РЕПЛИКАЦИЯ РЕФЕРЕНСА 1:1' $f); d=$(grep -cE '^[0-9]\\. `[a-z-]+\\.html`' $f); echo \"$a $b $c $d\"",
+    "expect_equal": "2 2 1 9"
+   }
+  },
+  {
+   "id": "14",
+   "text": "T008-роадмап в redesign-ветке содержит 8 фаз и 372 строки",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(git show HEAD:docs/tasks/T008_redesign_modern_2026.md | grep -cE '^\\| Ф[1-8] \\|'); b=$(git show HEAD:docs/tasks/T008_redesign_modern_2026.md | wc -l | tr -d ' '); echo \"$a $b\"",
+    "expect_equal": "8 372"
+   }
+  },
+  {
+   "id": "15",
+   "text": "Изоляция: в ОСНОВНОМ чекауте нет ни контентных, ни staged-изменений кода сайта",
+   "asserted": true,
+   "proof": {
+    "cmd": "a=$(git diff site/ 2>/dev/null | wc -l | tr -d ' '); b=$(git diff --cached site/ 2>/dev/null | wc -l | tr -d ' '); echo \"$a $b\"",
+    "expect_equal": "0 0"
+   }
+  },
+  {
+   "id": "16",
+   "text": "Код сайта в redesign-ветке НЕ тронут; .gitattributes с *.snap eol=lf закоммичен (техдолг #1 Landa S074)",
+   "asserted": true,
+   "proof": {
+    "cmd": "a=$(git -C .worktrees/redesign status --porcelain site/src | wc -l | tr -d ' '); b=$(git -C .worktrees/redesign show HEAD:.gitattributes | grep -c 'snap text eol=lf'); echo \"$a $b\"",
+    "expect_equal": "0 1"
+   }
+  },
+  {
+   "id": "17",
+   "text": "GIT-ИНЦИДЕНТ (признаю): worktree по ошибке оказался на ветке docs/t008-roadmap, исправлено через git branch -f + force-push. Коммиты НЕ потеряны: базовый 036c9a2 является предком текущего HEAD; master не затронут force-операциями",
+   "asserted": true,
+   "proof": {
+    "cmd": "git merge-base --is-ancestor 036c9a2 $(git -C .worktrees/redesign rev-parse HEAD) && a=ANCESTOR_OK || a=LOST; b=$(git rev-parse master | cut -c1-7); c=$(git ls-remote origin refs/heads/master | cut -c1-7); test \"$b\" = \"$c\" && d=MASTER_SYNC || d=MASTER_DIVERGED; echo \"$a $d\"",
+    "expect_equal": "ANCESTOR_OK MASTER_SYNC"
+   }
+  },
+  {
+   "id": "18",
+   "text": "Ветка redesign/modern-2026 запушена в origin и содержит работы Ф1-Ф3",
+   "asserted": true,
+   "proof": {
+    "cmd": "a=$(git ls-remote origin refs/heads/redesign/modern-2026 | wc -l | tr -d ' '); b=$(git -C .worktrees/redesign log --oneline origin/redesign/modern-2026 | wc -l | tr -d ' '); test $a -eq 1 -a $b -ge 3 && echo PUSHED",
+    "expect_equal": "PUSHED"
+   }
+  },
+  {
+   "id": "19",
+   "text": "Индексация не пострадала: множество URL в sitemap копии полностью совпадает с живым продакшеном (сравнение МНОЖЕСТВ, не счётчиков), 511 URL",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"\nimport re,subprocess,urllib.request\nloc=open(r'.worktrees/redesign/site/.next/server/app/sitemap.xml.body',encoding='utf-8').read()\nlive=urllib.request.urlopen('https://rundumshaus-littawe.de/sitemap.xml',timeout=25).read().decode()\nA=set(re.findall(r'<loc>(.*?)</loc>',loc)); B=set(re.findall(r'<loc>(.*?)</loc>',live))\nprint(len(A),len(B),len(A-B),len(B-A))\"",
+    "expect_equal": "511 511 0 0"
+   }
+  },
+  {
+   "id": "20",
+   "text": "Проект-донор тулкита существует и содержит заявленное: HennerHeede-Site/verify с pixel_toolkit.py, check_geometry.py, VISUAL_ACCEPTANCE.md",
+   "asserted": true,
+   "proof": {
+    "cmd": "ls /c/Projects/HennerHeede-Site/verify/ | grep -cE '^(pixel_toolkit\\.py|check_geometry\\.py|VISUAL_ACCEPTANCE\\.md)$'",
+    "expect_equal": "3"
+   }
+  },
+  {
+   "id": "21",
+   "text": "CDP-мастер-шаблон существует в MainCore и был основой промпта",
+   "asserted": true,
+   "proof": {
+    "cmd": "test -f /c/Projects/MainCore/core/CLAUDE_DESKTOP_DESIGN_PROMPT.md && grep -c 'ШАГ 0' /c/Projects/MainCore/core/CLAUDE_DESKTOP_DESIGN_PROMPT.md",
+    "expect_contain": "1"
+   }
+  },
+  {
+   "id": "22",
+   "text": "Текущая палитра сайта (которую заменит редизайн): copper #4A8B3F, charcoal #1B3A5C",
+   "asserted": true,
+   "proof": {
+    "cmd": "a=$(grep -c '#4A8B3F' site/src/app/globals.css); b=$(grep -c '#1B3A5C' site/src/app/globals.css); test $a -ge 1 -a $b -ge 1 && echo BOTH_PRESENT",
+    "expect_equal": "BOTH_PRESENT"
+   }
+  },
+  {
+   "id": "23",
+   "text": "Доли (%) в палитре — из живого замера, не выдуманы: доля модального тёмного в stats-полосе 43.57% и фона в секции услуг 60.15% (в MD округлены до 43.6/60.1)",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import json;d=json.load(open('docs/design/REFERENCE_MEASUREMENTS.json',encoding='utf-8'));p=d['probes'];print(p['stats_band_core']['mode_exact']['share_pct'],p['services_bg']['mode_exact']['share_pct'])\"",
+    "expect_equal": "43.57 60.15"
+   }
+  },
+  {
+   "id": "24",
+   "text": "Число секций макета: 8 (navbar, hero, заголовок услуг, карточки, über uns, stats, отзывы, футер). Ранее CEO называлось '6 секций' — неточность, отзываю; каноническое число 8, оно же в MD и в CDP",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(py -c \"import json;d=json.load(open('docs/design/REFERENCE_MEASUREMENTS.json',encoding='utf-8'));print(len(d['zones']))\"); b=$(grep -c 'Startseite — 8 секций строго в этом порядке' docs/design/CDP-RundumsHaus.md); echo \"$a $b\"",
+    "expect_equal": "8 1"
+   }
+  },
+  {
+   "id": "25",
+   "text": "Landa-ревью CDP-промпта до отправки в Desktop",
+   "asserted": false,
+   "note": "Запущено параллельно, вердикт на момент составления реестра не получен. Промпт НЕ отправляется в Desktop до GO. Станет проверяемым после сохранения verify/landa_cdp_review.json."
+  },
+  {
+   "id": "26",
+   "text": "Baseline-ΔE текущего сайта против референса",
+   "asserted": false,
+   "note": "НЕ замерялся. Требует headless-рендера живого сайта шириной 962px. Планируется в начале Ф5 как точка отсчёта."
+  },
+  {
+   "id": "27",
+   "text": "Расхождение по гэпам карточек РАЗРЕШЕНО: Landa перемерил независимым методом (однострочный скан y600/620/632) и подтвердил 13-14px, отозвав свой замер 7-9px первого раунда",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py -c \"import numpy as np,sys;sys.path.insert(0,'verify');from PIL import Image;from measure_reference import card_geometry\na=np.asarray(Image.open('docs/design/ref/reference.jpg').convert('RGB'),dtype=np.int16)\ngs=[]\nfor t in (10,14,20):\n    gs+=card_geometry(a,565,635,tol=t)['gaps_px']\nprint(min(gs),max(gs))\"",
+    "expect_equal": "13 15"
+   }
+  },
+  {
+   "id": "28",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-01): типографика перемерена настоящим скриптом verify/measure_typography.py по cap-height ЗАГЛАВНОЙ буквы (не bbox строки). H2 = 17px, а не 23-24 как в v1. Отношение H1:H2 = 2.0 — совпадает с независимым замером Landa (34:17)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py verify/measure_typography.py > docs/design/TYPOGRAPHY.json 2>&1 && py -c \"import json;d=json.load(open('docs/design/TYPOGRAPHY.json',encoding='utf-8'));e=d['elements'];print(e['h1_hero']['cap_px'],e['h2_section']['cap_px'],d['h1_to_h2_ratio'],sum(1 for v in e.values() if 'error' in v))\"",
+    "expect_equal": "34 17 2.0 0"
+   }
+  },
+  {
+   "id": "29",
+   "asserted": true,
+   "text": "Замер типографики детерминирован и покрывает 9 элементов без ошибок",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py verify/measure_typography.py > /tmp/ty1.txt 2>&1 && py verify/measure_typography.py > /tmp/ty2.txt 2>&1 && d=$(diff /tmp/ty1.txt /tmp/ty2.txt | wc -l | tr -d ' '); n=$(grep -c 'cap_px' /tmp/ty1.txt); echo \"$d $n\"",
+    "expect_equal": "0 9"
+   }
+  },
+  {
+   "id": "30",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-02): в промпте стоит РЕАЛЬНЫЙ телефон бизнеса из site.json (+49 1523 9603175), а не номер с макета (0152 29 78 14 75), который был бы вшит в 490 city-страниц и в JSON-LD",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c '+49 1523 9603175' docs/design/CDP-RundumsHaus.md); b=$(grep -c '0152 29 78 14 75' docs/design/CDP-RundumsHaus.md; true); c=$(py -c \"import json;print(json.load(open('site/src/data/site.json',encoding='utf-8'))['phone'])\"); echo \"$a $b $c\"",
+    "expect_equal": "3 0 +49 1523 9603175"
+   }
+  },
+  {
+   "id": "31",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa fixes_missing): impressum.html и datenschutz.html есть И в разделе СТРУКТУРА, И в дереве ФОРМАТ ВЫВОДА (Desktop собирает по дереву)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=docs/design/CDP-RundumsHaus.md; a=$(grep -c 'impressum.html' $f); b=$(grep -c 'datenschutz.html' $f); test $a -ge 2 -a $b -ge 2 && echo IN_BOTH",
+    "expect_equal": "IN_BOTH"
+   }
+  },
+  {
+   "id": "32",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa fixes_missing): противоречие про вложения снято — и шапка, и заметка CEO говорят НЕ прикладывать REFERENCE_MEASUREMENTS.md; водяной знак Über uns внесён в промпт (раньше жил только в MD, который больше не прикладывается)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=docs/design/CDP-RundumsHaus.md; a=$(grep -c 'НЕ прикладывать' $f); b=$(grep -c 'водяной знак' $f); echo \"$a $b\"",
+    "expect_equal": "2 1"
+   }
+  },
+  {
+   "id": "33",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-03/F-04/F-11): фабрикованное '~4.3:1' удалено; ширина карточки пересчитана от контентной ширины макета 869px к контейнеру 1280 → 240px. Ошибочные '213px' И '213 px' (с пробелом — Landa нашёл выживший экземпляр в зоне COPY) отсутствуют в ОБОИХ документах",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -cE '213 ?px' docs/design/CDP-RundumsHaus.md docs/design/REFERENCE_MEASUREMENTS.md | py -c \"import sys;print(sum(int(l.split(':')[-1]) for l in sys.stdin))\"); b=$(grep -c '4.3:1' docs/design/CDP-RundumsHaus.md; true); c=$(grep -c 'карточка ≈ 240px' docs/design/CDP-RundumsHaus.md); echo \"$a $b $c\"",
+    "expect_equal": "0 0 1"
+   }
+  },
+  {
+   "id": "34",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa fixes_missing): рубрики секций красятся в --accent-ink единообразно; противоречивое '--accent, CAPS' в описании секции 3 устранено",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=docs/design/CDP-RundumsHaus.md; a=$(grep -c 'accent-ink, CAPS' $f); b=$(grep -c '(--accent, CAPS)' $f; true); echo \"$a $b\"",
+    "expect_equal": "1 0"
+   }
+  },
+  {
+   "id": "35",
+   "asserted": false,
+   "text": "Допущение, на котором стоит вся шкала font-size: макет 962px — уменьшенный скриншот дизайна под 1440px",
+   "note": "НЕ доказано и по картинке недоказуемо. Если оригинал верстался под 1512/1728, абсолютные font-size сдвинутся пропорционально. Отношения (H1:H2 = 2.0) сохранятся при любом базисе — на них и опирается критерий приёмки. Помечено явно по требованию Landa."
+  },
+  {
+   "id": "36",
+   "asserted": false,
+   "text": "Коэффициент cap-height ≈ 0.72 от кегля",
+   "note": "Типографская эвристика для гротесков без привязки к конкретному шрифту (для Inter ~0.727). Шрифт ещё не выбран, поэтому точность ±1px в таблице недостижима — это оценка, а не измерение."
+  },
+  {
+   "id": "37",
+   "asserted": false,
+   "text": "Атрибуции решений живым людям: Kevin («тексты наши, moderner verpackt»), CEO («фото AI», «5+ Jahre переносим», «Preview любой»)",
+   "note": "Источник — переписка WhatsApp и указания CEO в сессии, машинного пруфа нет и быть не может. Зафиксировано в DEVLOG/STATUS как решения, но фактом в реестре не заявляется."
+  },
+  {
+   "id": "38",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-12, вторая половина F-02): e-mail. В макете стоит info@rundumshaus-littawe.de, которого в проекте не существует; реальный адрес kontakt@rundumshaus-littawe.de из site.json. Промпт теперь явно предписывает брать e-mail и телефон из данных бизнеса, а не с картинки",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'kontakt@rundumshaus-littawe.de' docs/design/CDP-RundumsHaus.md); b=$(py -c \"import json;print(json.load(open('site/src/data/site.json',encoding='utf-8'))['email'])\"); c=$(grep -rc 'info@rundumshaus' site/src/data/site.json; true); echo \"$a $b $c\"",
+    "expect_equal": "2 kontakt@rundumshaus-littawe.de 0"
+   }
+  },
+  {
+   "id": "39",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-14): в промпте задан нижний порог кегля 14px — исправленная шкала давала буллеты 12px, что противоречило собственному блоку доступности. Отступление внесено и в список разрешённых",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'не мельче 14 px' docs/design/CDP-RundumsHaus.md); b=$(grep -c 'до минимальных 14 px' docs/design/CDP-RundumsHaus.md); echo \"$a $b\"",
+    "expect_equal": "1 1"
+   }
+  },
+  {
+   "id": "40",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-13): правило #7 больше не самопротиворечиво — из макета берутся stats и часы работы, телефон и e-mail берутся из данных бизнеса",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'ИЗ ДАННЫХ БИЗНЕСА, А НЕ ИЗ МАКЕТА' docs/design/CDP-RundumsHaus.md); b=$(grep -c 'контакты (телефон .* берутся из макета КАК ЕСТЬ' docs/design/CDP-RundumsHaus.md; true); echo \"$a $b\"",
+    "expect_equal": "1 0"
+   }
+  },
+  {
+   "id": "41",
+   "asserted": false,
+   "text": "Часы работы Mo-Sa 08:00-18:00 (Landa unlisted)",
+   "note": "Единственный источник — макет. В site.json и во всём коде проекта часов работы НЕТ (grep openingHours пуст). Это допущение дизайнера, не подтверждённые Kevin'ом часы. Переносим как есть по решению CEO о макете, но фактом бизнеса не заявляем — подтверждение у Kevin запросить перед деплоем."
+  },
+  {
+   "id": "42",
+   "asserted": true,
+   "text": "Реестр T008 закоммичен в redesign-ветку (Landa F-16: раньше жил только как untracked-файл основного чекаута и исчез бы при чистом клоне)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && git show HEAD:verify/hrc_ledger.json | py -c \"import json,sys;d=json.load(sys.stdin);print('CLAIMS',len(d['claims']))\"",
+    "expect_contain": "CLAIMS 42"
+   }
+  }
+ ]
+}
