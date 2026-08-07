@@ -34,14 +34,21 @@ status: draft — ждёт Landa-ревью до отправки в Desktop
 Скилы Claude Code (ui-ux-pro-max, brainstorming, TDD) здесь НЕ существуют —
 они применяются позже, в VS Code, на этапе порта.
 
-Вызови ДО первой строки HTML:
-1. web-artifacts-builder — сборка HTML/CSS/JS-скелета
-2. canvas-design — layout и визуальная композиция
-3. theme-factory — палитра и дизайн-токены
-4. brand-guidelines — консистентность бренда
+SKILLS — вызови ДО первой строки HTML (имена точные, из реестра Desktop):
+1. web-artifacts-builder — сборка HTML/CSS/JS-скелета (основной)
+2. canvas-design — layout и визуальная композиция страниц
+3. theme-factory — палитра и дизайн-токены (tokens.css)
+4. brand-guidelines — консистентность бренда по всем 9 экранам
+
+CONNECTOR (обязателен для записи результата):
+5. filesystem — читать входной макет и записать папку результата на диск
+
+⛔ НЕ включать: algorithmic-art (у нас репликация макета, не генеративная графика),
+   doc-coauthoring, internal-comms, mcp-builder, skill-creator, slack-gif-creator,
+   Higgsfield MCP (генерация фото — отдельный этап, после утверждения макета).
 
 ПОДТВЕРДИ В НАЧАЛЕ ОТВЕТА строкой:
-«Desktop skills invoked: web-artifacts-builder, canvas-design, theme-factory, brand-guidelines».
+«Desktop skills invoked: web-artifacts-builder, canvas-design, theme-factory, brand-guidelines; connector: filesystem».
 Без этой строки — STOP.
 
 ═══════════════════════════════════════════════════════════
@@ -360,7 +367,15 @@ DSGVO:
 ФОРМАТ ВЫВОДА
 ═══════════════════════════════════════════════════════════
 
-Папка `/v1-desktop/`:
+Записать через коннектор **filesystem** ровно сюда (папка уже создана):
+
+    C:\Projects\RundUmsHaus\.worktrees\redesign\docs\design\v1-desktop
+
+Входной макет лежит здесь (прочитай оттуда, если он не приложен файлом):
+
+    C:\Projects\RundUmsHaus\.worktrees\redesign\docs\design\ref\reference.jpg
+
+Структура результата:
 
     /v1-desktop/
       index.html
@@ -438,6 +453,32 @@ DSGVO (Германия — обязательно)
 ---
 
 ## Заметки для CEO (в Desktop НЕ копировать)
+
+## ПАМЯТКА CEO — что включить в Claude Desktop перед вставкой промпта
+
+**Skills (Customize → Skills, включить ровно эти 4):**
+
+| Skill | Зачем |
+|-------|-------|
+| `web-artifacts-builder` | собирает HTML/CSS/JS-скелет |
+| `canvas-design` | layout и композиция страниц |
+| `theme-factory` | палитра и токены (tokens.css) |
+| `brand-guidelines` | единый бренд по всем 9 экранам |
+
+**Connector (Customize → Connectors → Desktop):**
+
+| Connector | Зачем |
+|-----------|-------|
+| `filesystem` | прочитать макет с диска и записать результат в папку |
+
+**НЕ включать:** `algorithmic-art` (у нас репликация, не генеративная графика),
+`doc-coauthoring`, `internal-comms`, `mcp-builder`, `skill-creator`, `slack-gif-creator`,
+`Higgsfield MCP` (фото генерим отдельным этапом, после утверждения макета Kevin).
+
+**Папки:**
+
+- вход (макет): `C:\Projects\RundUmsHaus\.worktrees\redesign\docs\design\ref\reference.jpg`
+- выход (результат): `C:\Projects\RundUmsHaus\.worktrees\redesign\docs\design\v1-desktop\`
 
 **Что приложить к промпту в Desktop:** ТОЛЬКО `reference.jpg`.
 `REFERENCE_MEASUREMENTS.md` НЕ прикладывать — все нужные Desktop числа уже вшиты
