@@ -17,7 +17,7 @@ Landa требовал этого четыре раунда: «токены со
 дизайна под 1440px). Поэтому «совпало» здесь значит «совпало с расчётной оценкой
 в пределах допуска», а не «точно» — Landa справедливо забраковал слово «точное».
 
-Usage: py verify/check_tokens_match.py [путь к tokens.css]
+Usage: py verify/check_tokens_match.py [tokens.css] [REFERENCE_MEASUREMENTS.json] [TYPOGRAPHY.json]
 Код возврата: 0 — всё сошлось, 1 — есть расхождения.
 """
 import hashlib
@@ -35,10 +35,12 @@ TYPO = os.path.join(ROOT, "docs", "design", "TYPOGRAPHY.json")
 PX_TOLERANCE = 1
 # Landa раунд 5: замеры-эталон ничем не закреплены — расхождение можно «починить»
 # правкой самого замера, и пруф останется зелёным, потеряв связь с макетом Kevin.
-# Хеши берутся из состояния, проверенного ревьюером (файлы закоммичены до мокапа).
+# Раунд 6: хеш считается по НОРМАЛИЗОВАННОМУ содержимому (CRLF -> LF). Первая версия
+# хешировала байты рабочей копии, из-за чего на чистом клоне с LF чекер обвинил бы
+# в подмене эталона, которой нет.
 EXPECTED_SHA = {
-    "REFERENCE_MEASUREMENTS.json": "d56577ef485634c1",
-    "TYPOGRAPHY.json": "aaa85bd9999b232a",
+    "REFERENCE_MEASUREMENTS.json": "13066ac0d617fc78",
+    "TYPOGRAPHY.json": "8cc27daec622cd2c",
 }
 
 # ВСЕ 9 измеренных зон цвета (Landa раунд 5: прежняя версия брала 4 из 9,
@@ -113,15 +115,20 @@ def clamp_max_px(value):
 
 
 def main():
+    # пути принимаются аргументами, иначе мутацию ЗАМЕРА невозможно протестировать
+    # (Landa раунд 6: «новый механизм снова приехал без мутационного теста»)
     tokens_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_TOKENS
+    meas_path = sys.argv[2] if len(sys.argv) > 2 else MEAS
+    typo_path = sys.argv[3] if len(sys.argv) > 3 else TYPO
     css = io.open(tokens_path, encoding="utf-8").read()
-    meas = json.load(io.open(MEAS, encoding="utf-8"))
-    typo = json.load(io.open(TYPO, encoding="utf-8"))
+    meas = json.load(io.open(meas_path, encoding="utf-8"))
+    typo = json.load(io.open(typo_path, encoding="utf-8"))
     bad = 0
 
     print("ЭТАЛОННЫЕ ЗАМЕРЫ (закреплены хешем — правкой замера расхождение не спрячешь):")
-    for fname, path in (("REFERENCE_MEASUREMENTS.json", MEAS), ("TYPOGRAPHY.json", TYPO)):
-        got = hashlib.sha256(io.open(path, "rb").read()).hexdigest()[:16]
+    for fname, path in (("REFERENCE_MEASUREMENTS.json", meas_path), ("TYPOGRAPHY.json", typo_path)):
+        raw = io.open(path, "rb").read().replace(b"\r\n", b"\n")
+        got = hashlib.sha256(raw).hexdigest()[:16]
         want = EXPECTED_SHA[fname]
         ok = got == want
         bad += not ok

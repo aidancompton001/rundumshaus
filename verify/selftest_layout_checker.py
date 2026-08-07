@@ -130,9 +130,15 @@ def main():
         if must_catch == "warn":
             ok = warned and not caught          # предупреждение, но не дефект
             state = "предупреждение" if warned else ("ДЕФЕКТ" if caught else "молчит")
-        else:
-            ok = (caught == must_catch)
+        elif must_catch:
+            ok = caught
             state = ("ПОЙМАН " + detail) if caught else "молчит"
+        else:
+            # Landa раунд 6: негатив обязан молчать в ОБОИХ каналах. Прежняя версия
+            # смотрела только дефекты, поэтому строка «карусель молчит OK» проходила
+            # при карусели, которая выдавала предупреждение на каждой мобильной ширине.
+            ok = (not caught) and (not warned)
+            state = "молчит" if ok else ("ДЕФЕКТ " + detail if caught else "ПРЕДУПРЕЖДЕНИЕ " + detail)
         results.append((label, ok, state))
 
     # контроль чистоты — по всей папке, как в реальном прогоне

@@ -142,11 +142,23 @@ JS_OVERFLOW = """() => {
     // из-за чего инструмент ругался на скрытые элементы.
     if (cs.display === 'none' || cs.visibility === 'hidden') return;
     if (el.closest('[hidden]')) return;
+    // Landa раунд 6: у горизонтальной карусели scrollWidth больше clientWidth ВСЕГДА —
+    // это её определение. Без этой строки канал предупреждений выдавал 12 сообщений
+    // из 12 ложных, все про .reviews-grid, и приучал в него не смотреть.
+    if (isSlider(el)) return;
     // Landa раунд 5: обрезка БЕЗ ellipsis хуже, чем с ним — текст обрывается вовсе,
     // без визуального признака. Ловим при ЛЮБОМ неvisible overflow-x; ellipsis лишь
     // уточняет формулировку. Оба случая идут в предупреждения, а не в дефекты:
     // отличить намеренную обрезку от аварийной по CSS невозможно, но молчать нельзя.
     if (cs.overflowX !== 'visible') {
+      // Проверяем только СОБСТВЕННЫЙ текст элемента. Иначе флаг ловит любой
+      // контейнер с overflow:hidden, внутри которого лежит широкий декор
+      // (например секция hero с водяным знаком) — там ничего не теряется.
+      const ownText = [...el.childNodes]
+        .filter(n => n.nodeType === 3)
+        .map(n => n.textContent.trim())
+        .join('');
+      if (!ownText) return;
       if (el.scrollWidth > el.clientWidth + NOISE) {
         const kind = cs.textOverflow === 'ellipsis' ? 'ELLIPSIS' : 'SILENT_CLIP';
         warn.push(kind + ':' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');

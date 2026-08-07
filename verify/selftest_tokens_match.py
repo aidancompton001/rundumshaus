@@ -24,6 +24,8 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 TOKENS = os.path.join(ROOT, "docs", "design", "v1-desktop", "css", "tokens.css")
+MEAS = os.path.join(ROOT, "docs", "design", "REFERENCE_MEASUREMENTS.json")
+TYPO = os.path.join(ROOT, "docs", "design", "TYPOGRAPHY.json")
 CHECKER = os.path.join(HERE, "check_tokens_match.py")
 
 # (описание, что заменить, на что) — каждая мутация обязана уронить проверку
@@ -37,9 +39,9 @@ MUTATIONS = [
 ]
 
 
-def run(path):
-    r = subprocess.run([sys.executable, CHECKER, path], capture_output=True,
-                       text=True, encoding="utf-8", timeout=120)
+def run(path, meas=None, typo=None):
+    argv = [sys.executable, CHECKER, path, meas or MEAS, typo or TYPO]
+    r = subprocess.run(argv, capture_output=True, text=True, encoding="utf-8", timeout=120)
     return r.stdout.strip().splitlines()[-1] if r.stdout.strip() else "(нет вывода)"
 
 
@@ -64,6 +66,16 @@ def main():
             caught = out.startswith("RESULT: MISMATCH")
             results.append((label, caught, out))
 
+    # Landa раунд 6: хеш-замок эталона сам не был фальсифицирован — мутируем ЗАМЕР
+    # и требуем, чтобы чекер это увидел (иначе расхождение чинится правкой эталона)
+    with tempfile.TemporaryDirectory() as tmp2:
+        mutant_meas = os.path.join(tmp2, "meas_mutant.json")
+        raw = io.open(MEAS, encoding="utf-8").read()
+        io.open(mutant_meas, "w", encoding="utf-8", newline="\n").write(
+            raw.replace("#5A7F1B", "#123456", 1))
+        out = run(TOKENS, meas=mutant_meas)
+        results.append(("мутация ЭТАЛОНА замеров", out.startswith("RESULT: MISMATCH"), out))
+
     for label, ok, detail in results:
         print("%-44s %-7s %s" % (label, "OK" if ok else "ПРОВАЛ", detail))
 
@@ -73,7 +85,7 @@ def main():
 
     ok = all(r[1] for r in results) and untouched
     print("SELFTEST_TOKENS: %s (%d/%d мутаций)" % ("PASS" if ok else "FAIL",
-          sum(1 for r in results[1:] if r[1]), len(MUTATIONS)))
+          sum(1 for r in results[1:] if r[1]), len(MUTATIONS) + 1))
     return 0 if ok else 1
 
 
