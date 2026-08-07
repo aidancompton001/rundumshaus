@@ -186,8 +186,11 @@ JS_TABBABLE = """() => {
 async def run(directory, widths):
     from playwright.async_api import async_playwright
 
-    pages = sorted(glob.glob(os.path.join(directory, "*.html")))
-    pages = [p for p in pages if not os.path.basename(p).startswith("_")]
+    if os.path.isfile(directory):
+        pages = [directory]           # можно передать одну страницу — так делает самотест
+    else:
+        pages = sorted(glob.glob(os.path.join(directory, "*.html")))
+        pages = [p for p in pages if not os.path.basename(p).startswith("_")]
     problems = 0
 
     async with async_playwright() as pw:

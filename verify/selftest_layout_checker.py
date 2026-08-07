@@ -98,7 +98,7 @@ def inject(html, where, snippet):
 
 def run_checker(width):
     return subprocess.run(
-        [PW_PY, CHECKER, PAGES, str(width)],
+        [PW_PY, CHECKER, os.path.join(PAGES, "zz-selftest.html"), str(width)],
         capture_output=True, text=True, encoding="utf-8", timeout=300,
     ).stdout
 
@@ -126,7 +126,9 @@ def main():
         ok = (caught == must_catch)
         results.append((label, ok, ('ПОЙМАН ' + detail) if caught else 'молчит'))
 
-    clean = "LAYOUT_CLEAN" in run_checker(375)
+    # контроль чистоты — по всей папке, как в реальном прогоне
+    clean = "LAYOUT_CLEAN" in subprocess.run([PW_PY, CHECKER, PAGES, "375"],
+        capture_output=True, text=True, encoding="utf-8", timeout=300).stdout
 
     for label, caught, detail in results:
         print("%-46s %-6s %s" % (label, "OK" if caught else "ПРОВАЛ", detail))
