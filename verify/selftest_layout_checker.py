@@ -27,23 +27,48 @@ PAGES = os.path.join(ROOT, "docs", "design", "v1-desktop")
 CHECKER = os.path.join(HERE, "check_layout_mobile.py")
 PW_PY = r"C:\Projects\HausBot\backend\.venv\Scripts\python.exe"
 
-WIDE = '<div style="width:3000px;height:10px"></div>'
+# Блоки НЕСУТ ТЕКСТ: обрезка пустого декора визуально безвредна, а обрезка
+# контента — дефект. Именно так инструмент и различает случаи после раунда 3.
+WIDE = '<div style="width:3000px;height:14px">Preise ab 49 EUR - Jetzt anrufen</div>' 
 
 # (имя случая, куда внедрять, что внедрять)
 #   anchor "</body>"        — элемент прямо под body, без клипперов
 #   anchor "<!-- HERO -->"  — подставляется внутрь секции hero (см. inject())
 CASES = [
-    ("широкий блок под body",        "body",    WIDE),
-    ("широкий блок внутри .hero",    "hero",    WIDE),
+    # положительные: инструмент ОБЯЗАН поймать
+    ("широкий блок под body",                     "body", WIDE, True),
+    ("широкий блок внутри .hero",                 "hero", WIDE, True),
     ("широкий блок под обёрткой overflow:hidden", "body",
-     '<div style="overflow-x:hidden;width:100%">' + WIDE + "</div>"),
-    ("переполнение ТЕКСТОМ (nowrap)", "body",
+     '<div style="overflow-x:hidden;width:100%">' + WIDE + "</div>", True),
+    ("блок под aria-hidden обёрткой (текст виден)", "hero",
+     '<div aria-hidden="true">' + WIDE + "</div>", True),
+    ("блок под pointer-events:none",              "hero",
+     '<div style="pointer-events:none">' + WIDE + "</div>", True),
+    ("блок под обёрткой overflow-y:auto",         "body",
+     '<div style="overflow-y:auto;max-height:100px">' + WIDE + "</div>", True),
+    ("блок под fixed-клиппером",                  "body",
+     '<div style="position:fixed;overflow:hidden;width:100%;height:20px">' + WIDE + "</div>", True),
+    ("переполнение ТЕКСТОМ (nowrap)",             "body",
      '<p style="white-space:nowrap;width:100px;overflow:visible">'
-     'Hausmeisterservice-Gebaeudereinigungs-Dachrinnenreinigungs-Sonderleistung</p>'),
-    ("вылет ВЛЕВО (left:-800px)",    "body",
-     '<div style="position:absolute;left:-800px;width:600px;height:10px"></div>'),
+     'Hausmeisterservice-Gebaeudereinigungs-Dachrinnenreinigungs-Sonderleistung</p>', True),
+    ("переполнение текстом в НЕлистовом (ul>li)", "body",
+     '<ul style="width:80px;list-style:none"><li style="white-space:nowrap">'
+     'Keller- und Dachbodenraeumung komplett</li></ul>', True),
+    ("вылет ВЛЕВО нефокусируемого",               "body",
+     '<div style="position:absolute;left:-2500px;width:600px;height:14px">Impressum</div>', True),
+    # негативные: инструмент обязан МОЛЧАТЬ (иначе он кричит на здоровом)
+    # негативный слайдер повторяет РЕАЛЬНЫЙ паттерн проекта (.reviews-grid):
+    # overflow-x:auto + scroll-snap-type: x mandatory — намеренная карусель
+    ("НЕГАТИВ: штатная карусель (scroll-snap)",   "body",
+     '<div style="overflow-x:auto;scroll-snap-type:x mandatory;width:200px">'
+     '<div style="width:900px;height:14px;scroll-snap-align:start">'
+     'Bewertung 1 Bewertung 2 Bewertung 3</div></div>', False),
+    ("НЕГАТИВ: skip-ссылка за краем",             "body",
+     '<a href="#main" style="position:absolute;left:-9999px">Zum Inhalt springen</a>', False),
+    ("НЕГАТИВ: декоративный svg за краем",        "hero",
+     '<svg aria-hidden="true" style="position:absolute;right:-200px;width:300px;height:20px">'
+     '<rect width="300" height="20"/></svg>', False),
 ]
-
 
 def inject(html, where, snippet):
     if where == "body":
@@ -69,7 +94,7 @@ def main():
     tmp = os.path.join(PAGES, "zz-selftest.html")   # без "_": чекер фильтрует "_*"
     results = []
 
-    for label, where, snippet in CASES:
+    for label, where, snippet, must_catch in CASES:
         patched = inject(html, where, snippet)
         if patched is None:
             results.append((label, False, "секция для внедрения не найдена"))
@@ -83,12 +108,13 @@ def main():
         caught = any("zz-selftest.html" in ln and "OVERFLOW" in ln for ln in out.splitlines())
         detail = next((ln.split("OVERFLOW:")[-1][:60] for ln in out.splitlines()
                        if "zz-selftest.html" in ln and "OVERFLOW" in ln), "")
-        results.append((label, caught, detail))
+        ok = (caught == must_catch)
+        results.append((label, ok, ('ПОЙМАН ' + detail) if caught else 'молчит'))
 
     clean = "LAYOUT_CLEAN" in run_checker(375)
 
     for label, caught, detail in results:
-        print("%-46s %s  %s" % (label, "ПОЙМАН" if caught else "ПРОПУЩЕН", detail))
+        print("%-46s %-6s %s" % (label, "OK" if caught else "ПРОВАЛ", detail))
     print("%-46s %s" % ("после удаления всех вставок", "чисто" if clean else "ГРЯЗНО"))
 
     ok = all(c for _, c, _ in results) and clean

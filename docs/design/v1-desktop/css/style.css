@@ -474,7 +474,6 @@ button {
      (gemessen bei 1101 px: «Keller-&nbsp;Dachbodenräumung» 159 px in 148 px Spalte) */
   hyphens: auto;
   overflow-wrap: anywhere;
-  hyphens: auto;
 }
 .card-bullets li::before {
   content: "";
@@ -593,7 +592,7 @@ button {
 }
 .stats .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .stat {
   text-align: center;
@@ -623,7 +622,7 @@ button {
 /* ============ BEWERTUNGEN (ReviewsBlock) ============ */
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-card-gap);
   margin-bottom: 2.25rem;
 }
@@ -660,7 +659,7 @@ button {
 }
 .site-footer .footer-grid {
   display: grid;
-  grid-template-columns: 1.35fr 1fr 1fr 1.25fr;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr);
   padding-block: clamp(2.5rem, 4.5vw, 3.75rem) 2rem;
 }
 .footer-col {
@@ -791,7 +790,10 @@ button {
 .check-list { display: grid; gap: 0.7rem; }
 .check-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-weight: 600; font-size: 0.9375rem; }
 .check-list .badge-check { margin-top: 0.05em; }
-.check-list--2col { grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+.check-list--2col { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+/* Deutsche Komposita («Keller- & Dachbodenräumung») sprengen sonst die Spalte:
+   gemessen bei 901 px — LI min-content 189 px in 164-px-Spalte (Landa). */
+.check-list li { hyphens: auto; overflow-wrap: anywhere; }
 
 /* CTA-Block (city-template) */
 .cta-panel {
@@ -890,7 +892,7 @@ button {
 /* Referenzen: Vorher/Nachher */
 .ref-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-card-gap);
 }
 .ref-card {
@@ -899,7 +901,7 @@ button {
   box-shadow: var(--shadow-card);
   overflow: hidden;
 }
-.ref-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.ref-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .ref-pair figure { margin: 0; position: relative; }
 .ref-pair img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 .ref-pair figcaption {
@@ -919,7 +921,7 @@ button {
 /* Ratgeber-Karten */
 .post-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-card-gap);
 }
 .post-card {
@@ -1134,7 +1136,7 @@ button {
   .services-grid .service-card { flex-basis: calc((100% - var(--spacing-card-gap)) / 2); }
   /* letzte (ungerade) Reihe zentriert automatisch via justify-content:center */
 
-  .stats .container { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+  .stats .container { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
   .stat:nth-child(3) { border-left: 0; }
 
   .reviews-grid {
@@ -1147,12 +1149,12 @@ button {
   }
   .review-card { scroll-snap-align: start; }
 
-  .site-footer .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+  .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
   .footer-col:nth-child(3) { border-left: 0; padding-left: 0; }
   .footer-col:first-child { padding-right: clamp(1rem, 2.4vw, 2.25rem); }
 
   .check-list--2col { grid-template-columns: 1fr; }
-  .ref-grid, .post-grid { grid-template-columns: 1fr 1fr; }
+  .ref-grid, .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .form-row { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -1188,6 +1190,34 @@ button {
   .contact-info-card { min-width: 0; padding: 1.25rem; }
   .contact-info-card h2 { overflow-wrap: anywhere; }
   .footer-contact, .footer-contact li { min-width: 0; overflow-wrap: anywhere; }
+}
+
+
+/* ============================================================
+   Deutsche Komposita — systemisch, nicht punktuell.
+   «Hausmeisterservice», «Dachrinnenreinigung», «Haushaltsauflösung» sprengen
+   schmale Spalten. Gemessen bei 769/820/821 px (Footer-Spalten, Stats) und
+   901 px (Check-Listen). Lange Wörter dürfen umbrechen statt überzulaufen.
+   ============================================================ */
+.footer-links li,
+.footer-contact li,
+.footer-col,
+.stat,
+.check-list li,
+.card-bullets li,
+.leistungen-list li {
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* Kopfzeile bei 320 px: Inhalt (303 px) lief über den Container (288 px)
+   und fraß den rechten Seitenrand. */
+@media (max-width: 360px) {
+  .site-header .container { gap: 0.35rem; }
+  .brand img { height: 34px; }
+  .site-header .btn--whatsapp { padding-inline: 0.55rem; }
+  .site-header .btn--whatsapp .btn-lines strong { font-size: 0.75rem; }
 }
 
 /* ============================================================
