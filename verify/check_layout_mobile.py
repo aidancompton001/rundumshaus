@@ -129,7 +129,14 @@ JS_OVERFLOW = """() => {
         // текст без span — только предупреждает: строгость становилась функцией
         // формы разметки, что и было исходным замечанием.
         const msg = name(el) + '@' + Math.round(r.right) + '>' + Math.round(cr.right);
-        if (getComputedStyle(clip).textOverflow === 'ellipsis') {
+        // Landa (дельта-2): text-overflow опознаёт НАМЕРЕННУЮ обрезку ТЕКСТА.
+        // На обёртке с блочными или медийными детьми это свойство визуально не
+        // делает ничего — то есть одной инертной строкой CSS можно было выключить
+        // блокировку для целого поддерева и отменить гарантию claim 21
+        // («обрезанное фото Vorher/Nachher — потеря контента»). Понижаем только
+        // когда переполняет элемент строчного уровня, то есть собственно текст.
+        const inlineLevel = cs.display.startsWith('inline');
+        if (inlineLevel && getComputedStyle(clip).textOverflow === 'ellipsis') {
           warn.push('ELLIPSIS:' + msg);
         } else {
           bad.push('CLIPPED:' + msg);

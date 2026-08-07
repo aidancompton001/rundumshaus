@@ -26,7 +26,7 @@ CHECKER = os.path.join(HERE, "check_tokens_match.py")
 # Landa: HEAD — движущаяся мишень, правка замера вместе с пересчётом константы
 # в одном коммите прошла бы незаметно. Замеры сняты в 418ddd2, ДО появления мокапа,
 # и это фиксированный исторический факт: содержимое там и в HEAD совпадает до бита.
-ANCHOR = "418ddd2"
+ANCHOR = "418ddd2b09b043876b7f382a8a0fe9dbedb87e53"  # полный хеш: короткий молча перестал бы разрешаться
 FILES = {
     "REFERENCE_MEASUREMENTS.json": "docs/design/REFERENCE_MEASUREMENTS.json",
     "TYPOGRAPHY.json": "docs/design/TYPOGRAPHY.json",
@@ -43,7 +43,7 @@ def sha_from_git(path):
     out = subprocess.run(["git", "-C", ROOT, "show", ANCHOR + ":" + path],
                          capture_output=True, timeout=60).stdout
     if not out:
-        return None
+        return "ЯКОРЬ_НЕ_НАЙДЕН"
     return hashlib.sha256(out.replace(b"\r\n", b"\n")).hexdigest()[:16]
 
 

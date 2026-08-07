@@ -85,6 +85,13 @@ CASES = [
     ("ellipsis с текстом В ПОТОМКЕ — тоже предупреждение", "body",
      '<div style="width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'
      '<span>Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</span></div>', "warn"),
+    ("ellipsis + БЛОЧНЫЙ потомок — всё равно дефект", "body",
+     '<div style="overflow:hidden;text-overflow:ellipsis;width:100%">'
+     '<div style="width:3000px;height:14px">Preisliste komplett</div></div>', True),
+    ("ellipsis + КАРТИНКА — всё равно дефект",     "hero",
+     '<div style="overflow:hidden;text-overflow:ellipsis;width:100%">'
+     '<img src="assets/img/ph-hero.svg" style="width:3000px;max-width:none;height:20px" '
+     'alt="Vorher Nachher"></div>', True),
     ("НЕГАТИВ: скрытый элемент (visibility:hidden)", "body",
      '<div style="visibility:hidden"><p style="white-space:nowrap;width:80px">'
      'Sehr langer deutscher Kompositatext zur Pruefung</p></div>', False),
