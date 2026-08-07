@@ -24,28 +24,78 @@ import glob
 import os
 import sys
 
+OFFCANVAS_BP = 820  # @media (max-width: 820px) в css/style.css — ниже включается бургер
 PW_PY = r"C:\Projects\HausBot\backend\.venv\Scripts\python.exe"
 
 JS_OVERFLOW = """() => {
-  const w = document.documentElement.clientWidth;
+  // Landa (раунд 2): пропускать элемент только потому, что у предка есть overflow —
+  // ошибка. Overflow предка значит лишь, что предок ОБРЕЖЕТ ребёнка, а не что сам
+  // предок помещается. Из-за такого пропуска 232 из 417 элементов index.html
+  // не проверялись, и блок width:3000px внутри .hero не ловился вовсе.
+  // Теперь: у каждого элемента ищем ближайшего клиппера и сравниваем с ЕГО рамкой,
+  // а сам клиппер обязан помещаться во вьюпорт.
+  const vw = document.documentElement.clientWidth;
   const bad = [];
+  const name = el => el.tagName + (el.className ? '.' + String(el.className).split(' ')[0] : '');
+
+  // Цепочка клипперов до body; берём САМЫЙ ВЕРХНИЙ — именно он определяет,
+  // вылезает ли что-то за пределы страницы. Промежуточные обрезки законны.
+  // <svg> исключён: у него overflow:hidden по спецификации, это графика, не layout.
+  const topClipper = el => {
+    let top = null;
+    for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+      if (a.tagName.toLowerCase() === 'svg') continue;
+      const ox = getComputedStyle(a).overflowX;
+      if (ox === 'auto' || ox === 'scroll' || ox === 'hidden' || ox === 'clip') top = a;
+    }
+    return top;
+  };
+
   document.querySelectorAll('body *').forEach(el => {
     const cs = getComputedStyle(el);
-    if (cs.position === 'fixed' || cs.display === 'none' || cs.visibility === 'hidden') return;
-    // Элемент не считается переполнением страницы, если какой-то ПРОМЕЖУТОЧНЫЙ предок
-    // (не html/body) сам обрабатывает горизонталь: слайдер (auto/scroll) листается
-    // пользователем, а hidden/clip визуально обрезает декор (напр. водяной знак).
-    // html/body сознательно исключены: overflow на них маскирует настоящие дефекты —
-    // именно так пряталось переполнение до этой проверки (находка Landa).
-    for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
-      const ax = getComputedStyle(a).overflowX;
-      if (ax === 'auto' || ax === 'scroll' || ax === 'hidden' || ax === 'clip') return;
-    }
+    if (cs.display === 'none' || cs.visibility === 'hidden') return;
     const r = el.getBoundingClientRect();
     if (r.width === 0 && r.height === 0) return;
-    if (r.right > w + 1) bad.push(el.tagName + '.' + (el.className || '').toString().split(' ')[0] + '@' + Math.round(r.right));
+
+    const clip = topClipper(el);
+    if (clip) {
+      if (getComputedStyle(clip).position === 'fixed') return;
+      const cr = clip.getBoundingClientRect();
+      // 1) сам клиппер обязан помещаться во вьюпорт
+      if (cr.right > vw + 1) bad.push('CLIPPER:' + name(clip) + '@' + Math.round(cr.right));
+      if (cr.left < -1) bad.push('CLIPPER_LEFT:' + name(clip) + '@' + Math.round(cr.left));
+      // 2) Landa: обрезка hidden/clip молча съедает контент — это хуже скролла.
+      //    Для слайдера (auto/scroll) вылет законен: пользователь листает.
+      //    Для hidden/clip вылет допустим только декору (aria-hidden / pointer-events:none).
+      const ox = getComputedStyle(clip).overflowX;
+      if (ox !== 'auto' && ox !== 'scroll' && r.right > cr.right + 1) {
+        const decorative = el.closest('[aria-hidden="true"]') !== null
+          || cs.pointerEvents === 'none'
+          || el.tagName.toLowerCase() === 'svg' || el.closest('svg') !== null;
+        if (!decorative) {
+          bad.push('CLIPPED:' + name(el) + '@' + Math.round(r.right) + '>' + Math.round(cr.right));
+        }
+      }
+      return;
+    }
+
+    if (cs.position === 'fixed') return;          // fixed позиционируется от вьюпорта
+    if (r.right > vw + 1) bad.push(name(el) + '@' + Math.round(r.right));
+    // Landa: левое переполнение не проверялось вообще. Скрытые skip-ссылки
+    // уводят далеко влево намеренно — их отсекаем по порогу.
+    if (r.left < -1 && r.left > -2000 && r.width > 4) bad.push('LEFT:' + name(el) + '@' + Math.round(r.left));
   });
-  return { width: w, overflow: bad.slice(0, 8) };
+
+  // переполнение ТЕКСТОМ (nowrap-композит) бокс не расширяет — ловим отдельно
+  document.querySelectorAll('body *').forEach(el => {
+    if (el.children.length) return;
+    if (el.tagName.toLowerCase() === 'svg' || el.closest('svg')) return;
+    if (el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflowX === 'visible') {
+      bad.push('TEXT_OVF:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+    }
+  });
+
+  return { width: vw, overflow: [...new Set(bad)].slice(0, 8) };
 }"""
 
 JS_IMAGES = """() => {
@@ -101,7 +151,7 @@ async def run(directory, widths):
                     flags.append("OVERFLOW:" + ",".join(ovf["overflow"]))
                 if img["broken"]:
                     flags.append("BROKEN_IMG:%d/%d" % (img["broken"], img["total"]))
-                if width <= 900 and os.path.basename(f) == "index.html":
+                if width <= OFFCANVAS_BP:  # брейкпоинт off-canvas из CSS, не на глаз
                     tab = await page.evaluate(JS_TABBABLE)
                     if tab.get("found") and not tab["open"] and tab["tabbable"] > 0:
                         flags.append("CLOSED_NAV_TABBABLE:%d" % tab["tabbable"])

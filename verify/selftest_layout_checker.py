@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
-"""САМОТЕСТ ИНСТРУМЕНТА check_layout_mobile.py.
+"""МАТРИЧНЫЙ САМОТЕСТ инструмента check_layout_mobile.py.
 
-Landa отклонил предыдущую проверку лейаута за нефальсифицируемость: она
-не могла провалиться в принципе (overflow-x:clip делал scrollWidth равным
-clientWidth), и он доказал это, вставив в страницу блок width:3000px.
+История. Landa дважды отклонял проверки лейаута за нефальсифицируемость:
+  раунд 1 — критерий scrollWidth<=clientWidth не мог провалиться при
+            overflow-x:clip (он вставил блок width:3000px, проверка сказала «чисто»);
+  раунд 2 — самотест закрывал ровно ОДНУ точку внедрения (прямо перед </body>),
+            а из четырёх способов сломать чекер он ловил один: вложение под
+            предка с overflow, переполнение ТЕКСТОМ и вылет ВЛЕВО проходили мимо.
 
-Этот самотест делает то же самое автоматически: во временную копию страницы
-вставляется заведомо переполняющий блок, инструмент обязан его поймать.
-Если не ловит — инструмент негоден, каким бы зелёным ни был его отчёт.
+Поэтому здесь матрица: каждый способ сломать вёрстку внедряется отдельно,
+и инструмент обязан поймать КАЖДЫЙ. Если хоть один случай не пойман —
+инструмент негоден, каким бы зелёным ни был его отчёт.
 
 Usage: py verify/selftest_layout_checker.py
-Печатает SELFTEST: PASS | FAIL. Код возврата 0/1.
+Печатает таблицу случаев и SELFTEST: PASS | FAIL. Код возврата 0/1.
 """
 import io
 import os
+import re
 import subprocess
 import sys
 
@@ -22,38 +26,74 @@ ROOT = os.path.dirname(HERE)
 PAGES = os.path.join(ROOT, "docs", "design", "v1-desktop")
 CHECKER = os.path.join(HERE, "check_layout_mobile.py")
 PW_PY = r"C:\Projects\HausBot\backend\.venv\Scripts\python.exe"
-INJECT = '<div style="width:3000px;height:10px" id="selftest-overflow"></div>'
+
+WIDE = '<div style="width:3000px;height:10px"></div>'
+
+# (имя случая, куда внедрять, что внедрять)
+#   anchor "</body>"        — элемент прямо под body, без клипперов
+#   anchor "<!-- HERO -->"  — подставляется внутрь секции hero (см. inject())
+CASES = [
+    ("широкий блок под body",        "body",    WIDE),
+    ("широкий блок внутри .hero",    "hero",    WIDE),
+    ("широкий блок под обёрткой overflow:hidden", "body",
+     '<div style="overflow-x:hidden;width:100%">' + WIDE + "</div>"),
+    ("переполнение ТЕКСТОМ (nowrap)", "body",
+     '<p style="white-space:nowrap;width:100px;overflow:visible">'
+     'Hausmeisterservice-Gebaeudereinigungs-Dachrinnenreinigungs-Sonderleistung</p>'),
+    ("вылет ВЛЕВО (left:-800px)",    "body",
+     '<div style="position:absolute;left:-800px;width:600px;height:10px"></div>'),
+]
 
 
-def run_checker(directory, width):
+def inject(html, where, snippet):
+    if where == "body":
+        return html.replace("</body>", snippet + "</body>")
+    if where == "hero":
+        m = re.search(r'(<section[^>]*class="[^"]*\bhero\b[^"]*"[^>]*>)', html)
+        if not m:
+            return None
+        return html[: m.end()] + snippet + html[m.end():]
+    raise ValueError(where)
+
+
+def run_checker(width):
     return subprocess.run(
-        [PW_PY, CHECKER, directory, str(width)],
+        [PW_PY, CHECKER, PAGES, str(width)],
         capture_output=True, text=True, encoding="utf-8", timeout=300,
     ).stdout
 
 
 def main():
     src = os.path.join(PAGES, "index.html")
-    # имя БЕЗ подчёркивания: чекер исключает "_*", и самотест на таком имени
-    # молча проходил бы мимо — ровно та слепота, которую он должен ловить
-    tmp = os.path.join(PAGES, "zz-selftest.html")
     html = io.open(src, encoding="utf-8").read()
-    io.open(tmp, "w", encoding="utf-8", newline="\n").write(
-        html.replace("</body>", INJECT + "</body>")
-    )
-    try:
-        out = run_checker(PAGES, 375)
-    finally:
-        if os.path.exists(tmp):
-            os.remove(tmp)
+    tmp = os.path.join(PAGES, "zz-selftest.html")   # без "_": чекер фильтрует "_*"
+    results = []
 
-    caught = any("zz-selftest.html" in ln and "OVERFLOW" in ln for ln in out.splitlines())
-    clean_after = "LAYOUT_CLEAN" in run_checker(PAGES, 375)
+    for label, where, snippet in CASES:
+        patched = inject(html, where, snippet)
+        if patched is None:
+            results.append((label, False, "секция для внедрения не найдена"))
+            continue
+        io.open(tmp, "w", encoding="utf-8", newline="\n").write(patched)
+        try:
+            out = run_checker(375)
+        finally:
+            if os.path.exists(tmp):
+                os.remove(tmp)
+        caught = any("zz-selftest.html" in ln and "OVERFLOW" in ln for ln in out.splitlines())
+        detail = next((ln.split("OVERFLOW:")[-1][:60] for ln in out.splitlines()
+                       if "zz-selftest.html" in ln and "OVERFLOW" in ln), "")
+        results.append((label, caught, detail))
 
-    print("вставлен блок width:3000px -> инструмент %s" % ("ПОЙМАЛ" if caught else "НЕ ПОЙМАЛ"))
-    print("после удаления вставки -> %s" % ("чисто" if clean_after else "всё ещё грязно"))
-    ok = caught and clean_after
-    print("SELFTEST: %s" % ("PASS" if ok else "FAIL"))
+    clean = "LAYOUT_CLEAN" in run_checker(375)
+
+    for label, caught, detail in results:
+        print("%-46s %s  %s" % (label, "ПОЙМАН" if caught else "ПРОПУЩЕН", detail))
+    print("%-46s %s" % ("после удаления всех вставок", "чисто" if clean else "ГРЯЗНО"))
+
+    ok = all(c for _, c, _ in results) and clean
+    print("SELFTEST: %s (%d/%d случаев)" % ("PASS" if ok else "FAIL",
+                                            sum(1 for _, c, _ in results if c), len(results)))
     return 0 if ok else 1
 
 
