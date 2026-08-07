@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Platzhalter: Hero-Foto">
+  <rect width="1440" height="620" fill="#8A9086"/>
+  <rect width="1440" height="620" fill="url(#g)" opacity=".35"/>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#6B7266"/><stop offset="1" stop-color="#3E443B"/>
+  </linearGradient></defs>
+  <text x="720" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#F8F8F8" opacity=".85">FOTO: Mitarbeiter beim Heckenschnitt</text>
+  <text x="720" y="344" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#F8F8F8" opacity=".6">(Platzhalter – echtes Foto folgt nach Freigabe)</text>
+</svg>

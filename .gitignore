@@ -26,3 +26,6 @@ Thumbs.db
 # Debug
 npm-debug.log*
 .worktrees/
+docs/design/v1-desktop/_*.png
+docs/design/v1-desktop/_*.json
+docs/design/v1-desktop/_*.html

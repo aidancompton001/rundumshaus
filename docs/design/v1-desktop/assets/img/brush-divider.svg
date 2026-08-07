@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" role="presentation" aria-hidden="true">
+  <!-- „Mazok kist'ju“: weißer Pinselstrich mit rauem Rand als Übergang Hero → helle Sektion.
+       Separates, wiederverwendbares Asset (kein Inline-clip-path). Füllfarbe = –color-paper. -->
+  <path fill="#F8F8F8" d="M0,44
+    C40,38 78,50 120,42 C160,34 190,52 240,46 C280,42 310,30 360,38
+    C405,45 440,28 490,36 C540,44 570,26 620,34 C665,41 700,52 750,44
+    C795,37 830,24 880,32 C925,39 960,54 1010,46 C1055,39 1090,28 1140,36
+    C1185,43 1220,30 1270,38 C1310,44 1350,32 1390,40 C1410,44 1425,40 1440,42
+    L1440,64 L0,64 Z"/>
+  <path fill="#F8F8F8" opacity=".55" d="M0,52
+    C60,46 110,58 180,50 C250,42 300,58 380,52 C450,47 520,38 600,46
+    C680,54 740,40 820,46 C900,52 970,60 1050,52 C1130,44 1200,52 1280,48
+    C1340,45 1400,52 1440,50 L1440,64 L0,64 Z"/>
+</svg>

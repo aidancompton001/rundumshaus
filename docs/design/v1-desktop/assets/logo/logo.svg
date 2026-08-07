@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 96" width="300" height="96" role="img" aria-label="Rund ums Haus Littawe – Logo (Platzhalter)">
+  <!-- Platzhalter-Logo: gleiche Form/Proportionen wie im Mockup (Haus + Werkzeuge + Wortmarke).
+       Finales Logo wird beim Port eingesetzt. Farben: Token-Werte hart eingebettet (SVG-Asset). -->
+  <g>
+    <!-- Haus -->
+    <path d="M14 46 L46 20 L78 46 L78 78 L14 78 Z" fill="#5A7F1B"/>
+    <path d="M46 20 L78 46 L78 78 L46 78 Z" fill="#10171F" opacity=".25"/>
+    <rect x="36" y="56" width="20" height="22" rx="2" fill="#FEFEFE"/>
+    <!-- Werkzeuge (Schraubenschlüssel + Hammer, stilisiert) -->
+    <path d="M60 12 l14 14 M74 12 l-14 14" stroke="#10171F" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="67" cy="19" r="5" fill="none" stroke="#10171F" stroke-width="3"/>
+    <!-- Grüne Wiese -->
+    <path d="M8 80 q38 -10 76 0 q-38 8 -76 0 Z" fill="#5A7F1B" opacity=".8"/>
+  </g>
+  <g font-family="Inter, system-ui, Arial, sans-serif">
+    <text x="96" y="46" font-size="26" font-weight="800" fill="#10171F">Rund ums Haus</text>
+    <text x="96" y="74" font-size="20" font-weight="600" fill="#5A7F1B" letter-spacing="2">— Littawe —</text>
+  </g>
+</svg>
