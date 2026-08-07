@@ -76,9 +76,12 @@ CASES = [
      # сжимает картинку и переполнения физически не возникает
      '<div style="overflow:hidden;width:100%"><img src="assets/img/ph-hero.svg" '
      'style="width:3000px;max-width:none;height:20px" alt="Vorher Nachher"></div>', True),
+    ("МОЛЧАЛИВАЯ обрезка текста без ellipsis",     "body",
+     '<div style="width:120px;overflow:hidden;white-space:nowrap">'
+     'Hausmeisterservice Osnabrueck Festpreis 79 Euro monatlich</div>', "warn"),
     ("ellipsis-обрезка показывается",              "body",
      '<div style="width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'
-     'Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</div>', True),
+     'Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</div>', "warn"),
     ("НЕГАТИВ: скрытый элемент (visibility:hidden)", "body",
      '<div style="visibility:hidden"><p style="white-space:nowrap;width:80px">'
      'Sehr langer deutscher Kompositatext zur Pruefung</p></div>', False),
@@ -120,11 +123,17 @@ def main():
         finally:
             if os.path.exists(tmp):
                 os.remove(tmp)
-        caught = any("zz-selftest.html" in ln and "OVERFLOW" in ln for ln in out.splitlines())
-        detail = next((ln.split("OVERFLOW:")[-1][:60] for ln in out.splitlines()
-                       if "zz-selftest.html" in ln and "OVERFLOW" in ln), "")
-        ok = (caught == must_catch)
-        results.append((label, ok, ('ПОЙМАН ' + detail) if caught else 'молчит'))
+        lines = [ln for ln in out.splitlines() if "zz-selftest.html" in ln]
+        caught = any("OVERFLOW" in ln for ln in lines)
+        warned = any("предупр:" in ln for ln in lines)
+        detail = (lines[0].split("  ", 2)[-1][:70] if lines else "")
+        if must_catch == "warn":
+            ok = warned and not caught          # предупреждение, но не дефект
+            state = "предупреждение" if warned else ("ДЕФЕКТ" if caught else "молчит")
+        else:
+            ok = (caught == must_catch)
+            state = ("ПОЙМАН " + detail) if caught else "молчит"
+        results.append((label, ok, state))
 
     # контроль чистоты — по всей папке, как в реальном прогоне
     clean = "LAYOUT_CLEAN" in subprocess.run([PW_PY, CHECKER, PAGES, "375"],

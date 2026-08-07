@@ -20,6 +20,7 @@ Landa требовал этого четыре раунда: «токены со
 Usage: py verify/check_tokens_match.py [путь к tokens.css]
 Код возврата: 0 — всё сошлось, 1 — есть расхождения.
 """
+import hashlib
 import io
 import json
 import os
@@ -32,14 +33,42 @@ DEFAULT_TOKENS = os.path.join(ROOT, "docs", "design", "v1-desktop", "css", "toke
 MEAS = os.path.join(ROOT, "docs", "design", "REFERENCE_MEASUREMENTS.json")
 TYPO = os.path.join(ROOT, "docs", "design", "TYPOGRAPHY.json")
 PX_TOLERANCE = 1
-
-# ВСЕ измеренные базовые цвета: токен -> путь к медиане зоны в замерах
-COLORS = {
-    "color-accent": ("green_accent", "median", "hex"),
-    "color-dark": ("zones", "stats_band", "median", "hex"),
-    "color-paper": ("zones", "leistungen_heading", "median", "hex"),
-    "color-white": ("zones", "navbar", "median", "hex"),
+# Landa раунд 5: замеры-эталон ничем не закреплены — расхождение можно «починить»
+# правкой самого замера, и пруф останется зелёным, потеряв связь с макетом Kevin.
+# Хеши берутся из состояния, проверенного ревьюером (файлы закоммичены до мокапа).
+EXPECTED_SHA = {
+    "REFERENCE_MEASUREMENTS.json": "d56577ef485634c1",
+    "TYPOGRAPHY.json": "aaa85bd9999b232a",
 }
+
+# ВСЕ 9 измеренных зон цвета (Landa раунд 5: прежняя версия брала 4 из 9,
+# и непроверенными оставались ровно те, что расходятся). Каждой зоне сопоставлен
+# токен, которым она РЕАЛЬНО красится в мокапе.
+COLOR_ZONES = {
+    "green_accent": ("color-accent", ("green_accent", "median", "hex")),
+    "navbar": ("color-white", ("zones", "navbar", "median", "hex")),
+    "leistungen_heading": ("color-paper", ("zones", "leistungen_heading", "median", "hex")),
+    "leistungen_cards": ("color-paper", ("zones", "leistungen_cards", "median", "hex")),
+    "bewertungen": ("color-paper", ("zones", "bewertungen", "median", "hex")),
+    "stats_band": ("color-dark", ("zones", "stats_band", "median", "hex")),
+    "ueber_uns": ("color-paper", ("zones", "ueber_uns", "median", "hex")),
+    "footer": ("color-dark", ("zones", "footer", "median", "hex")),
+    "hero": (None, ("zones", "hero", "median", "hex")),
+}
+# Осознанные упрощения палитры: измеренная зона -> (измерено, в токене, причина).
+# Landa: «объявить с величиной», чтобы отклонение было видно, а не отсутствовало.
+COLOR_DEVIATIONS = {
+    "ueber_uns": ("#F0F0F0", "#F8F8F8",
+                  "секция Über uns не имеет собственного фона и наследует фон страницы; "
+                  "разница 8 единиц на канал — след фото и водяного знака в замеряемой полосе"),
+    "footer": ("#11181F", "#10171F",
+               "футер и stats-полоса красятся одним токеном --color-dark; "
+               "разница 1 единица на канал — JPEG-шум"),
+    "hero": ("#0E130A", None,
+             "hero — фотография под градиентом, отдельного токена фона у неё нет "
+             "и быть не должно; сверять не с чем"),
+}
+
 # ВСЕ элементы TYPOGRAPHY.json: ключ замера -> токен кегля
 TYPESCALE = {
     "h1_hero": "text-h1",
@@ -90,13 +119,30 @@ def main():
     typo = json.load(io.open(TYPO, encoding="utf-8"))
     bad = 0
 
-    print("ЦВЕТА (%d измеренных, все проверяются):" % len(COLORS))
-    for name, path in sorted(COLORS.items()):
-        got = (token(css, name) or "—").upper()
-        want = dig(meas, path).upper()
+    print("ЭТАЛОННЫЕ ЗАМЕРЫ (закреплены хешем — правкой замера расхождение не спрячешь):")
+    for fname, path in (("REFERENCE_MEASUREMENTS.json", MEAS), ("TYPOGRAPHY.json", TYPO)):
+        got = hashlib.sha256(io.open(path, "rb").read()).hexdigest()[:16]
+        want = EXPECTED_SHA[fname]
         ok = got == want
         bad += not ok
-        print("  --%-16s %-9s vs %-9s  %s" % (name, got, want, "OK" if ok else "РАСХОЖДЕНИЕ"))
+        print("  %-30s %s  %s" % (fname, got, "OK" if ok else "ИЗМЕНЁН (ожидался " + want + ")"))
+
+    print("ЦВЕТА (%d измеренных зон, все проверяются):" % len(COLOR_ZONES))
+    for zone in sorted(COLOR_ZONES):
+        tname, path = COLOR_ZONES[zone]
+        want = dig(meas, path).upper()
+        got = (token(css, tname) or "—").upper() if tname else "—"
+        dev = COLOR_DEVIATIONS.get(zone)
+        if dev:
+            m_want, m_got, why = dev
+            ok = (want == m_want.upper() and got == (m_got.upper() if m_got else "—"))
+            bad += not ok
+            print("  %-20s %-9s vs %-9s  %s (упрощение заявлено: %s)"
+                  % (zone, got, want, "OK" if ok else "РАСХОЖДЕНИЕ", why[:60]))
+            continue
+        ok = got == want
+        bad += not ok
+        print("  %-20s %-9s vs %-9s  %s" % (zone, got, want, "OK" if ok else "РАСХОЖДЕНИЕ"))
 
     print("ТИПОГРАФИКА (%d измеренных, все проверяются):" % len(typo["elements"]))
     for key in sorted(typo["elements"]):

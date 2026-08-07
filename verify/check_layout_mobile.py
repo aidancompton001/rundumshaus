@@ -47,6 +47,7 @@ JS_OVERFLOW = """() => {
   const vw = document.documentElement.clientWidth;
   const NOISE = 8;                     // субпиксельный фон округления
   const bad = [];
+  const warn = [];   // видно в отчёте, но прогон не валит
   const name = el => el.tagName + (el.className ? '.' + String(el.className).split(' ')[0] : '');
 
   // Намеренно скрытое отличаем от дефекта ПОВЕДЕНЧЕСКИ, а не по расстоянию
@@ -141,18 +142,24 @@ JS_OVERFLOW = """() => {
     // из-за чего инструмент ругался на скрытые элементы.
     if (cs.display === 'none' || cs.visibility === 'hidden') return;
     if (el.closest('[hidden]')) return;
-    // ellipsis-обрезка: контент съедается молча — показываем некритичным флагом
-    if (cs.textOverflow === 'ellipsis' && el.scrollWidth > el.clientWidth + NOISE) {
-      bad.push('ELLIPSIS:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+    // Landa раунд 5: обрезка БЕЗ ellipsis хуже, чем с ним — текст обрывается вовсе,
+    // без визуального признака. Ловим при ЛЮБОМ неvisible overflow-x; ellipsis лишь
+    // уточняет формулировку. Оба случая идут в предупреждения, а не в дефекты:
+    // отличить намеренную обрезку от аварийной по CSS невозможно, но молчать нельзя.
+    if (cs.overflowX !== 'visible') {
+      if (el.scrollWidth > el.clientWidth + NOISE) {
+        const kind = cs.textOverflow === 'ellipsis' ? 'ELLIPSIS' : 'SILENT_CLIP';
+        warn.push(kind + ':' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+      }
       return;
     }
-    if (cs.overflowX !== 'visible') return;
     if (el.scrollWidth > el.clientWidth + NOISE) {
       bad.push('TEXT_OVF:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
     }
   });
 
-  return { width: vw, overflow: [...new Set(bad)].slice(0, 8) };
+  return { width: vw, overflow: [...new Set(bad)].slice(0, 8),
+           warnings: [...new Set(warn)].slice(0, 5) };
 }"""
 
 JS_IMAGES = """() => {
@@ -221,9 +228,13 @@ async def run(directory, widths):
                 st = await page.evaluate(JS_STICKY)
                 if st.get("found") and st["after"] != 0:
                     flags.append("STICKY_BROKEN(top=%d)" % st["after"])
+                warns = ovf.get("warnings") or []
                 if flags:
                     problems += 1
-                    print(line + "  " + " | ".join(flags))
+                    print(line + "  " + " | ".join(flags) +
+                          (("  [предупр: " + ",".join(warns) + "]") if warns else ""))
+                elif warns:
+                    print(line + "  OK  [предупр: " + ",".join(warns) + "]")
                 else:
                     print(line + "  OK")
         await ctx.close()
