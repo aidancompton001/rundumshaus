@@ -61,12 +61,26 @@ JS_OVERFLOW = """() => {
     const cs = getComputedStyle(el);
     const r = el.getBoundingClientRect();
     if (r.width <= 2 && r.height <= 2) return true;                 // sr-only 1x1
-    if (cs.clipPath !== 'none' || cs.clip !== 'auto') return true;  // clip-техника
+    // clip/clip-path — признак sr-only ТОЛЬКО в сочетании с крошечным боксом.
+    // Сам по себе clip-path это массовая декоративная техника (скошенные секции,
+    // маски), и освобождать по нему от всех проверок нельзя (лазейка, внесённая
+    // фиксом раунда 4 и найденная Landa в раунде 5).
+    const clipped = (cs.clipPath !== 'none' || cs.clip !== 'auto');
+    if (clipped && r.width <= 4 && r.height <= 4) return true;
     const fullyOutLeft = r.right <= 0;
     const fullyOutRight = r.left >= vw;
     return (fullyOutLeft || fullyOutRight) && isFocusable(el);
   };
-  const hasText = el => (el.textContent || '').trim().length > 0;
+  // Содержательным считается не только текст: обрезанное фото — та же потеря
+  // контента (на сайте услуг Vorher/Nachher несут смысл). Landa, раунд 5.
+  const MEDIA = new Set(['IMG', 'PICTURE', 'VIDEO', 'CANVAS', 'IFRAME']);
+  const hasContent = el => {
+    if ((el.textContent || '').trim().length > 0) return true;
+    if (MEDIA.has(el.tagName)) return true;
+    if (el.querySelector('img,picture,video,canvas,iframe')) return true;
+    const bg = getComputedStyle(el).backgroundImage;
+    return bg && bg !== 'none' && el.getBoundingClientRect().width > 8;
+  };
   // Горизонтальная КАРУСЕЛЬ — намеренный паттерн, у неё есть объективный признак:
   // scroll-snap-type по оси x. Просто overflow-x:auto таким признаком НЕ является:
   // при overflow-y:auto браузер вычисляет overflow-x как auto побочно, и любая
@@ -107,7 +121,7 @@ JS_OVERFLOW = """() => {
       }
       // содержимое, обрезанное клиппером: законно только для слайдера (листается)
       // и для элементов без текста (декор)
-      if (!isSlider(clip) && r.right > cr.right + 1 && hasText(el)) {
+      if (!isSlider(clip) && r.right > cr.right + 1 && hasContent(el)) {
         bad.push('CLIPPED:' + name(el) + '@' + Math.round(r.right) + '>' + Math.round(cr.right));
       }
       return;
@@ -123,6 +137,15 @@ JS_OVERFLOW = """() => {
   document.querySelectorAll('body *').forEach(el => {
     if (el.tagName.toLowerCase() === 'svg' || el.closest('svg')) return;
     const cs = getComputedStyle(el);
+    // Landa, раунд 5: первый проход учитывал видимость, второй — нет,
+    // из-за чего инструмент ругался на скрытые элементы.
+    if (cs.display === 'none' || cs.visibility === 'hidden') return;
+    if (el.closest('[hidden]')) return;
+    // ellipsis-обрезка: контент съедается молча — показываем некритичным флагом
+    if (cs.textOverflow === 'ellipsis' && el.scrollWidth > el.clientWidth + NOISE) {
+      bad.push('ELLIPSIS:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');
+      return;
+    }
     if (cs.overflowX !== 'visible') return;
     if (el.scrollWidth > el.clientWidth + NOISE) {
       bad.push('TEXT_OVF:' + name(el) + '(' + el.scrollWidth + '>' + el.clientWidth + ')');

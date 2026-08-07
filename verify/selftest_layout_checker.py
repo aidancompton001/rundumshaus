@@ -68,7 +68,22 @@ CASES = [
     ("НЕГАТИВ: декоративный svg за краем",        "hero",
      '<svg aria-hidden="true" style="position:absolute;right:-200px;width:300px;height:20px">'
      '<rect width="300" height="20"/></svg>', False),
+    # раунд 5 — случаи Landa, которые прошлая версия пропускала
+    ("clip-path не освобождает от проверки",      "hero",
+     '<div style="clip-path:inset(0);width:3000px;height:14px">Notdienst 24/7 - 0151 23456789</div>', True),
+    ("обрезанная КАРТИНКА (декор = не только текст)", "hero",
+     # max-width:none обязателен: глобальное правило img{max-width:100%} иначе
+     # сжимает картинку и переполнения физически не возникает
+     '<div style="overflow:hidden;width:100%"><img src="assets/img/ph-hero.svg" '
+     'style="width:3000px;max-width:none;height:20px" alt="Vorher Nachher"></div>', True),
+    ("ellipsis-обрезка показывается",              "body",
+     '<div style="width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'
+     'Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</div>', True),
+    ("НЕГАТИВ: скрытый элемент (visibility:hidden)", "body",
+     '<div style="visibility:hidden"><p style="white-space:nowrap;width:80px">'
+     'Sehr langer deutscher Kompositatext zur Pruefung</p></div>', False),
 ]
+
 
 def inject(html, where, snippet):
     if where == "body":
