@@ -1,0 +1,3 @@
+# PX/T008: snapshot-файлы vitest — всегда LF, иначе прогон тестов
+# оставляет ложный "M" в git status (Landa S074, техдолг #1)
+*.snap text eol=lf
