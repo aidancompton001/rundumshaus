@@ -1,5 +1,5 @@
 {
- "task": "T008 Ф1+Ф2+Ф3 — тулкит, замеры v3 (типографика по cap-height), CDP-промпт (2026-08-07, v3 после Landa раунд 2)",
+ "task": "T008 Ф1+Ф2+Ф3 — тулкит, замеры, типографика, CDP-промпт (2026-08-07, v4 после Landa раунд 3)",
  "threshold": 1e-08,
  "require_landa": true,
  "claims": [
@@ -288,9 +288,9 @@
   {
    "id": "33",
    "asserted": true,
-   "text": "ИСПРАВЛЕНО (Landa F-03/F-04): фабрикованное '~4.3:1' удалено из промпта; ширина карточки пересчитана от контентной ширины макета (869px) к контейнеру 1280 → ~240px вместо ошибочных 213px",
+   "text": "ИСПРАВЛЕНО (Landa F-03/F-04/F-11): фабрикованное '~4.3:1' удалено; ширина карточки пересчитана от контентной ширины макета 869px к контейнеру 1280 → 240px. Ошибочные '213px' И '213 px' (с пробелом — Landa нашёл выживший экземпляр в зоне COPY) отсутствуют в ОБОИХ документах",
    "proof": {
-    "cmd": "cd .worktrees/redesign && f=docs/design/CDP-RundumsHaus.md; a=$(grep -c '4.3:1' $f; true); b=$(grep -c '213px' $f; true); c=$(grep -c 'карточка ≈ 240px' $f); echo \"$a $b $c\"",
+    "cmd": "cd .worktrees/redesign && a=$(grep -cE '213 ?px' docs/design/CDP-RundumsHaus.md docs/design/REFERENCE_MEASUREMENTS.md | py -c \"import sys;print(sum(int(l.split(':')[-1]) for l in sys.stdin))\"); b=$(grep -c '4.3:1' docs/design/CDP-RundumsHaus.md; true); c=$(grep -c 'карточка ≈ 240px' docs/design/CDP-RundumsHaus.md); echo \"$a $b $c\"",
     "expect_equal": "0 0 1"
    }
   },
@@ -320,6 +320,48 @@
    "asserted": false,
    "text": "Атрибуции решений живым людям: Kevin («тексты наши, moderner verpackt»), CEO («фото AI», «5+ Jahre переносим», «Preview любой»)",
    "note": "Источник — переписка WhatsApp и указания CEO в сессии, машинного пруфа нет и быть не может. Зафиксировано в DEVLOG/STATUS как решения, но фактом в реестре не заявляется."
+  },
+  {
+   "id": "38",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-12, вторая половина F-02): e-mail. В макете стоит info@rundumshaus-littawe.de, которого в проекте не существует; реальный адрес kontakt@rundumshaus-littawe.de из site.json. Промпт теперь явно предписывает брать e-mail и телефон из данных бизнеса, а не с картинки",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'kontakt@rundumshaus-littawe.de' docs/design/CDP-RundumsHaus.md); b=$(py -c \"import json;print(json.load(open('site/src/data/site.json',encoding='utf-8'))['email'])\"); c=$(grep -rc 'info@rundumshaus' site/src/data/site.json; true); echo \"$a $b $c\"",
+    "expect_equal": "3 kontakt@rundumshaus-littawe.de 0"
+   }
+  },
+  {
+   "id": "39",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-14): в промпте задан нижний порог кегля 14px — исправленная шкала давала буллеты 12px, что противоречило собственному блоку доступности. Отступление внесено и в список разрешённых",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'не мельче 14 px' docs/design/CDP-RundumsHaus.md); b=$(grep -c 'до минимальных 14 px' docs/design/CDP-RundumsHaus.md); echo \"$a $b\"",
+    "expect_equal": "1 1"
+   }
+  },
+  {
+   "id": "40",
+   "asserted": true,
+   "text": "ИСПРАВЛЕНО (Landa F-13): правило #7 больше не самопротиворечиво — из макета берутся stats и часы работы, телефон и e-mail берутся из данных бизнеса",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'ИЗ ДАННЫХ БИЗНЕСА, А НЕ ИЗ МАКЕТА' docs/design/CDP-RundumsHaus.md); b=$(grep -c 'контакты (телефон .* берутся из макета КАК ЕСТЬ' docs/design/CDP-RundumsHaus.md; true); echo \"$a $b\"",
+    "expect_equal": "1 0"
+   }
+  },
+  {
+   "id": "41",
+   "asserted": false,
+   "text": "Часы работы Mo-Sa 08:00-18:00 (Landa unlisted)",
+   "note": "Единственный источник — макет. В site.json и во всём коде проекта часов работы НЕТ (grep openingHours пуст). Это допущение дизайнера, не подтверждённые Kevin'ом часы. Переносим как есть по решению CEO о макете, но фактом бизнеса не заявляем — подтверждение у Kevin запросить перед деплоем."
+  },
+  {
+   "id": "42",
+   "asserted": true,
+   "text": "Реестр T008 закоммичен в redesign-ветку (Landa F-16: раньше жил только как untracked-файл основного чекаута и исчез бы при чистом клоне)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && git show HEAD:verify/hrc_ledger.json | py -c \"import json,sys;print(len(json.load(sys.stdin)['claims']))\"",
+    "expect_contain": "3"
+   }
   }
  ]
 }
