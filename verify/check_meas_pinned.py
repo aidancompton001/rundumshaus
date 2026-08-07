@@ -6,7 +6,7 @@ Landa раунд 7: прошлый пруф этого claim'а содержал
 и циркулярный grep, сверявший константу чекера саму с собой. Проверку
 «хеши совпадают с git-версией» тогда доказал ревьюер, а не пруф.
 
-Здесь: берём содержимое файла ИЗ GIT (git show HEAD:path), считаем sha256
+Здесь: берём содержимое файла ИЗ GIT по историческому якорю (коммит замеров), считаем sha256
 и сравниваем с константой, зашитой в check_tokens_match.py. Совпадение
 означает, что закреплён не локальный файл, а то, что лежит в репозитории.
 
@@ -23,6 +23,10 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 CHECKER = os.path.join(HERE, "check_tokens_match.py")
+# Landa: HEAD — движущаяся мишень, правка замера вместе с пересчётом константы
+# в одном коммите прошла бы незаметно. Замеры сняты в 418ddd2, ДО появления мокапа,
+# и это фиксированный исторический факт: содержимое там и в HEAD совпадает до бита.
+ANCHOR = "418ddd2"
 FILES = {
     "REFERENCE_MEASUREMENTS.json": "docs/design/REFERENCE_MEASUREMENTS.json",
     "TYPOGRAPHY.json": "docs/design/TYPOGRAPHY.json",
@@ -36,7 +40,7 @@ def const_from_checker(name):
 
 
 def sha_from_git(path):
-    out = subprocess.run(["git", "-C", ROOT, "show", "HEAD:" + path],
+    out = subprocess.run(["git", "-C", ROOT, "show", ANCHOR + ":" + path],
                          capture_output=True, timeout=60).stdout
     if not out:
         return None

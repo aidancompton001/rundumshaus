@@ -82,6 +82,9 @@ CASES = [
     ("ellipsis-обрезка показывается",              "body",
      '<div style="width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'
      'Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</div>', "warn"),
+    ("ellipsis с текстом В ПОТОМКЕ — тоже предупреждение", "body",
+     '<div style="width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'
+     '<span>Hausmeisterservice Osnabrueck - Festpreis 79 Euro monatlich</span></div>', "warn"),
     ("НЕГАТИВ: скрытый элемент (visibility:hidden)", "body",
      '<div style="visibility:hidden"><p style="white-space:nowrap;width:80px">'
      'Sehr langer deutscher Kompositatext zur Pruefung</p></div>', False),

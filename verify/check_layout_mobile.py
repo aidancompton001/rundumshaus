@@ -123,7 +123,17 @@ JS_OVERFLOW = """() => {
       // содержимое, обрезанное клиппером: законно только для слайдера (листается)
       // и для элементов без текста (декор)
       if (!isSlider(clip) && r.right > cr.right + 1 && hasContent(el)) {
-        bad.push('CLIPPED:' + name(el) + '@' + Math.round(r.right) + '>' + Math.round(cr.right));
+        // Landa раунд 7 (дельта): намеренность обрезки определяется свойством
+        // КЛИППЕРА, а не тем, лежит ли текст прямым узлом или в потомке. Иначе
+        // шаблон <div class="truncate"><span>…</span></div> валит гейт, а тот же
+        // текст без span — только предупреждает: строгость становилась функцией
+        // формы разметки, что и было исходным замечанием.
+        const msg = name(el) + '@' + Math.round(r.right) + '>' + Math.round(cr.right);
+        if (getComputedStyle(clip).textOverflow === 'ellipsis') {
+          warn.push('ELLIPSIS:' + msg);
+        } else {
+          bad.push('CLIPPED:' + msg);
+        }
       }
       return;
     }

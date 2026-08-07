@@ -76,6 +76,24 @@ def main():
         out = run(TOKENS, meas=mutant_meas)
         results.append(("мутация ЭТАЛОНА замеров", out.startswith("RESULT: MISMATCH"), out))
 
+    # Landa раунд 7 (LOW): пятый инструмент приехал без собственного случая.
+    # Проверяем, что привязка к git фальсифицируема: подделанная константа ловится.
+    with tempfile.TemporaryDirectory() as tmp3:
+        fake_checker = os.path.join(tmp3, "check_tokens_match.py")
+        fake_pin = os.path.join(tmp3, "check_meas_pinned.py")
+        src = io.open(CHECKER, encoding="utf-8").read()
+        io.open(fake_checker, "w", encoding="utf-8", newline="\n").write(
+            src.replace('"REFERENCE_MEASUREMENTS.json": "', '"REFERENCE_MEASUREMENTS.json": "deadbeefdeadbeef', 1))
+        pin_src = io.open(os.path.join(HERE, "check_meas_pinned.py"), encoding="utf-8").read()
+        io.open(fake_pin, "w", encoding="utf-8", newline="\n").write(
+            pin_src.replace('CHECKER = os.path.join(HERE, "check_tokens_match.py")',
+                            'CHECKER = r"%s"' % fake_checker)
+                   .replace('ROOT = os.path.dirname(HERE)', 'ROOT = r"%s"' % ROOT))
+        r = subprocess.run([sys.executable, fake_pin], capture_output=True,
+                           text=True, encoding="utf-8", timeout=120)
+        last = r.stdout.strip().splitlines()[-1] if r.stdout.strip() else "(нет вывода)"
+        results.append(("подделка константы привязки к git", last.startswith("RESULT: PIN_MISMATCH"), last))
+
     for label, ok, detail in results:
         print("%-44s %-7s %s" % (label, "OK" if ok else "ПРОВАЛ", detail))
 
@@ -85,7 +103,7 @@ def main():
 
     ok = all(r[1] for r in results) and untouched
     print("SELFTEST_TOKENS: %s (%d/%d мутаций)" % ("PASS" if ok else "FAIL",
-          sum(1 for r in results[1:] if r[1]), len(MUTATIONS) + 1))
+          sum(1 for r in results[1:] if r[1]), len(MUTATIONS) + 2))
     return 0 if ok else 1
 
 
