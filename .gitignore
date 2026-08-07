@@ -26,3 +26,10 @@ Thumbs.db
 # Debug
 npm-debug.log*
 .worktrees/
+
+# Приватные материалы клиента — НЕ коммитить (2026-08-07, приказ CEO)
+docs/kevin-*.md
+docs/PENDING_KEVIN_*.md
+docs/ANLEITUNG_*
+docs/Anleitung*
+docs/DNS_BACKUP_*.md
