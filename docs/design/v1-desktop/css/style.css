@@ -217,9 +217,15 @@ button {
   min-height: 82px;               /* ≈5.1 % Seitenhöhe im Mockup */
 }
 .brand { display: inline-flex; align-items: center; flex: none; }
-.brand img { height: 52px; width: auto; }
+/* лого клиента — квадратной компоновки (дом над словесной маркой), тогда как в
+   макете стоял широкий плейсхолдер. При 52px словесная марка нечитаема, поэтому
+   берём 66px — предел, при котором лого ещё вписывается в шапку 82px */
+.brand img { height: 66px; width: auto; }
 
 .main-nav { margin-left: auto; }
+/* кнопка закрытия принадлежит мобильному меню; вне его она не имела правила
+   display и висела видимым крестиком посреди десктопной шапки */
+.nav-close { display: none; }
 .main-nav ul {
   display: flex;
   align-items: center;
@@ -675,7 +681,15 @@ button {
   font-weight: 700;
   margin-bottom: 1rem;
 }
-.footer-brand img { height: 46px; margin-bottom: 0.9rem; }
+/* лого клиента — синее по белому, на тёмном футере ему нужна подложка
+   (так же, как на текущем сайте: bg-white/95 + rounded + padding) */
+.footer-brand img {
+  height: 58px; width: auto; margin-bottom: 0.9rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-sizing: content-box;
+}
 .footer-desc { line-height: 1.6; margin-bottom: 1.1rem; }
 
 .footer-social { display: flex; gap: 0.6rem; }
