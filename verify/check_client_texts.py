@@ -247,7 +247,10 @@ def main():
     # faire Preise…»), хотя у клиента есть homepage.about. Проверка его не видела,
     # потому что он не про услуги — добавлен после визуального контроля.
     print("ГЛАВНАЯ — блок «Über uns» и подзаголовок героя из homepage.json:")
-    for key, want in (("homepage.about.paragraph1", hp["about"]["body"]),
+    # Landa H-03: H1 главной был из макета, а не из источника. Решением CEO
+    # поставлена формулировка клиента — теперь она под замком.
+    for key, want in (("homepage.hero.title", hp["hero"]["heading"]),
+                      ("homepage.about.paragraph1", hp["about"]["body"]),
                       ("homepage.about.paragraph2", hp["about"]["body2"]),
                       ("homepage.hero.subtitle", hp["hero"]["subheading"])):
         got = node_text(slot(idx, key) or "")

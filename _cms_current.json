@@ -1,0 +1,546 @@
+{
+ "cityPage.h1": {
+  "file": "city-template.html",
+  "text": "{{Leistung}} in {{Stadt}}"
+ },
+ "cityPage.heroText": {
+  "file": "city-template.html",
+  "text": "Ihr zuverlässiger Partner für {{Leistung}} in {{Stadt}} und Umgebung – schnell, preiswert und persönlich."
+ },
+ "cityPage.intro1": {
+  "file": "city-template.html",
+  "text": "{{Intro_Absatz_1: Leistung + Stadt, Nutzenversprechen, lokaler Bezug}}"
+ },
+ "cityPage.intro2": {
+  "file": "city-template.html",
+  "text": "{{Intro_Absatz_2: Arbeitsweise, Erreichbarkeit, faire Preise}}"
+ },
+ "cityPage.benefits": {
+  "file": "city-template.html",
+  "text": "Kostenlose & unverbindliche Anfrage Kurzfristige Termine in {{Stadt}} möglich Faire, transparente Preise Saubere & zuverlässige Ausführung Ein Ansprechpartner für alles rund ums Haus"
+ },
+ "cityPage.cta.title": {
+  "file": "city-template.html",
+  "text": "Jetzt {{Leistung}} in {{Stadt}} anfragen"
+ },
+ "cityPage.cta.text": {
+  "file": "city-template.html",
+  "text": "Beschreiben Sie kurz Ihr Anliegen – wir melden uns schnellstmöglich zurück."
+ },
+ "cityPage.section1.title": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_1_Titel: z. B. „Warum {{Leistung}} in {{Stadt}} regelmäßig wichtig ist“}}"
+ },
+ "cityPage.section1.text": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_1_Inhalt}}"
+ },
+ "cityPage.section2.title": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_2_Titel: z. B. „So arbeiten wir in {{Stadt}}“}}"
+ },
+ "cityPage.section2.text": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_2_Inhalt}}"
+ },
+ "cityPage.services.title": {
+  "file": "city-template.html",
+  "text": "{{Leistung}} in {{Stadt}} – unsere Leistungen im Detail"
+ },
+ "cityPage.services.items": {
+  "file": "city-template.html",
+  "text": "{{Unterleistung_1}} {{Unterleistung_2}} {{Unterleistung_3}} {{Unterleistung_4}} {{Unterleistung_5}} {{Unterleistung_6}}"
+ },
+ "cityPage.section3.title": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_3_Titel}}"
+ },
+ "cityPage.section3.text": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_3_Inhalt}}"
+ },
+ "cityPage.section4.title": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_4_Titel}}"
+ },
+ "cityPage.section4.text": {
+  "file": "city-template.html",
+  "text": "{{Textsektion_4_Inhalt}}"
+ },
+ "cityPage.whyUs": {
+  "file": "city-template.html",
+  "text": "Alles aus einer Hand Faire & transparente Preise Kurzfristige Termine möglich Persönlicher Ansprechpartner Saubere, dokumentierte Arbeit Auch für Vermieter & Hausverwaltungen Regional verwurzelt in Osnabrück Zuverlässig, schnell & preiswert"
+ },
+ "cityPage.area.title": {
+  "file": "city-template.html",
+  "text": "Unser Einsatzgebiet"
+ },
+ "cityPage.area.text": {
+  "file": "city-template.html",
+  "text": "Wir sind im Umkreis von 60 km rund um Osnabrück für Sie unterwegs – von {{Stadt}} bis in die umliegenden Gemeinden. Kurze Wege bedeuten schnelle Termine und faire Anfahrtskosten."
+ },
+ "cityPage.faq.title": {
+  "file": "city-template.html",
+  "text": "Häufige Fragen zu {{Leistung}} in {{Stadt}}"
+ },
+ "cityPage.faq[0].answer": {
+  "file": "city-template.html",
+  "text": "{{FAQ_Antwort_1}}"
+ },
+ "cityPage.faq[1].answer": {
+  "file": "city-template.html",
+  "text": "{{FAQ_Antwort_2}}"
+ },
+ "cityPage.faq[2].answer": {
+  "file": "city-template.html",
+  "text": "{{FAQ_Antwort_3}}"
+ },
+ "cityPage.faq[3].answer": {
+  "file": "city-template.html",
+  "text": "{{FAQ_Antwort_4}}"
+ },
+ "cityPage.faq[4].answer": {
+  "file": "city-template.html",
+  "text": "{{FAQ_Antwort_5}}"
+ },
+ "cityPage.faq[5].answer": {
+  "file": "city-template.html",
+  "text": "{{FAQ_Antwort_6}}"
+ },
+ "site.header.whatsapp": {
+  "file": "index.html",
+  "text": "+49 1523 9603175 Jetzt per WhatsApp"
+ },
+ "homepage.hero.title": {
+  "file": "index.html",
+  "text": "Rund ums Haus. Aus einer Hand."
+ },
+ "homepage.hero.subtitle": {
+  "file": "index.html",
+  "text": "Gartenpflege, Entrümpelung, Hausmeisterservice, Dachservice & vieles mehr."
+ },
+ "homepage.hero.badges": {
+  "file": "index.html",
+  "text": "Zuverlässig Schnell Preiswert Persönlich"
+ },
+ "homepage.hero.usp[0].title": {
+  "file": "index.html",
+  "text": "Zuverlässig"
+ },
+ "homepage.hero.usp[0].text": {
+  "file": "index.html",
+  "text": "Wir halten unsere Versprechen"
+ },
+ "homepage.hero.usp[1].title": {
+  "file": "index.html",
+  "text": "Schnell"
+ },
+ "homepage.hero.usp[1].text": {
+  "file": "index.html",
+  "text": "Kurzfristige Termine möglich"
+ },
+ "homepage.hero.usp[2].title": {
+  "file": "index.html",
+  "text": "Preiswert"
+ },
+ "homepage.hero.usp[2].text": {
+  "file": "index.html",
+  "text": "Faire Preise, klare Angebote"
+ },
+ "homepage.hero.usp[3].title": {
+  "file": "index.html",
+  "text": "Persönlich"
+ },
+ "homepage.hero.usp[3].text": {
+  "file": "index.html",
+  "text": "Direkt & persönlich für Sie da"
+ },
+ "homepage.services.eyebrow": {
+  "file": "index.html",
+  "text": "Unsere Leistungen"
+ },
+ "homepage.services.title": {
+  "file": "index.html",
+  "text": "Vielfältige Leistungen für Ihr Zuhause"
+ },
+ "services[4].title": {
+  "file": "index.html",
+  "text": "Garten- & Landschaftsbau & Pflasterarbeiten"
+ },
+ "services[4].bullets": {
+  "file": "index.html",
+  "text": "Pflasterarbeiten Terrassen & Wege Einfahrten Gestaltung & Neuanlagen"
+ },
+ "services[0].title": {
+  "file": "index.html",
+  "text": "Gartenpflege & Gärtnerarbeiten"
+ },
+ "services[0].bullets": {
+  "file": "index.html",
+  "text": "Rasenmähen Hecken- und Strauchschnitt Beetpflege Grünanlagenpflege"
+ },
+ "services[1].title": {
+  "file": "index.html",
+  "text": "Entrümpelung & Haushaltsauflösung"
+ },
+ "services[1].bullets": {
+  "file": "index.html",
+  "text": "Entrümpelung Haushaltsauflösung Wohnungsauflösung Keller- & Dachbodenräumung"
+ },
+ "services[2].title": {
+  "file": "index.html",
+  "text": "Hausmeisterservice & Gebäudereinigung"
+ },
+ "services[2].bullets": {
+  "file": "index.html",
+  "text": "Hausmeisterservice Gebäudereinigung Treppenhausreinigung Unterhaltsreinigung"
+ },
+ "services[3].title": {
+  "file": "index.html",
+  "text": "Dachservice & Dachreinigung"
+ },
+ "services[3].bullets": {
+  "file": "index.html",
+  "text": "Dachreinigung Dachrinnenreinigung Dachinspektion Kleinreparaturen"
+ },
+ "homepage.about.badge": {
+  "file": "index.html",
+  "text": "100% Zufriedene Kunden"
+ },
+ "homepage.about.eyebrow": {
+  "file": "index.html",
+  "text": "Über uns"
+ },
+ "homepage.about.title": {
+  "file": "index.html",
+  "text": "Zuverlässig. Ehrlich. Nah am Kunden."
+ },
+ "homepage.about.paragraph1": {
+  "file": "index.html",
+  "text": "Rund ums Haus Littawe steht für zuverlässige Arbeit, faire Preise und einen Service, auf den Sie sich verlassen können."
+ },
+ "homepage.about.paragraph2": {
+  "file": "index.html",
+  "text": "Wir kümmern uns um Ihr Zuhause, als wäre es unser eigenes – schnell, sauber und professionell."
+ },
+ "homepage.about.checks": {
+  "file": "index.html",
+  "text": "Erfahrenes Team Faire & transparente Preise Individuelle Beratung Zuverlässige Ausführung"
+ },
+ "homepage.stats[0].value": {
+  "file": "index.html",
+  "text": "100%"
+ },
+ "homepage.stats[0].label": {
+  "file": "index.html",
+  "text": "Zufriedene Kunden"
+ },
+ "homepage.stats[1].value": {
+  "file": "index.html",
+  "text": "5+"
+ },
+ "homepage.stats[1].label": {
+  "file": "index.html",
+  "text": "Jahre Erfahrung"
+ },
+ "homepage.stats[2].value": {
+  "file": "index.html",
+  "text": "Osnabrück &Umgebung"
+ },
+ "homepage.stats[2].label": {
+  "file": "index.html",
+  "text": "Unser Einsatzgebiet"
+ },
+ "homepage.stats[3].value": {
+  "file": "index.html",
+  "text": "Zuverlässig, schnell& preiswert"
+ },
+ "homepage.stats[3].label": {
+  "file": "index.html",
+  "text": "Unser Versprechen"
+ },
+ "homepage.reviews.eyebrow": {
+  "file": "index.html",
+  "text": "Bewertungen"
+ },
+ "homepage.reviews.title": {
+  "file": "index.html",
+  "text": "Das sagen unsere Kunden"
+ },
+ "homepage.reviews.items[0].text": {
+  "file": "index.html",
+  "text": "[Kundenzitat 1 – wird beim Port durch eine echte Google-Bewertung ersetzt]"
+ },
+ "homepage.reviews.items[0].author": {
+  "file": "index.html",
+  "text": "[Kundenname 1]"
+ },
+ "homepage.reviews.items[1].text": {
+  "file": "index.html",
+  "text": "[Kundenzitat 2 – wird beim Port durch eine echte Google-Bewertung ersetzt]"
+ },
+ "homepage.reviews.items[1].author": {
+  "file": "index.html",
+  "text": "[Kundenname 2]"
+ },
+ "homepage.reviews.items[2].text": {
+  "file": "index.html",
+  "text": "[Kundenzitat 3 – wird beim Port durch eine echte Google-Bewertung ersetzt]"
+ },
+ "homepage.reviews.items[2].author": {
+  "file": "index.html",
+  "text": "[Kundenname 3]"
+ },
+ "homepage.reviews.ctaLabel": {
+  "file": "index.html",
+  "text": "Alle Bewertungen auf Google ansehen"
+ },
+ "site.footer.description": {
+  "file": "index.html",
+  "text": "Ihr Partner für Gartenpflege, Entrümpelung, Hausmeisterservice, Dachservice & Dachreinigung, Garten- & Landschaftsbau und mehr in Osnabrück und Umgebung."
+ },
+ "site.contact.phone": {
+  "file": "index.html",
+  "text": "+49 1523 9603175"
+ },
+ "site.contact.email": {
+  "file": "index.html",
+  "text": "kontakt@rundumshaus-littawe.de"
+ },
+ "site.contact.region": {
+  "file": "index.html",
+  "text": "Osnabrück & Umgebung"
+ },
+ "site.contact.hours": {
+  "file": "index.html",
+  "text": "Mo – Sa: 08:00 – 18:00 Uhr"
+ },
+ "contactPage.title": {
+  "file": "kontakt.html",
+  "text": "Kontakt – wir sind für Sie da"
+ },
+ "contactPage.intro": {
+  "file": "kontakt.html",
+  "text": "Rufen Sie an, schreiben Sie uns oder nutzen Sie das Formular – wir melden uns schnellstmöglich zurück."
+ },
+ "services.page.title": {
+  "file": "leistungen.html",
+  "text": "Unsere Leistungen im Überblick"
+ },
+ "services.page.intro": {
+  "file": "leistungen.html",
+  "text": "Von der Gartenpflege bis zum Dachservice – wir kümmern uns um Ihr Zuhause. Zuverlässig, schnell und zu fairen Preisen, in Osnabrück und im Umkreis von 60 km."
+ },
+ "services[0].description": {
+  "file": "leistungen.html",
+  "text": "Ein gepflegter Garten braucht regelmäßige Aufmerksamkeit. Wir übernehmen die komplette Gartenpflege – vom wöchentlichen Rasenmähen bis zum fachgerechten Heckenschnitt zur richtigen Jahreszeit. Auch für Vermieter und Hausverwaltungen: dauerhafte Pflege von Grünanlagen mit verlässlichen Terminen."
+ },
+ "services[0].subservices": {
+  "file": "leistungen.html",
+  "text": "Rasenmähen & Rasenpflege Hecken- und Strauchschnitt Beetpflege & Unkrautentfernung Grünanlagenpflege Laubentfernung Saisonale Pflanzarbeiten"
+ },
+ "services[1].description": {
+  "file": "leistungen.html",
+  "text": "Ob Wohnungsübergabe, Erbfall oder Umzug: Wir räumen Wohnungen, Häuser, Keller und Dachböden besenrein – diskret, zügig und mit fachgerechter Entsorgung. Auf Wunsch mit Festpreis nach kostenloser Besichtigung, auch kurzfristig zum Mietende."
+ },
+ "services[1].subservices": {
+  "file": "leistungen.html",
+  "text": "Entrümpelung Haushaltsauflösung Wohnungsauflösung Keller- & Dachbodenräumung Besenreine Übergabe Fachgerechte Entsorgung"
+ },
+ "services[2].description": {
+  "file": "leistungen.html",
+  "text": "Für Eigentümer, Vermieter und Hausverwaltungen: Wir halten Ihre Immobilie in Schuss – regelmäßig, dokumentiert und zuverlässig. Vom Treppenhaus über die Außenanlage bis zu kleinen Reparaturen gibt es bei uns alles aus einer Hand."
+ },
+ "services[2].subservices": {
+  "file": "leistungen.html",
+  "text": "Hausmeisterservice Gebäudereinigung Treppenhausreinigung Unterhaltsreinigung Kleinreparaturen Winterdienst & Laubbeseitigung"
+ },
+ "services[3].description": {
+  "file": "leistungen.html",
+  "text": "Moos und Laub setzen Dach und Dachrinne zu. Wir reinigen fachgerecht, prüfen den Zustand und beheben kleine Schäden, bevor sie teuer werden – inklusive Fotos zur Dokumentation für Eigentümer und Verwalter."
+ },
+ "services[3].subservices": {
+  "file": "leistungen.html",
+  "text": "Dachreinigung Dachrinnenreinigung Dachinspektion Kleinreparaturen Moosentfernung Foto-Dokumentation"
+ },
+ "services[4].description": {
+  "file": "leistungen.html",
+  "text": "Neue Terrasse, befestigte Einfahrt oder komplette Neuanlage des Gartens: Wir planen mit Ihnen, arbeiten sauber und liefern ein Ergebnis, das lange hält – abgestimmt auf Grundstück und Budget."
+ },
+ "services[4].subservices": {
+  "file": "leistungen.html",
+  "text": "Pflasterarbeiten Terrassen & Wege Einfahrten Gestaltung & Neuanlagen Randsteine & Einfassungen Erd- & Vorbereitungsarbeiten"
+ },
+ "blogPage.title": {
+  "file": "ratgeber.html",
+  "text": "Ratgeber rund um Haus & Garten"
+ },
+ "blogPage.intro": {
+  "file": "ratgeber.html",
+  "text": "Praktische Tipps vom Fachmann – damit Sie wissen, was wann zu tun ist und wo sich professionelle Hilfe lohnt."
+ },
+ "blog.posts[0].meta": {
+  "file": "ratgeber.html",
+  "text": "Gartenpflege · [Datum]"
+ },
+ "blog.posts[0].title": {
+  "file": "ratgeber.html",
+  "text": "Heckenschnitt: Welche Zeiten erlaubt sind – und welche nicht"
+ },
+ "blog.posts[0].excerpt": {
+  "file": "ratgeber.html",
+  "text": "[Teaser-Text des Artikels – 2 bis 3 Sätze]"
+ },
+ "blog.posts[1].meta": {
+  "file": "ratgeber.html",
+  "text": "Entrümpelung · [Datum]"
+ },
+ "blog.posts[1].title": {
+  "file": "ratgeber.html",
+  "text": "Haushaltsauflösung planen: Checkliste für Erben und Vermieter"
+ },
+ "blog.posts[1].excerpt": {
+  "file": "ratgeber.html",
+  "text": "[Teaser-Text des Artikels – 2 bis 3 Sätze]"
+ },
+ "blog.posts[2].meta": {
+  "file": "ratgeber.html",
+  "text": "Dachservice · [Datum]"
+ },
+ "blog.posts[2].title": {
+  "file": "ratgeber.html",
+  "text": "Dachrinne reinigen: Warum Herbst und Frühjahr Pflichttermine sind"
+ },
+ "blog.posts[2].excerpt": {
+  "file": "ratgeber.html",
+  "text": "[Teaser-Text des Artikels – 2 bis 3 Sätze]"
+ },
+ "blog.posts[3].meta": {
+  "file": "ratgeber.html",
+  "text": "GaLaBau · [Datum]"
+ },
+ "blog.posts[3].title": {
+  "file": "ratgeber.html",
+  "text": "Terrasse pflastern: Materialien im Vergleich"
+ },
+ "blog.posts[3].excerpt": {
+  "file": "ratgeber.html",
+  "text": "[Teaser-Text des Artikels – 2 bis 3 Sätze]"
+ },
+ "blog.posts[4].meta": {
+  "file": "ratgeber.html",
+  "text": "Hausmeisterservice · [Datum]"
+ },
+ "blog.posts[4].title": {
+  "file": "ratgeber.html",
+  "text": "Hausmeisterservice für Vermieter: Was ein guter Vertrag regelt"
+ },
+ "blog.posts[4].excerpt": {
+  "file": "ratgeber.html",
+  "text": "[Teaser-Text des Artikels – 2 bis 3 Sätze]"
+ },
+ "blog.posts[5].meta": {
+  "file": "ratgeber.html",
+  "text": "Saison · [Datum]"
+ },
+ "blog.posts[5].title": {
+  "file": "ratgeber.html",
+  "text": "Herbst-Checkliste: Haus und Garten winterfest machen"
+ },
+ "blog.posts[5].excerpt": {
+  "file": "ratgeber.html",
+  "text": "[Teaser-Text des Artikels – 2 bis 3 Sätze]"
+ },
+ "referencesPage.title": {
+  "file": "referenzen.html",
+  "text": "Unsere Arbeit spricht für sich"
+ },
+ "referencesPage.intro": {
+  "file": "referenzen.html",
+  "text": "Vorher und nachher: eine Auswahl abgeschlossener Projekte aus Osnabrück und Umgebung."
+ },
+ "referencesPage.items[0].title": {
+  "file": "referenzen.html",
+  "text": "Gartenpflege – Heckenschnitt & Rasen"
+ },
+ "referencesPage.items[0].text": {
+  "file": "referenzen.html",
+  "text": "[Projektbeschreibung – Ort, Umfang, Dauer]"
+ },
+ "referencesPage.items[1].title": {
+  "file": "referenzen.html",
+  "text": "Entrümpelung – Kellerräumung"
+ },
+ "referencesPage.items[1].text": {
+  "file": "referenzen.html",
+  "text": "[Projektbeschreibung – Ort, Umfang, Dauer]"
+ },
+ "referencesPage.items[2].title": {
+  "file": "referenzen.html",
+  "text": "Dachreinigung – Moosentfernung"
+ },
+ "referencesPage.items[2].text": {
+  "file": "referenzen.html",
+  "text": "[Projektbeschreibung – Ort, Umfang, Dauer]"
+ },
+ "referencesPage.items[3].title": {
+  "file": "referenzen.html",
+  "text": "Pflasterarbeiten – Einfahrt"
+ },
+ "referencesPage.items[3].text": {
+  "file": "referenzen.html",
+  "text": "[Projektbeschreibung – Ort, Umfang, Dauer]"
+ },
+ "referencesPage.items[4].title": {
+  "file": "referenzen.html",
+  "text": "Gebäudereinigung – Treppenhaus"
+ },
+ "referencesPage.items[4].text": {
+  "file": "referenzen.html",
+  "text": "[Projektbeschreibung – Ort, Umfang, Dauer]"
+ },
+ "referencesPage.items[5].title": {
+  "file": "referenzen.html",
+  "text": "Gartenbau – Beet-Neuanlage"
+ },
+ "referencesPage.items[5].text": {
+  "file": "referenzen.html",
+  "text": "[Projektbeschreibung – Ort, Umfang, Dauer]"
+ },
+ "aboutPage.title": {
+  "file": "ueber-uns.html",
+  "text": "Zuverlässig. Ehrlich. Nah am Kunden."
+ },
+ "aboutPage.intro": {
+  "file": "ueber-uns.html",
+  "text": "Rund ums Haus Littawe ist Ihr familiengeführter Betrieb aus Osnabrück – für alles, was rund um Haus und Grundstück anfällt."
+ },
+ "aboutPage.section1.title": {
+  "file": "ueber-uns.html",
+  "text": "Ein Ansprechpartner für alles rund ums Haus"
+ },
+ "aboutPage.section1.text1": {
+  "file": "ueber-uns.html",
+  "text": "Hinter Rund ums Haus Littawe steht Kevin Littawe mit über fünf Jahren Erfahrung im Handwerk rund um Haus und Garten. Der Betrieb aus Osnabrück kümmert sich um Gartenpflege, Entrümpelung, Hausmeisterservice, Dachservice und Garten- & Landschaftsbau – für Privathaushalte ebenso wie für Vermieter und Hausverwaltungen."
+ },
+ "aboutPage.section1.text2": {
+  "file": "ueber-uns.html",
+  "text": "Wir arbeiten ohne Umwege: Sie sprechen direkt mit dem, der die Arbeit macht. Klare Absprachen, faire Preise und saubere Ausführung sind bei uns keine Werbeversprechen, sondern Arbeitsalltag."
+ },
+ "aboutPage.area.title": {
+  "file": "ueber-uns.html",
+  "text": "Unser Einsatzgebiet"
+ },
+ "aboutPage.area.text": {
+  "file": "ueber-uns.html",
+  "text": "Wir sind im Umkreis von 60 km rund um Osnabrück unterwegs – in 98 Städten und Gemeinden der Region. Kurze Wege bedeuten für Sie: schnelle Termine, faire Anfahrt und ein Partner, der wirklich aus der Nähe kommt."
+ },
+ "aboutPage.b2b.title": {
+  "file": "ueber-uns.html",
+  "text": "Für Vermieter & Hausverwaltungen"
+ },
+ "aboutPage.b2b.text": {
+  "file": "ueber-uns.html",
+  "text": "Wohnanlagen und vermietete Objekte brauchen verlässliche, dokumentierte Pflege. Wir übernehmen wiederkehrende Arbeiten mit festen Terminen und liefern auf Wunsch eine Foto-Dokumentation jeder Leistung – damit Sie jederzeit den Überblick behalten."
+ }
+}

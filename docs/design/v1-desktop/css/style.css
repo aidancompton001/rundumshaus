@@ -335,6 +335,16 @@ button {
   margin-bottom: 0.45em;
 }
 .hero h1 .accent { color: var(--color-accent); display: block; }
+/* Заголовок клиента (homepage.json hero.heading) — 95 знаков против 30 в макете:
+   решение CEO поставить его формулировку вместо дизайнерской. При --text-h1 (71px)
+   он занимал бы весь экран, поэтому длинному варианту дан свой кегль. Токен
+   --text-h1 не тронут: он сверяется с замерами макета (check_tokens_match). */
+.hero h1.hero-h1--long {
+  font-size: clamp(1.5rem, 3.1vw, 2.75rem);
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-wrap: balance;
+}
 .hero h1 span:not(.accent) { display: block; }
 .hero-sub {
   font-size: var(--text-hero-sub);

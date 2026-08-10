@@ -131,10 +131,10 @@
   },
   {
    "id": "15",
-   "text": "Живое превью отдаёт все 8 страниц клиента: каждая 200",
+   "text": "Живое превью отдаёт все 7 страниц клиента: каждая 200",
    "asserted": true,
    "proof": {
-    "cmd": "for p in / /leistungen.html /referenzen.html /ueber-uns.html /kontakt.html /ratgeber.html /impressum.html /datenschutz.html; do curl -4 -s -o /dev/null -w \"%{http_code}\n\" --max-time 25 \"https://2e1be0e5-a011-4411-b47f-f2e0e6b28bd8.clouding.host/rundumshaus$p\"; done | tr -d '\r' | sort -u | tr '\n' ' ' | sed 's/ $//'",
+    "cmd": "for p in / /leistungen.html /referenzen.html /ueber-uns.html /kontakt.html /impressum.html /datenschutz.html; do curl -4 -s -o /dev/null -w \"%{http_code}\n\" --max-time 25 \"https://2e1be0e5-a011-4411-b47f-f2e0e6b28bd8.clouding.host/rundumshaus$p\"; done | tr -d '\r' | sort -u | tr '\n' ' ' | sed 's/ $//'",
     "expect_equal": "200"
    }
   },
@@ -209,10 +209,19 @@
   },
   {
    "id": "24",
-   "text": "Статьи Ratgeber — реальные статьи клиента из ratgeber.json, а не заглушки [Datum] и [Teaser-Text]",
+   "text": "Раздел Ratgeber снят до наполнения по решению CEO: страницы нет ни в мокапе, ни на превью, ни одной ссылки на неё не осталось",
    "asserted": true,
    "proof": {
-    "cmd": "grep -c 'Hecke schneiden in Osnabrück' docs/design/v1-desktop/ratgeber.html",
+    "cmd": "n=$(grep -roh 'ratgeber' docs/design/v1-desktop/*.html | wc -l); c=$(curl -4 -s -o /dev/null -w \"%{http_code}\" --max-time 25 \"https://2e1be0e5-a011-4411-b47f-f2e0e6b28bd8.clouding.host/rundumshaus/ratgeber.html\"); echo \"$n $c\"",
+    "expect_equal": "0 404"
+   }
+  },
+  {
+   "id": "25",
+   "asserted": true,
+   "text": "H1 главной несёт формулировку клиента из homepage.json (решение CEO): «Gärtner, Gartenpflege, Hausmeisterservice, Dachservice & Entrümpelung in Osnabrück und Umgebung» вместо дизайнерского «Rund ums Haus. Aus einer Hand.»",
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | grep -c 'homepage.hero.title *OK'",
     "expect_equal": "1"
    }
   }
