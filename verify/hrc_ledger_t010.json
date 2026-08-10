@@ -1,0 +1,220 @@
+{
+ "task": "t010",
+ "threshold": 1e-08,
+ "require_landa": true,
+ "claims": [
+  {
+   "id": "01",
+   "text": "Тексты клиента стоят в мокапе: 5 названий и 5 полных описаний услуг посимвольно равны services.json, абзацы сохранены, показатели равны homepage.json, GaLaBau первая на обеих страницах",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | tail -1",
+    "expect_equal": "RESULT: CLIENT_TEXTS_MATCH"
+   }
+  },
+  {
+   "id": "02",
+   "text": "Проверка текстов фальсифицируема: 10 мутаций (потеря слова, обрезка хвоста, перестановка слов, подмена в навигации, склейка абзацев, возврат сочинённой услуги, слом порядка, возврат выдуманного факта, правка источника) — каждая роняет проверку",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/selftest_client_texts.py 2>&1 | tail -1",
+    "expect_equal": "SELFTEST_CLIENT_TEXTS: PASS (10/10 мутаций)"
+   }
+  },
+  {
+   "id": "03",
+   "text": "Тексты клиента видны целиком на 375 и 1440 при reduced-motion: не скрыты ни на самом узле, ни в потомке, ни предком, не срезаны и не выведены за экран. Impressum и Datenschutz размеченных узлов не имеют и в этой проверке НЕ участвуют — скрипт печатает по ним «НЕ ПРОВЕРЕНА»",
+   "asserted": true,
+   "proof": {
+    "cmd": "\"C:/Projects/HausBot/backend/.venv/Scripts/python.exe\" verify/check_text_not_clipped.py 2>&1 | tail -1",
+    "expect_equal": "RESULT: TEXT_FULLY_VISIBLE"
+   }
+  },
+  {
+   "id": "04",
+   "text": "Сочинённые названия услуг не встречаются ни разу в HTML, JS и CSS мокапа, включая навигацию, футер, title, meta, og и JSON-LD",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -roh 'Gartenpflege &amp;&nbsp;Gärtnerarbeiten\\|Dachservice &amp;&nbsp;Dachreinigung\\|Landschaftsbau &amp;&nbsp;Pflasterarbeiten' docs/design/v1-desktop/*.html docs/design/v1-desktop/js/*.js docs/design/v1-desktop/css/*.css | wc -l",
+    "expect_equal": "0"
+   }
+  },
+  {
+   "id": "05",
+   "text": "Выдуманные факты о бизнесе удалены: «пять лет опыта», плитка «Jahre Erfahrung», часы работы Mo-Sa 08:00-18:00 в футере и openingHours в JSON-LD",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -roh 'fünf Jahren\\|Jahre Erfahrung\\|openingHours\\|08:00' docs/design/v1-desktop/*.html | wc -l",
+    "expect_equal": "0"
+   }
+  },
+  {
+   "id": "06",
+   "text": "Услуги, которых у клиента нет ни в одном источнике, удалены: Unterhaltsreinigung, Dachinspektion, Foto-Dokumentation и сочинённый буллет Treppenhausreinigung (само слово остаётся в статье клиента про Mehrfamilienhäuser — это его текст)",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -roh 'Unterhaltsreinigung\\|Dachinspektion\\|Foto-Dokumentation\\|<li>Treppenhausreinigung</li>' docs/design/v1-desktop/*.html | wc -l",
+    "expect_equal": "0"
+   }
+  },
+  {
+   "id": "07",
+   "text": "На страницах, которые открывает клиент, не осталось ни одной скобочной заглушки и ни одной инженерной записки («beim Port», «Prototyp –», «siehe README», TODO)",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | grep -A1 'ЗАГЛУШКИ И СЛУЖЕБНЫЙ' | grep -o 'найдено: [0-9]*'",
+    "expect_equal": "найдено: 0"
+   }
+  },
+  {
+   "id": "08",
+   "text": "Список запретов не пересекается с текстами клиента: ни одна запрещённая строка не встречается в источниках (иначе проверка краснела бы на правильном результате)",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | grep 'пересечений с источником' | grep -o 'пересечений с источником: [0-9]*'",
+    "expect_equal": "пересечений с источником: 0"
+   }
+  },
+  {
+   "id": "09",
+   "text": "Названия услуг в меню и футере равны названиям клиента на всех 9 страницах, включая leistungen.html с локальными якорями: 80 ссылок, расхождений нет",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | grep -o 'ссылок проверено: [0-9]*, расхождений: [0-9]*'",
+    "expect_equal": "ссылок проверено: 80, расхождений: 0"
+   }
+  },
+  {
+   "id": "10",
+   "text": "SEO-заголовок клиента вернулся из meta-overrides.json: главная несёт ключ «Gärtner Osnabrück» дважды — в <title> и в og:title (в мокапе он был потерян)",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -c 'Gärtner Osnabrück | Gartenpflege' docs/design/v1-desktop/index.html",
+    "expect_equal": "2"
+   }
+  },
+  {
+   "id": "11",
+   "text": "Лейаут не сломан длинными немецкими текстами: 27 проверок (9 страниц x 375/768/1440), 0 предупреждений",
+   "asserted": true,
+   "proof": {
+    "cmd": "\"C:/Projects/HausBot/backend/.venv/Scripts/python.exe\" verify/check_layout_mobile.py docs/design/v1-desktop 2>&1 | tail -1",
+    "expect_equal": "RESULT: LAYOUT_CLEAN"
+   }
+  },
+  {
+   "id": "12",
+   "text": "Проверка лейаута сама фальсифицируема: 23 матричных случая",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/selftest_layout_checker.py 2>&1 | tail -1",
+    "expect_equal": "SELFTEST: PASS (23/23 случаев)"
+   }
+  },
+  {
+   "id": "13",
+   "text": "РЕГРЕСС-СТОРОЖ, не доказательство переноса текстов (Landa F-10): токены мокапа по-прежнему совпадают с замерами макета",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_tokens_match.py 2>&1 | tail -1",
+    "expect_equal": "RESULT: TOKENS_MATCH"
+   }
+  },
+  {
+   "id": "14",
+   "text": "РЕГРЕСС-СТОРОЖ: эталоны замеров закреплены содержимым git-блоба, подмена невозможна",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_meas_pinned.py 2>&1 | tail -1",
+    "expect_equal": "RESULT: PINNED_TO_GIT"
+   }
+  },
+  {
+   "id": "15",
+   "text": "Живое превью отдаёт все 8 страниц клиента: каждая 200",
+   "asserted": true,
+   "proof": {
+    "cmd": "for p in / /leistungen.html /referenzen.html /ueber-uns.html /kontakt.html /ratgeber.html /impressum.html /datenschutz.html; do curl -4 -s -o /dev/null -w \"%{http_code}\n\" --max-time 25 \"https://2e1be0e5-a011-4411-b47f-f2e0e6b28bd8.clouding.host/rundumshaus$p\"; done | tr -d '\r' | sort -u | tr '\n' ' ' | sed 's/ $//'",
+    "expect_equal": "200"
+   }
+  },
+  {
+   "id": "16",
+   "text": "Живые сайты CEO на том же сервере не пострадали от заливки: 6 доменов отвечают 200",
+   "asserted": true,
+   "proof": {
+    "cmd": "for u in https://baupreis.ais152.com https://kontur.ais152.com https://henner.ais152.com https://silkekleinart.com https://sorrysara.space https://n8n.ais152.com; do curl -4 -s -o /dev/null -w \"%{http_code}\n\" --max-time 25 $u; done | tr -d '\r' | sort -u | tr '\n' ' ' | sed 's/ $//'",
+    "expect_equal": "200"
+   }
+  },
+  {
+   "id": "17",
+   "text": "Внутренние файлы разработки на публичный сервер не попали: ни отладочных рендеров, ни README",
+   "asserted": true,
+   "proof": {
+    "cmd": "ssh -o BatchMode=yes root@187.33.159.205 'find /opt/rundumshaus-preview -name \"_*\" -o -name \"README.md\" | wc -l'",
+    "expect_equal": "0"
+   }
+  },
+  {
+   "id": "18",
+   "text": "Откат возможен: перед заливкой снят архив прежней версии превью",
+   "asserted": true,
+   "proof": {
+    "cmd": "ssh -o BatchMode=yes root@187.33.159.205 'ls /opt/rundumshaus-preview.bak-*.tgz | wc -l'",
+    "expect_equal": "1"
+   }
+  },
+  {
+   "id": "19",
+   "text": "Проверка видимости фальсифицируема по обоим направлениям: 13 мутаций — скрытие в потомке, на САМОМ узле (нулевой кегль, прозрачный цвет, clip-path, вынос за край) и на ПРЕДКЕ (opacity, visibility), плюс line-clamp, фиксированная высота и ellipsis",
+   "asserted": true,
+   "proof": {
+    "cmd": "\"C:/Projects/HausBot/backend/.venv/Scripts/python.exe\" verify/selftest_text_not_clipped.py 2>&1 | tail -1",
+    "expect_equal": "SELFTEST_CLIPPED: PASS (13/13 мутаций)"
+   }
+  },
+  {
+   "id": "20",
+   "text": "Списки услуг — 50 позиций — дословно равны спискам клиента из templates/<id>.json: 4 позиции в карточке главной и 6 на странице услуг для каждой из 5 услуг",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | grep -o 'списки: [0-9]* из [0-9]* совпали, расхождений: [0-9]*'",
+    "expect_equal": "списки: 10 из 10 совпали, расхождений: 0"
+   }
+  },
+  {
+   "id": "21",
+   "text": "JSON-LD валиден и не содержит HTML-сущностей: Google получит «&», а не «&amp;amp;» в описании услуг",
+   "asserted": true,
+   "proof": {
+    "cmd": "py verify/check_client_texts.py 2>&1 | grep -o 'блоков: [0-9]*, дефектов: [0-9]*'",
+    "expect_equal": "блоков: 2, дефектов: 0"
+   }
+  },
+  {
+   "id": "22",
+   "text": "Список запретов не может запретить слова самого клиента: сверяется со ВСЕМИ источниками, включая шаблоны городов и статьи",
+   "asserted": false,
+   "note": "дубль claim 08: измеряет ту же строку того же прогона. Снят со статуса факта, чтобы не завышать знаменатель N (находка Ланды, раунд 3)"
+  },
+  {
+   "id": "23",
+   "text": "Страница-шаблон города с плейсхолдерами {{Stadt}} на публичное превью не выложена",
+   "asserted": true,
+   "proof": {
+    "cmd": "curl -4 -s -o /dev/null -w \"%{http_code}\" --max-time 25 \"https://2e1be0e5-a011-4411-b47f-f2e0e6b28bd8.clouding.host/rundumshaus/city-template.html\"",
+    "expect_equal": "404"
+   }
+  },
+  {
+   "id": "24",
+   "text": "Статьи Ratgeber — реальные статьи клиента из ratgeber.json, а не заглушки [Datum] и [Teaser-Text]",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -c 'Hecke schneiden in Osnabrück' docs/design/v1-desktop/ratgeber.html",
+    "expect_equal": "1"
+   }
+  }
+ ]
+}
