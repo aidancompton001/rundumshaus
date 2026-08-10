@@ -32,6 +32,13 @@ body {
 }
 
 img, svg { display: block; max-width: 100%; }
+/* Атрибуты width/height в разметке — presentational hint: они задают CSS-высоту и
+   перебивают объявленный aspect-ratio. Из-за этого фото 800x1063 рендерилось
+   полосой 205x1063 в галерее, а карточки услуг 1200x896 выводились 691x896
+   вместо 7/5 (находка Ланды U-01). height:auto возвращает управление вёрстке.
+   :where() держит нулевую специфичность — иначе правило перебивало .brand img
+   и логотип разъезжался на всю натуральную высоту. */
+:where(.ref-pair, .service-block-media, .about-media, .card-media) img { height: auto; }
 
 h1, h2, h3, h4 {
   margin: 0 0 0.5em;
@@ -927,7 +934,10 @@ button {
 }
 .ref-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .ref-pair figure { margin: 0; position: relative; }
-.ref-pair img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+.ref-pair img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; height: auto; }
+/* height:auto обязателен: width/height в разметке — presentational hint, они
+   задают CSS-высоту и перебивают aspect-ratio. Без этого фото 800x1063
+   рендерилось полосой 205x1063 на всех ширинах (находка Ланды U-01). */
 .ref-pair figcaption {
   position: absolute;
   left: 8px; bottom: 8px;
