@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="Rund ums Haus Littawe">
   <!-- Fonts: DSGVO — kein Google-CDN. „Inter“ wird beim Port lokal self-gehostet (font-display: swap).
        Im Prototyp greift der Systemfallback aus tokens.css. -->
-  <link rel="preload" href="assets/img/ph-hero.svg" as="image">
+  <link rel="preload" href="assets/img/ph-hero.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
@@ -99,7 +99,7 @@
 <!-- ================= HERO ================= -->
 <section class="hero" data-component="Hero">
   <div class="hero-media" aria-hidden="true">
-    <img src="assets/img/ph-hero.svg" alt="" width="1440" height="620" loading="eager" fetchpriority="high">
+    <img src="assets/img/ph-hero.webp" alt="" width="1376" height="768" loading="eager" fetchpriority="high">
   </div>
   <div class="container">
     <div class="hero-copy">
@@ -187,7 +187,26 @@
       <!-- Karte 1 -->
       <article class="service-card reveal">
         <div class="card-media">
-          <img src="assets/img/ph-gartenpflege.svg" alt="Rasenmäher auf gepflegtem Rasen" width="700" height="500" loading="lazy">
+          <img src="assets/img/ph-galabau.webp" alt="Pflasterarbeiten an einer Einfahrt" width="1200" height="896" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg></span>
+          <h3 data-cms="services[4].title">Garten- &amp;&nbsp;Landschaftsbau &amp;&nbsp;Pflasterarbeiten</h3>
+          <ul class="card-bullets" data-cms="services[4].bullets">
+            <li>Pflasterarbeiten</li>
+            <li>Terrassen &amp;&nbsp;Wege</li>
+            <li>Einfahrten</li>
+            <li>Gestaltung &amp;&nbsp;Neuanlagen</li>
+          </ul>
+          <a class="card-link" href="leistungen.html#galabau">Mehr erfahren
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+      <!-- Karte 2 -->
+      <article class="service-card reveal">
+        <div class="card-media">
+          <img src="assets/img/ph-gartenpflege.webp" alt="Rasenmäher auf gepflegtem Rasen" width="1200" height="896" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V9"/><path d="M12 9C12 5 9 3 5 3c0 4 3 6 7 6Z"/><path d="M12 13c0-4 3-6 7-6 0 4-3 6-7 6Z"/></svg></span>
@@ -204,10 +223,10 @@
         </div>
       </article>
 
-      <!-- Karte 2 -->
+      <!-- Karte 3 -->
       <article class="service-card reveal">
         <div class="card-media">
-          <img src="assets/img/ph-entruempelung.svg" alt="Umzugskartons bei einer Haushaltsauflösung" width="700" height="500" loading="lazy">
+          <img src="assets/img/ph-entruempelung.webp" alt="Umzugskartons bei einer Haushaltsauflösung" width="1200" height="896" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4M1 17h2m18 0h2M5 17V7h9v10M14 9h4l3 4v4h-3"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/></svg></span>
@@ -224,10 +243,10 @@
         </div>
       </article>
 
-      <!-- Karte 3 -->
+      <!-- Karte 4 -->
       <article class="service-card reveal">
         <div class="card-media">
-          <img src="assets/img/ph-hausmeister.svg" alt="Reinigungsutensilien für die Gebäudereinigung" width="700" height="500" loading="lazy">
+          <img src="assets/img/ph-hausmeister.webp" alt="Reinigungsutensilien für die Gebäudereinigung" width="1200" height="896" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg></span>
@@ -244,10 +263,10 @@
         </div>
       </article>
 
-      <!-- Karte 4 -->
+      <!-- Karte 5 -->
       <article class="service-card reveal">
         <div class="card-media">
-          <img src="assets/img/ph-dach.svg" alt="Dachziegel und Dachrinne nach der Reinigung" width="700" height="500" loading="lazy">
+          <img src="assets/img/ph-dach.webp" alt="Dachziegel und Dachrinne nach der Reinigung" width="1200" height="896" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13 12 4l10 9"/><path d="M4 11.5V20h16v-8.5"/><path d="M2 20h20"/></svg></span>
@@ -264,25 +283,6 @@
         </div>
       </article>
 
-      <!-- Karte 5 -->
-      <article class="service-card reveal">
-        <div class="card-media">
-          <img src="assets/img/ph-galabau.svg" alt="Pflasterarbeiten an einer Einfahrt" width="700" height="500" loading="lazy">
-        </div>
-        <div class="card-body">
-          <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg></span>
-          <h3 data-cms="services[4].title">Garten- &amp;&nbsp;Landschaftsbau &amp;&nbsp;Pflasterarbeiten</h3>
-          <ul class="card-bullets" data-cms="services[4].bullets">
-            <li>Pflasterarbeiten</li>
-            <li>Terrassen &amp;&nbsp;Wege</li>
-            <li>Einfahrten</li>
-            <li>Gestaltung &amp;&nbsp;Neuanlagen</li>
-          </ul>
-          <a class="card-link" href="leistungen.html#galabau">Mehr erfahren
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -296,7 +296,7 @@
   </svg>
   <div class="container">
     <div class="about-media reveal">
-      <img src="assets/img/ph-ueber-uns.svg" alt="Mitarbeiter von Rund ums Haus Littawe im Firmen-Hoodie am Einsatzwagen" width="800" height="620" loading="lazy">
+      <img src="assets/img/ph-ueber-uns.webp" alt="Mitarbeiter von Rund ums Haus Littawe im Firmen-Hoodie am Einsatzwagen" width="1200" height="896" loading="lazy">
       <div class="about-badge">
         <span class="badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.7c2.9.3 5 2.2 5 5.3" opacity=".7"/></svg></span>
         <div data-cms="homepage.about.badge">
