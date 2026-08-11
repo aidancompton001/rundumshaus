@@ -404,7 +404,11 @@
     </div>
 
     <div class="reviews-cta reveal">
-      <a class="btn btn--primary" href="#" data-cms="homepage.reviews.ctaLabel">Alle Bewertungen auf Google ansehen
+      <!-- профиль клиента найден через Places API по названию и адресу Bramscher Str. 161:
+           place_id ChIJlwdlLxePaQER5QKZVHCPPx0, 5.0 при 10 отзывах -->
+      <a class="btn btn--primary" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/place/?q=place_id:ChIJlwdlLxePaQER5QKZVHCPPx0"
+         data-cms="homepage.reviews.ctaLabel">Alle Bewertungen auf Google ansehen
         <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
       </a>
     </div>
