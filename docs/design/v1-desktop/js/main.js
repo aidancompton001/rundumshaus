@@ -212,7 +212,10 @@
     }
 
     form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Prototyp: kein Backend (Handler wird beim Port angebunden)
+      // Валидируем на месте. Невалидную форму не отпускаем, валидная уходит на
+      // FormSubmit — тот же обработчик и та же почта, что на живом сайте.
+      // Поля НЕ блокируем до отправки: disabled-поля браузер не отправляет,
+      // и раньше форма показывала успех, ничего не отослав.
       var valid = true;
       form.querySelectorAll(".form-field[data-required]").forEach(function (field) {
         var input = field.querySelector("input, textarea, select");
@@ -221,10 +224,10 @@
         field.dataset.invalid = String(bad);
         if (bad) valid = false;
       });
-      if (valid) {
-        var ok = form.querySelector(".form-success");
-        if (ok) ok.hidden = false;
-        form.querySelectorAll("input, textarea, select, button").forEach(function (el) { el.disabled = true; });
+      if (!valid) {
+        e.preventDefault();
+        var first = form.querySelector('.form-field[data-invalid="true"] input, .form-field[data-invalid="true"] textarea');
+        if (first) first.focus();
       }
     });
   }

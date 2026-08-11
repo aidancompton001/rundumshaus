@@ -100,7 +100,14 @@
       <p class="form-note">* Pflichtfelder.</p>
     </div>
 
-    <form class="form reveal" data-form="kontakt" novalidate>
+    <form class="form reveal" data-form="kontakt" novalidate
+          action="https://formsubmit.co/kontakt@rundumshaus-littawe.de" method="POST">
+      <!-- Honeypot: уводится за экран, НЕ display:none — иначе боты его видят -->
+      <input type="text" name="_honey" tabindex="-1" aria-hidden="true"
+             style="position:absolute;left:-9999px" autocomplete="off">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Neue Anfrage über rundumshaus-littawe.de">
+      <input type="hidden" name="_template" value="table">
       <h2 style="font-size:var(--text-card-title);margin:0;">Anfrage senden</h2>
 
       <div class="form-row">
@@ -149,8 +156,6 @@
       <button class="btn btn--primary" type="submit" disabled>Anfrage absenden
         <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
       </button>
-
-      <p class="form-success" hidden style="color:var(--color-accent-ink);font-weight:700;">Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.</p>
       <p class="form-note">* Pflichtfelder.</p>
     </form>
 
