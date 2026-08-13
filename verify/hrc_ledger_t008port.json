@@ -1,169 +1,250 @@
 {
- "task": "t008port",
- "threshold": 1e-08,
- "require_landa": true,
- "claims": [
-  {
-   "id": "01",
-   "text": "Живой сайт содержит 617 HTML-страниц — столько обязано пережить перенос",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && find site/out -name '*.html' | wc -l",
-    "expect_equal": "617"
-   }
-  },
-  {
-   "id": "02",
-   "text": "В карте сайта для Google 511 адресов",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && grep -c '<loc>' site/out/sitemap.xml",
-    "expect_equal": "511"
-   }
-  },
-  {
-   "id": "03",
-   "text": "Живых городских страниц 490: 98 городов на каждую из 5 услуг",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && find site/out/leistungen -mindepth 2 -name index.html | awk -F/ '{print $4}' | grep -v schrottabholung | grep -vE 'objektpflege|rasen-neuanlage' | wc -l",
-    "expect_equal": "490"
-   }
-  },
-  {
-   "id": "04",
-   "text": "Страниц-редиректов со снятой услуги 99, плюс один редирект статьи — всего 100 (прежняя подпись «100 Schrottabholung» была неточной)",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && echo \"$(find site/out/leistungen/schrottabholung -name index.html | wc -l) $(grep -rl 'http-equiv=\"refresh\"' site/out --include=index.html | wc -l)\"",
-    "expect_equal": "99 100"
-   }
-  },
-  {
-   "id": "05",
-   "text": "Городских шаблонов пять, а не один: Dach, Entruempelung, Galabau, Garten, Hausmeister — объём Задачи 5 занижался впятеро",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && ls site/src/components/templates/*CityTemplate.tsx | wc -l",
-    "expect_equal": "5"
-   }
-  },
-  {
-   "id": "06",
-   "text": "Тестов 247 в 20 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1 | grep -oE '[0-9]+'",
-    "expect_equal": "247"
-   }
-  },
-  {
-   "id": "07",
-   "text": "Страницы статей Ratgeber СУЩЕСТВУЮТ: 11 страниц в сборке, 10 в карте сайта. Прежнее «страниц статей нет» было ошибкой, и на нём основывалось снятие раздела",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && echo \"$(find site/out/ratgeber -name index.html | wc -l) $(grep -c 'ratgeber' site/out/sitemap.xml)\"",
-    "expect_equal": "11 10"
-   }
-  },
-  {
-   "id": "08",
-   "text": "Маршрутов Next.js 16, а макетов 8: девять маршрутов остались бы на старом дизайне, включая /osnabrueck/",
-   "asserted": true,
-   "proof": {
-    "cmd": "cd ../.. && find site/src/app -name page.tsx | wc -l",
-    "expect_equal": "16"
-   }
-  },
-  {
-   "id": "09",
-   "text": "Приёмка видит разметку Google: на обычной странице 4 типа, на городской 7. До правки парсер показывал пусто, потому что не разворачивал @graph",
-   "asserted": true,
-   "proof": {
-    "cmd": "py -c \"import json,io;p=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['pages'];print(len(p['/impressum/']['jsonld']), len(p['/leistungen/gartenpflege/alfhausen/']['jsonld']))\"",
-    "expect_equal": "4 7"
-   }
-  },
-  {
-   "id": "10",
-   "text": "Приёмка снимает состав страницы, а не только meta: внутренние ссылки, картинки, alt и файлы CSS/JS",
-   "asserted": true,
-   "proof": {
-    "cmd": "py -c \"import json,io;f=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['pages']['/impressum/'];print(all(k in f for k in ('links','images','alts','assets')))\"",
-    "expect_equal": "True"
-   }
-  },
-  {
-   "id": "11",
-   "text": "Приёмка следит за файлами, потеря которых убивает домен и индексацию: CNAME, robots.txt, sitemap.xml, favicon.ico, 404.html",
-   "asserted": true,
-   "proof": {
-    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['files'];print(sum(1 for k in ('CNAME','robots.txt','sitemap.xml','favicon.ico','404.html') if d.get(k)))\"",
-    "expect_equal": "5"
-   }
-  },
-  {
-   "id": "12",
-   "text": "Слепок фиксирует среду замера: git-sha, время снятия и возраст сборки — иначе сверяются разные вещи (Закон 27)",
-   "asserted": true,
-   "proof": {
-    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'));print(all(k in d for k in ('git_sha','taken_at','build_newest_html')))\"",
-    "expect_equal": "True"
-   }
-  },
-  {
-   "id": "13",
-   "text": "Чек-лист переноса покрывает все пять разделов ворот: готовность инструментов, ворота на каждом шаге, поимённый список охраняемого, обещания клиенту, публикация и наблюдение после неё",
-   "asserted": true,
-   "proof": {
-    "cmd": "grep -c '^## ' docs/plans/CHECKLIST_redesign_port.md",
-    "expect_min": 5
-   }
-  },
-  {
-   "id": "14",
-   "text": "План переноса не содержит чисел, опровергнутых ревью: ни «226 тестов», ни «591 городских», ни «один компонент»",
-   "asserted": true,
-   "proof": {
-    "cmd": "grep -c '226 тест\\|591\b\\|Один компонент' docs/plans/2026-08-11-redesign-port.md || true",
-    "expect_equal": "0"
-   }
-  },
-  {
-   "id": "15",
-   "asserted": true,
-   "text": "Приёмка переноса фальсифицируема по 13 направлениям: удаление страницы, обнуление заголовков, удаление описаний, H1, разметки Google, картинок, навигации, CSS и JS, файла CNAME, подсадка чужого адреса в карту сайта, закрытие сайта через robots.txt, увод CNAME на чужой домен, удаление файлов фотографий. Каждое даёт 0, нетронутая сборка — 1",
-   "proof": {
-    "cmd": "py verify/selftest_migration_parity.py 2>&1 | tail -1",
-    "expect_equal": "SELFTEST_PARITY: PASS (13/13 мутаций)"
-   }
-  },
-  {
-   "id": "16",
-   "asserted": true,
-   "text": "Живой домен отдаёт все 511 адресов карты сайта с кодом 200, и заголовок, описание и canonical каждой страницы совпадают с эталонным слепком. Разметку Google эта проверка НЕ сверяет: в эталоне старого формата её нет — это отдельный долг",
-   "proof": {
-    "cmd": "py verify/check_live_site.py verify/snapshots/before-redesign.json 2>&1 | tail -1",
-    "expect_equal": "БИНАРНО: 1"
-   }
-  },
-  {
-   "id": "17",
-   "asserted": true,
-   "text": "Эталон снят ТЕКУЩЕЙ версией инструмента: у страницы 15 полей, включая ссылки, картинки, alt, ассеты и типы разметки; в слепке есть файлы сборки и отпечаток коммита. Слепок прежней версии содержал 8 полей, и все новые проверки против него молчали",
-   "proof": {
-    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'));p=next(iter(d['pages'].values()));print(len(p), 'files' in d, 'git_sha' in d)\"",
-    "expect_equal": "15 True True"
-   }
-  },
-  {
-   "id": "18",
-   "asserted": true,
-   "text": "Сравнение слепков разных версий инструмента отклоняется, а не даёт ложное «всё хорошо». Проверяется на реальном историческом слепке: в коммите 79c6120 лежит эталон прежней схемы (8 полей у страницы, без файлов сборки), текущий имеет 15",
-   "proof": {
-    "cmd": "git show 79c6120:verify/snapshots/before-redesign.json > verify/snapshots/_t.json && py verify/check_migration_parity.py compare verify/snapshots/_t.json verify/snapshots/before-redesign.json 2>&1 | grep -c 'PARITY_SCHEMA_MISMATCH'; rm -f verify/snapshots/_t.json",
-    "expect_equal": "1"
-   }
-  }
- ]
+  "task": "t008port",
+  "threshold": 1e-08,
+  "require_landa": true,
+  "claims": [
+    {
+      "id": "01",
+      "text": "Живой сайт содержит 617 HTML-страниц — столько обязано пережить перенос",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && find site/out -name '*.html' | wc -l",
+        "expect_equal": "617"
+      }
+    },
+    {
+      "id": "02",
+      "text": "В карте сайта для Google 511 адресов",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && grep -c '<loc>' site/out/sitemap.xml",
+        "expect_equal": "511"
+      }
+    },
+    {
+      "id": "03",
+      "text": "Живых городских страниц 490: 98 городов на каждую из 5 услуг",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && find site/out/leistungen -mindepth 2 -name index.html | awk -F/ '{print $4}' | grep -v schrottabholung | grep -vE 'objektpflege|rasen-neuanlage' | wc -l",
+        "expect_equal": "490"
+      }
+    },
+    {
+      "id": "04",
+      "text": "Страниц-редиректов со снятой услуги 99, плюс один редирект статьи — всего 100 (прежняя подпись «100 Schrottabholung» была неточной)",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && echo \"$(find site/out/leistungen/schrottabholung -name index.html | wc -l) $(grep -rl 'http-equiv=\"refresh\"' site/out --include=index.html | wc -l)\"",
+        "expect_equal": "99 100"
+      }
+    },
+    {
+      "id": "05",
+      "text": "Городских шаблонов пять, а не один: Dach, Entruempelung, Galabau, Garten, Hausmeister — объём Задачи 5 занижался впятеро",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && ls site/src/components/templates/*CityTemplate.tsx | wc -l",
+        "expect_equal": "5"
+      }
+    },
+    {
+      "id": "06",
+      "text": "Тестов 247 в 20 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1 | grep -oE '[0-9]+'",
+        "expect_equal": "247"
+      }
+    },
+    {
+      "id": "07",
+      "text": "Страницы статей Ratgeber СУЩЕСТВУЮТ: 11 страниц в сборке, 10 в карте сайта. Прежнее «страниц статей нет» было ошибкой, и на нём основывалось снятие раздела",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && echo \"$(find site/out/ratgeber -name index.html | wc -l) $(grep -c 'ratgeber' site/out/sitemap.xml)\"",
+        "expect_equal": "11 10"
+      }
+    },
+    {
+      "id": "08",
+      "text": "Маршрутов Next.js 16, а макетов 8: девять маршрутов остались бы на старом дизайне, включая /osnabrueck/",
+      "asserted": true,
+      "proof": {
+        "cmd": "cd ../.. && find site/src/app -name page.tsx | wc -l",
+        "expect_equal": "16"
+      }
+    },
+    {
+      "id": "09",
+      "text": "Приёмка видит разметку Google: на обычной странице 4 типа, на городской 7. До правки парсер показывал пусто, потому что не разворачивал @graph",
+      "asserted": true,
+      "proof": {
+        "cmd": "py -c \"import json,io;p=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['pages'];print(len(p['/impressum/']['jsonld']), len(p['/leistungen/gartenpflege/alfhausen/']['jsonld']))\"",
+        "expect_equal": "4 7"
+      }
+    },
+    {
+      "id": "10",
+      "text": "Приёмка снимает состав страницы, а не только meta: внутренние ссылки, картинки, alt и файлы CSS/JS",
+      "asserted": true,
+      "proof": {
+        "cmd": "py -c \"import json,io;f=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['pages']['/impressum/'];print(all(k in f for k in ('links','images','alts','assets')))\"",
+        "expect_equal": "True"
+      }
+    },
+    {
+      "id": "11",
+      "text": "Приёмка следит за файлами, потеря которых убивает домен и индексацию: CNAME, robots.txt, sitemap.xml, favicon.ico, 404.html",
+      "asserted": true,
+      "proof": {
+        "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['files'];print(sum(1 for k in ('CNAME','robots.txt','sitemap.xml','favicon.ico','404.html') if d.get(k)))\"",
+        "expect_equal": "5"
+      }
+    },
+    {
+      "id": "12",
+      "text": "Слепок фиксирует среду замера: git-sha, время снятия и возраст сборки — иначе сверяются разные вещи (Закон 27)",
+      "asserted": true,
+      "proof": {
+        "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'));print(all(k in d for k in ('git_sha','taken_at','build_newest_html')))\"",
+        "expect_equal": "True"
+      }
+    },
+    {
+      "id": "13",
+      "text": "Чек-лист переноса покрывает все пять разделов ворот: готовность инструментов, ворота на каждом шаге, поимённый список охраняемого, обещания клиенту, публикация и наблюдение после неё",
+      "asserted": true,
+      "proof": {
+        "cmd": "grep -c '^## ' docs/plans/CHECKLIST_redesign_port.md",
+        "expect_min": 5
+      }
+    },
+    {
+      "id": "14",
+      "text": "План переноса не содержит чисел, опровергнутых ревью: ни «226 тестов», ни «591 городских», ни «один компонент»",
+      "asserted": true,
+      "proof": {
+        "cmd": "grep -c '226 тест\\|591\b\\|Один компонент' docs/plans/2026-08-11-redesign-port.md || true",
+        "expect_equal": "0"
+      }
+    },
+    {
+      "id": "15",
+      "asserted": true,
+      "text": "Приёмка переноса фальсифицируема по 13 направлениям: удаление страницы, обнуление заголовков, удаление описаний, H1, разметки Google, картинок, навигации, CSS и JS, файла CNAME, подсадка чужого адреса в карту сайта, закрытие сайта через robots.txt, увод CNAME на чужой домен, удаление файлов фотографий. Каждое даёт 0, нетронутая сборка — 1",
+      "proof": {
+        "cmd": "py verify/selftest_migration_parity.py 2>&1 | tail -1",
+        "expect_equal": "SELFTEST_PARITY: PASS (13/13 мутаций)"
+      }
+    },
+    {
+      "id": "16",
+      "asserted": true,
+      "text": "Живой домен отдаёт все 511 адресов карты сайта с кодом 200, и заголовок, описание и canonical каждой страницы совпадают с эталонным слепком. Разметку Google эта проверка НЕ сверяет: в эталоне старого формата её нет — это отдельный долг",
+      "proof": {
+        "cmd": "py verify/check_live_site.py verify/snapshots/before-redesign.json 2>&1 | tail -1",
+        "expect_equal": "БИНАРНО: 1"
+      }
+    },
+    {
+      "id": "17",
+      "asserted": true,
+      "text": "Эталон снят ТЕКУЩЕЙ версией инструмента: у страницы 15 полей, включая ссылки, картинки, alt, ассеты и типы разметки; в слепке есть файлы сборки и отпечаток коммита. Слепок прежней версии содержал 8 полей, и все новые проверки против него молчали",
+      "proof": {
+        "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'));p=next(iter(d['pages'].values()));print(len(p), 'files' in d, 'git_sha' in d)\"",
+        "expect_equal": "15 True True"
+      }
+    },
+    {
+      "id": "18",
+      "asserted": true,
+      "text": "Сравнение слепков разных версий инструмента отклоняется, а не даёт ложное «всё хорошо». Проверяется на реальном историческом слепке: в коммите 79c6120 лежит эталон прежней схемы (8 полей у страницы, без файлов сборки), текущий имеет 15",
+      "proof": {
+        "cmd": "git show 79c6120:verify/snapshots/before-redesign.json > verify/snapshots/_t.json && py verify/check_migration_parity.py compare verify/snapshots/_t.json verify/snapshots/before-redesign.json 2>&1 | grep -c 'PARITY_SCHEMA_MISMATCH'; rm -f verify/snapshots/_t.json",
+        "expect_equal": "1"
+      }
+    },
+    {
+      "id": "19",
+      "asserted": true,
+      "text": "Перенос оформления не потерял ни одного адреса, заголовка, описания, canonical, типа разметки, ссылки, картинки, файла сборки и записи карты сайта: приёмка отвечает БИНАРНО 1",
+      "proof": {
+        "cmd": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-city.json | grep -c '^БИНАРНО: 1'",
+        "expect_equal": "1"
+      }
+    },
+    {
+      "id": "20",
+      "asserted": true,
+      "text": "Пять городских шаблонов получили оформление макета, и все 490 живых городских страниц по-прежнему собираются",
+      "proof": {
+        "cmd": "find site/out/leistungen -mindepth 2 -name index.html | awk -F/ '{print $4}' | grep -v schrottabholung | grep -vE 'objektpflege|rasen-neuanlage' | wc -l",
+        "expect_equal": "490"
+      }
+    },
+    {
+      "id": "21",
+      "asserted": true,
+      "text": "Заголовок раздела по макету (надзаголовок капителью, вес 800, разделитель) стоит единым компонентом, а не скопирован в каждый раздел",
+      "proof": {
+        "cmd": "grep -rl 'ui/SectionHeading' site/src/components | wc -l",
+        "expect_min": 6
+      }
+    },
+    {
+      "id": "22",
+      "asserted": true,
+      "text": "Надзаголовок нигде не дублирует заголовок клиента: тексты клиента на месте, проверка отвечает CLIENT_TEXTS_MATCH",
+      "proof": {
+        "cmd": "py verify/check_client_texts.py | tail -1",
+        "expect_equal": "RESULT: CLIENT_TEXTS_MATCH"
+      }
+    },
+    {
+      "id": "23",
+      "asserted": true,
+      "text": "Вёрстка мерится в среде посетителя: каталог сборки поднимается по HTTP. Под file:// собранный сайт ссылается на картинки от корня, и браузер называл целые снимки битыми (Закон 27, правило 2)",
+      "proof": {
+        "cmd": "py verify/check_layout_mobile.py site/out 2>/dev/null | grep -c 'СРЕДА ЗАМЕРА: HTTP'",
+        "expect_equal": "1"
+      }
+    },
+    {
+      "id": "24",
+      "asserted": true,
+      "text": "Правка измерителя его не ослабила: собственный самотест ловит все 23 подложенных дефекта вёрстки",
+      "proof": {
+        "cmd": "py verify/selftest_layout_checker.py | tail -1",
+        "expect_equal": "SELFTEST: PASS (23/23 случаев)"
+      }
+    },
+    {
+      "id": "25",
+      "asserted": true,
+      "text": "Заголовки карточек услуг больше не режутся: на 1440 в пяти колонках проверка не находит ни одного CLIPPED",
+      "proof": {
+        "cmd": "py verify/check_layout_mobile.py site/out 1440 2>/dev/null | grep -c CLIPPED",
+        "expect_equal": "0"
+      }
+    },
+    {
+      "id": "26",
+      "asserted": true,
+      "text": "Ни одна из пяти проверенных страниц не уезжает вбок на 375, 768 и 1440 — это то, что чувствует посетитель, в отличие от переполнения вложенного узла",
+      "proof": {
+        "cmd": "py verify/check_no_sideways.py site/out 2>/dev/null | tail -1",
+        "expect_equal": "NO_SIDEWAYS_SCROLL"
+      }
+    },
+    {
+      "id": "27",
+      "asserted": true,
+      "text": "Все 247 тестов зелёные после переноса",
+      "proof": {
+        "cmd": "cd site && npx vitest run 2>&1 | grep -oE 'Tests  [0-9]+ passed' | head -1",
+        "expect_equal": "Tests  247 passed"
+      }
+    }
+  ]
 }
