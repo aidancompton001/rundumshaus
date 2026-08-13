@@ -80,7 +80,7 @@
    "text": "Приёмка видит разметку Google: на обычной странице 4 типа, на городской 7. До правки парсер показывал пусто, потому что не разворачивал @graph",
    "asserted": true,
    "proof": {
-    "cmd": "py -c \"import json,io;p=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'))['pages'];print(len(p['/impressum/']['jsonld']), len(p['/leistungen/gartenpflege/alfhausen/']['jsonld']))\"",
+    "cmd": "py -c \"import json,io;p=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['pages'];print(len(p['/impressum/']['jsonld']), len(p['/leistungen/gartenpflege/alfhausen/']['jsonld']))\"",
     "expect_equal": "4 7"
    }
   },
@@ -89,7 +89,7 @@
    "text": "Приёмка снимает состав страницы, а не только meta: внутренние ссылки, картинки, alt и файлы CSS/JS",
    "asserted": true,
    "proof": {
-    "cmd": "py -c \"import json,io;f=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'))['pages']['/impressum/'];print(all(k in f for k in ('links','images','alts','assets')))\"",
+    "cmd": "py -c \"import json,io;f=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['pages']['/impressum/'];print(all(k in f for k in ('links','images','alts','assets')))\"",
     "expect_equal": "True"
    }
   },
@@ -98,7 +98,7 @@
    "text": "Приёмка следит за файлами, потеря которых убивает домен и индексацию: CNAME, robots.txt, sitemap.xml, favicon.ico, 404.html",
    "asserted": true,
    "proof": {
-    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'))['files'];print(sum(1 for k in ('CNAME','robots.txt','sitemap.xml','favicon.ico','404.html') if d.get(k)))\"",
+    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'))['files'];print(sum(1 for k in ('CNAME','robots.txt','sitemap.xml','favicon.ico','404.html') if d.get(k)))\"",
     "expect_equal": "5"
    }
   },
@@ -107,7 +107,7 @@
    "text": "Слепок фиксирует среду замера: git-sha, время снятия и возраст сборки — иначе сверяются разные вещи (Закон 27)",
    "asserted": true,
    "proof": {
-    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'));print(all(k in d for k in ('git_sha','taken_at','build_newest_html')))\"",
+    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'));print(all(k in d for k in ('git_sha','taken_at','build_newest_html')))\"",
     "expect_equal": "True"
    }
   },
@@ -159,9 +159,9 @@
   {
    "id": "18",
    "asserted": true,
-   "text": "Сравнение слепков разных версий инструмента отклоняется, а не даёт ложное «всё хорошо»: сторож схемы сверяет набор полей страницы и наличие служебных разделов",
+   "text": "Сравнение слепков разных версий инструмента отклоняется, а не даёт ложное «всё хорошо». Проверяется на реальном историческом слепке: в коммите 79c6120 лежит эталон прежней схемы (8 полей у страницы, без файлов сборки), текущий имеет 15",
    "proof": {
-    "cmd": "git show HEAD~2:verify/snapshots/before-redesign.json > verify/snapshots/_t.json 2>/dev/null; py verify/check_migration_parity.py compare verify/snapshots/_t.json verify/snapshots/before-redesign.json 2>&1 | grep -c 'PARITY_SCHEMA_MISMATCH'; rm -f verify/snapshots/_t.json",
+    "cmd": "git show 79c6120:verify/snapshots/before-redesign.json > verify/snapshots/_t.json && py verify/check_migration_parity.py compare verify/snapshots/_t.json verify/snapshots/before-redesign.json 2>&1 | grep -c 'PARITY_SCHEMA_MISMATCH'; rm -f verify/snapshots/_t.json",
     "expect_equal": "1"
    }
   }

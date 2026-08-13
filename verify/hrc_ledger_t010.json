@@ -140,10 +140,10 @@
   },
   {
    "id": "16",
-   "text": "Живые сайты CEO на том же сервере не пострадали от заливки: 6 доменов отвечают 200",
+   "text": "Живые сайты CEO на том же сервере доступны: шесть доменов отвечают 200 после следования редиректам. Прежняя формулировка требовала голый 200 и упала, когда henner.ais152.com переехал на собственный домен hennerheede.com — сайт при этом жив",
    "asserted": true,
    "proof": {
-    "cmd": "for u in https://baupreis.ais152.com https://kontur.ais152.com https://henner.ais152.com https://silkekleinart.com https://sorrysara.space https://n8n.ais152.com; do curl -4 -s -o /dev/null -w \"%{http_code}\n\" --max-time 25 $u; done | tr -d '\r' | sort -u | tr '\n' ' ' | sed 's/ $//'",
+    "cmd": "for u in https://baupreis.ais152.com https://kontur.ais152.com https://henner.ais152.com https://silkekleinart.com https://sorrysara.space https://n8n.ais152.com; do curl -4 -sL -o /dev/null -w \"%{http_code}\n\" --max-time 25 $u; done | tr -d '\r' | sort -u | tr '\n' ' ' | sed 's/ $//'",
     "expect_equal": "200"
    }
   },
