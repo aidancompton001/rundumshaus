@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import MotionProvider from "@/components/motion/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -33,17 +33,22 @@ const reviewSchemas = reviewsData.reviews.map((r) => ({
   reviewBody: r.text,
 }));
 
-const lora = Lora({
-  variable: "--font-heading",
+// Макет клиента построен на Inter (docs/design/v1-desktop/css/tokens.css).
+// next/font скачивает гарнитуру при сборке и раздаёт со своего домена —
+// проверено: 11 файлов .woff2 в out/_next/static/media, обращений к
+// fonts.googleapis.com ноль. Заголовки и текст берут одну гарнитуру, как
+// в макете: там --font-sans единственный.
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-body",
+const interHeading = Inter({
+  variable: "--font-heading",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
@@ -70,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${lora.variable} ${plusJakarta.variable} antialiased`}
+      className={`${interHeading.variable} ${inter.variable} antialiased`}
     >
       <head>
         {/* Yandex Webmaster verification (PX-031 Phase B). */}

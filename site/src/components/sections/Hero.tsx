@@ -47,7 +47,12 @@ export default function Hero() {
             then animates chars in. If JS fails or is slow, text remains visible. */}
         <h1
           ref={headingRef}
-          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream leading-tight mb-6"
+          /* Заголовок клиента — 95 знаков (homepage.json hero.heading), а кегль был
+             рассчитан на короткий. Слова рвались посреди: «H|ausmeisterservice»,
+             «Umgebun|g» — это видно и на живом сайте прямо сейчас, дефект не новый.
+             Кегль уменьшен до размера, при котором слова переносятся целиком;
+             balance выравнивает строки по длине. */
+          className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-cream leading-tight mb-6 [text-wrap:balance]"
         >
           {data.hero.heading}
         </h1>
