@@ -1,0 +1,133 @@
+{
+ "task": "t008_port",
+ "threshold": 1e-08,
+ "require_landa": true,
+ "claims": [
+  {
+   "id": "01",
+   "text": "Живой сайт содержит 617 HTML-страниц — столько обязано пережить перенос",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && find site/out -name '*.html' | wc -l",
+    "expect_equal": "617"
+   }
+  },
+  {
+   "id": "02",
+   "text": "В карте сайта для Google 511 адресов",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && grep -c '<loc>' site/out/sitemap.xml",
+    "expect_equal": "511"
+   }
+  },
+  {
+   "id": "03",
+   "text": "Живых городских страниц 490: 98 городов на каждую из 5 услуг",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && find site/out/leistungen -mindepth 2 -name index.html | awk -F/ '{print $4}' | grep -v schrottabholung | grep -vE 'objektpflege|rasen-neuanlage' | wc -l",
+    "expect_equal": "490"
+   }
+  },
+  {
+   "id": "04",
+   "text": "Страниц-редиректов со снятой услуги 99, плюс один редирект статьи — всего 100 (прежняя подпись «100 Schrottabholung» была неточной)",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && echo \"$(find site/out/leistungen/schrottabholung -name index.html | wc -l) $(grep -rl 'http-equiv=\"refresh\"' site/out --include=index.html | wc -l)\"",
+    "expect_equal": "99 100"
+   }
+  },
+  {
+   "id": "05",
+   "text": "Городских шаблонов пять, а не один: Dach, Entruempelung, Galabau, Garten, Hausmeister — объём Задачи 5 занижался впятеро",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && ls site/src/components/templates/*CityTemplate.tsx | wc -l",
+    "expect_equal": "5"
+   }
+  },
+  {
+   "id": "06",
+   "text": "Тестов 247 в 20 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1 | grep -oE '[0-9]+'",
+    "expect_equal": "247"
+   }
+  },
+  {
+   "id": "07",
+   "text": "Страницы статей Ratgeber СУЩЕСТВУЮТ: 11 страниц в сборке, 10 в карте сайта. Прежнее «страниц статей нет» было ошибкой, и на нём основывалось снятие раздела",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && echo \"$(find site/out/ratgeber -name index.html | wc -l) $(grep -c 'ratgeber' site/out/sitemap.xml)\"",
+    "expect_equal": "11 10"
+   }
+  },
+  {
+   "id": "08",
+   "text": "Маршрутов Next.js 16, а макетов 8: девять маршрутов остались бы на старом дизайне, включая /osnabrueck/",
+   "asserted": true,
+   "proof": {
+    "cmd": "cd ../.. && find site/src/app -name page.tsx | wc -l",
+    "expect_equal": "16"
+   }
+  },
+  {
+   "id": "09",
+   "text": "Приёмка видит разметку Google: на обычной странице 4 типа, на городской 7. До правки парсер показывал пусто, потому что не разворачивал @graph",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"import json,io;p=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'))['pages'];print(len(p['/impressum/']['jsonld']), len(p['/leistungen/gartenpflege/alfhausen/']['jsonld']))\"",
+    "expect_equal": "4 7"
+   }
+  },
+  {
+   "id": "10",
+   "text": "Приёмка снимает состав страницы, а не только meta: внутренние ссылки, картинки, alt и файлы CSS/JS",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"import json,io;f=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'))['pages']['/impressum/'];print(all(k in f for k in ('links','images','alts','assets')))\"",
+    "expect_equal": "True"
+   }
+  },
+  {
+   "id": "11",
+   "text": "Приёмка следит за файлами, потеря которых убивает домен и индексацию: CNAME, robots.txt, sitemap.xml, favicon.ico, 404.html",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'))['files'];print(sum(1 for k in ('CNAME','robots.txt','sitemap.xml','favicon.ico','404.html') if d.get(k)))\"",
+    "expect_equal": "5"
+   }
+  },
+  {
+   "id": "12",
+   "text": "Слепок фиксирует среду замера: git-sha, время снятия и возраст сборки — иначе сверяются разные вещи (Закон 27)",
+   "asserted": true,
+   "proof": {
+    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/_check.json',encoding='utf-8'));print(all(k in d for k in ('git_sha','taken_at','build_newest_html')))\"",
+    "expect_equal": "True"
+   }
+  },
+  {
+   "id": "13",
+   "text": "Чек-лист переноса заведён и содержит команды, а не намерения",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -c '`' docs/plans/CHECKLIST_redesign_port.md",
+    "expect_equal": "29"
+   }
+  },
+  {
+   "id": "14",
+   "text": "План переноса существует и числа в нём исправлены после ревью: 247 тестов, 490 городских, пять шаблонов",
+   "asserted": true,
+   "proof": {
+    "cmd": "grep -c '247\\|490\\|Пять' docs/plans/2026-08-11-redesign-port.md",
+    "expect_equal": "6"
+   }
+  }
+ ]
+}
