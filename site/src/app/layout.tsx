@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import MotionProvider from "@/components/motion/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -33,22 +33,17 @@ const reviewSchemas = reviewsData.reviews.map((r) => ({
   reviewBody: r.text,
 }));
 
-// Макет клиента построен на Inter (docs/design/v1-desktop/css/tokens.css).
-// next/font скачивает гарнитуру при сборке и раздаёт со своего домена —
-// проверено: 11 файлов .woff2 в out/_next/static/media, обращений к
-// fonts.googleapis.com ноль. Заголовки и текст берут одну гарнитуру, как
-// в макете: там --font-sans единственный.
-const inter = Inter({
-  variable: "--font-body",
+const lora = Lora({
+  variable: "--font-heading",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700"],
   display: "swap",
 });
 
-const interHeading = Inter({
-  variable: "--font-heading",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-body",
   subsets: ["latin", "latin-ext"],
-  weight: ["600", "700", "800"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -75,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${interHeading.variable} ${inter.variable} antialiased`}
+      className={`${lora.variable} ${plusJakarta.variable} antialiased`}
     >
       <head>
         {/* Yandex Webmaster verification (PX-031 Phase B). */}
@@ -274,7 +269,10 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-body bg-cream text-charcoal">
         <MotionProvider>
           <Navbar />
-          <main className="flex-1 pt-16">{children}</main>
+          {/* отступ равен высоте шапки: шапка фиксирована сверху, и при 64px
+             против её новых 82px контент уезжал бы под неё на всех 617
+             страницах сразу (находка ревьюера F-09) */}
+          <main className="flex-1 pt-[82px]">{children}</main>
           <Footer />
           <WhatsAppButton />
           <CookieBanner />

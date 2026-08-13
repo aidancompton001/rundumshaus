@@ -42,7 +42,10 @@ export default function Navbar() {
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50">
       <nav className="backdrop-blur-xl bg-charcoal/90 border-b border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          {/* Высота шапки 82px и лого 66px — замеры макета клиента
+              (docs/design/REFERENCE_MEASUREMENTS.json). При 44px словесная
+              марка лого нечитаема, это проверялось на превью. */}
+          <div className="flex items-center justify-between h-[82px]">
             {/* Logo */}
             <a
               href={getHref("/")}
@@ -53,7 +56,7 @@ export default function Navbar() {
                 alt={site.company}
                 width={160}
                 height={48}
-                className="h-10 sm:h-11 w-auto rounded bg-white/95 px-2 py-1"
+                className="h-14 sm:h-[66px] w-auto rounded bg-white/95 px-2 py-1"
               />
             </a>
 
