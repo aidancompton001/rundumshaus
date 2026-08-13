@@ -90,7 +90,8 @@ import sys
 
 DEFAULT_THRESHOLD = 1e-8  # 0.000001 %
 PLACEHOLDER_MARK = "заполняется агентом"  # маркер незаполненного шаблона
-PROOF_TIMEOUT_SEC = 900   # браузерные пруфы (Playwright: мутации x ширины) в 60с не укладываются
+PROOF_TIMEOUT_SEC = 2400  # самотест приёмки (15 мутаций x подвыборка сборки) идёт ~20 мин;
+                          # это терпение, а не послабление: ответ пруфа сверяется так же строго
 EXPECT_KEYS = ("expect_exit", "expect_equal", "expect_contain", "expect_min")
 
 
