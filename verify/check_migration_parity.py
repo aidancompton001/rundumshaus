@@ -85,10 +85,21 @@ def page_facts(src):
     # Landa F-01: он удалил ВСЕ картинки, заменил все внутренние ссылки на "#"
     # и снёс папку _next — приёмка ответила «БИНАРНО: 1». Потому что смотрела
     # только на meta-теги. Теперь смотрит и на то, из чего страница состоит.
-    f["links"] = sorted(set(re.findall(r'href="(/[^"#?]*)"', src)))
+    # из ссылок исключены /_next/: их имена содержат хеш содержимого и меняются
+    # при любой пересборке. Landa F-45: переименование одного CSS-файла давало
+    # «ПОТЕРЯ на 36 страницах» и БИНАРНО 0 на honest-пересборке. Взамен фатально
+    # сравнивается ЧИСЛО таких ссылок и assets_missing (наличие файлов на диске).
+    f["links"] = sorted(x for x in set(re.findall(r'href="(/[^"#?]*)"', src))
+                        if not x.startswith("/_next/"))
     f["images"] = sorted(set(re.findall(r'<img[^>]+src="([^"]+)"', src)))
     f["alts"] = sorted(set(re.findall(r'<img[^>]+alt="([^"]*)"', src)))
     f["assets"] = sorted(set(re.findall(r'<(?:link[^>]+href|script[^>]+src)="(/_next/[^"]+)"', src)))
+    # Landa, раунд 3, F-46: он подменил приёмник формы на чужой адрес, телефон и
+    # почту на всех страницах — и приёмка ответила «БИНАРНО: 1». Сайт, у которого
+    # каждая заявка уходит постороннему, проходил как «ничего не потеряно».
+    f["forms"] = sorted(set(re.findall(r'<form[^>]*action="([^"]*)"', src)))
+    f["ext"] = sorted(set(re.findall(r'href="((?:tel:|mailto:|https?://)[^"]*)"', src)))
+    f["srcset_n"] = len(re.findall(r'srcset="', src))
     return f
 
 
@@ -202,11 +213,21 @@ def compare(before_path, after_path):
 
     print("СОСТАВ СТРАНИЦ — ссылки, картинки, ассеты (Landa F-01):")
     for key, what in (("links", "внутренних ссылок"), ("images", "картинок"),
-                      ("alts", "alt-текстов"), ("assets", "файлов CSS/JS")):
+                      ("alts", "alt-текстов"),
+                      ("forms", "приёмников формы"), ("ext", "телефонов и почты")):
         lostn = [u for u in common if set(A[u].get(key) or []) - set(B[u].get(key) or [])]
         bad += len(lostn) > 0
         print("  %-16s страниц с потерей: %-5d %s" % (what, len(lostn),
               "OK" if not lostn else "ПОТЕРЯ, напр. " + lostn[0]))
+
+    # число подключённых CSS/JS и адаптивных картинок — вместо поимённого сравнения
+    for key, what in (("assets", "ссылок на CSS/JS"), ("srcset_n", "адаптивных картинок")):
+        diff = [u for u in common
+                if (len(A[u].get(key) or []) if key == "assets" else (A[u].get(key) or 0))
+                != (len(B[u].get(key) or []) if key == "assets" else (B[u].get(key) or 0))]
+        bad += len(diff) > 0
+        print("  %-16s страниц с расхождением: %-5d %s" % (what, len(diff),
+              "OK" if not diff else "РАСХОЖДЕНИЕ, напр. " + diff[0]))
 
     broken = [u for u in common if (B[u].get("assets_missing") or 0) > (A[u].get("assets_missing") or 0)]
     bad += len(broken) > 0

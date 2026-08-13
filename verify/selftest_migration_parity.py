@@ -105,6 +105,35 @@ def m_photos(d):
         shutil.rmtree(p)
 
 
+def m_form_hijack(d):
+    """Landa F-46: заявки клиента уходят постороннему. Приёмник формы подменён."""
+    _edit_html(d, lambda s: s.replace("formsubmit.co/kontakt@rundumshaus-littawe.de",
+                                      "formsubmit.co/angreifer@example.com"))
+
+
+def m_phone_hijack(d):
+    """Landa F-46: телефон клиента подменён на всех страницах."""
+    _edit_html(d, lambda s: s.replace("+4915239603175", "+490000000000")
+                             .replace("+49 1523 9603175", "+49 000 0000000"))
+
+
+def m_rebuild_hashes(d):
+    """КОНТРОЛЬ, а не дефект: честная пересборка меняет имена файлов в /_next/,
+    потому что они содержат хеш содержимого. Приёмка обязана остаться ЗЕЛЁНОЙ —
+    иначе первый же шаг переноса упрётся в красный по ложной причине (Landa F-45)."""
+    import glob as _g
+    nxt = os.path.join(d, "_next", "static")
+    files = [f for f in _g.glob(os.path.join(nxt, "**", "*.css"), recursive=True)]
+    if not files:
+        return
+    old = files[0]
+    new = os.path.join(os.path.dirname(old), "rebuilt-" + os.path.basename(old))
+    os.rename(old, new)
+    rel_old = "/" + os.path.relpath(old, d).replace(os.sep, "/")
+    rel_new = "/" + os.path.relpath(new, d).replace(os.sep, "/")
+    _edit_html(d, lambda s: s.replace(rel_old, rel_new))
+
+
 def m_sitemap_spam(d):
     p = os.path.join(d, "sitemap.xml")
     s = io.open(p, encoding="utf-8").read()
@@ -140,6 +169,8 @@ MUTATIONS = [
     ("robots.txt закрыл сайт от Google", m_robots_noindex),
     ("CNAME уведён на чужой домен", m_cname_hijack),
     ("удалены файлы фотографий", m_photos),
+    ("приёмник формы подменён на чужой", m_form_hijack),
+    ("телефон клиента подменён", m_phone_hijack),
 ]
 
 
@@ -216,6 +247,14 @@ def main():
         after0 = snap(clean, os.path.join(tmp, "after0.json"))
         v = verdict(before, after0)
         results.append(("КОНТРОЛЬ: нетронутая сборка", v == 1, "БИНАРНО: %d" % v))
+
+        # Landa F-45: обычная пересборка меняет хеши в именах файлов. Это НЕ потеря,
+        # и приёмка обязана остаться зелёной — иначе ворота всегда красные.
+        rebuilt = os.path.join(tmp, "rb")
+        subset(BUILD, rebuilt)
+        m_rebuild_hashes(rebuilt)
+        v = verdict(before, snap(rebuilt, os.path.join(tmp, "rb.json")))
+        results.append(("КОНТРОЛЬ: честная пересборка (хеши имён)", v == 1, "БИНАРНО: %d" % v))
 
         for label, fn in MUTATIONS:
             work = os.path.join(tmp, "m")

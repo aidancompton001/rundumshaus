@@ -12,8 +12,8 @@
 
 | # | Что | Команда | Ожидается | ✓ |
 |---|---|---|---|---|
-| 0.1 | Приёмка ловит потерю | `py verify/selftest_migration_parity.py` | `SELFTEST_PARITY: PASS (10/10 мутаций)` | ☐ |
-| 0.2 | Реестр переноса заведён | `py verify/hrc.py verify/hrc_ledger_t008_port.json` | `P = 0` | ☐ |
+| 0.1 | Приёмка ловит потерю | `py verify/selftest_migration_parity.py` | `SELFTEST_PARITY: PASS (15/15 мутаций)` | ☐ |
+| 0.2 | Реестр переноса заведён | `py verify/hrc.py verify/hrc_ledger_t008port.json` | `P = 0` | ☐ |
 | 0.3 | Карта «маршрут → макет» составлена | `grep -c '^|' docs/plans/ROUTE_MAP.md` | 16 маршрутов покрыты решением | ☐ |
 | 0.4 | Таблица токенов старое→новое | `grep -c '^|' docs/plans/TOKEN_MAP.md` | все цвета сайта сопоставлены | ☐ |
 | 0.5 | Базовый слепок снят и в git | `git log --oneline -1 -- verify/snapshots/` | коммит есть | ☐ |
@@ -75,8 +75,8 @@
 |---|---|---|---|
 | 4.1 | Все ворота раздела 1 зелёные | — | ☐ |
 | 4.2 | Реестр HRC прогнан | `P = 0` | ☐ |
-| 4.3 | Подпись Ланды на результат | `landa_review_t008_port.json`, verdict CONFIRMED-ALL | ☐ |
-| 4.4 | Гейт доклада | `report_gate.py t008_port --strict` → код 0 | ☐ |
+| 4.3 | Подпись Ланды на результат | `landa_review_t008port.json`, verdict CONFIRMED-ALL | ☐ |
+| 4.4 | Гейт доклада | `report_gate.py t008port --strict` → код 0 | ☐ |
 | 4.5 | Решение CEO: сразу на домен или сначала поддомен | ответ получен | ☐ |
 | 4.6 | Клиент предупреждён не править в админке в окно переноса | сообщение отправлено | ☐ |
 | 4.7 | Один merge в master (деплой стреляет на каждый push) | — | ☐ |
