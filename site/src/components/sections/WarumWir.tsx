@@ -6,6 +6,7 @@
 import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const data = (homepageData as HomepageData).warumWir;
 
@@ -13,13 +14,10 @@ export default function WarumWir() {
   return (
     <section className="py-20 md:py-28 bg-charcoal text-cream">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-14">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+        <ScrollReveal className="mb-14">
+          <SectionHeading eyebrow="Warum wir" onDark subheading={data.subheading}>
             {data.heading}
-          </h2>
-          <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-            {data.subheading}
-          </p>
+          </SectionHeading>
         </ScrollReveal>
 
         <Stagger

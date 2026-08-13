@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/motion";
 import { Stagger } from "@/components/motion";
 import { getHref, getImageUrl, toResponsiveWebpSrcSet } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -17,13 +18,10 @@ export default function ServiceOverview() {
   return (
     <section className="py-20 md:py-28 bg-cream-dark/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-16">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-4">
+        <ScrollReveal className="mb-16">
+          <SectionHeading eyebrow="Unsere Leistungen" subheading={subheading}>
             {heading}
-          </h2>
-          <p className="text-charcoal-light text-lg max-w-2xl mx-auto">
-            {subheading}
-          </p>
+          </SectionHeading>
         </ScrollReveal>
 
         {/* Пять карточек в ряд, как в макете: там все услуги видны сразу.

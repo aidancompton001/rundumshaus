@@ -10,6 +10,7 @@
 import { useRef, useState } from "react";
 import reviewsData from "@/data/reviews.json";
 import { ScrollReveal } from "@/components/motion";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const { reviews, aggregateRating } = reviewsData;
 
@@ -69,9 +70,9 @@ export default function BewertungenSlider() {
     <section className="py-20 md:py-28 bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-12">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-4">
+          <SectionHeading eyebrow="Bewertungen" className="mb-4">
             Das sagen unsere Kunden
-          </h2>
+          </SectionHeading>
           <div className="flex items-center justify-center gap-3 text-charcoal-light">
             <Stars count={Math.round(aggregateRating.ratingValue)} />
             <span className="font-semibold text-charcoal">

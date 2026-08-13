@@ -6,6 +6,7 @@ import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
 import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const data = (homepageData as HomepageData).kontaktCta;
 const PHONE = (siteData as { phone: string }).phone.replace(/\s+/g, "");
@@ -16,9 +17,9 @@ export default function HomeKontakt() {
   return (
     <section className="py-20 md:py-28 bg-charcoal text-cream">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+        <SectionHeading eyebrow="Kontakt" onDark className="mb-4">
           {data.heading}
-        </h2>
+        </SectionHeading>
         <p className="text-cream/80 text-lg mb-10 leading-relaxed max-w-2xl mx-auto">
           {data.text}
         </p>
