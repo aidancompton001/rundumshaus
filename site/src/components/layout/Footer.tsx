@@ -9,7 +9,10 @@ export default function Footer() {
   return (
     <footer className="bg-charcoal text-cream/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        {/* Четыре колонки, как в макете клиента: бренд, услуги, информация,
+            контакт. Было три — услуги и информационные страницы лежали
+            вперемешку в одном списке. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Company Info */}
           <div>
             <div className="mb-4">
@@ -33,7 +36,7 @@ export default function Footer() {
           {/* Navigation */}
           <div>
             <h4 className="font-heading text-lg font-semibold text-cream mb-4">
-              Seiten
+              Leistungen
             </h4>
             <ul className="space-y-2">
               {site.navigation.map((link) => (
@@ -77,6 +80,30 @@ export default function Footer() {
                 >
                   Objektpflege (B2B)
                 </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Informationen */}
+          <div>
+            <h4 className="font-heading text-lg font-semibold text-cream mb-4">
+              Informationen
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <a href={getHref("/ueber-uns/")} className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Über uns</a>
+              </li>
+              <li>
+                <a href={getHref("/referenzen/")} className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Referenzen</a>
+              </li>
+              <li>
+                <a href={getHref("/ratgeber/")} className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Ratgeber</a>
+              </li>
+              <li>
+                <a href={getHref("/osnabrueck/")} className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Standort Osnabrück</a>
+              </li>
+              <li>
+                <a href={getHref("/einsatzgebiet/")} className="text-sm hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Einsatzgebiet</a>
               </li>
             </ul>
           </div>
