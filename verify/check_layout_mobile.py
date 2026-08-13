@@ -243,6 +243,24 @@ async def run(directory, widths):
         pages = [p for p in pages if not os.path.basename(p).startswith("_")]
     problems = 0
 
+    # Закон 27, правило 2: среда измерителя фиксируется явно. Собранный сайт
+    # ссылается на картинки и стили от корня («/images/...»), и под file:// они
+    # не резолвятся — браузер честно сообщает «битая картинка», хотя на живом
+    # сайте всё цело. Поэтому каталог сборки поднимается по HTTP и мерится так,
+    # как его видит посетитель.
+    httpd = base_url = None
+    if not os.path.isfile(directory):
+        import functools, http.server, socketserver, threading
+        handler = functools.partial(http.server.SimpleHTTPRequestHandler,
+                                    directory=os.path.abspath(directory))
+        httpd = socketserver.TCPServer(("127.0.0.1", 0), handler)
+        httpd.daemon_threads = True
+        threading.Thread(target=httpd.serve_forever, daemon=True).start()
+        base_url = "http://127.0.0.1:%d/" % httpd.server_address[1]
+        print("СРЕДА ЗАМЕРА: HTTP %s (каталог %s)" % (base_url, directory))
+    else:
+        print("СРЕДА ЗАМЕРА: file:// (одиночный файл)")
+
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
         # одна страница на весь прогон: пересоздание контекста на каждую ширину
@@ -252,7 +270,11 @@ async def run(directory, widths):
         for width in widths:
             await page.set_viewport_size({"width": width, "height": 900})
             for f in pages:
-                await page.goto("file:///" + os.path.abspath(f).replace("\\", "/"))
+                if base_url:
+                    rel = os.path.relpath(f, directory).replace(os.sep, "/")
+                    await page.goto(base_url + rel)
+                else:
+                    await page.goto("file:///" + os.path.abspath(f).replace("\\", "/"))
                 await page.wait_for_timeout(120)
                 ovf = await page.evaluate(JS_OVERFLOW)
                 img = await page.evaluate(JS_IMAGES)
@@ -283,6 +305,8 @@ async def run(directory, widths):
         await ctx.close()
         await browser.close()
 
+    if httpd:
+        httpd.shutdown()
     print("RESULT: %s" % ("LAYOUT_CLEAN" if problems == 0 else "PROBLEMS:%d" % problems))
     return 1 if problems else 0
 

@@ -108,7 +108,9 @@ export default function AboutSection() {
         </div>
 
         {/* Stats counter */}
-        <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+        {/* На 375 три колонки давали по 93 px, а «Kundenzufriedenheit» — 139 px:
+            подпись вылезала за плитку. На телефоне плитки идут в столбец. */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
           {data.stats.map((stat) => (
             <Counter
               key={stat.label}

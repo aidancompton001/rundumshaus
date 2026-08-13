@@ -57,14 +57,14 @@ export default function ServiceOverview() {
                 </div>
               )}
               <div className="p-6">
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-3 mb-2 min-w-0">
                   {(() => {
                     const Icon = serviceIconMap[service.icon] || DefaultIcon;
                     return (
-                      <Icon className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 transition-colors duration-300" />
+                      <Icon className="w-8 h-8 xl:w-9 xl:h-9 flex-shrink-0 transition-colors duration-300" />
                     );
                   })()}
-                  <h3 className="font-heading text-xl font-semibold text-charcoal group-hover:text-copper transition-colors">
+                  <h3 className="font-heading text-xl xl:text-lg font-semibold text-charcoal min-w-0 [overflow-wrap:anywhere] hyphens-auto group-hover:text-copper transition-colors">
                     {service.title}
                   </h3>
                 </div>
