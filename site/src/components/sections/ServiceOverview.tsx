@@ -19,7 +19,7 @@ export default function ServiceOverview() {
     <section className="py-20 md:py-28 bg-cream-dark/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="mb-16">
-          <SectionHeading eyebrow="Unsere Leistungen" subheading={subheading}>
+          <SectionHeading subheading={subheading}>
             {heading}
           </SectionHeading>
         </ScrollReveal>

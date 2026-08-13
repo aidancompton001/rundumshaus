@@ -54,7 +54,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
   const renderSection = (sec: { heading: string; paragraphs: string[] }) => (
     <section className="mb-10" key={sec.heading}>
-      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-4">
+      <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
         {s(sec.heading)}
       </h2>
       {sec.paragraphs.map((p, i) => (
@@ -129,7 +129,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* CTA block */}
         <section className="my-10 p-6 md:p-8 bg-charcoal text-cream rounded-2xl text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-3">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">
             {s(T.cta.heading)}
           </h2>
           <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">
@@ -180,7 +180,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Leistungen list */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-4">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
             {s(T.leistungen.heading)}
           </h2>
           <p className="text-base text-charcoal-light mb-5 leading-relaxed">
@@ -215,7 +215,8 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Warum */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-5">
+          <span className="eyebrow">Warum wir</span>
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-5">
             {s(T.warum.heading)}
           </h2>
           <ul className="space-y-3">
@@ -236,7 +237,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Einsatzgebiet */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-4">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
             {s(T.einsatzgebiet.heading)}
           </h2>
           <p className="text-base text-charcoal-light leading-relaxed">
@@ -248,7 +249,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-6">
             {s(T.faq.heading)}
           </h2>
           <div className="space-y-3">

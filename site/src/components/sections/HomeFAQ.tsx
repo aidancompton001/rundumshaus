@@ -26,7 +26,7 @@ export default function HomeFAQ() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading eyebrow="Häufige Fragen" className="mb-10">
+        <SectionHeading className="mb-10">
           {data.heading}
         </SectionHeading>
         <div className="space-y-3">

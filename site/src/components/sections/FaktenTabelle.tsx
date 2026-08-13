@@ -32,7 +32,7 @@ export default function FaktenTabelle() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           id="fakten-tabelle-heading"
-          className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-8 text-center"
+          className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-8 text-center"
         >
           Alle Firmendaten auf einen Blick
         </h2>

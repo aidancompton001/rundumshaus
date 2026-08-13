@@ -22,7 +22,7 @@ export default function SpezialthemenSection() {
   return (
     <section className="py-12 md:py-16 bg-cream-dark border-y border-sand/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-2">
+        <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-2">
           Weitere Spezialleistungen
         </h2>
         <p className="text-charcoal-light leading-relaxed mb-6">

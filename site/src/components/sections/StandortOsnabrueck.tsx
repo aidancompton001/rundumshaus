@@ -22,7 +22,7 @@ export default function StandortOsnabrueck() {
             <p className="text-sm text-copper font-semibold uppercase tracking-wide mb-3">
               Familienbetrieb aus Osnabrück
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-4">
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-charcoal mb-4">
               Direkt in Osnabrück und im 60-km-Umkreis
             </h2>
             <p className="text-charcoal-light leading-relaxed mb-6">

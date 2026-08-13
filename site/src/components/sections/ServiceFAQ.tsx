@@ -24,7 +24,7 @@ export default function ServiceFAQ({ serviceId }: ServiceFAQProps) {
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-3">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-3">
             {faq.title}
           </h2>
           <p className="text-charcoal-light text-base">{faq.subheading}</p>
