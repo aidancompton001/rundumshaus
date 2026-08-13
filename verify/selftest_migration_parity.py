@@ -269,8 +269,14 @@ def main():
     for label, ok, detail in results:
         print("%-44s %-7s %s" % (label, "OK" if ok else "ПРОВАЛ", detail))
     ok = all(r[1] for r in results)
-    print("SELFTEST_PARITY: %s (%d/%d мутаций)"
-          % ("PASS" if ok else "FAIL", sum(1 for r in results[1:] if r[1]), len(MUTATIONS)))
+    # Контроли (нетронутая сборка, честная пересборка) — не мутации. Считать их
+    # в числителе давало «16/15»: число, не сходящееся с собственным списком,
+    # обесценивает отчёт целиком.
+    muts = [r for r in results if not r[0].startswith("КОНТРОЛЬ")]
+    ctrl = [r for r in results if r[0].startswith("КОНТРОЛЬ")]
+    print("SELFTEST_PARITY: %s (%d/%d мутаций, контролей зелёных: %d/%d)"
+          % ("PASS" if ok else "FAIL", sum(1 for r in muts if r[1]), len(MUTATIONS),
+             sum(1 for r in ctrl if r[1]), len(ctrl)))
     return 0 if ok else 1
 
 
