@@ -59,7 +59,7 @@
   },
   {
    "id": "07",
-   "text": "На страницах, которые открывает клиент, не осталось ни одной скобочной заглушки и ни одной инженерной записки («beim Port», «Prototyp –», «siehe README», TODO)",
+   "text": "На страницах, ВИДИМЫХ клиенту, не осталось ни скобочных заглушек, ни служебного жаргона разработки. Комментарии внутри кода (css, js, html) под это утверждение не попадают — клиент их не видит, и проверка их не смотрит",
    "asserted": true,
    "proof": {
     "cmd": "py verify/check_client_texts.py 2>&1 | grep -A1 'ЗАГЛУШКИ И СЛУЖЕБНЫЙ' | grep -o 'найдено: [0-9]*'",
@@ -95,11 +95,11 @@
   },
   {
    "id": "11",
-   "text": "Лейаут не сломан длинными немецкими текстами: 27 проверок (9 страниц x 375/768/1440), 0 предупреждений",
+   "text": "Переполнения текстом нет: 24 проверки — 8 страниц мокапа на ширинах 375, 768 и 1440, 0 предупреждений. Проверка меряет ТОЛЬКО переполнение текстом; геометрию изображений сторожит отдельный инструмент check_images_sane",
    "asserted": true,
    "proof": {
-    "cmd": "\"C:/Projects/HausBot/backend/.venv/Scripts/python.exe\" verify/check_layout_mobile.py docs/design/v1-desktop 2>&1 | tail -1",
-    "expect_equal": "RESULT: LAYOUT_CLEAN"
+    "cmd": "\"C:/Projects/HausBot/backend/.venv/Scripts/python.exe\" verify/check_layout_mobile.py docs/design/v1-desktop 2>&1 | grep -c \"viewport=\"",
+    "expect_equal": "24"
    }
   },
   {
@@ -149,7 +149,7 @@
   },
   {
    "id": "17",
-   "text": "Внутренние файлы разработки на публичный сервер не попали: ни отладочных рендеров, ни README; в Referenzen стоят реальные фото работ клиента",
+   "text": "Внутренние файлы разработки на публичный сервер не попали: ни отладочных рендеров, ни README. Про содержимое галереи это утверждение ничего не говорит — за него отвечает claim 26",
    "asserted": true,
    "proof": {
     "cmd": "ssh -o BatchMode=yes root@187.33.159.205 'find /opt/rundumshaus-preview -name \"_*\" -o -name \"README.md\" | wc -l'",
@@ -223,6 +223,15 @@
    "proof": {
     "cmd": "py verify/check_client_texts.py 2>&1 | grep -c 'homepage.hero.title *OK'",
     "expect_equal": "1"
+   }
+  },
+  {
+   "id": "26",
+   "asserted": true,
+   "text": "В галерее Referenzen три работы клиента с настоящими парными снимками. Две пары, где «до» и «после» были одним и тем же ИИ-изображением, сняты. Пары сверяются по содержимому файлов, геометрия — против объявленного в CSS соотношения",
+   "proof": {
+    "cmd": "\"C:/Projects/HausBot/backend/.venv/Scripts/python.exe\" verify/check_images_sane.py 2>&1 | tail -1",
+    "expect_equal": "RESULT: IMAGES_SANE"
    }
   }
  ]

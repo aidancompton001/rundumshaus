@@ -132,10 +132,10 @@
   {
    "id": "15",
    "asserted": true,
-   "text": "Приёмка переноса фальсифицируема: все 10 способов угробить сайт, применённые ревьюером (удаление страницы, обнуление заголовков, удаление описаний, H1, разметки Google, картинок, навигации, CSS и JS, файла CNAME, подсадка чужого адреса в карту сайта) дают 0, а нетронутая сборка даёт 1. До правок инструмент пропускал ВСЕ десять",
+   "text": "Приёмка переноса фальсифицируема по 13 направлениям: удаление страницы, обнуление заголовков, удаление описаний, H1, разметки Google, картинок, навигации, CSS и JS, файла CNAME, подсадка чужого адреса в карту сайта, закрытие сайта через robots.txt, увод CNAME на чужой домен, удаление файлов фотографий. Каждое даёт 0, нетронутая сборка — 1",
    "proof": {
     "cmd": "py verify/selftest_migration_parity.py 2>&1 | tail -1",
-    "expect_equal": "SELFTEST_PARITY: PASS (10/10 мутаций)"
+    "expect_equal": "SELFTEST_PARITY: PASS (13/13 мутаций)"
    }
   },
   {
@@ -145,6 +145,24 @@
    "proof": {
     "cmd": "py verify/check_live_site.py verify/snapshots/before-redesign.json 2>&1 | tail -1",
     "expect_equal": "БИНАРНО: 1"
+   }
+  },
+  {
+   "id": "17",
+   "asserted": true,
+   "text": "Эталон снят ТЕКУЩЕЙ версией инструмента: у страницы 15 полей, включая ссылки, картинки, alt, ассеты и типы разметки; в слепке есть файлы сборки и отпечаток коммита. Слепок прежней версии содержал 8 полей, и все новые проверки против него молчали",
+   "proof": {
+    "cmd": "py -c \"import json,io;d=json.load(io.open('verify/snapshots/before-redesign.json',encoding='utf-8'));p=next(iter(d['pages'].values()));print(len(p), 'files' in d, 'git_sha' in d)\"",
+    "expect_equal": "15 True True"
+   }
+  },
+  {
+   "id": "18",
+   "asserted": true,
+   "text": "Сравнение слепков разных версий инструмента отклоняется, а не даёт ложное «всё хорошо»: сторож схемы сверяет набор полей страницы и наличие служебных разделов",
+   "proof": {
+    "cmd": "git show HEAD~2:verify/snapshots/before-redesign.json > verify/snapshots/_t.json 2>/dev/null; py verify/check_migration_parity.py compare verify/snapshots/_t.json verify/snapshots/before-redesign.json 2>&1 | grep -c 'PARITY_SCHEMA_MISMATCH'; rm -f verify/snapshots/_t.json",
+    "expect_equal": "1"
    }
   }
  ]
