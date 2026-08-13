@@ -8,7 +8,7 @@ export const metadata = generateSEO({
   title: metaOverride?.title ?? "Einsatzgebiet",
   description:
     metaOverride?.description ??
-    "Hausmeisterservice und Gartenpflege in Osnabrück, Münster, Bielefeld, Rheine, Lingen und über 90 weiteren Städten im Umkreis von 60 km.",
+    "Hausmeisterservice und Gartenpflege in Osnabrück, Münster, Bielefeld, Rheine, Lingen und über 90 weiteren Städten im Umkreis von 80 km.",
   path: "/einsatzgebiet",
 });
 

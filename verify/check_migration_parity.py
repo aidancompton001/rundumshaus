@@ -38,6 +38,13 @@ import sys
 
 H1_ALLOWED_CHANGES = {"/"}      # решение CEO: H1 главной заменён текстом клиента
 
+# Осознанные изменения текста, объявленные ЗАРАНЕЕ и с причиной. Список закрытый:
+# всё, чего в нём нет, остаётся провалом. Печатается в отчёте, а не молчит.
+EXPECTED_TEXT_CHANGES = {
+    ("description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
+    ("og_description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
+}
+
 TAGS = {
     "title": r"<title[^>]*>(.*?)</title>",
     "description": r'<meta name="description" content="([^"]*)"',
@@ -196,6 +203,10 @@ def compare(before_path, after_path):
         # а согласованные изменения объявляются поимённо, а не оптом.
         if key == "h1":
             diff = [u for u in diff if u not in H1_ALLOWED_CHANGES]
+        declared = [u for u in diff if (key, u) in EXPECTED_TEXT_CHANGES]
+        for u in declared:
+            print("  %-12s ЗАЯВЛЕНО    %s — %s" % (key, u, EXPECTED_TEXT_CHANGES[(key, u)]))
+        diff = [u for u in diff if u not in declared]
         fatal = True
         bad += (len(diff) > 0) and fatal
         mark = "OK" if not diff else ("ИЗМЕНЕНО: %d" % len(diff))

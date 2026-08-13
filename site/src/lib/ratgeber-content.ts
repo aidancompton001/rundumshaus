@@ -46,7 +46,7 @@ export const RATGEBER_CONTENT: Record<string, ArticleSection[]> = {
       "Anfahrt: bei lokalen Anbietern im Umkreis Osnabrück oft enthalten oder pauschal 20–40 €.",
       "Entsorgung Schnittgut: typisch 5–10 € pro m³ oder im Stundenlohn enthalten.",
     ] },
-    { type: "p", text: "Bei Rund ums Haus Littawe ist die Besichtigung kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück. Anschließend erhalten Sie ein verbindliches Festpreisangebot." },
+    { type: "p", text: "Bei Rund ums Haus Littawe ist die Besichtigung kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 80 km um Osnabrück. Anschließend erhalten Sie ein verbindliches Festpreisangebot." },
     { type: "h2", text: "Schnittgut entsorgen — Wege im Landkreis Osnabrück und Nachbarn" },
     { type: "p", text: "Im Landkreis Osnabrück können Sie Heckenschnitt bei den Awigo-Annahmestellen abgeben (z.B. Atter, Bramsche, Melle, Quakenbrück). Im Kreis Steinfurt nutzen Sie die Wertstoffhöfe der Kreisabfallwirtschaft. Wer einen Garten mit Komposterstellung hat, kann den feinen Anteil selbst kompostieren — verholzte Triebe gehören jedoch in die Grünabfall-Annahme." },
     { type: "h2", text: "Häufige Fehler beim Heckenschnitt" },

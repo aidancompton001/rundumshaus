@@ -11,7 +11,7 @@ const FAKTEN: { label: string; value: string }[] = [
   { label: "Telefon", value: "+49 1523 9603175" },
   { label: "E-Mail", value: "kontakt@rundumshaus-littawe.de" },
   { label: "Sprache", value: "Deutsch" },
-  { label: "Einsatzgebiet", value: "60 km Umkreis um Osnabrück" },
+  { label: "Einsatzgebiet", value: "80 km Umkreis um Osnabrück" },
   { label: "Anzahl bedienter Städte", value: "98 in Niedersachsen + Nordrhein-Westfalen" },
   { label: "Bundesländer", value: "Niedersachsen, Nordrhein-Westfalen" },
   { label: "Hauptleistungen", value: "5 (Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten, Entrümpelung)" },

@@ -164,7 +164,7 @@ interface ServiceBlocks {
 }
 
 // PX-038 CTR fix: meta description should not say "Aus Osnabrück, 0 km Anfahrt"
-// when the city IS Osnabrück. Returns " · 60 km Anfahrt" or empty string.
+// when the city IS Osnabrück. Returns " · 80 km Anfahrt" or empty string.
 const distanceMeta = (c: City) =>
   c.distanceKm === 0 ? "" : ` · ${c.distanceKm} km Anfahrt`;
 
@@ -209,7 +209,7 @@ const HAUSMEISTER: ServiceBlocks = {
     (c, n) =>
       `Mehrfamilienhäuser und Eigentümergemeinschaften in ${c.displayName} betreuen wir auf Wunsch dauerhaft. Treppenhausreinigung in festen Intervallen, Pflege der Außenanlagen, Müllmanagement, kleine Reparaturen, Pflege der Heizung, Winterdienst — alles aus einer Hand und mit einem festen Ansprechpartner. Wir sind regelmäßig auch in ${n.slice(0, 3).map((x) => x.displayName).join(", ")} im Einsatz, was kurze Reaktionszeiten in der gesamten Region ermöglicht.`,
     (c) =>
-      `Eine Besichtigung vor Ort in ${c.displayName} ist kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück. Bei der Besichtigung erfassen wir den Zustand, klären Wünsche und Prioritäten und erstellen anschließend ein faires Festpreisangebot. Bei laufenden Aufträgen (z.B. Mehrfamilienhausbetreuung) erhalten Sie monatliche Übersichten der erledigten Tätigkeiten.`,
+      `Eine Besichtigung vor Ort in ${c.displayName} ist kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 80 km um Osnabrück. Bei der Besichtigung erfassen wir den Zustand, klären Wünsche und Prioritäten und erstellen anschließend ein faires Festpreisangebot. Bei laufenden Aufträgen (z.B. Mehrfamilienhausbetreuung) erhalten Sie monatliche Übersichten der erledigten Tätigkeiten.`,
     (c) =>
       `Winterdienst in ${c.displayName}: Wir übernehmen Räum- und Streupflichten von November bis März — sowohl für private Eigentümer als auch für Hausverwaltungen. Geräumt wird in der Regel werktags vor 7:00 Uhr und sonntags vor 9:00 Uhr (gemäß lokaler Streupflicht). Streumittel stellen wir auf Wunsch zur Verfügung.`,
     (c) =>
@@ -234,7 +234,7 @@ const HAUSMEISTER: ServiceBlocks = {
     }),
     (c) => ({
       q: `Was kostet eine Besichtigung in ${c.displayName}?`,
-      a: `Die Besichtigung in ${c.displayName} ist kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 60 km um Osnabrück.`,
+      a: `Die Besichtigung in ${c.displayName} ist kostenlos und unverbindlich — im gesamten Einsatzgebiet bis 80 km um Osnabrück.`,
     }),
     (c) => ({
       q: `Bieten Sie Winterdienst in ${c.displayName} an?`,
@@ -534,7 +534,7 @@ const ENTRUEMP: ServiceBlocks = {
     }),
     (c) => ({
       q: `Was kostet eine Besichtigung in ${c.displayName}?`,
-      a: `Die Besichtigung in ${c.displayName} ist kostenlos und unverbindlich, im gesamten Umkreis von rund 60 km um Osnabrück.`,
+      a: `Die Besichtigung in ${c.displayName} ist kostenlos und unverbindlich, im gesamten Umkreis von rund 80 km um Osnabrück.`,
     }),
     (c) => ({
       q: `Welche Räume entrümpeln Sie in ${c.displayName}?`,

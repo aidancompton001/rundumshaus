@@ -110,7 +110,7 @@ export default function RootLayout({
                   logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
                   priceRange: "€€",
                   description:
-                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück und im Umkreis von 60 km.",
+                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück und im Umkreis von 80 km.",
                   foundingDate: "2026",
                   founder: {
                     "@type": "Person",

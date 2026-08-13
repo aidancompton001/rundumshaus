@@ -11,7 +11,7 @@ export const metadata = generateSEO({
   title: metaOverride?.title ?? "Über uns — Familienbetrieb Littawe in Osnabrück",
   description:
     metaOverride?.description ??
-    "Familienbetrieb aus Osnabrück (Bramscher Str. 161). Inhaber Kevin Littawe. Persönlicher Kontakt, faire Festpreise, eigene Mitarbeiter — 60 km Umkreis.",
+    "Familienbetrieb aus Osnabrück (Bramscher Str. 161). Inhaber Kevin Littawe. Persönlicher Kontakt, faire Festpreise, eigene Mitarbeiter — 80 km Umkreis.",
   path: "/ueber-uns",
 });
 

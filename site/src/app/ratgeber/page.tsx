@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Ratgeber — Gartenpflege, Entrümpelung, Hausmeisterservice in Osnabrück",
   description:
-    "Praxis-Guides aus erster Hand: Hecke schneiden in NDS/NRW, Entrümpelungskosten, Dachreinigung, Winterdienst-Pflichten, Haushaltsauflösung. Aktuell und regional für Osnabrück und 60 km Umkreis.",
+    "Praxis-Guides aus erster Hand: Hecke schneiden in NDS/NRW, Entrümpelungskosten, Dachreinigung, Winterdienst-Pflichten, Haushaltsauflösung. Aktuell und regional für Osnabrück und 80 km Umkreis.",
   path: "/ratgeber",
 });
 
