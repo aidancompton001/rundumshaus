@@ -105,8 +105,11 @@ def snapshot(build_dir, out_path):
             # Самотест поймал дыру: удаление папки _next не меняло слепок, потому
             # что ссылки в HTML оставались. Страница ссылается на CSS и JS, файлов
             # нет — сайт без стилей, а сравнение молчало. Считаем недостающие.
+            # Landa F-39: считались только пути /_next/, а картинки лежат в
+            # /images/** — удаление папки с фотографиями проходило незамеченным.
+            local = [x for x in facts["assets"] + facts["images"] if x.startswith("/")]
             facts["assets_missing"] = sum(
-                1 for a in facts["assets"]
+                1 for a in local
                 if not os.path.exists(os.path.join(build_dir, a.lstrip("/").replace("/", os.sep))))
             pages[url] = facts
     sm = os.path.join(build_dir, "sitemap.xml")
@@ -145,6 +148,24 @@ def compare(before_path, after_path):
     b = json.load(io.open(after_path, encoding="utf-8"))
     A, B = a["pages"], b["pages"]
     bad = 0
+
+    # Landa F-35: эталон, снятый ПРЕЖНЕЙ версией инструмента, не содержит ни
+    # ссылок, ни картинок, ни файлов сборки, ни типов разметки — и все проверки
+    # против него молчат: вычитание из пустого множества всегда пусто. Защита
+    # выглядела рабочей, а в боевом сценарии её не было.
+    def schema(sn):
+        pg = next(iter(sn["pages"].values()), {})
+        return (frozenset(pg), "files" in sn, "git_sha" in sn)
+    if schema(a) != schema(b):
+        print("СХЕМА СЛЕПКОВ: РАЗНАЯ — сняты разными версиями инструмента.")
+        print("  до:    ключей %d, files=%s, git_sha=%s"
+              % (len(schema(a)[0]), schema(a)[1], schema(a)[2]))
+        print("  после: ключей %d, files=%s, git_sha=%s"
+              % (len(schema(b)[0]), schema(b)[1], schema(b)[2]))
+        print("  Сравнение недействительно: пересними эталон текущей версией.")
+        print("RESULT: PARITY_SCHEMA_MISMATCH")
+        print("БИНАРНО: 0")
+        return 1
 
     lost = sorted(set(A) - set(B))
     added = sorted(set(B) - set(A))
@@ -197,6 +218,17 @@ def compare(before_path, after_path):
     lostf = [k for k, v in fa.items() if v and not fb.get(k)]
     bad += len(lostf) > 0
     print("  пропало: %d  %s" % (len(lostf), "OK" if not lostf else "ПОТЕРЯ: " + ", ".join(lostf)))
+    # Landa F-38: хеши считались и не сравнивались — «robots.txt: Disallow /»
+    # и подмена CNAME на чужой домен проходили как «файл на месте».
+    CRITICAL_FILES = ("CNAME", "robots.txt")
+    changed = [k for k in CRITICAL_FILES if fa.get(k) and fb.get(k) and fa[k] != fb[k]]
+    bad += len(changed) > 0
+    print("  содержимое изменено: %d  %s" % (len(changed),
+          "OK" if not changed else "ПОДМЕНА: " + ", ".join(changed)
+          + " — это привязка домена и правила индексации"))
+    soft = [k for k, v in fa.items() if k not in CRITICAL_FILES and v and fb.get(k) and v != fb[k]]
+    if soft:
+        print("  изменены (не фатально): %s" % ", ".join(soft))
 
     print("ЧЕСТНОСТЬ ЗАМЕРА (Закон 27: среда измерителя фиксируется):")
     same_dir = a.get("build_dir") == b.get("build_dir")

@@ -86,6 +86,25 @@ def m_page(d):
             return
 
 
+def m_robots_noindex(d):
+    """Landa F-38: сайт закрыт от Google целиком, файл при этом на месте."""
+    io.open(os.path.join(d, "robots.txt"), "w", encoding="utf-8").write(
+        "User-agent: *" + chr(10) + "Disallow: /" + chr(10))
+
+
+def m_cname_hijack(d):
+    """Landa F-38: домен уводится на чужой, файл при этом на месте."""
+    io.open(os.path.join(d, "CNAME"), "w", encoding="utf-8").write(
+        "chuzhoy-domen.example.com" + chr(10))
+
+
+def m_photos(d):
+    """Landa F-39: удаляются файлы фотографий; ссылки в HTML остаются."""
+    p = os.path.join(d, "images")
+    if os.path.isdir(p):
+        shutil.rmtree(p)
+
+
 def m_sitemap_spam(d):
     p = os.path.join(d, "sitemap.xml")
     s = io.open(p, encoding="utf-8").read()
@@ -118,6 +137,9 @@ MUTATIONS = [
     ("удалены CSS и JS (_next)", m_assets),
     ("удалён CNAME — привязка домена", m_cname),
     ("в карту сайта подсажен чужой адрес", m_sitemap_spam),
+    ("robots.txt закрыл сайт от Google", m_robots_noindex),
+    ("CNAME уведён на чужой домен", m_cname_hijack),
+    ("удалены файлы фотографий", m_photos),
 ]
 
 
@@ -134,7 +156,7 @@ def subset(src, dst, cities=12):
             keep.append(name)
     for name in keep:
         shutil.copy2(os.path.join(src, name), os.path.join(dst, name))
-    for rel in ("_next", "leistungen", "ueber-uns", "kontakt", "impressum",
+    for rel in ("_next", "images", "leistungen", "ueber-uns", "kontakt", "impressum",
                 "datenschutz", "referenzen", "ratgeber", "osnabrueck"):
         sp = os.path.join(src, rel)
         if not os.path.isdir(sp):
@@ -153,6 +175,16 @@ def subset(src, dst, cities=12):
                     elif os.path.isfile(cp):
                         os.makedirs(os.path.join(dst, rel, svc), exist_ok=True)
                         shutil.copy2(cp, os.path.join(dst, rel, svc, city))
+        elif rel == "images":
+            # только те файлы, на которые ссылаются взятые страницы — иначе
+            # копирование всей папки картинок затягивает прогон
+            os.makedirs(os.path.join(dst, rel), exist_ok=True)
+            for r2, _d2, f2 in os.walk(sp):
+                for n2 in f2:
+                    rp = os.path.relpath(os.path.join(r2, n2), sp)
+                    tp = os.path.join(dst, rel, rp)
+                    os.makedirs(os.path.dirname(tp), exist_ok=True)
+                    shutil.copy2(os.path.join(r2, n2), tp)
         elif rel == "_next":
             # только css/js-манифесты: полный _next весит много и не нужен
             os.makedirs(os.path.join(dst, rel), exist_ok=True)
