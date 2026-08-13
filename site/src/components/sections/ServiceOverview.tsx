@@ -26,9 +26,11 @@ export default function ServiceOverview() {
           </p>
         </ScrollReveal>
 
+        {/* Пять карточек в ряд, как в макете: там все услуги видны сразу.
+            При трёх колонках две уезжали на вторую строку и терялись. */}
         <Stagger
           staggerDelay={100}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5"
         >
           {services.map((service) => (
             <a
