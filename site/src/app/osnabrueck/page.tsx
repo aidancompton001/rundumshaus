@@ -129,7 +129,7 @@ export default function OsnabrueckHubPage() {
           </nav>
 
           {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
+          <h1 className="font-heading text-3xl md:text-[2.875rem] font-black text-ink leading-tight mb-5">
             Rund ums Haus Littawe — Ihr Familienbetrieb in Osnabrück
           </h1>
           <p className="text-lg text-charcoal-light leading-relaxed mb-8">
