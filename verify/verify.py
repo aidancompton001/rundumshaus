@@ -20,11 +20,25 @@ print(f"VERIFY: {manifest['task']}")
 print(f"Время прогона (UTC): {datetime.now(timezone.utc).isoformat()}")
 print("=" * 72)
 
+# Файл приёмки этой задачи описан ключами criteria/text/check — их читает
+# гейт доклада и ревьюер. Прежний формат этого скрипта — checks/desc/cmd.
+# Форматов два, источник истины должен остаться ОДИН: дублировать файл
+# значило бы завести вторую приёмку, которая молча разойдётся с первой.
+# Поэтому приводим схему здесь, ничего не меняя в самих проверках.
+checks = manifest.get('checks')
+if checks is None:
+    checks = [{'id': c['id'],
+               'desc': c.get('desc') or c.get('text', ''),
+               'cmd': c.get('cmd') or c['check'],
+               **{k: v for k, v in c.items()
+                  if k.startswith('expect_')}}
+              for c in manifest['criteria']]
+
 passed = 0
-total = len(manifest['checks'])
+total = len(checks)
 failed_ids = []
 
-for c in manifest['checks']:
+for c in checks:
     r = subprocess.run(c['cmd'], shell=True, capture_output=True, text=True)
     out = (r.stdout + r.stderr).strip()
 
