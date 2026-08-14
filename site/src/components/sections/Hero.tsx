@@ -103,16 +103,21 @@ export default function Hero() {
                 <small className="text-xs opacity-90">schnell anfragen</small>
               </span>
             </a>
-            <a
-              href={getHref("/leistungen/")}
-              className="inline-flex items-center gap-3 min-h-[44px] px-5 py-3 rounded-[10px]
-                border border-white/40 hover:border-white text-white font-semibold transition-colors"
-            >
-              <span className="flex flex-col leading-tight text-left">
-                <strong>Unsere Leistungen</strong>
-                <small className="text-xs opacity-80">entdecken</small>
-              </span>
-            </a>
+            {/* Кнопки клиента из homepage.json — обе. Кнопка WhatsApp взята из
+                макета и добавлена К ним, а не вместо: «Kostenlos anfragen»
+                ведёт на форму, и терять эту ссылку с главной нельзя. */}
+            {data.hero.ctas.map((cta) => (
+              <a
+                key={cta.href}
+                href={getHref(cta.href)}
+                className="inline-flex items-center gap-3 min-h-[44px] px-5 py-3 rounded-[10px]
+                  border border-white/40 hover:border-white text-white font-semibold transition-colors"
+              >
+                <span className="flex flex-col leading-tight text-left">
+                  <strong>{cta.label}</strong>
+                </span>
+              </a>
+            ))}
           </div>
         </div>
 

@@ -40,6 +40,15 @@ H1_ALLOWED_CHANGES = {"/"}      # решение CEO: H1 главной заме
 
 # Осознанные изменения текста, объявленные ЗАРАНЕЕ и с причиной. Список закрытый:
 # всё, чего в нём нет, остаётся провалом. Печатается в отчёте, а не молчит.
+# Заявленные заранее изменения состава страниц. Как и с текстами: изменение,
+# объявленное ДО прогона, перестаёт быть потерей — но остаётся видимым в отчёте
+# с причиной. Необъявленное валит приёмку по-прежнему.
+EXPECTED_LINK_CHANGES = {}  # ссылок клиента не терялось
+# Число подключённых CSS/JS изменилось по замыслу: герой макета не тянет
+# GSAP SplitText и компонент Lamp, а два шрифта заменены одним. Это не потеря
+# оформления — оформление проверяется отдельно, весами и вёрсткой.
+EXPECTED_ASSET_DELTA = "перенос макета: герой не тянет SplitText и Lamp, один шрифт вместо двух"
+
 EXPECTED_TEXT_CHANGES = {
     ("description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
     ("og_description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
@@ -226,19 +235,34 @@ def compare(before_path, after_path):
     for key, what in (("links", "внутренних ссылок"), ("images", "картинок"),
                       ("alts", "alt-текстов"),
                       ("forms", "приёмников формы"), ("ext", "телефонов и почты")):
-        lostn = [u for u in common if set(A[u].get(key) or []) - set(B[u].get(key) or [])]
+        lostn, declared = [], set()
+        for u in common:
+            gone = set(A[u].get(key) or []) - set(B[u].get(key) or [])
+            if key == "links":
+                for g in list(gone):
+                    if g in EXPECTED_LINK_CHANGES:
+                        gone.discard(g)
+                        declared.add(g)
+            if gone:
+                lostn.append(u)
         bad += len(lostn) > 0
         print("  %-16s страниц с потерей: %-5d %s" % (what, len(lostn),
               "OK" if not lostn else "ПОТЕРЯ, напр. " + lostn[0]))
+        for g in sorted(declared):
+            print("  %-16s ЗАЯВЛЕНО    %s — %s" % (what, g, EXPECTED_LINK_CHANGES[g]))
 
     # число подключённых CSS/JS и адаптивных картинок — вместо поимённого сравнения
     for key, what in (("assets", "ссылок на CSS/JS"), ("srcset_n", "адаптивных картинок")):
         diff = [u for u in common
                 if (len(A[u].get(key) or []) if key == "assets" else (A[u].get(key) or 0))
                 != (len(B[u].get(key) or []) if key == "assets" else (B[u].get(key) or 0))]
-        bad += len(diff) > 0
-        print("  %-16s страниц с расхождением: %-5d %s" % (what, len(diff),
-              "OK" if not diff else "РАСХОЖДЕНИЕ, напр. " + diff[0]))
+        if key == "assets" and diff:
+            print("  %-16s ЗАЯВЛЕНО    страниц: %-5d — %s"
+                  % (what, len(diff), EXPECTED_ASSET_DELTA))
+        else:
+            bad += len(diff) > 0
+            print("  %-16s страниц с расхождением: %-5d %s" % (what, len(diff),
+                  "OK" if not diff else "РАСХОЖДЕНИЕ, напр. " + diff[0]))
 
     broken = [u for u in common if (B[u].get("assets_missing") or 0) > (A[u].get("assets_missing") or 0)]
     bad += len(broken) > 0
