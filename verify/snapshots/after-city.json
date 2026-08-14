@@ -1,9 +1,9 @@
 {
  "build_dir": "C:\\Projects\\RundUmsHaus\\.worktrees\\redesign\\site\\out",
- "build_newest_html": "2026-08-14T07:03:07+00:00",
+ "build_newest_html": "2026-08-14T07:50:06+00:00",
  "files": {
   ".nojekyll": null,
-  "404.html": "1d1332a5bf66fce9",
+  "404.html": "e7183bf4c0c6844f",
   "CNAME": "742bd7fff334f14c",
   "ai.txt": "88e5a27845bd3e5a",
   "favicon.ico": "2b8ad2d33455a8f7",
@@ -12,7 +12,7 @@
   "robots.txt": "0f2b6a00cee258fe",
   "sitemap.xml": "03ed1b11feea284c"
  },
- "git_sha": "dc47212148aa89d09a97f4e5480d112f3b6c996d",
+ "git_sha": "5ab0bd8c1ee691853a7861a5e2804b4f7cfa377d",
  "pages": {
   "/": {
    "alts": [
@@ -89556,5 +89556,5 @@
   "https://rundumshaus-littawe.de/referenzen/",
   "https://rundumshaus-littawe.de/ueber-uns/"
  ],
- "taken_at": "2026-08-14T07:11:22+00:00"
+ "taken_at": "2026-08-14T08:02:29+00:00"
 }

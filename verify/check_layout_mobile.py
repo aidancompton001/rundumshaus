@@ -251,16 +251,20 @@ async def run(directory, widths):
                  # админка клиента: своей вёрстки не имеет, рисуется сторонним
                  # скриптом Sveltia. ROUTE_MAP: НЕ ТРОГАТЬ
                  and os.sep + "admin" + os.sep not in p]
-        seen, pages = set(), []
+        # Landa, F-15: представителем рода берётся САМЫЙ ДЛИННЫЙ путь, а не
+        # первый по алфавиту. Дефекты немецкой вёрстки рождаются длиной слова,
+        # и `alfhausen` их не показывает, а `neuenkirchen-kreis-steinfurt`
+        # показывает. Отбор по алфавиту был везучим, а не гарантирующим.
+        kinds = {}
         for f in found:
             rel = os.path.relpath(f, directory).replace(os.sep, "/")
             parts = rel.split("/")
             # род = маршрут без города и без слага статьи
             kind = "/".join(parts[:2]) if len(parts) > 2 else rel
-            if kind in seen:
-                continue
-            seen.add(kind)
-            pages.append(f)
+            prev = kinds.get(kind)
+            if prev is None or len(rel) > len(prev[0]):
+                kinds[kind] = (rel, f)
+        pages = [v[1] for v in sorted(kinds.values())]
         print("РОДОВ СТРАНИЦ: %d (из %d файлов сборки)" % (len(pages), len(found)))
     problems = 0
 

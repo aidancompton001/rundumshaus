@@ -179,7 +179,7 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
 
         {/* Leistungen list */}
         <section className="mb-10">
-          <SectionHeading eyebrow="Unsere Leistungen" compact className="mb-4">
+          <SectionHeading compact className="mb-4">
             {s(T.leistungen.heading)}
           </SectionHeading>
           <p className="text-base text-charcoal-light mb-5 leading-relaxed">

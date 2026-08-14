@@ -50,7 +50,7 @@
     },
     {
       "id": "06",
-      "text": "Тестов 247 в 20 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой [СРЕДА ЗАМЕРА: главный чекаут c:/Projects/RundUmsHaus, ветка master — там лежит сборка живого сайта, то есть состояние ДО переноса]",
+      "text": "Тестов 247 в 19 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой [СРЕДА ЗАМЕРА: главный чекаут c:/Projects/RundUmsHaus, ветка master — там лежит сборка живого сайта, то есть состояние ДО переноса]",
       "asserted": true,
       "proof": {
         "cmd": "cd ../.. && cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1 | grep -oE '[0-9]+'",
@@ -285,10 +285,19 @@
     {
       "id": "32",
       "asserted": true,
-      "text": "Представителем рода страниц берётся самый длинный путь, а не первый по алфавиту: дефекты немецкой вёрстки рождаются длиной слова, и `alfhausen` их не показывает, а `neuenkirchen-kreis-steinfurt` показывает (находка Ланды F-15) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "text": "Представителем рода страниц берётся самый длинный путь В ОБОИХ измерителях — и весов, и вёрстки (Landa F-15-bis: сперва это внесли только туда, где длина слова роли не играет), а не первый по алфавиту: дефекты немецкой вёрстки рождаются длиной слова, и `alfhausen` их не показывает, а `neuenkirchen-kreis-steinfurt` показывает (находка Ланды F-15) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
       "proof": {
-        "cmd": "py verify/check_type_weights.py site/out 2>/dev/null | grep -c 'neuenkirchen-kreis-steinfurt'",
-        "expect_min": 1
+        "cmd": "a=$(py verify/check_type_weights.py site/out 2>/dev/null | grep -c 'neuenkirchen-kreis-steinfurt'); b=$(py verify/check_layout_mobile.py site/out 2>/dev/null | grep -c 'neuenkirchen-kreis-steinfurt'); [ $a -gt 0 ] && [ $b -gt 0 ] && echo ОБА || echo НЕТ",
+        "expect_equal": "ОБА"
+      }
+    },
+    {
+      "id": "33",
+      "asserted": true,
+      "text": "Надзаголовок нигде не повторяет свой заголовок: проверка обходит ВСЕ страницы сборки и запрещает три случая — совпадение целиком, заголовок начинается с надзаголовка, общее первое слово. Дважды за перенос это чинилось руками и руками же возвращалось (находки Ланды F-07 и F-18), поэтому класс закрыт механически [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "proof": {
+        "cmd": "py verify/check_eyebrow_not_dup.py site/out | tail -1",
+        "expect_equal": "RESULT: EYEBROWS_CLEAN"
       }
     }
   ]
