@@ -9,6 +9,7 @@ import Link from "next/link";
 import { generateSEO } from "@/lib/seo";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import reviewsData from "@/data/reviews.json";
+import PageHero from "@/components/ui/PageHero";
 
 // PX-046 F4+F8: title 91→58 chars, description 191→154 chars
 export const metadata = generateSEO({
@@ -115,29 +116,17 @@ export default function OsnabrueckHubPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
 
-      <article className="py-12 md:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="text-sm text-charcoal-light mb-8">
-            <ol className="flex flex-wrap gap-x-2 gap-y-1">
-              <li>
-                <Link href="/" className="hover:text-copper">Startseite</Link>
-                <span className="mx-2">/</span>
-              </li>
-              <li className="text-charcoal" aria-current="page">Osnabrück</li>
-            </ol>
-          </nav>
-
-          {/* H1 */}
-          <h1 className="font-heading text-3xl md:text-[2.875rem] font-black text-ink leading-tight mb-5">
-            Rund ums Haus Littawe — Ihr Familienbetrieb in Osnabrück
-          </h1>
-          <p className="text-lg text-charcoal-light leading-relaxed mb-8">
-            Familienbetrieb von Kevin Littawe in der Bramscher Straße 161.
+      <PageHero
+        title={<>Rund ums Haus Littawe — Ihr Familienbetrieb in Osnabrück</>}
+        intro={<>Familienbetrieb von Kevin Littawe in der Bramscher Straße 161.
             Hausmeisterservice, Gartenpflege, Dacharbeiten, Entrümpelung und
             Garten- und Landschaftsbau — direkt vor Ihrer Haustür in Osnabrück
-            und im 60-km-Umkreis. Kostenlose Besichtigung, Festpreis nach Aufnahme.
-          </p>
+            und im 60-km-Umkreis. Kostenlose Besichtigung, Festpreis nach Aufnahme.</>}
+        crumb="Osnabrück"
+      />
+      <article className="py-12 md:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
 
           {/* Hero image */}
           <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-10 border border-sand/30">
