@@ -13,22 +13,18 @@
 
 import Link from "next/link";
 import { getImageUrl } from "@/lib/getImageUrl";
+import PageHero from "@/components/ui/PageHero";
 
 export default function FamilyBusinessBlock() {
   return (
-    <section className="py-16 md:py-24 bg-cream-dark" aria-labelledby="family-heading">
+    <>
+      <PageHero
+        title="Familienbetrieb Littawe"
+        intro="Junges Unternehmen aus Osnabrück — gegründet 2026 von Kevin Littawe"
+        crumb="Über uns"
+      />
+    <section className="py-14 md:py-20 bg-paper" aria-labelledby="family-heading">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h1
-            id="family-heading"
-            className="font-heading text-3xl md:text-5xl font-black text-charcoal mb-3"
-          >
-            Familienbetrieb Littawe
-          </h1>
-          <p className="text-lg md:text-xl text-charcoal-light">
-            Junges Unternehmen aus Osnabrück — gegründet 2026 von Kevin Littawe
-          </p>
-        </div>
 
         {/* Hero image — Kevin's branded company van. Real, verifiable brand proof. */}
         <figure className="mb-12 rounded-2xl overflow-hidden border border-sand/30 shadow-sm bg-cream">
@@ -101,5 +97,6 @@ export default function FamilyBusinessBlock() {
         </div>
       </div>
     </section>
+    </>
   );
 }

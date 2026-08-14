@@ -4,21 +4,20 @@ import referenzenData from "@/data/referenzen.json";
 import type { ReferenzenData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
+import PageHero from "@/components/ui/PageHero";
 
 const data = referenzenData as ReferenzenData;
 
 export default function ReferenzenContent() {
   return (
-    <section className="py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-16">
-          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
-            {data.heading}
-          </h1>
-          <p className="text-charcoal-light text-lg max-w-2xl mx-auto">
-            Vorher &amp; Nachher — unsere Arbeit spricht für sich.
-          </p>
-        </ScrollReveal>
+    <>
+      <PageHero
+        title={data.heading}
+        intro="Vorher & Nachher — unsere Arbeit spricht für sich."
+        crumb="Referenzen"
+      />
+    <section className="py-14 md:py-20">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {data.items.length === 0 ? (
           <ScrollReveal className="text-center py-20">
@@ -133,5 +132,6 @@ export default function ReferenzenContent() {
         )}
       </div>
     </section>
+    </>
   );
 }

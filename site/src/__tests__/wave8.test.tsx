@@ -32,8 +32,10 @@ import ContactForm from "@/components/sections/ContactForm";
 
 describe("Referenzen", () => {
   it("renders heading", () => {
-    render(<ReferenzenContent />);
-    expect(screen.getByText("Referenzen")).toBeInTheDocument();
+    // Слово «Referenzen» теперь стоит дважды: в хлебных крошках и в H1 —
+    // так устроена шапка страницы в макете. Проверяем именно заголовок.
+    const { container } = render(<ReferenzenContent />);
+    expect(container.querySelector("h1")?.textContent).toContain("Referenzen");
   });
 
   it("renders referenzen items with titles", () => {

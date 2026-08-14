@@ -3,6 +3,7 @@ import serviceAreasData from "@/data/service-areas.json";
 import type { ServiceAreasData } from "@/data/types";
 import { ScrollReveal } from "@/components/motion";
 import { CITIES, SERVICE_IDS, type ServiceId } from "@/lib/programmatic";
+import PageHero from "@/components/ui/PageHero";
 import {
   WrenchIcon,
   LeafIcon,
@@ -50,15 +51,11 @@ export default function Servicegebiet() {
   );
 
   return (
-    <section className="py-20 md:py-28">
+    <>
+      <PageHero title={data.heading} intro={data.subheading} crumb="Einsatzgebiete" />
+    <section className="py-14 md:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-12">
-          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
-            {data.heading}
-          </h1>
-          <p className="text-charcoal-light text-lg max-w-2xl mx-auto">
-            {data.subheading}
-          </p>
           <p className="text-copper text-sm font-semibold uppercase tracking-wider mt-4">
             {totalCities} Städte und Gemeinden — jede mit eigener Leistungs-Seite
           </p>
@@ -160,5 +157,6 @@ export default function Servicegebiet() {
         </ScrollReveal>
       </div>
     </section>
+    </>
   );
 }
