@@ -1,149 +1,115 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import gsap from "gsap";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
 import { getHref, getImageUrl } from "@/lib/getImageUrl";
-import { useMotion } from "@/components/motion/MotionProvider";
+import { WhatsAppIcon } from "@/components/ContactIcons";
 
 const site = siteData as SiteConfig;
+const WA = site.phone.replace(/[^\d]/g, "");
 
+/**
+ * Шапка по макету клиента (docs/design/v1-desktop, `.site-header`):
+ * БЕЛАЯ и липкая, высота 82px, лого 66px, меню справа, а справа от меню —
+ * двухстрочная кнопка WhatsApp с номером. Прежняя шапка была тёмной,
+ * пряталась при прокрутке и вместо номера показывала слово «Kontakt».
+ */
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-  const lastScrollY = useRef(0);
-  const { reducedMotion } = useMotion();
-
-  useEffect(() => {
-    if (reducedMotion) return;
-
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      const el = headerRef.current;
-      if (!el) return;
-
-      if (currentY > lastScrollY.current && currentY > 80) {
-        // Scrolling down — hide
-        gsap.to(el, { y: -100, duration: 0.3, ease: "power2.out" });
-      } else {
-        // Scrolling up — reveal
-        gsap.to(el, { y: 0, duration: 0.3, ease: "power2.out" });
-      }
-      lastScrollY.current = currentY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [reducedMotion]);
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50">
-      <nav className="backdrop-blur-xl bg-charcoal/90 border-b border-white/[0.08]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Высота шапки 82px и лого 66px — замеры макета клиента
-              (docs/design/REFERENCE_MEASUREMENTS.json). При 44px словесная
-              марка лого нечитаема, это проверялось на превью. */}
-          <div className="flex items-center justify-between h-[82px]">
-            {/* Logo */}
-            <a
-              href={getHref("/")}
-              className="flex items-center"
-            >
-              <img
-                src={getImageUrl("/images/branding/logo-client.png")}
-                alt={site.company}
-                width={160}
-                height={48}
-                className="h-14 sm:h-[66px] w-auto rounded bg-white/95 px-2 py-1"
-              />
-            </a>
+    <header className="sticky top-0 z-50 bg-white shadow-[0_2px_14px_rgba(16,23,31,0.06)]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-6 min-h-[82px]">
+          <a href={getHref("/")} className="inline-flex items-center flex-none">
+            <img
+              src={getImageUrl("/images/branding/logo-client.png")}
+              alt={site.company}
+              width={160}
+              height={66}
+              className="h-12 sm:h-[66px] w-auto"
+            />
+          </a>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
+          {/* Меню прижато вправо, как в макете (.main-nav { margin-left: auto }) */}
+          <nav className="hidden lg:flex items-center gap-7 ml-auto">
+            {site.navigation.map((link) => (
+              <a
+                key={link.href}
+                href={getHref(link.href)}
+                className="text-ink font-semibold text-[0.9375rem] hover:text-copper transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Номер телефона в шапке — главный способ связи у клиента */}
+          <a
+            href={`https://wa.me/${WA}`}
+            rel="noopener"
+            className="hidden sm:inline-flex items-center gap-3 flex-none bg-copper hover:bg-copper-dark text-white rounded-[10px] px-4 py-2.5 min-h-[44px] transition-colors ml-auto lg:ml-0"
+          >
+            <span className="flex-none w-9 h-9 rounded-full bg-white/20 grid place-items-center">
+              <WhatsAppIcon className="w-5 h-5" />
+            </span>
+            <span className="flex flex-col leading-tight text-left">
+              <strong className="text-[0.9375rem] font-semibold">{site.phone}</strong>
+              <small className="text-xs opacity-90">Jetzt per WhatsApp</small>
+            </span>
+          </a>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 flex-none"
+            aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
+            aria-expanded={isOpen}
+          >
+            <motion.span animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 6 : 0 }}
+              transition={{ duration: 0.2 }} className="block w-6 h-0.5 bg-ink" />
+            <motion.span animate={{ opacity: isOpen ? 0 : 1 }}
+              transition={{ duration: 0.2 }} className="block w-6 h-0.5 bg-ink" />
+            <motion.span animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -6 : 0 }}
+              transition={{ duration: 0.2 }} className="block w-6 h-0.5 bg-ink" />
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            className="lg:hidden fixed top-[82px] left-0 right-0 h-[calc(100dvh-82px)] bg-white z-[60] overflow-y-auto"
+          >
+            <div className="flex flex-col items-center justify-center h-full gap-7">
               {site.navigation.map((link) => (
                 <a
                   key={link.href}
                   href={getHref(link.href)}
-                  className="text-cream/80 hover:text-cream transition-colors duration-200 text-sm font-body font-medium"
+                  onClick={() => setIsOpen(false)}
+                  className="text-ink text-2xl font-heading font-extrabold hover:text-copper transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
               <a
-                href={getHref("/kontakt/")}
-                className="bg-gold hover:bg-gold-light text-white px-5 py-2 rounded-lg text-sm font-body font-semibold transition-colors duration-200"
+                href={`https://wa.me/${WA}`}
+                rel="noopener"
+                onClick={() => setIsOpen(false)}
+                className="inline-flex items-center gap-3 bg-copper text-white px-6 py-3 rounded-[10px] font-semibold mt-2"
               >
-                Kontakt
+                <WhatsAppIcon className="w-5 h-5" />
+                {site.phone}
               </a>
             </div>
-
-            {/* Mobile Burger */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5"
-              aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
-              aria-expanded={isOpen}
-            >
-              <motion.span
-                animate={{
-                  rotate: isOpen ? 45 : 0,
-                  y: isOpen ? 6 : 0,
-                }}
-                transition={{ duration: 0.2 }}
-                className="block w-6 h-0.5 bg-cream"
-              />
-              <motion.span
-                animate={{ opacity: isOpen ? 0 : 1 }}
-                transition={{ duration: 0.2 }}
-                className="block w-6 h-0.5 bg-cream"
-              />
-              <motion.span
-                animate={{
-                  rotate: isOpen ? -45 : 0,
-                  y: isOpen ? -6 : 0,
-                }}
-                transition={{ duration: 0.2 }}
-                className="block w-6 h-0.5 bg-cream"
-              />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="md:hidden fixed top-16 left-0 right-0 h-[calc(100dvh-4rem)] bg-charcoal z-[60] overflow-y-auto"
-            >
-              <div className="flex flex-col items-center justify-center h-full gap-8">
-                {site.navigation.map((link) => (
-                  <a
-                    key={link.href}
-                    href={getHref(link.href)}
-                    onClick={() => setIsOpen(false)}
-                    className="text-cream text-2xl font-heading font-semibold hover:text-copper transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <a
-                  href={getHref("/kontakt/")}
-                  onClick={() => setIsOpen(false)}
-                  className="bg-gold hover:bg-gold-light text-white px-8 py-3 rounded-lg text-lg font-body font-semibold transition-colors mt-4"
-                >
-                  Kontakt
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

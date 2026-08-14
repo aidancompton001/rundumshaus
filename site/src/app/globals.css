@@ -63,8 +63,9 @@
   --color-sand: #5A6472;
   --color-gold: #5A7F1B;
   --color-gold-light: #4A6B16;
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+  /* Макет набран одним шрифтом — Inter, и заголовки, и текст */
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-sans);
 }
 
 body {
