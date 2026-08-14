@@ -127,19 +127,10 @@ export default function AboutSection() {
               <p className="text-sand text-lg leading-relaxed mt-4">{data.about.body2}</p>
             )}
 
-            <ul className="mt-6 space-y-3">
-              {data.warumWir.items.slice(0, 4).map((t) => (
-                <li key={t} className="flex items-start gap-3 text-ink">
-                  <span className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center mt-0.5">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                      <path d="m5 13 4 4L19 7" />
-                    </svg>
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
+            {/* Четыре пункта макета сюда не переносятся: ровно эти же
+                восемь пунктов клиента идут следующей секцией «Warum Rund
+                ums Haus Littawe?». В макете той секции нет, у Кевина есть,
+                и повтор одного списка дважды подряд читается как ошибка. */}
 
             <a
               href={getHref("/ueber-uns/")}

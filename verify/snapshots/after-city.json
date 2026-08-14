@@ -1,9 +1,9 @@
 {
  "build_dir": "C:\\Projects\\RundUmsHaus\\.worktrees\\redesign\\site\\out",
- "build_newest_html": "2026-08-14T10:34:27+00:00",
+ "build_newest_html": "2026-08-14T10:51:44+00:00",
  "files": {
   ".nojekyll": null,
-  "404.html": "b83bf3d26a78567f",
+  "404.html": "12863a8d66bcc5d3",
   "CNAME": "742bd7fff334f14c",
   "ai.txt": "88e5a27845bd3e5a",
   "favicon.ico": "2b8ad2d33455a8f7",
@@ -12,7 +12,7 @@
   "robots.txt": "0f2b6a00cee258fe",
   "sitemap.xml": "03ed1b11feea284c"
  },
- "git_sha": "5ef7ddd0d794866089c14494042c5ad8cd9b1b77",
+ "git_sha": "d2610a23690a7eb82a4681f0a296cf908e08b591",
  "pages": {
   "/": {
    "alts": [
@@ -29,9 +29,9 @@
     "/_next/static/chunks/02y90l.4to3qd.js",
     "/_next/static/chunks/02~j5qz126vn~.css",
     "/_next/static/chunks/03~yq9q893hmn.js",
-    "/_next/static/chunks/05f7rux5bza3f.js",
     "/_next/static/chunks/0d3shmwh5_nmn.js",
     "/_next/static/chunks/0dgq26a5_oy.a.js",
+    "/_next/static/chunks/0ghzzb1tu9c0x.js",
     "/_next/static/chunks/0ht900cau6_ur.js",
     "/_next/static/chunks/0mstyq17cbf8-.js",
     "/_next/static/chunks/0se7sg63s8f9c.js",
@@ -88531,5 +88531,5 @@
   "https://rundumshaus-littawe.de/referenzen/",
   "https://rundumshaus-littawe.de/ueber-uns/"
  ],
- "taken_at": "2026-08-14T10:40:15+00:00"
+ "taken_at": "2026-08-14T10:58:47+00:00"
 }
