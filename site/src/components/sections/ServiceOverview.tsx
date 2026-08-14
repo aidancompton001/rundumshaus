@@ -1,7 +1,7 @@
 "use client";
 
 import servicesData from "@/data/services.json";
-import type { Service } from "@/data/types";
+import type { ServicesData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { getHref, getImageUrl, toResponsiveWebpSrcSet } from "@/lib/getImageUrl";
 import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
@@ -12,11 +12,12 @@ import galabau from "@/data/templates/garten-landschaftsbau.json";
 import garten from "@/data/templates/gartenpflege.json";
 import hausmeister from "@/data/templates/hausmeisterservice.json";
 
-const { services, heading, subheading } = servicesData as {
-  heading: string;
-  subheading: string;
-  services: Service[];
-};
+// F-69: у раздела макета связка «надзаголовок → H2 → разделитель». Строка
+// клиента «Unsere Leistungen» — это и есть надзаголовок макета
+// (index.html: <span class="eyebrow" data-cms="homepage.services.eyebrow">),
+// а заголовком стоит headline (data-cms="homepage.services.title").
+// Оба поля живут в services.json, потому что оба правит Кевин через /admin/.
+const { services, heading, headline, subheading } = servicesData as ServicesData;
 
 // Позиции под названием услуги — из файлов клиента, не сочинённые.
 // В макете их ровно четыре на карточку (index.html, .card-bullets).
@@ -41,8 +42,8 @@ export default function ServiceOverview() {
     <section className="py-14 md:py-24 bg-paper">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="mb-10 md:mb-12">
-          <SectionHeading subheading={subheading}>
-            {heading}
+          <SectionHeading eyebrow={heading} subheading={subheading}>
+            {headline}
           </SectionHeading>
         </ScrollReveal>
 

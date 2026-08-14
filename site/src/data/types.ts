@@ -38,7 +38,10 @@ export interface HeroData {
 }
 
 export interface AboutData {
+  /** F-69: строка клиента — идёт надзаголовком раздела (span.eyebrow), как в макете */
   heading: string;
+  /** F-69: заголовок раздела из макета (index.html, `homepage.about.title`) */
+  headline: string;
   body: string;
   body2?: string;
   image: string;
@@ -80,6 +83,15 @@ export interface Service {
   imageAlt?: string;  // PX-072: CMS-editable alt text (fallback: title)
   detailImage?: string;
   subPage?: { href: string; label: string };
+}
+
+export interface ServicesData {
+  /** F-69: строка клиента — идёт надзаголовком раздела (span.eyebrow), как в макете */
+  heading: string;
+  /** F-69: заголовок раздела из макета (index.html, `homepage.services.title`) */
+  headline: string;
+  subheading: string;
+  services: Service[];
 }
 
 /* ── Contact Form ── */

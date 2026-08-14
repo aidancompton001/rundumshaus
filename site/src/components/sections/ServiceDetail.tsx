@@ -9,7 +9,6 @@ import entruempelung from "@/data/templates/entruempelung.json";
 import galabau from "@/data/templates/garten-landschaftsbau.json";
 import garten from "@/data/templates/gartenpflege.json";
 import hausmeister from "@/data/templates/hausmeisterservice.json";
-import BrushDivider from "@/components/ui/BrushDivider";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -49,7 +48,7 @@ export default function ServiceDetail() {
   return (
     <>
       <section className="bg-dark text-white relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 md:pt-16 md:pb-20">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
           <nav className="flex flex-wrap gap-1.5 text-sm text-white/70 mb-4" aria-label="Brotkrumen-Navigation">
             <a href={getHref("/")} className="hover:text-white">Startseite</a>
             <span aria-hidden="true">›</span>
@@ -60,7 +59,6 @@ export default function ServiceDetail() {
           </h1>
           <p className="text-white/70 max-w-[62ch] text-lg">{subheading}</p>
         </div>
-        <BrushDivider />
       </section>
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">

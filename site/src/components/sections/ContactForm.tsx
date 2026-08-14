@@ -8,7 +8,6 @@ import type { ContactFormData, SiteConfig } from "@/data/types";
 import { FORMSUBMIT_ACTION } from "@/lib/formsubmit";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { motion, AnimatePresence } from "motion/react";
-import BrushDivider from "@/components/ui/BrushDivider";
 import {
   PhoneIcon,
   WhatsAppIcon,
@@ -60,7 +59,7 @@ export default function ContactForm() {
       {/* Шапка страницы по макету (kontakt.html, .page-hero): тёмная полоса
           с крошками и H1. Прежде H1 стоял внутри колонки формы. */}
       <section className="bg-dark text-white relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
           <nav className="flex flex-wrap gap-1.5 text-sm text-white/70 mb-4" aria-label="Brotkrumen-Navigation">
             <a href="/" className="hover:text-white">Startseite</a>
             <span aria-hidden="true">›</span>
@@ -71,7 +70,6 @@ export default function ContactForm() {
           </h1>
           <p className="text-white/70 max-w-[62ch] text-lg">{form.body}</p>
         </div>
-        <BrushDivider />
       </section>
 
     <section className="contact-form-bg py-14 md:py-20 relative">

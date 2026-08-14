@@ -11,7 +11,6 @@ import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
 import SectionHeading from "@/components/ui/SectionHeading";
-import BrushDivider from "@/components/ui/BrushDivider";
 
 const T = templateTexts as CityTemplateTexts;
 // PX-073 F3: contact data from site.json (Einstellungen in CMS) — was hardcoded.
@@ -70,7 +69,7 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
   const s = (text: string) => subst(text, vars);
 
   const renderSection = (sec: { heading: string; paragraphs: string[] }) => (
-    <section className="mb-10 max-w-[76ch]" key={sec.heading}>
+    <section className="mb-10 max-w-[76ch] mx-auto" key={sec.heading}>
       <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
         {s(sec.heading)}
       </h2>
@@ -95,7 +94,7 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
           тёмная полоса с хлебными крошками и H1. Прежде крошки и заголовок
           стояли на белом внутри статьи. */}
       <section className="bg-dark text-white relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
           <nav aria-label="Breadcrumb" className="text-sm text-white/70 mb-4">
             <ol className="flex flex-wrap gap-x-2 gap-y-1">
               <li>
@@ -113,7 +112,6 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
             {s(T.h1)}
           </h1>
         </div>
-        <BrushDivider />
       </section>
 
     <article className="py-10 md:py-16">
@@ -154,14 +152,14 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
         </ul>
 
         {/* CTA block */}
-        <section className="my-10 p-6 md:p-8 bg-charcoal text-cream rounded-2xl text-center">
+        <section className="my-10 p-6 md:p-8 bg-charcoal text-cream rounded-2xl">
           <h2 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">
             {s(T.cta.heading)}
           </h2>
-          <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl">
             {s(T.cta.text)}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-w-3xl">
             <a
               href={`tel:${PHONE}`}
               className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition whitespace-nowrap"
@@ -256,7 +254,7 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
         <hr className="my-10 border-sand/30" />
 
         {/* Einsatzgebiet */}
-        <section className="mb-10 max-w-[76ch]">
+        <section className="mb-10 max-w-[76ch] mx-auto">
           <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
             {s(T.einsatzgebiet.heading)}
           </h2>

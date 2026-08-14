@@ -115,7 +115,12 @@ function Counter({
 
 export default function AboutSection() {
   const { reducedMotion } = useMotion();
-  const heading = data.about.heading;
+  // F-69: связка макета «надзаголовок → H2». Строка клиента «Über uns» —
+  // это надзаголовок макета (index.html, .about-copy:
+  // <span class="eyebrow" data-cms="homepage.about.eyebrow">Über uns</span>),
+  // заголовком идёт headline (data-cms="homepage.about.title").
+  // Обе строки лежат в homepage.json — Кевин правит их через /admin/.
+  const { heading: eyebrow, headline } = data.about;
 
   return (
     <>
@@ -194,8 +199,14 @@ export default function AboutSection() {
           </ScrollReveal>
 
           <ScrollReveal direction="right">
+            {/* Надзаголовок и заголовок стоят вплотную — так же, как в макете
+                и в соседнем левоколоночном блоке FamilyBusinessBlock.
+                SectionHeading здесь не подходит: он центрирует текст
+                (.section-heading { text-align: center }) и добавляет
+                разделитель, которого у .about-copy в макете нет. */}
+            <span className="eyebrow">{eyebrow}</span>
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-ink mb-5">
-              {heading}
+              {headline}
             </h2>
             <p className="text-sand text-lg leading-relaxed">{data.about.body}</p>
             {data.about.body2 && (

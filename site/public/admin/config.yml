@@ -44,7 +44,8 @@ collections:
             label: Über uns
             widget: object
             fields:
-              - { name: heading, label: Überschrift, widget: string }
+              - { name: heading, label: Kleine Überschrift (über dem Titel), widget: string }
+              - { name: headline, label: Überschrift, widget: string }
               - { name: body, label: Text — Absatz 1, widget: text }
               - { name: body2, label: Text — Absatz 2, widget: text, required: false }
               - { name: image, label: Bild, widget: image }
@@ -100,7 +101,8 @@ collections:
         label: Dienstleistungs-Karten
         file: site/src/data/services.json
         fields:
-          - { name: heading, label: Bereichs-Überschrift, widget: string }
+          - { name: heading, label: Kleine Bereichs-Überschrift (über dem Titel), widget: string }
+          - { name: headline, label: Bereichs-Überschrift, widget: string }
           - { name: subheading, label: Bereichs-Untertitel, widget: text }
           - name: services
             label: Karten

@@ -66,6 +66,22 @@ async def run(directory, width):
     print("РОДОВ СТРАНИЦ: %d (из %d файлов; админка клиента исключена — "
           "своей вёрстки не имеет)" % (len(pages), total))
 
+    # Landa, F-78: без этого отбойника прогон по ПУСТОМУ каталогу печатал
+    # «РОДОВ СТРАНИЦ: 0» и RESULT: TYPE_WEIGHTS_MATCH с кодом 0 — то есть
+    # успех, обойдя ноль страниц. Порог привязан не к размеру проекта
+    # (Закон 27, правило 5), а к охраняемой величине: главная задаёт
+    # WANT_H1_HOME, внутренние — WANT_H1_INNER; без них обеих проверять
+    # нечего, и молчать об этом нельзя.
+    has_home = any(rel in ("index.html", "") for rel in pages)
+    has_inner = any(rel not in ("index.html", "") for rel in pages)
+    if not pages or not has_home or not has_inner:
+        print("  ОХВАТ ПУСТ: страниц %d, главная %s, внутренние %s"
+              % (len(pages), "есть" if has_home else "НЕТ",
+                 "есть" if has_inner else "НЕТ"))
+        httpd.shutdown()
+        print("RESULT: TYPE_WEIGHTS_NO_COVERAGE")
+        return 1
+
     bad = 0
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()

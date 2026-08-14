@@ -88,6 +88,16 @@ def main():
               % (total_eyebrows, pairs, total_eyebrows - pairs))
     print("НАДЗАГОЛОВКИ: пар проверено %d из %d надзаголовков на %d страницах, дублей %d"
           % (pairs, total_eyebrows, len(files), bad))
+    # Landa, F-78: раньше прогон по пустому каталогу печатал «0 из 0 на 0
+    # страницах» и RESULT: EYEBROWS_CLEAN с кодом 0 — успех, обойдя ноль
+    # страниц. Порог привязан к охраняемой величине, а не к размеру проекта
+    # (Закон 27, правило 5): охраняется оформление разделов, значит хотя бы
+    # один надзаголовок обязан быть найден, иначе проверять было нечего.
+    if not files or total_eyebrows == 0:
+        print("  ОХВАТ ПУСТ: страниц %d, надзаголовков %d — проверять было нечего"
+              % (len(files), total_eyebrows))
+        print("RESULT: EYEBROWS_NO_COVERAGE")
+        return 1
     print("RESULT: %s" % ("EYEBROWS_CLEAN" if bad == 0 else "EYEBROW_DUP:%d" % bad))
     return 1 if bad else 0
 

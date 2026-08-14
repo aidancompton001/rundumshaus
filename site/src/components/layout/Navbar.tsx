@@ -47,15 +47,25 @@ export default function Navbar() {
           </nav>
 
           {/* Номер телефона в шапке — главный способ связи у клиента */}
+          {/*
+            Ниже sm кнопка сжимается в круглую иконку 44x44 (тач-цель по WCAG),
+            текстовые строки уходят из потока через hidden — иначе лого + кнопка
+            + бургер не помещаются в 375px и появляется горизонтальная прокрутка.
+            От sm и выше вид прежний: иконка + номер + подпись.
+          */}
           <a
             href={`https://wa.me/${WA}`}
             rel="noopener"
-            className="hidden sm:inline-flex items-center gap-3 flex-none bg-copper hover:bg-copper-dark text-white rounded-[10px] px-4 py-2.5 min-h-[44px] transition-colors ml-auto lg:ml-0"
+            className="inline-flex items-center justify-center sm:justify-start sm:gap-3 flex-none bg-copper hover:bg-copper-dark text-white w-11 h-11 sm:w-auto sm:h-auto rounded-full sm:rounded-[10px] sm:px-4 sm:py-2.5 min-h-[44px] transition-colors ml-auto lg:ml-0"
           >
-            <span className="flex-none w-9 h-9 rounded-full bg-white/20 grid place-items-center">
+            <span className="flex-none w-9 h-9 rounded-full sm:bg-white/20 grid place-items-center">
               <WhatsAppIcon className="w-5 h-5" />
+              {/* Ниже sm видимого текста у кнопки нет — имя для скринридера
+                  даёт эта строка. Через aria-label делать нельзя: он перебил
+                  бы видимый номер и подпись на широких ширинах. */}
+              <span className="sr-only sm:hidden">WhatsApp: {site.phone}</span>
             </span>
-            <span className="flex flex-col leading-tight text-left">
+            <span className="hidden sm:flex flex-col leading-tight text-left">
               <strong className="text-[0.9375rem] font-semibold">{site.phone}</strong>
               <small className="text-xs opacity-90">Jetzt per WhatsApp</small>
             </span>

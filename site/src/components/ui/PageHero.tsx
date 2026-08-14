@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { getHref } from "@/lib/getImageUrl";
-import BrushDivider from "@/components/ui/BrushDivider";
 
 /**
  * Шапка внутренней страницы по макету (docs/design/v1-desktop, `.page-hero`):
@@ -27,7 +26,7 @@ export default function PageHero({
 }) {
   return (
     <section className="bg-dark text-white relative overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
         <nav
           className="flex flex-wrap items-center gap-1.5 text-sm text-white/70 mb-4"
           aria-label="Brotkrumen-Navigation"
@@ -53,7 +52,6 @@ export default function PageHero({
 
         {intro && <p className="mt-3 text-white/70 max-w-[62ch] text-lg">{intro}</p>}
       </div>
-      <BrushDivider />
     </section>
   );
 }
