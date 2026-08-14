@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import contactFormData from "@/data/contact-form.json";
+import servicesData from "@/data/services.json";
 import siteData from "@/data/site.json";
 import type { ContactFormData, SiteConfig } from "@/data/types";
 import { FORMSUBMIT_ACTION } from "@/lib/formsubmit";
@@ -18,6 +19,9 @@ import {
 } from "@/components/ContactIcons";
 
 const form = contactFormData as ContactFormData;
+// Варианты в поле «Leistung» — названия услуг клиента из services.json
+// плюс «Sonstiges». Своего списка услуг сайт не выдумывает.
+const SERVICE_OPTIONS = [...(servicesData as { services: { title: string }[] }).services.map((x) => x.title), "Sonstiges"];
 const site = siteData as SiteConfig;
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -142,72 +146,82 @@ export default function ContactForm() {
                         <legend className="font-heading text-lg font-semibold text-charcoal mb-4">
                           {section.heading}
                         </legend>
-                        <div className="space-y-5">
-                          {section.fields.map((field) =>
-                            field.type === "checkbox" ? (
-                              <label
-                                key={field.name}
-                                className="flex items-start gap-3 cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  name={field.name}
-                                  required={field.required}
-                                  /* Цвет галочки был прибит гвоздём (#3A7030 из прежней палитры) и
-                                     единственный на весь сайт пережил смену цветов. Теперь берётся
-                                     из токена — при следующей смене палитры поедет вместе со всеми. */
-                                  className="mt-1 w-5 h-5 rounded border-sand accent-[color:var(--color-copper)]"
-                                />
-                                <span className="text-charcoal-light text-sm">
-                                  {field.label}
-                                </span>
-                              </label>
-                            ) : field.type === "textarea" ? (
-                              // PX-046 F22: aria-label fix for floating-label fields
-                              <div key={field.name} className="relative">
-                                <textarea
-                                  id={`f-${field.name}`}
-                                  name={field.name}
-                                  required={field.required}
-                                  placeholder=" "
-                                  rows={4}
-                                  aria-label={field.label}
-                                  aria-required={field.required}
-                                  className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all resize-none"
-                                />
-                                <label htmlFor={`f-${field.name}`} className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
-                                  {field.label}
-                                  {field.required && " *"}
-                                </label>
+                        {/* Макет (kontakt.html): подпись СТОИТ НАД полем и
+                            не исчезает при вводе. Прежде подписи жили внутри
+                            поля и пропадали, стоило начать печатать. */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+                          {section.fields.map((field) => {
+                            const id = `f-${field.name}`;
+                            const wide = field.type === "textarea" || field.type === "checkbox";
+                            const box =
+                              "w-full border border-sand/40 rounded-[10px] px-4 py-3 text-ink " +
+                              "bg-paper focus:ring-2 focus:ring-copper/40 focus:border-copper " +
+                              "outline-none transition-all";
+                            return (
+                              <div key={field.name} className={wide ? "sm:col-span-2" : ""}>
+                                {field.type === "checkbox" ? (
+                                  <label className="flex items-start gap-3 cursor-pointer">
+                                    <input
+                                      type="checkbox"
+                                      name={field.name}
+                                      required={field.required}
+                                      className="mt-1 w-5 h-5 rounded border-sand accent-[color:var(--color-copper)]"
+                                    />
+                                    <span className="text-sand text-sm">{field.label}</span>
+                                  </label>
+                                ) : (
+                                  <>
+                                    <label htmlFor={id} className="block text-sm font-semibold text-ink mb-1.5">
+                                      {field.label}
+                                      {field.required && " *"}
+                                    </label>
+                                    {field.type === "textarea" ? (
+                                      <textarea
+                                        id={id}
+                                        name={field.name}
+                                        required={field.required}
+                                        rows={5}
+                                        aria-required={field.required}
+                                        className={box + " resize-none"}
+                                      />
+                                    ) : field.type === "select" ? (
+                                      <select
+                                        id={id}
+                                        name={field.name}
+                                        required={field.required}
+                                        aria-required={field.required}
+                                        defaultValue=""
+                                        className={box}
+                                      >
+                                        <option value="">Bitte wählen …</option>
+                                        {SERVICE_OPTIONS.map((o) => (
+                                          <option key={o} value={o}>{o}</option>
+                                        ))}
+                                      </select>
+                                    ) : (
+                                      <input
+                                        id={id}
+                                        type={field.type}
+                                        name={field.name}
+                                        required={field.required}
+                                        aria-required={field.required}
+                                        autoComplete={
+                                          field.type === "email"
+                                            ? "email"
+                                            : field.type === "tel"
+                                              ? "tel"
+                                              : field.name === "name"
+                                                ? "name"
+                                                : undefined
+                                        }
+                                        className={box}
+                                      />
+                                    )}
+                                  </>
+                                )}
                               </div>
-                            ) : (
-                              <div key={field.name} className="relative">
-                                <input
-                                  id={`f-${field.name}`}
-                                  type={field.type}
-                                  name={field.name}
-                                  required={field.required}
-                                  placeholder=" "
-                                  aria-label={field.label}
-                                  aria-required={field.required}
-                                  autoComplete={
-                                    field.type === "email"
-                                      ? "email"
-                                      : field.type === "tel"
-                                        ? "tel"
-                                        : field.name === "name"
-                                          ? "name"
-                                          : undefined
-                                  }
-                                  className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all"
-                                />
-                                <label htmlFor={`f-${field.name}`} className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
-                                  {field.label}
-                                  {field.required && " *"}
-                                </label>
-                              </div>
-                            )
-                          )}
+                            );
+                          })}
                         </div>
                       </fieldset>
                     ))}

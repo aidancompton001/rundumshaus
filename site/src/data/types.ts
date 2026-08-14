@@ -87,7 +87,9 @@ export interface Service {
 export interface ContactFormField {
   name: string;
   label: string;
-  type: "text" | "email" | "tel" | "textarea" | "checkbox";
+  type: "text" | "email" | "tel" | "textarea" | "checkbox" | "select";
+  /** Для select: варианты берутся из названий услуг клиента, плюс «Sonstiges» — сочинять список нельзя */
+  optionsFrom?: "services";
   required: boolean;
   placeholder?: string;
 }

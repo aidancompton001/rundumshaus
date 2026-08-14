@@ -78,10 +78,33 @@ describe("ContactForm", () => {
     expect(screen.getByText(/kontakt@rundumshaus-littawe.de/)).toBeInTheDocument();
   });
 
-  it("has floating labels with placeholder space", () => {
+  // Прежде подписи полей жили ВНУТРИ поля и исчезали, стоило начать печатать:
+  // человек переставал видеть, что именно он заполняет. В макете подпись стоит
+  // над полем и остаётся на месте. Стережём это: у каждого поля есть видимая
+  // подпись, связанная с ним через htmlFor.
+  it("у каждого поля видимая подпись над ним", () => {
     const { container } = render(<ContactForm />);
-    const inputs = container.querySelectorAll('input[placeholder=" "], textarea[placeholder=" "]');
-    expect(inputs.length).toBeGreaterThanOrEqual(3);
+    const fields = container.querySelectorAll(
+      'input:not([type="hidden"]):not([type="checkbox"]), textarea, select'
+    );
+    // Ловушка для спам-ботов подписи иметь не должна — она за экраном
+    const visible = [...fields].filter((f) => f.getAttribute("name") !== "_honey");
+    expect(visible.length).toBeGreaterThanOrEqual(4);
+    visible.forEach((f) => {
+      const id = f.getAttribute("id");
+      expect(id, "поле без id: " + f.getAttribute("name")).toBeTruthy();
+      const label = container.querySelector(`label[for="${id}"]`);
+      expect(label, "нет подписи у поля " + id).toBeTruthy();
+      expect(label?.className).not.toContain("absolute");
+    });
+  });
+
+  it("в форме есть выбор услуги — иначе заявка приходит без неё", () => {
+    const { container } = render(<ContactForm />);
+    const select = container.querySelector('select[name="service"]');
+    expect(select).toBeTruthy();
+    // варианты — названия услуг клиента, а не сочинённый список
+    expect(select!.querySelectorAll("option").length).toBeGreaterThanOrEqual(6);
   });
 
   it("has hidden FormSubmit config fields", () => {

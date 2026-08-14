@@ -18,7 +18,7 @@ export default function BrushDivider() {
         alt=""
         width={1440}
         height={64}
-        className="w-full h-[34px] md:h-[52px] xl:h-16 object-fill"
+        className="block w-full max-w-full h-[34px] md:h-[52px] xl:h-16 object-fill"
         loading="eager"
         decoding="async"
       />
