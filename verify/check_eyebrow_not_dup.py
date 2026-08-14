@@ -73,8 +73,21 @@ def main():
                     rel = os.path.relpath(f, out).replace(os.sep, "/")
                     print("  ДУБЛЬ  %s | «%s» над «%s» — %s" % (rel, e, h[:60], why))
                 bad += 1
-    print("НАДЗАГОЛОВКИ: пар проверено %d на %d страницах, дублей %d"
-          % (pairs, len(files), bad))
+    # Landa, F-21: правило видит только пару, стоящую вплотную. Ручная правка
+    # разметки добавляет между ними обёртку — и пара молча выпадает из
+    # проверки. Поэтому число найденных пар сверяется с числом надзаголовков:
+    # любая будущая обёртка выдаёт себя расхождением.
+    total_eyebrows = sum(
+        len(re.findall(r'class="eyebrow"', io.open(f, encoding="utf-8",
+                                                   errors="replace").read()))
+        for f in files)
+    if total_eyebrows != pairs:
+        bad += 1
+        print("  ВНЕ ПРОВЕРКИ: надзаголовков %d, а пар найдено %d — %d "
+              "остались без заголовка рядом (обёртка между ними?)"
+              % (total_eyebrows, pairs, total_eyebrows - pairs))
+    print("НАДЗАГОЛОВКИ: пар проверено %d из %d надзаголовков на %d страницах, дублей %d"
+          % (pairs, total_eyebrows, len(files), bad))
     print("RESULT: %s" % ("EYEBROWS_CLEAN" if bad == 0 else "EYEBROW_DUP:%d" % bad))
     return 1 if bad else 0
 
