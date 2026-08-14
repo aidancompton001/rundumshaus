@@ -76,7 +76,59 @@ export default function ContactForm() {
 
     <section className="contact-form-bg py-14 md:py-20 relative">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Порядок колонок по макету (.contact-layout): карточка контактов
+            слева и уже, форма справа и шире. Прежде колонки стояли зеркально.
+            На узком экране карточка контактов идёт первой — так же в макете. */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-8 lg:gap-12 items-start [&>*]:min-w-0">
+          {/* Карточка контактов — по макету .contact-info-card */}
+          <ScrollReveal direction="left">
+            <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-7">
+              <h2 className="font-heading text-[1.1875rem] font-extrabold text-ink">
+                Direkt erreichen
+              </h2>
+              {/* Макет: три строки с круглой иконкой 40px, а не крупные кнопки */}
+              <ul className="mt-5 space-y-4">
+                <li className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
+                    <PhoneIcon className="w-[18px] h-[18px]" variant="mono" />
+                  </span>
+                  <a href={`tel:${site.phone}`} className="font-body font-semibold text-ink hover:text-copper transition-colors">
+                    {site.phone}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
+                    <EnvelopeIcon className="w-[18px] h-[18px]" variant="mono" />
+                  </span>
+                  <a href={`mailto:${site.email}`} className="font-body font-semibold text-ink hover:text-copper transition-colors break-all">
+                    {site.email}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
+                    <MapPinIcon className="w-[18px] h-[18px]" variant="mono" />
+                  </span>
+                  <span className="font-body text-sand">
+                    {site.address.street}, {site.address.zip} {site.address.city}
+                  </span>
+                </li>
+              </ul>
+              {/* Одна кнопка WhatsApp в цвете бренда (--color-copper).
+                  Прежде она была покрашена в #25D366 — фирменный цвет чужого
+                  мессенджера, которого в палитре сайта нет. */}
+              <a
+                href="https://wa.me/4915239603175"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 flex items-center justify-center gap-3 bg-copper hover:bg-copper-dark text-white rounded-[10px] px-5 py-3 min-h-[44px] font-semibold transition-colors"
+              >
+                <WhatsAppIcon className="w-5 h-5" variant="mono" />
+                <span className="font-body">Per WhatsApp anfragen</span>
+              </a>
+              <p className="mt-4 text-sm text-sand">* Pflichtfelder.</p>
+            </div>
+          </ScrollReveal>
+
           {/* Карточка формы — белая, с радиусом и тенью макета */}
           <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-8">
             <ScrollReveal>
@@ -149,7 +201,7 @@ export default function ContactForm() {
                         {/* Макет (kontakt.html): подпись СТОИТ НАД полем и
                             не исчезает при вводе. Прежде подписи жили внутри
                             поля и пропадали, стоило начать печатать. */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4 [&>*]:min-w-0">
                           {section.fields.map((field) => {
                             const id = `f-${field.name}`;
                             const wide = field.type === "textarea" || field.type === "checkbox";
@@ -226,16 +278,33 @@ export default function ContactForm() {
                       </fieldset>
                     ))}
 
+                    {/* Макет: кнопка во всю ширину формы и со стрелкой.
+                        Прежде она была по ширине текста и без стрелки. */}
                     <div>
                       <button
                         type="submit"
                         disabled={state === "submitting"}
-                        className="bg-copper hover:bg-copper-dark disabled:opacity-50 text-white px-8 py-3.5 rounded-[10px] font-semibold text-lg transition-colors w-full sm:w-auto"
+                        className="w-full flex items-center justify-center gap-3 bg-copper hover:bg-copper-dark disabled:opacity-50 text-white px-8 py-3.5 min-h-[44px] rounded-[10px] font-semibold text-lg transition-colors group"
                       >
                         {state === "submitting"
                           ? "Wird gesendet..."
                           : form.submitLabel}
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          width="20"
+                          height="20"
+                          aria-hidden="true"
+                          className="flex-none transition-transform group-hover:translate-x-1"
+                        >
+                          <path d="M5 12h14m-6-6 6 6-6 6" />
+                        </svg>
                       </button>
+                      <p className="mt-4 text-sm text-sand">* Pflichtfelder.</p>
                     </div>
                   </Stagger>
                 </motion.form>
@@ -243,54 +312,6 @@ export default function ContactForm() {
             </AnimatePresence>
           </div>
 
-          {/* Sidebar — contact info */}
-          <ScrollReveal direction="right" className="lg:pt-20">
-            <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-8 sticky top-[98px]">
-              <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-6">
-                Direkt erreichen
-              </h2>
-              <div className="space-y-4">
-                <a
-                  href={`tel:${site.phone}`}
-                  className="flex items-center gap-3 bg-gold hover:bg-gold-light text-white rounded-xl px-5 py-3 font-semibold transition-colors"
-                >
-                  <PhoneIcon className="w-5 h-5" variant="mono" />
-                  <span className="font-body">Jetzt anrufen</span>
-                </a>
-                <a
-                  href="https://wa.me/4915239603175"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl px-5 py-3 font-semibold transition-colors"
-                >
-                  <WhatsAppIcon className="w-5 h-5" variant="mono" />
-                  <span className="font-body">WhatsApp schreiben</span>
-                </a>
-                <a
-                  href={`tel:${site.phone}`}
-                  className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
-                >
-                  <PhoneIcon className="w-6 h-6" />
-                  <span className="font-body">{site.phone}</span>
-                </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
-                >
-                  <EnvelopeIcon className="w-6 h-6" />
-                  <span className="font-body">{site.email}</span>
-                </a>
-                <div className="flex items-start gap-3 text-charcoal-light">
-                  <MapPinIcon className="w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <span className="font-body">
-                    {site.address.street}
-                    <br />
-                    {site.address.zip} {site.address.city}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </div>
     </section>

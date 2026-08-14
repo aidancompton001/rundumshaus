@@ -28,6 +28,23 @@ const HERO = {
   fallback: T.heroImage,
 };
 
+// Галочка списка по макету (.badge-check, style.css): зелёный кружок с белой
+// галочкой. На городских стояла тонкая галочка без кружка — на главной и в
+// услугах кружки были, и стиль внутри сайта расходился.
+function CheckBadge() {
+  return (
+    <span
+      className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center mt-0.5"
+      aria-hidden="true"
+    >
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+        <path d="m5 13 4 4L19 7" />
+      </svg>
+    </span>
+  );
+}
+
 interface Props {
   city: City;
   neighbors: City[];
@@ -53,7 +70,7 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
   const s = (text: string) => subst(text, vars);
 
   const renderSection = (sec: { heading: string; paragraphs: string[] }) => (
-    <section className="mb-10" key={sec.heading}>
+    <section className="mb-10 max-w-[76ch]" key={sec.heading}>
       <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
         {s(sec.heading)}
       </h2>
@@ -78,7 +95,7 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
           тёмная полоса с хлебными крошками и H1. Прежде крошки и заголовок
           стояли на белом внутри статьи. */}
       <section className="bg-dark text-white relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
           <nav aria-label="Breadcrumb" className="text-sm text-white/70 mb-4">
             <ol className="flex flex-wrap gap-x-2 gap-y-1">
               <li>
@@ -100,10 +117,10 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
       </section>
 
     <article className="py-10 md:py-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Hero image */}
-        <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8 border border-sand/30">
+        <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8 border border-sand/30 max-w-[860px]">
           <picture>
             <source type="image/webp" media="(min-width: 1024px)" srcSet={getImageUrl(HERO.w1200)} />
             <source type="image/webp" media="(min-width: 640px)" srcSet={getImageUrl(HERO.w800)} />
@@ -121,19 +138,16 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
         </div>
 
         {/* Intro */}
-        <p className="text-lg text-charcoal-light leading-relaxed mb-5">{s(T.intro1)}</p>
-        <p className="text-base text-charcoal-light leading-relaxed mb-8">{s(T.intro2)}</p>
+        <div className="max-w-[76ch]">
+          <p className="text-lg text-charcoal-light leading-relaxed mb-5">{s(T.intro1)}</p>
+          <p className="text-base text-charcoal-light leading-relaxed mb-8">{s(T.intro2)}</p>
+        </div>
 
         {/* 5 ✅ benefits */}
-        <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[860px]">
           {T.benefits.map((b) => (
             <li key={b} className="flex items-start gap-2 text-charcoal">
-              <span className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center mt-0.5" aria-hidden="true">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <path d="m5 13 4 4L19 7" />
-                </svg>
-              </span>
+              <CheckBadge />
               <span>{b}</span>
             </li>
           ))}
@@ -192,21 +206,16 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
 
         {/* Leistungen list */}
         <section className="mb-10">
-          <SectionHeading compact className="mb-4">
+          <SectionHeading eyebrow="Leistungsumfang" compact className="mb-4">
             {s(T.leistungen.heading)}
           </SectionHeading>
-          <p className="text-base text-charcoal-light mb-5 leading-relaxed">
+          <p className="text-base text-charcoal-light mb-5 leading-relaxed max-w-[76ch] mx-auto text-center">
             {s(T.leistungen.intro)}
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 max-w-[860px] mx-auto">
             {T.leistungen.items.map((item) => (
               <li key={item} className="flex items-start gap-2 text-charcoal">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
-                  strokeLinejoin="round" className="text-copper flex-shrink-0 mt-1"
-                  aria-hidden="true">
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
+                <CheckBadge />
                 <span className="text-sm">{item}</span>
               </li>
             ))}
@@ -227,18 +236,18 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
 
         {/* Warum */}
         <section className="mb-10">
-          <SectionHeading compact className="mb-5">
+          <SectionHeading eyebrow="Ihre Vorteile" compact className="mb-5">
             {s(T.warum.heading)}
           </SectionHeading>
-          <ul className="space-y-3">
+          <ul className="space-y-3 max-w-[860px] mx-auto">
             {T.warum.items.map((u) => (
               <li key={u} className="flex items-start gap-3 text-charcoal">
-                <span className="text-copper font-bold flex-shrink-0" aria-hidden="true">✓</span>
+                <CheckBadge />
                 <span>{u}</span>
               </li>
             ))}
             <li className="flex items-start gap-3 text-charcoal">
-              <span className="text-copper font-bold flex-shrink-0" aria-hidden="true">✓</span>
+              <CheckBadge />
               <span>{s(T.warum.cityLine)}</span>
             </li>
           </ul>
@@ -247,7 +256,7 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
         <hr className="my-10 border-sand/30" />
 
         {/* Einsatzgebiet */}
-        <section className="mb-10">
+        <section className="mb-10 max-w-[76ch]">
           <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
             {s(T.einsatzgebiet.heading)}
           </h2>
@@ -263,7 +272,7 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
           <SectionHeading eyebrow="FAQ" compact className="mb-6">
             {s(T.faq.heading)}
           </SectionHeading>
-          <div className="space-y-3">
+          <div className="space-y-3 max-w-[860px] mx-auto">
             {T.faq.items.map((f, i) => (
               <details
                 key={i}
