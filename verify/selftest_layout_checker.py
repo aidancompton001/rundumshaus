@@ -158,9 +158,25 @@ def main():
             state = "молчит" if ok else ("ДЕФЕКТ " + detail if caught else "ПРЕДУПРЕЖДЕНИЕ " + detail)
         results.append((label, ok, state))
 
+    # Landa, F-04: все случаи выше подаются чекеру ОДНИМ ФАЙЛОМ, то есть
+    # проверяют ветку file://. Ветка HTTP — та, которой меряется собранный
+    # сайт, — оставалась без единого подложенного дефекта. Здесь дефект
+    # кладётся В ПАПКУ, и чекер обязан найти его в режиме каталога.
+    http_page = os.path.join(PAGES, "zz-http-defect.html")
+    io.open(http_page, "w", encoding="utf-8", newline=chr(10)).write(
+        inject(html, "body", '<div style="width:3000px">HTTP-ветка</div>') or html)
+    out_http = subprocess.run([PW_PY, CHECKER, PAGES, "375"],
+        capture_output=True, text=True, encoding="utf-8", timeout=600).stdout
+    http_caught = ("zz-http-defect" in out_http
+                   and "СРЕДА ЗАМЕРА: HTTP" in out_http
+                   and "PROBLEMS" in out_http)
+    results.append(("дефект в режиме каталога (ветка HTTP)", http_caught,
+                    "ПОЙМАН по HTTP" if http_caught else "ПРОПУЩЕН"))
+    os.remove(http_page)
+
     # контроль чистоты — по всей папке, как в реальном прогоне
     clean = "LAYOUT_CLEAN" in subprocess.run([PW_PY, CHECKER, PAGES, "375"],
-        capture_output=True, text=True, encoding="utf-8", timeout=300).stdout
+        capture_output=True, text=True, encoding="utf-8", timeout=600).stdout
 
     for label, caught, detail in results:
         print("%-46s %-6s %s" % (label, "OK" if caught else "ПРОВАЛ", detail))
