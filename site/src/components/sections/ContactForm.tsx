@@ -66,7 +66,7 @@ export default function ContactForm() {
             <span aria-hidden="true">›</span>
             <span aria-current="page">Kontakt</span>
           </nav>
-          <h1 className="font-heading font-black text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-3">
+          <h1 className="font-heading font-extrabold text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-3">
             {form.heading}
           </h1>
           <p className="text-white/70 max-w-[62ch] text-lg">{form.body}</p>

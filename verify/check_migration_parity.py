@@ -47,7 +47,15 @@ EXPECTED_LINK_CHANGES = {}  # ссылок клиента не терялось
 # Число подключённых CSS/JS изменилось по замыслу: герой макета не тянет
 # GSAP SplitText и компонент Lamp, а два шрифта заменены одним. Это не потеря
 # оформления — оформление проверяется отдельно, весами и вёрсткой.
-EXPECTED_ASSET_DELTA = "перенос макета: герой не тянет SplitText и Lamp, один шрифт вместо двух"
+# Landa, F-50: прежняя форма была амнистией целому измерению приёмки —
+# любая разница в числе CSS/JS печаталась и НЕ валила прогон. Подлогом
+# доказано: снятие всего JavaScript со всех страниц давало БИНАРНО 1.
+# Теперь заявление закрепляет ЧИСЛА: на сколько и у скольких страниц.
+EXPECTED_ASSET_DELTA = {
+    "reason": "перенос макета: герой не тянет SplitText и Lamp, один шрифт вместо двух",
+    "delta": -2,     # замерено: два чанка меньше (SplitText+Lamp, второй шрифт)
+    "pages": 513,    # столько страниц затронуто; иное число валит прогон
+}
 
 EXPECTED_TEXT_CHANGES = {
     ("description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
@@ -257,12 +265,33 @@ def compare(before_path, after_path):
                 if (len(A[u].get(key) or []) if key == "assets" else (A[u].get(key) or 0))
                 != (len(B[u].get(key) or []) if key == "assets" else (B[u].get(key) or 0))]
         if key == "assets" and diff:
-            print("  %-16s ЗАЯВЛЕНО    страниц: %-5d — %s"
-                  % (what, len(diff), EXPECTED_ASSET_DELTA))
+            deltas = {len(B[u].get(key) or []) - len(A[u].get(key) or []) for u in diff}
+            want = EXPECTED_ASSET_DELTA["delta"]
+            want_pages = EXPECTED_ASSET_DELTA["pages"]
+            bad_delta = deltas != {want}
+            bad_pages = want_pages is not None and len(diff) != want_pages
+            bad += bad_delta or bad_pages
+            print("  %-16s %s страниц: %-5d дельта: %s (заявлено %+d) — %s"
+                  % (what, "ЗАЯВЛЕНО   " if not (bad_delta or bad_pages) else "НЕ СОШЛОСЬ ",
+                     len(diff), sorted(deltas), want, EXPECTED_ASSET_DELTA["reason"]))
         else:
             bad += len(diff) > 0
             print("  %-16s страниц с расхождением: %-5d %s" % (what, len(diff),
                   "OK" if not diff else "РАСХОЖДЕНИЕ, напр. " + diff[0]))
+
+    def n_js(page):
+        return sum(1 for a in (page.get("assets") or []) if a.endswith(".js"))
+
+    def n_css(page):
+        return sum(1 for a in (page.get("assets") or []) if a.endswith(".css"))
+
+    no_js = [u for u in common if n_js(A[u]) > 0 and n_js(B[u]) == 0]
+    no_css = [u for u in common if n_css(A[u]) > 0 and n_css(B[u]) == 0]
+    bad += len(no_js) > 0 or len(no_css) > 0
+    print("  %-16s без JS: %-5d без CSS: %-5d %s"
+          % ("ЖИВОЙ ЛИ КОД", len(no_js), len(no_css),
+             "OK" if not (no_js or no_css) else
+             "ПОТЕРЯ, напр. " + (no_js or no_css)[0]))
 
     broken = [u for u in common if (B[u].get("assets_missing") or 0) > (A[u].get("assets_missing") or 0)]
     bad += len(broken) > 0

@@ -32,3 +32,4 @@ docs/design/v1-desktop/_*.html
 
 # стейджинг-сборка с путём /rundumshaus — артефакт, не исходник
 site/out-staging/
+verify/snapshots/_tmp.json

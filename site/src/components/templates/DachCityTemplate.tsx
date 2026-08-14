@@ -94,7 +94,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
               <li className="text-white" aria-current="page">{s(T.h1)}</li>
             </ol>
           </nav>
-          <h1 className="font-heading text-3xl md:text-[2.875rem] font-black leading-tight max-w-[24ch]">
+          <h1 className="font-heading text-3xl md:text-[2.875rem] font-extrabold leading-tight max-w-[24ch]">
             {s(T.h1)}
           </h1>
         </div>

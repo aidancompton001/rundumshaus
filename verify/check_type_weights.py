@@ -25,7 +25,13 @@ import threading
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PW_PY = os.path.join(ROOT, "verify", ".venv", "Scripts", "python.exe")
 
-WANT = {"h1": 900, "h2": 800}
+# Landa, F-53: в макете H1 весит 900 ТОЛЬКО на главной. У внутренних страниц
+# `.page-hero h1` переопределён на 800 (style.css:791-796), и прежняя единая
+# константа 900 уводила сайт ОТ макета на пяти родах страниц — при этом
+# служила доказательством соответствия. Замерено на самом макете.
+WANT_H2 = 800
+WANT_H1_HOME = 900      # index.html
+WANT_H1_INNER = 800     # все страницы с тёмной шапкой .page-hero
 
 
 def representatives(directory):
@@ -75,8 +81,9 @@ async def run(directory, width):
               }
               return out;
             }""")
+            want_h1 = WANT_H1_HOME if rel in ("index.html", "") else WANT_H1_INNER
             flags = []
-            for tag, want in WANT.items():
+            for tag, want in (("h1", want_h1), ("h2", WANT_H2)):
                 wrong = [w for w in got[tag] if w != want]
                 if wrong:
                     flags.append("%s: %s вместо %d" % (tag.upper(), wrong, want))

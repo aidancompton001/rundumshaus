@@ -55,7 +55,7 @@ export default function ServiceDetail() {
             <span aria-hidden="true">›</span>
             <span aria-current="page">Leistungen</span>
           </nav>
-          <h1 className="font-heading font-black text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-4">
+          <h1 className="font-heading font-extrabold text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-4">
             {heading}
           </h1>
           <p className="text-white/70 max-w-[62ch] text-lg">{subheading}</p>

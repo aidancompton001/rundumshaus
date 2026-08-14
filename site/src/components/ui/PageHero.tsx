@@ -47,7 +47,7 @@ export default function PageHero({
           )}
         </nav>
 
-        <h1 className="font-heading font-black text-3xl md:text-[2.875rem] leading-tight max-w-[24ch]">
+        <h1 className="font-heading font-extrabold text-3xl md:text-[2.875rem] leading-tight max-w-[24ch]">
           {title}
         </h1>
 

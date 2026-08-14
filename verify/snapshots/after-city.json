@@ -1,9 +1,9 @@
 {
  "build_dir": "C:\\Projects\\RundUmsHaus\\.worktrees\\redesign\\site\\out",
- "build_newest_html": "2026-08-14T16:38:50+00:00",
+ "build_newest_html": "2026-08-14T16:57:47+00:00",
  "files": {
   ".nojekyll": null,
-  "404.html": "98dad0c59a8f4168",
+  "404.html": "cf85e74fd97bf6d1",
   "CNAME": "742bd7fff334f14c",
   "ai.txt": "88e5a27845bd3e5a",
   "favicon.ico": "2b8ad2d33455a8f7",
@@ -12,7 +12,7 @@
   "robots.txt": "0f2b6a00cee258fe",
   "sitemap.xml": "03ed1b11feea284c"
  },
- "git_sha": "a4448393454645c80d4b61c67eee4b13358eaca2",
+ "git_sha": "661020d9876546f17a0f81ead7dcddb5cafd21fd",
  "pages": {
   "/": {
    "alts": [
@@ -514,7 +514,7 @@
     "/_next/static/chunks/028-uff-punmz.css",
     "/_next/static/chunks/02y90l.4to3qd.js",
     "/_next/static/chunks/03~yq9q893hmn.js",
-    "/_next/static/chunks/0_cb4o-mt4m8j.js",
+    "/_next/static/chunks/04up5jsx~qnp..js",
     "/_next/static/chunks/0d3shmwh5_nmn.js",
     "/_next/static/chunks/0dgq26a5_oy.a.js",
     "/_next/static/chunks/0ht900cau6_ur.js",
@@ -589,10 +589,10 @@
     "/_next/static/chunks/028-uff-punmz.css",
     "/_next/static/chunks/02y90l.4to3qd.js",
     "/_next/static/chunks/03~yq9q893hmn.js",
-    "/_next/static/chunks/09rh0dc0hm_l1.js",
     "/_next/static/chunks/0d3shmwh5_nmn.js",
     "/_next/static/chunks/0dgq26a5_oy.a.js",
     "/_next/static/chunks/0ht900cau6_ur.js",
+    "/_next/static/chunks/0itg4gh.8.0hb.js",
     "/_next/static/chunks/0mstyq17cbf8-.js",
     "/_next/static/chunks/106e28ra4mk1o.js",
     "/_next/static/chunks/161k6z-~60~21.js",
@@ -89251,8 +89251,8 @@
     "/_next/static/chunks/0dgq26a5_oy.a.js",
     "/_next/static/chunks/0ht900cau6_ur.js",
     "/_next/static/chunks/0mstyq17cbf8-.js",
+    "/_next/static/chunks/0pdh85sedvyqb.js",
     "/_next/static/chunks/106e28ra4mk1o.js",
-    "/_next/static/chunks/12j1sob-cupw..js",
     "/_next/static/chunks/161k6z-~60~21.js",
     "/_next/static/chunks/turbopack-0jv9bus~~1nta.js",
     "/_next/static/media/1bffadaabf893a1e-s.p.16ipb6fqu393i.woff2",
@@ -90030,5 +90030,5 @@
   "https://rundumshaus-littawe.de/referenzen/",
   "https://rundumshaus-littawe.de/ueber-uns/"
  ],
- "taken_at": "2026-08-14T16:45:03+00:00"
+ "taken_at": "2026-08-14T17:04:08+00:00"
 }
