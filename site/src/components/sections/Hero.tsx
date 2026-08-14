@@ -5,6 +5,7 @@ import siteData from "@/data/site.json";
 import type { HomepageData, SiteConfig } from "@/data/types";
 import { getHref } from "@/lib/getImageUrl";
 import { WhatsAppIcon } from "@/components/ContactIcons";
+import BrushDivider from "@/components/ui/BrushDivider";
 
 const data = homepageData as HomepageData;
 const site = siteData as SiteConfig;
@@ -143,6 +144,7 @@ export default function Hero() {
           ))}
         </aside>
       </div>
+      <BrushDivider />
     </section>
   );
 }

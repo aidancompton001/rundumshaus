@@ -1,0 +1,61 @@
+{
+  "task": "t008port-visual",
+  "title": "Довести перенос макета: блоки, которых на сайте нет",
+  "why": "Перенос был принят по числовым проверкам, но дизайн ими не измеряется. CEO открыл стейджинг и увидел старый сайт. Разбор — docs/POSTMORTEM_T008_perenos.md. Это добор оставшихся блоков макета с визуальной приёмкой.",
+  "environment": "рабочее дерево .worktrees/redesign, ветка redesign/modern-2026; замеры по HTTP на собранном site/out и на стейджинге",
+  "criteria": [
+    {
+      "id": "V1",
+      "text": "Волна-разделитель макета (.brush-divider) стоит на стыке тёмной секции и светлой: под героем главной и под тёмными шапками внутренних страниц",
+      "check": "grep -rl 'brush-divider' site/out --include=*.html | wc -l",
+      "expect_min": 500
+    },
+    {
+      "id": "V2",
+      "text": "Водяной знак блока «О нас» (.about-watermark) перенесён на главную",
+      "check": "grep -c 'about-watermark' site/out/index.html",
+      "expect_min": 1
+    },
+    {
+      "id": "V3",
+      "text": "Ничего не потеряно: адреса, SEO, ссылки, картинки, файлы сборки",
+      "check": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-city.json | tail -1",
+      "expect_equal": "БИНАРНО: 1"
+    },
+    {
+      "id": "V4",
+      "text": "Вёрстка не разъехалась ни на одном роде страниц",
+      "check": "py verify/check_layout_mobile.py site/out 2>/dev/null | tail -1",
+      "expect_equal": "RESULT: LAYOUT_CLEAN"
+    },
+    {
+      "id": "V5",
+      "text": "Вес заголовков макета выдержан на экране",
+      "check": "py verify/check_type_weights.py site/out 2>/dev/null | tail -1",
+      "expect_equal": "RESULT: TYPE_WEIGHTS_MATCH"
+    },
+    {
+      "id": "V6",
+      "text": "Тексты клиента целы",
+      "check": "py verify/check_client_texts.py | tail -1",
+      "expect_equal": "RESULT: CLIENT_TEXTS_MATCH"
+    },
+    {
+      "id": "V7",
+      "text": "Тесты зелёные",
+      "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests  [0-9]+ passed' | head -1",
+      "expect_equal": "Tests  247 passed"
+    },
+    {
+      "id": "V8",
+      "text": "ВИЗУАЛЬНАЯ ПРИЁМКА. Снимок каждой страницы макета и соответствующей страницы сайта в одном окне 1440 приложен и сверен глазами. Без этого пункта работа не принимается — числовые проверки дизайн не видят",
+      "check": "ls _cmp/*.png 2>/dev/null | wc -l",
+      "expect_min": 6
+    }
+  ],
+  "out_of_scope": [
+    "изменение текстов клиента",
+    "изменение адресов, карты сайта и разметки Google",
+    "правка админки /admin/ — единственный способ клиента редактировать тексты"
+  ]
+}

@@ -11,6 +11,7 @@ import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
 import SectionHeading from "@/components/ui/SectionHeading";
+import BrushDivider from "@/components/ui/BrushDivider";
 
 const T = templateTexts as CityTemplateTexts;
 // PX-073 F3: contact data from site.json (Einstellungen in CMS) — was hardcoded.
@@ -76,7 +77,7 @@ export default function HausmeisterCityTemplate({ city, neighbors, allOtherCitie
       {/* Шапка городской страницы по макету (city-template.html, .page-hero):
           тёмная полоса с хлебными крошками и H1. Прежде крошки и заголовок
           стояли на белом внутри статьи. */}
-      <section className="bg-dark text-white">
+      <section className="bg-dark text-white relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
           <nav aria-label="Breadcrumb" className="text-sm text-white/70 mb-4">
             <ol className="flex flex-wrap gap-x-2 gap-y-1">
@@ -95,6 +96,7 @@ export default function HausmeisterCityTemplate({ city, neighbors, allOtherCitie
             {s(T.h1)}
           </h1>
         </div>
+        <BrushDivider />
       </section>
 
     <article className="py-10 md:py-16">
