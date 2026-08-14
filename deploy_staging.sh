@@ -21,5 +21,9 @@ rm -f site/out-staging/CNAME
 echo "файлов в стейджинг-сборке: $(find site/out-staging -type f | wc -l)"
 
 ssh $SRV "test -d $DST && tar czf ${DST}.bak-$(date +%Y%m%d-%H%M%S).tgz -C $DST . || true"
-rsync -az --delete site/out-staging/ $SRV:$DST/
+# rsync на этой машине не установлен — переносим tar-потоком через ssh.
+# --delete повторяем вручную: каталог очищается перед распаковкой, иначе
+# удалённые страницы остались бы жить на стейджинге и вводили в заблуждение.
+ssh $SRV "rm -rf $DST && mkdir -p $DST"
+tar czf - -C site/out-staging . | ssh $SRV "tar xzf - -C $DST"
 ssh $SRV "ls $DST | head -5; du -sh $DST"

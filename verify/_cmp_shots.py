@@ -73,6 +73,28 @@ async def shoot(page, url, path):
         window.scrollTo(0, 0);
         await new Promise(r => setTimeout(r, 400));
     }""")
+    # Полностраничный снимок разворачивает окно, и картинки с loading="lazy",
+    # не попавшие в окно во время прокрутки, на снимке остаются пустыми —
+    # причём по-разному от прогона к прогону. Снимаем ленивость и ждём, пока
+    # ВСЕ картинки догрузятся: иначе «пусто» меряет расторопность браузера,
+    # а не содержимое страницы.
+    await page.evaluate("""async () => {
+        // Блоки с анимацией появления ждут наблюдателя. При очень длинной
+        // странице (375 — до 8000 px) прокрутка обгоняет его, и часть блоков
+        // остаётся при opacity 0 — от прогона к прогону разная. Снимок должен
+        // показывать УСТОЯВШЕЕСЯ состояние страницы, поэтому доводим их до
+        // конца принудительно: правило действует только внутри снимка и
+        // ничего не меняет ни в макете, ни на сайте.
+        const st = document.createElement('style');
+        st.textContent = '.reveal,[class*="reveal"]{opacity:1!important;'
+                       + 'transform:none!important;transition:none!important}';
+        document.head.appendChild(st);
+        document.querySelectorAll('img[loading="lazy"]')
+                .forEach(i => i.loading = 'eager');
+        await Promise.all([...document.images]
+            .filter(i => !i.complete)
+            .map(i => new Promise(r => { i.onload = i.onerror = r; })));
+    }""")
     await page.wait_for_timeout(900)
     await page.screenshot(path=path, full_page=True)
     h = await page.evaluate("document.body.scrollHeight")

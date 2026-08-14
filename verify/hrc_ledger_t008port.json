@@ -50,7 +50,7 @@
     },
     {
       "id": "06",
-      "text": "Тестов ДО переноса — 247 в 19 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой. Это база сравнения, а не текущее число: после переноса их 248 (утверждение 27) [СРЕДА ЗАМЕРА: главный чекаут c:/Projects/RundUmsHaus, ветка master — там лежит сборка живого сайта, то есть состояние ДО переноса]",
+      "text": "Тестов ДО переноса — 247 в 19 файлах. Прежнее «226» считало файлы внутри node_modules и было ошибкой. Это база сравнения, а не текущее число: после переноса их 249 (утверждение 27) [СРЕДА ЗАМЕРА: главный чекаут c:/Projects/RundUmsHaus, ветка master — там лежит сборка живого сайта, то есть состояние ДО переноса]",
       "asserted": true,
       "proof": {
         "cmd": "cd ../.. && cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1 | grep -oE '[0-9]+'",
@@ -298,6 +298,42 @@
       "proof": {
         "cmd": "py verify/check_eyebrow_not_dup.py site/out | tail -1",
         "expect_equal": "RESULT: EYEBROWS_CLEAN"
+      }
+    },
+    {
+      "id": "34",
+      "text": "Призыв в шапке виден на 375, 768 и 1440 — столько же видимых ссылок tel:/wa.me внутри header, сколько в макете. До правки на 375 ссылка была в разметке, но невидима: класс `hidden sm:inline-flex` (находка Ланды F-71). Проверка сверяет обе стороны в одной среде [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026, сборка site/out поднята по HTTP]",
+      "asserted": true,
+      "proof": {
+        "cmd": "py verify/check_vs_mockup.py site/out 2>/dev/null | tail -1",
+        "expect_equal": "RESULT: MOCKUP_MATCH"
+      }
+    },
+    {
+      "id": "35",
+      "text": "Колонка текста городской страницы отцентрована как в макете, а заголовок призыва выключен влево как в макете (Ланда F-72, F-73; было: колонка прижата влево, призыв по центру, 490 страниц). Сверяется ЦЕНТР колонки, а не левый край: ширина задана в ch и зависит от шрифта, левый край ловил бы смену шрифта вместо съехавшей вёрстки. Чувствительность доказана подкладкой: сдвиг колонки влево даёт 224 px расхождения и MOCKUP_OFF [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026, сборка site/out поднята по HTTP]",
+      "asserted": true,
+      "proof": {
+        "cmd": "py verify/check_vs_mockup.py site/out 2>/dev/null | grep -c 'НЕ ТАМ\\|ВЫКЛЮЧКА ИНАЯ'",
+        "expect_equal": "0"
+      }
+    },
+    {
+      "id": "36",
+      "text": "Волна-разделитель стоит только там, где она есть в макете: в исходниках её тянут ровно два места — сам компонент и Hero главной. С внутренних page-hero и с пяти городских шаблонов снята (Ланда F-74). В макете grep brush-divider даёт 2 на index.html и 0 на leistungen, ueber-uns, kontakt, referenzen, city-template, impressum, datenschutz [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026, сборка site/out поднята по HTTP]",
+      "asserted": true,
+      "proof": {
+        "cmd": "grep -rl 'BrushDivider' site/src | wc -l",
+        "expect_equal": "2"
+      }
+    },
+    {
+      "id": "37",
+      "text": "Ни один измеритель не докладывает успех, обойдя ноль страниц (Ланда F-78). Прогон трёх проверок по заведомо пустому каталогу даёт три ненулевых кода возврата; прежде все три печатали MATCH/CLEAN и код 0 [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026, сборка site/out поднята по HTTP]",
+      "asserted": true,
+      "proof": {
+        "cmd": "py -c \"import subprocess,os,tempfile,sys; d=tempfile.mkdtemp(); print(sum(1 for s in ('check_type_weights','check_eyebrow_not_dup','check_layout_mobile') if subprocess.run([sys.executable,'verify/%s.py'%s,d],capture_output=True).returncode!=0))\"",
+        "expect_equal": "3"
       }
     }
   ]

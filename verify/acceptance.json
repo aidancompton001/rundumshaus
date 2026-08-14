@@ -6,9 +6,9 @@
   "criteria": [
     {
       "id": "V1",
-      "text": "Волна-разделитель макета (.brush-divider) стоит на стыке тёмной секции и светлой: под героем главной и под тёмными шапками внутренних страниц",
-      "check": "grep -rl 'brush-divider' site/out --include=*.html | wc -l",
-      "expect_min": 500
+      "text": "Волна-разделитель стоит ТОЛЬКО там, где она есть в макете: под героем главной. Прежняя редакция этого критерия требовала её на 500 страницах и была ошибкой — в макете brush-divider встречается лишь в index.html, на leistungen, ueber-uns, kontakt, referenzen, city-template, impressum и datenschutz его нет (Ланда F-74). Критерий, требовавший обратного, сам служил доказательством отступления от макета",
+      "check": "grep -rl 'BrushDivider' site/src | wc -l",
+      "expect_equal": "2"
     },
     {
       "id": "V2",
@@ -43,14 +43,26 @@
     {
       "id": "V7",
       "text": "Тесты зелёные",
-      "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests  [0-9]+ passed' | head -1",
-      "expect_equal": "Tests  247 passed"
+      "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1",
+      "expect_equal": "Tests  249 passed"
     },
     {
       "id": "V8",
-      "text": "ВИЗУАЛЬНАЯ ПРИЁМКА. Снимок каждой страницы макета и соответствующей страницы сайта в одном окне 1440 приложен и сверен глазами. Без этого пункта работа не принимается — числовые проверки дизайн не видят",
-      "check": "ls _cmp/*.png 2>/dev/null | wc -l",
-      "expect_min": 6
+      "text": "ВИЗУАЛЬНАЯ ПРИЁМКА. Снимки пар «макет ↔ сайт» сняты штатным verify/_cmp_shots.py (он прокручивает страницу перед съёмкой) и КАЖДЫЙ признан пригодным: доля пустых строк не выше 60 %, сплошной пустой участок не длиннее 500 px. Ланда F-70: комплект, снятый на скорую руку без прокрутки, был в основном белым — блоки с анимацией появления остались при opacity 0, и ревьюер сравнивал бы белое с белым. Снимок, который ничего не содержит, доказательством не считается",
+      "check": "py verify/_cmp_shots.py 2>/dev/null | tail -1",
+      "expect_equal": "RESULT: SHOTS_USABLE"
+    },
+    {
+      "id": "V9",
+      "text": "Сверка с макетом там, где числа её не вели: призыв в шапке виден на 375, 768 и 1440; колонка текста городской страницы отцентрована; заголовок призыва выключен влево. Эти три величины не проверялись ничем, поэтому дефекты прожили шесть раундов (Ланда F-71..F-73)",
+      "check": "py verify/check_vs_mockup.py site/out 2>/dev/null | tail -1",
+      "expect_equal": "RESULT: MOCKUP_MATCH"
+    },
+    {
+      "id": "V10",
+      "text": "Ни один измеритель не докладывает успех, обойдя ноль страниц. Прогон по пустому каталогу обязан завершаться ненулевым кодом у всех трёх (Ланда F-78)",
+      "check": "py -c \"import subprocess,tempfile,sys; d=tempfile.mkdtemp(); print(sum(1 for s in ('check_type_weights','check_eyebrow_not_dup','check_layout_mobile') if subprocess.run([sys.executable,'verify/%s.py'%s,d],capture_output=True).returncode!=0))\"",
+      "expect_equal": "3"
     }
   ],
   "out_of_scope": [
