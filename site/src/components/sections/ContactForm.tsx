@@ -137,7 +137,10 @@ export default function ContactForm() {
                                   type="checkbox"
                                   name={field.name}
                                   required={field.required}
-                                  className="mt-1 w-5 h-5 rounded border-sand accent-[#3A7030]"
+                                  /* Цвет галочки был прибит гвоздём (#3A7030 из прежней палитры) и
+                                     единственный на весь сайт пережил смену цветов. Теперь берётся
+                                     из токена — при следующей смене палитры поедет вместе со всеми. */
+                                  className="mt-1 w-5 h-5 rounded border-sand accent-[color:var(--color-copper)]"
                                 />
                                 <span className="text-charcoal-light text-sm">
                                   {field.label}

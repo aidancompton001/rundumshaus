@@ -254,6 +254,15 @@
         "cmd": "grep -ho '_next/static/chunks/[a-z0-9._~-]*\\.css' $(find site/out -name '*.html') | sort -u | wc -l",
         "expect_equal": "1"
       }
+    },
+    {
+      "id": "29",
+      "asserted": true,
+      "text": "Ни один цвет прежней палитры не пережил перенос: девять старых значений (синий #1B3A5C и #2D5A8C, золотой #D4A843 и #E0BA5A, прежний зелёный #4A8B3F, #5AA84D, #3A7030, серый #6B7B8D, фон #F0F4F8) не встречаются ни в одном файле сборки — ни в HTML, ни в CSS, ни в JS",
+      "proof": {
+        "cmd": "n=0; for c in 1B3A5C 2D5A8C D4A843 E0BA5A 4A8B3F 5AA84D 3A7030 6B7B8D F0F4F8; do n=$((n+$(grep -ril \"$c\" site/out --include=*.html --include=*.css --include=*.js 2>/dev/null | wc -l))); done; echo $n",
+        "expect_equal": "0"
+      }
     }
   ]
 }
