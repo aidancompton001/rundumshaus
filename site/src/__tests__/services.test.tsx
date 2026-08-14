@@ -127,31 +127,27 @@ describe("ServiceDetail", () => {
     });
   });
 
-  it("cards use solid bg, not transparent glassmorphism (bug fix)", () => {
+  // Прежние два теста стерегли прозрачные карточки: на светлом фоне текст в них
+  // не читался. В макете карточек на этой странице нет вовсе — услуги идут
+  // блоками «фото + текст». Стеречь надо то же самое свойство на новой вёрстке:
+  // блоков ровно пять, у каждого есть заголовок, фото и позиции клиента, и
+  // ни один не полупрозрачный.
+  it("рисует пять блоков услуг, непрозрачных и с фото", () => {
     const { container } = render(<ServiceDetail />);
-    // Service cards have group + relative + rounded-2xl + bg-cream-dark — distinguish from FAQ section bg
-    const cards = container.querySelectorAll(
-      ".group.relative[class*='rounded-2xl'][class*='bg-cream-dark']"
-    );
-    expect(cards.length).toBe(5);
-    // No card should have backdrop-blur (invisible on light bg)
-    cards.forEach((card) => {
-      expect(card.className).not.toContain("backdrop-blur");
-      // Should have solid bg (no /30 opacity)
-      expect(card.className).toContain("bg-cream-dark");
-      expect(card.className).not.toContain("bg-cream-dark/");
+    const blocks = container.querySelectorAll("section[id]");
+    expect(blocks.length).toBe(5);
+    blocks.forEach((block) => {
+      expect(block.querySelector("h2")).toBeTruthy();
+      expect(block.querySelector("img")).toBeTruthy();
+      expect(block.className).not.toContain("backdrop-blur");
+      expect(block.className).not.toMatch(/bg-[a-z-]+\/\d/);
     });
   });
 
-  it("cards have visible border (solid, not transparent)", () => {
+  it("под каждым блоком стоят позиции услуги из файлов клиента", () => {
     const { container } = render(<ServiceDetail />);
-    // Same precise selector as above — exclude FAQ accordion items
-    const cards = container.querySelectorAll(
-      ".group.relative[class*='rounded-2xl'][class*='border-sand']"
-    );
-    expect(cards.length).toBe(5);
-    cards.forEach((card) => {
-      expect(card.className).toContain("shadow-md");
+    container.querySelectorAll("section[id]").forEach((block) => {
+      expect(block.querySelectorAll("li").length).toBeGreaterThanOrEqual(4);
     });
   });
 });

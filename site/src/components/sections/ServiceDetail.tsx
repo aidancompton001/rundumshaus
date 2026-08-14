@@ -2,11 +2,13 @@
 
 import servicesData from "@/data/services.json";
 import type { Service } from "@/data/types";
-import { ScrollReveal, Stagger } from "@/components/motion";
-import { getImageUrl, toWebp } from "@/lib/getImageUrl";
-import { serviceIconMap, DefaultIcon } from "@/components/ServiceIcons";
-// PX-061: ServiceFAQ, FAQSchema, SpezialthemenSection imports removed
-// (no longer rendered on /leistungen/ per Kevin's request).
+import { ScrollReveal } from "@/components/motion";
+import { getHref, getImageUrl, toWebp } from "@/lib/getImageUrl";
+import dach from "@/data/templates/dacharbeiten.json";
+import entruempelung from "@/data/templates/entruempelung.json";
+import galabau from "@/data/templates/garten-landschaftsbau.json";
+import garten from "@/data/templates/gartenpflege.json";
+import hausmeister from "@/data/templates/hausmeisterservice.json";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -14,97 +16,127 @@ const { services, heading, subheading } = servicesData as {
   services: Service[];
 };
 
+// Позиции услуги — из файлов клиента. В макете их шесть на блок, в две колонки.
+const ITEMS: Record<string, string[]> = {
+  dacharbeiten: dach.leistungen.items,
+  entruempelung: entruempelung.leistungen.items,
+  "garten-landschaftsbau": galabau.leistungen.items,
+  gartenpflege: garten.leistungen.items,
+  hausmeisterservice: hausmeister.leistungen.items,
+};
+
+function Check() {
+  return (
+    <span className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center mt-0.5" aria-hidden="true">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+        <path d="m5 13 4 4L19 7" />
+      </svg>
+    </span>
+  );
+}
+
+/**
+ * Страница услуг по макету (docs/design/v1-desktop/leistungen.html):
+ * тёмная шапка страницы с H1, затем блоки услуг — фото и текст в две
+ * колонки, стороны чередуются, под текстом шесть позиций с галочками
+ * в два столбца и кнопка «Jetzt anfragen». Между блоками тонкая линия.
+ *
+ * Прежняя страница была сеткой карточек 2×3 — старой вёрсткой.
+ */
 export default function ServiceDetail() {
   return (
-    <section className="py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-16">
-          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
+    <>
+      <section className="bg-dark text-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 md:pt-16 md:pb-20">
+          <nav className="flex flex-wrap gap-1.5 text-sm text-white/70 mb-4" aria-label="Brotkrumen-Navigation">
+            <a href={getHref("/")} className="hover:text-white">Startseite</a>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Leistungen</span>
+          </nav>
+          <h1 className="font-heading font-black text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-4">
             {heading}
           </h1>
-          <p className="text-charcoal-light text-lg max-w-2xl mx-auto">
-            {subheading}
-          </p>
-        </ScrollReveal>
+          <p className="text-white/70 max-w-[62ch] text-lg">{subheading}</p>
+        </div>
+      </section>
 
-        <Stagger staggerDelay={100} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map((service) => (
-            <div
-              key={service.id}
-              className="group relative bg-cream-dark border border-sand/30 rounded-2xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-copper/30"
-            >
-              {(service.detailImage || service.image) && (() => {
-                const imgSrc = service.detailImage || service.image || "";
-                return (
-                  <div className="aspect-[16/9] overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        {services.map((service, i) => {
+          const img = service.detailImage || service.image || "";
+          const items = (ITEMS[service.id] || []).slice(0, 6);
+          return (
+            <ScrollReveal key={service.id}>
+              <section
+                id={service.id}
+                className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]
+                  gap-7 lg:gap-12 items-center py-10 md:py-14
+                  border-b border-ink/10 last:border-b-0"
+              >
+                {img && (
+                  <div className={i % 2 === 1 ? "md:order-2" : ""}>
                     <picture>
-                      <source type="image/webp" srcSet={getImageUrl(toWebp(imgSrc))} />
+                      <source type="image/webp" srcSet={getImageUrl(toWebp(img))} />
                       <img
-                        src={getImageUrl(imgSrc)}
+                        src={getImageUrl(img)}
                         alt={service.imageAlt ?? service.title}
                         width={800}
-                        height={450}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        height={571}
+                        className="w-full aspect-[7/5] object-cover rounded-[16px]"
                         loading="lazy"
                         decoding="async"
                       />
                     </picture>
                   </div>
-                );
-              })()}
-              <div className="p-8">
-                <div className="flex items-start gap-4 mb-4">
-                  {(() => {
-                    const Icon = serviceIconMap[service.icon] || DefaultIcon;
-                    return (
-                      <Icon className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 transition-colors duration-300" />
-                    );
-                  })()}
-                  <h2 className="font-heading text-2xl font-extrabold text-charcoal group-hover:text-copper transition-colors">
+                )}
+
+                <div>
+                  <h2 className="font-heading text-2xl md:text-[2.1875rem] font-extrabold text-ink hyphens-auto mb-3">
                     {service.title}
                   </h2>
-                </div>
-                <p className="text-charcoal-light leading-relaxed">
-                  {service.detailDescription}
-                </p>
-                {/* PX-052 K2: "Mehr erfahren" CTA to Osnabrück city page.
-                    Each service.id maps 1:1 to URL slug. */}
-                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
-                  <a
-                    href={`/leistungen/${service.id}/osnabrueck/`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold border border-copper/40 text-copper rounded-lg hover:border-copper hover:bg-copper/5 transition-colors"
-                  >
-                    Mehr erfahren
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                  {/* PX-053: Kevin asked to temporarily remove subPage links
-                      ("erstmal raus" 2026-06-09 18:31). Data preserved in
-                      services.json — uncomment to re-enable.
-                  {service.subPage && (
-                    <a
-                      href={service.subPage.href}
-                      className="text-copper font-semibold hover:underline"
-                    >
-                      {service.subPage.label}
-                    </a>
-                  )}
-                  */}
-                </div>
-              </div>
-            </div>
-          ))}
-        </Stagger>
-      </div>
+                  <p className="text-sand leading-relaxed">{service.detailDescription}</p>
 
-      {/* PX-061: per Kevin 2026-06-09 23:23 — removed from /leistungen/:
-          - SpezialthemenSection (Objektpflege + Rasen cards)
-          - ServiceFAQ × 2 (FAQs are on city service pages)
-          - FAQSchema
-          - Einsatzgebiet CTA (was in LeistungenInStaedten, removed from page.tsx)
-          Rationale: FAQs + Einsatzgebiete duplicate content already
-          present on city service pages and on /einsatzgebiet/. */}
-    </section>
+                  {items.length > 0 && (
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 my-5">
+                      {items.map((t) => (
+                        <li key={t} className="flex items-start gap-2.5 text-[0.9375rem] font-semibold
+                          text-ink hyphens-auto [overflow-wrap:anywhere]">
+                          <Check />
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a
+                      href={getHref("/kontakt/")}
+                      className="inline-flex items-center gap-2 bg-copper hover:bg-copper-dark
+                        text-white px-5 py-3 rounded-[10px] font-semibold transition-colors"
+                    >
+                      Jetzt anfragen
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M5 12h14m-6-6 6 6-6 6" />
+                      </svg>
+                    </a>
+                    <a
+                      href={`/leistungen/${service.id}/osnabrueck/`}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-copper hover:underline"
+                    >
+                      Mehr erfahren
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </ScrollReveal>
+          );
+        })}
+      </div>
+    </>
   );
 }
