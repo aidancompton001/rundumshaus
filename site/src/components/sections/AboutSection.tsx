@@ -202,10 +202,33 @@ export default function AboutSection() {
               <p className="text-sand text-lg leading-relaxed mt-4">{data.about.body2}</p>
             )}
 
-            {/* Четыре пункта макета сюда не переносятся: ровно эти же
-                восемь пунктов клиента идут следующей секцией «Warum Rund
-                ums Haus Littawe?». В макете той секции нет, у Кевина есть,
-                и повтор одного списка дважды подряд читается как ошибка. */}
+            {/* Четыре галочки макета (.about-checks): первая половина
+                warumWir.items. Источник — ОДИН массив клиента в
+                homepage.json, который Кевин правит через /admin/; делить
+                его в данных нельзя, поэтому деление живёт здесь, в коде.
+                Вторую половину — items.slice(4) — показывает секция
+                «Warum Rund ums Haus Littawe?», так что ни один пункт
+                не встречается на странице дважды. */}
+            {/* Отступ снизу даёт mt-7 у кнопки — как margin-bottom 1.75rem
+                у .about-checks в макете; дублировать его тут не нужно */}
+            <ul className="grid gap-[0.7rem] mt-5">
+              {data.warumWir.items.slice(0, 4).map((item) => (
+                <li key={item} className="flex items-center gap-[0.6rem]
+                  text-[0.9375rem] font-semibold text-ink
+                  [overflow-wrap:anywhere] hyphens-auto min-w-0">
+                  <span
+                    className="flex-none w-6 h-6 rounded-full bg-copper text-white grid place-items-center"
+                    aria-hidden="true"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="m5 13 4 4L19 7" />
+                    </svg>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
 
             <a
               href={getHref("/ueber-uns/")}

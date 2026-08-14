@@ -70,7 +70,10 @@ export default function Hero() {
         pt-14 pb-20 md:pt-20 md:pb-28 min-h-[480px] lg:min-h-[620px]">
 
         <div>
-          <h1 className="font-heading font-black leading-[1.15] [text-wrap:balance]
+          {/* Капслок — из макета: style.css `.hero h1 { text-transform: uppercase }`.
+              Начертанием, а не переписыванием: текст клиента в homepage.json
+              остаётся в обычном регистре. */}
+          <h1 className="font-heading font-black leading-[1.15] [text-wrap:balance] uppercase
             text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] mb-5">
             <span className="block">{main}</span>
             {accent && <span className="block text-copper-light">{accent}</span>}

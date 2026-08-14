@@ -25,6 +25,7 @@ vi.mock("lenis", () => ({
 import ServiceOverview from "@/components/sections/ServiceOverview";
 import ServiceDetail from "@/components/sections/ServiceDetail";
 import AboutSection from "@/components/sections/AboutSection";
+import WarumWir from "@/components/sections/WarumWir";
 import servicesData from "@/data/services.json";
 import homepageData from "@/data/homepage.json";
 import type { Service } from "@/data/types";
@@ -37,6 +38,21 @@ import {
   DefaultIcon,
   serviceIconMap,
 } from "@/components/ServiceIcons";
+
+// Полупрозрачная подложка Tailwind: bg-<цвет>/<число>, кроме /100 (это непрозрачно).
+// Границы (border-ink/10) сюда не попадают — они читаемость текста не ломают.
+const TRANSLUCENT_BG = /(^|\s|:)bg-[a-z0-9-]+\/(?!100(\s|$))\d+/;
+
+// Инлайновый фон вида rgba(...,0.6) / hsla / transparent — тот же дефект мимо классов.
+function inlineBgIsTranslucent(el: Element): boolean {
+  const style = el.getAttribute("style") ?? "";
+  const m = style.match(/background(?:-color)?\s*:\s*([^;]+)/i);
+  if (!m) return false;
+  const value = m[1];
+  if (/transparent/i.test(value)) return true;
+  const alpha = value.match(/(?:rgba|hsla)\([^)]*?,\s*([0-9.]+)\s*\)/i);
+  return alpha ? Number(alpha[1]) < 1 : false;
+}
 
 describe("ServiceIcons", () => {
   it("renders all 5 named icons as SVG", () => {
@@ -105,13 +121,26 @@ describe("ServiceOverview", () => {
     });
   });
 
-  it("renders SVG icons for every service card", () => {
+  // Карточка услуги — единственная карточка, пережившая перевёрстку. Исходный
+  // дефект: полупрозрачный фон со стеклянным размытием, текст на светлом фоне
+  // не читался. Читаемость держат непрозрачная подложка и тень, их и стережём.
+  it("карточки услуг: SVG-иконка, непрозрачный фон, тень", () => {
     const { container } = render(<ServiceOverview />);
     const svgs = container.querySelectorAll("svg");
     expect(svgs.length).toBeGreaterThanOrEqual(5);
     // PX-068 A0: emoji-in-text check removed — descriptions are CMS-editable
     // and Kevin may legitimately paste emoji. The SVG-icons assertion above
     // still guards the original design regression (icons, not emoji icons).
+
+    const cards = container.querySelectorAll("article");
+    expect(cards.length).toBe(5);
+    cards.forEach((card, i) => {
+      const cls = card.getAttribute("class") ?? "";
+      expect(cls, `card ${i}: непрозрачная подложка`).toMatch(/(^|\s)bg-(white|paper|cream[a-z-]*)(\s|$)/);
+      expect(cls, `card ${i}: тень`).toMatch(/(^|\s)shadow-/);
+      expect(cls, `card ${i}: без стекла`).not.toMatch(TRANSLUCENT_BG);
+      expect(cls, `card ${i}: без размытия`).not.toMatch(/backdrop-blur/);
+    });
   });
 });
 
@@ -128,10 +157,13 @@ describe("ServiceDetail", () => {
   });
 
   // Прежние два теста стерегли прозрачные карточки: на светлом фоне текст в них
-  // не читался. В макете карточек на этой странице нет вовсе — услуги идут
-  // блоками «фото + текст». Стеречь надо то же самое свойство на новой вёрстке:
-  // блоков ровно пять, у каждого есть заголовок, фото и позиции клиента, и
-  // ни один не полупрозрачный.
+  // не читался. Карточек на этой странице больше нет — услуги идут блоками
+  // «фото + текст». Дефект от этого никуда не делся: стеклянная подложка под
+  // текстом убивает читаемость на любой вёрстке. Проверять внешний тег блока
+  // бесполезно — фона у него нет вовсе, такой тест не может провалиться.
+  // Поэтому проходим КАЖДЫЙ элемент внутри блока, у которого есть свой текст,
+  // и запрещаем ему полупрозрачный фон и backdrop-blur — и в классах, и в
+  // инлайновом стиле.
   it("рисует пять блоков услуг, непрозрачных и с фото", () => {
     const { container } = render(<ServiceDetail />);
     const blocks = container.querySelectorAll("section[id]");
@@ -139,8 +171,16 @@ describe("ServiceDetail", () => {
     blocks.forEach((block) => {
       expect(block.querySelector("h2")).toBeTruthy();
       expect(block.querySelector("img")).toBeTruthy();
-      expect(block.className).not.toContain("backdrop-blur");
-      expect(block.className).not.toMatch(/bg-[a-z-]+\/\d/);
+
+      const surfaces = [block, ...Array.from(block.querySelectorAll("*"))];
+      expect(surfaces.length).toBeGreaterThan(10);
+      surfaces.forEach((el) => {
+        const cls = el.getAttribute("class") ?? "";
+        const where = `${block.id} → <${el.tagName.toLowerCase()} class="${cls}">`;
+        expect(cls, `${where}: backdrop-blur`).not.toMatch(/backdrop-blur/);
+        expect(cls, `${where}: полупрозрачный фон`).not.toMatch(TRANSLUCENT_BG);
+        expect(inlineBgIsTranslucent(el), `${where}: полупрозрачный inline-фон`).toBe(false);
+      });
     });
   });
 
@@ -149,6 +189,27 @@ describe("ServiceDetail", () => {
     container.querySelectorAll("section[id]").forEach((block) => {
       expect(block.querySelectorAll("li").length).toBeGreaterThanOrEqual(4);
     });
+  });
+});
+
+describe("Главная: список клиента не задваивается", () => {
+  // Восемь пунктов warumWir.items делятся между блоком «О нас» и секцией
+  // «Warum»: 4 + 4. Деление живёт в КОДЕ (homepage.json Кевин правит через
+  // админку, резать массив там нельзя). Само деление до сих пор ничем не
+  // стереглось: убери срез — повтор вернётся молча, все тесты останутся
+  // зелёными. Стережём: в «О нас» ровно четыре галочки, и ни один пункт
+  // не встречается в двух блоках сразу.
+  it("в блоке «О нас» ровно четыре пункта, и они не повторяются в «Warum»", () => {
+    const items = homepageData.warumWir.items as string[];
+    expect(items.length).toBeGreaterThanOrEqual(8);
+
+    const about = render(<AboutSection />).container.textContent ?? "";
+    const inAbout = items.filter((t) => about.includes(t));
+    expect(inAbout.length, "в «О нас» должно быть ровно четыре пункта").toBe(4);
+
+    const warum = render(<WarumWir />).container.textContent ?? "";
+    const inBoth = inAbout.filter((t) => warum.includes(t));
+    expect(inBoth, "эти пункты показаны дважды на одной странице").toEqual([]);
   });
 });
 
