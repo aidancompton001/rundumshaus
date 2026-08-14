@@ -25,7 +25,7 @@ export default function Lamp({ children }: LampProps) {
     >
       {/* Soft bronze glow — CSS only, no Motion dependency */}
       {!reducedMotion && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
           {/* Wide ambient glow */}
           <div className="absolute w-[40rem] h-[20rem] -translate-y-[10rem] rounded-full bg-copper/30 blur-[120px] opacity-50" />
           {/* Focused center glow */}

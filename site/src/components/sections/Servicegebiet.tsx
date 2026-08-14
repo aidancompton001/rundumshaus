@@ -71,7 +71,7 @@ export default function Servicegebiet() {
              now shows pure regional list of cities. */}
         {false && (
           <ScrollReveal className="mb-12">
-          <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
+          <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-4">
             Beliebte Leistungen in unseren Top-Städten
           </h2>
           <p className="text-charcoal-light mb-6">
@@ -101,7 +101,7 @@ export default function Servicegebiet() {
           </ScrollReveal>
         )}
 
-        <h2 className="font-heading text-2xl font-semibold text-charcoal mb-6">
+        <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-6">
           Alle {totalCities} Städte im Einsatzgebiet
         </h2>
 
@@ -109,7 +109,7 @@ export default function Servicegebiet() {
           {data.regions.map((region) => (
             <ScrollReveal key={region.name}>
               <div className="bg-cream-dark border border-sand/30 rounded-2xl p-6 h-full">
-                <h2 className="font-heading text-xl font-semibold text-charcoal mb-4 pb-3 border-b border-sand/30">
+                <h2 className="font-heading text-xl font-extrabold text-charcoal mb-4 pb-3 border-b border-sand/30">
                   {region.name}
                 </h2>
                 <ul className="space-y-1.5">

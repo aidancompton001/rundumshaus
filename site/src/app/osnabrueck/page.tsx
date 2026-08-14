@@ -129,7 +129,7 @@ export default function OsnabrueckHubPage() {
           </nav>
 
           {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-4">
             Rund ums Haus Littawe — Ihr Familienbetrieb in Osnabrück
           </h1>
           <p className="text-lg text-charcoal-light leading-relaxed mb-8">
@@ -193,7 +193,7 @@ export default function OsnabrueckHubPage() {
 
           {/* 5 Service cards — links to programmatic city pages */}
           <section className="my-12">
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+            <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-6">
               Unsere Leistungen in Osnabrück
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -219,7 +219,7 @@ export default function OsnabrueckHubPage() {
 
           {/* Stadtteile reinforcement */}
           <section className="my-12 p-6 bg-copper/5 border-l-4 border-copper rounded-r-2xl">
-            <h2 className="font-heading text-xl font-semibold text-charcoal mb-3">
+            <h2 className="font-heading text-xl font-extrabold text-charcoal mb-3">
               Wir sind in allen Stadtteilen unterwegs
             </h2>
             <p className="text-charcoal-light leading-relaxed mb-3">
@@ -268,7 +268,7 @@ export default function OsnabrueckHubPage() {
           {/* 3 visible reviews from Osnabrück */}
           {osnabrueckReviews.length > 0 && (
             <section className="my-12">
-              <h2 className="font-heading text-2xl font-semibold text-charcoal mb-6">
+              <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-6">
                 Was Kunden aus Osnabrück sagen
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -293,7 +293,7 @@ export default function OsnabrueckHubPage() {
 
           {/* CTA */}
           <section className="my-12 p-8 bg-charcoal text-cream rounded-2xl text-center">
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-3">
+            <h2 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">
               Jetzt unverbindlich anfragen
             </h2>
             <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">

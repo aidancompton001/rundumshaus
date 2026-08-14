@@ -87,7 +87,7 @@ export default function BewertungenSlider() {
           {/* Track — CSS scroll-snap, works without JS; arrows enhance on desktop */}
           <div
             ref={trackRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {reviews.map((r) => (
               <article
@@ -116,7 +116,7 @@ export default function BewertungenSlider() {
             type="button"
             onClick={() => scrollBy(-1)}
             aria-label="Vorherige Bewertung"
-            className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full bg-white border border-sand/40 shadow-md hover:border-copper hover:text-copper transition"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full bg-white border border-sand/40 shadow-md hover:border-copper hover:text-copper transition"
           >
             ‹
           </button>
@@ -124,7 +124,7 @@ export default function BewertungenSlider() {
             type="button"
             onClick={() => scrollBy(1)}
             aria-label="Nächste Bewertung"
-            className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full bg-white border border-sand/40 shadow-md hover:border-copper hover:text-copper transition"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full bg-white border border-sand/40 shadow-md hover:border-copper hover:text-copper transition"
           >
             ›
           </button>

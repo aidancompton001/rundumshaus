@@ -270,3 +270,11 @@ html.lenis body {
 .heading-divider--on-dark::after {
   background: rgba(254, 254, 254, 0.22);
 }
+
+/* === ПЕРЕНОС ДЛИННЫХ НЕМЕЦКИХ СЛОВ ===
+   На 375 px «Datenschutzerklärung» и длинные названия услуг в H1
+   вылезали за колонку. Заголовки переносятся по слогам. */
+h1, h2, h3 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}

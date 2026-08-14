@@ -43,7 +43,7 @@ async def run(directory, widths):
                                 directory=os.path.abspath(directory))
     # тихий сервер: журнал обращений в этом замере ничего не доказывает
     handler.func.log_message = lambda *a, **k: None
-    httpd = socketserver.TCPServer(("127.0.0.1", 0), handler)
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     base = "http://127.0.0.1:%d/" % httpd.server_address[1]
     print("СРЕДА ЗАМЕРА: HTTP %s (каталог %s)" % (base, directory))

@@ -64,7 +64,7 @@ export default function ServiceOverview() {
                       <Icon className="w-8 h-8 xl:w-9 xl:h-9 flex-shrink-0 transition-colors duration-300" />
                     );
                   })()}
-                  <h3 className="font-heading text-xl xl:text-lg font-semibold text-charcoal min-w-0 [overflow-wrap:anywhere] hyphens-auto group-hover:text-copper transition-colors">
+                  <h3 className="font-heading text-xl xl:text-lg font-extrabold text-charcoal min-w-0 [overflow-wrap:anywhere] hyphens-auto group-hover:text-copper transition-colors">
                     {service.title}
                   </h3>
                 </div>

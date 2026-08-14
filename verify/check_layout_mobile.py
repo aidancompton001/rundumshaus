@@ -239,8 +239,29 @@ async def run(directory, widths):
     if os.path.isfile(directory):
         pages = [directory]           # можно передать одну страницу — так делает самотест
     else:
-        pages = sorted(glob.glob(os.path.join(directory, "*.html")))
-        pages = [p for p in pages if not os.path.basename(p).startswith("_")]
+        # Landa, F-03: шаблон брал только *.html верхнего уровня — на собранном
+        # сайте это две страницы из 617, а 490 городских не мерились ни разу.
+        # Теперь обход рекурсивный, с отбором по одному представителю каждого
+        # рода: страницы одного рода рождаются одним компонентом, мерить все
+        # 617 незачем, но НИ ОДИН род не должен остаться без замера.
+        found = sorted(glob.glob(os.path.join(directory, "**", "*.html"),
+                                 recursive=True))
+        found = [p for p in found if not os.path.basename(p).startswith("_")
+                 and os.sep + "_next" + os.sep not in p
+                 # админка клиента: своей вёрстки не имеет, рисуется сторонним
+                 # скриптом Sveltia. ROUTE_MAP: НЕ ТРОГАТЬ
+                 and os.sep + "admin" + os.sep not in p]
+        seen, pages = set(), []
+        for f in found:
+            rel = os.path.relpath(f, directory).replace(os.sep, "/")
+            parts = rel.split("/")
+            # род = маршрут без города и без слага статьи
+            kind = "/".join(parts[:2]) if len(parts) > 2 else rel
+            if kind in seen:
+                continue
+            seen.add(kind)
+            pages.append(f)
+        print("РОДОВ СТРАНИЦ: %d (из %d файлов сборки)" % (len(pages), len(found)))
     problems = 0
 
     # Закон 27, правило 2: среда измерителя фиксируется явно. Собранный сайт
@@ -253,7 +274,7 @@ async def run(directory, widths):
         import functools, http.server, socketserver, threading
         handler = functools.partial(http.server.SimpleHTTPRequestHandler,
                                     directory=os.path.abspath(directory))
-        httpd = socketserver.TCPServer(("127.0.0.1", 0), handler)
+        httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
         httpd.daemon_threads = True
         threading.Thread(target=httpd.serve_forever, daemon=True).start()
         base_url = "http://127.0.0.1:%d/" % httpd.server_address[1]
@@ -278,7 +299,9 @@ async def run(directory, widths):
                 await page.wait_for_timeout(120)
                 ovf = await page.evaluate(JS_OVERFLOW)
                 img = await page.evaluate(JS_IMAGES)
-                line = "%4d  %-22s viewport=%d" % (width, os.path.basename(f), ovf["width"])
+                rel_ = (os.path.relpath(f, directory).replace(os.sep, "/")
+                        if not os.path.isfile(directory) else os.path.basename(f))
+                line = "%4d  %-42s viewport=%d" % (width, rel_, ovf["width"])
                 flags = []
                 if ovf["width"] != width:
                     flags.append("VIEWPORT_MISMATCH")

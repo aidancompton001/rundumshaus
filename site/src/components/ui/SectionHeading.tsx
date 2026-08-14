@@ -13,6 +13,7 @@ export default function SectionHeading({
   children,
   subheading,
   onDark = false,
+  compact = false,
   className = "",
   id,
 }: {
@@ -20,6 +21,8 @@ export default function SectionHeading({
   children: ReactNode;
   subheading?: ReactNode;
   onDark?: boolean;
+  /** Городская страница — статья: там заголовок раздела на ступень мельче */
+  compact?: boolean;
   className?: string;
   id?: string;
 }) {
@@ -28,7 +31,9 @@ export default function SectionHeading({
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
       <h2
         id={id}
-        className={`font-heading text-3xl md:text-4xl font-extrabold ${
+        className={`font-heading ${
+          compact ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl"
+        } font-extrabold ${
           onDark ? "text-cream" : "text-charcoal"
         } [text-wrap:balance]`}
       >

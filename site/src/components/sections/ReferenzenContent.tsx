@@ -120,7 +120,7 @@ export default function ReferenzenContent() {
                       Vorher / Nachher
                     </span>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-charcoal mb-2">
+                  <h3 className="font-heading text-xl font-extrabold text-charcoal mb-2">
                     {item.title}
                   </h3>
                   <p className="text-charcoal-light text-sm leading-relaxed">

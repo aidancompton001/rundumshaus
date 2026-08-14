@@ -44,7 +44,7 @@ export default function RatgeberIndex() {
       />
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-4">
             Ratgeber
           </h1>
           <p className="text-lg text-charcoal-light mb-12 max-w-3xl">

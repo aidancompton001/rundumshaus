@@ -12,6 +12,7 @@ import templateTexts from "@/data/templates/dacharbeiten.json";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const T = templateTexts as CityTemplateTexts;
 // PX-073 F3: contact data from site.json (Einstellungen in CMS) — was hardcoded.
@@ -180,9 +181,9 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Leistungen list */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
+          <SectionHeading eyebrow="Unsere Leistungen" compact className="mb-4">
             {s(T.leistungen.heading)}
-          </h2>
+          </SectionHeading>
           <p className="text-base text-charcoal-light mb-5 leading-relaxed">
             {s(T.leistungen.intro)}
           </p>
@@ -215,10 +216,9 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Warum */}
         <section className="mb-10">
-          <span className="eyebrow">Warum wir</span>
-          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-5">
+          <SectionHeading eyebrow="Warum wir" compact className="mb-5">
             {s(T.warum.heading)}
-          </h2>
+          </SectionHeading>
           <ul className="space-y-3">
             {T.warum.items.map((u) => (
               <li key={u} className="flex items-start gap-3 text-charcoal">
@@ -249,9 +249,9 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-6">
+          <SectionHeading eyebrow="FAQ" compact className="mb-6">
             {s(T.faq.heading)}
-          </h2>
+          </SectionHeading>
           <div className="space-y-3">
             {T.faq.items.map((f, i) => (
               <details
@@ -272,7 +272,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Weitere Leistungen */}
         <section className="mb-10">
-          <h3 className="font-heading text-xl font-semibold text-charcoal mb-4">
+          <h3 className="font-heading text-xl font-extrabold text-charcoal mb-4">
             {s(T.weitereLeistungen.heading)}
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -291,7 +291,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
         {/* Weitere Einsatzorte — 30 visible + expandable */}
         {safeNeighbors.length > 0 && (
           <section className="mb-10">
-            <h3 className="font-heading text-xl font-semibold text-charcoal mb-4">
+            <h3 className="font-heading text-xl font-extrabold text-charcoal mb-4">
               {s(T.einsatzorte.heading)}
             </h3>
             <div className="flex flex-wrap gap-2">

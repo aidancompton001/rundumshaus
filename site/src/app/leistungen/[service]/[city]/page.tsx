@@ -608,7 +608,7 @@ export default async function ProgrammaticLandingPage({
           </nav>
 
           {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-6">
+          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-6">
             {h1}
           </h1>
 
@@ -622,7 +622,7 @@ export default async function ProgrammaticLandingPage({
             className="my-10 p-6 bg-cream-dark border border-sand/30 rounded-2xl"
             aria-label={`Fakten zu ${svc.title} in ${cityName}`}
           >
-            <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+            <h2 className="font-heading text-xl font-extrabold text-charcoal mb-4">
               {svc.title} in {cityName} — auf einen Blick
             </h2>
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
@@ -645,7 +645,7 @@ export default async function ProgrammaticLandingPage({
           {/* PX-033 Phase B.1: city-specific boost block — Festpreis + Anfahrt + Lokal */}
           {boost && (
             <aside className="my-10 p-6 bg-copper/5 border-l-4 border-copper rounded-r-2xl">
-              <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+              <h2 className="font-heading text-xl font-extrabold text-charcoal mb-4">
                 Konkret für {cityName}
               </h2>
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm mb-4">
@@ -681,7 +681,7 @@ export default async function ProgrammaticLandingPage({
           {/* FAQ (rotated from pool 10-12, tier-scaled count) */}
           {faqs.length > 0 && (
             <section className="mt-12">
-              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+              <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-6">
                 Häufige Fragen — {svc.title} in {cityName}
               </h2>
               <div className="space-y-3">
@@ -704,7 +704,7 @@ export default async function ProgrammaticLandingPage({
           {/* Cross-links to symmetric neighbors (same service, neighbor cities) */}
           {neighbors.length > 0 && (
             <section className="mt-12 pt-8 border-t border-sand/30">
-              <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+              <h2 className="font-heading text-xl font-extrabold text-charcoal mb-4">
                 {svc.title} auch in der Nähe
               </h2>
               <div className="flex flex-wrap gap-3">
@@ -723,7 +723,7 @@ export default async function ProgrammaticLandingPage({
 
           {/* Vertical cross-links: same city, other services (PX-032 indexation acceleration) */}
           <section className="mt-12 pt-8 border-t border-sand/30">
-            <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+            <h2 className="font-heading text-xl font-extrabold text-charcoal mb-4">
               Weitere Leistungen in {cityName}
             </h2>
             <div className="flex flex-wrap gap-3">
