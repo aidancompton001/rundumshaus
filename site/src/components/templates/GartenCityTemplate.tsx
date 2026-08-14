@@ -72,27 +72,33 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
   );
 
   return (
-    <article className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="text-sm text-charcoal-light mb-8">
-          <ol className="flex flex-wrap gap-x-2 gap-y-1">
-            <li>
-              <Link href="/" className="hover:text-copper">Startseite</Link>
-              <span className="mx-2">/</span>
-            </li>
-            <li>
-              <Link href="/leistungen/" className="hover:text-copper">Leistungen</Link>
-              <span className="mx-2">/</span>
-            </li>
-            <li className="text-charcoal" aria-current="page">{s(T.h1)}</li>
-          </ol>
-        </nav>
+    <>
+      {/* Шапка городской страницы по макету (city-template.html, .page-hero):
+          тёмная полоса с хлебными крошками и H1. Прежде крошки и заголовок
+          стояли на белом внутри статьи. */}
+      <section className="bg-dark text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
+          <nav aria-label="Breadcrumb" className="text-sm text-white/70 mb-4">
+            <ol className="flex flex-wrap gap-x-2 gap-y-1">
+              <li>
+                <Link href="/" className="hover:text-white">Startseite</Link>
+                <span className="mx-2" aria-hidden="true">›</span>
+              </li>
+              <li>
+                <Link href="/leistungen/" className="hover:text-white">Leistungen</Link>
+                <span className="mx-2" aria-hidden="true">›</span>
+              </li>
+              <li className="text-white" aria-current="page">{s(T.h1)}</li>
+            </ol>
+          </nav>
+          <h1 className="font-heading text-3xl md:text-[2.875rem] font-black leading-tight max-w-[24ch]">
+            {s(T.h1)}
+          </h1>
+        </div>
+      </section>
 
-        {/* H1 */}
-        <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-6">
-          {s(T.h1)}
-        </h1>
+    <article className="py-10 md:py-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Hero image */}
         <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8 border border-sand/30">
@@ -120,7 +126,12 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
         <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
           {T.benefits.map((b) => (
             <li key={b} className="flex items-start gap-2 text-charcoal">
-              <span className="text-copper flex-shrink-0 mt-0.5" aria-hidden="true">✅</span>
+              <span className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center mt-0.5" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="m5 13 4 4L19 7" />
+                </svg>
+              </span>
               <span>{b}</span>
             </li>
           ))}
@@ -337,5 +348,6 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
         </div>
       </div>
     </article>
+    </>
   );
 }
