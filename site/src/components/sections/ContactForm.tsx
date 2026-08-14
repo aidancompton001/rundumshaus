@@ -51,18 +51,32 @@ export default function ContactForm() {
   // tablet 94 KB, desktop 190 KB via CSS media queries in globals.css.
   // Fixed mobile LCP from 39s to <3s.
   return (
-    <section className="contact-form-bg py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Form */}
-          <div>
+    <>
+      {/* Шапка страницы по макету (kontakt.html, .page-hero): тёмная полоса
+          с крошками и H1. Прежде H1 стоял внутри колонки формы. */}
+      <section className="bg-dark text-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-16">
+          <nav className="flex flex-wrap gap-1.5 text-sm text-white/70 mb-4" aria-label="Brotkrumen-Navigation">
+            <a href="/" className="hover:text-white">Startseite</a>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Kontakt</span>
+          </nav>
+          <h1 className="font-heading font-black text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-3">
+            {form.heading}
+          </h1>
+          <p className="text-white/70 max-w-[62ch] text-lg">{form.body}</p>
+        </div>
+      </section>
+
+    <section className="contact-form-bg py-14 md:py-20 relative">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Карточка формы — белая, с радиусом и тенью макета */}
+          <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-8">
             <ScrollReveal>
-              <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
-                {form.heading}
-              </h1>
-              <p className="text-charcoal-light text-lg mb-10">
-                {form.body}
-              </p>
+              <h2 className="font-heading text-[1.1875rem] font-extrabold text-ink mb-6">
+                Anfrage senden
+              </h2>
             </ScrollReveal>
 
             <AnimatePresence mode="wait">
@@ -91,7 +105,7 @@ export default function ContactForm() {
                   </p>
                   <button
                     onClick={() => setState("idle")}
-                    className="bg-gold hover:bg-gold-light text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                    className="bg-copper hover:bg-copper-dark text-white px-6 py-2 rounded-[10px] font-semibold transition-colors"
                   >
                     Erneut versuchen
                   </button>
@@ -200,7 +214,7 @@ export default function ContactForm() {
                       <button
                         type="submit"
                         disabled={state === "submitting"}
-                        className="bg-gold hover:bg-gold-light disabled:opacity-50 text-white px-8 py-3.5 rounded-xl font-semibold text-lg transition-colors w-full sm:w-auto"
+                        className="bg-copper hover:bg-copper-dark disabled:opacity-50 text-white px-8 py-3.5 rounded-[10px] font-semibold text-lg transition-colors w-full sm:w-auto"
                       >
                         {state === "submitting"
                           ? "Wird gesendet..."
@@ -215,7 +229,7 @@ export default function ContactForm() {
 
           {/* Sidebar — contact info */}
           <ScrollReveal direction="right" className="lg:pt-20">
-            <div className="bg-cream-dark/50 border border-sand/20 rounded-2xl p-8 sticky top-24">
+            <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-8 sticky top-[98px]">
               <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-6">
                 Direkt erreichen
               </h2>
@@ -264,5 +278,6 @@ export default function ContactForm() {
         </div>
       </div>
     </section>
+    </>
   );
 }
