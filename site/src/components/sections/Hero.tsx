@@ -52,7 +52,7 @@ export default function Hero() {
              «Umgebun|g» — это видно и на живом сайте прямо сейчас, дефект не новый.
              Кегль уменьшен до размера, при котором слова переносятся целиком;
              balance выравнивает строки по длине. */
-          className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-cream leading-tight mb-6 [text-wrap:balance]"
+          className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-cream leading-tight mb-6 [text-wrap:balance]"
         >
           {data.hero.heading}
         </h1>

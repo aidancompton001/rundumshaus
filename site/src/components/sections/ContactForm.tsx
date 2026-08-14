@@ -57,7 +57,7 @@ export default function ContactForm() {
           {/* Form */}
           <div>
             <ScrollReveal>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
+              <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
                 {form.heading}
               </h1>
               <p className="text-charcoal-light text-lg mb-10">
@@ -216,7 +216,7 @@ export default function ContactForm() {
           {/* Sidebar — contact info */}
           <ScrollReveal direction="right" className="lg:pt-20">
             <div className="bg-cream-dark/50 border border-sand/20 rounded-2xl p-8 sticky top-24">
-              <h2 className="font-heading text-2xl font-bold text-charcoal mb-6">
+              <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-6">
                 Direkt erreichen
               </h2>
               <div className="space-y-4">

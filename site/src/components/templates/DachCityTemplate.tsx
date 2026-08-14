@@ -92,7 +92,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
         </nav>
 
         {/* H1 */}
-        <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-6">
+        <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-6">
           {s(T.h1)}
         </h1>
 
@@ -216,7 +216,7 @@ export default function DachCityTemplate({ city, neighbors, allOtherCities }: Pr
 
         {/* Warum */}
         <section className="mb-10">
-          <SectionHeading eyebrow="Warum wir" compact className="mb-5">
+          <SectionHeading compact className="mb-5">
             {s(T.warum.heading)}
           </SectionHeading>
           <ul className="space-y-3">

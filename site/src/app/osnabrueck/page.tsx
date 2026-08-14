@@ -129,7 +129,7 @@ export default function OsnabrueckHubPage() {
           </nav>
 
           {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
             Rund ums Haus Littawe — Ihr Familienbetrieb in Osnabrück
           </h1>
           <p className="text-lg text-charcoal-light leading-relaxed mb-8">
@@ -158,7 +158,7 @@ export default function OsnabrueckHubPage() {
           {/* E-E-A-T trust block */}
           <aside className="my-10 grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-cream-dark border border-sand/30 rounded-2xl">
             <div>
-              <h2 className="font-heading text-base font-semibold text-charcoal mb-2">
+              <h2 className="font-heading text-base font-extrabold text-charcoal mb-2">
                 Standort
               </h2>
               <address className="not-italic text-sm text-charcoal-light leading-relaxed">
@@ -168,7 +168,7 @@ export default function OsnabrueckHubPage() {
               </address>
             </div>
             <div>
-              <h2 className="font-heading text-base font-semibold text-charcoal mb-2">
+              <h2 className="font-heading text-base font-extrabold text-charcoal mb-2">
                 Bewertungen
               </h2>
               <p className="text-sm text-charcoal-light">
@@ -177,7 +177,7 @@ export default function OsnabrueckHubPage() {
               </p>
             </div>
             <div>
-              <h2 className="font-heading text-base font-semibold text-charcoal mb-2">
+              <h2 className="font-heading text-base font-extrabold text-charcoal mb-2">
                 Direkt erreichbar
               </h2>
               <p className="text-sm text-charcoal-light leading-relaxed">

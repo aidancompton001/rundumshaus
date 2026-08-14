@@ -205,7 +205,7 @@ export default async function RatgeberDetail({
             {article.category}
           </span>
 
-          <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-charcoal mb-4 leading-tight">
+          <h1 className="font-heading text-3xl md:text-5xl font-black text-charcoal mb-4 leading-tight">
             {article.title}
           </h1>
 

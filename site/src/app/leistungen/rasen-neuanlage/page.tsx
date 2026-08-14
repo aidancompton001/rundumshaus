@@ -83,7 +83,7 @@ export default function RasenNeuanlagePage() {
           </nav>
 
           {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-6">
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-6">
             Rasen neu anlegen &amp; alten Rasen entfernen
           </h1>
 

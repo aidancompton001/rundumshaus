@@ -12,7 +12,7 @@ export default function ReferenzenContent() {
     <section className="py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-16">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
             {data.heading}
           </h1>
           <p className="text-charcoal-light text-lg max-w-2xl mx-auto">

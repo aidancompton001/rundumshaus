@@ -19,7 +19,7 @@ export default function ServiceDetail() {
     <section className="py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center mb-16">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
             {heading}
           </h1>
           <p className="text-charcoal-light text-lg max-w-2xl mx-auto">
@@ -60,7 +60,7 @@ export default function ServiceDetail() {
                       <Icon className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 transition-colors duration-300" />
                     );
                   })()}
-                  <h2 className="font-heading text-2xl font-bold text-charcoal group-hover:text-copper transition-colors">
+                  <h2 className="font-heading text-2xl font-extrabold text-charcoal group-hover:text-copper transition-colors">
                     {service.title}
                   </h2>
                 </div>

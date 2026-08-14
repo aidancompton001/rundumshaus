@@ -15,7 +15,7 @@ export default function WarumWir() {
     <section className="py-20 md:py-28 bg-charcoal text-cream">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="mb-14">
-          <SectionHeading eyebrow="Warum wir" onDark subheading={data.subheading}>
+          <SectionHeading onDark subheading={data.subheading}>
             {data.heading}
           </SectionHeading>
         </ScrollReveal>

@@ -21,7 +21,7 @@ export default function FamilyBusinessBlock() {
         <div className="text-center mb-10">
           <h1
             id="family-heading"
-            className="font-heading text-3xl md:text-5xl font-bold text-charcoal mb-3"
+            className="font-heading text-3xl md:text-5xl font-black text-charcoal mb-3"
           >
             Familienbetrieb Littawe
           </h1>

@@ -195,7 +195,7 @@
     {
       "id": "22",
       "asserted": true,
-      "text": "Надзаголовок нигде не дублирует заголовок клиента: тексты клиента на месте, проверка отвечает CLIENT_TEXTS_MATCH [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "text": "Тексты клиента целы после переноса: пять названий и пять описаний услуг, заголовок и подзаголовок главной, оба абзаца «Über uns», списки услуг, показатели и 70 ссылок меню и подвала сверены с источником на равенство, а не на вхождение. Проверка отвечает CLIENT_TEXTS_MATCH. Прежняя формулировка обещала «надзаголовок нигде не дублирует заголовок» — этого инструмент не проверяет (находка Ланды F-07) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
       "proof": {
         "cmd": "py verify/check_client_texts.py | tail -1",
         "expect_equal": "RESULT: CLIENT_TEXTS_MATCH"
@@ -249,10 +249,10 @@
     {
       "id": "28",
       "asserted": true,
-      "text": "Ни одна содержательная страница не выпала из общего оформления: у всех 516 страниц, кроме админки клиента и ста страниц-редиректов, подключён один и тот же лист стилей. Считаются страницы БЕЗ него — их ноль. Прежняя формулировка считала уникальные имена среди найденных и не могла провалиться вовсе (находка Ланды F-01) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "text": "Ни одна содержательная страница не выпала из общего оформления: считаются страницы БЕЗ листа стилей — их ноль. Число пропущенных закреплено, иначе страницу можно спрятать от аудита, дописав ей редирект (находка Ланды F-14): редиректов ровно 100, страниц админки ровно 1 [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
       "proof": {
-        "cmd": "CSS=$(basename $(ls site/out/_next/static/chunks/*.css | head -1)); n=0; for f in $(find site/out -name '*.html'); do case \"$f\" in */admin/*) continue;; esac; grep -qi 'http-equiv=\"refresh\"' \"$f\" && continue; grep -q \"$CSS\" \"$f\" || n=$((n+1)); done; echo $n",
-        "expect_equal": "0"
+        "cmd": "CSS=$(basename $(ls site/out/_next/static/chunks/*.css | head -1)); r=$(grep -rli 'http-equiv=\"refresh\"' site/out --include=*.html | wc -l); a=$(find site/out -path '*/admin/*' -name '*.html' | wc -l); n=0; for f in $(find site/out -name '*.html'); do case \"$f\" in */admin/*) continue;; esac; grep -qi 'http-equiv=\"refresh\"' \"$f\" && continue; grep -q \"$CSS\" \"$f\" || n=$((n+1)); done; echo \"$n $r $a\"",
+        "expect_equal": "0 100 1"
       }
     },
     {
@@ -271,6 +271,24 @@
       "proof": {
         "cmd": "for s in gartenpflege hausmeisterservice dacharbeiten entruempelung garten-landschaftsbau; do grep -o 'class=\"heading-divider\"' site/out/leistungen/$s/osnabrueck/index.html | wc -l; done | sort -u | tr -d ' '",
         "expect_equal": "3"
+      }
+    },
+    {
+      "id": "31",
+      "asserted": true,
+      "text": "Вес заголовков макета выдержан НА ЭКРАНЕ, а не в разметке: у каждого H1 вычисленный вес 900, у каждого H2 — 800, на всех 33 родах страниц. Класс в HTML доказывает намерение, вычисленный стиль — результат (находка Ланды F-13; до неё H1 был то 700, то 800, и ни разу 900) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "proof": {
+        "cmd": "py verify/check_type_weights.py site/out 2>/dev/null | tail -1",
+        "expect_equal": "RESULT: TYPE_WEIGHTS_MATCH"
+      }
+    },
+    {
+      "id": "32",
+      "asserted": true,
+      "text": "Представителем рода страниц берётся самый длинный путь, а не первый по алфавиту: дефекты немецкой вёрстки рождаются длиной слова, и `alfhausen` их не показывает, а `neuenkirchen-kreis-steinfurt` показывает (находка Ланды F-15) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "proof": {
+        "cmd": "py verify/check_type_weights.py site/out 2>/dev/null | grep -c 'neuenkirchen-kreis-steinfurt'",
+        "expect_min": 1
       }
     }
   ]

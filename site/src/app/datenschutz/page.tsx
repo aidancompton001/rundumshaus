@@ -19,7 +19,7 @@ export default function DatenschutzPage() {
   return (
     <section className="py-24 px-4">
       <div className="max-w-3xl mx-auto prose prose-charcoal">
-        <h1 className="font-heading text-4xl font-extrabold mb-8">
+        <h1 className="font-heading text-4xl font-black mb-8">
           Datenschutzerklärung
         </h1>
 

@@ -98,7 +98,7 @@ export default function ObjektpflegePage() {
           </nav>
 
           {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-6">
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-6">
             Objektpflege in Osnabrück
           </h1>
 
@@ -134,7 +134,7 @@ export default function ObjektpflegePage() {
                 key={z.title}
                 className="p-5 bg-cream-dark border border-sand/30 rounded-xl"
               >
-                <h2 className="font-heading text-lg font-semibold text-charcoal mb-1">
+                <h2 className="font-heading text-lg font-extrabold text-charcoal mb-1">
                   {z.title}
                 </h2>
                 <p className="text-sm text-charcoal-light leading-relaxed">{z.desc}</p>

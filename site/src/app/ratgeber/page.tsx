@@ -44,7 +44,7 @@ export default function RatgeberIndex() {
       />
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-charcoal mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-charcoal mb-4">
             Ratgeber
           </h1>
           <p className="text-lg text-charcoal-light mb-12 max-w-3xl">
@@ -64,7 +64,7 @@ export default function RatgeberIndex() {
                   <span className="text-xs font-medium text-copper uppercase tracking-wide mb-2">
                     {a.category}
                   </span>
-                  <h2 className="font-heading text-lg font-semibold text-charcoal mb-3 leading-tight group-hover:text-copper transition-colors">
+                  <h2 className="font-heading text-lg font-extrabold text-charcoal mb-3 leading-tight group-hover:text-copper transition-colors">
                     {a.title}
                   </h2>
                   <p className="text-sm text-charcoal-light leading-relaxed mb-4 flex-1">
