@@ -22,7 +22,7 @@ export default function SpezialthemenSection() {
   return (
     <section className="py-12 md:py-16 bg-cream-dark border-y border-sand/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-2">
+        <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-2">
           Weitere Spezialleistungen
         </h2>
         <p className="text-charcoal-light leading-relaxed mb-6">
@@ -36,7 +36,7 @@ export default function SpezialthemenSection() {
               href={s.href}
               className="p-6 bg-cream border border-sand/30 rounded-2xl hover:border-copper hover:shadow-md transition group"
             >
-              <h3 className="font-heading text-xl font-semibold text-charcoal group-hover:text-copper mb-2">
+              <h3 className="font-heading text-xl font-extrabold text-charcoal group-hover:text-copper mb-2">
                 {s.title}
               </h3>
               <p className="text-charcoal-light leading-relaxed mb-3">

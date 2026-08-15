@@ -1,33 +1,71 @@
 @import "tailwindcss";
 
-/* === RundumsHaus — Warm Bronze Palette (FINAL — from Luma Nano Banana 2) === */
+/* === RundumsHaus — палитра редизайна (T008 Ф4, макет клиента) ===
+   Значения замерены с reference.jpg и закреплены в
+   docs/design/REFERENCE_MEASUREMENTS.json; соответствие старых имён новым —
+   в docs/plans/TOKEN_MAP.md.
+
+   ПОЧЕМУ ИМЕНА ОСТАЛИСЬ ПРЕЖНИМИ. Утилиты `bg-copper`, `text-charcoal`,
+   `bg-cream` стоят в 956 местах 46 компонентов. Переименовывать их —
+   отдельная работа, к переносу дизайна не обязательная и рискованная.
+   Здесь меняется только ЗНАЧЕНИЕ, на которое указывает имя: сайт
+   перекрашивается целиком, ни один компонент не трогается. */
 
 :root {
-  --color-cream: #FFFFFF;
-  --color-cream-dark: #F0F4F8;
-  --color-charcoal: #1B3A5C;
-  --color-charcoal-light: #2D5A8C;
-  --color-copper: #4A8B3F;
-  --color-copper-light: #5AA84D;
-  --color-copper-dark: #3A7030;
-  --color-sand: #6B7B8D;
-  --color-gold: #D4A843;
-  --color-gold-light: #E0BA5A;
+  /* палитра макета — первичные имена */
+  --color-accent: #5A7F1B;
+  --color-accent-ink: #4A6B16;
+  --color-accent-hover: #4A6B16;
+  --color-dark: #10171F;
+  --color-dark-soft: #1A2230;
+  --color-paper: #F8F8F8;
+  --color-white: #FEFEFE;
+  --color-ink: #14181F;
+  --color-ink-muted: #5A6472;
+
+  /* Прежние имена получают новые значения ПРЯМЫМ hex, а не через var().
+     Причина: утилиты с прозрачностью (`from-charcoal/60`, `bg-copper/10`)
+     Tailwind резолвит в конкретный цвет на этапе сборки, и двойная косвенность
+     до них не доходит — в собранном CSS оставался прежний синий #1B3A5C
+     в градиентах. Проверено на сборке. */
+  --color-cream: #FEFEFE;
+  --color-cream-dark: #F8F8F8;
+  --color-charcoal: #10171F;
+  --color-charcoal-light: #1A2230;
+  --color-copper: #5A7F1B;
+  --color-copper-light: #4A6B16;
+  --color-copper-dark: #4A6B16;
+  --color-sand: #5A6472;
+  /* золотого в палитре редизайна нет — решение CEO: уходит в зелёный целиком,
+     включая звёзды рейтинга. В макете клиента они уже зелёные */
+  --color-gold: #5A7F1B;
+  --color-gold-light: #4A6B16;
 }
 
 @theme inline {
-  --color-cream: #FFFFFF;
-  --color-cream-dark: #F0F4F8;
-  --color-charcoal: #1B3A5C;
-  --color-charcoal-light: #2D5A8C;
-  --color-copper: #4A8B3F;
-  --color-copper-light: #5AA84D;
-  --color-copper-dark: #3A7030;
-  --color-sand: #6B7B8D;
-  --color-gold: #D4A843;
-  --color-gold-light: #E0BA5A;
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+  --color-accent: #5A7F1B;
+  --color-accent-ink: #4A6B16;
+  --color-accent-hover: #4A6B16;
+  --color-dark: #10171F;
+  --color-dark-soft: #1A2230;
+  --color-paper: #F8F8F8;
+  --color-white: #FEFEFE;
+  --color-ink: #14181F;
+  --color-ink-muted: #5A6472;
+
+  --color-cream: #FEFEFE;
+  --color-cream-dark: #F8F8F8;
+  --color-charcoal: #10171F;
+  --color-charcoal-light: #1A2230;
+  --color-copper: #5A7F1B;
+  --color-copper-light: #4A6B16;
+  --color-copper-dark: #4A6B16;
+  --color-sand: #5A6472;
+  --color-gold: #5A7F1B;
+  --color-gold-light: #4A6B16;
+  /* Макет набран одним шрифтом — Inter, и заголовки, и текст */
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-sans);
 }
 
 body {
@@ -68,7 +106,7 @@ html.lenis body {
 }
 
 .moving-border-gradient {
-  background: conic-gradient(from var(--border-angle), transparent 70%, #4A8B3F 90%, transparent 100%);
+  background: conic-gradient(from var(--border-angle), transparent 70%, #5A7F1B 90%, transparent 100%);
 }
 
 @keyframes rotating-border {
@@ -99,16 +137,20 @@ html.lenis body {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
+/* Боковой сдвиг появления — наша выдумка: в макете анимация только
+   вертикальная («Scroll-Reveal: 8–12 px Anhebung», tokens.css). Пока карточка
+   ехала вбок, она на 11 px выступала за колонку, и измеритель ловил это как
+   переполнение на странице контакта. Сдвиг переведён в вертикальный. */
 .scroll-reveal.reveal-left {
   opacity: 0;
-  transform: translateX(12px);
+  transform: translateY(12px);
   transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
 .scroll-reveal.reveal-right {
   opacity: 0;
-  transform: translateX(-12px);
+  transform: translateY(12px);
   transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
@@ -145,7 +187,7 @@ html.lenis body {
 /* === Selection === */
 
 ::selection {
-  background: #4A8B3F;
+  background: #5A7F1B;
   color: #FFFFFF;
 }
 
@@ -153,7 +195,7 @@ html.lenis body {
    Mobile loads 800w (36 KB), desktop 1200w (61 KB). Overlay keeps text contrast. */
 .hero-lamp-bg {
   background-image:
-    linear-gradient(to bottom, rgba(27, 58, 92, 0.6), rgba(27, 58, 92, 0.85)),
+    linear-gradient(to bottom, rgba(16, 23, 31, 0.6), rgba(16, 23, 31, 0.85)),
     var(--hero-img-mobile);
   background-size: cover;
   background-position: center;
@@ -161,7 +203,7 @@ html.lenis body {
 @media (min-width: 768px) {
   .hero-lamp-bg {
     background-image:
-      linear-gradient(to bottom, rgba(27, 58, 92, 0.6), rgba(27, 58, 92, 0.85)),
+      linear-gradient(to bottom, rgba(16, 23, 31, 0.6), rgba(16, 23, 31, 0.85)),
       var(--hero-img-desktop);
   }
 }
@@ -189,4 +231,55 @@ html.lenis body {
       linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.96)),
       url("/images/kontakt/contact-bg-1920w.webp");
   }
+}
+
+/* === Слой оформления макета (T008 Ф4, docs/design/v1-desktop/css/style.css) ===
+   Переносится геометрия и типографика заголовков разделов: надзаголовок
+   капителью, разделитель «линия–точка–линия», радиусы и тени карточек.
+   Цвета берутся из палитры выше, поэтому здесь ни одного нового hex. */
+
+.eyebrow {
+  display: block;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-ink);
+  margin-bottom: 0.65rem;
+}
+
+.heading-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.heading-divider::before,
+.heading-divider::after {
+  content: "";
+  display: block;
+  width: clamp(2rem, 6vw, 4rem);
+  height: 1px;
+  background: rgba(20, 24, 31, 0.14);
+}
+.heading-divider > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+/* Разделитель на тёмном фоне — линии светлые, иначе их не видно */
+.heading-divider--on-dark::before,
+.heading-divider--on-dark::after {
+  background: rgba(254, 254, 254, 0.22);
+}
+
+/* === ПЕРЕНОС ДЛИННЫХ НЕМЕЦКИХ СЛОВ ===
+   На 375 px «Datenschutzerklärung» и длинные названия услуг в H1
+   вылезали за колонку. Заголовки переносятся по слогам. */
+h1, h2, h3 {
+  overflow-wrap: break-word;
+  hyphens: auto;
 }

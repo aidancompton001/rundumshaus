@@ -90,7 +90,8 @@ import sys
 
 DEFAULT_THRESHOLD = 1e-8  # 0.000001 %
 PLACEHOLDER_MARK = "заполняется агентом"  # маркер незаполненного шаблона
-PROOF_TIMEOUT_SEC = 60
+PROOF_TIMEOUT_SEC = 2400  # самотест приёмки (15 мутаций x подвыборка сборки) идёт ~20 мин;
+                          # это терпение, а не послабление: ответ пруфа сверяется так же строго
 EXPECT_KEYS = ("expect_exit", "expect_equal", "expect_contain", "expect_min")
 
 
@@ -142,17 +143,34 @@ def run_proof(proof):
     return True, "воспроизведено"
 
 
-def check_landa(ledger_path, claim_ids):
-    """Слой внешнего ревью. Возврат: (ok: bool, msg: str)."""
-    review = os.path.join(os.path.dirname(ledger_path) or ".", "landa_review.json")
+def check_landa(ledger_path, claim_ids, task=None):
+    """Слой внешнего ревью. Возврат: (ok: bool, msg: str).
+
+    Ревью ищется по ИМЕНИ ЗАДАЧИ: landa_review_<task>.json. Прежняя версия читала
+    единственный landa_review.json и сопоставляла его с реестром только по номерам
+    утверждений — поэтому ревью задачи T008 молча засчитывалось задаче T010, у
+    которой те же номера 01…22. Ревьюер указал на это как на открытый пункт ещё
+    в T008; здесь дыра закрыта: ревью не той задачи больше не подходит.
+    """
+    d = os.path.dirname(ledger_path) or "."
+    named = os.path.join(d, "landa_review_%s.json" % task) if task else None
+    review = named if named and os.path.isfile(named) else os.path.join(d, "landa_review.json")
     if not os.path.isfile(review):
-        return False, ("требуется ревью #14 Hans Landa: файла verify/landa_review.json нет. "
-                       "Вызови субагента hans-landa и сохрани его вердикт.")
+        return False, ("требуется ревью #14 Hans Landa: файла %s нет. "
+                       "Вызови субагента hans-landa и сохрани его вердикт."
+                       % os.path.basename(named or review))
     try:
         with open(review, encoding="utf-8") as f:
             data = json.load(f)
     except json.JSONDecodeError as e:
-        return False, f"landa_review.json не парсится ({e})"
+        return False, f"{os.path.basename(review)} не парсится ({e})"
+
+    # ревью обязано называть задачу, которую покрывает
+    rt = str(data.get("task", "")).strip().lower()
+    if task and rt != str(task).strip().lower():
+        return False, ("ревью %s покрывает задачу %r, а реестр — %r. Ревью другой задачи "
+                       "не засчитывается: совпадение номеров утверждений ничего не значит."
+                       % (os.path.basename(review), rt or "(поле task отсутствует)", task))
 
     reviewed = {str(c.get("id")) for c in data.get("reviewed_claims", [])}
     missing = [i for i in claim_ids if i not in reviewed]
@@ -241,7 +259,7 @@ def main():
         sys.exit(1)
 
     if data.get("require_landa") is True:
-        ok, msg = check_landa(path, [str(c.get("id")) for c in claims])
+        ok, msg = check_landa(path, [str(c.get("id")) for c in claims], data.get("task"))
         print(f"СЛОЙ ЛАНДЫ: {msg}")
         if not ok:
             print("VERDICT: FAIL — внешнее ревью не пройдено.")

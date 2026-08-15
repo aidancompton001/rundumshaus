@@ -10,6 +10,7 @@ import templateTexts from "@/data/templates/garten-landschaftsbau.json";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
 import siteData from "@/data/site.json";
 import { WhatsAppIcon, PhoneIcon, EnvelopeIcon } from "@/components/ContactIcons";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const T = templateTexts as CityTemplateTexts;
 // PX-073 F3: contact data from site.json (Einstellungen in CMS) — was hardcoded.
@@ -25,6 +26,23 @@ const HERO = {
   w400: `${heroBase}-400w.webp`,
   fallback: T.heroImage,
 };
+
+// Галочка списка по макету (.badge-check, style.css): зелёный кружок с белой
+// галочкой. На городских стояла тонкая галочка без кружка — на главной и в
+// услугах кружки были, и стиль внутри сайта расходился.
+function CheckBadge() {
+  return (
+    <span
+      className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center mt-0.5"
+      aria-hidden="true"
+    >
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+        <path d="m5 13 4 4L19 7" />
+      </svg>
+    </span>
+  );
+}
 
 interface Props {
   city: City;
@@ -51,8 +69,8 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
   const s = (text: string) => subst(text, vars);
 
   const renderSection = (sec: { heading: string; paragraphs: string[] }) => (
-    <section className="mb-10" key={sec.heading}>
-      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-4">
+    <section className="mb-10 max-w-[76ch] mx-auto" key={sec.heading}>
+      <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
         {s(sec.heading)}
       </h2>
       {sec.paragraphs.map((p, i) => (
@@ -71,30 +89,36 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
   );
 
   return (
-    <article className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="text-sm text-charcoal-light mb-8">
-          <ol className="flex flex-wrap gap-x-2 gap-y-1">
-            <li>
-              <Link href="/" className="hover:text-copper">Startseite</Link>
-              <span className="mx-2">/</span>
-            </li>
-            <li>
-              <Link href="/leistungen/" className="hover:text-copper">Leistungen</Link>
-              <span className="mx-2">/</span>
-            </li>
-            <li className="text-charcoal" aria-current="page">{s(T.h1)}</li>
-          </ol>
-        </nav>
+    <>
+      {/* Шапка городской страницы по макету (city-template.html, .page-hero):
+          тёмная полоса с хлебными крошками и H1. Прежде крошки и заголовок
+          стояли на белом внутри статьи. */}
+      <section className="bg-dark text-white relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
+          <nav aria-label="Breadcrumb" className="text-sm text-white/70 mb-4">
+            <ol className="flex flex-wrap gap-x-2 gap-y-1">
+              <li>
+                <Link href="/" className="hover:text-white">Startseite</Link>
+                <span className="mx-2" aria-hidden="true">›</span>
+              </li>
+              <li>
+                <Link href="/leistungen/" className="hover:text-white">Leistungen</Link>
+                <span className="mx-2" aria-hidden="true">›</span>
+              </li>
+              <li className="text-white" aria-current="page">{s(T.h1)}</li>
+            </ol>
+          </nav>
+          <h1 className="font-heading text-3xl md:text-[2.875rem] font-extrabold leading-tight max-w-[24ch]">
+            {s(T.h1)}
+          </h1>
+        </div>
+      </section>
 
-        {/* H1 */}
-        <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-6">
-          {s(T.h1)}
-        </h1>
+    <article className="py-10 md:py-16">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Hero image */}
-        <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8 border border-sand/30">
+        <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8 border border-sand/30 max-w-[860px]">
           <picture>
             <source type="image/webp" media="(min-width: 1024px)" srcSet={getImageUrl(HERO.w1200)} />
             <source type="image/webp" media="(min-width: 640px)" srcSet={getImageUrl(HERO.w800)} />
@@ -112,28 +136,37 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
         </div>
 
         {/* Intro */}
-        <p className="text-lg text-charcoal-light leading-relaxed mb-5">{s(T.intro1)}</p>
-        <p className="text-base text-charcoal-light leading-relaxed mb-8">{s(T.intro2)}</p>
+        <div className="max-w-[76ch]">
+          <p className="text-lg text-charcoal-light leading-relaxed mb-5">{s(T.intro1)}</p>
+          <p className="text-base text-charcoal-light leading-relaxed mb-8">{s(T.intro2)}</p>
+        </div>
 
         {/* 5 ✅ benefits */}
-        <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[860px]">
           {T.benefits.map((b) => (
             <li key={b} className="flex items-start gap-2 text-charcoal">
-              <span className="text-copper flex-shrink-0 mt-0.5" aria-hidden="true">✅</span>
+              <CheckBadge />
               <span>{b}</span>
             </li>
           ))}
         </ul>
 
         {/* CTA block */}
-        <section className="my-10 p-6 md:p-8 bg-charcoal text-cream rounded-2xl text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-3">
+        {/* F-84: поля плашки призыва приведены к макету (.container + .cta-panel).
+            Макет: ширина min(1280px, 90vw), центр по экрану, паддинг
+            clamp(1.5rem,3vw,2.5rem). У нас плашка сидела внутри контейнера с
+            px-8, поэтому на 1440 стояла на left=112 шириной 1216 вместо 80/1280
+            — заголовок призыва уезжал на 144/1152 против 120/1200 в макете.
+            left-1/2 + -translate-x-1/2 центрируют плашку по экрану, не трогая
+            остальные блоки колонки (F-72/F-73 не задеты). */}
+        <section className="my-10 relative left-1/2 -translate-x-1/2 w-[min(1280px,90vw)] p-[clamp(1.5rem,3vw,2.5rem)] bg-charcoal text-cream rounded-2xl">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">
             {s(T.cta.heading)}
           </h2>
-          <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-cream/80 mb-6 leading-relaxed max-w-2xl">
             {s(T.cta.text)}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-w-3xl">
             <a
               href={`tel:${PHONE}`}
               className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition whitespace-nowrap"
@@ -178,21 +211,16 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
 
         {/* Leistungen list */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-4">
+          <SectionHeading eyebrow="Leistungsumfang" compact className="mb-4">
             {s(T.leistungen.heading)}
-          </h2>
-          <p className="text-base text-charcoal-light mb-5 leading-relaxed">
+          </SectionHeading>
+          <p className="text-base text-charcoal-light mb-5 leading-relaxed max-w-[76ch] mx-auto text-center">
             {s(T.leistungen.intro)}
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 max-w-[860px] mx-auto">
             {T.leistungen.items.map((item) => (
               <li key={item} className="flex items-start gap-2 text-charcoal">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
-                  strokeLinejoin="round" className="text-copper flex-shrink-0 mt-1"
-                  aria-hidden="true">
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
+                <CheckBadge />
                 <span className="text-sm">{item}</span>
               </li>
             ))}
@@ -213,18 +241,18 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
 
         {/* Warum */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-5">
+          <SectionHeading eyebrow="Ihre Vorteile" compact className="mb-5">
             {s(T.warum.heading)}
-          </h2>
-          <ul className="space-y-3">
+          </SectionHeading>
+          <ul className="space-y-3 max-w-[860px] mx-auto">
             {T.warum.items.map((u) => (
               <li key={u} className="flex items-start gap-3 text-charcoal">
-                <span className="text-copper font-bold flex-shrink-0" aria-hidden="true">✓</span>
+                <CheckBadge />
                 <span>{u}</span>
               </li>
             ))}
             <li className="flex items-start gap-3 text-charcoal">
-              <span className="text-copper font-bold flex-shrink-0" aria-hidden="true">✓</span>
+              <CheckBadge />
               <span>{s(T.warum.cityLine)}</span>
             </li>
           </ul>
@@ -233,8 +261,8 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
         <hr className="my-10 border-sand/30" />
 
         {/* Einsatzgebiet */}
-        <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-4">
+        <section className="mb-10 max-w-[76ch] mx-auto">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
             {s(T.einsatzgebiet.heading)}
           </h2>
           <p className="text-base text-charcoal-light leading-relaxed">
@@ -246,10 +274,10 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
 
         {/* FAQ */}
         <section className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <SectionHeading eyebrow="FAQ" compact className="mb-6">
             {s(T.faq.heading)}
-          </h2>
-          <div className="space-y-3">
+          </SectionHeading>
+          <div className="space-y-3 max-w-[860px] mx-auto">
             {T.faq.items.map((f, i) => (
               <details
                 key={i}
@@ -269,7 +297,7 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
 
         {/* Weitere Leistungen */}
         <section className="mb-10">
-          <h3 className="font-heading text-xl font-semibold text-charcoal mb-4">
+          <h3 className="font-heading text-xl font-extrabold text-charcoal mb-4">
             {s(T.weitereLeistungen.heading)}
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -288,7 +316,7 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
         {/* Weitere Einsatzorte — 30 visible + expandable */}
         {safeNeighbors.length > 0 && (
           <section className="mb-10">
-            <h3 className="font-heading text-xl font-semibold text-charcoal mb-4">
+            <h3 className="font-heading text-xl font-extrabold text-charcoal mb-4">
               {s(T.einsatzorte.heading)}
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -336,5 +364,6 @@ export default function GalabauCityTemplate({ city, neighbors, allOtherCities }:
         </div>
       </div>
     </article>
+    </>
   );
 }

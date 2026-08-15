@@ -38,7 +38,10 @@ export interface HeroData {
 }
 
 export interface AboutData {
+  /** F-69: строка клиента — идёт надзаголовком раздела (span.eyebrow), как в макете */
   heading: string;
+  /** F-69: заголовок раздела из макета (index.html, `homepage.about.title`) */
+  headline: string;
   body: string;
   body2?: string;
   image: string;
@@ -82,12 +85,23 @@ export interface Service {
   subPage?: { href: string; label: string };
 }
 
+export interface ServicesData {
+  /** F-69: строка клиента — идёт надзаголовком раздела (span.eyebrow), как в макете */
+  heading: string;
+  /** F-69: заголовок раздела из макета (index.html, `homepage.services.title`) */
+  headline: string;
+  subheading: string;
+  services: Service[];
+}
+
 /* ── Contact Form ── */
 
 export interface ContactFormField {
   name: string;
   label: string;
-  type: "text" | "email" | "tel" | "textarea" | "checkbox";
+  type: "text" | "email" | "tel" | "textarea" | "checkbox" | "select";
+  /** Для select: варианты берутся из названий услуг клиента, плюс «Sonstiges» — сочинять список нельзя */
+  optionsFrom?: "services";
   required: boolean;
   placeholder?: string;
 }

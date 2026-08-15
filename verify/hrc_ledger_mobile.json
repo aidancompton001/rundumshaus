@@ -1,0 +1,253 @@
+{
+ "task": "T008 — мобильный лейаут и токены мокапа (Landa CONFIRMED-ALL раунд 7 + дельты 1-3)",
+ "threshold": 1e-08,
+ "require_landa": true,
+ "claims": [
+  {
+   "id": "01",
+   "asserted": true,
+   "text": "Лейаут чист на 16 ширинах из брейкпоинтов CSS × 9 страниц = 144 проверки, УЖЕСТОЧЁННЫМ инструментом (после закрытия 6 лазеек он сразу нашёл ещё 30 случаев на 320/769/820/821 — все починены)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && /c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 320 375 414 560 561 768 769 820 821 900 901 1000 1001 1100 1101 1440 > /tmp/l_a01.txt 2>&1; echo \"$(tail -1 /tmp/l_a01.txt) | $(grep -c 'viewport=' /tmp/l_a01.txt)\"",
+    "expect_equal": "RESULT: LAYOUT_CLEAN | 144"
+   }
+  },
+  {
+   "id": "02",
+   "asserted": true,
+   "text": "ИСПРАВЛЕН ЖИВОЙ ДЕФЕКТ, найденный Landa строгим сканом на 901-999: .check-list--2col держал bare '1fr 1fr', LI «Keller- & Dachbodenräumung» вылезал из своей колонки на 35px. Мой инструмент проверял 901 и называл чистым",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && /c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 901 950 999 > /tmp/l_a02.txt 2>&1; echo \"$(tail -1 /tmp/l_a02.txt) | $(grep -c 'viewport=' /tmp/l_a02.txt)\"",
+    "expect_equal": "RESULT: LAYOUT_CLEAN | 27"
+   }
+  },
+  {
+   "id": "03",
+   "asserted": true,
+   "text": "АУДИТ ВСЕГО ФАЙЛА, а не одной строки (Landa: «аудит был по строке, а не по болезни»): все 10 многоколоночных bare-fr переведены на minmax(0,1fr), осталось 0",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && grep -E 'grid-template-columns:' docs/design/v1-desktop/css/style.css | grep -vE 'minmax\\(0|: 1fr;|none' | wc -l | tr -d ' '",
+    "expect_equal": "0"
+   }
+  },
+  {
+   "id": "04",
+   "asserted": true,
+   "text": "САМОТЕСТ 23/23, причём негативные случаи теперь обязаны молчать в ОБОИХ каналах — и дефектов, и предупреждений (Landa раунд 6: прежняя версия смотрела только дефекты и удостоверяла молчание, которого не было). Ужесточение сразу поймало неточность SILENT_CLIP",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py verify/selftest_layout_checker.py | tail -1",
+    "expect_equal": "SELFTEST: PASS (23/23 случаев)"
+   }
+  },
+  {
+   "id": "05",
+   "asserted": true,
+   "text": "ЗАКРЫТА ЛАЗЕЙКА TEXT_OVF, которая скрывала дефект на 901: фильтр по листовым элементам снят, переполнение текстом ищется и в ul>li, p>strong; добавлен порог шума 8px",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=verify/check_layout_mobile.py; a=$(grep -c 'el.children.length' $f; true); b=$(grep -c 'NOISE = 8' $f); echo \"$a $b\"",
+    "expect_equal": "0 1"
+   }
+  },
+  {
+   "id": "06",
+   "asserted": true,
+   "text": "ЗАКРЫТА ЛАЗЕЙКА СЛАЙДЕРА: overflow-y:auto делал «слайдером» любую вертикальную панель. Карусель определяется по scroll-snap-type — объективному признаку намеренного паттерна, который есть у реального .reviews-grid проекта",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'scrollSnapType' verify/check_layout_mobile.py); b=$(grep -c 'scroll-snap-type: x mandatory' docs/design/v1-desktop/css/style.css); echo \"$a $b\"",
+    "expect_equal": "1 1"
+   }
+  },
+  {
+   "id": "07",
+   "asserted": true,
+   "text": "ЗАКРЫТЫ ЛАЗЕЙКИ ДЕКОРА И FIXED: aria-hidden и pointer-events больше не освобождают поддерево, контент под fixed-клиппером проверяется, левый вылет отсекается поведенчески (за краем + фокусируемый = skip-ссылка), а не магическим порогом -2000. Признак содержательности см. claim 21",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=verify/check_layout_mobile.py; a=$(grep -c 'hasText(el)' $f); b=$(grep -c 'isFocusable' $f); c=$(grep -c 'r.left > -2000' $f; true); echo \"$a $b $c\"",
+    "expect_equal": "0 2 0"
+   }
+  },
+  {
+   "id": "08",
+   "asserted": true,
+   "text": "ТОКЕНЫ: проверяются ВСЕ 9 измеренных зон цвета и ВСЕ 9 кеглей (Landa раунд 5: прежняя версия брала 4 зоны из 9, и непроверенными оставались ровно расходящиеся — .about #F8F8F8 против измеренной #F0F0F0 и футер #10171F против #11181F). Три упрощения палитры (плоский фон Über-uns, единый --color-dark для футера и stats, hero без токена фона) и одно отклонение кегля объявлены с величиной и ВИДНЫ в отчёте",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && out=$(py verify/check_tokens_match.py); a=$(echo \"$out\" | tail -1); z=$(echo \"$out\" | sed -n '/ЦВЕТА/,/ТИПОГРАФИКА/p' | grep -c ' vs '); t=$(echo \"$out\" | sed -n '/ТИПОГРАФИКА/,$p' | grep -c ' vs '); echo \"$a | $z $t\"",
+    "expect_equal": "RESULT: TOKENS_MATCH | 9 9"
+   }
+  },
+  {
+   "id": "09",
+   "asserted": true,
+   "text": "Пруф токенов ФАЛЬСИФИЦИРУЕМ по каждому классу: 7 мутаций (2 цвета, 2 кегля, кегль с заявленным отклонением, ПРАВКА САМОГО ЭТАЛОНА замеров, ПОДДЕЛКА КОНСТАНТЫ привязки к git) — все ловятся. Мутации над копией во временном каталоге, исходник проверяется на неизменность",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && py verify/selftest_tokens_match.py | tail -1",
+    "expect_equal": "SELFTEST_TOKENS: PASS (7/7 мутаций)"
+   }
+  },
+  {
+   "id": "10",
+   "asserted": true,
+   "text": "Sticky-шапка работает, и прогон ДЕЙСТВИТЕЛЬНО состоялся (положительное подтверждение вместо «grep; true», которое зеленело при несостоявшемся прогоне)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && /c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 375 821 1101 > /tmp/l_a10.txt 2>&1; echo \"$(grep -c 'STICKY_BROKEN' /tmp/l_a10.txt) $(grep -c 'viewport=' /tmp/l_a10.txt)\"",
+    "expect_equal": "0 27"
+   }
+  },
+  {
+   "id": "11",
+   "asserted": true,
+   "text": "Битых картинок нет, прогон состоялся",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && /c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 375 821 1101 > /tmp/l_a11.txt 2>&1; echo \"$(grep -c 'BROKEN_IMG' /tmp/l_a11.txt) $(grep -c 'viewport=' /tmp/l_a11.txt)\"",
+    "expect_equal": "0 27"
+   }
+  },
+  {
+   "id": "12",
+   "asserted": true,
+   "text": "Ложных CLOSED_NAV_TABBABLE нет; проверка tab-порядка идёт по ВСЕМ 9 страницам (условие index.html убрано), порог привязан к CSS-брейкпоинту 820",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(grep -c 'OFFCANVAS_BP = 820' verify/check_layout_mobile.py); /c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 821 900 > /tmp/tb4.txt 2>&1; b=$(grep -c CLOSED_NAV_TABBABLE /tmp/tb4.txt); c=$(grep -c 'viewport=' /tmp/tb4.txt); echo \"$a $b $c\"",
+    "expect_equal": "1 0 18"
+   }
+  },
+  {
+   "id": "13",
+   "asserted": true,
+   "text": "Пять инструментов (чекер лейаута, его самотест, чекер токенов, его мутационный самотест) закоммичены и запушены; HEAD ветки = b38af30, untracked в verify/ — ноль, без фильтров в пруфе",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(git ls-files verify/check_layout_mobile.py verify/selftest_layout_checker.py verify/check_tokens_match.py verify/selftest_tokens_match.py verify/check_meas_pinned.py | wc -l | tr -d ' '); b=$(git status --porcelain verify/ | wc -l | tr -d ' '); c=$(git rev-parse --short HEAD); d=$(git branch -r --contains HEAD | grep -c 'origin/redesign/modern-2026'); echo \"$a $b $c $d\"",
+    "expect_equal": "5 0 b38af30 1"
+   }
+  },
+  {
+   "id": "14",
+   "asserted": true,
+   "text": "Перф-правка (один page на прогон, wait 400→120ms) не повлияла на вердикт: порядок ширин результат не меняет",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(/c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 375 1440 2>&1 | tail -1); b=$(/c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 1440 375 2>&1 | tail -1); test \"$a\" = \"$b\" && echo \"SAME: $a\"",
+    "expect_equal": "SAME: RESULT: LAYOUT_CLEAN"
+   }
+  },
+  {
+   "id": "15",
+   "asserted": false,
+   "text": "Кросс-проектная зависимость: инструменты запускаются интерпретатором venv проекта HausBot",
+   "note": "Landa, 3-й раунд. Не решено: путь зашит в 3 скриптах и в пруфах. Для CI и второго свидетеля это отложенная версия проблемы untracked-файла. Свой venv в RundumsHaus — отдельная задача."
+  },
+  {
+   "id": "16",
+   "asserted": false,
+   "text": "Скрипт вывода ширин из брейкпоинтов CSS не закоммичен",
+   "note": "Landa: парсера ширин в репозитории нет, пруфы передают 16 чисел жёстко. Уточнение раунда 5: verify/_widths.txt уже ЗАКОММИЧЕН (не untracked, как говорилось раньше). При добавлении брейкпоинта список молча устареет — парсер надо закоммитить."
+  },
+  {
+   "id": "17",
+   "asserted": false,
+   "text": "Открытое состояние off-canvas меню (focus-trap, Esc, возврат фокуса) машинно не проверяется",
+   "note": "Landa проверял руками в раунде 1 (12 tabbable, панель во вьюпорте). Закрытое состояние покрыто на всех 9 страницах, открытое — нет."
+  },
+  {
+   "id": "18",
+   "asserted": false,
+   "text": "Самотест кодирует тесты последнего ревьюера — это регрессионный тест, а не доказательство фальсифицируемости",
+   "note": "Формулировка Landa, принимаю дословно. Раунд 5 её подтвердил немедленно: он принёс 6 новых случаев, 4 прошли мимо. Все внесены в матрицу — теперь 18/18, и это снова значит «этими восемнадцатью больше не обманешь»."
+  },
+  {
+   "id": "19",
+   "asserted": false,
+   "text": "Дыра hrc.py: вердикт сверяется с реестром только по номерам claim'ов",
+   "note": "Landa, 3-й раунд подряд. Пока правки нет, зелёный «СЛОЙ ЛАНДЫ» в этом репозитории доказательством ревью не является. Правка hrc.py в MainCore — вне скоупа T008."
+  },
+  {
+   "id": "20",
+   "asserted": true,
+   "text": "ЗАКРЫТА ЛАЗЕЙКА, ВНЕСЁННАЯ МОИМ ЖЕ ФИКСОМ раунда 4: clip-path освобождал от всех проверок любой элемент, хотя это массовая декоративная техника. Теперь признаком sr-only считается только сочетание clip/clip-path с крошечным боксом",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=verify/check_layout_mobile.py; a=$(grep -c 'clipped && r.width <= 4' $f); b=$(grep -c \"cs.clipPath !== 'none' || cs.clip !== 'auto') return true\" $f; true); echo \"$a $b\"",
+    "expect_equal": "1 0"
+   }
+  },
+  {
+   "id": "21",
+   "asserted": true,
+   "text": "ЗАКРЫТА ЛАЗЕЙКА «декор = отсутствие текста»: по ней декоративной становилась любая КАРТИНКА, а обрезанное фото Vorher/Nachher — та же потеря контента. Теперь img/picture/video/canvas/iframe и background-image считаются содержательными. Гарантия сохраняется и под клиппером с объявленным ellipsis: понижение до предупреждения работает только для строчных элементов (Landa дельта-2)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=verify/check_layout_mobile.py; a=$(grep -c 'hasContent' $f); b=$(grep -c 'MEDIA = new Set' $f); c=$(grep -c 'hasText(el)' $f; true); echo \"$a $b $c\"",
+    "expect_equal": "2 1 0"
+   }
+  },
+  {
+   "id": "22",
+   "asserted": true,
+   "text": "Канал предупреждений отделён от дефектов И ОЧИЩЕН ОТ ЛОЖНЫХ (Landa раунд 6: он родился со 100% ложных — 12 из 12 про легитимную карусель, потому что второй проход не знал про isSlider; плюс SILENT_CLIP ловил контейнеры с широким декором внутри). Теперь пропускаются слайдеры и проверяется только СОБСТВЕННЫЙ текст элемента",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=verify/check_layout_mobile.py; a=$(grep -c 'SILENT_CLIP' $f); b=$(grep -c 'if (isSlider(el)) return' $f); c=$(grep -c 'ownText' $f); echo \"$a $b $c\"",
+    "expect_equal": "1 1 2"
+   }
+  },
+  {
+   "id": "24",
+   "asserted": false,
+   "text": "Признак карусели (scroll-snap-type) самопровозглашаем: одна строка в проверяемом CSS снимает проверку с поддерева",
+   "note": "Landa, раунд 5: «проверяющий не должен принимать освобождение из рук проверяемого». Сегодня scroll-snap стоит только у настоящей .reviews-grid, эксплуатации нет. Признаю концептуальную слабость, не заявляю решённой. Landa раунд 7: 'if (isSlider(el)) return' во втором проходе расширил освобождение — элемент со scroll-snap молчит и о собственном обрезанном тексте."
+  },
+  {
+   "id": "25",
+   "asserted": false,
+   "text": "Пруф токенов сверяет ТЕКСТ tokens.css, а не то, что рисует браузер",
+   "note": "Landa: TOKENS_MATCH останется зелёным, если style.css перестанет ссылаться на токен или захардкодит цвет мимо него. Он проверил инвариант сам: висячих var() нет (56 объявлено, 51 использован), хардкод-хексов вне tokens.css два — #B3261E (цвет ошибки формы) и фирменные цвета Google в SVG-логотипе. Проверки этого инварианта в тулките нет."
+  },
+  {
+   "id": "26",
+   "asserted": false,
+   "text": "Число «30 случаев, найденных ужесточённым инструментом» — до-состояние, машинно не подтверждаемое",
+   "note": "Landa: тот же жанр, что отозванные «412px» и «битость SVG из git». Вывод прогона до фикса не сохранён, claim 01 доказывает только конечное состояние. Фактом не заявляю."
+  },
+  {
+   "id": "27",
+   "asserted": false,
+   "text": "Готовность мокапа как таковая (полнота страниц против ТЗ, структура против макета, наши тексты и реальные отзывы)",
+   "note": "Landa, 5-й раунд: токены теперь покрыты, но «дизайн готов кроме фото» по-прежнему не имеет ни одного claim'а. Это предмет отдельной приёмки Ф3 (реестр verify/hrc_ledger_acceptance.json: 9 claims, 7 asserted, require_landa=false), а не этого реестра про лейаут. Здесь не заявляю."
+  },
+  {
+   "id": "28",
+   "asserted": true,
+   "text": "ЭТАЛОННЫЕ ЗАМЕРЫ ЗАКРЕПЛЕНЫ ХЕШЕМ ПО НОРМАЛИЗОВАННОМУ СОДЕРЖИМОМУ, и константа в чекере сверяется с sha256 СОДЕРЖИМОГО GIT-БЛОБА (Landa раунд 7: прошлый пруф содержал мёртвую переменную git hash-object — она даёт SHA1 и не сошлась бы никогда — и циркулярный grep константы самой с собой). Якорь — полный хеш коммита самих замеров 418ddd2b09b0, а не движущийся HEAD",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && a=$(py verify/check_tokens_match.py | grep -cE 'MEASUREMENTS.json.*OK|TYPOGRAPHY.json.*OK'); b=$(py verify/check_meas_pinned.py | tail -1); echo \"$a | $b\"",
+    "expect_equal": "2 | RESULT: PINNED_TO_GIT"
+   }
+  },
+  {
+   "id": "29",
+   "asserted": false,
+   "text": "Приёмка мокапа (реестр verify/hrc_ledger_acceptance.json) прошла БЕЗ внешнего ревью",
+   "note": "Landa раунд 5, точная поправка: там 9 claims (7 asserted), а не 7, и require_landa=false — то есть единственный вопрос, реально интересующий CEO, самозасчитан. Ссылаться на него как на закрытый нельзя. Требует отдельного раунда Ланды по приёмке мокапа."
+  },
+  {
+   "id": "30",
+   "asserted": false,
+   "text": "Контент внутри признанной карусели и обрезка фоном-цветом не ловятся",
+   "note": "Landa раунд 5: блок с текстом внутри обёртки со scroll-snap-type проходит мимо (следствие гипотезы 24); hasContent считает содержательным background-image, но не background-color; Landa раунд 6 уточнил: такая полоса теперь не молчит совсем, а даёт предупреждение SILENT_CLIP. Живой экспозиции нет ни у одного."
+  },
+  {
+   "id": "31",
+   "asserted": true,
+   "text": "Ноль ложных предупреждений на реальном прогоне: было 12 из 12 ложных (все про карусель), стало 0 при тех же 144 проверках",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && /c/Projects/HausBot/backend/.venv/Scripts/python.exe verify/check_layout_mobile.py docs/design/v1-desktop 320 375 414 560 561 768 769 820 821 900 901 1000 1001 1100 1101 1440 > /tmp/w7.txt 2>&1; a=$(grep -c 'предупр' /tmp/w7.txt); b=$(grep -c 'viewport=' /tmp/w7.txt); echo \"$a $b\"",
+    "expect_equal": "0 144"
+   }
+  },
+  {
+   "id": "32",
+   "asserted": true,
+   "text": "ЕДИНАЯ МОДЕЛЬ ОБРЕЗКИ, СУЖЕННАЯ ДО ТЕКСТА (Landa дельта-2: механизм был шире принципа и молча ослаблял claim 21 — под клиппером с text-overflow в предупреждения уходило ЛЮБОЕ переполнение, включая блочное и медийное, хотя это свойство на обёртке с блочными детьми визуально не делает ничего). Понижение только для элементов строчного уровня; блочные элементы, медиа и inline-block остаются дефектами — понижение только для собственно текста (display inline/contents, без замещаемых элементов внутри)",
+   "proof": {
+    "cmd": "cd .worktrees/redesign && f=verify/check_layout_mobile.py; a=$(grep -c 'isTextInline' $f); b=$(py verify/selftest_layout_checker.py | tail -1); echo \"$a | $b\"",
+    "expect_equal": "2 | SELFTEST: PASS (23/23 случаев)"
+   }
+  }
+ ]
+}

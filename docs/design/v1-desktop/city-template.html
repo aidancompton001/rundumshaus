@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ============================================================
+       PROGRAMMSEITEN-TEMPLATE „Leistung + Stadt“ (490 Seiten: 5 × 98)
+       Literalplatzhalter: {{Leistung}}, {{Stadt}}, {{Leistung-slug}}, {{Stadt-slug}},
+       {{Ort_1}}…{{Ort_30}}. Beim Port ersetzt der Generator alle {{…}}-Stellen.
+       ============================================================ -->
+  <title>{{Leistung}} in {{Stadt}} – Rund ums Haus Littawe</title>
+  <meta name="description" content="{{Leistung}} in {{Stadt}}: zuverlässig, schnell und preiswert. Rund ums Haus Littawe – Ihr Partner aus der Region. Jetzt kostenlos anfragen.">
+  <link rel="canonical" href="https://rundumshaus-littawe.de/{{Leistung-slug}}/{{Stadt-slug}}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="{{Leistung}} in {{Stadt}} – Rund ums Haus Littawe">
+  <meta property="og:description" content="{{Leistung}} in {{Stadt}} und Umgebung – zuverlässig, schnell und preiswert.">
+  <meta property="og:url" content="https://rundumshaus-littawe.de/{{Leistung-slug}}/{{Stadt-slug}}">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://rundumshaus-littawe.de/" },
+          { "@type": "ListItem", "position": 2, "name": "{{Leistung}}", "item": "https://rundumshaus-littawe.de/{{Leistung-slug}}" },
+          { "@type": "ListItem", "position": 3, "name": "{{Stadt}}", "item": "https://rundumshaus-littawe.de/{{Leistung-slug}}/{{Stadt-slug}}" }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": "{{Leistung}} in {{Stadt}}",
+        "serviceType": "{{Leistung}}",
+        "areaServed": { "@type": "City", "name": "{{Stadt}}" },
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Rund ums Haus Littawe",
+          "telephone": "+4915239603175",
+          "email": "kontakt@rundumshaus-littawe.de",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Bramscher Str. 161",
+            "postalCode": "49090",
+            "addressLocality": "Osnabrück",
+            "addressCountry": "DE"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Was kostet {{Leistung}} in {{Stadt}}?", "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_Antwort_1}}" } },
+          { "@type": "Question", "name": "Wie schnell bekomme ich einen Termin in {{Stadt}}?", "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_Antwort_2}}" } },
+          { "@type": "Question", "name": "Arbeiten Sie auch für Vermieter und Hausverwaltungen?", "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_Antwort_3}}" } },
+          { "@type": "Question", "name": "Gibt es eine kostenlose Besichtigung vor Ort?", "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_Antwort_4}}" } },
+          { "@type": "Question", "name": "Welche Orte rund um {{Stadt}} decken Sie ab?", "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_Antwort_5}}" } },
+          { "@type": "Question", "name": "Wie läuft eine Anfrage ab?", "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_Antwort_6}}" } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<!-- WIEDERHOLT AUF ALLEN 490 SEITEN: Header identisch (statisch) -->
+<header class="site-header" data-component="Navbar">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="Rund ums Haus Littawe – Startseite">
+      <img src="assets/logo/logo-client.webp" alt="Rund ums Haus Littawe" width="117" height="66">
+    </a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <button class="nav-close" type="button" aria-label="Menü schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="24" height="24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <ul>
+        <li><a href="index.html">Startseite</a></li>
+        <li class="nav-dropdown">
+          <button type="button" aria-expanded="false" aria-haspopup="true">
+            Leistungen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="leistungen.html#galabau">Garten- und Landschaftsbau</a>
+            <a href="leistungen.html#gartenpflege">Gärtner &amp; Gartenpflege</a>
+            <a href="leistungen.html#entruempelung">Entrümpelung &amp;&nbsp;Haushaltsauflösung</a>
+            <a href="leistungen.html#hausmeisterservice">Hausmeisterservice, Objektpflege &amp; Grundstückspflege</a>
+            <a href="leistungen.html#dachservice">Dachservice &amp; Dachpflege</a>
+          </div>
+        </li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="referenzen.html">Referenzen</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="nav-overlay" hidden></div>
+    <a class="btn btn--primary btn--two-line btn--whatsapp" data-wa href="https://wa.me/4915239603175" rel="noopener">
+      <span class="btn-icon-circle" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.8-5.1c-.6-1-1-2.2-.9-3 0-.6.4-1.3.8-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7a9.6 9.6 0 0 0 3.8 3.4c.3.1.5.1.7-.1l.7-.8c.2-.3.4-.3.7-.2l1.9.9c.3.2.5.3.5.4 0 .2 0 .6-.2.9Z"/></svg>
+      </span>
+      <span class="btn-lines"><strong>+49 1523 9603175</strong><small>Jetzt per WhatsApp</small></span>
+    </a>
+    <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- PRO SEITE GENERIERT: Breadcrumb + H1 + Hero-Foto -->
+<section class="page-hero" data-component="Hero">
+  <div class="hero-media" aria-hidden="true">
+    <img src="assets/img/ph-generic.svg" alt="" width="1440" height="480" loading="eager" fetchpriority="high" style="opacity:.25;">
+  </div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Brotkrumen-Navigation">
+      <ul style="display:contents;">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="leistungen.html">{{Leistung}}</a></li>
+        <li aria-current="page">{{Stadt}}</li>
+      </ul>
+    </nav>
+    <h1 data-cms="cityPage.h1">{{Leistung}} in {{Stadt}}</h1>
+    <p data-cms="cityPage.heroText">Ihr zuverlässiger Partner für {{Leistung}} in {{Stadt}} und Umgebung – schnell, preiswert und persönlich.</p>
+  </div>
+</section>
+
+<!-- PRO SEITE GENERIERT: Intro (2 Absätze) + 5 Vorteile -->
+<section class="section" data-component="CityIntro">
+  <div class="container">
+    <div class="prose reveal">
+      <p data-cms="cityPage.intro1">{{Intro_Absatz_1: Leistung + Stadt, Nutzenversprechen, lokaler Bezug}}</p>
+      <p data-cms="cityPage.intro2">{{Intro_Absatz_2: Arbeitsweise, Erreichbarkeit, faire Preise}}</p>
+    </div>
+    <ul class="check-list reveal" style="margin-top:1.5rem;" data-cms="cityPage.benefits">
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Kostenlose &amp;&nbsp;unverbindliche Anfrage</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Kurzfristige Termine in {{Stadt}} möglich</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Faire, transparente Preise</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Saubere &amp;&nbsp;zuverlässige Ausführung</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Ein Ansprechpartner für alles rund ums Haus</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WIEDERHOLT (nur {{Stadt}} variiert): CTA-Block mit 4 Kanälen -->
+<section class="section section--flush-top" data-component="CityCTA">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <h2 data-cms="cityPage.cta.title">Jetzt {{Leistung}} in {{Stadt}} anfragen</h2>
+      <p data-cms="cityPage.cta.text">Beschreiben Sie kurz Ihr Anliegen – wir melden uns schnellstmöglich zurück.</p>
+      <div class="cta-buttons">
+        <a class="btn btn--primary" href="tel:+4915239603175">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+          Anrufen</a>
+        <a class="btn btn--outline-dark" href="mailto:kontakt@rundumshaus-littawe.de">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          E-Mail</a>
+        <a class="btn btn--outline-dark" data-wa href="https://wa.me/4915239603175" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.8-5.1c-.6-1-1-2.2-.9-3 0-.6.4-1.3.8-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7a9.6 9.6 0 0 0 3.8 3.4c.3.1.5.1.7-.1l.7-.8c.2-.3.4-.3.7-.2l1.9.9c.3.2.5.3.5.4 0 .2 0 .6-.2.9Z"/></svg>
+          WhatsApp</a>
+        <a class="btn btn--outline-dark" href="kontakt.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M4 4h16v13H8l-4 4V4Z"/></svg>
+          Formular</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRO SEITE GENERIERT: 2 Textsektionen -->
+<section class="section section--flush-top" data-component="CityText">
+  <div class="container prose reveal">
+    <h2 data-cms="cityPage.section1.title">{{Textsektion_1_Titel: z. B. „Warum {{Leistung}} in {{Stadt}} regelmäßig wichtig ist“}}</h2>
+    <p data-cms="cityPage.section1.text">{{Textsektion_1_Inhalt}}</p>
+    <h2 data-cms="cityPage.section2.title">{{Textsektion_2_Titel: z. B. „So arbeiten wir in {{Stadt}}“}}</h2>
+    <p data-cms="cityPage.section2.text">{{Textsektion_2_Inhalt}}</p>
+  </div>
+</section>
+
+<!-- WIEDERHOLT (pro Leistung fix): Unterleistungen, 2 Spalten -->
+<section class="section section--flush-top" data-component="CityServices">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">Unsere Leistungen</span>
+      <h2 data-cms="cityPage.services.title">{{Leistung}} in {{Stadt}} – unsere Leistungen im Detail</h2>
+      <div class="heading-divider" aria-hidden="true"><i></i></div>
+    </div>
+    <ul class="check-list check-list--2col reveal" style="max-width:860px;margin-inline:auto;" data-cms="cityPage.services.items">
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>{{Unterleistung_1}}</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>{{Unterleistung_2}}</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>{{Unterleistung_3}}</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>{{Unterleistung_4}}</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>{{Unterleistung_5}}</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>{{Unterleistung_6}}</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRO SEITE GENERIERT: 2 weitere Textsektionen -->
+<section class="section section--flush-top" data-component="CityText">
+  <div class="container prose reveal">
+    <h2 data-cms="cityPage.section3.title">{{Textsektion_3_Titel}}</h2>
+    <p data-cms="cityPage.section3.text">{{Textsektion_3_Inhalt}}</p>
+    <h2 data-cms="cityPage.section4.title">{{Textsektion_4_Titel}}</h2>
+    <p data-cms="cityPage.section4.text">{{Textsektion_4_Inhalt}}</p>
+  </div>
+</section>
+
+<!-- WIEDERHOLT (statisch): Warum wir — 8 Checks -->
+<section class="section section--flush-top" data-component="CityWhyUs">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">Warum wir</span>
+      <h2>Darum Rund ums Haus Littawe</h2>
+      <div class="heading-divider" aria-hidden="true"><i></i></div>
+    </div>
+    <ul class="check-list check-list--2col reveal" style="max-width:860px;margin-inline:auto;" data-cms="cityPage.whyUs">
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Alles aus einer Hand</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Faire &amp;&nbsp;transparente Preise</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Kurzfristige Termine möglich</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Persönlicher Ansprechpartner</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Saubere, dokumentierte Arbeit</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Auch für Vermieter &amp;&nbsp;Hausverwaltungen</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Regional verwurzelt in Osnabrück</li>
+      <li><span class="badge-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>Zuverlässig, schnell &amp;&nbsp;preiswert</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WIEDERHOLT (statisch): Einsatzgebiet -->
+<section class="section section--flush-top" data-component="CityArea">
+  <div class="container prose reveal">
+    <h2 data-cms="cityPage.area.title">Unser Einsatzgebiet</h2>
+    <p data-cms="cityPage.area.text">Wir sind im Umkreis von 60 km rund um Osnabrück für Sie unterwegs – von {{Stadt}} bis in die umliegenden Gemeinden. Kurze Wege bedeuten schnelle Termine und faire Anfahrtskosten.</p>
+  </div>
+</section>
+
+<!-- PRO SEITE GENERIERT (Antworten variieren): FAQ, 6 Fragen -->
+<section class="section section--flush-top" data-component="CityFAQ" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 id="faq-title" data-cms="cityPage.faq.title">Häufige Fragen zu {{Leistung}} in {{Stadt}}</h2>
+      <div class="heading-divider" aria-hidden="true"><i></i></div>
+    </div>
+    <div class="faq reveal">
+      <div class="faq-item">
+        <button type="button" aria-expanded="false">Was kostet {{Leistung}} in {{Stadt}}?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel"><p data-cms="cityPage.faq[0].answer">{{FAQ_Antwort_1}}</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" aria-expanded="false">Wie schnell bekomme ich einen Termin in {{Stadt}}?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel"><p data-cms="cityPage.faq[1].answer">{{FAQ_Antwort_2}}</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" aria-expanded="false">Arbeiten Sie auch für Vermieter und Hausverwaltungen?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel"><p data-cms="cityPage.faq[2].answer">{{FAQ_Antwort_3}}</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" aria-expanded="false">Gibt es eine kostenlose Besichtigung vor Ort?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel"><p data-cms="cityPage.faq[3].answer">{{FAQ_Antwort_4}}</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" aria-expanded="false">Welche Orte rund um {{Stadt}} decken Sie ab?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel"><p data-cms="cityPage.faq[4].answer">{{FAQ_Antwort_5}}</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" aria-expanded="false">Wie läuft eine Anfrage ab?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-panel"><p data-cms="cityPage.faq[5].answer">{{FAQ_Antwort_6}}</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIEDERHOLT (statisch pro Stadt): Weitere Leistungen als Chips -->
+<section class="section section--flush-top" data-component="CityMoreServices">
+  <div class="container">
+    <h2 style="font-size:var(--text-h2);font-weight:var(--font-weight-h2);" class="reveal">Weitere Leistungen in {{Stadt}}</h2>
+    <div class="chip-list reveal">
+      <a class="chip" href="#">Gärtner &amp; Gartenpflege in {{Stadt}}</a>
+      <a class="chip" href="#">Entrümpelung &amp;&nbsp;Haushaltsauflösung in {{Stadt}}</a>
+      <a class="chip" href="#">Hausmeisterservice, Objektpflege &amp; Grundstückspflege in {{Stadt}}</a>
+      <a class="chip" href="#">Dachservice &amp; Dachpflege in {{Stadt}}</a>
+      <a class="chip" href="#">Garten- und Landschaftsbau in {{Stadt}}</a>
+    </div>
+  </div>
+</section>
+
+<!-- WIEDERHOLT (statisch pro Leistung): Weitere Einsatzorte, 30 Chips + Aufklappen -->
+<section class="section section--flush-top" data-component="CityMorePlaces">
+  <div class="container">
+    <h2 style="font-size:var(--text-h2);font-weight:var(--font-weight-h2);" class="reveal">{{Leistung}} – weitere Einsatzorte</h2>
+    <div class="chip-list reveal" id="orte-liste">
+      <a class="chip" href="#">{{Ort_1}}</a><a class="chip" href="#">{{Ort_2}}</a><a class="chip" href="#">{{Ort_3}}</a><a class="chip" href="#">{{Ort_4}}</a><a class="chip" href="#">{{Ort_5}}</a><a class="chip" href="#">{{Ort_6}}</a><a class="chip" href="#">{{Ort_7}}</a><a class="chip" href="#">{{Ort_8}}</a><a class="chip" href="#">{{Ort_9}}</a><a class="chip" href="#">{{Ort_10}}</a><a class="chip" href="#">{{Ort_11}}</a><a class="chip" href="#">{{Ort_12}}</a><a class="chip" href="#">{{Ort_13}}</a><a class="chip" href="#">{{Ort_14}}</a><a class="chip" href="#">{{Ort_15}}</a><a class="chip" href="#">{{Ort_16}}</a><a class="chip" href="#">{{Ort_17}}</a><a class="chip" href="#">{{Ort_18}}</a><a class="chip" href="#">{{Ort_19}}</a><a class="chip" href="#">{{Ort_20}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_21}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_22}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_23}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_24}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_25}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_26}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_27}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_28}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_29}}</a><a class="chip" href="#" data-chip-extra hidden>{{Ort_30}}</a>
+      <button class="chip chip-more" type="button"
+              data-chip-toggle="#orte-liste"
+              data-more-label="Alle Orte anzeigen +"
+              data-less-label="Weniger anzeigen –">Alle Orte anzeigen +</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- WIEDERHOLT AUF ALLEN 490 SEITEN: Footer identisch (statisch) -->
+<footer class="site-footer" data-component="Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <img src="assets/logo/logo-client.webp" alt="Rund ums Haus Littawe" width="103" height="58">
+        <p class="footer-desc">Ihr Partner für Gartenpflege, Entrümpelung, Hausmeisterservice, Dachservice &amp; Dachpflege, Garten- und Landschaftsbau und mehr in Osnabrück und Umgebung.</p>
+        <div class="footer-social">
+          <a data-wa href="https://wa.me/4915239603175" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.8-5.1c-.6-1-1-2.2-.9-3 0-.6.4-1.3.8-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7a9.6 9.6 0 0 0 3.8 3.4c.3.1.5.1.7-.1l.7-.8c.2-.3.4-.3.7-.2l1.9.9c.3.2.5.3.5.4 0 .2 0 .6-.2.9Z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Leistungen">
+        <h4>Leistungen</h4>
+        <ul class="footer-links">
+          <li><a href="leistungen.html#galabau">Garten- und Landschaftsbau</a></li>
+          <li><a href="leistungen.html#gartenpflege">Gärtner &amp; Gartenpflege</a></li>
+          <li><a href="leistungen.html#entruempelung">Entrümpelung &amp;&nbsp;Haushaltsauflösung</a></li>
+          <li><a href="leistungen.html#hausmeisterservice">Hausmeisterservice, Objektpflege &amp; Grundstückspflege</a></li>
+          <li><a href="leistungen.html#dachservice">Dachservice &amp; Dachpflege</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Informationen">
+        <h4>Informationen</h4>
+        <ul class="footer-links">
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="referenzen.html">Referenzen</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul class="footer-contact">
+          <li><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span><a href="tel:+4915239603175">+49 1523 9603175</a></li>
+          <li><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><a href="mailto:kontakt@rundumshaus-littawe.de">kontakt@rundumshaus-littawe.de</a></li>
+          <li><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>Osnabrück &amp;&nbsp;Umgebung</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> Rund ums Haus Littawe · Alle Rechte vorbehalten</span></div>
+  </div>
+</footer>
+
+<a class="wa-fab" data-wa href="https://wa.me/4915239603175" rel="noopener" aria-label="Per WhatsApp anfragen (es werden Daten an Meta übertragen)">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.8-5.1c-.6-1-1-2.2-.9-3 0-.6.4-1.3.8-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7a9.6 9.6 0 0 0 3.8 3.4c.3.1.5.1.7-.1l.7-.8c.2-.3.4-.3.7-.2l1.9.9c.3.2.5.3.5.4 0 .2 0 .6-.2.9Z"/></svg>
+</a>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

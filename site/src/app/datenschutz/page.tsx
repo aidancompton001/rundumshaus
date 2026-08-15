@@ -19,11 +19,11 @@ export default function DatenschutzPage() {
   return (
     <section className="py-24 px-4">
       <div className="max-w-3xl mx-auto prose prose-charcoal">
-        <h1 className="font-heading text-4xl font-bold mb-8">
+        <h1 className="font-heading text-4xl font-extrabold mb-8">
           Datenschutzerklärung
         </h1>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           1. Verantwortlicher
         </h2>
         <p>
@@ -38,7 +38,7 @@ export default function DatenschutzPage() {
           Telefon: {site.phone}
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           2. Hosting
         </h2>
         <p>
@@ -49,7 +49,7 @@ export default function DatenschutzPage() {
           lit. f DSGVO.
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           3. Kontaktformular
         </h2>
         <p>
@@ -60,7 +60,7 @@ export default function DatenschutzPage() {
           Art. 6 Abs. 1 lit. b DSGVO.
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           4. Cookies
         </h2>
         <p>
@@ -70,7 +70,7 @@ export default function DatenschutzPage() {
           eingesetzt.
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           5. Google Fonts
         </h2>
         <p>
@@ -79,7 +79,7 @@ export default function DatenschutzPage() {
           Verbindung zu Google-Servern.
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           6. SSL-Verschlüsselung
         </h2>
         <p>
@@ -88,7 +88,7 @@ export default function DatenschutzPage() {
           dem Schloss-Symbol in der Adresszeile Ihres Browsers.
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           7. Speicherdauer
         </h2>
         <p>
@@ -98,7 +98,7 @@ export default function DatenschutzPage() {
           gelöscht.
         </p>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           8. Ihre Rechte (Betroffenenrechte)
         </h2>
         <p>Sie haben gemäß der DSGVO folgende Rechte:</p>
@@ -136,7 +136,7 @@ export default function DatenschutzPage() {
           </li>
         </ul>
 
-        <h2 className="font-heading text-2xl font-semibold mt-8 mb-4">
+        <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
           9. Beschwerderecht (Art. 77 DSGVO)
         </h2>
         <p>

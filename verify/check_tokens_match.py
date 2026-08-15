@@ -1,0 +1,178 @@
+# -*- coding: utf-8 -*-
+"""ПРУФ СООТВЕТСТВИЯ ТОКЕНОВ МОКАПА ЗАМЕРАМ МАКЕТА (T008).
+
+Landa требовал этого четыре раунда: «токены совпали» говорилось CEO, но не
+проверялось ничем, хотя в редизайне 1:1 это единственное, что интересует заказчика.
+
+Пятый раунд — его же замечание к первой версии: она проверяла ФИЛЬТРОВАННОЕ
+ПОДМНОЖЕСТВО (4 кегля из 9 и 3 цвета из 4), причём все взятые совпадали, а
+единственный расходящийся — card_bullet — из проверки был исключён. Поэтому здесь:
+  * перебираются ВСЕ элементы TYPOGRAPHY.json и ВСЕ измеренные базовые цвета;
+  * осознанные отклонения объявлены явным списком EXPECTED_DEVIATIONS с причиной
+    и ПОКАЗЫВАЮТСЯ в отчёте, а не отсутствуют в нём;
+  * незаявленное отклонение = провал, заявленное с другой величиной = тоже провал.
+
+Сверка идёт с РАСЧЁТНОЙ величиной font_size_at_1440_est, которая построена на двух
+объявленных допущениях (cap-height ≈ 0.72 кегля, макет 962px — уменьшенный скриншот
+дизайна под 1440px). Поэтому «совпало» здесь значит «совпало с расчётной оценкой
+в пределах допуска», а не «точно» — Landa справедливо забраковал слово «точное».
+
+Usage: py verify/check_tokens_match.py [tokens.css] [REFERENCE_MEASUREMENTS.json] [TYPOGRAPHY.json]
+Код возврата: 0 — всё сошлось, 1 — есть расхождения.
+"""
+import hashlib
+import io
+import json
+import os
+import re
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+DEFAULT_TOKENS = os.path.join(ROOT, "docs", "design", "v1-desktop", "css", "tokens.css")
+MEAS = os.path.join(ROOT, "docs", "design", "REFERENCE_MEASUREMENTS.json")
+TYPO = os.path.join(ROOT, "docs", "design", "TYPOGRAPHY.json")
+PX_TOLERANCE = 1
+# Landa раунд 5: замеры-эталон ничем не закреплены — расхождение можно «починить»
+# правкой самого замера, и пруф останется зелёным, потеряв связь с макетом Kevin.
+# Раунд 6: хеш считается по НОРМАЛИЗОВАННОМУ содержимому (CRLF -> LF). Первая версия
+# хешировала байты рабочей копии, из-за чего на чистом клоне с LF чекер обвинил бы
+# в подмене эталона, которой нет.
+EXPECTED_SHA = {
+    "REFERENCE_MEASUREMENTS.json": "13066ac0d617fc78",
+    "TYPOGRAPHY.json": "8cc27daec622cd2c",
+}
+
+# ВСЕ 9 измеренных зон цвета (Landa раунд 5: прежняя версия брала 4 из 9,
+# и непроверенными оставались ровно те, что расходятся). Каждой зоне сопоставлен
+# токен, которым она РЕАЛЬНО красится в мокапе.
+COLOR_ZONES = {
+    "green_accent": ("color-accent", ("green_accent", "median", "hex")),
+    "navbar": ("color-white", ("zones", "navbar", "median", "hex")),
+    "leistungen_heading": ("color-paper", ("zones", "leistungen_heading", "median", "hex")),
+    "leistungen_cards": ("color-paper", ("zones", "leistungen_cards", "median", "hex")),
+    "bewertungen": ("color-paper", ("zones", "bewertungen", "median", "hex")),
+    "stats_band": ("color-dark", ("zones", "stats_band", "median", "hex")),
+    "ueber_uns": ("color-paper", ("zones", "ueber_uns", "median", "hex")),
+    "footer": ("color-dark", ("zones", "footer", "median", "hex")),
+    "hero": (None, ("zones", "hero", "median", "hex")),
+}
+# Осознанные упрощения палитры: измеренная зона -> (измерено, в токене, причина).
+# Landa: «объявить с величиной», чтобы отклонение было видно, а не отсутствовало.
+COLOR_DEVIATIONS = {
+    "ueber_uns": ("#F0F0F0", "#F8F8F8",
+                  "секция Über uns не имеет собственного фона и наследует фон страницы; "
+                  "разница 8 единиц на канал — след фото и водяного знака в замеряемой полосе"),
+    "footer": ("#11181F", "#10171F",
+               "футер и stats-полоса красятся одним токеном --color-dark; "
+               "разница 1 единица на канал — JPEG-шум"),
+    "hero": ("#0E130A", None,
+             "hero — фотография под градиентом, отдельного токена фона у неё нет "
+             "и быть не должно; сверять не с чем"),
+}
+
+# ВСЕ элементы TYPOGRAPHY.json: ключ замера -> токен кегля
+TYPESCALE = {
+    "h1_hero": "text-h1",
+    "hero_subline": "text-hero-sub",
+    "h2_section": "text-h2",
+    "h2_about": "text-h2-about",
+    "eyebrow_caps": "text-eyebrow",
+    "card_title": "text-card-title",
+    "card_bullet": "text-small",
+    "stats_value": "text-stat-value",
+    "stats_label": "text-stat-label",
+}
+# Осознанные отклонения: (измерено, в токене, причина). Отклонение обязано быть
+# ровно таким, как заявлено, иначе провал — «разрешено» не значит «что угодно».
+EXPECTED_DEVIATIONS = {
+    "card_bullet": (12, 14, "жёсткий нижний порог кегля 14px: 12px нечитаемо, конфликтует с доступностью"),
+}
+
+
+def dig(d, path):
+    for k in path:
+        d = d[k]
+    return d
+
+
+def token(css, name):
+    m = re.search(r"--" + re.escape(name) + r":\s*([^;]+);", css)
+    return m.group(1).strip() if m else None
+
+
+def clamp_max_px(value):
+    if value is None:
+        return None
+    rems = re.findall(r"([\d.]+)rem\s*\)", value)
+    if rems:
+        return round(float(rems[0]) * 16)
+    m = re.match(r"^([\d.]+)rem$", value)
+    if m:
+        return round(float(m.group(1)) * 16)
+    m = re.match(r"^([\d.]+)px$", value)
+    return round(float(m.group(1))) if m else None
+
+
+def main():
+    # пути принимаются аргументами, иначе мутацию ЗАМЕРА невозможно протестировать
+    # (Landa раунд 6: «новый механизм снова приехал без мутационного теста»)
+    tokens_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_TOKENS
+    meas_path = sys.argv[2] if len(sys.argv) > 2 else MEAS
+    typo_path = sys.argv[3] if len(sys.argv) > 3 else TYPO
+    css = io.open(tokens_path, encoding="utf-8").read()
+    meas = json.load(io.open(meas_path, encoding="utf-8"))
+    typo = json.load(io.open(typo_path, encoding="utf-8"))
+    bad = 0
+
+    print("ЭТАЛОННЫЕ ЗАМЕРЫ (закреплены хешем — правкой замера расхождение не спрячешь):")
+    for fname, path in (("REFERENCE_MEASUREMENTS.json", meas_path), ("TYPOGRAPHY.json", typo_path)):
+        raw = io.open(path, "rb").read().replace(b"\r\n", b"\n")
+        got = hashlib.sha256(raw).hexdigest()[:16]
+        want = EXPECTED_SHA[fname]
+        ok = got == want
+        bad += not ok
+        print("  %-30s %s  %s" % (fname, got, "OK" if ok else "ИЗМЕНЁН (ожидался " + want + ")"))
+
+    print("ЦВЕТА (%d измеренных зон, все проверяются):" % len(COLOR_ZONES))
+    for zone in sorted(COLOR_ZONES):
+        tname, path = COLOR_ZONES[zone]
+        want = dig(meas, path).upper()
+        got = (token(css, tname) or "—").upper() if tname else "—"
+        dev = COLOR_DEVIATIONS.get(zone)
+        if dev:
+            m_want, m_got, why = dev
+            ok = (want == m_want.upper() and got == (m_got.upper() if m_got else "—"))
+            bad += not ok
+            print("  %-20s %-9s vs %-9s  %s (упрощение заявлено: %s)"
+                  % (zone, got, want, "OK" if ok else "РАСХОЖДЕНИЕ", why[:60]))
+            continue
+        ok = got == want
+        bad += not ok
+        print("  %-20s %-9s vs %-9s  %s" % (zone, got, want, "OK" if ok else "РАСХОЖДЕНИЕ"))
+
+    print("ТИПОГРАФИКА (%d измеренных, все проверяются):" % len(typo["elements"]))
+    for key in sorted(typo["elements"]):
+        want = typo["elements"][key]["font_size_at_1440_est"]
+        tname = TYPESCALE.get(key)
+        got = clamp_max_px(token(css, tname)) if tname else None
+        dev = EXPECTED_DEVIATIONS.get(key)
+        if dev:
+            m_want, m_got, why = dev
+            ok = (want == m_want and got == m_got)
+            bad += not ok
+            print("  %-14s %-9s vs %-9s  %s (отклонение заявлено: %s)"
+                  % (key, str(got) + "px", str(want) + "px",
+                     "OK" if ok else "РАСХОЖДЕНИЕ", why))
+            continue
+        ok = got is not None and abs(got - want) <= PX_TOLERANCE
+        bad += not ok
+        print("  %-14s %-9s vs %-9s  %s" % (key, str(got) + "px", str(want) + "px",
+                                            "OK" if ok else "РАСХОЖДЕНИЕ"))
+
+    print("RESULT: %s" % ("TOKENS_MATCH" if bad == 0 else "MISMATCH:%d" % bad))
+    return 1 if bad else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

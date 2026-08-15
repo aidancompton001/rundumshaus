@@ -2,31 +2,42 @@
 
 // PX-064: 8 checkmarks per Kevin's verbatim Startseite text.
 // PX-070: texts moved to homepage.json (CMS-editable) — no hardcoded content.
+// Редизайн: те же восемь пунктов теперь делятся между «О нас» и этой
+// секцией — см. комментарий к REMAINING_START ниже.
 
 import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
 import { ScrollReveal, Stagger } from "@/components/motion";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const data = (homepageData as HomepageData).warumWir;
+
+/** Деление списка живёт в КОДЕ, а не в данных (решение CEO).
+    В homepage.json warumWir.items остаётся единым списком из восьми
+    пунктов — этот файл Кевин правит через админку /admin/, и разрезать
+    массив там нельзя: часть пунктов «уехала бы» в другой блок без
+    объяснения. Первые четыре показывает блок «О нас» галочками макета
+    (AboutSection, .about-checks), здесь идут остальные — так ни один
+    пункт не повторяется на главной дважды.
+    Срез хвостовой: если клиент добавит девятый пункт, он попадёт сюда,
+    а не потеряется. */
+const REMAINING_START = 4;
 
 export default function WarumWir() {
   return (
     <section className="py-20 md:py-28 bg-charcoal text-cream">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-14">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+        <ScrollReveal className="mb-14">
+          <SectionHeading onDark subheading={data.subheading}>
             {data.heading}
-          </h2>
-          <p className="text-cream/70 text-lg max-w-2xl mx-auto">
-            {data.subheading}
-          </p>
+          </SectionHeading>
         </ScrollReveal>
 
         <Stagger
           staggerDelay={80}
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
-          {data.items.map((reason) => (
+          {data.items.slice(REMAINING_START).map((reason) => (
             <div
               key={reason}
               className="flex items-center gap-4 bg-charcoal-light/30 border border-cream/10 rounded-xl px-6 py-5 transition-colors hover:border-gold/40"

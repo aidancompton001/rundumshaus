@@ -1,0 +1,91 @@
+/* ============================================================
+   Rund ums Haus Littawe — Design Tokens (v1-desktop)
+   Quelle: reference.jpg (Messwerte) + ТЗ-Konstanten.
+   Benennung Tailwind-4-kompatibel (@theme): --color-*, --spacing-*, --radius-*
+   Kein Hardcode-Hex außerhalb dieser Datei.
+   ============================================================ */
+
+:root {
+  /* ---------- Farben — GEMESSEN aus dem Referenz-Mockup ---------- */
+  --color-accent:       #5A7F1B; /* Lime-Olive: Button-Füllungen, Icons, Kreise, Akzentwörter */
+  --color-dark:         #10171F; /* Stats-Band, Footer */
+  --color-paper:        #F8F8F8; /* Seitenhintergrund + helle Sektionen */
+  --color-white:        #FEFEFE; /* Karten UND Header (Header ist weißer als Papier — gemessen) */
+
+  /* ---------- Abgeleitete Farben (nicht gemessen, im ТЗ definiert) ---------- */
+  --color-accent-ink:   #4A6B16; /* NUR für Akzent-TEXT auf hellem Grund (Kontrast 5.81:1) */
+  --color-accent-hover: #4A6B16; /* Hover der Akzent-Füllungen (~18 % dunkler) */
+  --color-dark-soft:    #1A2230; /* Karten/Blöcke auf dunklem Grund */
+  --color-ink:          #14181F; /* Haupttext */
+  --color-ink-muted:    #5A6472; /* Sekundärtext */
+
+  /* ---------- Hilfsfarben (transparent, aus Basisfarben abgeleitet) ---------- */
+  --color-line:            rgba(20, 24, 31, 0.08);   /* feine Linien auf hell */
+  --color-line-on-dark:    rgba(254, 254, 254, 0.14); /* 1px-Trenner auf dunkel */
+  --color-on-dark-muted:   rgba(254, 254, 254, 0.72); /* Sekundärtext auf dunkel */
+  --color-accent-soft:     rgba(90, 127, 27, 0.12);  /* zarte Akzentflächen (Icon-Hintergründe) */
+  --color-scrim:           rgba(10, 15, 10, 0.55);   /* Basiswert Hero-Overlay */
+
+  /* Hero-Overlay: dunkler Verlauf links→rechts (Deckkraft gewählt, damit weißes H1
+     mit Reserve lesbar bleibt — im Mockup nicht exakt gemessen) */
+  --gradient-hero: linear-gradient(90deg,
+      rgba(10, 14, 10, 0.86) 0%,
+      rgba(10, 14, 10, 0.62) 38%,
+      rgba(10, 14, 10, 0.28) 62%,
+      rgba(10, 14, 10, 0.08) 100%);
+
+  /* ---------- Typografie ----------
+     Basis: Viewport 1440 px. Cap-Height-Messwerte aus dem Mockup (962 px),
+     Faktor 1.4969. Schlüsselproportion H1:H2 = 2.0.
+     Fonts: Inter — im Prototyp Systemfallback; Self-Host beim Port (DSGVO, kein Google-CDN). */
+  --font-sans: "Inter", "Inter Variable", system-ui, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  --font-hand: "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive; /* Handschrift-Dekor */
+
+  --text-h1:         clamp(2.5rem, 4.93vw, 4.4375rem);  /* 71 px @1440 (cap 34 px @962) */
+  --text-hero-sub:   clamp(1.125rem, 1.74vw, 1.5625rem); /* 25 px @1440 */
+  --text-h2:         clamp(1.625rem, 2.43vw, 2.1875rem); /* 35 px @1440 — H1:H2 = 2.0 */
+  --text-h2-about:   clamp(1.6875rem, 2.57vw, 2.3125rem);/* 37 px — Kontrollwert Über uns */
+  --text-eyebrow:    1.0625rem;                          /* 17 px, CAPS, ls 0.12em */
+  --text-card-title: 1.1875rem;                          /* 19 px */
+  --text-stat-value: 1.9375rem;                          /* 31 px */
+  --text-stat-label: 1.0625rem;                          /* 17 px */
+  --text-body:       1rem;                               /* 16 px */
+  --text-small:      0.875rem;  /* 14 px — HARTE UNTERGRENZE (Bullets: Rechenwert 12 px → 14 px) */
+
+  --font-weight-h1:     900;
+  --font-weight-h2:     800;
+  --font-weight-eyebrow: 700;
+  --font-weight-card:   700;
+  --font-weight-button: 600;
+
+  --leading-tight: 1.08;  /* Headlines 1.05–1.1 */
+  --leading-body:  1.6;
+  --tracking-eyebrow: 0.12em;
+
+  /* ---------- Layout / Spacing ---------- */
+  --container-max: 1280px;
+  --container-pad: 5vw;             /* Seitenränder ~5 % wie im Mockup */
+  --spacing-section:    clamp(3.5rem, 6.5vw, 6rem);   /* vertikaler Sektionsabstand */
+  --spacing-section-sm: clamp(2.5rem, 4.5vw, 4rem);
+  --spacing-card-gap:   clamp(0.875rem, 1.65vw, 1.3125rem); /* Karten-Gap ≈21 px @1280 */
+  --spacing-block:      1.5rem;
+
+  /* ---------- Radius / Schatten / Fokus ---------- */
+  --radius-card:   14px;
+  --radius-button: 10px;
+  --radius-pill:   999px;
+  --radius-media:  16px;
+
+  --shadow-card:       0 6px 22px rgba(16, 23, 31, 0.07);
+  --shadow-card-hover: 0 14px 32px rgba(16, 23, 31, 0.14);
+  --shadow-header:     0 2px 14px rgba(16, 23, 31, 0.06);
+  --shadow-fab:        0 8px 24px rgba(16, 23, 31, 0.28);
+
+  --focus-ring: 0 0 0 3px var(--color-paper), 0 0 0 6px var(--color-accent);
+
+  /* ---------- Motion (dezent; deaktiviert via prefers-reduced-motion) ---------- */
+  --transition-fast: 180ms ease;
+  --transition-med:  260ms ease;
+  --reveal-shift: 10px;   /* Scroll-Reveal: 8–12 px Anhebung */
+}

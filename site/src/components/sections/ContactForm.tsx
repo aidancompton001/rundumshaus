@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 import contactFormData from "@/data/contact-form.json";
+import servicesData from "@/data/services.json";
 import siteData from "@/data/site.json";
 import type { ContactFormData, SiteConfig } from "@/data/types";
 import { FORMSUBMIT_ACTION } from "@/lib/formsubmit";
@@ -17,6 +19,9 @@ import {
 } from "@/components/ContactIcons";
 
 const form = contactFormData as ContactFormData;
+// Варианты в поле «Leistung» — названия услуг клиента из services.json
+// плюс «Sonstiges». Своего списка услуг сайт не выдумывает.
+const SERVICE_OPTIONS = [...(servicesData as { services: { title: string }[] }).services.map((x) => x.title), "Sonstiges"];
 const site = siteData as SiteConfig;
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -51,18 +56,87 @@ export default function ContactForm() {
   // tablet 94 KB, desktop 190 KB via CSS media queries in globals.css.
   // Fixed mobile LCP from 39s to <3s.
   return (
-    <section className="contact-form-bg py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Form */}
-          <div>
+    <>
+      {/* Шапка страницы по макету (kontakt.html, .page-hero): тёмная полоса
+          с крошками и H1. Прежде H1 стоял внутри колонки формы. */}
+      <section className="bg-dark text-white relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
+          <nav className="flex flex-wrap gap-1.5 text-sm text-white/70 mb-4" aria-label="Brotkrumen-Navigation">
+            <Link href="/" className="hover:text-white">Startseite</Link>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Kontakt</span>
+          </nav>
+          <h1 className="font-heading font-extrabold text-3xl md:text-[2.875rem] leading-tight max-w-[24ch] mb-3">
+            {form.heading}
+          </h1>
+          <p className="text-white/70 max-w-[62ch] text-lg">{form.body}</p>
+        </div>
+      </section>
+
+    <section className="contact-form-bg py-14 md:py-20 relative">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Порядок колонок по макету (.contact-layout): карточка контактов
+            слева и уже, форма справа и шире. Прежде колонки стояли зеркально.
+            На узком экране карточка контактов идёт первой — так же в макете. */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-8 lg:gap-12 items-start [&>*]:min-w-0">
+          {/* Карточка контактов — по макету .contact-info-card */}
+          <ScrollReveal direction="left">
+            <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-7">
+              <h2 className="font-heading text-[1.1875rem] font-extrabold text-ink">
+                Direkt erreichen
+              </h2>
+              {/* Макет: три строки с круглой иконкой 40px, а не крупные кнопки */}
+              <ul className="mt-5 space-y-4">
+                <li className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
+                    <PhoneIcon className="w-[18px] h-[18px]" variant="mono" />
+                  </span>
+                  <a href={`tel:${site.phone}`} className="font-body font-semibold text-ink hover:text-copper transition-colors">
+                    {site.phone}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
+                    <EnvelopeIcon className="w-[18px] h-[18px]" variant="mono" />
+                  </span>
+                  {/* F-79: break-all рвал адрес посреди слова («…littaw|e.de»).
+                      break-words оставляет обычные точки переноса — дефис в
+                      домене — и рубит по буквам только если иначе не влезает. */}
+                  <a href={`mailto:${site.email}`} className="font-body font-semibold text-ink hover:text-copper transition-colors break-words">
+                    {site.email}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
+                    <MapPinIcon className="w-[18px] h-[18px]" variant="mono" />
+                  </span>
+                  <span className="font-body text-sand">
+                    {site.address.street}, {site.address.zip} {site.address.city}
+                  </span>
+                </li>
+              </ul>
+              {/* Одна кнопка WhatsApp в цвете бренда (--color-copper).
+                  Прежде она была покрашена в #25D366 — фирменный цвет чужого
+                  мессенджера, которого в палитре сайта нет. */}
+              <a
+                href="https://wa.me/4915239603175"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 flex items-center justify-center gap-3 bg-copper hover:bg-copper-dark text-white rounded-[10px] px-5 py-3 min-h-[44px] font-semibold transition-colors"
+              >
+                <WhatsAppIcon className="w-5 h-5" variant="mono" />
+                <span className="font-body">Per WhatsApp anfragen</span>
+              </a>
+              <p className="mt-4 text-sm text-sand">* Pflichtfelder.</p>
+            </div>
+          </ScrollReveal>
+
+          {/* Карточка формы — белая, с радиусом и тенью макета */}
+          <div className="bg-white rounded-[14px] shadow-[0_6px_22px_rgba(16,23,31,0.07)] p-6 md:p-8">
             <ScrollReveal>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
-                {form.heading}
-              </h1>
-              <p className="text-charcoal-light text-lg mb-10">
-                {form.body}
-              </p>
+              <h2 className="font-heading text-[1.1875rem] font-extrabold text-ink mb-6">
+                Anfrage senden
+              </h2>
             </ScrollReveal>
 
             <AnimatePresence mode="wait">
@@ -91,7 +165,7 @@ export default function ContactForm() {
                   </p>
                   <button
                     onClick={() => setState("idle")}
-                    className="bg-gold hover:bg-gold-light text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                    className="bg-copper hover:bg-copper-dark text-white px-6 py-2 rounded-[10px] font-semibold transition-colors"
                   >
                     Erneut versuchen
                   </button>
@@ -126,83 +200,113 @@ export default function ContactForm() {
                         <legend className="font-heading text-lg font-semibold text-charcoal mb-4">
                           {section.heading}
                         </legend>
-                        <div className="space-y-5">
-                          {section.fields.map((field) =>
-                            field.type === "checkbox" ? (
-                              <label
-                                key={field.name}
-                                className="flex items-start gap-3 cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  name={field.name}
-                                  required={field.required}
-                                  className="mt-1 w-5 h-5 rounded border-sand accent-[#3A7030]"
-                                />
-                                <span className="text-charcoal-light text-sm">
-                                  {field.label}
-                                </span>
-                              </label>
-                            ) : field.type === "textarea" ? (
-                              // PX-046 F22: aria-label fix for floating-label fields
-                              <div key={field.name} className="relative">
-                                <textarea
-                                  id={`f-${field.name}`}
-                                  name={field.name}
-                                  required={field.required}
-                                  placeholder=" "
-                                  rows={4}
-                                  aria-label={field.label}
-                                  aria-required={field.required}
-                                  className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all resize-none"
-                                />
-                                <label htmlFor={`f-${field.name}`} className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
-                                  {field.label}
-                                  {field.required && " *"}
-                                </label>
+                        {/* Макет (kontakt.html): подпись СТОИТ НАД полем и
+                            не исчезает при вводе. Прежде подписи жили внутри
+                            поля и пропадали, стоило начать печатать. */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4 [&>*]:min-w-0">
+                          {section.fields.map((field) => {
+                            const id = `f-${field.name}`;
+                            const wide = field.type === "textarea" || field.type === "checkbox";
+                            const box =
+                              "w-full border border-sand/40 rounded-[10px] px-4 py-3 text-ink " +
+                              "bg-paper focus:ring-2 focus:ring-copper/40 focus:border-copper " +
+                              "outline-none transition-all";
+                            return (
+                              <div key={field.name} className={wide ? "sm:col-span-2" : ""}>
+                                {field.type === "checkbox" ? (
+                                  <label className="flex items-start gap-3 cursor-pointer">
+                                    <input
+                                      type="checkbox"
+                                      name={field.name}
+                                      required={field.required}
+                                      className="mt-1 w-5 h-5 rounded border-sand accent-[color:var(--color-copper)]"
+                                    />
+                                    <span className="text-sand text-sm">{field.label}</span>
+                                  </label>
+                                ) : (
+                                  <>
+                                    <label htmlFor={id} className="block text-sm font-semibold text-ink mb-1.5">
+                                      {field.label}
+                                      {field.required && " *"}
+                                    </label>
+                                    {field.type === "textarea" ? (
+                                      <textarea
+                                        id={id}
+                                        name={field.name}
+                                        required={field.required}
+                                        rows={5}
+                                        aria-required={field.required}
+                                        className={box + " resize-none"}
+                                      />
+                                    ) : field.type === "select" ? (
+                                      <select
+                                        id={id}
+                                        name={field.name}
+                                        required={field.required}
+                                        aria-required={field.required}
+                                        defaultValue=""
+                                        className={box}
+                                      >
+                                        <option value="">Bitte wählen …</option>
+                                        {SERVICE_OPTIONS.map((o) => (
+                                          <option key={o} value={o}>{o}</option>
+                                        ))}
+                                      </select>
+                                    ) : (
+                                      <input
+                                        id={id}
+                                        type={field.type}
+                                        name={field.name}
+                                        required={field.required}
+                                        aria-required={field.required}
+                                        autoComplete={
+                                          field.type === "email"
+                                            ? "email"
+                                            : field.type === "tel"
+                                              ? "tel"
+                                              : field.name === "name"
+                                                ? "name"
+                                                : undefined
+                                        }
+                                        className={box}
+                                      />
+                                    )}
+                                  </>
+                                )}
                               </div>
-                            ) : (
-                              <div key={field.name} className="relative">
-                                <input
-                                  id={`f-${field.name}`}
-                                  type={field.type}
-                                  name={field.name}
-                                  required={field.required}
-                                  placeholder=" "
-                                  aria-label={field.label}
-                                  aria-required={field.required}
-                                  autoComplete={
-                                    field.type === "email"
-                                      ? "email"
-                                      : field.type === "tel"
-                                        ? "tel"
-                                        : field.name === "name"
-                                          ? "name"
-                                          : undefined
-                                  }
-                                  className="peer w-full border border-sand/40 rounded-xl px-4 pt-6 pb-3 text-charcoal bg-white focus:ring-2 focus:ring-copper/50 focus:border-copper outline-none transition-all"
-                                />
-                                <label htmlFor={`f-${field.name}`} className="absolute left-4 top-4 text-charcoal-light text-sm transition-all duration-200 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-charcoal-light peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">
-                                  {field.label}
-                                  {field.required && " *"}
-                                </label>
-                              </div>
-                            )
-                          )}
+                            );
+                          })}
                         </div>
                       </fieldset>
                     ))}
 
+                    {/* Макет: кнопка во всю ширину формы и со стрелкой.
+                        Прежде она была по ширине текста и без стрелки. */}
                     <div>
                       <button
                         type="submit"
                         disabled={state === "submitting"}
-                        className="bg-gold hover:bg-gold-light disabled:opacity-50 text-white px-8 py-3.5 rounded-xl font-semibold text-lg transition-colors w-full sm:w-auto"
+                        className="w-full flex items-center justify-center gap-3 bg-copper hover:bg-copper-dark disabled:opacity-50 text-white px-8 py-3.5 min-h-[44px] rounded-[10px] font-semibold text-lg transition-colors group"
                       >
                         {state === "submitting"
                           ? "Wird gesendet..."
                           : form.submitLabel}
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          width="20"
+                          height="20"
+                          aria-hidden="true"
+                          className="flex-none transition-transform group-hover:translate-x-1"
+                        >
+                          <path d="M5 12h14m-6-6 6 6-6 6" />
+                        </svg>
                       </button>
+                      <p className="mt-4 text-sm text-sand">* Pflichtfelder.</p>
                     </div>
                   </Stagger>
                 </motion.form>
@@ -210,56 +314,9 @@ export default function ContactForm() {
             </AnimatePresence>
           </div>
 
-          {/* Sidebar — contact info */}
-          <ScrollReveal direction="right" className="lg:pt-20">
-            <div className="bg-cream-dark/50 border border-sand/20 rounded-2xl p-8 sticky top-24">
-              <h2 className="font-heading text-2xl font-bold text-charcoal mb-6">
-                Direkt erreichen
-              </h2>
-              <div className="space-y-4">
-                <a
-                  href={`tel:${site.phone}`}
-                  className="flex items-center gap-3 bg-gold hover:bg-gold-light text-white rounded-xl px-5 py-3 font-semibold transition-colors"
-                >
-                  <PhoneIcon className="w-5 h-5" variant="mono" />
-                  <span className="font-body">Jetzt anrufen</span>
-                </a>
-                <a
-                  href="https://wa.me/4915239603175"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl px-5 py-3 font-semibold transition-colors"
-                >
-                  <WhatsAppIcon className="w-5 h-5" variant="mono" />
-                  <span className="font-body">WhatsApp schreiben</span>
-                </a>
-                <a
-                  href={`tel:${site.phone}`}
-                  className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
-                >
-                  <PhoneIcon className="w-6 h-6" />
-                  <span className="font-body">{site.phone}</span>
-                </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="flex items-center gap-3 text-charcoal hover:text-copper transition-colors"
-                >
-                  <EnvelopeIcon className="w-6 h-6" />
-                  <span className="font-body">{site.email}</span>
-                </a>
-                <div className="flex items-start gap-3 text-charcoal-light">
-                  <MapPinIcon className="w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <span className="font-body">
-                    {site.address.street}
-                    <br />
-                    {site.address.zip} {site.address.city}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </div>
     </section>
+    </>
   );
 }

@@ -10,7 +10,7 @@ export default function LeistungenInStaedten() {
           Einsatzgebiete now lives as its own page in navigation. */}
       <section className="py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-charcoal mb-4">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
             Einsatzgebiet — Osnabrück und 60-km-Umkreis
           </h2>
           <p className="text-charcoal-light leading-relaxed mb-6 max-w-2xl mx-auto">

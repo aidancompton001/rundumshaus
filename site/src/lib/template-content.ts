@@ -9,7 +9,11 @@
 
 import type { City } from "./programmatic";
 
-const MAX_EINSATZ_KM = 60;
+// T009: порог зоны выезда. В данных 11 городов дальше 60 км — до 80
+// (Nordhorn, Twist), и их 55 страниц уже опубликованы и проиндексированы,
+// то есть обещание выезда туда уже дано. Порог приведён к факту, тексты
+// охвата — к 80 км. Города за порогом по-прежнему получают «auf Anfrage».
+const MAX_EINSATZ_KM = 80;
 
 /**
  * Safe distance phrase with full guard coverage.
@@ -38,13 +42,13 @@ export function safeDistanceMeta(city: City): string {
 }
 
 /**
- * Einsatzgebiet text guard — avoids UWG § 5 false advertising for cities >60 km.
+ * Einsatzgebiet text guard — avoids UWG § 5 false advertising for cities >80 km.
  */
 export function safeEinsatzText(city: City): string {
   if (city.distanceKm > MAX_EINSATZ_KM) {
     return "Auf Anfrage übernehmen wir auch Aufträge außerhalb unseres regulären Einsatzgebiets.";
   }
-  return "Im Einsatzgebiet bis 60 km um Osnabrück sind wir regelmäßig vor Ort.";
+  return "Im Einsatzgebiet bis 80 km um Osnabrück sind wir regelmäßig vor Ort.";
 }
 
 /**

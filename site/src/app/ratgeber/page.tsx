@@ -1,11 +1,12 @@
 import Link from "next/link";
 import ratgeberData from "@/data/ratgeber.json";
 import { generateSEO } from "@/lib/seo";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata = generateSEO({
   title: "Ratgeber — Gartenpflege, Entrümpelung, Hausmeisterservice in Osnabrück",
   description:
-    "Praxis-Guides aus erster Hand: Hecke schneiden in NDS/NRW, Entrümpelungskosten, Dachreinigung, Winterdienst-Pflichten, Haushaltsauflösung. Aktuell und regional für Osnabrück und 60 km Umkreis.",
+    "Praxis-Guides aus erster Hand: Hecke schneiden in NDS/NRW, Entrümpelungskosten, Dachreinigung, Winterdienst-Pflichten, Haushaltsauflösung. Aktuell und regional für Osnabrück und 80 km Umkreis.",
   path: "/ratgeber",
 });
 
@@ -42,16 +43,13 @@ export default function RatgeberIndex() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
-      <section className="py-16 md:py-24">
+      <PageHero
+        title="Ratgeber"
+        intro="Praxiswissen rund ums Haus — geschrieben für Eigentümer, Vermieter und Mieter im Raum Osnabrück, im Münsterland und in Ostwestfalen. Aktuell, regional und ohne Marketing-Geschwafel."
+        crumb="Ratgeber"
+      />
+      <section className="py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Ratgeber
-          </h1>
-          <p className="text-lg text-charcoal-light mb-12 max-w-3xl">
-            Praxiswissen rund ums Haus — geschrieben für Eigentümer, Vermieter und
-            Mieter im Raum Osnabrück, im Münsterland und in Ostwestfalen. Aktuell,
-            regional und ohne Marketing-Geschwafel.
-          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.map((a) => (
@@ -64,7 +62,7 @@ export default function RatgeberIndex() {
                   <span className="text-xs font-medium text-copper uppercase tracking-wide mb-2">
                     {a.category}
                   </span>
-                  <h2 className="font-heading text-lg font-semibold text-charcoal mb-3 leading-tight group-hover:text-copper transition-colors">
+                  <h2 className="font-heading text-lg font-extrabold text-charcoal mb-3 leading-tight group-hover:text-copper transition-colors">
                     {a.title}
                   </h2>
                   <p className="text-sm text-charcoal-light leading-relaxed mb-4 flex-1">

@@ -10,17 +10,46 @@
   "phone": "+49 1523 9603175",
   "email": "kontakt@rundumshaus-littawe.de",
   "navigation": [
-    { "label": "Startseite", "href": "/" },
-    { "label": "Leistungen", "href": "/leistungen/" },
-    { "label": "Über uns", "href": "/ueber-uns/" },
-    { "label": "Referenzen", "href": "/referenzen/" },
-    { "label": "Einsatzgebiete", "href": "/einsatzgebiet/" }
+    {
+      "label": "Startseite",
+      "href": "/"
+    },
+    {
+      "label": "Leistungen",
+      "href": "/leistungen/"
+    },
+    {
+      "label": "Über uns",
+      "href": "/ueber-uns/"
+    },
+    {
+      "label": "Referenzen",
+      "href": "/referenzen/"
+    },
+    {
+      "label": "Ratgeber",
+      "href": "/ratgeber/"
+    },
+    {
+      "label": "Einsatzgebiete",
+      "href": "/einsatzgebiet/"
+    },
+    {
+      "label": "Kontakt",
+      "href": "/kontakt/"
+    }
   ],
   "footer": {
     "copyright": "© 2026 Rund ums Haus Littawe. Alle Rechte vorbehalten.",
     "legalLinks": [
-      { "label": "Impressum", "href": "/impressum/" },
-      { "label": "Datenschutz", "href": "/datenschutz/" }
+      {
+        "label": "Impressum",
+        "href": "/impressum/"
+      },
+      {
+        "label": "Datenschutz",
+        "href": "/datenschutz/"
+      }
     ]
   }
 }

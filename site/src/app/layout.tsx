@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import MotionProvider from "@/components/motion/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -33,17 +33,14 @@ const reviewSchemas = reviewsData.reviews.map((r) => ({
   reviewBody: r.text,
 }));
 
-const lora = Lora({
-  variable: "--font-heading",
+// Макет клиента набран Inter — и заголовки, и текст
+// (docs/design/v1-desktop/css/tokens.css:44). Прежняя пара Lora +
+// Plus Jakarta давала засечный заголовок, которого в макете нет.
+// Веса 800 и 900 обязательны: ими заданы H2 и H1 макета.
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-body",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -70,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${lora.variable} ${plusJakarta.variable} antialiased`}
+      className={`${inter.variable} antialiased`}
     >
       <head>
         {/* Yandex Webmaster verification (PX-031 Phase B). */}
@@ -110,7 +107,7 @@ export default function RootLayout({
                   logo: "https://rundumshaus-littawe.de/images/og-image.jpg",
                   priceRange: "€€",
                   description:
-                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück und im Umkreis von 60 km.",
+                    "Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück und im Umkreis von 80 km.",
                   foundingDate: "2026",
                   founder: {
                     "@type": "Person",
@@ -269,7 +266,13 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-body bg-cream text-charcoal">
         <MotionProvider>
           <Navbar />
-          <main className="flex-1 pt-16">{children}</main>
+          {/* отступ равен высоте шапки: шапка фиксирована сверху, и при 64px
+             против её новых 82px контент уезжал бы под неё на всех 617
+             страницах сразу (находка ревьюера F-09) */}
+          {/* Шапка макета липкая, а не плавающая: место под неё держит она
+              сама. Прежний отступ в 82px был нужен для fixed-шапки и теперь
+              дал бы пустую полосу под ней. */}
+          <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppButton />
           <CookieBanner />

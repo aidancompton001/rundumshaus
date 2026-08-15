@@ -6,6 +6,7 @@
 import Link from "next/link";
 import { generateSEO } from "@/lib/seo";
 import { TARGET_CITIES } from "@/lib/targetCities";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata = generateSEO({
   title: "Rasen neu anlegen & alten Rasen entfernen",
@@ -65,27 +66,14 @@ export default function RasenNeuanlagePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
 
+      <PageHero
+        title={<>Rasen neu anlegen &amp; alten Rasen entfernen</>}
+        crumb="Rasen neu anlegen"
+        parent={{ label: "Leistungen", href: "/leistungen/" }}
+      />
       <article className="py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="text-sm text-charcoal-light mb-8">
-            <ol className="flex flex-wrap gap-x-2 gap-y-1">
-              <li>
-                <Link href="/" className="hover:text-copper">Startseite</Link>
-                <span className="mx-2">/</span>
-              </li>
-              <li>
-                <Link href="/leistungen/" className="hover:text-copper">Leistungen</Link>
-                <span className="mx-2">/</span>
-              </li>
-              <li className="text-charcoal" aria-current="page">Rasen neu anlegen</li>
-            </ol>
-          </nav>
 
-          {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-6">
-            Rasen neu anlegen &amp; alten Rasen entfernen
-          </h1>
 
           {/* Intro — Kevin text AS IS */}
           <p className="text-lg text-charcoal-light leading-relaxed mb-6">
@@ -102,7 +90,7 @@ export default function RasenNeuanlagePage() {
 
           {/* Leistungen-Checkliste */}
           <section className="my-10 p-6 bg-cream-dark border border-sand/30 rounded-2xl">
-            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-5">
+            <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-5">
               Unsere Leistungen rund um die Rasenneuanlage
             </h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
@@ -146,7 +134,7 @@ export default function RasenNeuanlagePage() {
 
           {/* Cross-link to Bramsche Referenz (PX-036b) */}
           <section className="mt-12 pt-8 border-t border-sand/30">
-            <h2 className="font-heading text-xl font-semibold text-charcoal mb-3">
+            <h2 className="font-heading text-xl font-extrabold text-charcoal mb-3">
               So sieht das in der Praxis aus
             </h2>
             <p className="text-charcoal-light leading-relaxed mb-4">

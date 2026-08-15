@@ -4,6 +4,7 @@
 
 import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const data = (homepageData as HomepageData).faq;
 
@@ -25,9 +26,9 @@ export default function HomeFAQ() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-10 text-center">
+        <SectionHeading className="mb-10">
           {data.heading}
-        </h2>
+        </SectionHeading>
         <div className="space-y-3">
           {data.items.map((f, i) => (
             <details

@@ -1,0 +1,79 @@
+{
+  "task": "t008port-visual",
+  "title": "Довести перенос макета: блоки, которых на сайте нет",
+  "why": "Перенос был принят по числовым проверкам, но дизайн ими не измеряется. CEO открыл стейджинг и увидел старый сайт. Разбор — docs/POSTMORTEM_T008_perenos.md. Это добор оставшихся блоков макета с визуальной приёмкой.",
+  "environment": "рабочее дерево .worktrees/redesign, ветка redesign/modern-2026; замеры по HTTP на собранном site/out и на стейджинге",
+  "criteria": [
+    {
+      "id": "V1",
+      "text": "Волна-разделитель стоит ТОЛЬКО там, где она есть в макете: под героем главной, и это проверяется по СБОРКЕ, а не по исходнику (Ланда F-88 — критерий считал импорты в коде, то есть намерение, а не результат; в макете brush-divider есть лишь в index.html). Ровно одна страница сборки из 617 несёт разделитель",
+      "check": "bash -c \"grep -rl 'brush-divider' site/out --include=*.html | wc -l\"",
+      "expect_equal": "1"
+    },
+    {
+      "id": "V2",
+      "text": "Водяной знак блока «О нас» перенесён на главную — ровно один. Ланда F-89: прежняя проверка считала `grep -c` по ОДНОСТРОЧНОМУ html, где счёт строк всегда даёт 1 при любом числе совпадений, и искала `opacity-5`, что ловит и `opacity-50`. Теперь считаются сами совпадения, а образец закрыт кавычкой класса",
+      "check": "bash -c \"grep -o 'text-ink opacity-5\\\"' site/out/index.html | wc -l\"",
+      "expect_equal": "1"
+    },
+    {
+      "id": "V3",
+      "text": "Ничего не потеряно: адреса, SEO, ссылки, картинки, alt, разметка Google, файлы сборки. Слепок «после» снят с ТЕКУЩЕЙ сборки — прежний отставал на три коммита и не покрывал правки этого раунда (Ланда F-94). Замена картинок карточек и переписанные alt объявлены поимённо: любая другая потеря по-прежнему валит сверку",
+      "check": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-round8.json | tail -1",
+      "expect_equal": "БИНАРНО: 1"
+    },
+    {
+      "id": "V4",
+      "text": "Вёрстка не разъехалась ни на одном роде страниц",
+      "check": "bash -c \"py verify/check_layout_mobile.py site/out 2>/dev/null | tail -1\"",
+      "expect_equal": "RESULT: LAYOUT_CLEAN"
+    },
+    {
+      "id": "V5",
+      "text": "Вес заголовков макета выдержан на экране",
+      "check": "bash -c \"py verify/check_type_weights.py site/out 2>/dev/null | tail -1\"",
+      "expect_equal": "RESULT: TYPE_WEIGHTS_MATCH"
+    },
+    {
+      "id": "V6",
+      "text": "Тексты клиента целы",
+      "check": "py verify/check_client_texts.py | tail -1",
+      "expect_equal": "RESULT: CLIENT_TEXTS_MATCH"
+    },
+    {
+      "id": "V7",
+      "text": "Тесты зелёные",
+      "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1",
+      "expect_equal": "Tests  254 passed"
+    },
+    {
+      "id": "V8",
+      "text": "ВИЗУАЛЬНАЯ ПРИЁМКА. Снимки пар «макет ↔ сайт» сняты штатным verify/_cmp_shots.py (он прокручивает страницу перед съёмкой) и КАЖДЫЙ признан пригодным: доля пустых строк не выше 60 %, сплошной пустой участок не длиннее 500 px. Ланда F-70: комплект, снятый на скорую руку без прокрутки, был в основном белым — блоки с анимацией появления остались при opacity 0, и ревьюер сравнивал бы белое с белым. Снимок, который ничего не содержит, доказательством не считается",
+      "check": "bash -c \"py verify/_cmp_shots.py 2>/dev/null | tail -1\"",
+      "expect_equal": "RESULT: SHOTS_USABLE"
+    },
+    {
+      "id": "V9",
+      "text": "Сверка с макетом там, где числа её не вели: призыв в шапке виден на 375, 768 и 1440; колонка текста городской страницы отцентрована; заголовок призыва выключен влево. Эти три величины не проверялись ничем, поэтому дефекты прожили шесть раундов (Ланда F-71..F-73)",
+      "check": "bash -c \"py verify/check_vs_mockup.py site/out 2>/dev/null | tail -1\"",
+      "expect_equal": "RESULT: MOCKUP_MATCH"
+    },
+    {
+      "id": "V10",
+      "text": "Ни один измеритель не докладывает успех, обойдя ноль страниц. Прогон по пустому каталогу обязан завершаться ненулевым кодом у всех трёх (Ланда F-78)",
+      "check": "py -c \"import subprocess,tempfile,sys; d=tempfile.mkdtemp(); print(sum(1 for s in ('check_type_weights','check_eyebrow_not_dup','check_layout_mobile') if subprocess.run([sys.executable,'verify/%s.py'%s,d],capture_output=True).returncode!=0))\"",
+      "expect_equal": "3"
+    },
+    {
+      "id": "V11",
+      "text": "Деплой стейджинга не оставляет задачу без сборки. Скрипт сносил site/out, и ПОСЛЕ каждого деплоя приёмка молча падала с 10/10 до 4/10 — ревьюер получил «замороженный и проверенный» сайт без сборки (Ланда F-93). Прод пересобирается тем же скриптом, и он падает, если сборки нет",
+      "check": "bash -c \"grep -c 'прод-сборка восстановлена' deploy_staging.sh\"",
+      "expect_equal": "1"
+    }
+  ],
+  "out_of_scope": [
+    "изменение текстов клиента",
+    "изменение адресов, карты сайта и разметки Google",
+    "правка админки /admin/ — единственный способ клиента редактировать тексты"
+  ]
+}

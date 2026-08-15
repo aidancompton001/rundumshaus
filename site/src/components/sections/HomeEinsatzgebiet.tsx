@@ -4,6 +4,7 @@
 import Link from "next/link";
 import homepageData from "@/data/homepage.json";
 import type { HomepageData } from "@/data/types";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const data = (homepageData as HomepageData).einsatzgebiet;
 
@@ -11,9 +12,9 @@ export default function HomeEinsatzgebiet() {
   return (
     <section className="py-20 md:py-28 bg-cream-dark/50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-6">
+        <SectionHeading className="mb-6">
           {data.heading}
-        </h2>
+        </SectionHeading>
         <p className="text-charcoal-light text-lg leading-relaxed mb-4">
           {data.text1}
         </p>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Platzhalter: Foto">
+  <rect width="700" height="500" fill="#94978F"/>
+  <text x="350" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#F8F8F8" opacity=".85">FOTO</text>
+  <text x="350" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#F8F8F8" opacity=".6">(Platzhalter)</text>
+</svg>

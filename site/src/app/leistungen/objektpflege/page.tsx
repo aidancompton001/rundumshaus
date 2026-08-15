@@ -7,6 +7,7 @@ import Link from "next/link";
 import { generateSEO } from "@/lib/seo";
 import { TARGET_CITIES } from "@/lib/targetCities";
 import { getImageUrl, toWebp } from "@/lib/getImageUrl";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata = generateSEO({
   title: "Objektpflege Osnabrück ★ für Hausverwaltungen & WEGs",
@@ -80,27 +81,14 @@ export default function ObjektpflegePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
 
+      <PageHero
+        title={<>Objektpflege in Osnabrück</>}
+        crumb="Objektpflege"
+        parent={{ label: "Leistungen", href: "/leistungen/" }}
+      />
       <article className="py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="text-sm text-charcoal-light mb-8">
-            <ol className="flex flex-wrap gap-x-2 gap-y-1">
-              <li>
-                <Link href="/" className="hover:text-copper">Startseite</Link>
-                <span className="mx-2">/</span>
-              </li>
-              <li>
-                <Link href="/leistungen/" className="hover:text-copper">Leistungen</Link>
-                <span className="mx-2">/</span>
-              </li>
-              <li className="text-charcoal" aria-current="page">Objektpflege</li>
-            </ol>
-          </nav>
 
-          {/* H1 */}
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-charcoal mb-6">
-            Objektpflege in Osnabrück
-          </h1>
 
           {/* Hero image (PX-040: generated via Higgsfield nano_banana_pro) */}
           <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-10 border border-sand/30">
@@ -134,7 +122,7 @@ export default function ObjektpflegePage() {
                 key={z.title}
                 className="p-5 bg-cream-dark border border-sand/30 rounded-xl"
               >
-                <h2 className="font-heading text-lg font-semibold text-charcoal mb-1">
+                <h2 className="font-heading text-lg font-extrabold text-charcoal mb-1">
                   {z.title}
                 </h2>
                 <p className="text-sm text-charcoal-light leading-relaxed">{z.desc}</p>
@@ -144,7 +132,7 @@ export default function ObjektpflegePage() {
 
           {/* Leistungen-Checkliste (11 services from Kevin's list) */}
           <section className="my-10 p-6 bg-cream-dark border border-sand/30 rounded-2xl">
-            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-5">
+            <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-5">
               Unsere Leistungen rund um die Objektpflege
             </h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
@@ -195,7 +183,7 @@ export default function ObjektpflegePage() {
 
           {/* Festpreis / Jahresvertrag trust block */}
           <aside className="my-10 p-6 bg-copper/5 border-l-4 border-copper rounded-r-2xl">
-            <h2 className="font-heading text-xl font-semibold text-charcoal mb-3">
+            <h2 className="font-heading text-xl font-extrabold text-charcoal mb-3">
               Festpreis oder Jahresvertrag — Sie entscheiden
             </h2>
             <p className="text-charcoal-light leading-relaxed">
@@ -209,7 +197,7 @@ export default function ObjektpflegePage() {
           {/* CTA — Telefon + Email only (per Kevin's WhatsApp request). */}
           {/* Global floating WhatsApp button already exists in layout.tsx. */}
           <section className="my-10">
-            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-3">
+            <h2 className="font-heading text-2xl font-extrabold text-charcoal mb-3">
               Jetzt Kontakt aufnehmen
             </h2>
             <p className="text-charcoal-light leading-relaxed mb-6">
@@ -238,7 +226,7 @@ export default function ObjektpflegePage() {
 
           {/* Cross-link to Hausmeisterservice (B2C variant) */}
           <section className="mt-12 pt-8 border-t border-sand/30">
-            <h2 className="font-heading text-xl font-semibold text-charcoal mb-3">
+            <h2 className="font-heading text-xl font-extrabold text-charcoal mb-3">
               Sie suchen Hausmeisterservice für ein Einfamilienhaus?
             </h2>
             <p className="text-charcoal-light leading-relaxed mb-4">

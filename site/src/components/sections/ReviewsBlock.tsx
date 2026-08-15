@@ -64,7 +64,7 @@ export default function ReviewsBlock() {
         <div className="text-center mb-10">
           <h2
             id="reviews-heading"
-            className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-3"
+            className="font-heading text-3xl md:text-4xl font-extrabold text-charcoal mb-3"
           >
             Was unsere Kunden sagen
           </h2>

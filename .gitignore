@@ -26,10 +26,10 @@ Thumbs.db
 # Debug
 npm-debug.log*
 .worktrees/
+docs/design/v1-desktop/_*.png
+docs/design/v1-desktop/_*.json
+docs/design/v1-desktop/_*.html
 
-# Приватные материалы клиента — НЕ коммитить (2026-08-07, приказ CEO)
-docs/kevin-*.md
-docs/PENDING_KEVIN_*.md
-docs/ANLEITUNG_*
-docs/Anleitung*
-docs/DNS_BACKUP_*.md
+# стейджинг-сборка с путём /rundumshaus — артефакт, не исходник
+site/out-staging/
+verify/snapshots/_tmp.json

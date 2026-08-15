@@ -362,6 +362,15 @@
     "cmd": "cd .worktrees/redesign && git show HEAD:verify/hrc_ledger.json | py -c \"import json,sys;d=json.load(sys.stdin);print('CLAIMS',len(d['claims']))\"",
     "expect_contain": "CLAIMS 42"
    }
+  },
+  {
+   "id": "43",
+   "asserted": true,
+   "text": "НАРУШЕНИЕ ПРОТОКОЛА (признаю, второе за сессию): коммит 2ba3380 сделан напрямую в master вместо PR — я находился в основном чекауте, думая, что нахожусь в worktree. Содержимое безвредно (17 файлов: документация и verify-скрипты, кода сайта 0), прод не пострадал: 200, sitemap 511. Правки, которые предназначались ветке, доведены отдельным коммитом 9e9a81e в redesign/modern-2026",
+   "proof": {
+    "cmd": "a=$(git show --stat --format= 2ba3380 --name-only | grep -c '^site/'; true); b=$(curl -sf -o /dev/null -w '%{http_code}' --max-time 20 https://rundumshaus-littawe.de/); c=$(curl -sf --max-time 20 https://rundumshaus-littawe.de/sitemap.xml | grep -o '<loc>' | wc -l | tr -d ' '); d=$(git -C .worktrees/redesign log --oneline -1 --format=%h); echo \"$a $b $c $d\"",
+    "expect_equal": "0 200 511 9e9a81e"
+   }
   }
  ]
 }

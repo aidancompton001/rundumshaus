@@ -1,20 +1,17 @@
 {
   "heading": "Unsere Leistungen",
+  "headline": "Vielfältige Leistungen für Ihr Zuhause",
   "subheading": "Gärtner, Gartenpflege, Garten- und Landschaftsbau, Hausmeisterservice, Dachservice und Entrümpelung für Privat- und Gewerbekunden in Osnabrück und Umgebung.",
   "services": [
     {
-      "id": "hausmeisterservice",
-      "title": "Hausmeisterservice, Objektpflege & Grundstückspflege",
-      "description": "Rund ums Haus Littawe bietet professionellen Hausmeisterservice in Osnabrück und Umgebung. Von der regelmäßigen Objektpflege über Grundstückspflege und Kleinreparaturen bis hin zur Betreuung von Wohnanlagen und Gewerbeobjekten – wir sorgen für gepflegte Immobilien und einen zuverlässigen Werterhalt Ihrer Objekte. Ideal für Privatkunden, Vermieter, Unternehmen und Hausverwaltungen.",
-      "detailDescription": "Rund ums Haus Littawe bietet professionellen Hausmeisterservice in Osnabrück und Umgebung. Von der regelmäßigen Objektpflege über Grundstückspflege und Kleinreparaturen bis hin zur Betreuung von Wohnanlagen und Gewerbeobjekten – wir sorgen für gepflegte Immobilien und einen zuverlässigen Werterhalt Ihrer Objekte. Ideal für Privatkunden, Vermieter, Unternehmen und Hausverwaltungen.",
-      "icon": "wrench",
-      "image": "/images/services/hausmeisterservice.png",
-      "detailImage": "/images/services/detail-hausmeister.png",
-      "subPage": {
-        "href": "/leistungen/objektpflege/",
-        "label": "Für Hausverwaltungen & WEGs: Objektpflege →"
-      },
-      "imageAlt": "Hausmeisterservice, Objektpflege & Grundstückspflege"
+      "id": "garten-landschaftsbau",
+      "title": "Garten- und Landschaftsbau",
+      "description": "Individuelle Außenanlagen nach Ihren Vorstellungen – Neuanlage und Umgestaltung von Gärten, Pflasterarbeiten, Rollrasen, Erdarbeiten und Bepflanzung für Privat- und Gewerbekunden.",
+      "detailDescription": "Eine professionell gestaltete Außenanlage verbindet Funktionalität, Ästhetik und Werterhalt. Als zuverlässiger Partner im Garten- und Landschaftsbau realisiert Rund ums Haus Littawe individuelle Projekte für Privatkunden, Unternehmen sowie Wohnanlagen. Von der ersten Planung bis zur fachgerechten Umsetzung begleiten wir Sie mit Erfahrung, Sorgfalt und einem hohen Qualitätsanspruch.\n\nOb die Neuanlage eines Gartens, die Umgestaltung bestehender Außenbereiche oder die Modernisierung von Einfahrten und Wegen – wir schaffen Außenanlagen, die optisch überzeugen und langfristig Bestand haben. Zu unseren Leistungen gehören Neuanlage und Umgestaltung von Gärten, Rasenneuanlagen und Rollrasenverlegung, Pflasterarbeiten für Einfahrten, Wege und Terrassen, Erdarbeiten und Geländemodellierung, Beeteinfassungen, Beete, Unkrautvlies, Bepflanzungen sowie die Wiederherstellung bestehender Außenanlagen.\n\nDarüber hinaus übernehmen wir auf Wunsch auch die anschließende Gartenpflege, damit Ihre neu gestaltete Außenanlage dauerhaft in einem gepflegten Zustand bleibt. Kontaktieren Sie uns – wir beraten Sie gerne persönlich und erstellen Ihnen ein unverbindliches Angebot.",
+      "icon": "leaf",
+      "image": "/images/services/garten-hero.webp",
+      "detailImage": "/images/services/detail-garten.png",
+      "imageAlt": "Garten- und Landschaftsbau: angelegter Garten mit Natursteinweg, Rasenfläche und blühenden Beeten"
     },
     {
       "id": "gartenpflege",
@@ -22,23 +19,13 @@
       "description": "Professionelle Gartenpflege in Osnabrück und Umgebung – Ihr zuverlässiger Gärtner für gepflegte Gärten und Außenanlagen.",
       "detailDescription": "Als erfahrener Gärtner übernehmen wir die professionelle Gartenpflege für Privatkunden, Unternehmen, Vermieter und Hausverwaltungen. Zu unseren Leistungen gehören Rasenmähen, Heckenschnitt, Beetpflege, Unkrautentfernung, Vertikutieren sowie die Pflege von Grünanlagen und Außenanlagen. Ob regelmäßige Gartenpflege oder einmalige Gartenarbeiten – wir sorgen für einen gepflegten und ordentlichen Eindruck Ihres Grundstücks.",
       "icon": "leaf",
-      "image": "/images/services/gartenpflege.png",
+      "image": "/images/services/detail-garten.png",
       "detailImage": "/images/services/detail-garten.png",
       "subPage": {
         "href": "/leistungen/rasen-neuanlage/",
         "label": "Spezial: Rasen neu anlegen →"
       },
-      "imageAlt": "Gärtner & Gartenpflege"
-    },
-    {
-      "id": "dacharbeiten",
-      "title": "Dachservice & Dachpflege",
-      "description": "Professionelle Dachpflege, Dachreinigung und Dachrinnenreinigung in Osnabrück und Umgebung.",
-      "detailDescription": "Wir unterstützen Privatkunden, Unternehmen und Hausverwaltungen mit professionellem Dachservice in Osnabrück und Umgebung. Zu unseren Leistungen gehören Dachreinigung, Dachpflege, Dachrinnenreinigung, Fallrohrreinigung, Moosentfernung, Laubentfernung, Sichtprüfungen von Dachflächen sowie die Reinigung von Garagendächern und Carports. Regelmäßige Pflege und Kontrollen helfen dabei, Verschmutzungen frühzeitig zu erkennen und den Wert Ihrer Immobilie langfristig zu erhalten.",
-      "icon": "home",
-      "image": "/images/services/dacharbeiten.jpg",
-      "detailImage": "/images/services/detail-dach.png",
-      "imageAlt": "Dachservice & Dachpflege"
+      "imageAlt": "Gärtner & Gartenpflege: gepflegter Garten mit geschnittenen Hecken, gemähtem Rasen und Blumenbeeten"
     },
     {
       "id": "entruempelung",
@@ -46,19 +33,33 @@
       "description": "Professionelle Entrümpelungen, Haushaltsauflösungen und Wohnungsauflösungen für Privat- und Gewerbekunden. Schnell, zuverlässig und inklusive fachgerechter Entsorgung.",
       "detailDescription": "Rund ums Haus Littawe unterstützt Privatkunden, Unternehmen, Vermieter und Hausverwaltungen bei Entrümpelungen aller Art. Ob Wohnung, Haus, Keller, Dachboden, Garage oder Gewerbeobjekt – wir übernehmen die komplette Räumung inklusive fachgerechter Entsorgung und besenreiner Übergabe.\n\nZu unseren Leistungen gehören Entrümpelungen, Haushaltsauflösungen, Wohnungsauflösungen, Kellerentrümpelungen, Dachbodenentrümpelungen, Garagenräumungen sowie die Entsorgung von Sperrmüll, Möbeln und sonstigem Hausrat. Dank transparenter Preise, kostenloser Besichtigungen und kurzfristiger Termine sorgen wir für eine schnelle, saubere und stressfreie Abwicklung.",
       "icon": "truck",
-      "image": "/images/services/entruempelung.jpg",
+      "image": "/images/services/entruempelung-hero.webp",
       "detailImage": "/images/services/detail-entruempelung.png",
-      "imageAlt": "Entrümpelung & Haushaltsauflösung"
+      "imageAlt": "Entrümpelung & Haushaltsauflösung: zwei Mitarbeiter laden Umzugskartons und Möbel in einen Transporter"
     },
     {
-      "id": "garten-landschaftsbau",
-      "title": "Garten- und Landschaftsbau",
-      "description": "Individuelle Außenanlagen nach Ihren Vorstellungen – Neuanlage und Umgestaltung von Gärten, Pflasterarbeiten, Rollrasen, Erdarbeiten und Bepflanzung für Privat- und Gewerbekunden.",
-      "detailDescription": "Eine professionell gestaltete Außenanlage verbindet Funktionalität, Ästhetik und Werterhalt. Als zuverlässiger Partner im Garten- und Landschaftsbau realisiert Rund ums Haus Littawe individuelle Projekte für Privatkunden, Unternehmen sowie Wohnanlagen. Von der ersten Planung bis zur fachgerechten Umsetzung begleiten wir Sie mit Erfahrung, Sorgfalt und einem hohen Qualitätsanspruch.\n\nOb die Neuanlage eines Gartens, die Umgestaltung bestehender Außenbereiche oder die Modernisierung von Einfahrten und Wegen – wir schaffen Außenanlagen, die optisch überzeugen und langfristig Bestand haben. Zu unseren Leistungen gehören Neuanlage und Umgestaltung von Gärten, Rasenneuanlagen und Rollrasenverlegung, Pflasterarbeiten für Einfahrten, Wege und Terrassen, Erdarbeiten und Geländemodellierung, Beeteinfassungen, Beete, Unkrautvlies, Bepflanzungen sowie die Wiederherstellung bestehender Außenanlagen.\n\nDarüber hinaus übernehmen wir auf Wunsch auch die anschließende Gartenpflege, damit Ihre neu gestaltete Außenanlage dauerhaft in einem gepflegten Zustand bleibt. Kontaktieren Sie uns – wir beraten Sie gerne persönlich und erstellen Ihnen ein unverbindliches Angebot.",
-      "icon": "leaf",
-      "image": "/images/services/gartenpflege.png",
-      "detailImage": "/images/services/detail-garten.png",
-      "imageAlt": "Garten- und Landschaftsbau"
+      "id": "hausmeisterservice",
+      "title": "Hausmeisterservice, Objektpflege & Grundstückspflege",
+      "description": "Rund ums Haus Littawe bietet professionellen Hausmeisterservice in Osnabrück und Umgebung. Von der regelmäßigen Objektpflege über Grundstückspflege und Kleinreparaturen bis hin zur Betreuung von Wohnanlagen und Gewerbeobjekten – wir sorgen für gepflegte Immobilien und einen zuverlässigen Werterhalt Ihrer Objekte. Ideal für Privatkunden, Vermieter, Unternehmen und Hausverwaltungen.",
+      "detailDescription": "Rund ums Haus Littawe bietet professionellen Hausmeisterservice in Osnabrück und Umgebung. Von der regelmäßigen Objektpflege über Grundstückspflege und Kleinreparaturen bis hin zur Betreuung von Wohnanlagen und Gewerbeobjekten – wir sorgen für gepflegte Immobilien und einen zuverlässigen Werterhalt Ihrer Objekte. Ideal für Privatkunden, Vermieter, Unternehmen und Hausverwaltungen.",
+      "icon": "wrench",
+      "image": "/images/services/hausmeister-hero.webp",
+      "detailImage": "/images/services/detail-hausmeister.png",
+      "subPage": {
+        "href": "/leistungen/objektpflege/",
+        "label": "Für Hausverwaltungen & WEGs: Objektpflege →"
+      },
+      "imageAlt": "Hausmeisterservice, Objektpflege & Grundstückspflege: Hausmeister prüft mit Messgerät die Außenbeleuchtung an einer Hausfassade"
+    },
+    {
+      "id": "dacharbeiten",
+      "title": "Dachservice & Dachpflege",
+      "description": "Professionelle Dachpflege, Dachreinigung und Dachrinnenreinigung in Osnabrück und Umgebung.",
+      "detailDescription": "Wir unterstützen Privatkunden, Unternehmen und Hausverwaltungen mit professionellem Dachservice in Osnabrück und Umgebung. Zu unseren Leistungen gehören Dachreinigung, Dachpflege, Dachrinnenreinigung, Fallrohrreinigung, Moosentfernung, Laubentfernung, Sichtprüfungen von Dachflächen sowie die Reinigung von Garagendächern und Carports. Regelmäßige Pflege und Kontrollen helfen dabei, Verschmutzungen frühzeitig zu erkennen und den Wert Ihrer Immobilie langfristig zu erhalten.",
+      "icon": "home",
+      "image": "/images/services/dach-hero.webp",
+      "detailImage": "/images/services/detail-dach.png",
+      "imageAlt": "Dachservice & Dachpflege: Mitarbeiter mit Sicherheitsgurt reinigt Dachrinne und Dachziegel mit einer Bürste"
     }
   ]
 }

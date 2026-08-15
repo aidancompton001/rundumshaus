@@ -6,21 +6,57 @@
     {
       "heading": "Ihre Kontaktdaten",
       "fields": [
-        { "name": "name", "label": "Ihr Name", "type": "text", "required": true, "placeholder": " " },
-        { "name": "email", "label": "E-Mail-Adresse", "type": "email", "required": true, "placeholder": " " },
-        { "name": "phone", "label": "Telefonnummer", "type": "tel", "required": false, "placeholder": " " }
+        {
+          "name": "name",
+          "label": "Ihr Name",
+          "type": "text",
+          "required": true,
+          "placeholder": " "
+        },
+        {
+          "name": "email",
+          "label": "E-Mail-Adresse",
+          "type": "email",
+          "required": true,
+          "placeholder": " "
+        },
+        {
+          "name": "phone",
+          "label": "Telefonnummer",
+          "type": "tel",
+          "required": false,
+          "placeholder": " "
+        }
       ]
     },
     {
       "heading": "Ihre Anfrage",
       "fields": [
-        { "name": "message", "label": "Ihre Nachricht", "type": "textarea", "required": true, "placeholder": " " }
+        {
+          "name": "service",
+          "label": "Leistung",
+          "type": "select",
+          "required": false,
+          "optionsFrom": "services"
+        },
+        {
+          "name": "message",
+          "label": "Ihre Nachricht",
+          "type": "textarea",
+          "required": true,
+          "placeholder": " "
+        }
       ]
     },
     {
       "heading": "Datenschutz",
       "fields": [
-        { "name": "consent", "label": "Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.", "type": "checkbox", "required": true }
+        {
+          "name": "consent",
+          "label": "Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.",
+          "type": "checkbox",
+          "required": true
+        }
       ]
     }
   ],

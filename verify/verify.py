@@ -20,10 +20,11 @@ print(f"VERIFY: {manifest['task']}")
 print(f"Время прогона (UTC): {datetime.now(timezone.utc).isoformat()}")
 print("=" * 72)
 
-# Файлы приёмки бывают в двух видах: старый — checks/desc/cmd, новый —
-# criteria/text/check, который читают гейт доклада и ревьюер. Приводим
-# схему здесь: заводить второй файл приёмки значило бы завести вторую
-# правду, которая молча разойдётся с первой.
+# Файл приёмки этой задачи описан ключами criteria/text/check — их читает
+# гейт доклада и ревьюер. Прежний формат этого скрипта — checks/desc/cmd.
+# Форматов два, источник истины должен остаться ОДИН: дублировать файл
+# значило бы завести вторую приёмку, которая молча разойдётся с первой.
+# Поэтому приводим схему здесь, ничего не меняя в самих проверках.
 checks = manifest.get('checks')
 if checks is None:
     checks = [{'id': c['id'],
@@ -40,6 +41,17 @@ failed_ids = []
 for c in checks:
     r = subprocess.run(c['cmd'], shell=True, capture_output=True, text=True)
     out = (r.stdout + r.stderr).strip()
+
+    # Landa, F-91: критерий без единого expect_* проходил цикл нетронутым и
+    # печатался как PASS. Такой критерий не может провалиться — значит он
+    # ничего не проверяет, а в отчёте выглядит наравне с настоящими. Молчать
+    # об этом хуже, чем упасть.
+    if not any(k.startswith('expect_') for k in c):
+        failed_ids.append(c['id'])
+        print(f"{c['id']:5} FAIL  {c['desc'][:48]:48} | "
+              f"у критерия нет ни одного expect_* — он не может провалиться "
+              f"| raw[{out.replace(chr(10), ' ')[:50]}]")
+        continue
 
     ok = True
     reason = ""

@@ -73,11 +73,12 @@ export default function BeforeAfter({
           </div>
         </div>
 
-        {/* Labels */}
-        <span className="absolute top-3 left-3 bg-charcoal/70 text-cream text-xs px-2 py-1 rounded-md z-20">
+        {/* Labels — единственный макетный способ подписи: тёмная пилюля
+            слева снизу (docs/design/v1-desktop/css/style.css, .ref-pair figcaption) */}
+        <span className="absolute left-2 bottom-2 z-20 px-[0.55rem] py-[0.2rem] bg-charcoal text-cream text-xs font-bold leading-tight rounded-full max-w-[calc(100%-1rem)]">
           Vorher
         </span>
-        <span className="absolute top-3 right-3 bg-charcoal/70 text-cream text-xs px-2 py-1 rounded-md z-20">
+        <span className="absolute right-2 bottom-2 z-20 px-[0.55rem] py-[0.2rem] bg-charcoal text-cream text-xs font-bold leading-tight rounded-full max-w-[calc(100%-1rem)]">
           Nachher
         </span>
       </div>

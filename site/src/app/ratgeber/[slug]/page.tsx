@@ -49,7 +49,7 @@ function renderSection(section: ArticleSection, idx: number) {
       return (
         <h2
           key={idx}
-          className="font-heading text-2xl md:text-3xl font-semibold text-charcoal mt-10 mb-4"
+          className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mt-10 mb-4"
         >
           {section.text}
         </h2>
@@ -58,7 +58,7 @@ function renderSection(section: ArticleSection, idx: number) {
       return (
         <h3
           key={idx}
-          className="font-heading text-xl font-semibold text-charcoal mt-8 mb-3"
+          className="font-heading text-xl font-extrabold text-charcoal mt-8 mb-3"
         >
           {section.text}
         </h3>
@@ -205,7 +205,7 @@ export default async function RatgeberDetail({
             {article.category}
           </span>
 
-          <h1 className="font-heading text-3xl md:text-5xl font-bold text-charcoal mb-4 leading-tight">
+          <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-charcoal mb-4 leading-tight">
             {article.title}
           </h1>
 

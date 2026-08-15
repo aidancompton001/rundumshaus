@@ -1,0 +1,119 @@
+{
+ "source": "docs/design/ref/reference.jpg",
+ "layout_width": 962,
+ "assumed_design_width": 1440,
+ "scale_to_1440": 1.4969,
+ "cap_ratio_assumption": 0.72,
+ "method": "cap-height первой заглавной буквы строки (без выносных и умляутов)",
+ "elements": {
+  "h1_hero": {
+   "cap_px": 34,
+   "top_abs": 160,
+   "bottom_abs": 193,
+   "window": {
+    "y0": 155,
+    "y1": 250,
+    "x0": 55,
+    "x1": 120
+   },
+   "font_size_at_1440_est": 71
+  },
+  "hero_subline": {
+   "cap_px": 12,
+   "top_abs": 273,
+   "bottom_abs": 284,
+   "window": {
+    "y0": 265,
+    "y1": 292,
+    "x0": 55,
+    "x1": 100
+   },
+   "font_size_at_1440_est": 25
+  },
+  "h2_section": {
+   "cap_px": 17,
+   "top_abs": 504,
+   "bottom_abs": 520,
+   "window": {
+    "y0": 495,
+    "y1": 535,
+    "x0": 262,
+    "x1": 292
+   },
+   "font_size_at_1440_est": 35
+  },
+  "eyebrow_caps": {
+   "cap_px": 8,
+   "top_abs": 483,
+   "bottom_abs": 490,
+   "window": {
+    "y0": 472,
+    "y1": 492,
+    "x0": 420,
+    "x1": 442
+   },
+   "font_size_at_1440_est": 17
+  },
+  "card_title": {
+   "cap_px": 9,
+   "top_abs": 687,
+   "bottom_abs": 695,
+   "window": {
+    "y0": 680,
+    "y1": 700,
+    "x0": 50,
+    "x1": 78
+   },
+   "font_size_at_1440_est": 19
+  },
+  "card_bullet": {
+   "cap_px": 6,
+   "top_abs": 730,
+   "bottom_abs": 735,
+   "window": {
+    "y0": 723,
+    "y1": 742,
+    "x0": 56,
+    "x1": 76
+   },
+   "font_size_at_1440_est": 12
+  },
+  "h2_about": {
+   "cap_px": 18,
+   "top_abs": 891,
+   "bottom_abs": 908,
+   "window": {
+    "y0": 885,
+    "y1": 925,
+    "x0": 484,
+    "x1": 512
+   },
+   "font_size_at_1440_est": 37
+  },
+  "stats_value": {
+   "cap_px": 15,
+   "top_abs": 1244,
+   "bottom_abs": 1258,
+   "window": {
+    "y0": 1240,
+    "y1": 1262,
+    "x0": 133,
+    "x1": 150
+   },
+   "font_size_at_1440_est": 31
+  },
+  "stats_label": {
+   "cap_px": 8,
+   "top_abs": 1269,
+   "bottom_abs": 1276,
+   "window": {
+    "y0": 1264,
+    "y1": 1288,
+    "x0": 96,
+    "x1": 122
+   },
+   "font_size_at_1440_est": 17
+  }
+ },
+ "h1_to_h2_ratio": 2.0
+}

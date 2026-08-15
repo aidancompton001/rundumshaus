@@ -105,7 +105,7 @@ export default function FaktenBlock() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           id="fakten-heading"
-          className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-6"
+          className="font-heading text-3xl md:text-4xl font-extrabold text-charcoal mb-6"
         >
           Rund ums Haus Littawe — auf einen Blick
         </h2>
