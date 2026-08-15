@@ -18,8 +18,8 @@
     },
     {
       "id": "V3",
-      "text": "Ничего не потеряно: адреса, SEO, ссылки, картинки, файлы сборки",
-      "check": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-city.json | tail -1",
+      "text": "Ничего не потеряно: адреса, SEO, ссылки, картинки, alt, разметка Google, файлы сборки. Слепок «после» снят с ТЕКУЩЕЙ сборки — прежний отставал на три коммита и не покрывал правки этого раунда (Ланда F-94). Замена картинок карточек и переписанные alt объявлены поимённо: любая другая потеря по-прежнему валит сверку",
+      "check": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-round8.json | tail -1",
       "expect_equal": "БИНАРНО: 1"
     },
     {
@@ -63,6 +63,12 @@
       "text": "Ни один измеритель не докладывает успех, обойдя ноль страниц. Прогон по пустому каталогу обязан завершаться ненулевым кодом у всех трёх (Ланда F-78)",
       "check": "py -c \"import subprocess,tempfile,sys; d=tempfile.mkdtemp(); print(sum(1 for s in ('check_type_weights','check_eyebrow_not_dup','check_layout_mobile') if subprocess.run([sys.executable,'verify/%s.py'%s,d],capture_output=True).returncode!=0))\"",
       "expect_equal": "3"
+    },
+    {
+      "id": "V11",
+      "text": "Деплой стейджинга не оставляет задачу без сборки. Скрипт сносил site/out, и ПОСЛЕ каждого деплоя приёмка молча падала с 10/10 до 4/10 — ревьюер получил «замороженный и проверенный» сайт без сборки (Ланда F-93). Прод пересобирается тем же скриптом, и он падает, если сборки нет",
+      "check": "bash -c \"grep -c 'прод-сборка восстановлена' deploy_staging.sh\"",
+      "expect_equal": "1"
     }
   ],
   "out_of_scope": [

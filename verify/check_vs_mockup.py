@@ -50,6 +50,13 @@ POS_TOL = 40
 CH_TOL = 8
 WIDTH_TOL_PX = 40
 
+# Landa, F-97: перевод ширины колонки в ЗНАКИ вынул из-под охраны КЕГЛЬ.
+# Подлог `html{font-size:8px}` давал колонку 384 px вместо 656 при тех же
+# 76 знаках, и проверка отвечала «совпадает». Начертание сторожит
+# check_type_weights, размер — не сторожил никто. Базовый кегль сверяется
+# отдельно и точно: это одно число на всю страницу, ему допуск не нужен.
+FS_TOL_PX = 1.0
+
 JS_HEADER_CTA = """() => {
   const h = document.querySelector('header');
   if (!h) return {found: 0, visible: 0};
@@ -103,7 +110,9 @@ JS_CITY = """() => {
     probe.remove();
     return w;
   };
-  const out = {prose: null, cta: null};
+  const out = {prose: null, cta: null,
+               rootFontPx: parseFloat(
+                 getComputedStyle(document.documentElement).fontSize)};
   for (const h of document.querySelectorAll('h2')) {
     const b = h.getBoundingClientRect();
     if (b.width === 0 || b.height === 0) continue;
@@ -176,6 +185,15 @@ async def run(out_dir):
             await page.evaluate("window.scrollTo(0, 0);")
             await page.wait_for_timeout(300)
             geo[tag] = await page.evaluate(JS_CITY)
+        fa = geo["макет"].get("rootFontPx")
+        fb = geo["сайт"].get("rootFontPx")
+        ok_fs = (fa is not None and fb is not None
+                 and abs(fa - fb) <= FS_TOL_PX)
+        if not ok_fs:
+            bad += 1
+        print("  базовый кегль  макет %s px | сайт %s px (допуск %s) — %s"
+              % (fa, fb, FS_TOL_PX, "OK" if ok_fs else "КЕГЛЬ ИНОЙ"))
+
         for slot, human in (("prose", "колонка текста"), ("cta", "призыв")):
             for tag in ("макет", "сайт"):
                 g = geo[tag][slot]

@@ -78,7 +78,11 @@ async def run(directory, widths):
 
 def main():
     directory = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "site", "out")
-    widths = [int(x) for x in sys.argv[2:]] or [375, 768, 1440]
+    # Ланда, раунд 8: дефект шапки жил на 1024-1279 именно потому, что
+    # сторож ходил по 375, 768 и 1440, а между ними была дыра. Ширины
+    # добраны по местам, где ломается немецкая вёрстка: сужение колонок
+    # подвала и переход меню в бургер.
+    widths = [int(x) for x in sys.argv[2:]] or [375, 768, 1024, 1100, 1280, 1440]
     try:
         import playwright  # noqa: F401
     except ImportError:

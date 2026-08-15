@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import siteData from "@/data/site.json";
 import servicesData from "@/data/services.json";
 import type { SiteConfig } from "@/data/types";
@@ -23,6 +24,14 @@ const FOOTER_DESCRIPTION =
   "Ihr Partner für Gartenpflege, Entrümpelung, Hausmeisterservice, Dachservice & Dachpflege, Garten- und Landschaftsbau und mehr in Osnabrück und Umgebung.";
 
 const waHref = `https://wa.me/${site.phone.replace(/\D/g, "")}`;
+
+/**
+ * Die Kontaktspalte ist ab `lg` schmal; die E-Mail passt dort nicht in eine Zeile.
+ * Deshalb werden erlaubte Umbruchstellen (`@` und der Domain-Bindestrich) explizit
+ * als `<wbr>` gesetzt — der Browser bricht dann dort statt mitten im Wort.
+ * Der Text selbst kommt unverändert aus `site.json`, `<wbr>` fügt kein Zeichen hinzu.
+ */
+const EMAIL_PARTS = site.email.split(/(?<=[@-])/);
 
 const linkClass =
   "text-sm inline-flex items-center min-h-[24px] hover:text-cream transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full";
@@ -128,7 +137,7 @@ export default function Footer() {
             <h4 className="font-heading text-lg font-semibold text-cream mb-4">
               Kontakt
             </h4>
-            <ul className="space-y-3.5 text-sm [&_li]:min-w-0 [&_li]:[overflow-wrap:anywhere]">
+            <ul className="space-y-3.5 text-sm [&_li]:min-w-0 [&_li]:break-words">
               <li className="flex items-center gap-3">
                 <span className="flex-none w-10 h-10 rounded-full border-[1.5px] border-cream/15 grid place-items-center text-gold">
                   <PhoneIcon className="w-[18px] h-[18px]" variant="mono" />
@@ -148,7 +157,12 @@ export default function Footer() {
                   href={`mailto:${site.email}`}
                   className="inline-flex items-center min-h-[24px] hover:text-cream transition-colors"
                 >
-                  {site.email}
+                  {EMAIL_PARTS.map((part, i) => (
+                    <Fragment key={i}>
+                      {part}
+                      {i < EMAIL_PARTS.length - 1 ? <wbr /> : null}
+                    </Fragment>
+                  ))}
                 </a>
               </li>
               <li className="flex items-start gap-3">

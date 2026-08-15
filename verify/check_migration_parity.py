@@ -44,6 +44,38 @@ H1_ALLOWED_CHANGES = {"/"}      # решение CEO: H1 главной заме
 # объявленное ДО прогона, перестаёт быть потерей — но остаётся видимым в отчёте
 # с причиной. Необъявленное валит приёмку по-прежнему.
 EXPECTED_LINK_CHANGES = {}  # ссылок клиента не терялось
+
+# Заявленная замена картинок карточек услуг и их alt (Ланда F-86, F-94).
+# Старые кадры были одной серией тёмных «раскладок инструмента на столе»:
+# услуга не показана ни на одной, а две карточки делили один файл. Alt при
+# этом дублировали название услуги, ничего не говоря о кадре.
+# Новые alt НЕСУТ и название услуги, и описание кадра, поэтому поисковое
+# слово не потеряно — потеряна ТОЧНАЯ прежняя строка, и вот она объявлена.
+# Объявление приколочено к адресу и к перечню значений: любая другая
+# потеря картинки или alt по-прежнему валит сверку (урок F-50 — амнистия
+# без пришпиливания превращает проверку в театр).
+EXPECTED_MEDIA_CHANGES = {
+    ("images", "/"): {
+        "reason": "F-86: тёмные кадры «раскладки инструмента» заменены "
+                  "снимками, где видна сама услуга; два дубля разведены",
+        "values": {
+            "/images/services/dacharbeiten.jpg",
+            "/images/services/entruempelung.jpg",
+            "/images/services/gartenpflege.png",
+            "/images/services/hausmeisterservice.png",
+        }},
+    ("alts", "/"): {
+        "reason": "F-94: alt дублировали название услуги; теперь несут "
+                  "и название, и описание кадра",
+        "values": {
+            "Dachservice &amp; Dachpflege",
+            "Entrümpelung &amp; Haushaltsauflösung",
+            "Garten- und Landschaftsbau",
+            "Gärtner &amp; Gartenpflege",
+            "Hausmeisterservice, Objektpflege &amp; Grundstückspflege",
+        }},
+}
+EXPECTED_MEDIA_CHANGES[("alts", "/leistungen/")] =     EXPECTED_MEDIA_CHANGES[("alts", "/")]
 # Число подключённых CSS/JS изменилось по замыслу: герой макета не тянет
 # GSAP SplitText и компонент Lamp, а два шрифта заменены одним. Это не потеря
 # оформления — оформление проверяется отдельно, весами и вёрсткой.
@@ -52,9 +84,14 @@ EXPECTED_LINK_CHANGES = {}  # ссылок клиента не терялось
 # доказано: снятие всего JavaScript со всех страниц давало БИНАРНО 1.
 # Теперь заявление закрепляет ЧИСЛА: на сколько и у скольких страниц.
 EXPECTED_ASSET_DELTA = {
-    "reason": "перенос макета: герой не тянет SplitText и Lamp, один шрифт вместо двух",
-    "delta": -2,     # замерено: два чанка меньше (SplitText+Lamp, второй шрифт)
-    "pages": 513,    # столько страниц затронуто; иное число валит прогон
+    "reason": "перенос макета: герой не тянет SplitText и Lamp, один шрифт "
+              "вместо двух; у главной на один чанк меньше экономии — в шапке "
+              "появился признак текущего пункта меню, который считается "
+              "после гидратации",
+    # Приколочено ПОИМЁННО: сколько страниц на какую дельту. Одна дельта на
+    # все страницы уже подводила (F-50): снятие ВСЕГО JS проходило как
+    # совпадение. Иное число страниц или иная дельта валят прогон.
+    "by_delta": {-2: 512, -1: 1},
 }
 
 EXPECTED_TEXT_CHANGES = {
@@ -251,6 +288,11 @@ def compare(before_path, after_path):
                     if g in EXPECTED_LINK_CHANGES:
                         gone.discard(g)
                         declared.add(g)
+            rule = EXPECTED_MEDIA_CHANGES.get((key, u))
+            if rule and gone and gone <= rule["values"]:
+                print("  %-16s ЗАЯВЛЕНО    %s: %d значений — %s"
+                      % (what, u, len(gone), rule["reason"]))
+                gone = set()
             if gone:
                 lostn.append(u)
         bad += len(lostn) > 0
@@ -265,15 +307,16 @@ def compare(before_path, after_path):
                 if (len(A[u].get(key) or []) if key == "assets" else (A[u].get(key) or 0))
                 != (len(B[u].get(key) or []) if key == "assets" else (B[u].get(key) or 0))]
         if key == "assets" and diff:
-            deltas = {len(B[u].get(key) or []) - len(A[u].get(key) or []) for u in diff}
-            want = EXPECTED_ASSET_DELTA["delta"]
-            want_pages = EXPECTED_ASSET_DELTA["pages"]
-            bad_delta = deltas != {want}
-            bad_pages = want_pages is not None and len(diff) != want_pages
-            bad += bad_delta or bad_pages
-            print("  %-16s %s страниц: %-5d дельта: %s (заявлено %+d) — %s"
-                  % (what, "ЗАЯВЛЕНО   " if not (bad_delta or bad_pages) else "НЕ СОШЛОСЬ ",
-                     len(diff), sorted(deltas), want, EXPECTED_ASSET_DELTA["reason"]))
+            import collections as _c
+            got = _c.Counter(len(B[u].get(key) or []) - len(A[u].get(key) or [])
+                             for u in diff)
+            want = EXPECTED_ASSET_DELTA["by_delta"]
+            mismatch = dict(got) != dict(want)
+            bad += mismatch
+            print("  %-16s %s страниц: %-5d дельты: %s (заявлено %s) — %s"
+                  % (what, "ЗАЯВЛЕНО   " if not mismatch else "НЕ СОШЛОСЬ ",
+                     len(diff), dict(sorted(got.items())),
+                     dict(sorted(want.items())), EXPECTED_ASSET_DELTA["reason"]))
         else:
             bad += len(diff) > 0
             print("  %-16s страниц с расхождением: %-5d %s" % (what, len(diff),

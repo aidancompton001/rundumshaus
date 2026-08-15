@@ -168,9 +168,9 @@
     {
       "id": "19",
       "asserted": true,
-      "text": "Перенос оформления не потерял ни одного адреса, заголовка, canonical, типа разметки, ссылки, картинки, файла сборки и записи карты сайта. Единственное изменение описания — заявленное заранее в EXPECTED_TEXT_CHANGES (охват 60 -> 80 км на /ratgeber/), инструмент печатает его как ЗАЯВЛЕНО, а не молчит. Итог: БИНАРНО 1 [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "text": "Перенос оформления не потерял ни одного адреса, заголовка, canonical, типа разметки, ссылки, картинки, файла сборки и записи карты сайта. Единственное изменение описания — заявленное заранее в EXPECTED_TEXT_CHANGES (охват 60 -> 80 км на /ratgeber/), инструмент печатает его как ЗАЯВЛЕНО, а не молчит. Итог: БИНАРНО 1. Слепок «после» снят с ТЕКУЩЕЙ сборки: прежний отставал на три коммита и не покрывал правки подвала, шапки, героя, городских и картинок (Ланда F-94) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
       "proof": {
-        "cmd": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-city.json | grep -c '^БИНАРНО: 1'",
+        "cmd": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-round8.json | grep -c '^БИНАРНО: 1'",
         "expect_equal": "1"
       }
     },
@@ -258,9 +258,9 @@
     {
       "id": "29",
       "asserted": true,
-      "text": "Ни один цвет прежней палитры не пережил перенос: девять старых значений (синий #1B3A5C и #2D5A8C, золотой #D4A843 и #E0BA5A, прежний зелёный #4A8B3F, #5AA84D, #3A7030, серый #6B7B8D, фон #F0F4F8) не встречаются ни в одном файле сборки — ни в HTML, ни в CSS, ни в JS [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
+      "text": "Ни один цвет прежней палитры не пережил перенос: девять старых значений (синий #1B3A5C и #2D5A8C, золотой #D4A843 и #E0BA5A, прежний зелёный #4A8B3F, #5AA84D, #3A7030, серый #6B7B8D, фон #F0F4F8) не встречаются ни в одном файле сборки — ни в HTML, ни в CSS, ни в JS. Проверка сперва убеждается, что сборка существует: без этого она проходила на пустом месте (Ланда F-96) [СРЕДА ЗАМЕРА: рабочее дерево .worktrees/redesign, ветка redesign/modern-2026 — состояние ПОСЛЕ переноса]",
       "proof": {
-        "cmd": "n=0; for c in 1B3A5C 2D5A8C D4A843 E0BA5A 4A8B3F 5AA84D 3A7030 6B7B8D F0F4F8; do n=$((n+$(grep -ril \"$c\" site/out --include=*.html --include=*.css --include=*.js 2>/dev/null | wc -l))); done; echo $n",
+        "cmd": "if [ $(find site/out -name '*.html' 2>/dev/null | wc -l) -lt 600 ]; then echo НЕТ_СБОРКИ; else n=0; for c in 1B3A5C 2D5A8C D4A843 E0BA5A 4A8B3F 5AA84D 3A7030 6B7B8D F0F4F8; do n=$((n+$(grep -ril \"$c\" site/out --include=*.html --include=*.css --include=*.js 2>/dev/null | wc -l))); done; echo $n; fi",
         "expect_equal": "0"
       }
     },
@@ -314,8 +314,8 @@
       "text": "Колонка текста городской страницы отцентрована как в макете, а заголовок призыва выключен влево как в макете (Ланда F-72, F-73; было: колонка прижата влево, призыв по центру, 490 страниц). Сверяется ЦЕНТР колонки, а не левый край: ширина задана в ch и зависит от шрифта, левый край ловил бы смену шрифта вместо съехавшей вёрстки. Чувствительность доказана подкладкой: сдвиг колонки влево даёт 224 px расхождения и MOCKUP_OFF [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026, сборка site/out поднята по HTTP]",
       "asserted": true,
       "proof": {
-        "cmd": "py verify/check_vs_mockup.py site/out 2>/dev/null | grep -c 'НЕ ТАМ\\|ВЫКЛЮЧКА ИНАЯ'",
-        "expect_equal": "0"
+        "cmd": "py verify/check_vs_mockup.py site/out 2>/dev/null | tail -1",
+        "expect_equal": "RESULT: MOCKUP_MATCH"
       }
     },
     {
@@ -360,6 +360,42 @@
       "text": "Крупная надпись VORHER NACHHER на карточках Dachreinigung и Kellerentrümpelung впечатана в сами фотографии клиента, а не нарисована кодом: на этой ветке разметки подпись не добавляется вовсе — ни одного figcaption. Убрать надпись можно только перерисовав снимок клиента, это вне кода (остаток находки Ланды F-81, вынесен CEO) [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
       "proof": {
         "cmd": "py -c \"import io,re;t=io.open('site/src/components/sections/ReferenzenContent.tsx',encoding='utf-8').read();i=t.index('item.before === item.after');j=t.index(') : (',i);print(t[i:j].count('figcaption'))\"",
+        "expect_equal": "0"
+      }
+    },
+    {
+      "id": "41",
+      "asserted": true,
+      "text": "Деплой стейджинга больше не сносит прод-сборку. Скрипт удалял site/out и уносил остаток через mv, из-за чего ПОСЛЕ каждого деплоя вся приёмка задачи молча падала с 10/10 до 4/10 — ровно это ревьюер и увидел, получив «замороженный и проверенный» сайт (Ланда F-93, CRITICAL). Комментарий в шапке скрипта при этом утверждал обратное. Теперь прод пересобирается тем же скриптом, и он падает, если сборки нет [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
+      "proof": {
+        "cmd": "grep -c 'прод-сборка восстановлена' deploy_staging.sh",
+        "expect_equal": "1"
+      }
+    },
+    {
+      "id": "42",
+      "asserted": true,
+      "text": "Цвет строки «in Osnabrück und Umgebung» отступает от макета сознательно: макет RGB(92,127,27), сайт RGB(172,190,140) — тот же токен, осветлённый белым. На нашем тёмном кадре крыши цвет макета давал контраст 1.15 худшим пикселем, ни один акцентный токен палитры не брал даже 3:1. После замены — 3.48 при 375 и 4.42 при 1440 (порог 3:1 для крупного текста 24px/900). Порог 4.5 не взят: цена — потеря зелёного цвета строки. Отступление не скрыто (Ланда F-100) [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
+      "proof": {
+        "cmd": "grep -c '172,190,140\\|#ACBE8C\\|acbe8c' site/src/components/sections/Hero.tsx",
+        "expect_min": 1
+      }
+    },
+    {
+      "id": "43",
+      "asserted": true,
+      "text": "Почтовый адрес не рвётся посреди слова ни на одной из шести проверяемых ширин, включая 1024 и 1100, где он рвался в подвале (Ланда F-98). Сторож горизонтальной прокрутки тоже расширен с трёх ширин до шести: дефект шапки на 1024-1279 жил именно в дыре между 768 и 1440 [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
+      "proof": {
+        "cmd": "py verify/check_no_sideways.py site/out 2>/dev/null | tail -1",
+        "expect_equal": "RESULT: NO_SIDEWAYS_SCROLL"
+      }
+    },
+    {
+      "id": "44",
+      "asserted": true,
+      "text": "Базовый кегль страницы под охраной: перевод ширины колонки в знаки вынул размер шрифта из-под проверки, и подлог html{font-size:8px} давал колонку 384 px вместо 656 при тех же 76 знаках с вердиктом «совпадает» (Ланда F-97). Подлог воспроизведён и теперь валит прогон [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
+      "proof": {
+        "cmd": "py verify/check_vs_mockup.py site/out 2>/dev/null | grep -c 'КЕГЛЬ ИНОЙ'",
         "expect_equal": "0"
       }
     }

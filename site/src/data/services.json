@@ -11,7 +11,7 @@
       "icon": "leaf",
       "image": "/images/services/garten-hero.webp",
       "detailImage": "/images/services/detail-garten.png",
-      "imageAlt": "Angelegter Garten mit Natursteinweg, Rasenfläche und blühenden Beeten"
+      "imageAlt": "Garten- und Landschaftsbau: angelegter Garten mit Natursteinweg, Rasenfläche und blühenden Beeten"
     },
     {
       "id": "gartenpflege",
@@ -25,7 +25,7 @@
         "href": "/leistungen/rasen-neuanlage/",
         "label": "Spezial: Rasen neu anlegen →"
       },
-      "imageAlt": "Gepflegter Garten mit geschnittenen Hecken, gemähtem Rasen und Blumenbeeten"
+      "imageAlt": "Gärtner & Gartenpflege: gepflegter Garten mit geschnittenen Hecken, gemähtem Rasen und Blumenbeeten"
     },
     {
       "id": "entruempelung",
@@ -35,7 +35,7 @@
       "icon": "truck",
       "image": "/images/services/entruempelung-hero.webp",
       "detailImage": "/images/services/detail-entruempelung.png",
-      "imageAlt": "Zwei Mitarbeiter laden Umzugskartons und Möbel in einen Transporter"
+      "imageAlt": "Entrümpelung & Haushaltsauflösung: zwei Mitarbeiter laden Umzugskartons und Möbel in einen Transporter"
     },
     {
       "id": "hausmeisterservice",
@@ -49,7 +49,7 @@
         "href": "/leistungen/objektpflege/",
         "label": "Für Hausverwaltungen & WEGs: Objektpflege →"
       },
-      "imageAlt": "Hausmeister prüft mit Messgerät die Außenbeleuchtung an einer Hausfassade"
+      "imageAlt": "Hausmeisterservice, Objektpflege & Grundstückspflege: Hausmeister prüft mit Messgerät die Außenbeleuchtung an einer Hausfassade"
     },
     {
       "id": "dacharbeiten",
@@ -59,7 +59,7 @@
       "icon": "home",
       "image": "/images/services/dach-hero.webp",
       "detailImage": "/images/services/detail-dach.png",
-      "imageAlt": "Mitarbeiter mit Sicherheitsgurt reinigt Dachrinne und Dachziegel mit einer Bürste"
+      "imageAlt": "Dachservice & Dachpflege: Mitarbeiter mit Sicherheitsgurt reinigt Dachrinne und Dachziegel mit einer Bürste"
     }
   ]
 }
