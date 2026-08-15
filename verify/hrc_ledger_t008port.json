@@ -344,6 +344,24 @@
         "cmd": "grep -c 'PX-065/066: section order per Kevin' site/src/app/page.tsx",
         "expect_equal": "1"
       }
+    },
+    {
+      "id": "39",
+      "asserted": true,
+      "text": "Кнопок на первом экране три, в макете две — отступление сознательное, той же природы, что и порядок разделов (утверждение 38): третья кнопка «Kostenlos anfragen» приходит из данных клиента homepage.json (hero.ctas), которые Кевин правит через админку. Удалить её значило бы решить за клиента ради макета. Вид кнопок при этом приведён к макету: вторая строка, стрелка, поля, радиус; медная заливка ровно одна и отдана WhatsApp, обе клиентские идут ghost-стилем макета [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
+      "proof": {
+        "cmd": "py -c \"import json,io;d=json.load(io.open('site/src/data/homepage.json',encoding='utf-8'));print(len(d['hero']['ctas']))\"",
+        "expect_equal": "2"
+      }
+    },
+    {
+      "id": "40",
+      "asserted": true,
+      "text": "Крупная надпись VORHER NACHHER на карточках Dachreinigung и Kellerentrümpelung впечатана в сами фотографии клиента, а не нарисована кодом: на этой ветке разметки подпись не добавляется вовсе — ни одного figcaption. Убрать надпись можно только перерисовав снимок клиента, это вне кода (остаток находки Ланды F-81, вынесен CEO) [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026]",
+      "proof": {
+        "cmd": "py -c \"import io,re;t=io.open('site/src/components/sections/ReferenzenContent.tsx',encoding='utf-8').read();i=t.index('item.before === item.after');j=t.index(') : (',i);print(t[i:j].count('figcaption'))\"",
+        "expect_equal": "0"
+      }
     }
   ]
 }
