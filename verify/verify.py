@@ -20,11 +20,24 @@ print(f"VERIFY: {manifest['task']}")
 print(f"Время прогона (UTC): {datetime.now(timezone.utc).isoformat()}")
 print("=" * 72)
 
+# Файлы приёмки бывают в двух видах: старый — checks/desc/cmd, новый —
+# criteria/text/check, который читают гейт доклада и ревьюер. Приводим
+# схему здесь: заводить второй файл приёмки значило бы завести вторую
+# правду, которая молча разойдётся с первой.
+checks = manifest.get('checks')
+if checks is None:
+    checks = [{'id': c['id'],
+               'desc': c.get('desc') or c.get('text', ''),
+               'cmd': c.get('cmd') or c['check'],
+               **{k: v for k, v in c.items()
+                  if k.startswith('expect_')}}
+              for c in manifest['criteria']]
+
 passed = 0
-total = len(manifest['checks'])
+total = len(checks)
 failed_ids = []
 
-for c in manifest['checks']:
+for c in checks:
     r = subprocess.run(c['cmd'], shell=True, capture_output=True, text=True)
     out = (r.stdout + r.stderr).strip()
 
