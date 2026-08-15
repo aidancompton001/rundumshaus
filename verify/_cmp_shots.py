@@ -20,7 +20,15 @@ import threading
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MOCK = os.path.join(ROOT, "docs", "design", "v1-desktop")
 OUT = os.path.join(ROOT, "_cmp")
-LIVE = "https://2e1be0e5-a011-4411-b47f-f2e0e6b28bd8.clouding.host/rundumshaus/"
+BUILD = os.path.join(ROOT, "site", "out")
+
+# Landa, F-90: сторона «сайт» бралась с сетевого стейджинга, и ничто не
+# связывало его с текущим исходником — доказательство держалось на слове
+# исполнителя, что там та же сборка. Теперь снимается ЛОКАЛЬНАЯ сборка
+# site/out, полученная из HEAD, и рядом печатается git-sha и возраст
+# сборки (Закон 27, правило 2: среда замера фиксируется явно).
+# Стейджинг можно снять поверх: RUH_SHOTS_LIVE=<url>.
+LIVE_URL = os.environ.get("RUH_SHOTS_LIVE")
 
 PAIRS = [
     ("index", "index.html", ""),
@@ -30,6 +38,27 @@ PAIRS = [
     ("kontakt", "kontakt.html", "kontakt/"),
     ("city", "city-template.html", "leistungen/gartenpflege/osnabrueck/"),
 ]
+
+
+def stamp():
+    """git-sha исходника и возраст сборки — чтобы снимок нельзя было
+    выдать за свежий."""
+    import subprocess, time
+    def sh(*a):
+        try:
+            return subprocess.run(a, cwd=ROOT, capture_output=True,
+                                  text=True).stdout.strip()
+        except Exception:
+            return "?"
+    sha = sh("git", "rev-parse", "--short", "HEAD")
+    dirty = "с несохранёнными правками" if sh("git", "status", "--porcelain")         else "чисто"
+    newest = 0
+    for base, _dirs, files in os.walk(BUILD):
+        for f in files:
+            if f.endswith(".html"):
+                newest = max(newest, os.path.getmtime(os.path.join(base, f)))
+    age = (time.time() - newest) / 60 if newest else -1
+    return sha, dirty, age
 
 
 # Доля строк пикселей, у которых разброс яркости ниже BLANK_STD, — мера
@@ -110,8 +139,23 @@ async def main():
     httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     base = "http://127.0.0.1:%d/" % httpd.server_address[1]
+
+    if LIVE_URL:
+        live = LIVE_URL
+        s_httpd = None
+    else:
+        s_handler = functools.partial(http.server.SimpleHTTPRequestHandler,
+                                      directory=BUILD)
+        s_handler.func.log_message = lambda *a, **k: None
+        s_httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), s_handler)
+        threading.Thread(target=s_httpd.serve_forever, daemon=True).start()
+        live = "http://127.0.0.1:%d/" % s_httpd.server_address[1]
+
+    sha, dirty, age = stamp()
     print("МАКЕТ:", base)
-    print("САЙТ :", LIVE)
+    print("САЙТ :", live)
+    print("ИСХОДНИК: HEAD %s, дерево %s; сборке %.0f мин"
+          % (sha, dirty, age))
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
@@ -124,7 +168,7 @@ async def main():
             page = await ctx.new_page()
             for name, mock_rel, live_rel in PAIRS:
                 for tag, url in (("mock", base + mock_rel),
-                                 ("live", LIVE + live_rel)):
+                                 ("live", live + live_rel)):
                     p = os.path.join(OUT, "%s_%s_%d.png" % (name, tag, width))
                     try:
                         h = await shoot(page, url, p)

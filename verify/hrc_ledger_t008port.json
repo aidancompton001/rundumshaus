@@ -335,6 +335,15 @@
         "cmd": "py -c \"import subprocess,os,tempfile,sys; d=tempfile.mkdtemp(); print(sum(1 for s in ('check_type_weights','check_eyebrow_not_dup','check_layout_mobile') if subprocess.run([sys.executable,'verify/%s.py'%s,d],capture_output=True).returncode!=0))\"",
         "expect_equal": "3"
       }
+    },
+    {
+      "id": "38",
+      "asserted": true,
+      "text": "Порядок разделов главной ОТСТУПАЕТ от макета сознательно, а не по недосмотру: в макете услуги идут перед отзывами, у нас отзывы вторые — по прямой просьбе клиента Кевина в WhatsApp от 2026-06-10, зафиксированной в коде (site/src/app/page.tsx, комментарий PX-065/066). Ревьюер довод принял по существу и потребовал оформить отступление утверждением реестра — это оно. Решение, оставлять ли так, за CEO [СРЕДА ЗАМЕРА: .worktrees/redesign, ветка redesign/modern-2026, исходник страницы]",
+      "proof": {
+        "cmd": "grep -c 'PX-065/066: section order per Kevin' site/src/app/page.tsx",
+        "expect_equal": "1"
+      }
     }
   ]
 }

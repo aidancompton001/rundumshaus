@@ -183,7 +183,7 @@ JS_OVERFLOW = """() => {
     const srOnly = cs.position === 'absolute'
       && box.width <= 1.5 && box.height <= 1.5
       && cs.overflow === 'hidden'
-      && /inset\(\s*50%/.test(cs.clipPath || '');
+      && /inset\\(\\s*50%/.test(cs.clipPath || '');
     if (srOnly) return;
     if (cs.overflowX !== 'visible') {
       // Проверяем только СОБСТВЕННЫЙ текст элемента. Иначе флаг ловит любой

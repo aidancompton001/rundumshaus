@@ -42,6 +42,17 @@ for c in checks:
     r = subprocess.run(c['cmd'], shell=True, capture_output=True, text=True)
     out = (r.stdout + r.stderr).strip()
 
+    # Landa, F-91: критерий без единого expect_* проходил цикл нетронутым и
+    # печатался как PASS. Такой критерий не может провалиться — значит он
+    # ничего не проверяет, а в отчёте выглядит наравне с настоящими. Молчать
+    # об этом хуже, чем упасть.
+    if not any(k.startswith('expect_') for k in c):
+        failed_ids.append(c['id'])
+        print(f"{c['id']:5} FAIL  {c['desc'][:48]:48} | "
+              f"у критерия нет ни одного expect_* — он не может провалиться "
+              f"| raw[{out.replace(chr(10), ' ')[:50]}]")
+        continue
+
     ok = True
     reason = ""
     if 'expect_exit' in c:

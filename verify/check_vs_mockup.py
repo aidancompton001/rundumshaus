@@ -36,6 +36,20 @@ CITY_MOCK = "city-template.html"
 # Допуск 40 px на порядок меньше разъезда, который ловим (225 px).
 POS_TOL = 40
 
+# Landa, F-85: перевод сверки на центр отдал ШИРИНУ колонки без охраны —
+# подлог «колонка сужена до 22ch, центр сохранён» проходил как совпадение.
+# Ширина сверяется в ЗНАКАХ, а не в пикселях: в пикселях 76ch макета и
+# 76ch сайта это 656 и 767, разные шрифты дают разный знак. Допуск 8
+# знаков — вчетверо меньше разрыва, который ловим (76 против 22).
+#
+# Правило про знаки годится ТОЛЬКО для колонки текста: её ширина и задана
+# в ch. Плашка призыва тянется во всю ширину контейнера, она задана в
+# пикселях, и мерить её в знаках значило бы сравнивать кегль заголовка,
+# а не вёрстку. Поэтому у неё сверяется ширина в пикселях: макет 1200,
+# сайт 1152 — те самые лишние 24 px поля с каждой стороны (F-84).
+CH_TOL = 8
+WIDTH_TOL_PX = 40
+
 JS_HEADER_CTA = """() => {
   const h = document.querySelector('header');
   if (!h) return {found: 0, visible: 0};
@@ -70,11 +84,32 @@ JS_CITY = """() => {
     }
     return false;
   };
+  // Ширина колонки задана в ch, а ch — это ширина знака в ЕЁ шрифте.
+  // Меряем ширину знака на месте и переводим пиксели в знаки: тогда
+  // 76ch макета и 76ch сайта сравнимы, хотя в пикселях это 656 и 767.
+  const chPx = el => {
+    const probe = document.createElement('span');
+    probe.textContent = '0'.repeat(100);
+    const cs = getComputedStyle(el);
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;'
+      + 'font:' + cs.font;
+    if (!cs.font) {
+      probe.style.fontFamily = cs.fontFamily;
+      probe.style.fontSize = cs.fontSize;
+      probe.style.fontWeight = cs.fontWeight;
+    }
+    document.body.appendChild(probe);
+    const w = probe.getBoundingClientRect().width / 100;
+    probe.remove();
+    return w;
+  };
   const out = {prose: null, cta: null};
   for (const h of document.querySelectorAll('h2')) {
     const b = h.getBoundingClientRect();
     if (b.width === 0 || b.height === 0) continue;
+    const unit = chPx(h.parentElement || h);
     const rec = {left: Math.round(b.left), width: Math.round(b.width),
+                 ch: unit > 0 ? Math.round(b.width / unit) : null,
                  align: getComputedStyle(h).textAlign,
                  text: h.textContent.trim().slice(0, 40)};
     const slot = onDark(h) ? 'cta' : 'prose';
@@ -144,9 +179,9 @@ async def run(out_dir):
         for slot, human in (("prose", "колонка текста"), ("cta", "призыв")):
             for tag in ("макет", "сайт"):
                 g = geo[tag][slot]
-                print("  %-14s %-6s left=%s width=%s align=%s  «%s»"
+                print("  %-14s %-6s left=%s width=%s (%s знаков) align=%s  «%s»"
                       % (human, tag, g and g["left"], g and g["width"],
-                         g and g["align"], g and g["text"]))
+                         g and g["ch"], g and g["align"], g and g["text"]))
             a, b = geo["макет"][slot], geo["сайт"][slot]
             if not a or not b:
                 bad += 1
@@ -156,13 +191,24 @@ async def run(out_dir):
             d = abs((a["left"] + a["width"] / 2) - (b["left"] + b["width"] / 2))
             ok_pos = d <= POS_TOL
             ok_align = a["align"] == b["align"]
-            if not (ok_pos and ok_align):
+            if slot == "prose":
+                got, want, unit = a.get("ch"), b.get("ch"), "знаков"
+                tol = CH_TOL
+            else:
+                got, want, unit = a["width"], b["width"], "px"
+                tol = WIDTH_TOL_PX
+            ok_ch = (got is not None and want is not None
+                     and abs(got - want) <= tol)
+            if not (ok_pos and ok_align and ok_ch):
                 bad += 1
-            print("  %-14s расхождение по центру %.0f px при допуске %d; "
-                  "выключка макет=%s сайт=%s — %s"
-                  % (human, d, POS_TOL, a["align"], b["align"],
-                     "OK" if ok_pos and ok_align else
-                     ("НЕ ТАМ" if not ok_pos else "ВЫКЛЮЧКА ИНАЯ")))
+            why = ("OK" if ok_pos and ok_align and ok_ch else
+                   "НЕ ТАМ" if not ok_pos else
+                   "ВЫКЛЮЧКА ИНАЯ" if not ok_align else
+                   "ШИРИНА ИНАЯ")
+            print("  %-14s центр %.0f px (допуск %d); ширина %s против %s "
+                  "%s (допуск %d); выключка макет=%s сайт=%s — %s"
+                  % (human, d, POS_TOL, got, want, unit, tol,
+                     a["align"], b["align"], why))
         await ctx.close()
         await browser.close()
 
