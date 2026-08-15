@@ -393,6 +393,11 @@ collections:
                   - { name: type, label: "Typ (nicht ändern)", widget: string, readonly: true }
                   - { name: required, label: Pflichtfeld, widget: boolean }
                   - { name: placeholder, label: Platzhalter-Text, widget: string, required: false }
+                  # Список услуг в поле «Leistung» собирается из services.json.
+                  # Ключ обязан быть описан здесь: Sveltia переписывает файл
+                  # по схеме конфига, и незаявленный ключ пропал бы при первом
+                  # же сохранении — выпадающий список остался бы без вариантов.
+                  - { name: optionsFrom, label: "Auswahl-Quelle (nicht ändern)", widget: string, required: false, readonly: true }
           - { name: submitLabel, label: Absende-Button, widget: string }
           - { name: successMessage, label: Erfolgs-Meldung, widget: text }
           - { name: errorMessage, label: Fehler-Meldung, widget: text }

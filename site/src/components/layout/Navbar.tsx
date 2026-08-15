@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
@@ -24,10 +24,17 @@ export default function Navbar() {
      из usePathname: компонент рендерится и в тестах, где контекста роутера нет.
      До гидратации подчёркивания нет — статический экспорт одинаков для всех
      страниц, и вшить признак в HTML на этапе сборки нельзя. */
-  const [path, setPath] = useState<string | null>(null);
-  useEffect(() => {
-    setPath(window.location.pathname.replace(/\/+$/, "") || "/");
-  }, []);
+  // Читаем адрес через useSyncExternalStore, а не через setState в эффекте:
+  // синхронный вызов setState внутри эффекта тянет каскад перерисовок и
+  // валит `npm run lint`, а падение линтера останавливает деплой целиком.
+  // Серверный снимок — null: до гидратации подчёркивания нет, статический
+  // экспорт одинаков для всех страниц.
+  const path = useSyncExternalStore(
+    () => () => {},
+    () => window.location.pathname.replace(/\/+$/, "") || "/",
+    () => null,
+  );
+
   const isCurrent = (href: string) => {
     if (path === null) return false;
     const target = getHref(href).replace(/\/+$/, "") || "/";

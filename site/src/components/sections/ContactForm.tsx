@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 import contactFormData from "@/data/contact-form.json";
 import servicesData from "@/data/services.json";
 import siteData from "@/data/site.json";
@@ -61,7 +62,7 @@ export default function ContactForm() {
       <section className="bg-dark text-white relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(2.75rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5.5rem)]">
           <nav className="flex flex-wrap gap-1.5 text-sm text-white/70 mb-4" aria-label="Brotkrumen-Navigation">
-            <a href="/" className="hover:text-white">Startseite</a>
+            <Link href="/" className="hover:text-white">Startseite</Link>
             <span aria-hidden="true">›</span>
             <span aria-current="page">Kontakt</span>
           </nav>
