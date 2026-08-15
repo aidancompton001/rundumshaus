@@ -173,7 +173,8 @@ export default function OsnabrueckHubPage() {
                 <a href="tel:+4915239603175" className="hover:text-copper block">
                   ☎ +49 1523 9603175
                 </a>
-                <a href="mailto:kontakt@rundumshaus-littawe.de" className="hover:text-copper block break-all">
+                {/* F-79: было break-all — адрес рвался посреди слова. */}
+                <a href="mailto:kontakt@rundumshaus-littawe.de" className="hover:text-copper block break-words">
                   ✉ kontakt@rundumshaus-littawe.de
                 </a>
               </p>

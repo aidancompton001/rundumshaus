@@ -44,7 +44,7 @@
       "id": "V7",
       "text": "Тесты зелёные",
       "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1",
-      "expect_equal": "Tests  249 passed"
+      "expect_equal": "Tests  254 passed"
     },
     {
       "id": "V8",

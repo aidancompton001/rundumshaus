@@ -39,7 +39,7 @@ export default function ReferenzenContent() {
                   // PX-036b: multi-step gallery — 2×2 grid with labels.
                   <div className="aspect-[4/3] grid grid-cols-2 grid-rows-2 gap-px overflow-hidden bg-charcoal/10">
                     {item.steps.slice(0, 4).map((s, i) => (
-                      <div key={i} className="relative overflow-hidden">
+                      <figure key={i} className="relative m-0 overflow-hidden">
                         <picture>
                           <source type="image/webp" srcSet={getImageUrl(toWebp(s.src))} />
                           <img
@@ -52,10 +52,10 @@ export default function ReferenzenContent() {
                             decoding="async"
                           />
                         </picture>
-                        <span className="absolute top-2 left-2 px-2 py-0.5 bg-charcoal/85 text-white text-[10px] font-semibold uppercase tracking-wider rounded">
+                        <figcaption className="absolute left-2 bottom-2 z-10 px-[0.55rem] py-[0.2rem] bg-charcoal text-cream text-xs font-bold leading-tight rounded-full max-w-[calc(100%-1rem)]">
                           {i + 1}. {s.label}
-                        </span>
-                      </div>
+                        </figcaption>
+                      </figure>
                     ))}
                   </div>
                 ) : item.before === item.after ? (
@@ -77,7 +77,7 @@ export default function ReferenzenContent() {
                 ) : (
                   // Side-by-side vorher | nachher with labels
                   <div className="aspect-[4/3] grid grid-cols-2 gap-px overflow-hidden bg-charcoal/10">
-                    <div className="relative overflow-hidden">
+                    <figure className="relative m-0 overflow-hidden">
                       <picture>
                         <source type="image/webp" srcSet={getImageUrl(toWebp(item.before))} />
                         <img
@@ -90,11 +90,11 @@ export default function ReferenzenContent() {
                           decoding="async"
                         />
                       </picture>
-                      <span className="absolute top-3 left-3 px-2.5 py-1 bg-charcoal/80 text-white text-xs font-semibold uppercase tracking-wider rounded">
+                      <figcaption className="absolute left-2 bottom-2 z-10 px-[0.55rem] py-[0.2rem] bg-charcoal text-cream text-xs font-bold leading-tight rounded-full max-w-[calc(100%-1rem)]">
                         Vorher
-                      </span>
-                    </div>
-                    <div className="relative overflow-hidden">
+                      </figcaption>
+                    </figure>
+                    <figure className="relative m-0 overflow-hidden">
                       <picture>
                         <source type="image/webp" srcSet={getImageUrl(toWebp(item.after))} />
                         <img
@@ -107,18 +107,13 @@ export default function ReferenzenContent() {
                           decoding="async"
                         />
                       </picture>
-                      <span className="absolute top-3 left-3 px-2.5 py-1 bg-copper/90 text-white text-xs font-semibold uppercase tracking-wider rounded">
+                      <figcaption className="absolute left-2 bottom-2 z-10 px-[0.55rem] py-[0.2rem] bg-charcoal text-cream text-xs font-bold leading-tight rounded-full max-w-[calc(100%-1rem)]">
                         Nachher
-                      </span>
-                    </div>
+                      </figcaption>
+                    </figure>
                   </div>
                 )}
                 <div className="p-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-copper">
-                      Vorher / Nachher
-                    </span>
-                  </div>
                   <h3 className="font-heading text-xl font-extrabold text-charcoal mb-2">
                     {item.title}
                   </h3>

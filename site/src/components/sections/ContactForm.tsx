@@ -98,7 +98,10 @@ export default function ContactForm() {
                   <span className="w-10 h-10 rounded-full border-[1.5px] border-ink/10 grid place-items-center text-copper flex-none">
                     <EnvelopeIcon className="w-[18px] h-[18px]" variant="mono" />
                   </span>
-                  <a href={`mailto:${site.email}`} className="font-body font-semibold text-ink hover:text-copper transition-colors break-all">
+                  {/* F-79: break-all рвал адрес посреди слова («…littaw|e.de»).
+                      break-words оставляет обычные точки переноса — дефис в
+                      домене — и рубит по буквам только если иначе не влезает. */}
+                  <a href={`mailto:${site.email}`} className="font-body font-semibold text-ink hover:text-copper transition-colors break-words">
                     {site.email}
                   </a>
                 </li>

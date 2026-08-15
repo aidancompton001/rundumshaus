@@ -35,6 +35,57 @@ const USP: { title: string; text: string; path: string }[] = [
     path: "M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" },
 ];
 
+/**
+ * Цвет акцентной строки H1 на фото.
+ *
+ * В макете `.hero h1 .accent` — это `--color-accent` (#5A7F1B) поверх светлого
+ * тёплого кадра. У нас в героя поставлено другое фото — тёмный кадр крыши, и
+ * тот же зелёный на нём не читается: замер по чистому фону (строка сделана
+ * прозрачной, снят кадр 343×55 при 375) даёт медиану 2,33:1 и худший пиксель
+ * 1,51:1, а стоявший здесь `--color-copper-light` (#4A6B16) — 1,77:1 и 1,15:1.
+ * Ни один акцентный токен палитры на этом кадре не берёт даже 3:1.
+ *
+ * Поэтому берётся тот же токен, осветлённый белым из палитры: тон остаётся
+ * прежним (81,6° против 82,2° у токена), а контраст поднимается до медианы
+ * 5,45:1 при худшем пикселе 3,54:1. Порог применён «крупный текст» (WCAG 1.4.3:
+ * от 18,66px полужирного; здесь 24px и вес 900) — 3:1, запас 18 %. Расчёт —
+ * скриптом по каждому пикселю замеренного фона, числа в отчёте F-80.
+ *
+ * Значение записано готовым hex, а не через color-mix: color-mix отдаёт
+ * вычисленный цвет как `color(srgb …)`, и проверки, разбирающие `rgb(…)`,
+ * его не прочитают. Формула зафиксирована здесь:
+ *   color-mix(in srgb, #5A7F1B 50%, #FEFEFE) = #ACBE8C
+ */
+const ACCENT_ON_DARK = "#ACBE8C";
+
+/* Вторые строки кнопок героя — дословно из макета (index.html, `.hero-ctas`).
+   Ключ — подпись кнопки из homepage.json; чего в макете нет, того здесь нет. */
+const CTA_SUBLINES: Record<string, string> = {
+  "Unsere Leistungen": "entdecken",
+};
+
+/** Стрелка `.btn-arrow` из макета: едет вправо на наведении. */
+function Arrow() {
+  return (
+    <svg
+      className="flex-none transition-transform duration-200 group-hover:translate-x-1"
+      width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+    >
+      <path d="M5 12h14m-6-6 6 6-6 6" />
+    </svg>
+  );
+}
+
+/* Геометрия кнопок героя — из макета, css/style.css `.btn` и `.btn--two-line`:
+   padding .8rem 1.4rem, gap .75rem, min-height 44, radius 10, кегль 16/600,
+   вторая строка 14/400 с прозрачностью .92. Ниже 560 макет растягивает кнопку
+   на всю ширину и центрирует содержимое (`.hero-ctas .btn`). */
+const BTN_BASE =
+  "group inline-flex items-center gap-3 min-h-[44px] px-[1.4rem] py-[0.8rem] " +
+  "rounded-[10px] text-base font-semibold leading-[1.25] transition-colors " +
+  "justify-center sm:justify-start";
+
 function Check() {
   return (
     <span className="flex-none w-6 h-6 rounded-full bg-copper grid place-items-center" aria-hidden="true">
@@ -76,7 +127,7 @@ export default function Hero() {
           <h1 className="font-heading font-black leading-[1.15] [text-wrap:balance] uppercase
             text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] mb-5">
             <span className="block">{main}</span>
-            {accent && <span className="block text-copper-light">{accent}</span>}
+            {accent && <span className="block" style={{ color: ACCENT_ON_DARK }}>{accent}</span>}
           </h1>
 
           <p className="text-lg md:text-[1.5625rem] leading-snug max-w-[34ch] mb-6">
@@ -92,34 +143,51 @@ export default function Hero() {
             ))}
           </ul>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4">
             <a
               href={`https://wa.me/${WA}`}
               rel="noopener"
-              className="inline-flex items-center gap-3 min-h-[44px] px-5 py-3 rounded-[10px]
-                bg-copper hover:bg-copper-dark text-white font-semibold transition-colors"
+              className={`${BTN_BASE} bg-copper hover:bg-copper-dark text-white`}
             >
-              <span className="flex-none w-9 h-9 rounded-full bg-white/20 grid place-items-center">
-                <WhatsAppIcon className="w-5 h-5" />
+              <span className="flex-none w-[34px] h-[34px] rounded-full bg-white/[0.18] grid place-items-center">
+                <WhatsAppIcon className="w-[19px] h-[19px]" />
               </span>
-              <span className="flex flex-col leading-tight text-left">
-                <strong>Jetzt per WhatsApp</strong>
-                <small className="text-xs opacity-90">schnell anfragen</small>
+              <span className="flex flex-col leading-[1.25] text-left">
+                <strong className="font-bold">Jetzt per WhatsApp</strong>
+                <small className="text-sm font-normal opacity-[0.92]">schnell anfragen</small>
               </span>
+              <Arrow />
             </a>
             {/* Кнопки клиента из homepage.json — обе. Кнопка WhatsApp взята из
                 макета и добавлена К ним, а не вместо: «Kostenlos anfragen»
-                ведёт на форму, и терять эту ссылку с главной нельзя. */}
+                ведёт на форму, и терять эту ссылку с главной нельзя.
+
+                ВИД приведён к макету: обводка 2px белым (`.btn--ghost`), вторая
+                строка и стрелка (`.btn--two-line`, `.btn-arrow`). Вторая строка
+                берётся из макета только там, где макет её задаёт — у
+                «Unsere Leistungen» это «entdecken»; для «Kostenlos anfragen»
+                пары в макете нет, и выдумывать подпись за клиента нельзя.
+
+                Заливку `variant: "primary"` у «Kostenlos anfragen» намеренно НЕ
+                отрисовываем медью: в макете медная заливка ровно одна и отдана
+                WhatsApp — главному каналу связи клиента. Число кнопок (в данных
+                2 + WhatsApp из макета = 3 против 2 в макете) вынесено вопросом
+                CEO, кнопка не удалена. */}
             {data.hero.ctas.map((cta) => (
               <a
                 key={cta.href}
                 href={getHref(cta.href)}
-                className="inline-flex items-center gap-3 min-h-[44px] px-5 py-3 rounded-[10px]
-                  border border-white/40 hover:border-white text-white font-semibold transition-colors"
+                className={`${BTN_BASE} bg-transparent border-2 border-white text-white hover:bg-white/[0.12]`}
               >
-                <span className="flex flex-col leading-tight text-left">
-                  <strong>{cta.label}</strong>
+                <span className="flex flex-col leading-[1.25] text-left">
+                  <strong className="font-bold">{cta.label}</strong>
+                  {CTA_SUBLINES[cta.label] && (
+                    <small className="text-sm font-normal opacity-[0.92]">
+                      {CTA_SUBLINES[cta.label]}
+                    </small>
+                  )}
                 </span>
+                <Arrow />
               </a>
             ))}
           </div>

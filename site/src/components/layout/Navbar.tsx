@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
@@ -19,55 +19,101 @@ const WA = site.phone.replace(/[^\d]/g, "");
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  /* Текущий пункт меню в макете подчёркнут (`.main-nav a[aria-current="page"]`:
+     цвет accent-ink + нижняя граница accent). Адрес берётся из location, а не
+     из usePathname: компонент рендерится и в тестах, где контекста роутера нет.
+     До гидратации подчёркивания нет — статический экспорт одинаков для всех
+     страниц, и вшить признак в HTML на этапе сборки нельзя. */
+  const [path, setPath] = useState<string | null>(null);
+  useEffect(() => {
+    setPath(window.location.pathname.replace(/\/+$/, "") || "/");
+  }, []);
+  const isCurrent = (href: string) => {
+    if (path === null) return false;
+    const target = getHref(href).replace(/\/+$/, "") || "/";
+    return path === target;
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_2px_14px_rgba(16,23,31,0.06)]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-6 min-h-[82px]">
+        {/* Зазоры шапки — из макета: до 1000px он ужимается до 0.5rem, до 360px
+            до 0.35rem, иначе лого + плашка + бургер не помещаются в 375/320.
+            Полный зазор макета (1.5rem) с 1280px: на 1024–1279 меню из 7 пунктов
+            вместе с ним не влезало (1031px строки при 1024px экрана). */}
+        <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 max-[360px]:gap-[0.35rem] min-h-[82px]">
           <a href={getHref("/")} className="inline-flex items-center flex-none">
             <img
               src={getImageUrl("/images/branding/logo-client.png")}
               alt={site.company}
               width={160}
               height={66}
-              className="h-12 sm:h-[66px] w-auto"
+              /* Высоты лого — из макета: 66px в полной шапке, 40px до 1000px,
+                 34px до 360px. На 375 это освобождает место под плашку с
+                 номером (расчёт ширин — в отчёте F-87). */
+              className="h-10 lg:h-[66px] max-[360px]:h-[34px] w-auto"
             />
           </a>
 
           {/* Меню прижато вправо, как в макете (.main-nav { margin-left: auto }) */}
-          <nav className="hidden lg:flex items-center gap-7 ml-auto">
-            {site.navigation.map((link) => (
-              <a
-                key={link.href}
-                href={getHref(link.href)}
-                className="text-ink font-semibold text-[0.9375rem] hover:text-copper transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Зазор между пунктами — формула макета (`.main-nav ul`:
+              clamp(0.9rem, 1.8vw, 1.6rem)) вместо прежних фиксированных 28px.
+              У нас в меню 7 пунктов против 5 в макете, и на 1024 фиксированный
+              зазор выносил шапку за экран: строка занимала 1080px при 960px
+              контейнера. */}
+          <nav className="hidden lg:flex items-center gap-[clamp(0.9rem,1.8vw,1.6rem)] ml-auto">
+            {site.navigation.map((link) => {
+              const current = isCurrent(link.href);
+              return (
+                <a
+                  key={link.href}
+                  href={getHref(link.href)}
+                  aria-current={current ? "page" : undefined}
+                  /* Полоса под пунктом заложена всегда прозрачной, как в макете,
+                     чтобы у текущего пункта не менялась высота строки. */
+                  className={`inline-flex items-center min-h-[44px] font-semibold text-[0.9375rem]
+                    border-b-2 transition-colors ${
+                      current
+                        ? "text-copper-light border-copper"
+                        : "text-ink border-transparent hover:text-copper"
+                    }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
 
-          {/* Номер телефона в шапке — главный способ связи у клиента */}
-          {/*
-            Ниже sm кнопка сжимается в круглую иконку 44x44 (тач-цель по WCAG),
-            текстовые строки уходят из потока через hidden — иначе лого + кнопка
-            + бургер не помещаются в 375px и появляется горизонтальная прокрутка.
-            От sm и выше вид прежний: иконка + номер + подпись.
-          */}
+          {/* Номер телефона в шапке — главный способ связи у клиента.
+
+              Плашка с НОМЕРОМ показывается на всех ширинах, как в макете. До
+              этого ниже sm она сжималась в круглую иконку 44×44 — вид, которого
+              в макете нет. Помещается: при 375 макет тратит на шапку 310,6px
+              (лого 71 + 8 + плашка 179,6 + 8 + бургер 44) при 337,5px
+              контейнера, у нас контейнер шире (343px при px-4). Числа замерены,
+              расчёт в отчёте F-87.
+
+              Компактный режим повторяет макет: до 1000px подпись «Jetzt per
+              WhatsApp» скрыта, номер 13px, поля 0.75rem, зазор 0.5rem; до 360px
+              номер 12px и поля 0.55rem. */}
           <a
             href={`https://wa.me/${WA}`}
             rel="noopener"
-            className="inline-flex items-center justify-center sm:justify-start sm:gap-3 flex-none bg-copper hover:bg-copper-dark text-white w-11 h-11 sm:w-auto sm:h-auto rounded-full sm:rounded-[10px] sm:px-4 sm:py-2.5 min-h-[44px] transition-colors ml-auto lg:ml-0"
+            className="inline-flex items-center gap-2 lg:gap-3 flex-none bg-copper hover:bg-copper-dark
+              text-white rounded-[10px] px-3 lg:px-[1.4rem] max-[360px]:px-[0.55rem] py-2
+              min-h-[44px] transition-colors ml-auto lg:ml-0"
           >
-            <span className="flex-none w-9 h-9 rounded-full sm:bg-white/20 grid place-items-center">
-              <WhatsAppIcon className="w-5 h-5" />
-              {/* Ниже sm видимого текста у кнопки нет — имя для скринридера
-                  даёт эта строка. Через aria-label делать нельзя: он перебил
-                  бы видимый номер и подпись на широких ширинах. */}
-              <span className="sr-only sm:hidden">WhatsApp: {site.phone}</span>
+            <span className="flex-none w-[34px] h-[34px] rounded-full bg-white/[0.18] grid place-items-center">
+              <WhatsAppIcon className="w-[19px] h-[19px]" />
             </span>
-            <span className="hidden sm:flex flex-col leading-tight text-left">
-              <strong className="text-[0.9375rem] font-semibold">{site.phone}</strong>
-              <small className="text-xs opacity-90">Jetzt per WhatsApp</small>
+            <span className="flex flex-col leading-[1.15] lg:leading-tight text-left">
+              <strong className="text-[13px] lg:text-[0.9375rem] max-[360px]:text-[12px] font-semibold whitespace-nowrap">
+                {site.phone}
+              </strong>
+              {/* Подпись до 1000px не показывается (как в макете), но остаётся
+                  доступной: sr-only вместо hidden — иначе на узких ширинах имя
+                  ссылки теряет слово WhatsApp. */}
+              <small className="sr-only lg:not-sr-only lg:text-xs lg:opacity-90">Jetzt per WhatsApp</small>
             </span>
           </a>
 

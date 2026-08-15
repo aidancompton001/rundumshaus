@@ -152,7 +152,14 @@ export default function GartenCityTemplate({ city, neighbors, allOtherCities }: 
         </ul>
 
         {/* CTA block */}
-        <section className="my-10 p-6 md:p-8 bg-charcoal text-cream rounded-2xl">
+        {/* F-84: поля плашки призыва приведены к макету (.container + .cta-panel).
+            Макет: ширина min(1280px, 90vw), центр по экрану, паддинг
+            clamp(1.5rem,3vw,2.5rem). У нас плашка сидела внутри контейнера с
+            px-8, поэтому на 1440 стояла на left=112 шириной 1216 вместо 80/1280
+            — заголовок призыва уезжал на 144/1152 против 120/1200 в макете.
+            left-1/2 + -translate-x-1/2 центрируют плашку по экрану, не трогая
+            остальные блоки колонки (F-72/F-73 не задеты). */}
+        <section className="my-10 relative left-1/2 -translate-x-1/2 w-[min(1280px,90vw)] p-[clamp(1.5rem,3vw,2.5rem)] bg-charcoal text-cream rounded-2xl">
           <h2 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">
             {s(T.cta.heading)}
           </h2>
