@@ -1,11 +1,23 @@
-// Server component — visible on-page reviews required by Google for valid
-// AggregateRating display (self-serving stars without visible reviews are
-// not shown). PX-031 Phase A.
+// Server component — Bewertungsblock auf /ueber-uns.
 //
-// Source: 2 verified Google Business Profile reviews from Osnabrück
-// customers (CEO confirmed with Kevin via WhatsApp 2026-05-02).
+// Texte und Daten stammen wortwörtlich aus dem Google-Unternehmensprofil
+// (Places API, place_id ChIJlwdlLxePaQER5QKZVHCPPx0). Wir prüfen sie nicht
+// selbst — deshalb steht hier der Herkunftshinweis nach § 5b Abs. 3 UWG und
+// nirgends die Behauptung, die Bewertungen seien von uns geprüft worden
+// (Anhang Nr. 23b zu § 3 UWG).
+//
+// Zahlen: 5,0 und 10 sind Profilzahlen aus reviews.json (googleProfile),
+// die Zahl der gezeigten Karten ist reviews.length.
 
 import reviewsData from "@/data/reviews.json";
+import {
+  GOOGLE_PROFILE,
+  GoogleLogo,
+  GoogleProfileButton,
+  GoogleProfileFigures,
+  ReviewsSourceNote,
+  ShownSelectionNote,
+} from "@/components/ui/GoogleReviewBits";
 
 interface Review {
   id: string;
@@ -19,12 +31,6 @@ interface Review {
 
 const data = reviewsData as {
   source: string;
-  aggregateRating: {
-    ratingValue: number;
-    ratingCount: number;
-    bestRating: number;
-    worstRating: number;
-  };
   reviews: Review[];
 };
 
@@ -53,7 +59,7 @@ function StarRating({ rating, max = 5 }: { rating: number; max?: number }) {
 }
 
 export default function ReviewsBlock() {
-  const { aggregateRating, reviews } = data;
+  const { reviews } = data;
 
   return (
     <section
@@ -66,17 +72,16 @@ export default function ReviewsBlock() {
             id="reviews-heading"
             className="font-heading text-3xl md:text-4xl font-extrabold text-charcoal mb-3"
           >
-            Was unsere Kunden sagen
+            Kundenstimmen aus unserem Google-Unternehmensprofil
           </h2>
           <div className="flex items-center justify-center gap-3 mb-2">
-            <StarRating rating={aggregateRating.ratingValue} />
+            <StarRating rating={GOOGLE_PROFILE.ratingValue} />
             <span className="text-charcoal text-lg font-semibold">
-              {aggregateRating.ratingValue.toFixed(1)} / {aggregateRating.bestRating}
+              <GoogleProfileFigures />
             </span>
           </div>
           <p className="text-charcoal-light text-sm">
-            {aggregateRating.ratingCount} verifizierte Bewertungen aus Google
-            Unternehmensprofil
+            <ShownSelectionNote shown={reviews.length} />
           </p>
         </div>
 
@@ -87,7 +92,10 @@ export default function ReviewsBlock() {
               className="bg-cream-dark border border-sand/30 rounded-2xl p-6"
             >
               <div className="flex items-center justify-between mb-3">
-                <StarRating rating={r.rating} />
+                <div className="flex items-center gap-2">
+                  <GoogleLogo />
+                  <StarRating rating={r.rating} />
+                </div>
                 <time
                   dateTime={r.datePublished}
                   className="text-xs text-charcoal-light"
@@ -98,7 +106,7 @@ export default function ReviewsBlock() {
                   })}
                 </time>
               </div>
-              <p className="text-charcoal leading-relaxed mb-4 text-base">
+              <p className="text-charcoal leading-relaxed mb-4 text-base whitespace-pre-line">
                 &bdquo;{r.text}&ldquo;
               </p>
               <footer className="text-sm text-charcoal-light">
@@ -116,16 +124,18 @@ export default function ReviewsBlock() {
           ))}
         </div>
 
-        <p className="text-center text-xs text-charcoal-light/70 mt-6">
-          Quelle: {data.source}
-        </p>
+        <div className="mt-8 text-center">
+          <GoogleProfileButton className="inline-flex items-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition" />
+        </div>
+
+        <ReviewsSourceNote className="text-center text-sm text-charcoal-light mt-6 max-w-2xl mx-auto" />
 
         <div className="mt-10 text-center border-t border-sand/30 pt-8">
           <p className="text-charcoal mb-4">
             Sie waren Kunde? Wir freuen uns über Ihre Bewertung.
           </p>
           <a
-            href="https://g.page/r/CeUCmVRwjz8dEBM/review"
+            href={GOOGLE_PROFILE.reviewUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition"

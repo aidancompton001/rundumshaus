@@ -339,18 +339,25 @@ collections:
         file: site/src/data/reviews.json
         fields:
           - { name: source, label: "Quelle (nicht ändern)", widget: string, readonly: true }
-          - { name: verified, label: "Interne Notiz (wird nicht angezeigt)", widget: string }
-          - name: aggregateRating
-            label: Gesamt-Bewertung
+          - { name: verified, label: "Interne Notiz (wird nicht angezeigt)", widget: text }
+          - name: googleProfile
+            label: "Zahlen aus dem Google-Profil"
             widget: object
+            hint: "Diese Zahlen zeigen wir als Google-Zahlen an ('5,0 bei Google · 10 Bewertungen'). Sie müssen mit dem echten Profil übereinstimmen — bitte dort nachsehen und bei Änderung hier nachziehen. Die Zahl der auf der Website gezeigten Karten wird automatisch gezählt und nirgends eingetragen."
             fields:
-              - { name: ratingValue, label: Durchschnitt, widget: number, value_type: float }
-              - { name: ratingCount, label: Anzahl, widget: number, value_type: int }
+              - { name: placeId, label: "Google place_id (nicht ändern)", widget: string, readonly: true }
+              - { name: profileUrl, label: "Link zum Profil (Bewertungen ansehen)", widget: string }
+              - { name: reviewUrl, label: "Link zum Bewerten (Formular)", widget: string }
+              - { name: ratingValue, label: "Durchschnitt im Profil", widget: number, value_type: float }
+              - { name: ratingCount, label: "Anzahl Bewertungen im Profil", widget: number, value_type: int }
               - { name: bestRating, label: Beste, widget: number, value_type: int }
               - { name: worstRating, label: Schlechteste, widget: number, value_type: int }
+              - { name: asOfLabel, label: "Stand, ausgeschrieben (z. B. August 2026)", widget: string }
+              - { name: asOfShort, label: "Stand, kurz (z. B. 08/2026)", widget: string }
           - name: reviews
-            label: Bewertungen
+            label: "Bewertungen (nur echte, aus Google übernommen)"
             widget: list
+            hint: "Nur Bewertungen eintragen, die wirklich im Google-Profil stehen — Text wortwörtlich. Erfundene oder von Familie/Freunden geschriebene Bewertungen sind wettbewerbswidrig und können das Google-Profil kosten."
             fields:
               - { name: id, label: "Technische ID (eindeutig)", widget: string }
               - { name: author, label: Name, widget: string }

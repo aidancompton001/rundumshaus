@@ -20,9 +20,8 @@
 import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-// PX-074: schema review assertions derive from reviews.json (single source) —
-// hardcoded counts broke every time a real review lands (A0/E2-class lesson).
-import reviewsData from "@/data/reviews.json";
+// reviews.json wird hier bewusst NICHT mehr importiert: das Bewertungs-Markup
+// ist aus layout.tsx entfernt, es gibt also nichts mehr dagegen zu prüfen.
 
 const LAYOUT_PATH = path.resolve(__dirname, "..", "layout.tsx");
 const BASE_URL = "https://rundumshaus-littawe.de";
@@ -74,53 +73,17 @@ function readSchemaGraph(): {
   const allCities = serviceAreas.regions.flatMap((r) => r.cities);
   const targetCitiesSchema: Array<{ "@type": "City"; name: string }> = []; // not under test here
 
-  // Resolve reviewSchemas + reviewsData from real data file
-  const reviewsData = JSON.parse(
-    fs.readFileSync(
-      path.resolve(__dirname, "..", "..", "data", "reviews.json"),
-      "utf-8"
-    )
-  ) as {
-    aggregateRating: {
-      ratingValue: number;
-      ratingCount: number;
-      bestRating: number;
-      worstRating: number;
-    };
-    reviews: Array<{
-      author: string;
-      datePublished: string;
-      rating: number;
-      text: string;
-    }>;
-  };
-  const reviewSchemas = reviewsData.reviews.map((r) => ({
-    "@type": "Review",
-    author: { "@type": "Person", name: r.author },
-    datePublished: r.datePublished,
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: r.rating,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    reviewBody: r.text,
-  }));
-
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval
+  // Bewertungen sind aus dem Markup entfernt — reviewsData/reviewSchemas
+  // werden im Literal nicht mehr referenziert und deshalb hier auch nicht
+  // mehr bereitgestellt. Stünde eine der beiden Referenzen wieder im
+  // Literal, würde new Function mit ReferenceError scheitern — das ist
+  // eine zusätzliche, unbeabsichtigte Sicherung.
   const fn = new Function(
     "allCities",
     "targetCitiesSchema",
-    "reviewsData",
-    "reviewSchemas",
     `return (${literal});`
   );
-  return fn(
-    allCities,
-    targetCitiesSchema,
-    reviewsData,
-    reviewSchemas
-  ) as ReturnType<typeof readSchemaGraph>;
+  return fn(allCities, targetCitiesSchema) as ReturnType<typeof readSchemaGraph>;
 }
 
 describe("layout.tsx — Schema.org @graph", () => {
@@ -264,49 +227,38 @@ describe("layout.tsx — Schema.org @graph", () => {
     });
   });
 
-  describe("AggregateRating + Review (PX-031 Phase A)", () => {
+  // Bewertungs-Markup wurde bewusst entfernt (statt es nur nicht mehr zu
+  // pruefen): Google gibt fuer Bewertungen ueber das eigene Unternehmen auf
+  // der eigenen Website keine Sterne aus, verbietet aber zugleich das
+  // Aggregieren von Bewertungen anderer Plattformen. Das Markup brachte also
+  // nichts und riskierte eine manuelle Massnahme -- und zwar auf allen Seiten
+  // gleichzeitig, weil es im Root-Layout lag. Diese Tests halten den Zustand
+  // fest, damit es nicht unbemerkt zurueckkehrt.
+  describe("kein Bewertungs-Markup im LocalBusiness (bewusst entfernt)", () => {
     const lb3 = readSchemaGraph()["@graph"].find(
       (n) => n["@id"] === LB_ID
     ) as Record<string, unknown> | undefined;
 
-    it("LocalBusiness has AggregateRating with verified Kevin reviews", () => {
-      const ar = lb3!.aggregateRating as Record<string, unknown>;
-      expect(ar["@type"]).toBe("AggregateRating");
-      expect(ar.ratingValue).toBe(reviewsData.aggregateRating.ratingValue);
-      expect(ar.ratingCount).toBe(reviewsData.aggregateRating.ratingCount);
-      // ratingCount must never drift from the actual review list
-      expect(ar.ratingCount).toBe(reviewsData.reviews.length);
-      expect(ar.bestRating).toBe(5);
-      // schema.org: worstRating is the LOWER bound of the scale, not the lowest received rating
-      expect(ar.worstRating).toBe(1);
+    it("LocalBusiness hat kein aggregateRating", () => {
+      expect(lb3!.aggregateRating).toBeUndefined();
     });
 
-    it("LocalBusiness has one Review entry per reviews.json item (PX-074: derived, not hardcoded)", () => {
-      const reviews = lb3!.review as Array<Record<string, unknown>>;
-      expect(Array.isArray(reviews)).toBe(true);
-      expect(reviews.length).toBe(reviewsData.reviews.length);
-      const authors = reviews.map(
-        (r) => (r.author as Record<string, string>).name
-      );
-      for (const src of reviewsData.reviews) {
-        expect(authors).toContain(src.author);
+    it("LocalBusiness hat kein review-Array", () => {
+      expect(lb3!.review).toBeUndefined();
+    });
+
+    it("kein Knoten im @graph traegt Review- oder AggregateRating-Auszeichnung", () => {
+      for (const node of readSchemaGraph()["@graph"]) {
+        expect(node.aggregateRating).toBeUndefined();
+        expect(node.review).toBeUndefined();
+        expect(node["@type"]).not.toBe("Review");
+        expect(node["@type"]).not.toBe("AggregateRating");
       }
     });
 
-    it("each Review has @type, author Person, rating, body", () => {
-      const reviews = lb3!.review as Array<Record<string, unknown>>;
-      for (const r of reviews) {
-        expect(r["@type"]).toBe("Review");
-        const author = r.author as Record<string, string>;
-        expect(author["@type"]).toBe("Person");
-        expect(author.name).toBeTruthy();
-        const rating = r.reviewRating as Record<string, unknown>;
-        expect(rating["@type"]).toBe("Rating");
-        expect(rating.ratingValue).toBe(5);
-        expect(typeof r.reviewBody).toBe("string");
-        expect((r.reviewBody as string).length).toBeGreaterThan(0);
-        expect(r.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      }
+    it("layout.tsx importiert reviews.json nicht mehr", () => {
+      const source = fs.readFileSync(LAYOUT_PATH, "utf-8");
+      expect(source).not.toMatch(/from\s+"@\/data\/reviews\.json"/);
     });
   });
 

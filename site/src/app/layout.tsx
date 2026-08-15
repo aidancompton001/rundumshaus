@@ -6,7 +6,6 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import serviceAreasData from "@/data/service-areas.json";
-import reviewsData from "@/data/reviews.json";
 import type { ServiceAreasData } from "@/data/types";
 import { TARGET_CITIES } from "@/lib/targetCities";
 import "./globals.css";
@@ -18,20 +17,18 @@ const targetCitiesSchema = TARGET_CITIES.map((name) => ({
   name,
 }));
 
-// Reviews: visible on /ueber-uns. Schema below references this data.
-// PX-031 Phase A: AggregateRating + individual Review entries.
-const reviewSchemas = reviewsData.reviews.map((r) => ({
-  "@type": "Review",
-  author: { "@type": "Person", name: r.author },
-  datePublished: r.datePublished,
-  reviewRating: {
-    "@type": "Rating",
-    ratingValue: r.rating,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  reviewBody: r.text,
-}));
+// KEIN aggregateRating und KEIN review im LocalBusiness-Knoten — bewusst.
+//
+// Google Review snippets: „Reviews that are collected on the business's own
+// site are not eligible for review rich results", und das Aggregieren von
+// Bewertungen anderer Plattformen ist ausdrücklich untersagt. Unsere
+// Bewertungen stammen aus dem eigenen Google-Profil und stehen auf der
+// eigenen Seite — Sterne in den Suchergebnissen gibt es dafür also ohnehin
+// nicht, wohl aber das Risiko einer manuellen Maßnahme. Das Markup lag auf
+// allen 617 Seiten, der Schaden wäre also nicht lokal gewesen.
+// Die Bewertungen bleiben für Menschen sichtbar (Startseite, /ueber-uns,
+// /osnabrueck) — entfernt wird nur die Maschinen-Auszeichnung.
+// Gegenprobe: site/src/app/__tests__/layout.schema.test.ts.
 
 // Макет клиента набран Inter — и заголовки, и текст
 // (docs/design/v1-desktop/css/tokens.css:44). Прежняя пара Lora +
@@ -134,16 +131,6 @@ export default function RootLayout({
                     "@type": "City",
                     name: city,
                   })),
-                  // AggregateRating: 2 verified Google reviews from Osnabrück
-                  // (PX-031 Phase A, CEO confirmed with Kevin 2026-05-02).
-                  aggregateRating: {
-                    "@type": "AggregateRating",
-                    ratingValue: reviewsData.aggregateRating.ratingValue,
-                    ratingCount: reviewsData.aggregateRating.ratingCount,
-                    bestRating: reviewsData.aggregateRating.bestRating,
-                    worstRating: reviewsData.aggregateRating.worstRating,
-                  },
-                  review: reviewSchemas,
                   hasOfferCatalog: {
                     "@type": "OfferCatalog",
                     name: "Leistungen",

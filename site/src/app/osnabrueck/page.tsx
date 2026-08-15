@@ -12,10 +12,16 @@ import reviewsData from "@/data/reviews.json";
 import PageHero from "@/components/ui/PageHero";
 
 // PX-046 F4+F8: title 91→58 chars, description 191→154 chars
+// Bewertungszahlen werden aus reviews.json gerechnet, nicht in den String
+// geschrieben: ein festes „5,0 aus 8" wird beim nächsten Google-Update
+// stillschweigend falsch.
+const { googleProfile } = reviewsData;
+const GOOGLE_RATING = googleProfile.ratingValue.toFixed(1).replace(".", ",");
+
 export const metadata = generateSEO({
   title: "Hausmeister & Gartenpflege Osnabrück ★ Familienbetrieb",
   description:
-    "Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Landschaftsbau, Dach, Entrümpelung in Osnabrück. ★ 5,0 aus 8 Bewertungen. ☎ direkt anrufen.",
+    `Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Landschaftsbau, Dach, Entrümpelung in Osnabrück. ★ ${GOOGLE_RATING} bei Google, ${googleProfile.ratingCount} Bewertungen. ☎ direkt anrufen.`,
   path: "/osnabrueck",
 });
 
@@ -161,9 +167,18 @@ export default function OsnabrueckHubPage() {
                 Bewertungen
               </h2>
               <p className="text-sm text-charcoal-light">
-                <span className="text-copper font-bold text-xl">★ {reviewsData.aggregateRating.ratingValue.toFixed(1)}</span>
-                {" "}aus {reviewsData.aggregateRating.ratingCount} verifizierten Google-Bewertungen
+                <span className="text-copper font-bold text-xl">★ {GOOGLE_RATING}</span>
+                {" "}bei Google · {googleProfile.ratingCount} Bewertungen
+                {" "}(Stand: {googleProfile.asOfShort})
               </p>
+              <a
+                href={googleProfile.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-copper font-medium hover:underline"
+              >
+                Alle Bewertungen auf Google ansehen →
+              </a>
             </div>
             <div>
               <h2 className="font-heading text-base font-extrabold text-charcoal mb-2">
@@ -268,7 +283,7 @@ export default function OsnabrueckHubPage() {
                     className="p-5 bg-cream-dark border border-sand/30 rounded-xl"
                   >
                     <div className="text-copper text-base mb-2">★★★★★</div>
-                    <p className="text-sm text-charcoal-light leading-relaxed mb-3">
+                    <p className="text-sm text-charcoal-light leading-relaxed mb-3 whitespace-pre-line">
                       „{r.text}&ldquo;
                     </p>
                     <p className="text-xs text-charcoal font-medium">
@@ -278,6 +293,22 @@ export default function OsnabrueckHubPage() {
                   </div>
                 ))}
               </div>
+              {/* § 5b Abs. 3 UWG: Hinweis muss neben den Bewertungen stehen. */}
+              <p className="mt-4 text-xs text-charcoal-light/80">
+                Bewertungen aus unserem Google-Profil, von uns übernommen
+                (Stand: {googleProfile.asOfShort}). Eine eigene Echtheitsprüfung
+                führen wir nicht durch. Hier zeigen wir{" "}
+                {osnabrueckReviews.length} davon —{" "}
+                <a
+                  href={googleProfile.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-copper hover:underline"
+                >
+                  alle Bewertungen auf Google ansehen
+                </a>
+                .
+              </p>
             </section>
           )}
 

@@ -1,18 +1,30 @@
 "use client";
 
 // PX-064: Google reviews slider on homepage (Kevin's request 2026-06-09).
-// Data from reviews.json (8 real verified Google reviews).
-// JSX only — NO Schema here: AggregateRating + Review schema already lives
-// in the LocalBusiness JSON-LD in layout.tsx (ownership contract L-015).
-// Auto-pull via Places API will replace the static JSON once Google
-// indexes the profile (see docs/CREDENTIALS.md — Places API key ready).
+// Texte und Daten wortwörtlich aus dem Google-Unternehmensprofil übernommen.
+// JSX only — kein Review-/AggregateRating-Markup: Google erlaubt keine
+// Sternchen-Rich-Results für Bewertungen über das eigene Unternehmen auf der
+// eigenen Website, deshalb ist das Markup in layout.tsx entfernt worden.
+//
+// Zahlen: 5,0 und 10 kommen aus googleProfile (Profilzahlen, per Link
+// nachprüfbar), die Zahl der gezeigten Karten ist reviews.length — nie
+// als Literal ins JSX schreiben, sonst wird sie beim nächsten Google-Update
+// stillschweigend zur Lüge.
 
 import { useRef, useState } from "react";
 import reviewsData from "@/data/reviews.json";
 import { ScrollReveal } from "@/components/motion";
 import SectionHeading from "@/components/ui/SectionHeading";
+import {
+  GOOGLE_PROFILE,
+  GoogleLogo,
+  GoogleProfileButton,
+  GoogleProfileFigures,
+  ReviewsSourceNote,
+  ShownSelectionNote,
+} from "@/components/ui/GoogleReviewBits";
 
-const { reviews, aggregateRating } = reviewsData;
+const { reviews } = reviewsData;
 
 // PX-074: long reviews (Markus, Gartenpflege) would stretch every card in the
 // flex row to the tallest card's height — clamp long texts with a toggle.
@@ -24,7 +36,7 @@ function ReviewText({ text }: { text: string }) {
   return (
     <div className="mt-4 flex-1">
       <p
-        className={`text-charcoal-light leading-relaxed ${
+        className={`text-charcoal-light leading-relaxed whitespace-pre-line ${
           isLong && !expanded ? "line-clamp-6" : ""
         }`}
       >
@@ -73,13 +85,18 @@ export default function BewertungenSlider() {
           <SectionHeading eyebrow="Bewertungen" className="mb-4">
             Das sagen unsere Kunden
           </SectionHeading>
-          <div className="flex items-center justify-center gap-3 text-charcoal-light">
-            <Stars count={Math.round(aggregateRating.ratingValue)} />
-            <span className="font-semibold text-charcoal">
-              {aggregateRating.ratingValue.toFixed(1)}
+          <p className="text-charcoal font-semibold mb-2">
+            Kundenstimmen aus unserem Google-Unternehmensprofil
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-charcoal-light">
+            <Stars count={Math.round(GOOGLE_PROFILE.ratingValue)} />
+            <span>
+              <GoogleProfileFigures />
             </span>
-            <span>·</span>
-            <span>{aggregateRating.ratingCount} Google-Bewertungen</span>
+            <span className="hidden sm:inline">·</span>
+            <span>
+              <ShownSelectionNote shown={reviews.length} />
+            </span>
           </div>
         </ScrollReveal>
 
@@ -94,7 +111,10 @@ export default function BewertungenSlider() {
                 key={r.id}
                 className="snap-start shrink-0 w-[300px] md:w-[360px] bg-cream-dark border border-sand/30 rounded-2xl p-6 flex flex-col"
               >
-                <Stars count={r.rating} />
+                <div className="flex items-center justify-between">
+                  <Stars count={r.rating} />
+                  <GoogleLogo />
+                </div>
                 <ReviewText text={r.text} />
                 <div className="mt-5 pt-4 border-t border-sand/30 flex items-center justify-between">
                   <div>
@@ -130,9 +150,11 @@ export default function BewertungenSlider() {
           </button>
         </div>
 
-        <p className="text-center text-sm text-charcoal-light mt-6">
-          Verifizierte Bewertungen aus dem Google Unternehmensprofil.
-        </p>
+        <div className="mt-8 text-center">
+          <GoogleProfileButton className="inline-flex items-center gap-2 px-6 py-3 bg-copper text-white font-semibold rounded-lg hover:bg-copper-dark transition" />
+        </div>
+
+        <ReviewsSourceNote className="text-center text-sm text-charcoal-light mt-6 max-w-2xl mx-auto" />
       </div>
     </section>
   );

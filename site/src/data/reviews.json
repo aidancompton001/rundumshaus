@@ -1,20 +1,34 @@
 {
-  "source": "Google Business Profile",
-  "verified": "2026-06-11 (CEO confirmed, +1 new review from Markus (Local Guide), Gartenpflege — PX-074)",
-  "aggregateRating": {
+  "source": "Google Unternehmensprofil",
+  "verified": "2026-08-15: Abgleich mit dem echten Google-Profil über die Places API (place_id ChIJlwdlLxePaQER5QKZVHCPPx0). Texte und Daten wortwörtlich übernommen. Zwei Einträge entfernt, die der Inhaber selbst als Familie/Freunde und nicht als Kunden benannt hat (siehe DEVLOG S033, 02.05.2026). Hinweis: dieses Feld landet mit im Browser-Bundle — keine Namen und nichts Internes hier hineinschreiben.",
+  "googleProfile": {
+    "placeId": "ChIJlwdlLxePaQER5QKZVHCPPx0",
+    "profileUrl": "https://www.google.com/maps/place/?q=place_id:ChIJlwdlLxePaQER5QKZVHCPPx0",
+    "reviewUrl": "https://g.page/r/CeUCmVRwjz8dEBM/review",
     "ratingValue": 5,
-    "ratingCount": 9,
+    "ratingCount": 10,
     "bestRating": 5,
-    "worstRating": 1
+    "worstRating": 1,
+    "asOfLabel": "August 2026",
+    "asOfShort": "08/2026"
   },
   "reviews": [
+    {
+      "id": "google-bahar-sevim-2026-07",
+      "author": "Bahar Sevim",
+      "city": "Osnabrück",
+      "rating": 5,
+      "datePublished": "2026-07-05",
+      "text": "Endlich jemand der einen nicht übers Tisch zieht. Bei uns wurde eine Dachreinigung mit Grundierung durchgeführt. Das Ergebnis kann sich sehen lassen. Sowohl Kevin als auch sein Mitarbeiter sind überaus freundlich und hilfsbereit. Sehr gerne wieder.",
+      "service": "Dachreinigung"
+    },
     {
       "id": "google-markus-garten-2026-06",
       "author": "Markus",
       "city": "Osnabrück",
       "rating": 5,
       "datePublished": "2026-06-11",
-      "text": "Ich bin restlos begeistert. Ich hab den Kevin Littawe kurzfristig angerufen, da ich leider seit ein paar Wochen aus gesundheitlichen Gründen nicht im Garten arbeiten konnte und er hat mir super schnell geholfen. Heute, 2 Tage nach unserem ersten Telefonat war er 3 Stunden da, mit einem Kollegen und jeder Menge guten Werkzeugen - ein Profi mit Profi Equipment. Den Rasen-Verschnitt hat er natürlich sofort eingepackt und auch mitgenommen und alles sauber gemacht. Er hat sich mehrfach erkundigt, ob mir alles gefällt. Kevin ist ein Profi und ein richtig guter Dienstleister rund ums Haus und er hat mir viele gute Tipps fürs gesamte Haus - Dach, Fassade, Pflaster, Hecken, Bäume gegeben. Ich werde ihn wieder beauftragen und freue mich schon auf das nette gegenüber. Kevin und sein Kollege sind super sympathisch, herzlich und lustig und ich bin wirklich sehr dankbar. Ach ja: preislich sehr gut, eine absolute ehrliche Haut, günstig und steht zu seinem Wort!",
+      "text": "Ich bin restlos begeistert. Ich hab den Kevin Littawe kurzfristig angerufen, da ich leider seit ein paar Wochen aus gesundheitlichen Gründen nicht im Garten arbeiten konnte und er hat mir super schnell geholfen.\n\nHeute, 2 Tage nach unserem ersten Telefonat war er 3 Stunden da, mit einem Kollegen und jeder Menge guten Werkzeugen - ein Profi mit Profi Equipment. Den Rasen-Verschnitt hat er natürlich sofort eingepackt und auch mitgenommen und alles sauber gemacht. Er hat sich mehrfach erkundigt, ob mir alles gefällt. 👍👌\nKevin ist ein Profi und ein richtig guter Dienstleister rund ums Haus und er hat mir viele gute Tipps fürs gesamte Haus - Dach, Fassade, Pflaster, Hecken, Bäume gegeben.\n\nIch werde ihn wieder beauftragen und freue mich schon auf das nette gegenüber. Kevin und sein Kollege sind super sympathisch, herzlich und lustig und ich bin wirklich sehr\ndankbar.\n\nAch ja: preislich sehr gut, eine absolute ehrliche Haut, günstig und steht zu seinem Wort!",
       "service": "Gartenpflege"
     },
     {
@@ -36,31 +50,22 @@
       "service": "Dachrinnenreinigung"
     },
     {
-      "id": "google-justus-mueller-2026-05",
-      "author": "Justus Müller",
+      "id": "google-maxim-kloster-2026-05",
+      "author": "Maxim Kloster",
       "city": "Osnabrück",
       "rating": 5,
-      "datePublished": "2026-05-05",
-      "text": "Rund ums Haus Littawe hat meinen kompletten Garten wieder in Topform gebracht. Es wurde alles gründlich gesäubert, der Rasen gemäht und vertikutiert sowie sämtliche Gartenarbeiten sauber erledigt.",
-      "service": "Gartenpflege"
+      "datePublished": "2026-05-25",
+      "text": "Sehr freundlich und gute Arbeit geleistet.\nKann ich nur weiterempfehlen!\nVollbrachte arbeiten bei mir:\nRasen abgeschält\nErde 10cm tief ausgehoben\nMaulwurfgitter verlegt\nWieder begradigt/Erde nachgefüllt\nSamen gesät.",
+      "service": "Rasen-Neuanlage"
     },
     {
       "id": "google-charleton-kaps-2026-05",
       "author": "Charleton Kaps",
       "city": "Osnabrück",
       "rating": 5,
-      "datePublished": "2026-05-29",
+      "datePublished": "2026-05-23",
       "text": "Sehr zuverlässig, super schnell gearbeitet und dabei auch noch total freundlich. Die Entrümpelung und Dachreinigung wurden sauber und professionell durchgeführt – und das zu einem top Preis. Bin sehr zufrieden, jederzeit wieder gerne!",
       "service": "Entrümpelung & Dachreinigung"
-    },
-    {
-      "id": "google-maxim-kloster-2026-05",
-      "author": "Maxim Kloster",
-      "city": "Osnabrück",
-      "rating": 5,
-      "datePublished": "2026-05-29",
-      "text": "Sehr freundlich und gute Arbeit geleistet. Kann ich nur weiterempfehlen!",
-      "service": null
     },
     {
       "id": "google-radoslaw-labuda-2026-04",
@@ -70,15 +75,6 @@
       "datePublished": "2026-04-25",
       "text": "Alles perfekt! Schnelle Terminvorgabe, pünktliche Abholung und fairer Preis. Der ganze Grünschnitt und Müll ist weg, genau so habe ich mir das vorgestellt. Gerne wieder!",
       "service": "Schrottabholung"
-    },
-    {
-      "id": "google-luca-kleinfeld-2026-05",
-      "author": "Luca Kleinfeld",
-      "city": "Osnabrück",
-      "rating": 5,
-      "datePublished": "2026-05-10",
-      "text": "Bestes Unternehmen",
-      "service": null
     },
     {
       "id": "google-daria-kaminska-2026-04",
