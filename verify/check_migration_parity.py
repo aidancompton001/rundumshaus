@@ -63,6 +63,18 @@ EXPECTED_MEDIA_CHANGES = {
             "/images/services/entruempelung.jpg",
             "/images/services/gartenpflege.png",
             "/images/services/hausmeisterservice.png",
+        },
+        # Landa, F-105: правило спрашивало только про то, что ПРОПАЛО, и
+        # ничего — про то, что пришло взамен. Поэтому миловалось любое
+        # подмножество объявленного, включая «пропало всё»: снятие всех
+        # пяти alt и всех четырёх картинок проходило как «ничего не
+        # потеряно». Замена обязана быть предъявлена поимённо.
+        "replaced_by": {
+            "/images/services/garten-hero.webp",
+            "/images/services/detail-garten.png",
+            "/images/services/entruempelung-hero.webp",
+            "/images/services/hausmeister-hero.webp",
+            "/images/services/dach-hero.webp",
         }},
     ("alts", "/"): {
         "reason": "F-94: alt дублировали название услуги; теперь несут "
@@ -73,16 +85,32 @@ EXPECTED_MEDIA_CHANGES = {
             "Garten- und Landschaftsbau",
             "Gärtner &amp; Gartenpflege",
             "Hausmeisterservice, Objektpflege &amp; Grundstückspflege",
-        }},
+        },
+        # Каждое пропавшее название обязано ЖИТЬ внутри одного из новых
+        # alt: ровно это и было существом находки — из alt ушли слова,
+        # по которым страницу находят.
+        "must_survive_as_substring": True},
 }
 EXPECTED_MEDIA_CHANGES[("alts", "/leistungen/")] =     EXPECTED_MEDIA_CHANGES[("alts", "/")]
-# Число подключённых CSS/JS изменилось по замыслу: герой макета не тянет
-# GSAP SplitText и компонент Lamp, а два шрифта заменены одним. Это не потеря
-# оформления — оформление проверяется отдельно, весами и вёрсткой.
-# Landa, F-50: прежняя форма была амнистией целому измерению приёмки —
-# любая разница в числе CSS/JS печаталась и НЕ валила прогон. Подлогом
-# доказано: снятие всего JavaScript со всех страниц давало БИНАРНО 1.
-# Теперь заявление закрепляет ЧИСЛА: на сколько и у скольких страниц.
+
+
+def media_rule_ok(rule, before, after, gone):
+    """Объявление действует, только если замена на месте (Landa F-105)."""
+    if not (gone <= rule["values"]):
+        return False, "пропало не то, что объявлено"
+    if len(after) < len(before):
+        return False, ("значений стало меньше: было %d, стало %d"
+                       % (len(before), len(after)))
+    if rule.get("replaced_by") and not (rule["replaced_by"] <= after):
+        missing = sorted(rule["replaced_by"] - after)
+        return False, "замена не предъявлена: " + ", ".join(missing[:3])
+    if rule.get("must_survive_as_substring"):
+        for old in sorted(gone):
+            if not any(old in new for new in after):
+                return False, "из выдачи ушли слова «%s»" % old
+    return True, ""
+
+
 EXPECTED_ASSET_DELTA = {
     "reason": "перенос макета: герой не тянет SplitText и Lamp, один шрифт "
               "вместо двух; у главной на один чанк меньше экономии — в шапке "
@@ -289,10 +317,16 @@ def compare(before_path, after_path):
                         gone.discard(g)
                         declared.add(g)
             rule = EXPECTED_MEDIA_CHANGES.get((key, u))
-            if rule and gone and gone <= rule["values"]:
-                print("  %-16s ЗАЯВЛЕНО    %s: %d значений — %s"
-                      % (what, u, len(gone), rule["reason"]))
-                gone = set()
+            if rule and gone:
+                ok, why = media_rule_ok(rule, set(A[u].get(key) or []),
+                                        set(B[u].get(key) or []), gone)
+                if ok:
+                    print("  %-16s ЗАЯВЛЕНО    %s: %d значений заменены — %s"
+                          % (what, u, len(gone), rule["reason"]))
+                    gone = set()
+                else:
+                    print("  %-16s ОБЪЯВЛЕНИЕ НЕ ДЕЙСТВУЕТ %s — %s"
+                          % (what, u, why))
             if gone:
                 lostn.append(u)
         bad += len(lostn) > 0
