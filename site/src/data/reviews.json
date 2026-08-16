@@ -1,6 +1,6 @@
 {
   "source": "Google Unternehmensprofil",
-  "verified": "2026-08-15: Abgleich mit dem echten Google-Profil über die Places API (place_id ChIJlwdlLxePaQER5QKZVHCPPx0). Texte und Daten wortwörtlich übernommen. Zwei Einträge entfernt, die der Inhaber selbst als Familie/Freunde und nicht als Kunden benannt hat (siehe DEVLOG S033, 02.05.2026). Hinweis: dieses Feld landet mit im Browser-Bundle — keine Namen und nichts Internes hier hineinschreiben.",
+  "verified": "2026-08-16: Vollständiger Abgleich mit dem echten Google-Profil (place_id ChIJlwdlLxePaQER5QKZVHCPPx0) — alle 10 Rezensionen im Browser aus dem öffentlichen Profil ausgelesen, Datumsangaben aus den Original-Zeitstempeln von Google. Texte und Daten wortwörtlich übernommen. Zwei Einträge entfernt, die der Inhaber selbst als Familie/Freunde und nicht als Kunden benannt hat (siehe DEVLOG S033, 02.05.2026). Hinweis: dieses Feld landet mit im Browser-Bundle — keine Namen und nichts Internes hier hineinschreiben.",
   "googleProfile": {
     "placeId": "ChIJlwdlLxePaQER5QKZVHCPPx0",
     "profileUrl": "https://www.google.com/maps/place/?q=place_id:ChIJlwdlLxePaQER5QKZVHCPPx0",
@@ -72,7 +72,7 @@
       "author": "Radoslaw Eugeniusz Labuda",
       "city": "Osnabrück",
       "rating": 5,
-      "datePublished": "2026-04-25",
+      "datePublished": "2026-04-20",
       "text": "Alles perfekt! Schnelle Terminvorgabe, pünktliche Abholung und fairer Preis. Der ganze Grünschnitt und Müll ist weg, genau so habe ich mir das vorgestellt. Gerne wieder!",
       "service": "Schrottabholung"
     },
