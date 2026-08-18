@@ -33,3 +33,7 @@ docs/design/v1-desktop/_*.html
 # стейджинг-сборка с путём /rundumshaus — артефакт, не исходник
 site/out-staging/
 verify/snapshots/_tmp.json
+
+# временные артефакты скриптов, в репозиторий не нужны
+site/scripts/admin/_tmp_*.mjs
+site/scripts/phase1/canary-*.log
