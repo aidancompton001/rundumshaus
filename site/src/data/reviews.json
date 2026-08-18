@@ -3,14 +3,15 @@
   "verified": "2026-08-16: Vollständiger Abgleich mit dem echten Google-Profil (place_id ChIJlwdlLxePaQER5QKZVHCPPx0) — alle 10 Rezensionen im Browser aus dem öffentlichen Profil ausgelesen, Datumsangaben aus den Original-Zeitstempeln von Google. Texte und Daten wortwörtlich übernommen. Zwei Einträge entfernt, die der Inhaber selbst als Familie/Freunde und nicht als Kunden benannt hat (siehe DEVLOG S033, 02.05.2026). Hinweis: dieses Feld landet mit im Browser-Bundle — keine Namen und nichts Internes hier hineinschreiben.",
   "googleProfile": {
     "placeId": "ChIJlwdlLxePaQER5QKZVHCPPx0",
-    "profileUrl": "https://www.google.com/maps/place/?q=place_id:ChIJlwdlLxePaQER5QKZVHCPPx0",
-    "reviewUrl": "https://g.page/r/CeUCmVRwjz8dEBM/review",
+    "profileUrl": "https://maps.google.com/?cid=2107560863251104485",
+    "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x1698f172f650797:0x1d3f8f70549902e5!12e1",
     "ratingValue": 5,
-    "ratingCount": 10,
+    "ratingCount": 11,
     "bestRating": 5,
     "worstRating": 1,
     "asOfLabel": "August 2026",
-    "asOfShort": "08/2026"
+    "asOfShort": "08/2026",
+    "reviewsUrl": "https://www.google.com/maps/place//data=!4m4!3m3!1s0x1698f172f650797:0x1d3f8f70549902e5!9m1!1b1"
   },
   "reviews": [
     {

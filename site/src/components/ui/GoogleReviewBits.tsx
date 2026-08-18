@@ -93,11 +93,15 @@ export function ReviewsSourceNoteShort({ className = "" }: { className?: string 
   );
 }
 
-/** Button auf das Profil — Ansehen, nicht Schreiben. */
+/** Button auf das Profil — Ansehen, nicht Schreiben.
+    Ссылки берём те, что отдаёт сам Google (Places API, googleMapsLinks).
+    Прежняя форма `maps/place/?q=place_id:` собрана руками и на телефоне
+    ненадёжно открывается в приложении Google Maps — клиент видел ошибку.
+    `reviewsUrl` ведёт сразу во вкладку отзывов; `profileUrl` — запасной. */
 export function GoogleProfileButton({ className = "" }: { className?: string }) {
   return (
     <a
-      href={googleProfile.profileUrl}
+      href={googleProfile.reviewsUrl || googleProfile.profileUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={className}
