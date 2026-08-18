@@ -172,7 +172,7 @@ export default function OsnabrueckHubPage() {
                 {" "}(Stand: {googleProfile.asOfShort})
               </p>
               <a
-                href={googleProfile.reviewsUrl || googleProfile.profileUrl}
+                href={googleProfile.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-copper font-medium hover:underline"
@@ -300,7 +300,7 @@ export default function OsnabrueckHubPage() {
                 führen wir nicht durch. Hier zeigen wir{" "}
                 {osnabrueckReviews.length} davon —{" "}
                 <a
-                  href={googleProfile.reviewsUrl || googleProfile.profileUrl}
+                  href={googleProfile.profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-copper hover:underline"

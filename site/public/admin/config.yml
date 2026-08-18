@@ -347,7 +347,6 @@ collections:
             fields:
               - { name: placeId, label: "Google place_id (nicht ändern)", widget: string, readonly: true }
               - { name: profileUrl, label: "Link zum Profil (Bewertungen ansehen)", widget: string }
-              - { name: reviewsUrl, label: "Link direkt zu den Bewertungen (von Google)", widget: string, required: false }
               - { name: reviewUrl, label: "Link zum Bewerten (Formular)", widget: string }
               - { name: ratingValue, label: "Durchschnitt im Profil", widget: number, value_type: float }
               - { name: ratingCount, label: "Anzahl Bewertungen im Profil", widget: number, value_type: int }

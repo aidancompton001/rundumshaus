@@ -97,11 +97,15 @@ export function ReviewsSourceNoteShort({ className = "" }: { className?: string 
     Ссылки берём те, что отдаёт сам Google (Places API, googleMapsLinks).
     Прежняя форма `maps/place/?q=place_id:` собрана руками и на телефоне
     ненадёжно открывается в приложении Google Maps — клиент видел ошибку.
-    `reviewsUrl` ведёт сразу во вкладку отзывов; `profileUrl` — запасной. */
+    Прямая ссылка на вкладку отзывов (reviewsUri) НЕ годится: Google
+    открывает её в урезанном виде с плашкой «Die Ansicht ist beschränkt
+    und du siehst nur einen Teil der Google-Maps-Daten» — замерено на
+    мобильном. Ведём на карточку фирмы (cid): она открывается чисто, а
+    отзывы там в одно касание. */
 export function GoogleProfileButton({ className = "" }: { className?: string }) {
   return (
     <a
-      href={googleProfile.reviewsUrl || googleProfile.profileUrl}
+      href={googleProfile.profileUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={className}
