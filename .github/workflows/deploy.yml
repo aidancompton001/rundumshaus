@@ -30,8 +30,19 @@ jobs:
           cache: "npm"
           cache-dependency-path: site/package-lock.json
 
+      # npm install поверх кеша периодически пропускает optional-зависимости
+      # (баг npm #4828) — сборка падала на @rolldown/binding-linux-x64-gnu уже
+      # после того, как правка клиента через админку была принята. Клиенту
+      # приходило письмо об ошибке, хотя он ничего не сломал.
+      # npm ci ставит строго по локу; следом проверка, что нативный модуль
+      # действительно на месте, и доустановка, если его всё же нет.
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Ensure native build binding
+        run: |
+          node -e "require('@rolldown/binding-linux-x64-gnu')" 2>/dev/null             || npm install --no-save @rolldown/binding-linux-x64-gnu
+          node -e "require('@rolldown/binding-linux-x64-gnu');console.log('нативный модуль на месте')"
 
       - name: Validate JSON data
         run: node -e "const fs=require('fs'),p=require('path'),d='src/data';fs.readdirSync(d).filter(f=>f.endsWith('.json')).forEach(f=>{try{JSON.parse(fs.readFileSync(p.join(d,f),'utf8'));console.log('✓',f)}catch(e){console.error('✗',f,e.message);process.exit(1)}})"
