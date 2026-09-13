@@ -1912,3 +1912,98 @@ Q2 ответ #3: *"Radoslaw Eugeniusz Labuda und Daria Kaminska"* — confirmed
 **Проверка:** lint 0 ошибок, 277 тестов, 617 страниц, parity БИНАРНО 1, приёмка 11/11
 
 **Долг ревью:** N-03 — два свойства (удаление cookie на `.domain`, подъём баннера над WhatsApp) не охраняются юнит-тестами; живые проверки T011 не в `verify/acceptance.json`
+
+### [S085] — 2026-09-13 — T012: разбор roadmap «Судьёй Дредом», без правок кода
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #14 Судья Дред (параллельный критик)
+**Статус:** завершено (только чтение)
+
+**Что сделано:**
+- Пересчитаны базовые числа roadmap по сборке: 5 услуг, 98 городов, 617 HTML, 511 адресов sitemap, 490 городских — сходятся
+- Решение D4 не работает: `titlePattern` обходит `safeTitle` (meta-overrides.ts:7-9), у всех 490 существующих городских title > 70 знаков, максимум 115
+- В заголовке будет «Rund ums Haus Littawe» дважды: шаблон из Ф1.3 уже содержит хвост, а сборка добавляет его ещё раз; 62 и 83 знака посчитаны без него
+- Текста Кевина нет на диске — сверять «дословно» не с чем
+
+**Следующие шаги:**
+- Исправить D4 и шаблон заголовка в T012; сохранить текст Кевина в `docs/` до Ф1
+
+### [S085] — 2026-09-13 — T012 P0: roadmap новой услуги Entkernung, три ошибки исправлены
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #1 Product Architect, #3 Frontend, #2 UX/UI
+**Статус:** частично — roadmap ждёт ОК CEO, код не начат
+
+**Что сделано:**
+- P0-анализ новой основной услуги «Entkernung & Abbrucharbeiten» (запрос Кевина, цена 70 €): 5→6 услуг, 490→588 городских пар, 617→715 HTML, 511→609 адресов sitemap; фазы Ф0–Ф6
+- По вопросам CEO исправлены три ошибки roadmap:
+  - D4 был неверен: шаблон title из админки обходит `safeTitle` (`lib/meta-overrides.ts:7`), а `safeTitle` длинные города не укорачивает. У всех 490 городских страниц title уже длиннее 70 знаков (71–115; Entrümpelung Neuenkirchen — 108)
+  - В Ф1.3 шаблон содержал «| Rund ums Haus Littawe», а `generateSEO` дописывает его сам — вышло бы 86/107 знаков вместо 62/83. Шаблон — «Entkernung & Abbrucharbeiten {city}»
+  - Текст Кевина сохранён эталоном `docs/kevin-entkernung-text-2026-09-13.txt` (12 481 байт, 185 строк, sha256 d8927b56e8104947); сверка «дословно» в Ф5 — с ним
+
+**Ключевые решения (ждут CEO):** D1 индексировать все 98; D2 сетка главной 3×2; D3 адрес entkernung-abbrucharbeiten; D4 без хвоста в шаблоне, длинные города как у существующих услуг; D5 BLOCKS → Partial без заполнителя; D6 три фото из шести
+
+**Урок:** рекомендация про `safeTitle` дана по названию функции, а не по пути, которым title реально попадает в HTML. Проверять по собранной странице
+
+**Артефакты:** `docs/tasks/T012_entkernung_abbrucharbeiten.md`, `docs/kevin-entkernung-text-2026-09-13.txt`
+
+**Следующие шаги:**
+- ОК CEO на roadmap и D1–D6, затем Ф1
+
+### [S086] — 2026-09-13 — T012 P0: разметка «Osnabrück» в тексте Кевина
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Статус:** частично — roadmap ждёт ОК CEO
+
+**Что сделано:**
+- По ревью CEO: строки 126, 161, 183 текста Кевина тоже привязаны к Osnabrück, в плане их не было
+- Размечены все 20 строк с «Osnabrück» (21 вхождение): заменить на город — 13, оставить Osnabrück — 4, соседние города — 2, служебная — 1
+- Фразы о самой фирме («ist in Osnabrück … tätig», подпись «Osnabrück und Umgebung», «Entkernungsfirma in Osnabrück», FAQ «außerhalb von Osnabrück») остаются с Osnabrück: подстановка города сделала бы ложное утверждение, что фирма находится там
+- «Osnabrücker Land» и список соседей Osnabrück (строки 129–135) → соседи города из `cities.json`
+- В Ф5 — проверка дальней страницы Nordhorn (80 км): нет «in Nordhorn … tätig», нет «Osnabrücker Land», нет соседей Osnabrück
+
+**Урок:** «где текст привязан к Osnabrück» было оценено по двум примерам, а не по всем вхождениям. Разметка теперь покрывает файл целиком и проверяется скриптом
+
+### [S087] — 2026-09-13 — T012 P0: списки соседей и проверка Nordhorn
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md) · **Статус:** частично — ждёт ОК CEO
+
+**Что сделано:**
+- `getNeighborCities(nordhorn)` возвращает 30 городов: 3 из `cities.json.neighbors` и 27, добранных по кольцу расстояния от Osnabrück (Molbergen, Cloppenburg…) — с Nordhorn не соседствуют
+- Решение: строка 183 — город + 3 соседа из `cities.json.neighbors` (у всех 97 городов их от 3 до 8), список к строке 128 — город + до 7; отдельная функция `getGeoNeighbors`, 490 существующих страниц не трогаются
+- Проверка Ф5 ограничена разделом «Entkernungsfirma…» и ответом FAQ к строке 182: на существующей `entruempelung/nordhorn` Belm и Lotte уже стоят в «Weitere Einsatzorte»
+- Прототип `docs/tasks/T012_nordhorn_check_prototype.py`: правильные куски — GREEN, подлог «Osnabrück» → «Nordhorn» в строке 126 — RED
+
+**Урок:** «соседи» были взяты по названию функции, не по её выводу. Считать то, что функция возвращает
+
+### [S088] — 2026-09-13 — T012 P0: проверка Nordhorn валит приёмку кодом выхода
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md) · **Статус:** частично — ждёт ОК CEO
+
+**Что сделано:**
+- Прототип `docs/tasks/T012_nordhorn_check_prototype.py` раньше всегда завершался кодом 0 и только печатал RED — приёмка его провал не увидела бы
+- Теперь GREEN — код 0, RED — код 1; флаг `--mutate-126` подкладывает дефект строки 126
+- Замер: без флага — 0, с подлогом — 1; то же через `subprocess(shell=True)`, как запускает `verify.py`
+- Roadmap Ф5.3: критерий в `verify/acceptance.json` с `expect_exit: 0`
+
+### [S089] — 2026-09-13 — T012 Фаза 1/6 — данные и типы done
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #1 Product Architect
+**Статус:** завершено (фаза 1 из 6)
+
+**Что сделано:**
+- `ServiceId` и `SERVICE_IDS` — шестая услуга `entkernung-abbrucharbeiten`; `BLOCKS` частичный, `getBlocks()` бросает понятную ошибку
+- `CITY_PAGE_SERVICE_IDS` (sitemap, static params, перекрёстные ссылки) и `PROGRAMMATIC_SERVICE_IDS` — новая услуга не даёт страниц и ссылок, пока нет шаблона (Ф3)
+- `meta-overrides.json`: title «Entkernung & Abbrucharbeiten {city}» без хвоста бренда
+- `DemolitionIcon` (ключ `hammer`), название в `Servicegebiet`
+- Тесты: сначала RED, затем GREEN; tsc 0 ошибок, 281/281, lint 0; сборка 617 HTML, sitemap 511, страниц новой услуги 0
+
+**Приёмка:** `py verify/verify.py verify/acceptance.json`
+```
+RESULT: 14/14 PASSED  (100.0%)
+VERDICT: TASK VERIFIED
+```
+
+**Следующие шаги:**
+- Ф2 — фото (webp 400/800/1200, EXIF удалён) и запись в `services.json`

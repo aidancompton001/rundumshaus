@@ -35,6 +35,7 @@ import {
   RoofIcon,
   BoxArrowIcon,
   RecycleIcon,
+  DemolitionIcon,
   DefaultIcon,
   serviceIconMap,
 } from "@/components/ServiceIcons";
@@ -55,8 +56,8 @@ function inlineBgIsTranslucent(el: Element): boolean {
 }
 
 describe("ServiceIcons", () => {
-  it("renders all 5 named icons as SVG", () => {
-    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon];
+  it("renders all 6 named icons as SVG", () => {
+    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon, DemolitionIcon];
     icons.forEach((Icon) => {
       const { container } = render(<Icon className="w-10 h-10" />);
       const svg = container.querySelector("svg");
@@ -66,7 +67,7 @@ describe("ServiceIcons", () => {
   });
 
   it("each icon has dual-tone: charcoal base + copper accent groups", () => {
-    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon];
+    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon, DemolitionIcon];
     icons.forEach((Icon) => {
       const { container } = render(<Icon />);
       const charcoalGroup = container.querySelector(".text-charcoal");
@@ -82,12 +83,13 @@ describe("ServiceIcons", () => {
     expect(svg).toBeInTheDocument();
   });
 
-  it("serviceIconMap covers all 5 service keys", () => {
+  it("serviceIconMap covers all 6 service keys", () => {
     expect(serviceIconMap["wrench"]).toBe(WrenchIcon);
     expect(serviceIconMap["leaf"]).toBe(LeafIcon);
     expect(serviceIconMap["home"]).toBe(RoofIcon);
     expect(serviceIconMap["truck"]).toBe(BoxArrowIcon);
     expect(serviceIconMap["recycle"]).toBe(RecycleIcon);
+    expect(serviceIconMap["hammer"]).toBe(DemolitionIcon);
   });
 
   it("serviceIconMap returns undefined for unknown key (fallback handled by consumer)", () => {
@@ -95,7 +97,7 @@ describe("ServiceIcons", () => {
   });
 
   it("0 hardcoded hex in SVG output", () => {
-    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon];
+    const icons = [WrenchIcon, LeafIcon, RoofIcon, BoxArrowIcon, RecycleIcon, DemolitionIcon];
     icons.forEach((Icon) => {
       const { container } = render(<Icon />);
       const svg = container.querySelector("svg");

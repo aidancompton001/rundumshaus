@@ -3,6 +3,8 @@ import { describe, it, expect } from "vitest";
 import {
   CITIES,
   SERVICE_IDS,
+  CITY_PAGE_SERVICE_IDS,
+  PROGRAMMATIC_SERVICE_IDS,
   type ServiceId,
   getCityBySlug,
   getNeighborCities,
@@ -17,7 +19,7 @@ import {
 
 /** Collect all intros for a given city across all 5 services. */
 function introsForCity(citySlug: string): string[] {
-  return SERVICE_IDS.map((s) => generatePageContent(s, citySlug).intro);
+  return PROGRAMMATIC_SERVICE_IDS.map((s) => generatePageContent(s, citySlug).intro);
 }
 
 /**
@@ -27,7 +29,7 @@ function introsForCity(citySlug: string): string[] {
  */
 function distanceCorpusForCity(citySlug: string): string {
   const parts: string[] = [];
-  for (const s of SERVICE_IDS) {
+  for (const s of PROGRAMMATIC_SERVICE_IDS) {
     const pc = generatePageContent(s, citySlug);
     parts.push(pc.intro);
     parts.push(pc.body.join(" "));
@@ -58,16 +60,31 @@ describe("API contract — getAllPagePairs", () => {
     expect(set.size).toBe(490);
   });
 
-  it("yields exactly 98 pairs per ServiceId", () => {
-    for (const sid of SERVICE_IDS) {
+  it("yields exactly 98 pairs per city-page service", () => {
+    for (const sid of CITY_PAGE_SERVICE_IDS) {
       const count = getAllPagePairs().filter((p) => p.service === sid).length;
       expect(count, `service=${sid}`).toBe(98);
     }
   });
 
-  it("SERVICE_IDS contains exactly 5 services", () => {
-    expect(SERVICE_IDS.length).toBe(5);
-    expect(new Set(SERVICE_IDS).size).toBe(5);
+  it("SERVICE_IDS contains exactly 6 services, including Entkernung (T012)", () => {
+    expect(SERVICE_IDS.length).toBe(6);
+    expect(new Set(SERVICE_IDS).size).toBe(6);
+    expect(SERVICE_IDS).toContain("entkernung-abbrucharbeiten");
+  });
+
+  it("city pages exist only for known services — no sitemap URL without a page", () => {
+    for (const sid of CITY_PAGE_SERVICE_IDS) expect(SERVICE_IDS).toContain(sid);
+    const inPairs = new Set(getAllPagePairs().map((p) => p.service));
+    expect([...inPairs].sort()).toEqual([...CITY_PAGE_SERVICE_IDS].sort());
+  });
+
+  it("generatePageContent names the service when it has no programmatic blocks", () => {
+    // T012: Entkernung — только шаблонная услуга, без программных блоков-заполнителей
+    expect(PROGRAMMATIC_SERVICE_IDS).not.toContain("entkernung-abbrucharbeiten");
+    expect(() => generatePageContent("entkernung-abbrucharbeiten", "osnabrueck")).toThrowError(
+      "No programmatic blocks for service: entkernung-abbrucharbeiten",
+    );
   });
 });
 

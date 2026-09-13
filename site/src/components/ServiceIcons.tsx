@@ -119,6 +119,26 @@ export const DefaultIcon: FC<IconProps> = ({ className }) => (
   </svg>
 );
 
+/** Hammer — Entkernung & Abbrucharbeiten (T012) */
+export const DemolitionIcon: FC<IconProps> = ({ className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <g className="text-charcoal" stroke="currentColor" strokeWidth="1.5">
+      <path d="M13.5 10.5 4 20a1.5 1.5 0 0 1-2.1-2.1l9.5-9.5" />
+      <path d="M11.4 8.4 14 5.8l4.2 4.2-2.6 2.6z" />
+    </g>
+    <g className="text-copper" stroke="currentColor" strokeWidth="1.5">
+      <path d="m15.4 4.4 1.4-1.4a1.5 1.5 0 0 1 2.1 0l2.1 2.1a1.5 1.5 0 0 1 0 2.1l-1.4 1.4" />
+      <path d="M17 19h5M18.5 16.5h3" />
+    </g>
+  </svg>
+);
+
 /** Map service icon keys to components */
 export const serviceIconMap: Record<string, FC<IconProps>> = {
   wrench: WrenchIcon,
@@ -126,4 +146,5 @@ export const serviceIconMap: Record<string, FC<IconProps>> = {
   home: RoofIcon,
   truck: BoxArrowIcon,
   recycle: RecycleIcon,
+  hammer: DemolitionIcon,
 };

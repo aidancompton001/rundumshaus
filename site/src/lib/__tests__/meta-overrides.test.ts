@@ -83,7 +83,7 @@ describe("resolveServiceMeta", () => {
 });
 
 describe("committed meta-overrides.json (production state)", () => {
-  it("has entries for all 5 pages and all 5 services", () => {
+  it("has entries for all 5 pages and all 6 services", () => {
     const d = metaOverridesJson as MetaOverridesData;
     expect(d.pages?.map((p) => p.path)).toEqual(
       expect.arrayContaining(["/", "/leistungen/", "/ueber-uns/", "/kontakt/", "/einsatzgebiet/"]),
@@ -95,7 +95,24 @@ describe("committed meta-overrides.json (production state)", () => {
         "dacharbeiten",
         "entruempelung",
         "garten-landschaftsbau",
+        "entkernung-abbrucharbeiten",
       ]),
+    );
+  });
+
+  it("no titlePattern carries the brand — generateSEO appends it (T012: no double suffix)", () => {
+    const d = metaOverridesJson as MetaOverridesData;
+    for (const s of d.services ?? []) {
+      expect(s.titlePattern ?? "", s.id).not.toContain("Rund ums Haus Littawe");
+    }
+  });
+
+  it("Entkernung description pattern is Kevin's text with {city} (T012)", () => {
+    const d = metaOverridesJson as MetaOverridesData;
+    const e = (d.services ?? []).find((s) => s.id === "entkernung-abbrucharbeiten");
+    expect(e?.titlePattern).toBe("Entkernung & Abbrucharbeiten {city}");
+    expect(e?.descriptionPattern).toBe(
+      "Entkernung & Abbrucharbeiten in {city}. Rückbau von Estrich, Böden, Bädern, Fliesen, Türen & mehr inkl. Abtransport und Entsorgung. Jetzt anfragen.",
     );
   });
 

@@ -2,7 +2,8 @@
 import { describe, it, expect } from "vitest";
 import {
   CITIES,
-  SERVICE_IDS,
+  CITY_PAGE_SERVICE_IDS,
+  PROGRAMMATIC_SERVICE_IDS,
   generatePageContent,
   getAllPagePairs,
   getCityBySlug,
@@ -22,7 +23,10 @@ import {
 // This avoids re-running generatePageContent in every it() block.
 // ─────────────────────────────────────────────────────────────────────
 const PAIRS = getAllPagePairs();
-const PAGES: { sid: ServiceId; slug: string; page: PageContent }[] = PAIRS.map(
+// Шаблонные услуги без программных блоков (T012) генератором не собираются.
+const PAGES: { sid: ServiceId; slug: string; page: PageContent }[] = PAIRS.filter((p) =>
+  PROGRAMMATIC_SERVICE_IDS.includes(p.service),
+).map(
   (p) => ({
     sid: p.service,
     slug: p.city,
@@ -56,8 +60,8 @@ describe("programmatic — invariants (490 pairs)", () => {
     expect(set.size).toBe(490);
   });
 
-  it("each ServiceId appears exactly 98 times across pairs", () => {
-    for (const sid of SERVICE_IDS) {
+  it("each city-page service appears exactly 98 times across pairs", () => {
+    for (const sid of CITY_PAGE_SERVICE_IDS) {
       const n = PAIRS.filter((p) => p.service === sid).length;
       expect(n, `service ${sid}`).toBe(98);
     }
@@ -234,7 +238,7 @@ describe("programmatic — neighbor graph", () => {
 
 describe("programmatic — distribution invariants", () => {
   it("every introVariant index is used at least once per service (across 98 cities)", () => {
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sizes = getServiceBlockSizes(sid);
       const usage = new Array<number>(sizes.introVariants).fill(0);
       for (const c of CITIES) {
@@ -247,7 +251,7 @@ describe("programmatic — distribution invariants", () => {
   });
 
   it("every faqPool index is used at least once per service (across 98 cities)", () => {
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sizes = getServiceBlockSizes(sid);
       const usage = new Array<number>(sizes.faqPool).fill(0);
       for (const c of CITIES) {
@@ -260,7 +264,7 @@ describe("programmatic — distribution invariants", () => {
   });
 
   it("intro variant distribution: max/min ratio < 5 per service", () => {
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sizes = getServiceBlockSizes(sid);
       const usage = new Array<number>(sizes.introVariants).fill(0);
       for (const c of CITIES) {
@@ -276,7 +280,7 @@ describe("programmatic — distribution invariants", () => {
   });
 
   it("body paragraph distribution: every body index used >= 1 per service", () => {
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sizes = getServiceBlockSizes(sid);
       const usage = new Array<number>(sizes.bodyParagraphs).fill(0);
       for (const c of CITIES) {
@@ -315,7 +319,7 @@ describe("programmatic — content quality contracts (Phase 5 gaps)", () => {
   // Otherwise Tier-1 cities silently receive fewer paragraphs than expected.
   it("each service has bodyParagraphs ≥ 7 (Tier-1 demand)", () => {
     const T1 = paragraphCountForTier(1);
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sz = getServiceBlockSizes(sid);
       expect(sz.bodyParagraphs, `${sid} bodyParagraphs pool size`).toBeGreaterThanOrEqual(T1);
     }
@@ -324,7 +328,7 @@ describe("programmatic — content quality contracts (Phase 5 gaps)", () => {
   // Soft current-state assertion: bodyParagraphs ≥ 5 (true for ALL services
   // today). Catches regressions that would shrink any pool below 5.
   it("each service has bodyParagraphs ≥ 5 (current minimum)", () => {
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sz = getServiceBlockSizes(sid);
       expect(sz.bodyParagraphs, `${sid} bodyParagraphs pool size`).toBeGreaterThanOrEqual(5);
     }
@@ -332,7 +336,7 @@ describe("programmatic — content quality contracts (Phase 5 gaps)", () => {
 
   it("each service has faqPool ≥ 8 (Tier-1 demand)", () => {
     const T1 = faqCountForTier(1);
-    for (const sid of SERVICE_IDS) {
+    for (const sid of PROGRAMMATIC_SERVICE_IDS) {
       const sz = getServiceBlockSizes(sid);
       expect(sz.faqPool, `${sid} faqPool size`).toBeGreaterThanOrEqual(T1);
     }
@@ -446,7 +450,7 @@ describe("programmatic — distancePhrase branch coverage (Phase 5 gap #9)", () 
   // a representative city of each branch.
 
   function corpusFor(slug: string): string {
-    return SERVICE_IDS.map((sid) => {
+    return PROGRAMMATIC_SERVICE_IDS.map((sid) => {
       const p = generatePageContent(sid, slug);
       return [
         p.intro,
@@ -542,9 +546,9 @@ describe("programmatic — cross-page contracts (PX-029)", () => {
   // 5 distinct h1's (different service titles in template).
   it("a single city produces 5 distinct h1's across all services", () => {
     for (const c of CITIES) {
-      const h1s = SERVICE_IDS.map((sid) => generatePageContent(sid, c.slug).h1);
+      const h1s = PROGRAMMATIC_SERVICE_IDS.map((sid) => generatePageContent(sid, c.slug).h1);
       const unique = new Set(h1s);
-      expect(unique.size, `${c.slug} cross-service h1 collision: ${h1s.join(" / ")}`).toBe(SERVICE_IDS.length);
+      expect(unique.size, `${c.slug} cross-service h1 collision: ${h1s.join(" / ")}`).toBe(PROGRAMMATIC_SERVICE_IDS.length);
     }
   });
 });

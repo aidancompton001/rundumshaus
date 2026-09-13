@@ -61,6 +61,11 @@
       "id": "garten-landschaftsbau",
       "titlePattern": "Garten- und Landschaftsbau {city} | Pflasterarbeiten & Außenanlagen",
       "descriptionPattern": "Garten- und Landschaftsbau in {city}: Gartenneuanlage, Pflasterarbeiten, Rollrasen, Erdarbeiten und Bepflanzung. Individuelle Planung und unverbindliches Angebot."
+    },
+    {
+      "id": "entkernung-abbrucharbeiten",
+      "titlePattern": "Entkernung & Abbrucharbeiten {city}",
+      "descriptionPattern": "Entkernung & Abbrucharbeiten in {city}. Rückbau von Estrich, Böden, Bädern, Fliesen, Türen & mehr inkl. Abtransport und Entsorgung. Jetzt anfragen."
     }
   ]
 }

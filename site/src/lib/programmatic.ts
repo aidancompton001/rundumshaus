@@ -6,9 +6,23 @@ export type ServiceId =
   | "gartenpflege"
   | "dacharbeiten"
   | "entruempelung"
-  | "garten-landschaftsbau";
+  | "garten-landschaftsbau"
+  | "entkernung-abbrucharbeiten";
 
 export const SERVICE_IDS: ServiceId[] = [
+  "hausmeisterservice",
+  "gartenpflege",
+  "dacharbeiten",
+  "entruempelung",
+  "garten-landschaftsbau",
+  "entkernung-abbrucharbeiten",
+];
+
+// T012: услуги, у которых УЖЕ есть городские страницы. По этому списку строятся
+// пары для generateStaticParams и sitemap и перекрёстные ссылки между услугами.
+// Новая услуга входит сюда в тот момент, когда появляется её шаблон страницы —
+// иначе sitemap и ссылки вели бы на адреса, которых нет.
+export const CITY_PAGE_SERVICE_IDS: ServiceId[] = [
   "hausmeisterservice",
   "gartenpflege",
   "dacharbeiten",
@@ -651,13 +665,25 @@ const GALABAU: ServiceBlocks = {
   ],
 };
 
-const BLOCKS: Record<ServiceId, ServiceBlocks> = {
+// T012: программные блоки есть не у всех услуг. Entkernung — чисто шаблонная
+// услуга (текст клиента), заполнитель под генератор ей не пишется.
+const BLOCKS: Partial<Record<ServiceId, ServiceBlocks>> = {
   hausmeisterservice: HAUSMEISTER,
   gartenpflege: GARTEN,
   dacharbeiten: DACH,
   entruempelung: ENTRUEMP,
   "garten-landschaftsbau": GALABAU,
 };
+
+export const PROGRAMMATIC_SERVICE_IDS: ServiceId[] = SERVICE_IDS.filter(
+  (id) => BLOCKS[id] !== undefined,
+);
+
+function getBlocks(serviceId: ServiceId): ServiceBlocks {
+  const b = BLOCKS[serviceId];
+  if (!b) throw new Error(`No programmatic blocks for service: ${serviceId}`);
+  return b;
+}
 
 // ────────────────────────────────────────────────────────────────────
 // Page content generation (tier-scaled)
@@ -712,7 +738,7 @@ export function getServiceBlockSizes(serviceId: ServiceId): {
   bodyParagraphs: number;
   faqPool: number;
 } {
-  const b = BLOCKS[serviceId];
+  const b = getBlocks(serviceId);
   return {
     introVariants: b.introVariants.length,
     bodyParagraphs: b.bodyParagraphs.length,
@@ -728,7 +754,7 @@ export function getSelectedIndices(
 ): { introIdx: number; bodyIdx: number[]; faqIdx: number[] } {
   const city = getCityBySlug(citySlug);
   if (!city) throw new Error(`Unknown city: ${citySlug}`);
-  const blocks = BLOCKS[serviceId];
+  const blocks = getBlocks(serviceId);
   const variantKey = `${serviceId}:${citySlug}`;
   const introIdx = pickIndex(blocks.introVariants.length, variantKey);
 
@@ -749,7 +775,7 @@ export function getSelectedIndices(
 
 function buildFakten(city: City, service: ServiceId): FaktenItem[] {
   return [
-    { label: "Leistung", value: BLOCKS[service].primaryKeyword(city) },
+    { label: "Leistung", value: getBlocks(service).primaryKeyword(city) },
     { label: "Bundesland", value: city.bundesland },
     { label: "Landkreis", value: city.landkreis },
     { label: "PLZ-Bereich", value: city.plzPrefix },
@@ -763,7 +789,7 @@ export function generatePageContent(serviceId: ServiceId, citySlug: string): Pag
   const city = getCityBySlug(citySlug);
   if (!city) throw new Error(`Unknown city: ${citySlug}`);
 
-  const blocks = BLOCKS[serviceId];
+  const blocks = getBlocks(serviceId);
   const service = getServiceMeta(serviceId);
   const neighbors = getNeighborCities(city);
 
@@ -803,7 +829,7 @@ export function generatePageContent(serviceId: ServiceId, citySlug: string): Pag
 
 export function getAllPagePairs(): { service: ServiceId; city: string }[] {
   const pairs: { service: ServiceId; city: string }[] = [];
-  for (const s of SERVICE_IDS) {
+  for (const s of CITY_PAGE_SERVICE_IDS) {
     for (const c of CITIES) {
       pairs.push({ service: s, city: c.slug });
     }

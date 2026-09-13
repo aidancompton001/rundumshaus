@@ -2,7 +2,7 @@ import Link from "next/link";
 import serviceAreasData from "@/data/service-areas.json";
 import type { ServiceAreasData } from "@/data/types";
 import { ScrollReveal } from "@/components/motion";
-import { CITIES, SERVICE_IDS, type ServiceId } from "@/lib/programmatic";
+import { CITIES, CITY_PAGE_SERVICE_IDS, type ServiceId } from "@/lib/programmatic";
 import PageHero from "@/components/ui/PageHero";
 import {
   WrenchIcon,
@@ -42,6 +42,7 @@ const SERVICE_TITLES: Record<ServiceId, string> = {
   dacharbeiten: "Dachreinigung",
   entruempelung: "Entrümpelung",
   "garten-landschaftsbau": "Garten- und Landschaftsbau",
+  "entkernung-abbrucharbeiten": "Entkernung & Abbrucharbeiten",
 };
 
 export default function Servicegebiet() {
@@ -75,7 +76,7 @@ export default function Servicegebiet() {
             Direkter Zugang zu unseren 5 Hauptleistungen in den nahegelegenen Städten.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 text-sm">
-            {SERVICE_IDS.map((sid) => (
+            {CITY_PAGE_SERVICE_IDS.map((sid) => (
               <div key={sid}>
                 <h3 className="font-heading text-base font-semibold text-charcoal mb-2">
                   {SERVICE_TITLES[sid]}

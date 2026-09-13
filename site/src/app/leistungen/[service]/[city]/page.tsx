@@ -10,6 +10,7 @@ import {
   getServiceMeta,
   isNoindexPair,
   SERVICE_IDS,
+  CITY_PAGE_SERVICE_IDS,
   type ServiceId,
 } from "@/lib/programmatic";
 import { generateSEO } from "@/lib/seo";
@@ -727,7 +728,8 @@ export default async function ProgrammaticLandingPage({
               Weitere Leistungen in {cityName}
             </h2>
             <div className="flex flex-wrap gap-3">
-              {SERVICE_IDS.filter((id) => id !== service).map((otherId) => {
+              {/* T012: только услуги, у которых уже есть городские страницы — без ссылок в пустоту */}
+              {CITY_PAGE_SERVICE_IDS.filter((id) => id !== service).map((otherId) => {
                 const other = getServiceMeta(otherId);
                 return (
                   <Link

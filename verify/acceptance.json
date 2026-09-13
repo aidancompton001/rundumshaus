@@ -69,6 +69,24 @@
       "text": "Деплой стейджинга не оставляет задачу без сборки. Скрипт сносил site/out, и ПОСЛЕ каждого деплоя приёмка молча падала с 10/10 до 4/10 — ревьюер получил «замороженный и проверенный» сайт без сборки (Ланда F-93). Прод пересобирается тем же скриптом, и он падает, если сборки нет",
       "check": "bash -c \"grep -c 'прод-сборка восстановлена' deploy_staging.sh\"",
       "expect_equal": "1"
+    },
+    {
+      "id": "T012-F1-TSC",
+      "text": "T012 Ф1: типы собраны без ошибок — шестая услуга в ServiceId, BLOCKS частичный, Servicegebiet знает название услуги",
+      "check": "cd site && npx tsc --noEmit",
+      "expect_exit": 0
+    },
+    {
+      "id": "T012-F1-META",
+      "text": "T012 Ф1: у Entkernung есть шаблон мета — title без хвоста бренда (generateSEO дописывает его сам, иначе хвост встал бы дважды), description — текст Кевина с {city}; ни у одной услуги бренда в titlePattern нет",
+      "check": "py -c \"import json,io;d=json.load(io.open('site/src/data/meta-overrides.json',encoding='utf-8'));s={x['id']:x for x in d['services']};e=s.get('entkernung-abbrucharbeiten',{});ok=e.get('titlePattern')=='Entkernung & Abbrucharbeiten {city}' and '{city}' in e.get('descriptionPattern','') and not any('Rund ums Haus Littawe' in (x.get('titlePattern') or '') for x in d['services']);print(1 if ok else 0)\"",
+      "expect_equal": "1"
+    },
+    {
+      "id": "T012-F1-NO-DEAD-URLS",
+      "text": "T012 Ф1: пока у новой услуги нет шаблона страницы, в сборке нет ни её страниц, ни ссылок на неё — sitemap и перекрёстные ссылки ходят по CITY_PAGE_SERVICE_IDS",
+      "check": "py -c \"import glob;print(len(glob.glob('site/out/leistungen/entkernung-abbrucharbeiten/**/*.html',recursive=True)))\"",
+      "expect_equal": "0"
     }
   ],
   "out_of_scope": [
