@@ -87,6 +87,12 @@
       "text": "T012 Ф1: пока у новой услуги нет шаблона страницы, в сборке нет ни её страниц, ни ссылок на неё — sitemap и перекрёстные ссылки ходят по CITY_PAGE_SERVICE_IDS",
       "check": "py -c \"import glob;print(len(glob.glob('site/out/leistungen/entkernung-abbrucharbeiten/**/*.html',recursive=True)))\"",
       "expect_equal": "0"
+    },
+    {
+      "id": "T012-F2-PHOTOS",
+      "text": "T012 Ф2: восемь webp фото Entkernung (hero пейзаж 4.jpeg, карточка 7:5 из 6.jpeg; полный размер + 400/800/1200) на диске, без EXIF/XMP, ширины вариантов точные",
+      "check": "py verify/check_t012_photos.py",
+      "expect_equal": "1"
     }
   ],
   "out_of_scope": [

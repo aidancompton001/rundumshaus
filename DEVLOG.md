@@ -2007,3 +2007,27 @@ VERDICT: TASK VERIFIED
 
 **Следующие шаги:**
 - Ф2 — фото (webp 400/800/1200, EXIF удалён) и запись в `services.json`
+
+### [S090] — 2026-09-13 — T012 Фаза 2/6 — фото done
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #2 UX/UI, #3 Frontend
+**Статус:** завершено (фаза 2 из 6)
+
+**Что сделано:**
+- `4.jpeg` → `entkernung-hero` (пейзаж 1599×899: блок /leistungen/ и hero городских); `6.jpeg` → `entkernung-card` (кадр 7:5, 1536×1097)
+- Конвейер `optimize-images.mjs`: 8 webp (полный + 400/800/1200), EXIF/XMP/ICC нет — `verify/check_t012_photos.py` (при удалённом варианте даёт 0)
+- Тест `data.test.ts`: варианты на диске (RED → GREEN); тесты 282/282
+
+**Ключевые решения:**
+- Запись в `services.json` перенесена в Ф3: `ServiceDetail` берёт позиции блока из шаблона услуги, а шаблона до Ф3 нет — блок вышел бы без позиций
+- Использовано 2 снимка из 6, остальные — D6
+
+**Приёмка:** `py verify/verify.py verify/acceptance.json`
+```
+RESULT: 15/15 PASSED  (100.0%)
+VERDICT: TASK VERIFIED
+```
+
+**Следующие шаги:**
+- Ф3 — шаблон дословно из текста Кевина, запись в services.json, компонент, маршрут, админка

@@ -82,6 +82,17 @@ describe("Data Integrity", () => {
       expect(services).toHaveLength(5);
     });
 
+    // T012 Ф2: фото Entkernung готовы до записи услуги в services.json (Ф3):
+    // пейзаж для блока /leistungen/ и hero городских, кадр 7:5 для карточки
+    it("Entkernung photos and responsive variants exist", () => {
+      const PUBLIC = join(process.cwd(), "public");
+      ["entkernung-card", "entkernung-hero"].forEach((b) =>
+        ["", "-400w", "-800w", "-1200w"].forEach((w) =>
+          expect(existsSync(join(PUBLIC, `images/services/${b}${w}.webp`)), `${b}${w}.webp`).toBe(true)
+        )
+      );
+    });
+
     it("every service has required fields", () => {
       services.forEach((s) => {
         expect(s.id).toBeTruthy();

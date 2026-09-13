@@ -22,6 +22,8 @@ const RESPONSIVE = [
   "services/gartenpflege.png",
   "services/dacharbeiten.jpg",
   "services/entruempelung.jpg",
+  "services/entkernung-hero.jpg",
+  "services/entkernung-card.jpg",
 ];
 
 // Large detail images — resize to max 1600w and convert to webp
