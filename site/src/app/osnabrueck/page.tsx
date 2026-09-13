@@ -53,6 +53,11 @@ const SERVICES = [
     title: "Garten- und Landschaftsbau",
     short: "Kostenlose Abholung von Altmetall im Stadtgebiet.",
   },
+  {
+    slug: "entkernung-abbrucharbeiten",
+    title: "Entkernung & Abbrucharbeiten",
+    short: "Estrich, Böden, Bäder, Fliesen, Türen — inkl. Abtransport und Entsorgung.",
+  },
 ];
 
 const STADTTEILE = [

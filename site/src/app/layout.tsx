@@ -182,6 +182,15 @@ export default function RootLayout({
                           "Neuanlage und Umgestaltung von Gärten, Pflasterarbeiten, Rollrasen, Erdarbeiten und Bepflanzung — individuelle Außenanlagen im 60-km-Umkreis.",
                         provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
                       },
+                      // T012: Entkernung & Abbrucharbeiten — Text Kevin 13.09.
+                      {
+                        "@type": "Service",
+                        name: "Entkernung & Abbrucharbeiten",
+                        description:
+                          "Entkernungs-, Rückbau- und Innenabbrucharbeiten: Bodenbeläge, Estrich, Dämmung, Fliesen, Sanitäreinrichtungen, Türen und Zargen — inklusive Abtransport und fachgerechter Entsorgung.",
+                        provider: { "@id": "https://rundumshaus-littawe.de/#localbusiness" },
+                        areaServed: targetCitiesSchema,
+                      },
                       // PX-037: dedicated Rasenneuanlage sub-service with its own landing page.
                       {
                         "@type": "Service",

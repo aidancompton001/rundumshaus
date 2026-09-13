@@ -11,6 +11,7 @@ import entruempelung from "@/data/templates/entruempelung.json";
 import galabau from "@/data/templates/garten-landschaftsbau.json";
 import garten from "@/data/templates/gartenpflege.json";
 import hausmeister from "@/data/templates/hausmeisterservice.json";
+import entkernung from "@/data/templates/entkernung-abbrucharbeiten.json";
 
 // F-69: у раздела макета связка «надзаголовок → H2 → разделитель». Строка
 // клиента «Unsere Leistungen» — это и есть надзаголовок макета
@@ -27,12 +28,15 @@ const BULLETS: Record<string, string[]> = {
   "garten-landschaftsbau": galabau.leistungen.items,
   gartenpflege: garten.leistungen.items,
   hausmeisterservice: hausmeister.leistungen.items,
+  "entkernung-abbrucharbeiten": entkernung.leistungen.items,
 };
 
 /**
  * Карточки услуг по макету (docs/design/v1-desktop/index.html, `.service-card`):
  * фото 7:5 сверху, круглая иконка наполовину поверх фото, название,
- * четыре позиции с точками, ссылка «Mehr erfahren». Пять в ряд.
+ * четыре позиции с точками, ссылка «Mehr erfahren».
+ * T012 (D2): шесть услуг — на lg и шире два ряда по три; шесть в ряд на 1440
+ * дали бы карточки ~200 px, длинные немецкие названия ломались бы.
  *
  * Прежняя карточка была фото + название + абзац описания, без позиций
  * и без иконки поверх фото — то есть старой вёрсткой в новых цветах.
@@ -49,7 +53,7 @@ export default function ServiceOverview() {
 
         <Stagger
           staggerDelay={100}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {services.map((service) => {
             const Icon = serviceIconMap[service.icon] || DefaultIcon;
@@ -67,7 +71,7 @@ export default function ServiceOverview() {
                       <source
                         type="image/webp"
                         srcSet={toResponsiveWebpSrcSet(service.image, [400, 800])}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 20vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <img
                         src={getImageUrl(service.image)}

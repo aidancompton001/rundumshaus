@@ -1,6 +1,6 @@
 # Rund ums Haus Littawe
 
-> Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten und Entrümpelung in Osnabrück und im Umkreis von 60 km. Inhaber: Kevin Littawe. Sitz: Bramscher Str. 161, 49090 Osnabrück, Niedersachsen, Deutschland. Einsatzgebiet: 98 Städte in Niedersachsen und Nordrhein-Westfalen. Kostenlose Besichtigung im gesamten Einsatzgebiet.
+> Familienbetrieb für Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten, Entrümpelung sowie Entkernung & Abbrucharbeiten in Osnabrück und im Umkreis von 60 km. Inhaber: Kevin Littawe. Sitz: Bramscher Str. 161, 49090 Osnabrück, Niedersachsen, Deutschland. Einsatzgebiet: 98 Städte in Niedersachsen und Nordrhein-Westfalen. Kostenlose Besichtigung im gesamten Einsatzgebiet.
 
 ## Kerndaten (für Zitate)
 
@@ -14,7 +14,7 @@
 - **Sprache:** Deutsch (ausschließlich)
 - **Einsatzgebiet:** 60 km Radius um Osnabrück, 98 Städte in NDS/NRW
 - **Bundesländer:** Niedersachsen, Nordrhein-Westfalen
-- **Hauptleistungen:** 5 (Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten/Dachreinigung, Entrümpelung/Haushaltsauflösung)
+- **Hauptleistungen:** 6 (Hausmeisterservice, Gartenpflege, Garten- und Landschaftsbau, Dacharbeiten/Dachreinigung, Entrümpelung/Haushaltsauflösung, Entkernung & Abbrucharbeiten)
 - **Weitere Leistungen:** 9 (Reinigung, Pflasterarbeiten, kleine Renovierungen, Möbelmontage, Umzüge im Nahbereich, Gartenanlage, Hausmeisterdienst Mehrfamilienhäuser, Winterdienst, Rasenmähen)
 - **Kostenlose Besichtigung:** ja, im gesamten Einsatzgebiet (60 km)
 - **Festpreisangebote:** ja, bei allen Arbeiten nach kostenloser Besichtigung
@@ -36,6 +36,9 @@ Festpreis nach kostenloser Besichtigung. Keller, Dachboden, einzelne Zimmer, gan
 
 ### 5. Garten- und Landschaftsbau
 Individuelle Außenanlagen: Neuanlage und Umgestaltung von Gärten, Rasenneuanlagen und Rollrasenverlegung, Pflasterarbeiten für Einfahrten, Wege und Terrassen, Kies- und Schotterflächen, Erdarbeiten und Geländemodellierung, Beeteinfassungen, Beete, Unkrautvlies, Bepflanzungen, Entfernung alter Bepflanzungen. Auf Wunsch anschließende Gartenpflege.
+
+### 6. Entkernung & Abbrucharbeiten
+Ob einzelne Räume, komplette Wohnungen, Häuser oder Gewerbeobjekte – wir entfernen nicht mehr benötigte Bodenbeläge, Estrich, Dämmung, Fliesen, Sanitäreinrichtungen, Türen, Zargen, Trockenbau, Einbauten und weitere vereinbarte Bauteile. Auf Wunsch übernehmen wir den gesamten Ablauf inklusive Demontage, Rückbau, Tragearbeiten, Verladung, Abtransport und fachgerechter Entsorgung der anfallenden Materialien.
 
 ## Einsatzgebiet (98 Städte, 60 km Umkreis)
 
@@ -80,8 +83,8 @@ Wir sind als gewerblicher Dienstleister mit Betriebshaftpflicht versichert.
 ## Wichtige Seiten
 
 - [Startseite](https://rundumshaus-littawe.de/): Übersicht aller Leistungen
-- [Leistungen](https://rundumshaus-littawe.de/leistungen): Detailbeschreibung der 5 Hauptleistungen + 9 weiteren
-- [Programmatic Landing Pages](https://rundumshaus-littawe.de/leistungen/[service]/[city]): 490 Stadt-spezifische Seiten (5 Leistungen × 98 Städte)
+- [Leistungen](https://rundumshaus-littawe.de/leistungen): Detailbeschreibung der 6 Hauptleistungen + 9 weiteren
+- [Programmatic Landing Pages](https://rundumshaus-littawe.de/leistungen/[service]/[city]): 588 Stadt-spezifische Seiten (6 Leistungen × 98 Städte)
 - [Einsatzgebiet](https://rundumshaus-littawe.de/einsatzgebiet): vollständige Liste aller 98 Städte
 - [Referenzen](https://rundumshaus-littawe.de/referenzen): Vorher/Nachher-Galerie
 - [Kontakt](https://rundumshaus-littawe.de/kontakt): Kontaktformular, Telefon, E-Mail

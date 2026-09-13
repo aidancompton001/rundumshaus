@@ -6,7 +6,7 @@
 
 ## 1. Unternehmen
 
-**Rund ums Haus Littawe** ist ein junger Familienbetrieb mit Sitz in Osnabrück, Niedersachsen. Gegründet 2026 von Kevin Littawe. Die Firma bietet 5 Hauptleistungen und 9 weitere Dienstleistungen rund um Haus und Garten in einem Einsatzgebiet von 60 km um Osnabrück. Eigene Mitarbeiter, eigene Fahrzeuge, keine Subunternehmer.
+**Rund ums Haus Littawe** ist ein junger Familienbetrieb mit Sitz in Osnabrück, Niedersachsen. Gegründet 2026 von Kevin Littawe. Die Firma bietet 6 Hauptleistungen und 9 weitere Dienstleistungen rund um Haus und Garten in einem Einsatzgebiet von 60 km um Osnabrück. Eigene Mitarbeiter, eigene Fahrzeuge, keine Subunternehmer.
 
 ### Kontaktdaten
 
@@ -28,7 +28,7 @@
 
 ---
 
-## 2. Hauptleistungen (5)
+## 2. Hauptleistungen (6)
 
 ### 2.1 Hausmeisterservice
 
@@ -172,6 +172,34 @@
 
 **Zielgruppen:** Privatkunden, Unternehmen, Wohnanlagen.
 
+### 2.6 Entkernung & Abbrucharbeiten
+
+Sie planen eine Renovierung, Sanierung oder einen Umbau und benötigen Unterstützung bei der Entkernung oder bei Abbrucharbeiten? Rund ums Haus Littawe übernimmt zuverlässige Entkernungs-, Rückbau- und Innenabbrucharbeiten in Osnabrück und Umgebung.
+
+**Leistungen:**
+- Entfernung von Laminat, Parkett, Teppich und anderen Bodenbelägen
+- Rückbau und Entfernung von Estrich
+- Entfernung vorhandener Dämmungen und Bodenaufbauten
+- Entfernung von Wand- und Bodenfliesen
+- Entkernung von Badezimmern
+- Rückbau von Küchen und Einbauten
+- Ausbau von Türen und Türzargen
+- Entfernung von Sockelleisten
+- Rückbau von Trockenbauwänden und Verkleidungen
+- Demontage vereinbarter Heizkörper und Einrichtungen
+- Entfernung nicht mehr benötigter Innenausbauten
+- Teilentkernung einzelner Räume
+- Entkernung kompletter Wohnungen
+- Rückbauarbeiten in Häusern und Gewerbeobjekten
+- Trage- und Verladearbeiten
+- Abtransport der anfallenden Materialien
+- Fachgerechte Entsorgung
+- Vorbereitung der Räume für die anschließende Sanierung oder Renovierung
+
+**Kosten:** Deshalb kalkulieren wir Entkernungs- und Abbrucharbeiten individuell nach dem tatsächlichen Arbeitsumfang. Für eine erste Einschätzung können Sie uns gerne Fotos, die ungefähre Fläche und eine kurze Beschreibung der gewünschten Arbeiten zusenden.
+
+**Zielgruppen:** Unsere Leistungen richten sich sowohl an Privatkunden als auch an Vermieter, Eigentümer, Hausverwaltungen, Immobilienunternehmen und Gewerbekunden.
+
 ## 3. Weitere Leistungen (9)
 
 1. Reinigung
@@ -247,9 +275,9 @@ Für jede Kombination aus Leistung und Stadt existiert eine eigene Landing Page:
 
 `https://rundumshaus-littawe.de/leistungen/[service]/[city]/`
 
-**5 Services × 98 Cities = 490 Landing Pages.**
+**6 Services × 98 Cities = 588 Landing Pages.**
 
-Service-Slugs: `hausmeisterservice`, `gartenpflege`, `dacharbeiten`, `entruempelung`, `garten-landschaftsbau`.
+Service-Slugs: `hausmeisterservice`, `gartenpflege`, `dacharbeiten`, `entruempelung`, `garten-landschaftsbau`, `entkernung-abbrucharbeiten`.
 
 City-Slugs: ASCII-normalisiert (ä→ae, ö→oe, ü→ue, ß→ss, Klammern entfernt, Leerzeichen→`-`).
 

@@ -142,6 +142,10 @@
       {
         "label": "Garten- und Landschaftsbau",
         "servicePath": "garten-landschaftsbau"
+      },
+      {
+        "label": "Entkernung & Abbrucharbeiten",
+        "servicePath": "entkernung-abbrucharbeiten"
       }
     ]
   },

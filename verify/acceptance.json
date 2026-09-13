@@ -99,6 +99,12 @@
       "text": "T012 Ф3: админка знает шаблон Entkernung — validate-cms-config проходит (все ключи шаблона объявлены, ссылки ведут на существующие страницы)",
       "check": "cd site && node scripts/admin/validate-cms-config.mjs",
       "expect_exit": 0
+    },
+    {
+      "id": "T012-F4-LINKS",
+      "text": "T012 Ф4: ссылки в обе стороны по сборке — на каждой из 490 прежних городских ссылка на Entkernung того же города, на каждой из 98 новых ссылки на 5 остальных; главная (пункты карточки, сетка lg:grid-cols-3, блок Standort, hasOfferCatalog), /leistungen/ (якорь), подвал, форма Kontakt, /osnabrueck/, llms.txt и llms-full.txt",
+      "check": "py verify/check_t012_links.py",
+      "expect_equal": "1"
     }
   ],
   "out_of_scope": [

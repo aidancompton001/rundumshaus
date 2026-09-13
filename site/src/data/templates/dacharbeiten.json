@@ -150,6 +150,10 @@
         "label": "Objektpflege",
         "servicePath": "objektpflege",
         "isHub": true
+      },
+      {
+        "label": "Entkernung & Abbrucharbeiten",
+        "servicePath": "entkernung-abbrucharbeiten"
       }
     ]
   },

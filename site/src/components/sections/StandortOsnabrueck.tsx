@@ -11,6 +11,7 @@ const SERVICES = [
   { slug: "dacharbeiten", title: "Dacharbeiten" },
   { slug: "entruempelung", title: "Entrümpelung" },
   { slug: "garten-landschaftsbau", title: "Garten- und Landschaftsbau" },
+  { slug: "entkernung-abbrucharbeiten", title: "Entkernung & Abbrucharbeiten" },
 ];
 
 export default function StandortOsnabrueck() {

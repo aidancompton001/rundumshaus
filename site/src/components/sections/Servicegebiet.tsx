@@ -9,6 +9,7 @@ import {
   LeafIcon,
   RoofIcon,
   BoxArrowIcon,
+  DemolitionIcon,
 } from "@/components/ServiceIcons";
 
 // PX-056: 5 service icons next to every city — Kevin's request 2026-06-09.
@@ -19,6 +20,7 @@ const SERVICE_ICONS: { sid: ServiceId; label: string; Icon: typeof WrenchIcon }[
   { sid: "dacharbeiten", label: "Dachreinigung", Icon: RoofIcon },
   { sid: "entruempelung", label: "Entrümpelung", Icon: BoxArrowIcon },
   { sid: "garten-landschaftsbau", label: "Garten- und Landschaftsbau", Icon: LeafIcon },
+  { sid: "entkernung-abbrucharbeiten", label: "Entkernung & Abbrucharbeiten", Icon: DemolitionIcon },
 ];
 
 const data = serviceAreasData as ServiceAreasData;
@@ -73,7 +75,7 @@ export default function Servicegebiet() {
             Beliebte Leistungen in unseren Top-Städten
           </h2>
           <p className="text-charcoal-light mb-6">
-            Direkter Zugang zu unseren 5 Hauptleistungen in den nahegelegenen Städten.
+            Direkter Zugang zu unseren 6 Hauptleistungen in den nahegelegenen Städten.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 text-sm">
             {CITY_PAGE_SERVICE_IDS.map((sid) => (
@@ -146,7 +148,7 @@ export default function Servicegebiet() {
             {data.footer}
           </p>
           <p className="text-sm text-charcoal-light text-center">
-            Für jede Stadt finden Sie eigene Detailseiten zu unseren 5 Hauptleistungen — klicken Sie auf den Stadtnamen für{" "}
+            Für jede Stadt finden Sie eigene Detailseiten zu unseren 6 Hauptleistungen — klicken Sie auf den Stadtnamen für{" "}
             <Link href="/leistungen" className="text-copper hover:underline">
               Gartenpflege
             </Link>

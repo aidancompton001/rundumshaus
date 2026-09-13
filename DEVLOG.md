@@ -2057,3 +2057,28 @@ VERDICT: TASK VERIFIED
 
 **Следующие шаги:**
 - Ф4 — ссылки с 5 шаблонов, карточка на главной (BULLETS, сетка), Servicegebiet, Osnabrück, hasOfferCatalog, llms.txt
+
+### [S092] — 2026-09-13 — T012 Фаза 4/6 — перелинковка и сквозные места done
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #3 Frontend, #2 UX/UI
+**Статус:** завершено (фаза 4 из 6)
+
+**Что сделано:**
+- 5 шаблонов: ссылка «Entkernung & Abbrucharbeiten in {city}» — на всех 490 прежних городских
+- Главная: пункты карточки из шаблона, сетка `lg:grid-cols-3` (D2) — на 1440 два ряда по три, у всех 6 карточек по 4 пункта (снимок `home_1440_cards_f4.png`)
+- `StandortOsnabrueck`, `/osnabrueck/`, `hasOfferCatalog` (+ тест схемы 7→8), `Servicegebiet`, `llms.txt`/`llms-full.txt` (6 услуг, 588 страниц)
+- До ревью (Ф6): push в master не делался — deploy.yml выкатывает любой push
+
+**Проверка:** `verify/check_t012_links.py` по сборке — до правок 0 (499 ошибок), после 1. Тесты 290/290, tsc 0, eslint 0, validate-cms-config проходит.
+
+**Сбой среды:** V4 однажды упал с `ERR_NO_BUFFER_SPACE` (1759 соединений TIME_WAIT в Windows) — не вёрстка; повтор LAYOUT_CLEAN.
+
+**Приёмка:** `py verify/verify.py verify/acceptance.json`
+```
+RESULT: 17/17 PASSED  (100.0%)
+VERDICT: TASK VERIFIED
+```
+
+**Следующие шаги:**
+- Ф5 — тесты: дословная сверка, проверка Nordhorn с `expect_exit 0` в приёмке
