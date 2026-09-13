@@ -19,7 +19,7 @@
     {
       "id": "V3",
       "text": "Ничего не потеряно: адреса, SEO, ссылки, картинки, alt, разметка Google, файлы сборки. Слепок «после» снят с ТЕКУЩЕЙ сборки — прежний отставал на три коммита и не покрывал правки этого раунда (Ланда F-94). Замена картинок карточек и переписанные alt объявлены поимённо: любая другая потеря по-прежнему валит сверку",
-      "check": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-round8.json | tail -1",
+      "check": "py verify/check_migration_parity.py compare verify/snapshots/before-redesign.json verify/snapshots/after-t011.json | tail -1",
       "expect_equal": "БИНАРНО: 1"
     },
     {
@@ -44,7 +44,7 @@
       "id": "V7",
       "text": "Тесты зелёные",
       "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1",
-      "expect_equal": "Tests  255 passed"
+      "expect_equal": "Tests  269 passed"
     },
     {
       "id": "V8",

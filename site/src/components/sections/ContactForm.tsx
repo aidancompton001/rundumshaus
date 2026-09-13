@@ -7,6 +7,7 @@ import servicesData from "@/data/services.json";
 import siteData from "@/data/site.json";
 import type { ContactFormData, SiteConfig } from "@/data/types";
 import { FORMSUBMIT_ACTION } from "@/lib/formsubmit";
+import { trackKontaktConversion } from "@/lib/googleAds";
 import { ScrollReveal, Stagger } from "@/components/motion";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -44,6 +45,9 @@ export default function ContactForm() {
 
       if (res.ok) {
         setState("success");
+        // Конверсия Google Ads — только при реально дошедшей заявке и только
+        // с согласием посетителя (проверка внутри). Ошибка и сбой сети — мимо.
+        trackKontaktConversion();
       } else {
         setState("error");
       }

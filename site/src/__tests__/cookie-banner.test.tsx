@@ -1,8 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-// Mock motion/react
 vi.mock("motion/react", () => ({
   motion: {
     div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }) => <div {...props}>{children}</div>,
@@ -11,12 +10,23 @@ vi.mock("motion/react", () => ({
 }));
 
 import CookieBanner from "@/components/layout/CookieBanner";
+import { CONSENT_KEY } from "@/lib/googleAds";
 
-const STORAGE_KEY = "rh-cookie-consent";
+function adsScripts() {
+  return document.querySelectorAll(`script[src*="googletagmanager.com/gtag/js"]`);
+}
 
-describe("CookieBanner", () => {
+async function showBanner() {
+  render(<CookieBanner />);
+  await act(async () => {
+    vi.advanceTimersByTime(2000);
+  });
+}
+
+describe("CookieBanner — выбор, а не уведомление", () => {
   beforeEach(() => {
     localStorage.clear();
+    document.head.querySelectorAll("script").forEach((s) => s.remove());
     vi.useFakeTimers();
   });
 
@@ -24,44 +34,49 @@ describe("CookieBanner", () => {
     vi.useRealTimers();
   });
 
-  it("shows banner after delay when no consent in localStorage", async () => {
-    render(<CookieBanner />);
-    // Banner not visible immediately
-    expect(screen.queryByText(/Diese Website verwendet/)).not.toBeInTheDocument();
-
-    // Advance past delay
-    await act(async () => {
-      vi.advanceTimersByTime(2000);
-    });
-
-    expect(screen.getByText(/Diese Website verwendet/)).toBeInTheDocument();
-    expect(screen.getByText("Verstanden")).toBeInTheDocument();
+  it("показывает обе кнопки и ссылку на Datenschutz", async () => {
+    await showBanner();
+    expect(screen.getByRole("button", { name: "Alle akzeptieren" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Nur notwendige" })).toBeInTheDocument();
     expect(screen.getByText("Datenschutzerklärung")).toHaveAttribute("href", "/datenschutz");
   });
 
-  it("does not show banner when consent already given", async () => {
-    localStorage.setItem(STORAGE_KEY, "accepted");
-    render(<CookieBanner />);
-
-    await act(async () => {
-      vi.advanceTimersByTime(2000);
-    });
-
-    expect(screen.queryByText(/Diese Website verwendet/)).not.toBeInTheDocument();
+  it("больше не утверждает, что трекинга нет", async () => {
+    await showBanner();
+    expect(screen.queryByText(/Keine\s+Tracking-Cookies/)).not.toBeInTheDocument();
+    expect(screen.getByText(/Google Ads/)).toBeInTheDocument();
   });
 
-  it("hides banner and saves to localStorage on click", async () => {
-    render(<CookieBanner />);
+  it("«Alle akzeptieren» сохраняет согласие и грузит тег", async () => {
+    await showBanner();
+    fireEvent.click(screen.getByRole("button", { name: "Alle akzeptieren" }));
+    expect(localStorage.getItem(CONSENT_KEY)).toBe("all");
+    expect(adsScripts()).toHaveLength(1);
+    expect(screen.queryByRole("button", { name: "Alle akzeptieren" })).not.toBeInTheDocument();
+  });
 
-    await act(async () => {
-      vi.advanceTimersByTime(2000);
-    });
+  it("«Nur notwendige» сохраняет отказ и тег НЕ грузит", async () => {
+    await showBanner();
+    fireEvent.click(screen.getByRole("button", { name: "Nur notwendige" }));
+    expect(localStorage.getItem(CONSENT_KEY)).toBe("necessary");
+    expect(adsScripts()).toHaveLength(0);
+  });
 
-    expect(screen.getByText("Verstanden")).toBeInTheDocument();
+  it("не показывается повторно после выбора", async () => {
+    localStorage.setItem(CONSENT_KEY, "necessary");
+    await showBanner();
+    expect(screen.queryByRole("button", { name: "Alle akzeptieren" })).not.toBeInTheDocument();
+  });
 
-    fireEvent.click(screen.getByText("Verstanden"));
+  it("показывается снова тем, кто нажал только «Verstanden» в прежнем баннере", async () => {
+    localStorage.setItem("rh-cookie-consent", "accepted");
+    await showBanner();
+    expect(screen.getByRole("button", { name: "Alle akzeptieren" })).toBeInTheDocument();
+  });
 
-    expect(localStorage.getItem(STORAGE_KEY)).toBe("accepted");
-    expect(screen.queryByText("Verstanden")).not.toBeInTheDocument();
+  it("при уже данном согласии тег грузится без показа баннера", async () => {
+    localStorage.setItem(CONSENT_KEY, "all");
+    await showBanner();
+    expect(adsScripts()).toHaveLength(1);
   });
 });

@@ -2,24 +2,29 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { CONSENT_KEY, initAdsIfConsented } from "@/lib/googleAds";
 
-const STORAGE_KEY = "rh-cookie-consent";
-
+/** Баннер согласия (T011). Прежний только уведомлял «Verstanden» и утверждал,
+    что трекинга нет. С тегом Google Ads это стало бы ложью, а загрузка тега
+    без согласия нарушала бы § 25 TDDDG. Теперь — выбор из двух равноценных
+    кнопок, тег грузится только после «Alle akzeptieren». */
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    initAdsIfConsented();
     const timer = setTimeout(() => {
-      if (!localStorage.getItem(STORAGE_KEY)) {
+      if (!localStorage.getItem(CONSENT_KEY)) {
         setVisible(true);
       }
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  function accept() {
-    localStorage.setItem(STORAGE_KEY, "accepted");
+  function choose(value: "all" | "necessary") {
+    localStorage.setItem(CONSENT_KEY, value);
     setVisible(false);
+    if (value === "all") initAdsIfConsented();
   }
 
   return (
@@ -31,26 +36,36 @@ export default function CookieBanner() {
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
+          role="dialog"
+          aria-label="Cookie-Einstellungen"
         >
-          <div className="max-w-4xl mx-auto bg-charcoal/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="max-w-4xl mx-auto bg-charcoal border border-white/[0.08] rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4">
             <p className="text-cream/80 text-sm flex-1">
-              Diese Website verwendet nur technisch notwendige Cookies. Keine
-              Tracking-Cookies, keine Analyse-Tools. Weitere Informationen
-              finden Sie in unserer{" "}
+              Wir verwenden technisch notwendige Cookies. Mit Ihrer Zustimmung setzen wir zusätzlich Google Ads ein, um zu messen, ob unsere Anzeigen zu Anfragen führen. Ihre Auswahl können Sie jederzeit in der{" "}
               <a
                 href="/datenschutz"
                 className="text-copper hover:text-copper-light underline"
               >
                 Datenschutzerklärung
               </a>
-              .
+              {" "}ändern.
             </p>
-            <button
-              onClick={accept}
-              className="bg-copper hover:bg-copper-light text-white px-6 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 whitespace-nowrap"
-            >
-              Verstanden
-            </button>
+            <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+              <button
+                type="button"
+                onClick={() => choose("necessary")}
+                className="border border-cream/40 text-cream hover:bg-cream/10 px-5 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 whitespace-nowrap"
+              >
+                Nur notwendige
+              </button>
+              <button
+                type="button"
+                onClick={() => choose("all")}
+                className="bg-copper hover:bg-copper-light text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 whitespace-nowrap"
+              >
+                Alle akzeptieren
+              </button>
+            </div>
           </div>
         </motion.div>
       )}

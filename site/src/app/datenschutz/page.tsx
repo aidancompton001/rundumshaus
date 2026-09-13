@@ -2,6 +2,7 @@ import { generateSEO } from "@/lib/seo";
 import { getPageMetaOverride } from "@/lib/meta-overrides";
 import siteData from "@/data/site.json";
 import type { SiteConfig } from "@/data/types";
+import ConsentReset from "@/components/layout/ConsentReset";
 
 const site = siteData as SiteConfig;
 
@@ -61,13 +62,39 @@ export default function DatenschutzPage() {
         </p>
 
         <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
-          4. Cookies
+          4. Cookies und Einwilligung
         </h2>
         <p>
-          Diese Website verwendet ausschließlich technisch notwendige Cookies
-          (Speicherung der Cookie-Einwilligung). Es werden keine
-          Tracking-Cookies, Analyse-Tools oder Drittanbieter-Skripte
-          eingesetzt.
+          Technisch notwendig ist nur die Speicherung Ihrer Cookie-Auswahl in
+          Ihrem Browser. Weitere Dienste werden erst geladen, wenn Sie im
+          Cookie-Banner „Alle akzeptieren“ wählen. Rechtsgrundlage: § 25 Abs. 1
+          TDDDG und Art. 6 Abs. 1 lit. a DSGVO. Ihre Einwilligung können Sie
+          jederzeit mit Wirkung für die Zukunft widerrufen:
+        </p>
+        <ConsentReset />
+
+        <h3 className="font-heading text-xl font-extrabold mt-6 mb-3">
+          Google Ads (Conversion-Tracking)
+        </h3>
+        <p>
+          Mit Ihrer Einwilligung nutzen wir Google Ads der Google Ireland
+          Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Ads
+          setzt Cookies und erfasst, ob nach dem Klick auf eine unserer
+          Anzeigen das Kontaktformular abgesendet wird (Conversion). Dabei
+          können Daten wie IP-Adresse, Geräte- und Browserinformationen sowie
+          der Zeitpunkt des Besuchs an Google übermittelt werden, auch in die
+          USA. Die Übermittlung in die USA stützt sich auf das EU-US Data
+          Privacy Framework, dem Google beigetreten ist. Ohne Ihre
+          Einwilligung wird Google Ads nicht geladen. Weitere Informationen:{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-copper underline"
+          >
+            Datenschutzerklärung von Google
+          </a>
+          .
         </p>
 
         <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">

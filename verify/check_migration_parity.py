@@ -93,6 +93,17 @@ EXPECTED_MEDIA_CHANGES = {
 }
 EXPECTED_MEDIA_CHANGES[("alts", "/leistungen/")] =     EXPECTED_MEDIA_CHANGES[("alts", "/")]
 
+# Ссылка «оставить отзыв» на /ueber-uns/ (18.08): короткая g.page/r/... заменена
+# официальной writeAReviewUri из Places API. Замена предъявлена поимённо —
+# снятие ссылки без замены по-прежнему валит сверку (урок F-105).
+EXPECTED_MEDIA_CHANGES[("ext", "/ueber-uns/")] = {
+    "reason": "отзывы: ссылка на форму отзыва — официальная от Google",
+    "values": {"https://g.page/r/CeUCmVRwjz8dEBM/review"},
+    "replaced_by": {
+        "https://www.google.com/maps/place//data=!4m3!3m2!1s0x1698f172f650797:0x1d3f8f70549902e5!12e1",
+    },
+}
+
 
 def media_rule_ok(rule, before, after, gone):
     """Объявление действует, только если замена на месте (Landa F-105)."""
@@ -119,12 +130,24 @@ EXPECTED_ASSET_DELTA = {
     # Приколочено ПОИМЁННО: сколько страниц на какую дельту. Одна дельта на
     # все страницы уже подводила (F-50): снятие ВСЕГО JS проходило как
     # совпадение. Иное число страниц или иная дельта валят прогон.
-    "by_delta": {-2: 512, -1: 1},
+    # /datenschutz/ (T011): кнопка отзыва согласия Google Ads — клиентский
+    # компонент, отсюда ещё один чанк на этой странице.
+    "by_delta": {-2: 511, -1: 2},
 }
 
 EXPECTED_TEXT_CHANGES = {
     ("description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
     ("og_description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
+    # Отзывы приведены к правде (15.08): прежнее «aus 8 Bewertungen» было
+    # зашито строкой и расходилось и с сайтом (9), и с Google (10, затем 11).
+    # Теперь число берётся из данных и подписано как число Google. Объявление
+    # приколочено к НОВОМУ значению: любая другая правка описания валит сверку.
+    ("description", "/osnabrueck/"): {
+        "reason": "отзывы: число Google из данных вместо зашитого «aus 8»",
+        "now": 'Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Landschaftsbau, Dach, Entrümpelung in Osnabrück. ★ 5,0 bei Google, 11 Bewertungen. ☎ direkt anrufen.'},
+    ("og_description", "/osnabrueck/"): {
+        "reason": "отзывы: число Google из данных вместо зашитого «aus 8»",
+        "now": 'Familienbetrieb Bramscher Str. 161: Hausmeister, Garten, Landschaftsbau, Dach, Entrümpelung in Osnabrück. ★ 5,0 bei Google, 11 Bewertungen. ☎ direkt anrufen.'},
 }
 
 TAGS = {
@@ -285,9 +308,9 @@ def compare(before_path, after_path):
         # а согласованные изменения объявляются поимённо, а не оптом.
         if key == "h1":
             diff = [u for u in diff if u not in H1_ALLOWED_CHANGES]
-        declared = [u for u in diff if (key, u) in EXPECTED_TEXT_CHANGES]
+        declared = [u for u in diff if (key, u) in EXPECTED_TEXT_CHANGES and (not isinstance(EXPECTED_TEXT_CHANGES[(key, u)], dict) or B[u].get(key) == EXPECTED_TEXT_CHANGES[(key, u)]["now"])]
         for u in declared:
-            print("  %-12s ЗАЯВЛЕНО    %s — %s" % (key, u, EXPECTED_TEXT_CHANGES[(key, u)]))
+            print("  %-12s ЗАЯВЛЕНО    %s — %s" % (key, u, (lambda x: x["reason"] if isinstance(x, dict) else x)(EXPECTED_TEXT_CHANGES[(key, u)])))
         diff = [u for u in diff if u not in declared]
         fatal = True
         bad += (len(diff) > 0) and fatal
@@ -384,6 +407,13 @@ def compare(before_path, after_path):
     # и подмена CNAME на чужой домен проходили как «файл на месте».
     CRITICAL_FILES = ("CNAME", "robots.txt")
     changed = [k for k in CRITICAL_FILES if fa.get(k) and fb.get(k) and fa[k] != fb[k]]
+    # Слепок «до» снят с рабочей копии Windows, где git развернул CNAME в CRLF;
+    # сборка CI — с LF. Текст тот же: rundumshaus-littawe.de. Разрешён ровно этот
+    # переход между двумя известными хешами; любое иное содержимое CNAME
+    # по-прежнему считается подменой домена.
+    CNAME_EOL_ONLY = ('742bd7fff334f14c', 'a32cb30903a44519')   # CRLF -> LF
+    changed = [k for k in changed
+               if not (k == "CNAME" and (fa[k], fb[k]) == CNAME_EOL_ONLY)]
     bad += len(changed) > 0
     print("  содержимое изменено: %d  %s" % (len(changed),
           "OK" if not changed else "ПОДМЕНА: " + ", ".join(changed)
