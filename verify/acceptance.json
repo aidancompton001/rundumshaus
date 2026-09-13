@@ -42,9 +42,9 @@
     },
     {
       "id": "V7",
-      "text": "Тесты зелёные",
-      "check": "cd site && npx vitest run 2>&1 | grep -oE 'Tests +[0-9]+ passed' | head -1",
-      "expect_equal": "Tests  277 passed"
+      "text": "Тесты зелёные — проверяется результат, а не число. Прежняя проверка сверяла строку «Tests N passed» с конкретным N: падала от каждого нового теста и не замечала падения, если строка выглядела как «1 failed | 276 passed» (Ланда N-06, Закон 27 п.5). Теперь строка итога обязана начинаться с passed, без failed",
+      "check": "cd site && npx vitest run 2>&1 | grep -cE \"^ +Tests +[0-9]+ passed\"",
+      "expect_equal": "1"
     },
     {
       "id": "V8",

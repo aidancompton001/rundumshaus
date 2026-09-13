@@ -251,6 +251,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col font-body bg-cream text-charcoal">
+        {/* Баннер согласия — первым в DOM (Ланда N-05): фокус он сам не забирает,
+            поэтому путь для клавиатуры — первый же Tab. Визуально он fixed внизу. */}
+        <CookieBanner />
         <MotionProvider>
           <Navbar />
           {/* отступ равен высоте шапки: шапка фиксирована сверху, и при 64px
@@ -262,7 +265,6 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppButton />
-          <CookieBanner />
         </MotionProvider>
       </body>
     </html>

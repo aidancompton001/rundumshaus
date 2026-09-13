@@ -91,10 +91,13 @@ describe("CookieBanner — выбор, а не уведомление", () => {
     }
   });
 
-  it("при показе фокус переходит в баннер — с клавиатуры не надо листать всю страницу", async () => {
-    // Ланда F-06: баннер в конце DOM, Tab до него — 36–42 нажатия.
+  it("при показе фокус НЕ переводится сам — пробел для прокрутки не должен ставить выбор", async () => {
+    // Ланда N-05: баннер сам ставил фокус на «Nur notwendige». Посетитель жал
+    // пробел, чтобы пролистать, — страница стояла, а отказ молча записывался,
+    // и баннер больше не появлялся. Выбор делается только осознанно.
     await showBanner();
-    expect(document.activeElement).toBe(screen.getByRole("button", { name: "Nur notwendige" }));
+    expect(document.activeElement).toBe(document.body);
+    expect(localStorage.getItem(CONSENT_KEY)).toBeNull();
   });
 
   it("не отбирает фокус, если посетитель уже печатает в форме", async () => {

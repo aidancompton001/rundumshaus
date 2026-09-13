@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CONSENT_KEY, initAdsIfConsented } from "@/lib/googleAds";
 
@@ -10,19 +10,11 @@ import { CONSENT_KEY, initAdsIfConsented } from "@/lib/googleAds";
     кнопок, тег грузится только после «Alle akzeptieren». */
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
-  const firstButton = useRef<HTMLButtonElement>(null);
-
-  // Ланда F-06: баннер в конце DOM, с клавиатуры до него 36–42 нажатия Tab.
-  // Фокус — на «Nur notwendige», первую по порядку: не подталкиваем к согласию.
-  // Ланда N-01: переводим фокус ТОЛЬКО если посетитель ещё никуда не встал.
-  // Иначе баннер через 1,5 с уводил фокус с поля формы Kontakt: набранный
-  // текст терялся, а пробел сам нажимал «Nur notwendige».
-  useEffect(() => {
-    if (!visible) return;
-    const active = document.activeElement;
-    if (active && active !== document.body) return;
-    firstButton.current?.focus({ preventScroll: true });
-  }, [visible]);
+  // Фокус в баннер сам НЕ переводится (Ланда N-05). Раньше он вставал на
+  // «Nur notwendige», и пробел, нажатый чтобы пролистать страницу, молча
+  // записывал отказ — баннер больше не появлялся. А у того, кто печатал в
+  // форме, отбирал ввод (N-01). Путь для клавиатуры другой: баннер стоит
+  // первым в DOM (layout.tsx), и первый же Tab приводит к его кнопкам.
 
   useEffect(() => {
     initAdsIfConsented();
@@ -65,7 +57,6 @@ export default function CookieBanner() {
             </p>
             <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
               <button
-                ref={firstButton}
                 type="button"
                 onClick={() => choose("necessary")}
                 className="min-h-[44px] border border-cream/40 text-cream hover:bg-cream/10 px-5 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 whitespace-nowrap"
