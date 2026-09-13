@@ -48,4 +48,20 @@ describe("Отзыв согласия (Art. 7 Abs. 3 DSGVO)", () => {
     expect(left.filter((n) => n.startsWith("_gcl_") || n.startsWith("_gac_"))).toEqual([]);
     expect(left).toContain("foreign");
   });
+
+  it("удаляет данные Google Ads из localStorage (_gcl_ls и подобные)", () => {
+    // Ланда N-02: gtag хранит данные о кликах по рекламе ещё и в localStorage,
+    // для § 25 TDDDG это то же, что cookie. После отзыва запись оставалась.
+    localStorage.setItem(CONSENT_KEY, "all");
+    localStorage.setItem("_gcl_ls", '{"schema":"gcl"}');
+    localStorage.setItem("_gcl_other", "x");
+    localStorage.setItem("foreign-key", "keep");
+
+    render(<ConsentReset />);
+    fireEvent.click(screen.getByRole("button", { name: "Cookie-Einstellungen ändern" }));
+
+    const keys = Object.keys(localStorage);
+    expect(keys.filter((k) => k.startsWith("_gcl"))).toEqual([]);
+    expect(localStorage.getItem("foreign-key")).toBe("keep");
+  });
 });

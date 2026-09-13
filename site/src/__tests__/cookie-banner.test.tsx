@@ -97,6 +97,22 @@ describe("CookieBanner — выбор, а не уведомление", () => {
     expect(document.activeElement).toBe(screen.getByRole("button", { name: "Nur notwendige" }));
   });
 
+  it("не отбирает фокус, если посетитель уже печатает в форме", async () => {
+    // Ланда N-01: баннер через 1,5 с уводил фокус с поля Kontakt на «Nur
+    // notwendige» — набранный текст терялся, а пробел сам ставил отказ.
+    const input = document.createElement("input");
+    document.body.appendChild(input);
+    input.focus();
+    expect(document.activeElement).toBe(input);
+
+    await showBanner();
+
+    expect(screen.getByRole("button", { name: "Nur notwendige" })).toBeInTheDocument();
+    expect(document.activeElement).toBe(input);
+    expect(localStorage.getItem(CONSENT_KEY)).toBeNull();
+    input.remove();
+  });
+
   it("при уже данном согласии тег грузится без показа баннера", async () => {
     localStorage.setItem(CONSENT_KEY, "all");
     await showBanner();

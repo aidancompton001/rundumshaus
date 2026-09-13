@@ -84,7 +84,12 @@ export default function DatenschutzPage() {
           können Daten wie IP-Adresse, Geräte- und Browserinformationen sowie
           der Zeitpunkt des Besuchs an Google übermittelt werden, auch in die
           USA. Die Übermittlung in die USA stützt sich auf das EU-US Data
-          Privacy Framework, dem Google beigetreten ist. Google Ads setzt dabei die Cookies _gcl_au und gegebenenfalls _gcl_aw; sie werden in der Regel nach 90 Tagen automatisch gelöscht, bei Widerruf Ihrer Einwilligung sofort. Ohne Ihre
+          Privacy Framework, dem Google beigetreten ist. Google Ads setzt dabei die Cookies _gcl_au und gegebenenfalls _gcl_aw; sie werden in der Regel nach 90 Tagen automatisch gelöscht, bei Widerruf Ihrer Einwilligung sofort. Zusätzlich speichert Google Ads Angaben zum Anzeigenklick im lokalen
+          Speicher Ihres Browsers (_gcl_ls); auch diese Angaben löschen wir bei
+          Widerruf sofort. Google selbst setzt auf seiner eigenen Domain
+          google.com ein Cookie (GCL_AW_P, bis zu 90 Tage), das wir technisch
+          nicht löschen können; Sie können es in den Einstellungen Ihres
+          Browsers entfernen. Ohne Ihre
           Einwilligung wird Google Ads nicht geladen. Weitere Informationen:{" "}
           <a
             href="https://policies.google.com/privacy"

@@ -14,8 +14,14 @@ export default function CookieBanner() {
 
   // Ланда F-06: баннер в конце DOM, с клавиатуры до него 36–42 нажатия Tab.
   // Фокус — на «Nur notwendige», первую по порядку: не подталкиваем к согласию.
+  // Ланда N-01: переводим фокус ТОЛЬКО если посетитель ещё никуда не встал.
+  // Иначе баннер через 1,5 с уводил фокус с поля формы Kontakt: набранный
+  // текст терялся, а пробел сам нажимал «Nur notwendige».
   useEffect(() => {
-    if (visible) firstButton.current?.focus({ preventScroll: true });
+    if (!visible) return;
+    const active = document.activeElement;
+    if (active && active !== document.body) return;
+    firstButton.current?.focus({ preventScroll: true });
   }, [visible]);
 
   useEffect(() => {

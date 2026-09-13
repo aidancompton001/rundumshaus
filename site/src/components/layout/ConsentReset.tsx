@@ -17,6 +17,18 @@ function removeGoogleAdsCookies() {
   }
 }
 
+/** Ланда N-02: gtag хранит данные о кликах по рекламе ещё и в localStorage
+    (_gcl_ls). Для § 25 TDDDG это то же, что cookie — удаляем при отзыве. */
+function removeGoogleAdsStorage() {
+  try {
+    for (const key of Object.keys(localStorage)) {
+      if (key.startsWith("_gcl")) localStorage.removeItem(key);
+    }
+  } catch {
+    /* хранилище недоступно — удалять нечего */
+  }
+}
+
 /** Отзыв согласия должен быть так же прост, как его дача (Art. 7 Abs. 3 DSGVO).
     Сбрасывает выбор и перезагружает страницу — баннер спросит заново. */
 export default function ConsentReset() {
@@ -27,6 +39,7 @@ export default function ConsentReset() {
       /* хранилище недоступно — сбрасывать нечего */
     }
     removeGoogleAdsCookies();
+    removeGoogleAdsStorage();
     window.location.reload();
   }
 
