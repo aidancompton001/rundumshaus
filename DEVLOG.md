@@ -2082,3 +2082,28 @@ VERDICT: TASK VERIFIED
 
 **Следующие шаги:**
 - Ф5 — тесты: дословная сверка, проверка Nordhorn с `expect_exit 0` в приёмке
+
+### [S093] — 2026-09-13 — T012 Фаза 5/6 — тесты done
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #3 Frontend
+**Статус:** завершено (фаза 5 из 6)
+
+**Что сделано:**
+- `entkernung-integration.test.tsx`: 98 страниц в маршруте; `generateMetadata` — canonical, без noindex, title/description Osnabrück; ссылки `weitereLeistungen` в обе стороны; форма Kontakt — 7 вариантов с Entkernung
+- RED доказан подлогом в коде (файлы возвращены): услуга убрана из `CITY_PAGE_SERVICE_IDS`, Nordhorn в noindex, ссылка убрана из шаблона Hausmeister, услуга выпала из формы — каждый раз `1 failed | 3 passed`, падает нужный тест
+- `verify/check_t012_nordhorn.py` — куски из собранного HTML: GREEN код 0; `--mutate-126` → RED «есть „in Nordhorn … tätig“», код 1
+- `verify/check_t012_verbatim.py` — 180 строк текста Кевина на странице Osnabrück: GREEN код 0; `--mutate-word` → нет строки 9, код 1
+- Тесты 294/294; lint 0 ошибок (9 предупреждений прежние: `SERVICE_ICONS` не используется ещё до T012)
+
+**Ключевые решения:**
+- В форме 7 вариантов, а не 8, как в roadmap: 6 услуг + «Sonstiges»
+
+**Приёмка:** `py verify/verify.py verify/acceptance.json`
+```
+RESULT: 19/19 PASSED  (100.0%)
+VERDICT: TASK VERIFIED
+```
+
+**Следующие шаги:**
+- Ф6 — parity, вёрстка, скриншоты, ревью Ланды, закрытие долга ревью, выкатка и живой замер

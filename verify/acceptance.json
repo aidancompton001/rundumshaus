@@ -105,6 +105,18 @@
       "text": "T012 Ф4: ссылки в обе стороны по сборке — на каждой из 490 прежних городских ссылка на Entkernung того же города, на каждой из 98 новых ссылки на 5 остальных; главная (пункты карточки, сетка lg:grid-cols-3, блок Standort, hasOfferCatalog), /leistungen/ (якорь), подвал, форма Kontakt, /osnabrueck/, llms.txt и llms-full.txt",
       "check": "py verify/check_t012_links.py",
       "expect_equal": "1"
+    },
+    {
+      "id": "T012-F5-NORDHORN",
+      "text": "T012 Ф5: дальняя страница Nordhorn по собранному HTML — в разделе «Entkernungsfirma» и ответе FAQ к строке 182 нет «in Nordhorn … tätig», «Osnabrücker Land», соседей Osnabrück; есть Twist, Meppen, Wietmarschen. RED = код 1 (подлог строки 126 проверен: код 1)",
+      "check": "py verify/check_t012_nordhorn.py",
+      "expect_exit": 0
+    },
+    {
+      "id": "T012-F5-VERBATIM",
+      "text": "T012 Ф5: текст Кевина дословно на собранной странице Osnabrück — 180 строк (кроме служебных 1–4, 6): title = строка 5, description = строка 7, строки 8–185 в видимом тексте. Правка одного слова даёт код 1",
+      "check": "py verify/check_t012_verbatim.py",
+      "expect_exit": 0
     }
   ],
   "out_of_scope": [
