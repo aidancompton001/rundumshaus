@@ -74,6 +74,29 @@ describe("CookieBanner — выбор, а не уведомление", () => {
     expect(screen.getByRole("button", { name: "Alle akzeptieren" })).toBeInTheDocument();
   });
 
+  it("обёртка баннера не перехватывает клики — кнопка WhatsApp под ней остаётся рабочей", async () => {
+    // Ланда F-04: прозрачная обёртка на всю ширину съедала клик по плавающей
+    // кнопке WhatsApp. Клики принимает только сама карточка баннера.
+    await showBanner();
+    const dialog = screen.getByRole("dialog", { name: "Cookie-Einstellungen" });
+    expect(dialog.className).toMatch(/(^|\s)pointer-events-none(\s|$)/);
+    const card = dialog.firstElementChild as HTMLElement;
+    expect(card.className).toMatch(/(^|\s)pointer-events-auto(\s|$)/);
+  });
+
+  it("кнопки не меньше 44 px по высоте — тач-цель как на остальном сайте", async () => {
+    await showBanner();
+    for (const name of ["Alle akzeptieren", "Nur notwendige"]) {
+      expect(screen.getByRole("button", { name }).className, name).toMatch(/min-h-\[44px\]/);
+    }
+  });
+
+  it("при показе фокус переходит в баннер — с клавиатуры не надо листать всю страницу", async () => {
+    // Ланда F-06: баннер в конце DOM, Tab до него — 36–42 нажатия.
+    await showBanner();
+    expect(document.activeElement).toBe(screen.getByRole("button", { name: "Nur notwendige" }));
+  });
+
   it("при уже данном согласии тег грузится без показа баннера", async () => {
     localStorage.setItem(CONSENT_KEY, "all");
     await showBanner();

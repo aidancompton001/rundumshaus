@@ -40,6 +40,22 @@ export function initAdsIfConsented(): void {
     // eslint-disable-next-line prefer-rest-params
     w.dataLayer!.push(arguments);
   };
+  // Consent Mode v2 (Ланда F-01). Google требует для посетителей из ЕЭА явные
+  // сигналы согласия, иначе конверсии могут недосчитываться. Тег грузится
+  // только после «Alle akzeptieren», поэтому сразу за default denied идёт
+  // update granted — и оба ДО config, как предписывает порядок gtag.
+  w.gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
+  w.gtag("consent", "update", {
+    ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted",
+    analytics_storage: "granted",
+  });
   w.gtag("js", new Date());
   w.gtag("config", ADS_ID);
 

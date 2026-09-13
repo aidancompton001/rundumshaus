@@ -60,6 +60,27 @@ describe("Google Ads — только с согласия (TDDDG § 25)", () => 
     expect(s[0].getAttribute("src")).toContain("id=AW-18071508845");
   });
 
+  it("передаёт сигналы Consent Mode v2: сначала всё denied, затем granted — и до config", () => {
+    // Ланда F-01: без consent-сигналов Google не может учесть выбор посетителя
+    // из ЕЭА и рискует недосчитывать конверсии.
+    localStorage.setItem(CONSENT_KEY, "all");
+    initAdsIfConsented();
+    const dl = ((window as W).dataLayer ?? []).map((e) => Array.from(e as ArrayLike<unknown>));
+    const idx = (pred: (a: unknown[]) => boolean) => dl.findIndex(pred);
+    const SIGNALS = ["ad_storage", "ad_user_data", "ad_personalization", "analytics_storage"];
+
+    const def = idx((a) => a[0] === "consent" && a[1] === "default");
+    const upd = idx((a) => a[0] === "consent" && a[1] === "update");
+    const cfg = idx((a) => a[0] === "config");
+    expect(def).toBeGreaterThanOrEqual(0);
+    expect(upd).toBeGreaterThan(def);
+    expect(cfg).toBeGreaterThan(upd);
+    for (const s of SIGNALS) {
+      expect((dl[def][2] as Record<string, string>)[s], `default ${s}`).toBe("denied");
+      expect((dl[upd][2] as Record<string, string>)[s], `update ${s}`).toBe("granted");
+    }
+  });
+
   it("конверсия без согласия не отправляется", () => {
     trackKontaktConversion();
     expect(conversionEvents()).toHaveLength(0);
