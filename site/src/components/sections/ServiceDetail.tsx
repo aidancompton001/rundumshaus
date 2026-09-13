@@ -9,6 +9,7 @@ import entruempelung from "@/data/templates/entruempelung.json";
 import galabau from "@/data/templates/garten-landschaftsbau.json";
 import garten from "@/data/templates/gartenpflege.json";
 import hausmeister from "@/data/templates/hausmeisterservice.json";
+import entkernung from "@/data/templates/entkernung-abbrucharbeiten.json";
 
 const { services, heading, subheading } = servicesData as {
   heading: string;
@@ -23,6 +24,7 @@ const ITEMS: Record<string, string[]> = {
   "garten-landschaftsbau": galabau.leistungen.items,
   gartenpflege: garten.leistungen.items,
   hausmeisterservice: hausmeister.leistungen.items,
+  "entkernung-abbrucharbeiten": entkernung.leistungen.items,
 };
 
 function Check() {

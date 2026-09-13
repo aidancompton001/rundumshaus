@@ -78,8 +78,8 @@ describe("Data Integrity", () => {
   describe("services.json", () => {
     const { services } = servicesData as { services: Service[] };
 
-    it("has exactly 5 services", () => {
-      expect(services).toHaveLength(5);
+    it("has exactly 6 services", () => {
+      expect(services).toHaveLength(6);
     });
 
     // T012 Ф2: фото Entkernung готовы до записи услуги в services.json (Ф3):

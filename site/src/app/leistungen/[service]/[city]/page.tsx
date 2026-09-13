@@ -26,11 +26,13 @@ import { getHausmeisterContent } from "@/lib/template-content-hausmeister";
 import { getDachContent } from "@/lib/template-content-dach";
 import { getEntruempelungContent } from "@/lib/template-content-entruempelung";
 import { getGalabauContent } from "@/lib/template-content-galabau";
+import { getEntkernungContent, getEntkernungFaqs } from "@/lib/template-content-entkernung";
 import GartenCityTemplate from "@/components/templates/GartenCityTemplate";
 import HausmeisterCityTemplate from "@/components/templates/HausmeisterCityTemplate";
 import DachCityTemplate from "@/components/templates/DachCityTemplate";
 import EntruempelungCityTemplate from "@/components/templates/EntruempelungCityTemplate";
 import GalabauCityTemplate from "@/components/templates/GalabauCityTemplate";
+import EntkernungCityTemplate from "@/components/templates/EntkernungCityTemplate";
 
 export const dynamicParams = false;
 
@@ -132,6 +134,23 @@ export async function generateMetadata({
     const content = getGalabauContent(cityData);
     // PX-068 C: Kevin-editable per-service meta pattern ({city} placeholder).
     const metaOv = getServiceMetaOverride("garten-landschaftsbau", cityData.displayName);
+    const seo = generateSEO({
+      title: metaOv?.title ?? content.metaTitle,
+      description: metaOv?.description ?? content.metaDescription,
+      path: `/leistungen/${service}/${city}`,
+    });
+    if (isNoindexPair(service, city)) {
+      return { ...seo, robots: { index: false, follow: true } };
+    }
+    return seo;
+  }
+
+  if (service === "entkernung-abbrucharbeiten") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) return {};
+    const content = getEntkernungContent(cityData);
+    // T012: шаблон из meta-overrides.json без хвоста бренда — его дописывает generateSEO.
+    const metaOv = getServiceMetaOverride("entkernung-abbrucharbeiten", cityData.displayName);
     const seo = generateSEO({
       title: metaOv?.title ?? content.metaTitle,
       description: metaOv?.description ?? content.metaDescription,
@@ -444,6 +463,71 @@ export default async function ProgrammaticLandingPage({
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(entFaqSchema) }} />
         <EntruempelungCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
+      </>
+    );
+  }
+
+  // T012: entkernung-abbrucharbeiten — текст Кевина, EntkernungCityTemplate.
+  if (service === "entkernung-abbrucharbeiten") {
+    const cityData = getCityBySlug(city);
+    if (!cityData) notFound();
+    const neighbors = getNeighborCities(cityData);
+    const entkContent = getEntkernungContent(cityData);
+    const canonical = `${BASE_URL}/leistungen/entkernung-abbrucharbeiten/${city}/`;
+
+    const entkBreadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Startseite", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${BASE_URL}/leistungen/` },
+        { "@type": "ListItem", position: 3, name: "Entkernung & Abbrucharbeiten", item: `${BASE_URL}/leistungen/#entkernung-abbrucharbeiten` },
+        { "@type": "ListItem", position: 4, name: cityData.displayName, item: canonical },
+      ],
+    };
+
+    const entkService: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Entkernung & Abbrucharbeiten ${cityData.displayName}`,
+      serviceType: "Entkernung & Abbrucharbeiten",
+      description: entkContent.metaDescription,
+      areaServed: {
+        "@type": "City",
+        name: cityData.displayName,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: cityData.displayName,
+          addressRegion: cityData.bundesland,
+          addressCountry: "DE",
+        },
+      },
+      url: canonical,
+    };
+    if (cityData.distanceKm <= 40) {
+      entkService.provider = { "@id": LOCAL_BUSINESS_ID };
+    }
+
+    // FAQ-разметка из той же функции, что и видимый блок на странице.
+    const entkFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: getEntkernungFaqs(cityData).map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    };
+
+    return (
+      <>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entkBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entkService) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entkFaqSchema) }} />
+        <EntkernungCityTemplate city={cityData} neighbors={neighbors} allOtherCities={getAllOtherCities(cityData)} />
       </>
     );
   }

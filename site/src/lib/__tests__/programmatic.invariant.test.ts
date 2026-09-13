@@ -54,10 +54,10 @@ const DESC_LO = Math.min(120, metaDescMin - 10);
 const DESC_HI = Math.max(320, metaDescMax + 10);
 
 describe("programmatic — invariants (490 pairs)", () => {
-  it("getAllPagePairs has exactly 490 unique service:city pairs", () => {
-    expect(PAIRS.length).toBe(490);
+  it("getAllPagePairs has exactly 588 unique service:city pairs", () => {
+    expect(PAIRS.length).toBe(588);
     const set = new Set(PAIRS.map((p) => `${p.service}:${p.city}`));
-    expect(set.size).toBe(490);
+    expect(set.size).toBe(588);
   });
 
   it("each city-page service appears exactly 98 times across pairs", () => {

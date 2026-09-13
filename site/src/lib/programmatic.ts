@@ -28,6 +28,7 @@ export const CITY_PAGE_SERVICE_IDS: ServiceId[] = [
   "dacharbeiten",
   "entruempelung",
   "garten-landschaftsbau",
+  "entkernung-abbrucharbeiten",
 ];
 
 export type Tier = 1 | 2 | 3;
@@ -121,6 +122,15 @@ export function getNeighborCities(city: City): City[] {
   });
 
   return [...hardcoded, ...fallback].slice(0, NEIGHBOR_CAP);
+}
+
+// T012: соседи строго из cities.json.neighbors — без добора по расстоянию от Osnabrück,
+// как у getNeighborCities. Без Osnabrück и без самого города.
+export function getGeoNeighbors(city: City, max: number): City[] {
+  return city.neighbors
+    .map((slug) => getCityBySlug(slug))
+    .filter((c): c is City => c !== undefined && c.slug !== HQ_SLUG && c.slug !== city.slug)
+    .slice(0, max);
 }
 
 export function getServiceMeta(id: ServiceId) {

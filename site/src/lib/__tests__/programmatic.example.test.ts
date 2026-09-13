@@ -50,14 +50,14 @@ function combinedBodies(service: ServiceId, citySlugs: string[]): string {
 // ────────────────────────────────────────────────────────────────────
 
 describe("API contract — getAllPagePairs", () => {
-  it("returns exactly 490 pairs (5 services × 98 cities)", () => {
-    expect(getAllPagePairs().length).toBe(490);
+  it("returns exactly 588 pairs (6 services × 98 cities)", () => {
+    expect(getAllPagePairs().length).toBe(588);
   });
 
   it("contains no duplicate (service:city) pairs", () => {
     const pairs = getAllPagePairs();
     const set = new Set(pairs.map((p) => `${p.service}:${p.city}`));
-    expect(set.size).toBe(490);
+    expect(set.size).toBe(588);
   });
 
   it("yields exactly 98 pairs per city-page service", () => {

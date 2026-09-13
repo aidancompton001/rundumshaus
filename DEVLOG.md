@@ -2031,3 +2031,29 @@ VERDICT: TASK VERIFIED
 
 **Следующие шаги:**
 - Ф3 — шаблон дословно из текста Кевина, запись в services.json, компонент, маршрут, админка
+
+### [S091] — 2026-09-13 — T012 Фаза 3/6 — шаблон, мета, компонент, маршрут done
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #3 Frontend
+**Статус:** завершено (фаза 3 из 6)
+
+**Что сделано:**
+- `templates/entkernung-abbrucharbeiten.json` собран скриптом из `docs/kevin-entkernung-text-2026-09-13.txt` — строки дословно, `{city}` только в размеченных местах (8, 9, 13, 48, 53, 59, 72, 91, 138, 154, 164)
+- `template-content-entkernung.ts`: мета, список мест (Osnabrück — дословно, иначе город + до 7 соседей), FAQ (ответ 183 на других городах — город + 3 соседа); `getGeoNeighbors` в `programmatic.ts`
+- `EntkernungCityTemplate.tsx`, ветки маршрута с BreadcrumbList/Service/FAQPage, коллекция в админке, запись в `services.json`, позиции блока в `ServiceDetail`
+- Сборка: 98 страниц, 715 HTML, sitemap 609; Osnabrück: title «Entkernung & Abbrucharbeiten Osnabrück | Rund ums Haus Littawe» (62), description и H1 = строки 7/8
+- Тесты: 290/290 (новый `template-entkernung.test.tsx`: RED → GREEN, в т.ч. все строки 8–185 на странице Osnabrück и Nordhorn без «Osnabrücker Land»); tsc 0, eslint 0
+
+**Ключевые решения:**
+- Структура шаблона по тексту Кевина, а не по полям существующих услуг — в тексте списки внутри разделов
+- `T012-F1-NO-DEAD-URLS` заменён на `T012-F3-PAGES` (при удалённой странице Nordhorn даёт 0)
+
+**Приёмка:** `py verify/verify.py verify/acceptance.json`
+```
+RESULT: 16/16 PASSED  (100.0%)
+VERDICT: TASK VERIFIED
+```
+
+**Следующие шаги:**
+- Ф4 — ссылки с 5 шаблонов, карточка на главной (BULLETS, сетка), Servicegebiet, Osnabrück, hasOfferCatalog, llms.txt

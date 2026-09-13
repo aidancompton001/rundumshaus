@@ -135,7 +135,7 @@ describe("ServiceOverview", () => {
     // still guards the original design regression (icons, not emoji icons).
 
     const cards = container.querySelectorAll("article");
-    expect(cards.length).toBe(5);
+    expect(cards.length).toBe(6);
     cards.forEach((card, i) => {
       const cls = card.getAttribute("class") ?? "";
       expect(cls, `card ${i}: непрозрачная подложка`).toMatch(/(^|\s)bg-(white|paper|cream[a-z-]*)(\s|$)/);
@@ -169,7 +169,7 @@ describe("ServiceDetail", () => {
   it("рисует пять блоков услуг, непрозрачных и с фото", () => {
     const { container } = render(<ServiceDetail />);
     const blocks = container.querySelectorAll("section[id]");
-    expect(blocks.length).toBe(5);
+    expect(blocks.length).toBe(6);
     blocks.forEach((block) => {
       expect(block.querySelector("h2")).toBeTruthy();
       expect(block.querySelector("img")).toBeTruthy();

@@ -83,16 +83,22 @@
       "expect_equal": "1"
     },
     {
-      "id": "T012-F1-NO-DEAD-URLS",
-      "text": "T012 Ф1: пока у новой услуги нет шаблона страницы, в сборке нет ни её страниц, ни ссылок на неё — sitemap и перекрёстные ссылки ходят по CITY_PAGE_SERVICE_IDS",
-      "check": "py -c \"import glob;print(len(glob.glob('site/out/leistungen/entkernung-abbrucharbeiten/**/*.html',recursive=True)))\"",
-      "expect_equal": "0"
+      "id": "T012-F3-PAGES",
+      "text": "T012 Ф3 (заменяет T012-F1-NO-DEAD-URLS: «0 страниц, пока нет шаблона» — шаблон добавлен): страниц услуги столько же, сколько городов (98), все в sitemap, на каждой три JSON-LD разбираются, у Osnabrück title/description/H1 дословно строки 5/7/8 текста Кевина",
+      "check": "py verify/check_t012_pages.py",
+      "expect_equal": "1"
     },
     {
       "id": "T012-F2-PHOTOS",
       "text": "T012 Ф2: восемь webp фото Entkernung (hero пейзаж 4.jpeg, карточка 7:5 из 6.jpeg; полный размер + 400/800/1200) на диске, без EXIF/XMP, ширины вариантов точные",
       "check": "py verify/check_t012_photos.py",
       "expect_equal": "1"
+    },
+    {
+      "id": "T012-F3-CMS",
+      "text": "T012 Ф3: админка знает шаблон Entkernung — validate-cms-config проходит (все ключи шаблона объявлены, ссылки ведут на существующие страницы)",
+      "check": "cd site && node scripts/admin/validate-cms-config.mjs",
+      "expect_exit": 0
     }
   ],
   "out_of_scope": [

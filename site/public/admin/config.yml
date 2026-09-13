@@ -296,6 +296,86 @@ collections:
         label: Garten- und Landschaftsbau
         file: site/src/data/templates/garten-landschaftsbau.json
         fields: *stadtseiten_fields
+      - name: entkernung-abbrucharbeiten
+        label: Entkernung & Abbrucharbeiten
+        file: site/src/data/templates/entkernung-abbrucharbeiten.json
+        fields:
+          - { name: h1, label: "Überschrift (H1)", widget: string, hint: "{city} = Stadtname" }
+          - { name: heroImage, label: "Hero-Bild (oben auf den Stadt-Seiten)", widget: image }
+          - { name: heroAlt, label: "Bild-Beschreibung (Alt-Text)", widget: string, hint: "{city} = Stadtname" }
+          - { name: intro, label: "Einleitung (Absätze)", widget: list, field: { name: p, label: Absatz, widget: text } }
+          - name: sectionsBefore
+            label: "Abschnitte VOR der Leistungsliste"
+            widget: list
+            fields: &entkernung_section_fields
+              - { name: heading, label: Überschrift, widget: string, hint: "{city} = Stadtname" }
+              - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
+              - { name: listIntro, label: "Satz vor der Aufzählung", widget: string, required: false }
+              - { name: items, label: "Aufzählung", widget: list, required: false, field: { name: item, label: Punkt, widget: string } }
+              - { name: paragraphsAfter, label: "Absätze nach der Aufzählung", widget: list, required: false, field: { name: p, label: Absatz, widget: text } }
+          - name: leistungen
+            label: "Leistungsliste"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: intro, label: Einleitungssatz, widget: string }
+              - { name: items, label: Leistungen, widget: list, field: { name: item, label: Leistung, widget: string } }
+              - { name: footnote, label: Schlusszeile, widget: string }
+          - { name: sectionsAfter, label: "Abschnitte NACH der Leistungsliste", widget: list, fields: *entkernung_section_fields }
+          - name: firma
+            label: "Entkernungsfirma (Einsatzorte)"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
+              - { name: listIntro, label: "Satz vor der Orts-Liste", widget: string }
+              - { name: hqItems, label: "Orte (nur Seite Osnabrück; andere Städte: Stadt + Nachbarorte automatisch)", widget: list, field: { name: item, label: Ort, widget: string } }
+              - { name: moreItem, label: "Letzter Listenpunkt", widget: string }
+              - { name: paragraphsAfter, label: "Absätze nach der Liste", widget: list, field: { name: p, label: Absatz, widget: text } }
+          - { name: sectionsEnd, label: "Abschnitte vor dem Kontakt-Block", widget: list, fields: *entkernung_section_fields }
+          - name: cta
+            label: "Kontakt-Block"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string, hint: "{city} = Stadtname" }
+              - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
+              - { name: brand, label: Firmenname, widget: string }
+              - { name: tagline, label: Leistungszeile, widget: string }
+              - { name: location, label: Ortszeile, widget: string }
+              - { name: button, label: "Button-Text", widget: string }
+          - name: faq
+            label: "Häufige Fragen"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - name: items
+                label: Fragen
+                widget: list
+                fields:
+                  - { name: q, label: Frage, widget: string }
+                  - { name: a, label: "Antwort (Seite Osnabrück)", widget: text }
+                  - { name: cityInQuestion, label: "Stadtname an Frage anhängen?", widget: boolean, default: false }
+                  - { name: aOtherCities, label: "Antwort auf anderen Stadt-Seiten (optional)", widget: text, required: false, hint: "{city} = Stadtname, {nachbarn} = drei Nachbarorte" }
+          - name: weitereLeistungen
+            label: "Weitere Leistungen (Links)"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - name: links
+                label: Links
+                widget: list
+                allow_add: false
+                fields:
+                  - { name: label, label: Link-Text, widget: string }
+                  - { name: servicePath, label: "Technischer Pfad (nicht ändern!)", widget: string, readonly: true }
+                  - { name: isHub, label: "Übersichtsseite? (nicht ändern)", widget: boolean, required: false, readonly: true }
+          - name: einsatzorte
+            label: "Weitere Einsatzorte"
+            widget: object
+            fields:
+              - { name: heading, label: Überschrift, widget: string }
+              - { name: chipLabel, label: "Stadt-Link-Text (mit {city})", widget: string }
+              - { name: expandLabel, label: "Aufklapp-Text (mit {count})", widget: string }
 
   # ────────────────────────────────────────────────────────────
   # PX-070: full coverage — remaining content files (CEO audit demand).

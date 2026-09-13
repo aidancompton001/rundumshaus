@@ -60,6 +60,16 @@
       "image": "/images/services/dach-hero.webp",
       "detailImage": "/images/services/detail-dach.png",
       "imageAlt": "Dachservice & Dachpflege: Mitarbeiter mit Sicherheitsgurt reinigt Dachrinne und Dachziegel mit einer Bürste"
+    },
+    {
+      "id": "entkernung-abbrucharbeiten",
+      "title": "Entkernung & Abbrucharbeiten",
+      "description": "Rund ums Haus Littawe übernimmt zuverlässige Entkernungs-, Rückbau- und Innenabbrucharbeiten in Osnabrück und Umgebung.",
+      "detailDescription": "Sie planen eine Renovierung, Sanierung oder einen Umbau und benötigen Unterstützung bei der Entkernung oder bei Abbrucharbeiten? Rund ums Haus Littawe übernimmt zuverlässige Entkernungs-, Rückbau- und Innenabbrucharbeiten in Osnabrück und Umgebung.\n\nOb einzelne Räume, komplette Wohnungen, Häuser oder Gewerbeobjekte – wir entfernen nicht mehr benötigte Bodenbeläge, Estrich, Dämmung, Fliesen, Sanitäreinrichtungen, Türen, Zargen, Trockenbau, Einbauten und weitere vereinbarte Bauteile.\n\nAuf Wunsch übernehmen wir den gesamten Ablauf inklusive Demontage, Rückbau, Tragearbeiten, Verladung, Abtransport und fachgerechter Entsorgung der anfallenden Materialien.\n\nSo erhalten Sie alle vereinbarten Arbeiten aus einer Hand und können Ihr Objekt anschließend direkt für die weitere Renovierung oder Sanierung vorbereiten lassen.",
+      "icon": "hammer",
+      "image": "/images/services/entkernung-card.webp",
+      "detailImage": "/images/services/entkernung-hero.webp",
+      "imageAlt": "Entkernung & Abbrucharbeiten: entkerntes Badezimmer mit freigelegtem Mauerwerk, Leitungen und Bauschutt auf dem Boden"
     }
   ]
 }
