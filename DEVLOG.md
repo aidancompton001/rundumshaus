@@ -2125,3 +2125,20 @@ VERDICT: TASK VERIFIED
 
 **Следующие шаги:**
 - Круг 2 Ланды → при GO: коммит, push (деплой), живой замер, ссылка Кевину
+
+### [S095] — 2026-09-14 — T012 выкачена: Entkernung в проде
+
+**Задача:** [T012](docs/tasks/T012_entkernung_abbrucharbeiten.md)
+**Роли:** #1, #3, #14 Hans Landa
+**Статус:** завершено, долг ревью 7 пунктов
+
+**Что сделано:**
+- Круг 2 Ланды: 9 исправлений ЗАКРЫТО с подлогами, вердикт APPROVED/GO; её verify 20/20. Новые LOW R2-1…R2-3 — в долг
+- Коммит 46f8c7e, push в master (origin не уходил вперёд: behind 0); Deploy run 34808644353 — completed success
+- Живой замер: 98/98 страниц Entkernung = 200; sitemap 609 адресов, из них 98 новых; title Osnabrück = строка 5; главная 3×2 с пунктами; entruempelung/nordhorn ссылается на Entkernung
+- T011 не сломан: live_banner_fix_check — FIXES_OK; live_focus_check — N01_N02_OK; live_conversion_check — CONVERSION_E2E_OK (запросы к Google оборваны, форма перехвачена)
+- Замороженный слепок `verify/snapshots/after-t012.json` снят с выкаченной сборки: против after-t011 — БИНАРНО 1
+
+**Следующие шаги:**
+- CEO: ссылка Кевину, запрос индексации в GSC
+- Через 2–3 недели: GSC по /entkernung-abbrucharbeiten/ (F-06)

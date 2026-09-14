@@ -1,6 +1,6 @@
 # T012 — Новая основная услуга «Entkernung & Abbrucharbeiten»
 
-**Дата:** 2026-09-13 · **Статус:** в работе — ОК CEO 13.09 · **Размер:** L · **Цена клиенту:** 70 € (согласовано)
+**Дата:** 2026-09-13 · **Статус:** выкачено 14.09 (46f8c7e), фазы Ф0–Ф6 закрыты, долг ревью 7 пунктов (REVIEW_DEBT.md)
 **Ответственный:** #3 Marco Reiter — Frontend Engineer (данные, шаблон, маршрут); #2 Lena Schwarz — UX/UI (сетка главной, фото, адаптив); #14 Hans Landa — ревью
 **Скиллы:** brainstorming (P0), далее writing-plans → test-driven-development → verification-before-completion
 **Карточка Asana:** t012-entkernung · **Запрос клиента:** WhatsApp 13.09 — «neue Hauptdienstleistung … Entkernung und Abbrucharbeiten», «mit Seiten für die ganzen Städte»; текст страницы Osnabrück прислан CEO и сохранён дословно в `docs/kevin-entkernung-text-2026-09-13.txt` (12 481 байт, 185 строк, sha256 d8927b56e8104947) — единственный эталон для сверки «дословно»; фото — `C:\Users\moroc\Desktop\KEvinRund` (6 шт.)
@@ -159,7 +159,7 @@
 | Ф3 | Шаблон, мета, компонент, маршрут | ✅ | verify 16/16, 98 страниц, 715 HTML, sitemap 609 |
 | Ф4 | Перелинковка и сквозные места | ✅ | verify 17/17, check_t012_links 1 (до правок 499 ошибок) |
 | Ф5 | Тесты | ✅ | verify 19/19, тесты 294/294, lint 0 ошибок, 4 подлога дают RED |
-| Ф6 | Индексация, вёрстка, ревью, выкатка | ◐ | parity 1, verify 20/20, Ланда GO (круг 2); выкатка и живой замер — в работе |
+| Ф6 | Индексация, вёрстка, ревью, выкатка | ✅ | parity 1, verify 20/20, Ланда GO, прод 46f8c7e: 98/98 = 200, sitemap 609, T011 живые проверки OK; долг 7 |
 
 ### Ф0 — Решения CEO
 **Цель:** закрыть D1–D6. **Done:** ответ CEO записан в этот файл. **Зависимости:** нет.
