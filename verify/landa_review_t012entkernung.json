@@ -1,0 +1,151 @@
+{
+  "task": "t012entkernung",
+  "round": 1,
+  "reviewer": "#14 Hans Landa",
+  "head": "8925daa",
+  "ledger_verdict": "APPROVED",
+  "verdict": "GO",
+  "gate_note": "Подпись реестра доклада после выкатки, это не круг ревью фазы (фаза закрыта GO в круге 2). Все 16 утверждений подписаны отпечатком verdicts.fingerprint. Главное, что проверил сверх реестра: проверки 06/08/10/11 смотрят локальный site/out, поэтому скачал с прода все 609 адресов sitemap и прогнал на них те же скрипты — ответы те же, видимый текст совпадает. Отклонённых нет, замечания к 03, 04 и 15 касаются силы доказательств, сами утверждения верны.",
+  "reviewed_claims": [
+    {
+      "id": "01",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "e079fa6891e9408f",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: 98 of 98. urllib идёт по редиректам, так что «200» само по себе мог дать редирект на другую страницу; проверил отдельно r.geturl() — редиректов 0 из 98."
+    },
+    {
+      "id": "02",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "2ae4f98b47987af4",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "Мой прогон: sitemap 200 locs 609 entk 98."
+    },
+    {
+      "id": "03",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "6cb26f5fb3096a90",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон совпал. Доказательство слабее текста: «lg:grid-cols-3» ищется по всей главной, а пункты — по всей странице. Сверх реестра: на главной это вхождение одно; раскладку померил в Chromium на проде — 1440: три колонки x=112/524/936 в два ряда, шестая карточка Entkernung; 375: одна колонка. Скриншоты сделаны (1440 — 3×2, пункты Estrich/Dämmungen/Fliesen в карточке). Для доклада это нормально, в реестре следующей задачи сетку проверять по геометрии."
+    },
+    {
+      "id": "04",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "c7934425c56e2ab3",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: success. Команда не привязывает прогон 34808644353 к коммиту: успешный Deploy чужого коммита тоже прошёл бы. Проверил сам: gh run view → headSha 46f8c7e624d0…, workflow «Deploy to GitHub Pages». git diff 46f8c7e..HEAD — только DEVLOG, STATUS, файл задачи и слепок, код не менялся."
+    },
+    {
+      "id": "05",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "b79bfa2b1268db33",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: PARITY_OK, БИНАРНО 1, пропало 0, +1 JS заявлен. «Слепок выкаченной сборки» — это локальная сборка коммита 46f8c7e, а не файлы, скачанные с прода. Сверх реестра: зеркало прода (611 файлов по живой sitemap) — видимый текст всех 609 страниц с ней совпадает, так что по содержанию формулировка держится."
+    },
+    {
+      "id": "06",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "8adf8d89f3196a24",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: 97 городов, 0 нарушений, код 0. Проверяет site/out, собранный 13.09 в 23:45, то есть до времени коммита 46f8c7e. Сверх реестра: зеркало прода (611 файлов по живой sitemap) — видимый текст всех 609 HTML-страниц совпадает с site/out; этот же скрипт на зеркале прода дал тот же ответ: GREEN, 97/0."
+    },
+    {
+      "id": "07",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "b5b47ee71d9e2717",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "Мой прогон: RED, код 1, поимённо bissendorf, bad-iburg… На зеркале прода подлог тоже даёт код 1."
+    },
+    {
+      "id": "08",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "3faf9f4fdce52154",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: 180 строк, 0 пропусков. Остаётся R2-1 (вставку чужого текста между строками не ловит) — в долге. Сверх реестра: зеркало прода (611 файлов по живой sitemap) — видимый текст всех 609 HTML-страниц совпадает с site/out; этот же скрипт на зеркале прода дал тот же ответ: GREEN."
+    },
+    {
+      "id": "09",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "12e3a37534025f3b",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "Мой прогон: нет 66: Estrich, код 1; на зеркале прода то же."
+    },
+    {
+      "id": "10",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "7eb875069855bf59",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: 1. Прочитал скрипт: 0 печатается при любой ошибке, пустая сборка даёт 0 (pages != cities), вхолостую не проходит. Сверх реестра: зеркало прода (611 файлов по живой sitemap) — видимый текст всех 609 HTML-страниц совпадает с site/out; этот же скрипт на зеркале прода дал тот же ответ: 1."
+    },
+    {
+      "id": "11",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "3798d94c0368e8a1",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: 1. Счётчик checked == 6×98 защищает от пустого прохода. Подвал проверяется только на /impressum/ — «подвал» в тексте шире, но подвал общий для всех страниц. Сверх реестра: зеркало прода (611 файлов по живой sitemap) — видимый текст всех 609 HTML-страниц совпадает с site/out; этот же скрипт на зеркале прода дал тот же ответ: 1."
+    },
+    {
+      "id": "12",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "999367b170645354",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "Сам запустил vitest: Test Files 25 passed (25), Tests 294 passed (294)."
+    },
+    {
+      "id": "13",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "cf89047b3c4adb52",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "Отдельно проверен моим прогоном реестра: FIXES_OK. В скрипте запросы к Google обрываются через route.abort, цель — живой домен."
+    },
+    {
+      "id": "14",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "9b763f52bf8dff2c",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "Мой прогон реестра: CONVERSION_E2E_OK. Formsubmit перехвачен через route.fulfill, конверсия обрывается — клиенту ничего не уходит."
+    },
+    {
+      "id": "15",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "a136b6ed3e95bf44",
+      "verdict": "CONFIRMED",
+      "with_note": true,
+      "why": "Мой прогон: 7. Команда считает только число и не проверяет, какие именно ID открыты. Прочитал REVIEW_DEBT.md, раздел T012, строки 31–37: открыты ровно F-06, F-07, F-11, F-12, R2-1, R2-2, R2-3. Счётчик берёт всё после «## T012» до конца файла: если ниже появится раздел T013, число поплывёт."
+    },
+    {
+      "id": "16",
+      "ledger": "hrc_ledger_t012entkernung.json",
+      "claim_hash": "a26fb9748c4daa3c",
+      "verdict": "CONFIRMED",
+      "with_note": false,
+      "why": "asserted=false, подано как прогноз с риском F-06 и сроком контроля. Фактом не выдано — подписываю как честную гипотезу."
+    }
+  ],
+  "unlisted_claims": [],
+  "my_runs": [
+    "py verify/hrc.py verify/hrc_ledger_t012entkernung.json -> 15 [OK], H=0, FAIL только слой Ланды (до подписи)",
+    "py verify/live_t012_check.py -> 98 of 98 [], sitemap 200 locs 609 entk 98, title ok True, grid 3 True, entk card True, old page links True",
+    "зеркало прода в scratchpad: 611 файлов, 0 сбоев; видимый текст 609/609 = site/out; check_t012_pages 1, links 1, nordhorn --all GREEN 97/0 (mutate-126 код 1), verbatim GREEN 180/0 (drop-estrich код 1)",
+    "редиректы на 98 страницах Entkernung: 0 (r.geturl)",
+    "gh run view 34808644353 -> success, headSha 46f8c7e624d07e4a54505f0ee8fceaf1348d2eb7",
+    "cd site && npx vitest run -> Tests 294 passed (294)",
+    "Playwright, прод: главная 1440 — 3 колонки × 2 ряда, 375 — 1 колонка; скриншоты home_grid_1440.png / home_grid_375.png в scratchpad сессии"
+  ],
+  "not_rerun_by_me": [],
+  "previous_findings_note": "Долг T012 (7 пунктов) не менялся и в эту подпись как блокер не входит (Закон 31)."
+}

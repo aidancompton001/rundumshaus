@@ -1,0 +1,148 @@
+{
+  "task": "t012entkernung",
+  "threshold": 1e-08,
+  "require_landa": true,
+  "claims": [
+    {
+      "id": "01",
+      "asserted": true,
+      "text": "В проде все 98 страниц /leistungen/entkernung-abbrucharbeiten/<city>/ отвечают 200",
+      "proof": {
+        "cmd": "py verify/live_t012_check.py",
+        "expect_contain": "live pages 200: 98 of 98 []"
+      }
+    },
+    {
+      "id": "02",
+      "asserted": true,
+      "text": "Живая карта сайта: 609 адресов, из них 98 новой услуги",
+      "proof": {
+        "cmd": "py verify/live_t012_check.py",
+        "expect_contain": "sitemap 200 locs 609 entk 98"
+      }
+    },
+    {
+      "id": "03",
+      "asserted": true,
+      "text": "Живая главная: сетка 3×2 без xl:grid-cols-5, у карточки Entkernung пункты из шаблона; прежняя entruempelung/nordhorn ссылается на Entkernung того же города; title Osnabrück дословно строка 5 текста Кевина",
+      "proof": {
+        "cmd": "py verify/live_t012_check.py",
+        "expect_contain": "osnabrueck title ok: True\nhome 200 grid 3: True entk card: True\nold page 200 links to entk: True"
+      }
+    },
+    {
+      "id": "04",
+      "asserted": true,
+      "text": "Выкачен коммит 46f8c7e: он в origin/master, прогон Deploy 34808644353 завершён успешно",
+      "proof": {
+        "cmd": "git fetch -q origin && git merge-base --is-ancestor 46f8c7e origin/master && gh run view 34808644353 --json conclusion --jq .conclusion",
+        "expect_equal": "success"
+      }
+    },
+    {
+      "id": "05",
+      "asserted": true,
+      "text": "Ничего не потеряно относительно прода T011: замороженный слепок выкаченной сборки против after-t011 — БИНАРНО 1 (пропало 0 страниц, ссылок, картинок, адресов sitemap; +1 JS на /leistungen/ объявлен поимённо)",
+      "proof": {
+        "cmd": "py verify/check_migration_parity.py compare verify/snapshots/after-t011.json verify/snapshots/after-t012.json",
+        "expect_contain": "БИНАРНО: 1"
+      }
+    },
+    {
+      "id": "06",
+      "asserted": true,
+      "text": "Ни на одном из 97 городов (кроме Osnabrück) нет ложной привязки фирмы: в разделе фирмы и ответе FAQ к строке 182 нет «in <Stadt> … tätig» и «Osnabrücker Land», соседи — из cities.json",
+      "proof": {
+        "cmd": "py verify/check_t012_nordhorn.py --all",
+        "expect_exit": 0
+      }
+    },
+    {
+      "id": "07",
+      "asserted": true,
+      "text": "Проверка привязки чувствительна: подлог строки 126 («Osnabrück» → город) даёт код 1",
+      "proof": {
+        "cmd": "py verify/check_t012_nordhorn.py --all --mutate-126",
+        "expect_exit": 1
+      }
+    },
+    {
+      "id": "08",
+      "asserted": true,
+      "text": "Текст Кевина дословно на странице Osnabrück: 180 строк по порядку целыми узлами, title и description",
+      "proof": {
+        "cmd": "py verify/check_t012_verbatim.py",
+        "expect_exit": 0
+      }
+    },
+    {
+      "id": "09",
+      "asserted": true,
+      "text": "Проверка дословности чувствительна: удаление пункта «Estrich» даёт код 1",
+      "proof": {
+        "cmd": "py verify/check_t012_verbatim.py --drop-estrich",
+        "expect_exit": 1
+      }
+    },
+    {
+      "id": "10",
+      "asserted": true,
+      "text": "Все 98 страниц: в sitemap, canonical на себя, без noindex, один H1 «Entkernung & Abbrucharbeiten in <Stadt>», title/description без дублей, три JSON-LD",
+      "proof": {
+        "cmd": "py verify/check_t012_pages.py",
+        "expect_equal": "1"
+      }
+    },
+    {
+      "id": "11",
+      "asserted": true,
+      "text": "Ссылки в обе стороны: 490 прежних городских → Entkernung, 98 новых → 5 услуг; главная, /leistungen/, подвал, вариант в форме, /osnabrueck/, llms",
+      "proof": {
+        "cmd": "py verify/check_t012_links.py",
+        "expect_equal": "1"
+      }
+    },
+    {
+      "id": "12",
+      "asserted": true,
+      "text": "Тесты сайта: 294 из 294",
+      "proof": {
+        "cmd": "cd site && npx vitest run",
+        "expect_contain": "Tests  294 passed (294)"
+      }
+    },
+    {
+      "id": "13",
+      "asserted": true,
+      "text": "T011 на проде не сломан: баннер согласия (WhatsApp нажимается, фокус не отбирается, порядок consent до config, отзыв чистит cookies)",
+      "proof": {
+        "cmd": "py verify/live_t011_banner_check.py",
+        "expect_contain": "RESULT: FIXES_OK"
+      }
+    },
+    {
+      "id": "14",
+      "asserted": true,
+      "text": "T011 на проде не сломан: конверсия Kontakt — с согласием событие уходит, без согласия нет (запросы к Google оборваны, форма перехвачена)",
+      "proof": {
+        "cmd": "py verify/live_t011_conversion_check.py",
+        "expect_contain": "RESULT: CONVERSION_E2E_OK"
+      }
+    },
+    {
+      "id": "15",
+      "asserted": true,
+      "text": "Долг ревью T012 — 7 открытых пунктов: F-06, F-07, F-11, F-12, R2-1, R2-2, R2-3",
+      "proof": {
+        "cmd": "py -c \"s=open('docs/tasks/REVIEW_DEBT.md',encoding='utf-8').read().split('## T012')[1];print(sum(1 for l in s.splitlines() if l.startswith('| ') and l.rstrip().endswith('| Открыто |') or (l.startswith('| ') and 'Открыто' in l.split('|')[-2])))\"",
+        "expect_equal": "7"
+      }
+    },
+    {
+      "id": "16",
+      "asserted": false,
+      "text": "Google проиндексирует все 98 страниц",
+      "note": "Прогноз, не факт. Риск F-06 (сходство текстов 0,851) — контроль в GSC через 2–3 недели"
+    }
+  ]
+}
