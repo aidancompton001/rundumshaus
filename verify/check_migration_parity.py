@@ -135,6 +135,19 @@ EXPECTED_ASSET_DELTA = {
     "by_delta": {-2: 511, -1: 2},
 }
 
+# T012: сверка «после T011 → после T012» ведётся против другого эталона, и
+# объявление дельты для неё своё — ключ по коммиту эталона. Добавление шестой
+# услуги в ServiceDetail перегруппировало чанки Turbopack только на /leistungen/:
+# +1 JS-файл. Приколочено поимённо: другая страница или другая дельта валят прогон.
+EXPECTED_ASSET_DELTA_SINCE = {
+    "d76d71e8": {
+        "reason": "T012: ServiceDetail импортирует шаблон шестой услуги — "
+                  "на /leistungen/ чанки перегруппированы, +1 JS",
+        "by_delta": {1: 1},
+        "pages": ["/leistungen/"],
+    },
+}
+
 EXPECTED_TEXT_CHANGES = {
     ("description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
     ("og_description", "/ratgeber/"): "T009: охват приведён к данным, 60 -> 80 км",
@@ -367,13 +380,14 @@ def compare(before_path, after_path):
             import collections as _c
             got = _c.Counter(len(B[u].get(key) or []) - len(A[u].get(key) or [])
                              for u in diff)
-            want = EXPECTED_ASSET_DELTA["by_delta"]
-            mismatch = dict(got) != dict(want)
+            decl = EXPECTED_ASSET_DELTA_SINCE.get(str(a.get("git_sha", ""))[:8], EXPECTED_ASSET_DELTA)
+            want = decl["by_delta"]
+            mismatch = dict(got) != dict(want) or ("pages" in decl and sorted(diff) != sorted(decl["pages"]))
             bad += mismatch
             print("  %-16s %s страниц: %-5d дельты: %s (заявлено %s) — %s"
                   % (what, "ЗАЯВЛЕНО   " if not mismatch else "НЕ СОШЛОСЬ ",
                      len(diff), dict(sorted(got.items())),
-                     dict(sorted(want.items())), EXPECTED_ASSET_DELTA["reason"]))
+                     dict(sorted(want.items())), decl["reason"]))
         else:
             bad += len(diff) > 0
             print("  %-16s страниц с расхождением: %-5d %s" % (what, len(diff),

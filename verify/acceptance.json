@@ -84,7 +84,7 @@
     },
     {
       "id": "T012-F3-PAGES",
-      "text": "T012 Ф3 (заменяет T012-F1-NO-DEAD-URLS: «0 страниц, пока нет шаблона» — шаблон добавлен): страниц услуги столько же, сколько городов (98), все в sitemap, на каждой три JSON-LD разбираются, у Osnabrück title/description/H1 дословно строки 5/7/8 текста Кевина",
+      "text": "T012 Ф3/Ф6: 98 страниц (Ланда F-05) — каждая в sitemap, canonical на себя, без noindex, один H1 «Entkernung & Abbrucharbeiten in <Stadt>», title и description непустые и без дублей, сырых {city}/{nachbarn} нет, три JSON-LD; у Osnabrück title/description/H1 дословно строки 5/7/8",
       "check": "py verify/check_t012_pages.py",
       "expect_equal": "1"
     },
@@ -108,15 +108,21 @@
     },
     {
       "id": "T012-F5-NORDHORN",
-      "text": "T012 Ф5: дальняя страница Nordhorn по собранному HTML — в разделе «Entkernungsfirma» и ответе FAQ к строке 182 нет «in Nordhorn … tätig», «Osnabrücker Land», соседей Osnabrück; есть Twist, Meppen, Wietmarschen. RED = код 1 (подлог строки 126 проверен: код 1)",
-      "check": "py verify/check_t012_nordhorn.py",
+      "text": "T012 Ф5/Ф6: все 97 городов кроме Osnabrück по собранному HTML (Ланда F-05) — в разделе «Entkernungsfirma» и ответе FAQ к строке 182 нет «in <Stadt> … tätig», «Osnabrücker Land», соседей Osnabrück не из соседей города; есть соседи города из cities.json. RED = код 1 (--mutate-126 даёт 1)",
+      "check": "py verify/check_t012_nordhorn.py --all",
       "expect_exit": 0
     },
     {
       "id": "T012-F5-VERBATIM",
-      "text": "T012 Ф5: текст Кевина дословно на собранной странице Osnabrück — 180 строк (кроме служебных 1–4, 6): title = строка 5, description = строка 7, строки 8–185 в видимом тексте. Правка одного слова даёт код 1",
+      "text": "T012 Ф5/Ф6: текст Кевина на странице Osnabrück — строки 8–185 как упорядоченная подпоследовательность ТОЧНЫХ элементов видимого текста (Ланда F-02: поиск подстроки не видел удаление 34 строк), title = строка 5, description = строка 7. --mutate-word и --drop-estrich дают код 1",
       "check": "py verify/check_t012_verbatim.py",
       "expect_exit": 0
+    },
+    {
+      "id": "T012-F6-PARITY",
+      "text": "T012 Ф6: ничего не потеряно относительно прода T011 — свежий слепок текущей сборки против after-t011 (V3 сверяет только замороженные слепки и текущую сборку не видит). Пропало 0 страниц, ссылок, картинок, alt, разметки, файлов, адресов sitemap; дельта CSS/JS объявлена поимённо (/leistungen/ +1)",
+      "check": "py verify/check_migration_parity.py snapshot site/out %TEMP%\\rh-t012-current.json >NUL 2>&1 && py verify/check_migration_parity.py compare verify/snapshots/after-t011.json %TEMP%\\rh-t012-current.json 2>&1 | findstr /B /C:\"БИНАРНО\"",
+      "expect_equal": "БИНАРНО: 1"
     }
   ],
   "out_of_scope": [

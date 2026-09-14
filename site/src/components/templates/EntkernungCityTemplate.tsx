@@ -3,6 +3,7 @@
 // (правится в админке). Вёрстка — по образцу EntruempelungCityTemplate;
 // разделы умеют необязательный список (listIntro + items + paragraphsAfter).
 
+import { Fragment } from "react";
 import Link from "next/link";
 import type { City } from "@/lib/programmatic";
 import { subst } from "@/lib/template-text";
@@ -82,11 +83,15 @@ export default function EntkernungCityTemplate({ city, neighbors, allOtherCities
   const visibleSlugs = new Set(visibleNeighbors.map((n) => n.slug));
   const extraCities = allOtherCities.filter((c) => !visibleSlugs.has(c.slug));
   const s = (text: string) => subst(text, { city: city.displayName });
+  // F-01 (Ланда): раздел фирмы — утверждения о самой фирме. {city} здесь не
+  // подставляется: иначе правка в админке («Entkernungsfirma in {city}») дала бы
+  // ложный адрес фирмы на 97 страницах. Валидатор админки запрещает {city} там же.
+  const raw = (text: string) => text;
   const faqs = getEntkernungFaqs(city);
   const firmaItems = getEntkernungFirmaItems(city);
 
   const renderSection = (sec: EntkernungSection, key: string) => (
-    <span key={key}>
+    <Fragment key={key}>
       <hr className="my-10 border-sand/30" />
       <section className="mb-10 max-w-[76ch] mx-auto">
         <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
@@ -99,7 +104,7 @@ export default function EntkernungCityTemplate({ city, neighbors, allOtherCities
         {sec.items && sec.items.length > 0 && <CheckList items={sec.items.map(s)} />}
         {sec.paragraphsAfter && <Paragraphs items={sec.paragraphsAfter} s={s} />}
       </section>
-    </span>
+    </Fragment>
   );
 
   return (
@@ -185,12 +190,12 @@ export default function EntkernungCityTemplate({ city, neighbors, allOtherCities
 
           <section className="mb-10 max-w-[76ch] mx-auto">
             <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-charcoal mb-4">
-              {s(T.firma.heading)}
+              {raw(T.firma.heading)}
             </h2>
-            <Paragraphs items={T.firma.paragraphs} s={s} />
-            <p className="text-base text-charcoal font-semibold mt-4 leading-relaxed">{s(T.firma.listIntro)}</p>
+            <Paragraphs items={T.firma.paragraphs} s={raw} />
+            <p className="text-base text-charcoal font-semibold mt-4 leading-relaxed">{raw(T.firma.listIntro)}</p>
             <CheckList items={firmaItems} />
-            <Paragraphs items={T.firma.paragraphsAfter} s={s} />
+            <Paragraphs items={T.firma.paragraphsAfter} s={raw} />
           </section>
 
           {T.sectionsEnd.map((sec, i) => renderSection(sec, `e${i}`))}

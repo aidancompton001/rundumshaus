@@ -491,7 +491,7 @@ export default async function ProgrammaticLandingPage({
       "@type": "Service",
       name: `Entkernung & Abbrucharbeiten ${cityData.displayName}`,
       serviceType: "Entkernung & Abbrucharbeiten",
-      description: entkContent.metaDescription,
+      description: getServiceMetaOverride("entkernung-abbrucharbeiten", cityData.displayName)?.description ?? entkContent.metaDescription,
       areaServed: {
         "@type": "City",
         name: cityData.displayName,

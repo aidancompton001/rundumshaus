@@ -10,6 +10,7 @@
 - /osnabrueck/: ссылка на страницу Osnabrück; llms.txt и llms-full.txt: 6 основных услуг.
 """
 import glob
+import re
 import json
 import os
 import sys
@@ -62,7 +63,7 @@ if 'id="%s"' % NEW not in read("leistungen/index.html"):
     errors.append("/leistungen/ without anchor")
 if 'href="/leistungen/#%s"' % NEW not in read("impressum/index.html"):
     errors.append("footer without link")
-if "Entkernung &amp; Abbrucharbeiten" not in read("kontakt/index.html") and "Entkernung & Abbrucharbeiten" not in read("kontakt/index.html"):
+if not re.search(r"<option[^>]*>Entkernung (&amp;|&) Abbrucharbeiten</option>", read("kontakt/index.html")):
     errors.append("contact form without option")
 if 'href="/leistungen/%s/osnabrueck/"' % NEW not in read("osnabrueck/index.html"):
     errors.append("/osnabrueck/ without link")

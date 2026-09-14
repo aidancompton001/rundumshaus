@@ -326,7 +326,7 @@ collections:
             label: "Entkernungsfirma (Einsatzorte)"
             widget: object
             fields:
-              - { name: heading, label: Überschrift, widget: string }
+              - { name: heading, label: Überschrift, widget: string, hint: "ohne {city} — Firmensitz ist Osnabrück" }
               - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
               - { name: listIntro, label: "Satz vor der Orts-Liste", widget: string }
               - { name: hqItems, label: "Orte (nur Seite Osnabrück; andere Städte: Stadt + Nachbarorte automatisch)", widget: list, field: { name: item, label: Ort, widget: string } }
@@ -341,7 +341,7 @@ collections:
               - { name: paragraphs, label: Absätze, widget: list, field: { name: p, label: Absatz, widget: text } }
               - { name: brand, label: Firmenname, widget: string }
               - { name: tagline, label: Leistungszeile, widget: string }
-              - { name: location, label: Ortszeile, widget: string }
+              - { name: location, label: Ortszeile, widget: string, hint: "ohne {city} — Firmensitz ist Osnabrück" }
               - { name: button, label: "Button-Text", widget: string }
           - name: faq
             label: "Häufige Fragen"

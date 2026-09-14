@@ -94,6 +94,25 @@ for (const svc of SERVICE_IDS) {
 }
 ok("city-template cross-links point to existing pages");
 
+/* ── T012 (Ланда F-01): Entkernung — раздел фирмы и подпись фирмы в CTA
+   описывают саму фирму. {city} там дал бы «Entkernungsfirma in Nordhorn» на
+   97 страницах — ложный адрес фирмы (UWG). Шаблон этот плейсхолдер там и не
+   подставляет; валидатор не даёт вписать его по ошибке. */
+{
+  const tpl = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/templates/entkernung-abbrucharbeiten.json"), "utf8"));
+  const fixed = [
+    ["firma", JSON.stringify(tpl.firma ?? {})],
+    ["cta.brand", tpl.cta?.brand ?? ""],
+    ["cta.location", tpl.cta?.location ?? ""],
+  ];
+  const before = errors;
+  for (const [key, value] of fixed) {
+    if (/\{(city|nachbarn)\}/.test(value))
+      fail(`templates/entkernung-abbrucharbeiten.json ${key}: {city}/{nachbarn} verboten — Firmensitz bleibt Osnabrück`);
+  }
+  if (errors === before) ok("entkernung: firma/cta ohne {city}");
+}
+
 /* ── G6: meta-overrides patterns ────────────────────────────── */
 const meta = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/meta-overrides.json"), "utf8"));
 const cities = JSON.parse(readFileSync(path.join(SITE_ROOT, "src/data/cities.json"), "utf8")).cities;
