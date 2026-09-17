@@ -80,7 +80,10 @@ export default function DatenschutzPage() {
           Mit Ihrer Einwilligung nutzen wir Google Ads der Google Ireland
           Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Ads
           setzt Cookies und erfasst, ob nach dem Klick auf eine unserer
-          Anzeigen das Kontaktformular abgesendet wird (Conversion). Dabei
+          Anzeigen das Kontaktformular abgesendet, unsere Telefonnummer
+          angetippt oder ein Link zu WhatsApp angeklickt wird (Conversion).
+          Den Inhalt Ihrer Anfrage, Ihres Anrufs oder Ihrer Nachricht erfährt
+          Google dabei nicht. Dabei
           können Daten wie IP-Adresse, Geräte- und Browserinformationen sowie
           der Zeitpunkt des Besuchs an Google übermittelt werden, auch in die
           USA. Die Übermittlung in die USA stützt sich auf das EU-US Data
@@ -100,6 +103,27 @@ export default function DatenschutzPage() {
             Datenschutzerklärung von Google
           </a>
           .
+        </p>
+
+        <h3 className="font-heading text-xl font-extrabold mt-6 mb-3">
+          Reichweitenmessung (Umami)
+        </h3>
+        <p>
+          Zur Reichweitenmessung nutzen wir Umami Cloud der Umami Software,
+          Inc., 28 Geary St, Suite 650 #243, San Francisco, CA 94108, USA. Umami
+          setzt keine Cookies; eine Einwilligung ist dafür nicht erforderlich.
+          Aus IP-Adresse und Browserangaben werden ein ungefährer Standort
+          (Land, Region, Stadt) und eine pseudonyme Kennung gebildet, deren
+          Berechnungsgrundlage regelmäßig wechselt. Die IP-Adresse selbst wird
+          nicht gespeichert. Erfasst werden zum Beispiel aufgerufene Seiten,
+          verweisende Website, Browser, Betriebssystem, Gerätetyp und Sprache
+          sowie, welche Auswahl im Cookie-Banner getroffen wurde. Die Daten
+          werden in der Europäischen Union gespeichert. Umami setzt auch
+          Dienstleister in den USA ein; die Übermittlung stützt sich auf die
+          Standardvertragsklauseln der EU-Kommission. Mit Umami besteht ein
+          Vertrag über die Auftragsverarbeitung. Rechtsgrundlage: Art. 6 Abs.
+          1 lit. f DSGVO; unser berechtigtes Interesse ist, unsere Website und
+          Werbung zu verbessern.
         </p>
 
         <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">
@@ -130,6 +154,8 @@ export default function DatenschutzPage() {
           gelöscht.
           Cookies von Google Ads (nur mit Einwilligung) werden in der Regel
           nach 90 Tagen gelöscht, bei Widerruf sofort.
+          Daten der Reichweitenmessung mit Umami werden nach 6 Monaten
+          gelöscht.
         </p>
 
         <h2 className="font-heading text-2xl font-extrabold mt-8 mb-4">

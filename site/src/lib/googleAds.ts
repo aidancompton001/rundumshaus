@@ -71,3 +71,44 @@ export function trackKontaktConversion(): void {
   if (typeof w.gtag !== "function") return;
   w.gtag("event", "conversion", { send_to: KONTAKT_CONVERSION });
 }
+
+// T013 Ф2: клики по телефону и WhatsApp. Действия заведены в кабинете
+// 17.09.2026 (Website, Contact, Count: One), метки — docs/ads/conversion_labels.md.
+export const ANRUF_CONVERSION = "AW-18071508845/ajW6CLqn6PocEO2ulalD";
+export const WHATSAPP_CONVERSION = "AW-18071508845/-3b4CL2n6PocEO2ulalD";
+
+export function conversionForHref(href: string | null | undefined): string | null {
+  if (!href) return null;
+  const h = href.trim().toLowerCase();
+  if (h.startsWith("tel:")) return ANRUF_CONVERSION;
+  if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//.test(h)) return WHATSAPP_CONVERSION;
+  return null;
+}
+
+/** Клик по tel:/wa.me → конверсия, только с согласием.
+    Переход НЕ перехватываем (Ланда T013 Ф2 F-01): iOS Safari и Android Chrome
+    открывают приложение WhatsApp только по прямому нажатию, а переход из
+    программы после задержки оставляет человека на веб-странице wa.me с лишним
+    тапом. Чтобы уход со страницы не оборвал запрос, он отправляется как beacon
+    — этот способ браузер доводит до конца и после выгрузки страницы. */
+export function handleContactClick(event: MouseEvent): void {
+  if (typeof window === "undefined") return;
+  const target = event.target as Element | null;
+  const anchor = target?.closest?.("a[href]") as HTMLAnchorElement | null;
+  if (!anchor) return;
+  const sendTo = conversionForHref(anchor.getAttribute("href"));
+  if (!sendTo || !hasAdsConsent()) return;
+  const w = window as AdsWindow;
+  if (typeof w.gtag !== "function") return;
+  w.gtag("event", "conversion", { send_to: sendTo, transport_type: "beacon" });
+}
+
+let clickTrackingInstalled = false;
+
+/** Один слушатель на весь документ: ссылки на телефон и WhatsApp стоят
+    в двадцати местах, и новые не должны выпадать из учёта. */
+export function installContactClickTracking(): void {
+  if (typeof document === "undefined" || clickTrackingInstalled) return;
+  clickTrackingInstalled = true;
+  document.addEventListener("click", (e) => handleContactClick(e));
+}

@@ -251,12 +251,14 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* PX-047 Phase 1: Plausible analytics (cookieless, DSGVO-clean).
-            Required для измерения успеха Phase 1 vs baseline. */}
+        {/* T013 Ф2: Umami Cloud (регион EU, без cookies) вместо Plausible PX-047 —
+            аккаунта Plausible у проекта не было, данные уходили в никуда
+            (решение CEO 17.09.2026). Аккаунт — docs/CREDENTIALS.md. */}
         <script
           defer
-          data-domain="rundumshaus-littawe.de"
-          src="https://plausible.io/js/script.js"
+          src="https://cloud.umami.is/script.js"
+          data-website-id="737c1d4b-d61a-4f3d-8957-2c1953e2879d"
+          data-domains="rundumshaus-littawe.de"
         />
       </head>
       <body className="min-h-screen flex flex-col font-body bg-cream text-charcoal">

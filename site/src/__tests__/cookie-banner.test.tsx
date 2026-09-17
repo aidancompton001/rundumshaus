@@ -121,4 +121,29 @@ describe("CookieBanner — выбор, а не уведомление", () => {
     await showBanner();
     expect(adsScripts()).toHaveLength(1);
   });
+  it("выбор в баннере уходит в Umami событием consent — доля согласий (T013 Ф2)", async () => {
+    const calls: unknown[][] = [];
+    (window as unknown as { umami?: unknown }).umami = { track: (...a: unknown[]) => { calls.push(a); } };
+    await showBanner();
+    fireEvent.click(screen.getByRole("button", { name: "Nur notwendige" }));
+    expect(calls).toEqual([["consent", { choice: "necessary" }]]);
+    delete (window as unknown as { umami?: unknown }).umami;
+  });
+
+  it("Umami ещё не загрузился — событие уходит, когда скрипт появится", async () => {
+    delete (window as unknown as { umami?: unknown }).umami;
+    await showBanner();
+    fireEvent.click(screen.getByRole("button", { name: "Alle akzeptieren" }));
+    const calls: unknown[][] = [];
+    (window as unknown as { umami?: unknown }).umami = { track: (...a: unknown[]) => { calls.push(a); } };
+    await act(async () => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(calls).toEqual([["consent", { choice: "all" }]]);
+    await act(async () => {
+      vi.advanceTimersByTime(20000);
+    });
+    expect(calls).toHaveLength(1);
+    delete (window as unknown as { umami?: unknown }).umami;
+  });
 });

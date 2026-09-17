@@ -123,6 +123,36 @@
       "text": "T012 Ф6: ничего не потеряно относительно прода T011 — свежий слепок текущей сборки против after-t011 (V3 сверяет только замороженные слепки и текущую сборку не видит). Пропало 0 страниц, ссылок, картинок, alt, разметки, файлов, адресов sitemap; дельта CSS/JS объявлена поимённо (/leistungen/ +1)",
       "check": "py verify/check_migration_parity.py snapshot site/out %TEMP%\\rh-t012-current.json >NUL 2>&1 && py verify/check_migration_parity.py compare verify/snapshots/after-t011.json %TEMP%\\rh-t012-current.json 2>&1 | findstr /B /C:\"БИНАРНО\"",
       "expect_equal": "БИНАРНО: 1"
+    },
+    {
+      "id": "T013-F2-UNIT",
+      "text": "T013 Ф2: юнит-тесты кликов tel/WhatsApp (только с согласием, отзыв согласия, ровно одно событие, переход не перехватывается), событие consent в Umami, Datenschutz, tel в шапке посадочной",
+      "check": "cd site && npx vitest run src/lib/__tests__/contact-click-conversion.test.tsx src/__tests__/cookie-banner.test.tsx src/__tests__/legal.test.tsx",
+      "expect_exit": 0
+    },
+    {
+      "id": "T013-F2-BUILD",
+      "text": "T013 Ф2 по сборке: tel в шапке с H1 на всех 98 страницах /leistungen/entruempelung/*/, фразы Datenschutz (клики, Umami, срок хранения; скрипт Umami вместо Plausible), обе метки в JS. --mutate-drop-tel и --mutate-datenschutz дают код 1",
+      "check": "py verify/check_t013_f2.py",
+      "expect_exit": 0
+    },
+    {
+      "id": "T013-F2-BUILD-RED",
+      "text": "T013 Ф2: проверка по сборке краснеет при поломке (убрана ссылка tel на одной странице)",
+      "check": "py verify/check_t013_f2.py --mutate-drop-tel",
+      "expect_exit": 1
+    },
+    {
+      "id": "T013-F2-DS-RED",
+      "text": "T013 Ф2: проверка по сборке краснеет, если из Datenschutz пропал упоминание Umami",
+      "check": "py verify/check_t013_f2.py --mutate-datenschutz",
+      "expect_exit": 1
+    },
+    {
+      "id": "T013-F2-LIVE",
+      "text": "T013 Ф2 на боевом сайте: с согласием клик tel и WhatsApp дают по одному событию и запросу с новой меткой (запросы обрываются, в кабинет не попадают), на 1280 и 375; после отзыва согласия 0; без согласия 0; переход на wa.me происходит; событие consent уходит в Umami (перехвачено)",
+      "check": "py verify/live_t013_click_conversions.py",
+      "expect_contain": "RESULT: CLICK_CONV_OK"
     }
   ],
   "out_of_scope": [

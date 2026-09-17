@@ -111,6 +111,16 @@ export default function EntruempelungCityTemplate({ city, neighbors, allOtherCit
           <h1 className="font-heading text-3xl md:text-[2.875rem] font-extrabold leading-tight max-w-[24ch]">
             {s(T.h1)}
           </h1>
+          {/* T013 Ф2: посадочная рекламы Entrümpelung. Выше сгиба номер был
+              только текстом внутри ссылки на WhatsApp в шапке — позвонить в
+              одно касание было нельзя. */}
+          <a
+            href={`tel:${PHONE}`}
+            className="mt-5 inline-flex items-center gap-2 min-h-[44px] text-lg font-semibold text-white hover:text-copper-light transition-colors"
+          >
+            <PhoneIcon className="w-5 h-5 flex-shrink-0" variant="mono" />
+            <span>Jetzt anrufen: {(siteData as { phone: string }).phone}</span>
+          </a>
         </div>
       </section>
 

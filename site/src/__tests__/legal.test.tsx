@@ -98,4 +98,22 @@ describe("Datenschutz", () => {
     render(<DatenschutzPage />);
     expect(screen.getByText(/Speicherdauer/)).toBeInTheDocument();
   });
+  it("Google Ads: описаны клики по Telefon и WhatsApp как Conversion (T013 Ф2)", () => {
+    const { container } = render(<DatenschutzPage />);
+    const t = (container.textContent ?? "").replace(/\s+/g, " ");
+    expect(t).toMatch(/Telefonnummer/);
+    expect(t).toMatch(/WhatsApp/);
+    expect(t).toMatch(/Kontaktformular abgesendet/);
+  });
+
+  it("Umami описан: Anbieter, без Cookies, IP не сохраняется, EU, Speicherdauer; Plausible больше не упоминается", () => {
+    const { container } = render(<DatenschutzPage />);
+    const t = (container.textContent ?? "").replace(/\s+/g, " ");
+    expect(t).toMatch(/Umami Software, Inc\./);
+    expect(t).toMatch(/Umami setzt keine Cookies/);
+    expect(t).toMatch(/IP-Adresse selbst wird nicht gespeichert/);
+    expect(t).toMatch(/Standardvertragsklauseln/);
+    expect(t).toMatch(/Umami[^.]*6 Monate/);
+    expect(t).not.toMatch(/Plausible/);
+  });
 });

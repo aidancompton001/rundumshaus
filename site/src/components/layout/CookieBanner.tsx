@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { CONSENT_KEY, initAdsIfConsented } from "@/lib/googleAds";
+import { CONSENT_KEY, initAdsIfConsented, installContactClickTracking } from "@/lib/googleAds";
+import { trackConsentChoice } from "@/lib/umami";
 
 /** Баннер согласия (T011). Прежний только уведомлял «Verstanden» и утверждал,
     что трекинга нет. С тегом Google Ads это стало бы ложью, а загрузка тега
@@ -18,6 +19,9 @@ export default function CookieBanner() {
 
   useEffect(() => {
     initAdsIfConsented();
+    // T013 Ф2: клики по телефону и WhatsApp — конверсии. Слушатель сам
+    // проверяет согласие в момент клика, поэтому ставится сразу.
+    installContactClickTracking();
     const timer = setTimeout(() => {
       if (!localStorage.getItem(CONSENT_KEY)) {
         setVisible(true);
@@ -29,6 +33,7 @@ export default function CookieBanner() {
   function choose(value: "all" | "necessary") {
     localStorage.setItem(CONSENT_KEY, value);
     setVisible(false);
+    trackConsentChoice(value);
     if (value === "all") initAdsIfConsented();
   }
 
