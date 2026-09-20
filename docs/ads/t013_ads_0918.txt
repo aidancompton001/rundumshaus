@@ -1,0 +1,6 @@
+# Снято из кабинета 18.09.2026, Ads и форма редактирования каждого RSA (поля прочитаны из input)
+Entrümpelung | final /leistungen/entruempelung/osnabrueck/ | path Entruempelung/Osnabrueck | 15 заголовков (+12 more в списке)
+Haushaltsauflösung | final та же | path Aufloesung/Osnabrueck | 15 заголовков после правки 18.09 (было 14: «Haushaltsauflösung Osnabrück» попал в поле URL подбора ключей мастера — дописан)
+Keller & Dachboden | final та же | path Keller/Osnabrueck | 15 заголовков после правки 18.09 (было 14: «Keller entrümpeln Osnabrück» — дописан)
+Заголовки (общие 14): Entrümpelung Osnabrück, Festpreis nach Besichtigung, Kostenlose Besichtigung, Besenreine Übergabe möglich, Wohnungsauflösung Osnabrück | Haushaltsauflösung Osnabrück, Keller, Dachboden, Garage, Kurzfristige Termine möglich, Familienbetrieb aus Osnabrück, Entsorgung inklusive, Jetzt Angebot anfragen, Rund ums Haus Littawe, Entrümpelung zum Festpreis, Diskret & zuverlässig, Faire Preise
+Описания (все 3 объявления): 4 из плана, прочитаны из формы

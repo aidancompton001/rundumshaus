@@ -115,9 +115,7 @@ export default function DatenschutzPage() {
           Aus IP-Adresse und Browserangaben werden ein ungefährer Standort
           (Land, Region, Stadt) und eine pseudonyme Kennung gebildet, deren
           Berechnungsgrundlage regelmäßig wechselt. Die IP-Adresse selbst wird
-          nicht gespeichert. Erfasst werden zum Beispiel aufgerufene Seiten,
-          verweisende Website, Browser, Betriebssystem, Gerätetyp und Sprache
-          sowie, welche Auswahl im Cookie-Banner getroffen wurde. Die Daten
+          nicht gespeichert. Erfasst werden zum Beispiel aufgerufene Seiten, verweisende Website, Browser, Betriebssystem, Gerätetyp und Sprache sowie, welche Auswahl im Cookie-Banner getroffen wurde und ob auf unsere Telefonnummer oder auf einen WhatsApp-Link geklickt wurde. Die Daten
           werden in der Europäischen Union gespeichert. Umami setzt auch
           Dienstleister in den USA ein; die Übermittlung stützt sich auf die
           Standardvertragsklauseln der EU-Kommission. Mit Umami besteht ein
